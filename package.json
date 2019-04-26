@@ -58,7 +58,14 @@
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "jest"
+    "test": "jest",
+    "test-coverage": "jest --coverage",
+    "precommit-msg": "echo 'Pre-commit checks... linting Sass and JS, please fix any errors'",
+    "lint": "npm run eslint && npm run sasslint",
+    "preeslint": "echo 'Running eslint'",
+    "eslint": "eslint src",
+    "presasslint": "echo 'Running sasslint'",
+    "sasslint": "sass-lint -c .sass-lint.yml 'src/**/*.scss' -v --no-exit"
   },
   "pre-commit": [
     "precommit-msg",
