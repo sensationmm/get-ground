@@ -1,0 +1,15 @@
+.onboarding-intro {
+  h2 {
+    font-size: 36px;
+  }
+
+  .buttons-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    button {
+      margin-top: 20px;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+@import '../../styles/modules/colors';
+
+@mixin gradient-horizontal($from, $to) {
+  background-image: linear-gradient(to right, $from, $to);
+}
+
+@mixin gradient-horizontal-image($from, $to, $img) {
+  background-image: url($img), linear-gradient(to right, $from, $to);
+}
+
+@mixin gradient-vertical($from, $to) {
+  background-image: linear-gradient(to bottom, $from, $to);
+}
+
+@mixin gradient-vertical-image($from, $to, $img) {
+  background-image: url($img), linear-gradient(to bottom, $from, $to);
+}

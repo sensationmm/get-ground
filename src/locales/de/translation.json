@@ -1,0 +1,27 @@
+{
+  "onBoarding": {
+    "intro": {
+      "slides": [
+        {
+          "title": "bla bla",
+          "copy": "<p>In 5 Simple steps you will have created an account and profile on getGround.</p><p>This means you will be ready to design your company and proceed to investing in property.</p>"
+        },
+        {
+          "title": "One location",
+          "copy": "<p>In one easy to use location. You will be able to manage your property, add services and view your portfolio.</p>"
+        },
+        {
+          "title": "Secure process",
+          "copy": "<p>To verify you we will need you to take a photo of yourself, your passport and a proof of address</p><p>Don't worry, if you don't have your documents with you right now, you can skip this step and come back to it later.</p>"
+        },
+        {
+          "title": "Fast and efficient",
+          "copy": "<p>Setting up a company has never been simpler and quicker.</p><p>Get started by creating your account now.</p>"
+        }
+      ]
+    },
+    "accountCreation": {
+      
+    }
+  }
+}

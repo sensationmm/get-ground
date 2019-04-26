@@ -1,0 +1,28 @@
+$white: #ffffff;
+$white-opaque: rgba($white, 0.4);
+
+$primary: #8ac9c6;
+$primary-offset: rgba($primary, 0.6);
+
+$text: #2F5472;
+$background-content: $white;
+
+$background: #ccc;
+$border: #2f5472;
+$shadow: rgba(0,0,0,0.4);
+
+$gradient-primary-1: #559bab;
+$gradient-primary-2: #8ad9d0;
+
+$background-main-start: #60B0AC;
+$background-main-end: #F3D6AA;
+
+$background-account-start: #f27e8d;
+$background-account-end: #f2b47e;
+
+$warning: #ff5a62;
+$warning-offset: rgba(#ff5a62, 0.2);
+$rating-weak: $warning;
+$rating-fair: #FFE066;
+$rating-good: #52b648;
+$rating-strong: #0c9609;

@@ -1,0 +1,67 @@
+/* TODO: Will come back and refactor where needed when the initial theming is done */
+
+/* TODO: If more pages use this colour I'll move it out into colours and make the name more generic... */
+$slider-image-background-color: #c9dacc;
+
+.slick-slider {
+  overflow: hidden;
+  touch-action: none;
+
+  .slick-track {
+    display: flex;
+
+    .slick-slide {
+      div {
+        outline: none;
+      }
+
+      h2 {
+        margin: 0;
+        padding: 20px 0;
+      }
+
+      &--image-wrapper {
+        width: 210px;
+        height: 210px;
+        background: $slider-image-background-color;
+        margin: 0 auto;
+        border-radius: 105px;
+      }
+
+      &--copy {
+
+      }
+    }
+  }
+
+  .slick-dots {
+    padding: 0;
+    text-align: center;
+    margin: 0;
+
+    li {
+      display: inline-block;
+      margin-right: 5px;
+
+      &.slick-active button {
+        background: #2e5472;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      button {
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+        background-color: #FFF;
+        text-indent: -9999px;
+        border: 0;
+        cursor: pointer;
+        padding: 0;
+        outline: none;
+      }
+    }
+  }
+}
