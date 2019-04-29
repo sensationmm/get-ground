@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import Logo from '../assets/images/logo-white.svg'
+import Logo from '../../assets/images/logo-white.svg'
 
-import '../styles/header.scss'
+import './header.scss'
 
 /**
  * Header

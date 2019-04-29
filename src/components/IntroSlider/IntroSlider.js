@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 
-import '../../styles/intro-slider.scss';
+import './intro-slider.scss';
 
 /**
   * Introduction Slider (carousel)
