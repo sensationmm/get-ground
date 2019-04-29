@@ -9,7 +9,7 @@ import IntroSlider from '../components/IntroSlider/IntroSlider'
 import Button from '../components/_buttons/Button/Button'
 import Layout from '../components/layout/layout'
 
-import '../styles/onboarding-intro.scss'
+import '../styles/pages/onboarding-intro.scss'
 
 const OnboardingIntroContainer = () => {
   const windowContext = useContext(WindowSizeContext);

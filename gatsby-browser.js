@@ -1,7 +1,9 @@
-import React from "react"
+import React from 'react'
+import PropTypes from 'prop-types';
+
 import { ReduxWrapper } from './src/state/ReduxWrapper'
 
-import { WindowSizeProvider } from "./src/context/WindowSizeContext"
+import { WindowSizeProvider } from './src/context/WindowSizeContext'
 
 export const wrapRootElement =  ({ element }) => {
   return (
@@ -11,4 +13,8 @@ export const wrapRootElement =  ({ element }) => {
       </WindowSizeProvider>
     </ReduxWrapper>
   )
+}
+
+wrapRootElement.propTypes = {
+  element: PropTypes.object
 }
