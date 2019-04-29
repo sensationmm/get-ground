@@ -26,19 +26,19 @@ const StyleGuide = () => {
             <td><Button opaque small /></td>
           </tr>
           <tr>
-            <td>&lt;Button classes="primary" fullWidth /&gt;</td>
+            <td>&lt;Button classes=&quot;primary&quot; fullWidth /&gt;</td>
             <td><Button classes="primary" fullWidth /></td>
           </tr>
           <tr>
-            <td>&lt;Button classes="primary" small /&gt;</td>
+            <td>&lt;Button classes=&quot;primary&quot; small /&gt;</td>
             <td><Button classes="primary" small /></td>
           </tr>
           <tr>
-            <td>&lt;Button classes="secondary" fullWidth /&gt;</td>
+            <td>&lt;Button classes=&quot;secondary&quot; fullWidth /&gt;</td>
             <td><Button classes="secondary" fullWidth /></td>
           </tr>
           <tr>
-            <td>&lt;Button classes="secondary" small /&gt;</td>
+            <td>&lt;Button classes=&quot;secondary&quot; small /&gt;</td>
             <td><Button classes="secondary" small /></td>
           </tr>
         </tbody>

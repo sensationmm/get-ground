@@ -1,4 +1,14 @@
-import React, { Component } from "react"
+/* eslint-disable require-jsdoc */
+import React, { Component } from 'react'
+import PropTypes from 'prop-types';
+
+/**
+ * WindowSizeContext
+ * configure breakpoints
+ * @author Ravin Patel <ravin.patel@getground.co.uk>
+ * @param {Object} children - the app that the provider is wrapped
+ * @return {JSXElement} - window size context
+ */
 
 const WindowSizeContext = React.createContext()
 
@@ -42,3 +52,7 @@ class WindowSizeProvider extends Component {
 export default WindowSizeContext
 
 export { WindowSizeProvider }
+
+WindowSizeProvider.propTypes = {
+  children: PropTypes.object
+}
