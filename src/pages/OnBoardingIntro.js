@@ -1,17 +1,17 @@
 
 import React, { Fragment, useContext } from 'react'
-import { Link } from "gatsby"
-import { useTranslation } from "react-i18next"
+import { Link } from 'gatsby'
+import { useTranslation } from 'react-i18next'
 
 import WindowSizeContext from '../context/WindowSizeContext'
 import sliderImg from '../assets/images/intro-slide-image.png'
 import IntroSlider from '../components/IntroSlider/IntroSlider'
 import Button from '../components/_buttons/Button/Button'
-import Layout from '../components/layout'
+import Layout from '../components/layout/layout'
 
 import '../styles/onboarding-intro.scss'
 
-const OnboardingIntroContainer = ({location}) => {
+const OnboardingIntroContainer = () => {
   const windowContext = useContext(WindowSizeContext);
   const [t, i18n] = useTranslation();
 

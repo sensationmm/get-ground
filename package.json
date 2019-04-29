@@ -31,6 +31,7 @@
     "gatsby-plugin-i18next": "^1.1.7",
     "gatsby-plugin-sass": "^2.0.11",
     "history": "^4.9.0",
+    "husky": "^2.1.0",
     "i18n-react": "^0.6.4",
     "i18next": "^15.1.0",
     "i18next-browser-languagedetector": "^3.0.1",
@@ -39,6 +40,7 @@
     "jest": "^24.7.1",
     "jest-dom": "^3.1.3",
     "node-sass": "^4.11.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "^1.17.0",
     "react-i18next": "^10.9.0",
     "react-router": "^5.0.0",
@@ -46,7 +48,8 @@
     "react-test-renderer": "^16.8.6",
     "react-testing-library": "^6.1.2",
     "redux-mock-store": "^1.5.3",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "sass-lint": "^1.13.1"
   },
   "keywords": [
     "gatsby"
@@ -58,19 +61,22 @@
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "jest"
+    "test": "jest",
+    "test-coverage": "jest --coverage",
+    "lint": "npm run eslint && npm run sasslint",
+    "preeslint": "echo 'Running eslint'",
+    "eslint": "eslint src",
+    "presasslint": "echo 'Running sasslint'",
+    "sasslint": "sass-lint -c .sass-lint.yml 'src/**/*.scss' -v --no-exit"
   },
-  "pre-commit": [
-    "precommit-msg",
-    "lint",
-    "test-coverage"
-  ],
-  "lint-staged": {
-    "*.{js,json,css,md}": [
-      "prettier --write",
-      "git add"
-    ]
+
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm-run-all --parallel test lint",
+      "commit-msg": "echo 'Pre-commit checks... linting Sass and JS, please fix any errors'"
+    }
   },
+
   "repository": {
     "type": "git",
     "url": "https://github.com/gatsbyjs/gatsby-starter-default"

@@ -1,7 +1,7 @@
-@import './modules/reset';
-@import './modules/colors';
-@import './modules/mixins';
-@import './modules/variables';
+@import '../../styles/modules/reset';
+@import '../../styles/modules/_colors';
+@import '../../styles/modules/_mixins';
+@import '../../styles/modules/_variables';
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');
 
@@ -11,7 +11,7 @@ body {
   color: $text;
   line-height: 1.3;
   background: $background-main-start;
-  @include gradient-vertical-image($background-main-start, $background-main-end, '../assets/images/background.png');
+  @include gradient-vertical-image($background-main-start, $background-main-end, '../../assets/images/background.png');
   background-attachment: fixed;
   font-size: 18px;
 }

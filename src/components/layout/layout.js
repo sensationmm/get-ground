@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
-import Header from "./header"
-import WindowSizeContext from '../context/WindowSizeContext';
-import '../i18n';
-import '../styles/layout.scss'
+import React, { useContext } from 'react'
+import PropTypes from 'prop-types'
+import Header from '../header/header'
+import WindowSizeContext from '../../context/WindowSizeContext'
+import '../../i18n';
+import './layout.scss'
 
 const Layout = ({ children }) => {
   const windowContext = useContext(WindowSizeContext);
@@ -22,3 +23,7 @@ const Layout = ({ children }) => {
 }
 
 export default Layout;
+
+Layout.propTypes = {
+  children: PropTypes.array
+}

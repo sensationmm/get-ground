@@ -1,4 +1,4 @@
-import { render, fireEvent, waitForElement } from 'react-testing-library'
+import { render, fireEvent } from 'react-testing-library'
 import React from 'react'
 
 import WindowSizeContext from './WindowSizeContext'
@@ -55,10 +55,10 @@ describe('WindowSizeContext', () => {
       <WindowSizeContext.Provider value={value}>
         <WindowSizeContext.Consumer>
           {value =>
-          <div>
+          (<div>
             <div data-testid="test-resize" onClick={ () => value.setResize({width: 80, height: 100})}></div>
             <span>Breakpoint: {value.breakpoint}</span>
-          </div>
+          </div>)
         }
         </WindowSizeContext.Consumer>
       </WindowSizeContext.Provider>

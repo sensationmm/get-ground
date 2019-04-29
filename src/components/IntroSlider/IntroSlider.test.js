@@ -1,7 +1,4 @@
-import { setup, findByTestAttr } from '../../test-utils/test-utils'
-
-import { shallow } from 'enzyme'
-import React from 'react'
+import { setup } from '../../test-utils/test-utils'
 
 import IntroSlider from './IntroSlider'
 

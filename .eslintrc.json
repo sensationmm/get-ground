@@ -1,0 +1,139 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "parser": "babel-eslint",
+  "plugins": [
+    "react"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "settings": {
+    "react": {
+      "version": "latest"
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "jasmine": true,
+    "mocha": true,
+    "jest": true,
+    "es6": true
+  },
+  "globals": {
+    "React": true,
+    "TestUtils": true,
+    "routerHelper": true,
+    "App": true,
+    "APP_GLOBALS": true,
+    "APP_VERSION": true,
+    "AuthenticationContext": true,
+    "ScrollMagic": false,
+    "EventDispatcher": false,
+    "PIXI": false,
+    "THREE": false,
+    "spz": false,
+    "PixiUtils": false,
+    "BezEase": false,
+    "BehavioursController": false,
+    "noise": false,
+    "CubicBezier": false,
+    "TweenLib": false,
+    "TimelineLite": false,
+    "TimelineMax": false,
+    "TweenLite": false,
+    "TweenMax": false,
+    "Back": false,
+    "Bounce": false,
+    "Circ": false,
+    "Cubic": false,
+    "Ease": false,
+    "EaseLookup": false,
+    "Elastic": false,
+    "Expo": false,
+    "Linear": false,
+    "Power0": false,
+    "Power1": false,
+    "Power2": false,
+    "Power3": false,
+    "Power4": false,
+    "Quad": false,
+    "Quart": false,
+    "Quint": false,
+    "RoughEase": false,
+    "Sine": false,
+    "SlowMo": false,
+    "SteppedEase": false,
+    "Strong": false,
+    "Draggable": false,
+    "SplitText": false,
+    "VelocityTracker": false,
+    "CSSPlugin": false,
+    "ThrowPropsPlugin": false,
+    "BezierPlugin": false
+  },
+  "rules": {
+    "no-console": "error",
+    "vars-on-top": "error",
+    "no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "args": "none",
+        "ignoreRestSiblings": true
+      }
+    ],
+    "no-unreachable": "error",
+    "prefer-const": "error",
+    "no-const-assign": "error",
+    "no-duplicate-imports": [
+      "error",
+      {
+        "includeExports": true
+      }
+    ],
+    "valid-typeof": [
+      "error",
+      {
+        "requireStringLiterals": true
+      }
+    ],
+    "quotes": [
+      "error",
+      "single",
+      {
+        "avoidEscape": true,
+        "allowTemplateLiterals": true
+      }
+    ],
+    "no-empty-pattern": "error",
+    "react/display-name": "off",
+    "react/prefer-stateless-function": [
+      2,
+      {
+        "ignorePureComponents": true
+      }
+    ],
+    "react/jsx-wrap-multilines": "error",
+    "react/jsx-no-bind": "off",
+    "react/no-danger-with-children": 0,
+    "react/prop-types": "error",
+    "require-jsdoc": [
+      "error",
+      {
+        "require": {
+          "FunctionDeclaration": true,
+          "MethodDefinition": false,
+          "ClassDeclaration": true,
+          "ArrowFunctionExpression": false
+        }
+      }
+    ],
+    "valid-jsdoc": "error"
+  }
+}

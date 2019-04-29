@@ -1,7 +1,7 @@
-@import './modules/_reset';
-@import './modules/_colors';
-@import './modules/_mixins';
-@import './modules/_variables';
+@import '../../styles/modules/reset';
+@import '../../styles/modules/_colors';
+@import '../../styles/modules/_mixins';
+@import '../../styles/modules/_variables';
 
 .header {
   height: $header-height + 0px;
@@ -12,7 +12,7 @@
   padding: ($padding-vertical + 0px) ($padding-horizontal + 0px);
 
   &:not(.fullscreen) {
-    @include gradient-vertical-image($background-main-start, $background-main-end, '../assets/images/background.png');
+    @include gradient-vertical-image($background-main-start, $background-main-end, '../../assets/images/background.png');
   }
 
   &-logo {
@@ -28,7 +28,7 @@
     &-toggle {
       width: 32px;
       height: 32px;
-      background: url('../assets/images/burger-menu.svg') center center no-repeat;
+      background: url('../../assets/images/burger-menu.svg') center center no-repeat;
       background-size: contain;
     }
   }
