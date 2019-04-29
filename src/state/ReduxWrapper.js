@@ -5,6 +5,6 @@ import rootReducer from './reducers';
 
 const createStore = () => reduxCreateStore(rootReducer);
 
-export default ({ element }) => (
-  <Provider store={createStore()}>{element}</Provider>
-);
+export const ReduxWrapper = ({ children }) => (
+  <Provider store={createStore()}>{children}</Provider>
+)
