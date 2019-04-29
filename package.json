@@ -63,7 +63,6 @@
     "serve": "gatsby serve",
     "test": "jest",
     "test-coverage": "jest --coverage",
-    "precommit-msg": "echo 'Pre-commit checks... linting Sass and JS, please fix any errors'",
     "lint": "npm run eslint && npm run sasslint",
     "preeslint": "echo 'Running eslint'",
     "eslint": "eslint src",
@@ -73,7 +72,7 @@
 
   "husky": {
     "hooks": {
-      "pre-commit": "npm-run-all --parallel jest lint",
+      "pre-commit": "npm-run-all --parallel test lint",
       "commit-msg": "echo 'Pre-commit checks... linting Sass and JS, please fix any errors'"
     }
   },
