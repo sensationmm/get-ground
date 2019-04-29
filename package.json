@@ -25,8 +25,10 @@
     "babel-preset-gatsby": "^0.1.11",
     "classnames": "^2.2.6",
     "connected-react-router": "^6.4.0",
+    "cypress": "^3.2.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
+    "gatsby-cypress": "^0.1.9",
     "gatsby-plugin-css-literal-loader": "^1.0.0",
     "gatsby-plugin-i18next": "^1.1.7",
     "gatsby-plugin-sass": "^2.0.11",
@@ -49,7 +51,8 @@
     "react-testing-library": "^6.1.2",
     "redux-mock-store": "^1.5.3",
     "redux-thunk": "^2.3.0",
-    "sass-lint": "^1.13.1"
+    "sass-lint": "^1.13.1",
+    "start-server-and-test": "^1.9.0"
   },
   "keywords": [
     "gatsby"
@@ -63,20 +66,20 @@
     "serve": "gatsby serve",
     "test": "jest",
     "test-coverage": "jest --coverage",
+    "cy:open": "cypress open",
+    "integration": "start-server-and-test develop http://localhost:8000 cy:open",
     "lint": "npm run eslint && npm run sasslint",
     "preeslint": "echo 'Running eslint'",
     "eslint": "eslint src",
     "presasslint": "echo 'Running sasslint'",
     "sasslint": "sass-lint -c .sass-lint.yml 'src/**/*.scss' -v --no-exit"
   },
-
   "husky": {
     "hooks": {
       "pre-commit": "npm-run-all --parallel test lint",
       "commit-msg": "echo 'Pre-commit checks... linting Sass and JS, please fix any errors'"
     }
   },
-
   "repository": {
     "type": "git",
     "url": "https://github.com/gatsbyjs/gatsby-starter-default"
