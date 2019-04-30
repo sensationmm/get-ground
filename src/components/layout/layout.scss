@@ -28,15 +28,11 @@ body {
 }
 
 .app {
-  // padding: ($padding-vertical + 0px) ($padding-horizontal + 0px);
   height: calc(100% - #{$header-height + ($padding-vertical * 4) + 0px});
   min-width: 100%;
   min-height: 100%;
   height: 100%;
   width: 100%;
-  // &:not(.fullscreen) {
-  //   background: $white;
-  // }
 }
 
 h1, h2 {
