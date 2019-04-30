@@ -37,20 +37,18 @@
       "form": {
         "dateOfBirth": "Date of Birth"
       }
-    },
-    "verifyEmail": {
-      "initialLanding": {
-        "title": "We’ve sent you an email",
-        "copy": "With a magic link to “email@domain.com”. Please click the button on the email to verify your account.",
-        "info": "If you didn’t receive an email please check your spam folder and if it isn’t there contact us."
-      },
-      "success" : {
-        "title": "Thanks!",
-        "copy": "Your email has been verified."
-      },
-      "button1": "Continue",
-      "button2": "Back"
     }
+  },
+  "emailVerified": {
+    "title": "Thanks!",
+    "copy": "Your email has been verified.",
+    "button": "Continue"
+  },
+  "accountPending": {
+    "title": "We‘ve sent you an email",
+    "text": "With a magic link to the email address you provided. Please click the button on the email to verify your account.",
+    "introBox": "If you didn‘t receive an email please check your spam folder and if it isn‘t there contact us.",
+    "contactLink": "Contact us"
   },
   "contactUs": "Contact us"
 }

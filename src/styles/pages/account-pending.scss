@@ -1,6 +1,6 @@
 @import '../../styles/modules/colors';
 
-.verify-email {
+.account-pending {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -41,36 +41,8 @@
     object-fit: contain;
   }
 
-  &--info {
+  .intro-box {
     margin-top: 40px;
-  }
-
-  button {
-    margin-top: 66px;
-  }
-
-  &-success {
-    &--img {
-      margin-top: 61px;
-      width: 224px;
-      height: 178px;
-      object-fit: contain;
-    }
-    &--title {
-      margin-top: 45px;
-      width: 167px;
-      height: 60px;
-      font-size: 48px;
-      font-weight: 300;
-      line-height: 1.25;
-      letter-spacing: normal;
-    }
-    &--copy {
-      margin-top: 38px;
-      font-size: 18px;
-      line-height: 1.33;
-      letter-spacing: normal;
-    }
   }
 }
 

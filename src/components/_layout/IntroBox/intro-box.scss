@@ -1,0 +1,13 @@
+@import 'src/styles/modules/_colors.scss';
+@import 'src/styles/modules/_mixins.scss';
+
+.intro-box {
+  font-size: 14px;
+  margin-bottom: 20px;
+  padding: 10px;
+  @include gradient-horizontal($gradient-secondary-1, $gradient-secondary-2);
+ 
+  > :last-child {
+    margin-bottom: 0;
+  }
+}
