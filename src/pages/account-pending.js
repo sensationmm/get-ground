@@ -7,7 +7,8 @@ import { fetchVerification } from '../services/Verification'
 import IntroBox from '../components/_layout/IntroBox/IntroBox';
 import Layout from '../components/layout/layout'
 import ContactUs from '../components/ContactUs/ContactUs'
-import PhoneImg from '../assets/images/account-pending.png'
+import ImageFull from '../components/ImageFull/ImageFull'
+import EmailSent from '../assets/images/email-sent.svg'
 import '../styles/pages/account-pending.scss'
 
 const VerifyEmail = () => {
@@ -26,7 +27,8 @@ const VerifyEmail = () => {
       <div data-test="container-account-pending" className="account-pending">
         <div className="account-pending--title">{t('accountPending.title')}</div>
         <div className="account-pending--copy">{t('accountPending.text')}</div>
-        <img className="account-pending--img" src={PhoneImg} />
+        <ImageFull src={EmailSent} />
+        {/* <img className="account-pending--img" src={EmailSent} /> */}
         <IntroBox>{ t('accountPending.introBox') }</IntroBox>
         <ContactUs />
       </div>

@@ -4,12 +4,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  font-style: normal;
-  font-stretch: normal;
-  letter-spacing: normal;
   color: $border;
-  font-family: OpenSans;
-  position: relative;
   background: $white;
   height: 100%;
 
@@ -21,12 +16,9 @@
   }
   &--title {
     margin-top: 45px;
-    width: 167px;
-    height: 60px;
     font-size: 48px;
     font-weight: 300;
     line-height: 1.25;
-    letter-spacing: normal;
   }
   &--copy {
     margin-top: 38px;

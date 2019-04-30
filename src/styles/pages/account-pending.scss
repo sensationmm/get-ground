@@ -1,17 +1,14 @@
 @import '../../styles/modules/colors';
+@import '../../styles/modules/variables';
 
 .account-pending {
   display: flex;
   align-items: center;
   flex-direction: column;
-  font-style: normal;
-  font-stretch: normal;
-  letter-spacing: normal;
   color: $border;
-  font-family: OpenSans;
-  position: relative;
   background: $white;
   height: 100%;
+  padding: $padding-vertical $padding-horizontal;
 
   &--title {
     display: flex;
@@ -26,12 +23,13 @@
   }
 
   &--copy {
-    width: 296px;
     height: 79px;
     font-size: 14px;
     font-weight: normal;
     line-height: 1.29;
     margin-top: 22px;
+    margin-right: 40px;
+    margin-left: 40px;
   }
 
   &--img {
