@@ -37,7 +37,7 @@ export const setup = (Component, props={}, state=null) => {
   return wrapper;
 }
 
-export const setupRTL = (Component, props={}, componentTestId, getByFunc) => {
+export const setupRTL = (Component, props={}, componentTestId) => {
   const { getByTestId } = render(<Component {...props} />)
   const wrapper = getByTestId(componentTestId);
 

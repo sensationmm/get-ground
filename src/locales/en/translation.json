@@ -39,13 +39,18 @@
       }
     },
     "verifyEmail": {
-      "welcome": "If you didn’t receive an email please check your spam folder and if it isn’t there contact us",
+      "initialLanding": {
+        "title": "We’ve sent you an email",
+        "copy": "With a magic link to “email@domain.com”. Please click the button on the email to verify your account.",
+        "info": "If you didn’t receive an email please check your spam folder and if it isn’t there contact us."
+      },
       "success" : {
-        "title": "Thanks",
-        "msg": "Your email has been verified."
+        "title": "Thanks!",
+        "copy": "Your email has been verified."
       },
       "button1": "Continue",
       "button2": "Back"
     }
-  }
+  },
+  "contactUs": "Contact us"
 }

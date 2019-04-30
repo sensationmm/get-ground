@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
     <>
       <Header className="header"/>
       <div className="app">
-        <main>{children}</main>
+        <main className="main">{children}</main>
       </div>
     </>
   )
@@ -25,5 +25,5 @@ const Layout = ({ children }) => {
 export default Layout;
 
 Layout.propTypes = {
-  children: PropTypes.array
+  children: PropTypes.object,
 }
