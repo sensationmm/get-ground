@@ -19,7 +19,7 @@ const VerifyEmailSucess = () => {
         <div className="verify-email-success--title">{t('onBoarding.verifyEmail.success.title')}</div>
         <div className="verify-email-success--copy">{t('onBoarding.verifyEmail.success.copy')}</div>
         <Link to="/onboarding">
-          <Button label={t('onBoarding.verifyEmail.button1')} classes="primary" />
+          <Button label={t('onBoarding.verifyEmail.button1')} classes="primary" fullWidth />
         </Link>
       </div>
     </Layout>

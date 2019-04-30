@@ -1,0 +1,58 @@
+@import '../../../styles/modules/colors';
+@import '../../../styles/modules/variables';
+
+.text-input {
+  margin-bottom: 2px;
+  position: relative;
+  box-sizing: border-box;
+
+  &-label {
+    text-transform: uppercase;
+    color: $primary;
+    padding-left: $padding-horizontal;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+
+  &-required {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: $warning;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  input[type=text], input[type=password], textarea {
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid $border;
+    border-radius: 5px;
+    padding: $padding-horizontal;
+    background: none;
+    font-size: 14px;
+    color: $text;
+    outline: 0;
+    box-shadow: 0 0 0 0 $primary;
+    transition: all 0.3s;
+
+    &:focus {
+      box-shadow: 0 0 10px 0 $primary;
+    }
+
+    &::placeholder {
+      color: $primary;
+      opacity: 0.5;
+    }
+
+    &.error {
+      border-color: $warning;
+    }
+  }
+
+  textarea {
+    height: 120px;
+  }
+}

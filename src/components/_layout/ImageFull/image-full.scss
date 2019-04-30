@@ -1,0 +1,10 @@
+@import '../../../styles/modules/variables';
+
+.image-full {
+  display: block;
+  margin: (($padding-vertical-unit * 2) + 0px) (- ($padding-horizontal-unit * 2) + 0px);
+  
+  img {
+    width: 100%;
+  }
+}
