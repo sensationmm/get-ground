@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 
 import Button from '../components/_buttons/Button/Button'
 import Layout from '../components/layout/layout'
-import successImg from '../assets/images/verify-email.png'
+import successImg from '../assets/images/verify-email-success.png'
 
 import '../styles/pages/verify-email.scss'
 

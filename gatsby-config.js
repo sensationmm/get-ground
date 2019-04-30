@@ -6,8 +6,13 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-css-literal-loader`,
     'gatsby-plugin-sass',
+    {
+      resolve: `gatsby-plugin-css-literal-loader`,
+      options: {
+        extension: '.scss'
+      }
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {

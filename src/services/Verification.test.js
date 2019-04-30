@@ -1,10 +1,9 @@
-// import fetchVerification from './Verification';
+import { fetchVerification } from './Verification';
 
-// describe('fetchVerification', () => {
-//   beforeEach(() => {
-//     fetch.resetMocks()
-//   })
-
-  it('calls api and returns status code', () => {
+describe('fetchVerification', () => {
+  test('returns 401 status', () => {
+    return fetchVerification().then((data) => {
+      expect(data).toBe(401);
+    })
   })
-// })
+})

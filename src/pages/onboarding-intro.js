@@ -1,9 +1,8 @@
 
-import React, { Fragment, useContext } from 'react'
+import React, { Fragment } from 'react'
 import { Link } from 'gatsby'
 import { useTranslation } from 'react-i18next'
 
-import WindowSizeContext from '../context/WindowSizeContext'
 import sliderImg from '../assets/images/intro-slide-image.png'
 import IntroSlider from '../components/IntroSlider/IntroSlider'
 import Button from '../components/_buttons/Button/Button'
@@ -12,7 +11,6 @@ import Layout from '../components/layout/layout'
 import '../styles/pages/onboarding-intro.scss'
 
 const OnboardingIntroContainer = () => {
-  const windowContext = useContext(WindowSizeContext);
   const [t, i18n] = useTranslation();
 
   const slidesContent = i18n.t('onBoarding.intro.slides', { returnObjects: true });
@@ -46,13 +44,10 @@ const OnboardingIntroContainer = () => {
   };
 
   return (
-    <div data-test="container-onboarding-intro" className="onboarding-intro">
-      <span>Width: {windowContext.width}</span>
-      <span> Height: {windowContext.height}</span>
-      <span> Breakpoint: {windowContext.breakpoint}</span>
+    <Fragment>
       {slidesContent.length &&
-        <Fragment>
-          <Layout>
+        <Layout>
+          <div data-test="container-onboarding-intro" className="onboarding-intro">
             <IntroSlider
               slides={slidesConfig.slides}
             />
@@ -71,10 +66,10 @@ const OnboardingIntroContainer = () => {
                 />
               </Link>
             </div>
-          </Layout>
-        </Fragment>
+          </div>
+        </Layout>
       }
-    </div>
+      </Fragment>
   );
 }
 

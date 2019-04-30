@@ -9,6 +9,9 @@
   letter-spacing: normal;
   color: $border;
   font-family: OpenSans;
+  position: relative;
+  background: $white;
+  height: 100%;
 
   &--title {
     display: flex;
@@ -49,8 +52,9 @@
   &-success {
     &--img {
       margin-top: 61px;
-      // width: 224px;
-      // height: 178px;
+      width: 224px;
+      height: 178px;
+      object-fit: contain;
     }
     &--title {
       margin-top: 45px;
@@ -75,10 +79,4 @@
   align-items: center;
   flex-flow: column;
   margin-top: 22px;
-}
-
-body {
-  &:not(.fullscreen) {
-    background: $white;
-  }
 }

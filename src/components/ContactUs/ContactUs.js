@@ -16,7 +16,7 @@ const ContactUs = () => {
 
   return (
     <Link to="/onboarding">
-      <div className="contact-us" data-test="component-contact-us">
+      <div className="contact-us" data-testid="component-contact-us">
         {t('contactUs')}
       </div>
     </Link>
