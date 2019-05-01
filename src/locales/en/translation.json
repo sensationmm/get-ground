@@ -39,6 +39,26 @@
       }
     }
   },
+  "contactUs": "Contact us",
+  "createAccount": {
+    "title": "Account details",
+    "intro": "These details are used to create your account",
+    "ctaPrimary": "Next",
+    "ctaSecondary": "Back",
+    "form": {
+      "label": {
+        "email": "Email",
+        "password": "Password",
+        "passwordConfirm": "Confirm Password",
+        "optIn": "I would like to receive marketing emails and offers from GetGround",
+        "privacy": "Creating an account means you accept our terms of service and Privacy Policy"
+      },
+      "note": {
+        "email": "This will be your username",
+        "password": "Your password must be at least 6 characters long"
+      }
+    }
+  },
   "emailVerified": {
     "title": "Thanks!",
     "copy": "Your email has been verified.",
@@ -50,5 +70,9 @@
     "introBox": "If you didn‘t receive an email please check your spam folder and if it isn‘t there contact us.",
     "contactLink": "Contact us"
   },
-  "contactUs": "Contact us"
+  "validation": {
+    "validateEmail": "Invalid email address",
+    "validateRequired": "Required",
+    "validateMatching": "No match"
+  }
 }
