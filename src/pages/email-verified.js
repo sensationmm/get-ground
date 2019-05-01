@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 import { useTranslation } from 'react-i18next'
 
 import Button from '../components/_buttons/Button/Button'
-import Layout from '../components/layout/layout'
+import Layout from '../components/Layout/Layout'
 import successImg from '../assets/images/email-verified.png'
 
 import '../styles/pages/email-verified.scss'

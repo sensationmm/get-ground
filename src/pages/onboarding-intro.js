@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import sliderImg from '../assets/images/intro-slide-image.png'
 import IntroSlider from '../components/IntroSlider/IntroSlider'
 import Button from '../components/_buttons/Button/Button'
-import Layout from '../components/layout/layout'
+import Layout from '../components/Layout/Layout'
 
 import '../styles/pages/onboarding-intro.scss'
 

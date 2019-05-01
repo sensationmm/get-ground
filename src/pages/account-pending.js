@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 
 import { fetchVerification } from '../services/Verification'
 import IntroBox from '../components/_layout/IntroBox/IntroBox';
-import Layout from '../components/layout/layout'
+import Layout from '../components/Layout/Layout'
 import ContactUs from '../components/ContactUs/ContactUs'
 import ImageFull from '../components/ImageFull/ImageFull'
 import EmailSent from '../assets/images/email-sent.svg'

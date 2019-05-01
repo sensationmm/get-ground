@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { withTranslation } from 'react-i18next';
 
-import Layout from '../components/layout/layout'
+import Layout from '../components/Layout/Layout'
 import formUtils from '../utils/form';
 
 import IntroBox from '../components/_layout/IntroBox/IntroBox';
