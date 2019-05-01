@@ -24,7 +24,7 @@ const VerifyEmail = () => {
 
   return (
     <Layout>
-      <div data-test="container-account-pending" className="account-pending">
+      <div data-test="container-account-pending" className="account-pending" role="account">
         <div className="account-pending--title">{t('accountPending.title')}</div>
         <div className="account-pending--copy">{t('accountPending.text')}</div>
         <ImageFull src={EmailSent} />

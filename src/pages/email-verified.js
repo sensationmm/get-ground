@@ -14,7 +14,7 @@ const VerifyEmailSucess = () => {
 
   return (
     <Layout>
-      <div data-test="container-email-verified" className="email-verified">
+      <div data-test="container-email-verified" className="email-verified" role="account">
       <img className="email-verified--img" src={successImg} />
         <div className="email-verified--title">{t('emailVerified.title')}</div>
         <div className="email-verified--copy">{t('emailVerified.copy')}</div>
