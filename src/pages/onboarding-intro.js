@@ -47,7 +47,7 @@ const OnboardingIntroContainer = () => {
     <Fragment>
       {slidesContent.length &&
         <Layout>
-          <div data-test="container-onboarding-intro" className="onboarding-intro">
+          <div data-test="container-onboarding-intro" className="onboarding-intro" role="fullscreen">
             <IntroSlider
               slides={slidesConfig.slides}
             />

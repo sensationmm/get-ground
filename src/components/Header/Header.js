@@ -16,7 +16,7 @@ import './header.scss'
 
 const Header = (props) => {
   return (
-    <header data-test="component-header" className={classNames('header', props.classNames, props.className)}>
+    <header data-test="component-header" className={classNames('header', props.classNames)}>
       <div className="header-logo"><img src={Logo} alt="GetGround logo" /></div>
 
       <div className="header-menu-toggle" />
@@ -25,8 +25,7 @@ const Header = (props) => {
 }
 
 Header.propTypes = {
-  classNames: PropTypes.string,
-  className: PropTypes.string,
+  classNames: PropTypes.string
 }
 
 export default Header;
