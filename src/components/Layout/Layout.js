@@ -1,8 +1,9 @@
-import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
-import Header from '../Header/Header'
-import WindowSizeContext from '../../context/WindowSizeContext'
-import '../../i18n';
+import React, { useContext } from 'react';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import Header from 'src/components/Header/Header';
+import WindowSizeContext from 'src/context/WindowSizeContext';
+import 'src/i18n';
 import './layout.scss'
 
 const Layout = ({ children }) => {
@@ -14,8 +15,8 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header classNames={[`${children.props.role}`]} />
-      <div className="app">
+      <Header classNames={`${children.props.role}`} />
+      <div className={classNames('app', children.props.role)}>
         <main className="main">{children}</main>
       </div>
     </>

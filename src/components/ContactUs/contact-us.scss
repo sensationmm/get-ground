@@ -1,12 +1,11 @@
 @import 'src/styles/modules/_colors.scss';
 
 .contact-us {
-  width: 86px;
-  height: 30px;
-  font-size: 14px;
+  width: 100%;
   font-weight: 600;
   line-height: 2.14;
   letter-spacing: 0.9px;
   color: $primary;
   text-decoration: underline;
+  text-align: center;
 }
