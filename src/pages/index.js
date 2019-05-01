@@ -4,8 +4,6 @@ import Layout from '../components/Layout/Layout'
 import SEO from '../components/seo'
 import Select from '../components/_form/Select/Select';
 
-import '../styles/pages/home.scss';
-
 const IndexPage = () => {
 
   const testOptions = [
