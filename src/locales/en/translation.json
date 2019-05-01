@@ -86,11 +86,5 @@
     "validateMatching": "No match",
     "validatePhone": "Invalid phone",
     "validateNumeric": "Number only"
-  },
-  "emailVerified": {
-    "title": "Thanks!",
-    "copy": "Your email has been verified.",
-    "button": "Continue"
-  },
-  "contactUs": "Contact us"
+  }
 }
