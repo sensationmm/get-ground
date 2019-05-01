@@ -18,8 +18,6 @@ import StrengthMeter from '../components/StrengthMeter/StrengthMeter';
 
 import { showLoader, hideLoader } from '../state/actions/loader';
 
-import '../styles/pages/create-account.scss'
-
 /**
  * CreateAccount
  *
