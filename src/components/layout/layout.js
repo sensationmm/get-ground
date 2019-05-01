@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header className="header"/>
+      <Header className={`${children.props.role}`} />
       <div className="app">
         <main className="main">{children}</main>
       </div>

@@ -22,7 +22,7 @@ const VerifyEmail = () => {
 
   return (
     <Layout>
-      <div data-test="container-verify-email" className="verify-email">
+      <div data-test="container-verify-email" className="verify-email" role="email">
         <div className="verify-email--title">{t('onBoarding.verifyEmail.initialLanding.title')}</div>
         <div className="verify-email--copy">{t('onBoarding.verifyEmail.initialLanding.copy')}</div>
         <img className="verify-email--img" src={PhoneImg} />

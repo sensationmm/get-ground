@@ -20,6 +20,7 @@
     "redux": "^4.0.1"
   },
   "devDependencies": {
+    "axios": "^0.18.0",
     "babel-jest": "^24.7.1",
     "babel-polyfill": "^6.26.0",
     "babel-preset-gatsby": "^0.1.11",
@@ -49,7 +50,8 @@
     "react-testing-library": "^6.1.2",
     "redux-mock-store": "^1.5.3",
     "redux-thunk": "^2.3.0",
-    "sass-lint": "^1.13.1"
+    "sass-lint": "^1.13.1",
+    "zxcvbn": "^4.4.2"
   },
   "keywords": [
     "gatsby"
@@ -69,14 +71,12 @@
     "presasslint": "echo 'Running sasslint'",
     "sasslint": "sass-lint -c .sass-lint.yml 'src/**/*.scss' -v --no-exit"
   },
-
   "husky": {
     "hooks": {
       "pre-commit": "npm-run-all --parallel test lint",
       "commit-msg": "echo 'Pre-commit checks... linting Sass and JS, please fix any errors'"
     }
   },
-
   "repository": {
     "type": "git",
     "url": "https://github.com/gatsbyjs/gatsby-starter-default"
