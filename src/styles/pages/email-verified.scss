@@ -1,0 +1,33 @@
+@import '../../styles/modules/colors';
+
+.email-verified {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: $border;
+  background: $white;
+  height: 100%;
+
+  &--img {
+    margin-top: 61px;
+    width: 224px;
+    height: 178px;
+    object-fit: contain;
+  }
+  &--title {
+    margin-top: 45px;
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 1.25;
+  }
+  &--copy {
+    margin-top: 38px;
+    font-size: 18px;
+    line-height: 1.33;
+    letter-spacing: normal;
+  }
+
+  button {
+    margin-top: 66px;
+  }
+}
