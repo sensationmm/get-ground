@@ -5,7 +5,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 
 import configureMockStore from 'redux-mock-store'
 
-import { middleware } from '../store';
+import { middleware } from '../state/store';
 import { render } from 'react-testing-library'
 
 import rootReducer from '../state/reducers/index';
