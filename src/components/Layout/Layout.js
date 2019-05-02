@@ -5,10 +5,10 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import SEO from 'src/components/seo'
 import Header from 'src/components/Header/Header';
-import Loader from '../Loader/Loader';
-import { setWidth } from '../../state/actions/layout'
+import Loader from 'src/components/Loader/Loader';
+import { setWidth } from 'src/state/actions/layout'
 
-import '../../i18n';
+import 'src/i18n';
 import './layout.scss'
 
 export class Layout extends Component {
