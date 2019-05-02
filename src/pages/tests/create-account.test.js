@@ -10,7 +10,7 @@ describe('<CreateAccount />', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = setup(CreateAccount, { t: jest.fn().mockReturnValue('string') });
+    wrapper = setup(CreateAccount, { t: jest.fn().mockReturnValue('string'), modal: { isOpen: false } });
   });
 
   test('renders without error', () => {
@@ -19,13 +19,13 @@ describe('<CreateAccount />', () => {
   });
 
   test('renders error message if errors present', () => {
-    wrapper = setup(CreateAccount, { t: jest.fn().mockReturnValue('string') }, { showErrorMessage: true });
+    wrapper = setup(CreateAccount, { t: jest.fn().mockReturnValue('string'), modal: { isOpen: false } }, { showErrorMessage: true });
     expect(wrapper.contains(<ErrorBox>string</ErrorBox>)).toBe(true);
   });
 
   test('renders custom error message if set', () => {
     wrapper = setup(CreateAccount,
-      { t: jest.fn().mockReturnValue('string') },
+      { t: jest.fn().mockReturnValue('string'), modal: { isOpen: false } },
       { showErrorMessage: true, errors: { form: 'Test error' } }
     );
     expect(wrapper.contains(<ErrorBox>Test error</ErrorBox>)).toBe(true);

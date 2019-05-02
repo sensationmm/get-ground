@@ -15,14 +15,17 @@ import InputPassword from '../components/_form/InputPassword/InputPassword';
 import Checkbox from '../components/_form/Checkbox/Checkbox';
 import Button from '../components/_buttons/Button/Button';
 import StrengthMeter from '../components/StrengthMeter/StrengthMeter';
+import Modal from '../components/Modal/Modal';
+import TermsModalContent from '../components/Modal/TermsModalContent';
 
 import { showLoader, hideLoader } from '../state/actions/loader';
+import { showModal, hideModal } from '../state/actions/modal';
 
 import '../styles/pages/create-account.scss'
 
 /**
  * CreateAccount
- *
+ * @param {object} e - event passed on openModal (for JSdoc)
  * @return {JSXElement} CreateAccount
  */
 class CreateAccount extends Component {
@@ -83,10 +86,20 @@ class CreateAccount extends Component {
     }
   }
 
+  openModal = (e) => {
+    e.preventDefault();
+    this.props.showModal();
+  }
+
+  closeModal = () => {
+    this.props.hideModal();
+  }
+
   render() {
     const { values, errors, showErrorMessage } = this.state;
-    const { t } = this.props;
+    const { t, modal: { isOpen } } = this.props;
     // @TODO can this be moved out of render - fails on edit field currently
+
     this.config = [
       {
         stateKey: 'email',
@@ -128,9 +141,15 @@ class CreateAccount extends Component {
       {
         stateKey: 'privacy',
         component: Checkbox,
-        label: t('createAccount.form.label.privacy'),
+        label: <div>
+          {t('createAccount.form.label.privacyOne')}
+          <a onClick={(e) => { this.openModal(e)}}>{t('createAccount.form.label.privacyTermsLink')}</a>
+          {t('createAccount.form.label.privacyTwo')}
+          {t('createAccount.form.label.privacyPolicyLink')}
+        </div>,
         checked: values.privacy,
-        validationFunction: 'validateRequired'
+        validationFunction: 'validateRequired',
+        openModal: (e) => {this.openModal(e)}
       }
     ];
 
@@ -165,6 +184,12 @@ class CreateAccount extends Component {
 
             <Button classes="secondary" label={ t('createAccount.ctaSecondary') } fullWidth />
           </Form>
+          { isOpen &&
+            <Modal>
+              <TermsModalContent 
+              closeModal={this.closeModal} />
+            </Modal>
+          }
         </div>
       </Layout>
     );
@@ -174,11 +199,27 @@ class CreateAccount extends Component {
 CreateAccount.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
-  t: PropTypes.func.isRequired
+  showModal: PropTypes.func,
+  hideModal: PropTypes.func,
+  t: PropTypes.func.isRequired,
+  modal: PropTypes.object
 };
 
-const actions = { showLoader, hideLoader };
+const mapStateToProps = state => {
+  return {
+    modal: {
+      isOpen: state.modal.isOpen
+    }
+  }
+};
+
+const actions = { 
+  showLoader, 
+  hideLoader ,
+  showModal,
+  hideModal
+};
 
 export const RawComponent = CreateAccount;
 
-export default connect(null, actions)(withTranslation()(CreateAccount));
+export default connect(mapStateToProps, actions)(withTranslation()(CreateAccount));

@@ -17,6 +17,7 @@ const Layout = ({ children }) => {
       <Header classNames={[`${children.props.role}`]} />
       <div className="app">
         <main className="main">{children}</main>
+        <div id="modal-root"></div>
       </div>
     </>
   )

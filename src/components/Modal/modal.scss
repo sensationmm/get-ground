@@ -1,0 +1,50 @@
+@import '../../styles/modules/_mixins';
+@import '../../styles/modules/_variables';
+@import '../../styles/modules/_colors';
+
+.modal {
+  background-color: $white;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+
+  &--header {
+    display: flex;
+    height: $header-height + 0px;
+    padding: $padding-vertical (($padding-horizontal-unit * 2) + 0px);
+
+    @include gradient-vertical-image(
+      $gradient-primary-1,
+      $gradient-primary-2,
+      '../../assets/images/background.png'
+    );
+
+    a {
+      display: none;
+    }
+  }
+
+  &--content {
+    margin: 30px;
+    text-align: center;
+    overflow: auto;
+  }
+
+  &--title {
+    font-size: 34px;
+    margin-bottom: 40px;
+  }
+
+  &--markdown {
+    margin-top: 60px;
+    font-size: 16px;
+  }
+
+  &--close-icon {
+    margin-left: auto;
+    cursor: pointer;
+  }
+}
