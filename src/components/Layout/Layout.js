@@ -1,17 +1,16 @@
-/* eslint-disable react/prefer-stateless-function */
 /* eslint-disable require-jsdoc */
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import Header from 'src/components/Header/Header';
-import Loader from 'src/components/Loader/Loader';
+import Header from '../Header/Header';
+import Loader from '../Loader/Loader';
 import { setWidth } from '../../state/actions/layout'
 
-import 'src/i18n';
+import '../../i18n';
 import './layout.scss'
 
-class Layout extends Component {
+export class Layout extends Component {
   componentDidMount() {
     this.props.setWidth(window.innerWidth);
     window.addEventListener('resize', (window) => this.props.setWidth(window.currentTarget.innerWidth))
@@ -40,5 +39,6 @@ Layout.propTypes = {
 const mapStateToProps = (state) => ({
   isLoading: state.loader.isLoading
 })
+
 
 export default connect(mapStateToProps, { setWidth })(Layout)
