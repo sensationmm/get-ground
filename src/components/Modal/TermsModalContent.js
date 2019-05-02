@@ -2,11 +2,14 @@ import React, { Component, Fragment, createRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
-import Button from '../../components/_buttons/Button/Button';
+import Button from 'src/components/_buttons/Button/Button';
 
-import closeIcon from '../../assets/images/close-modal-icon.svg';
-import termsImage from '../../assets/images/terms-image.svg';
+import closeIcon from 'src/assets/images/close-modal-icon.svg';
+import termsImage from 'src/assets/images/terms-image.svg';
+
+import { showLoader, hideLoader } from 'src/state/actions/loader';
 
 /**
  * TermsModalContent
@@ -19,36 +22,49 @@ class TermsModalContent extends Component {
     super(props);
 
     this.state = {
-      test: '',
       termsMarkdown: '',
       markdownContainerHeight: ''
     }
 
     this.modalHeader = createRef();
-    this.link = null;
+    this.requestUrl = 'https://staging-backend-236514.appspot.com/api/v1/markdown_templates_unique?category=other';
   }
 
-  getBlobForDownload = requestUrl => {
+  getBlobForDownload = /* istanbul ignore next */ () => {
+    const { showLoader, hideLoader } = this.props;
+
+    showLoader();
+
     axios({
-      url: requestUrl,
-      method: 'GET',
-      headers: {
-        'Authorization': 'avb068cbk2os5ujhodmt'
+      url: 'https://staging-backend-236514.appspot.com/api/v1/md2pdf',
+      method: 'POST',
+      data: {
+        'markdown_text': this.state.termsMarkdown
       },
-      responseType: 'blob',
+      headers: {
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOjk1LCJSb2xlIjoiIiwiZXhwIjoxNTU2ODA5OTY3LCJuYmYiOjE1NTY4MDYzNjh9.K7w1ALntRT3k7NeOlHUPsVHbomwAMZ6QvNlwt86j0Fc'
+      },
+      responseType: 'blob'
     }).then((response) => {
       const url = window.URL.createObjectURL(new Blob([response.data]));
-      this.link = document.createElement('a');
-      this.link.href = url;
-      this.link.setAttribute('download', 'file.pdf');
-      this.modalHeader.current.appendChild(this.link);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'file.pdf');
+      this.modalHeader.current.appendChild(link);
+      link.click();
+
+      hideLoader();
     });
   }
 
-  getJsonForContent = requestUrl => {
+  getJsonForContent = /* istanbul ignore next */ () => {
+    const { showLoader, hideLoader } = this.props;
+
+    showLoader();
+
     axios({
       method: 'get',
-      url: requestUrl,
+      url: 'https://staging-backend-236514.appspot.com/api/v1/markdown_templates_unique?category=other',
       headers: {
         'Authorization': 'avb068cbk2os5ujhodmt',
         'Content-Type': 'application/json',
@@ -62,18 +78,13 @@ class TermsModalContent extends Component {
         termsMarkdown: response.data[9].markdown_text,
         markdownContainerHeight: markdownContainerHeight
       });
+
+      hideLoader();
     })
   }
 
   componentDidMount() {
-    const requestUrl = 'https://staging-backend-236514.appspot.com/api/v1/markdown_templates_unique?category=other';
-
-    this.getJsonForContent(requestUrl);
-    this.getBlobForDownload(requestUrl);
-  }
-
-  downloadContent = () => {
-    this.link.click();
+    this.getJsonForContent();
   }
 
   render() {
@@ -82,10 +93,10 @@ class TermsModalContent extends Component {
 
     return (
       <Fragment>
-        <div ref={this.modalHeader} className="modal--header">
+        <div data-test="terms-modal" ref={this.modalHeader} className="modal--header">
           <Button 
             label='Download'
-            onClick={this.downloadContent}
+            onClick={this.getBlobForDownload}
           />
           <img 
             className="modal--close-icon" 
@@ -108,7 +119,16 @@ class TermsModalContent extends Component {
 }
 
 TermsModalContent.propTypes = {
-  closeModal: PropTypes.func
+  closeModal: PropTypes.func,
+  showLoader: PropTypes.func,
+  hideLoader: PropTypes.func
 };
 
-export default TermsModalContent;
+const actions = { 
+  showLoader, 
+  hideLoader
+};
+
+export const RawComponent = TermsModalContent;
+
+export default connect(null, actions)(TermsModalContent);

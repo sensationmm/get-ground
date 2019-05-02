@@ -1,7 +1,7 @@
 import {
   SHOW_MODAL,
   HIDE_MODAL,
-} from '../../config/constants';
+} from 'src/config/constants';
 
 const initialState = {
   isOpen: false
