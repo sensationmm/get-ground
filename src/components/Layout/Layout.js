@@ -1,30 +1,46 @@
-import React, { useContext } from 'react'
+/* eslint-disable require-jsdoc */
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import Header from '../Header/Header'
-import WindowSizeContext from '../../context/WindowSizeContext'
-import '../../i18n';
+import SEO from 'src/components/seo'
+import Header from 'src/components/Header/Header';
+import Loader from 'src/components/Loader/Loader';
+import { setWidth } from 'src/state/actions/layout'
+
+import 'src/i18n';
 import './layout.scss'
 
-const Layout = ({ children }) => {
-  const windowContext = useContext(WindowSizeContext);
+export class Layout extends Component {
+  componentDidMount() {
+    this.props.setWidth(window.innerWidth);
+    window.addEventListener('resize', (window) => this.props.setWidth(window.currentTarget.innerWidth))
+  }
 
-  window.addEventListener('resize', (window) => windowContext.setResize({
-      width: window.currentTarget.innerWidth, height:window.currentTarget.innerHeight
-    }))
-
-  return (
-    <>
-      <Header classNames={[`${children.props.role}`]} />
-      <div className="app">
-        <main className="main">{children}</main>
+  render() {
+    const { children } = this.props;
+    return (
+      <>
+        <SEO title="GetGround" keywords={[`gatsby`, `application`, `react`]} />
+        {this.props.isLoading && <Loader />}
+        <Header classNames={`${children.props.role}`} />
+        <div className={classNames('app', children.props.role)}>
+          <main className="main">{children}</main>
+        </div>
         <div id="modal-root"></div>
-      </div>
-    </>
-  )
+      </>
+    )
+  }
 }
-
-export default Layout;
 
 Layout.propTypes = {
   children: PropTypes.object,
+  setWidth: PropTypes.func,
+  isLoading: PropTypes.bool
 }
+
+const mapStateToProps = (state) => ({
+  isLoading: state.loader.isLoading
+})
+
+export default connect(mapStateToProps, { setWidth })(Layout)

@@ -3,10 +3,14 @@ import {
   HIDE_LOADER,
 } from '../../config/constants';
 
-export const showLoader = () => (dispatch) => {
-  dispatch({ type: SHOW_LOADER });
+export const showLoader = () => {
+  return {
+    type: SHOW_LOADER
+  }
 }
 
-export const hideLoader = () => (dispatch) => {
-  dispatch({ type: HIDE_LOADER });
+export const hideLoader = () => {
+  return {
+    type: HIDE_LOADER
+  }
 }

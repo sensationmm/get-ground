@@ -9,7 +9,6 @@ import Layout from '../components/Layout/Layout'
 import ContactUs from '../components/ContactUs/ContactUs'
 import ImageFull from '../components/ImageFull/ImageFull'
 import EmailSent from '../assets/images/email-sent.svg'
-import '../styles/pages/account-pending.scss'
 
 const VerifyEmail = () => {
   const [t] = useTranslation();
@@ -25,11 +24,13 @@ const VerifyEmail = () => {
   return (
     <Layout>
       <div data-test="container-account-pending" className="account-pending" role="account">
-        <div className="account-pending--title">{t('accountPending.title')}</div>
-        <div className="account-pending--copy">{t('accountPending.text')}</div>
+        <h1>{ t('accountPending.title') }</h1>
+        <p>{ t('accountPending.text') }</p>
+        
         <ImageFull src={EmailSent} />
-        {/* <img className="account-pending--img" src={EmailSent} /> */}
+
         <IntroBox>{ t('accountPending.introBox') }</IntroBox>
+
         <ContactUs />
       </div>
     </Layout>

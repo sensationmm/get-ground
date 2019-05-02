@@ -21,8 +21,6 @@ import TermsModalContent from '../components/Modal/TermsModalContent';
 import { showLoader, hideLoader } from '../state/actions/loader';
 import { showModal, hideModal } from '../state/actions/modal';
 
-import '../styles/pages/create-account.scss'
-
 /**
  * CreateAccount
  * @param {object} e - event passed on openModal (for JSdoc)
