@@ -61,7 +61,7 @@
       "button2": "Already on GG? Log In"
     },
     "accountCreation": {
-      
+
     },
     "personalDetails": {
       "datepicker": {
@@ -78,6 +78,44 @@
         "manualAddressButtonLabel": "Enter Address Manually",
         "addressFinderButtonLabel": "Find Address"
       }
+    },
+    "progressTracker": {
+      "inProgressTitle": "Get Started in 5 simple steps",
+      "complete": "complete",
+      "completeTitle": "All 5 steps complete",
+      "confirmComplete": "I am happy with all my details and confirm they are all correct.",
+      "sections": [
+        {
+          "title": "Account Details",
+          "copy": "Create your account",
+          "imageAltText": "Person",
+          "path": "/create-account"
+        },
+        {
+          "title": "Personal Details",
+          "copy": "Details to create your profile",
+          "imageAltText": "Person",
+          "path": "/personal-details"
+        },
+        {
+          "title": "ID Check",
+          "copy": "Tax and regulatory details",
+          "imageAltText": "ID card",
+          "path": "/id-check"
+        },
+        {
+          "title": "Compliance Check",
+          "copy": "Verify your risk health",
+          "imageAltText": "Warning sign",
+          "path": "/compliance-check"
+        },
+        {
+          "title": "Payment",
+          "copy": "Pay for service",
+          "imageAltText": "Warning sign",
+          "path": "/payment"
+        }
+      ]
     }
   },
   "validation": {

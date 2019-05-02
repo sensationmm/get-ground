@@ -3,12 +3,12 @@ import React, { Fragment } from 'react'
 import { Link } from 'gatsby'
 import { useTranslation } from 'react-i18next'
 
-import sliderImg from '../assets/images/intro-slide-image.png'
-import IntroSlider from '../components/IntroSlider/IntroSlider'
-import Button from '../components/_buttons/Button/Button'
-import Layout from '../components/Layout/Layout'
+import sliderImg from 'src/assets/images/intro-slide-image.png'
+import IntroSlider from 'src/components/IntroSlider/IntroSlider'
+import Button from 'src/components/_buttons/Button/Button'
+import Layout from 'src/components/Layout/Layout'
 
-import '../styles/pages/onboarding-intro.scss'
+import 'src/styles/pages/onboarding-intro.scss'
 
 const OnboardingIntroContainer = () => {
   const [t, i18n] = useTranslation();
