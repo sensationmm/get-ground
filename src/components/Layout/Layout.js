@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import Header from '../Header/Header';
+import SEO from 'src/components/seo'
+import Header from 'src/components/Header/Header';
 import Loader from '../Loader/Loader';
 import { setWidth } from '../../state/actions/layout'
 
@@ -20,6 +21,7 @@ export class Layout extends Component {
     const { children } = this.props;
     return (
       <>
+        <SEO title="GetGround" keywords={[`gatsby`, `application`, `react`]} />
         {this.props.isLoading && <Loader />}
         <Header classNames={`${children.props.role}`} />
         <div className={classNames('app', children.props.role)}>
