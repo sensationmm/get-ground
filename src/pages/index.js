@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react'
 
 import Layout from '../components/Layout/Layout'
-import SEO from '../components/seo'
 import Select from '../components/_form/Select/Select';
 
 const IndexPage = () => {
@@ -25,7 +24,6 @@ const IndexPage = () => {
 
   return (
     <Fragment>
-      <SEO title="GetGround" keywords={[`gatsby`, `application`, `react`]} />
       <Layout>
         <div data-test="container-home" className="home" role="homepage">
         Home
