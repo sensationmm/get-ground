@@ -19,8 +19,6 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      # run tests!
-      - run: npm test
 
       # build!
       - run: npm run build
@@ -49,6 +47,8 @@ workflows:
   build_test_deploy:
     jobs:
       - build
+          requires:
+            - test
       - test
       - deploy:
           requires:
