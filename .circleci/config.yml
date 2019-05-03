@@ -28,11 +28,12 @@ jobs:
   deploy:
     docker:
       - image: google/cloud-sdk
+      - image: circleci/golang:1.12
     steps:
       - checkout
       - run: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
       - run: gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-
+      - run: go get -v -t -d ./...
       - run: gcloud app deploy --quiet
 
 workflows:
