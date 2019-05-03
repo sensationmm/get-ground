@@ -19,38 +19,31 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
-      # build!
-      - run: npm run build
-  test:
-    docker:
-      - image: circleci/node:11.13.0
-
-    steps:
       # run tests!
       - run: npm test
 
+      # build!
+      - run: npm run build
   deploy:
+    working_directory: ~/
     docker:
       - image: google/cloud-sdk
-    working_directory: ~/
     steps:
       - run: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
       - run: gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
 
       - run:
           name: deploy
-          command: ./deploy-staging.sh
+          command: './deploy-staging.sh'
 
 workflows:
   version: 2
-  build_test_deploy:
+  build_and_deploy:
     jobs:
-      - build:
-          requires:
-            - test
-      - test
+      - build
       - deploy:
           requires:
             - build
-            - test
+          filters:
+            branches:
+              only: develop
