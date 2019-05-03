@@ -11,9 +11,6 @@ jobs:
       xcode: "8.3.3"
 
     steps:
-      - checkout
-      - run: git checkout develop
-
       # Install Node Modules
       - run:
           name: Install Node Modules
