@@ -30,7 +30,7 @@ jobs:
 
       # build!
       - run: npm run build
-deploy:
+  deploy:
     requires:
       - build-job
     docker:
