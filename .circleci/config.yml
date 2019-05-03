@@ -28,7 +28,6 @@ jobs:
   deploy:
     docker:
       - image: google/cloud-sdk
-    working_directory: /go/src/github.com/getground/customer-frontend-pwa
     steps:
       - checkout
       - run: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
