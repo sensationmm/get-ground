@@ -58,6 +58,7 @@
     "sass-lint": "^1.13.1",
     "semver": "^6.0.0",
     "shelljs": "^0.8.3",
+    "uninstall": "0.0.0",
     "webpack": "^4.30.0",
     "zxcvbn": "^4.4.2"
   },
@@ -77,18 +78,13 @@
     "preeslint": "echo 'Running eslint'",
     "eslint": "eslint src",
     "presasslint": "echo 'Running sasslint'",
-    "sasslint": "sass-lint -c .sass-lint.yml 'src/**/*.scss' -v --no-exit",
-    "buildstaging": "node build/build-staging.js"
+    "sasslint": "sass-lint -c .sass-lint.yml 'src/**/*.scss' -v --no-exit"
   },
   "husky": {
     "hooks": {
       "pre-commit": "npm-run-all --parallel test lint",
       "commit-msg": "echo 'Pre-commit checks... linting Sass and JS, please fix any errors'"
     }
-  },
-  "engines": {
-    "node": ">= 6.0.0",
-    "npm": ">= 3.0.0"
   },
   "repository": {
     "type": "git",
