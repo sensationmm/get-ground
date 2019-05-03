@@ -32,9 +32,10 @@ jobs:
       - run: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
       - run: gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
 
-      - run:
-          name: deploy
-          command: ./deploy-staging.sh
+      - run: npm run build
+      - run: npm run buildstaging
+      - run: gcloud config set project customer-frontend-pwa
+      - run: gcloud app deploy --quiet
 
 workflows:
   version: 2
