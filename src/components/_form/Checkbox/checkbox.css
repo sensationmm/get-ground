@@ -1,0 +1,24 @@
+.checkbox {
+  font-size: 14px;
+  cursor: pointer; }
+  .checkbox-layout {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; }
+  .checkbox-toggle {
+    border: 1px solid #2f5472;
+    border-radius: 5px;
+    min-width: 39px;
+    height: 39px;
+    margin-right: 10px; }
+    .checkbox-toggle.checked:before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: #8ac9c6;
+      mask: url("../../../assets/images/tick.svg") center center no-repeat; }
+    .checkbox-toggle.error {
+      border-color: #ff5a62; }
+      .checkbox-toggle.error.checked:before {
+        background: #ff5a62; }

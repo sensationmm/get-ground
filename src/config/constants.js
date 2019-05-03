@@ -7,3 +7,5 @@ export const CHECK_BREAKPOINT = 'CHECK_BREAKPOINT';
 
 export const SHOW_LOADER = 'SHOW_LOADER';
 export const HIDE_LOADER = 'HIDE_LOADER';
+
+export const SET_WIDTH = 'SET_WIDTH';

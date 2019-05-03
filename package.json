@@ -20,6 +20,7 @@
     "redux": "^4.0.1"
   },
   "devDependencies": {
+    "axios": "^0.18.0",
     "babel-jest": "^24.7.1",
     "babel-polyfill": "^6.26.0",
     "babel-preset-gatsby": "^0.1.11",
@@ -31,6 +32,7 @@
     "gatsby-cypress": "^0.1.9",
     "gatsby-plugin-css-literal-loader": "^1.0.0",
     "gatsby-plugin-i18next": "^1.1.7",
+    "gatsby-plugin-root-import": "^2.0.5",
     "gatsby-plugin-sass": "^2.0.11",
     "history": "^4.9.0",
     "husky": "^2.1.0",
@@ -52,7 +54,8 @@
     "redux-mock-store": "^1.5.3",
     "redux-thunk": "^2.3.0",
     "sass-lint": "^1.13.1",
-    "start-server-and-test": "^1.9.0"
+    "start-server-and-test": "^1.9.0",
+    "zxcvbn": "^4.4.2"
   },
   "keywords": [
     "gatsby"

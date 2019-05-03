@@ -1,4 +1,7 @@
-$padding-vertical: 12;
-$padding-horizontal: 20;
+$padding-vertical-unit: 15;
+$padding-horizontal-unit: 10;
+
+$padding-vertical: $padding-vertical-unit + 0px;
+$padding-horizontal: $padding-horizontal-unit + 0px;
 
 $header-height: 45;

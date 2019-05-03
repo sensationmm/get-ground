@@ -1,0 +1,9 @@
+.error-box {
+  font-size: 14px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background: rgba(255, 90, 98, 0.2);
+  border: 1px solid #ff5a62;
+  color: #ff5a62; }
+  .error-box > :last-child {
+    margin-bottom: 0; }

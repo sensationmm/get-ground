@@ -3,7 +3,7 @@ import {
   HIDE_LOADER,
 } from '../../config/constants';
 
-const initialState = {
+export const initialState = {
   isLoading: false
 };
 

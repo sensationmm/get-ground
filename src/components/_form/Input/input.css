@@ -1,0 +1,40 @@
+.text-input {
+  margin-bottom: 2px;
+  position: relative;
+  box-sizing: border-box; }
+  .text-input-label {
+    text-transform: uppercase;
+    color: #8ac9c6;
+    padding-left: 10px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 14px; }
+  .text-input-required {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #ff5a62;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px; }
+  .text-input input[type=text], .text-input input[type=password], .text-input textarea {
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid #2f5472;
+    border-radius: 5px;
+    padding: 10px;
+    background: none;
+    font-size: 14px;
+    color: #2F5472;
+    outline: 0;
+    box-shadow: 0 0 0 0 #8ac9c6;
+    transition: all 0.3s; }
+    .text-input input[type=text]:focus, .text-input input[type=password]:focus, .text-input textarea:focus {
+      box-shadow: 0 0 10px 0 #8ac9c6; }
+    .text-input input[type=text]::placeholder, .text-input input[type=password]::placeholder, .text-input textarea::placeholder {
+      color: #8ac9c6;
+      opacity: 0.5; }
+    .text-input input[type=text].error, .text-input input[type=password].error, .text-input textarea.error {
+      border-color: #ff5a62; }
+  .text-input textarea {
+    height: 120px; }

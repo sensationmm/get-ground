@@ -5,7 +5,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 
 import configureMockStore from 'redux-mock-store'
 
-import { middleware } from '../store';
+import { middleware } from '../state/store';
 import { render } from 'react-testing-library'
 
 import rootReducer from '../state/reducers/index';
@@ -37,7 +37,7 @@ export const setup = (Component, props={}, state=null) => {
   return wrapper;
 }
 
-export const setupRTL = (Component, props={}, componentTestId, getByFunc) => {
+export const setupRTL = (Component, props={}, componentTestId) => {
   const { getByTestId } = render(<Component {...props} />)
   const wrapper = getByTestId(componentTestId);
 

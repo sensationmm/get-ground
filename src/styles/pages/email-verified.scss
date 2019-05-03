@@ -1,0 +1,19 @@
+@import '../../styles/modules/colors';
+
+.email-verified {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: $border;
+
+  &--img {
+    margin-top: 61px;
+    width: 224px;
+    height: 178px;
+    object-fit: contain;
+  }
+
+  button {
+    margin-top: 66px;
+  }
+}

@@ -1,0 +1,47 @@
+@import '../../styles/modules/reset';
+@import '../../styles/modules/_colors';
+@import '../../styles/modules/_mixins';
+@import '../../styles/modules/_variables';
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  color: $text;
+  line-height: 1.3;
+  background: $background-main-start;
+  @include gradient-vertical-image($background-main-start, $background-main-end, '../../assets/images/background.png');
+  background-attachment: fixed;
+  font-size: 18px;
+}
+
+#___gatsby, div[role=group], .main {
+  height: 100%;
+}
+
+#___gatsby {
+  width: 100%;
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.app {
+  padding: $padding-vertical (($padding-horizontal-unit * 2) + 0px);
+  min-height: calc(100% - #{$header-height + ($padding-vertical-unit * 4) + 0px});
+
+  &:not(.fullscreen) {
+    background: $white;
+  }
+}
+
+h1, h2 {
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 24px;
+}
+
+p, select {
+  font-size: 14px;
+}
