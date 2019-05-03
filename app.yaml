@@ -1,0 +1,29 @@
+runtime: go
+api_version: go1
+
+
+skip_files:
+- ^src$
+- ^node_modules$
+- ^config$
+- ^.git$
+- ^static$
+- ^test$
+
+
+handlers:
+# [START static_handlers]
+# If the path is empty, show static index.html file
+- url: /
+  static_files: public/index.html
+  upload: public/index.html
+# Otherwise, find file in static directory
+- url: /static
+  static_dir: public/static
+# [END static_handlers]
+- url: /.*
+  script: _go_app
+
+
+env_variables:
+  ENV: "production"

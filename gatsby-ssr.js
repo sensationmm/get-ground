@@ -1,8 +1,14 @@
-/**
- * Implement Gatsby's SSR (Server Side Rendering) APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/ssr-apis/
- */
+import React from 'react'
+import { renderToString } from 'react-dom/server'
 
-// You can delete this file if you're not using it
-export { default as wrapRootElement } from './src/state/ReduxWrapper';
+import { ReduxWrapper } from 'src/state/ReduxWrapper'
+
+export const replaceRenderer = ({ bodyComponent, replaceBodyHTMLString }) => {
+
+  const ConnectedBody = () => (
+    <ReduxWrapper>
+      {bodyComponent}
+    </ReduxWrapper>
+  )
+  replaceBodyHTMLString(renderToString(<ConnectedBody />))
+}

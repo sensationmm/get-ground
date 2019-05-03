@@ -70,7 +70,8 @@
     "preeslint": "echo 'Running eslint'",
     "eslint": "eslint src",
     "presasslint": "echo 'Running sasslint'",
-    "sasslint": "sass-lint -c .sass-lint.yml 'src/**/*.scss' -v --no-exit"
+    "sasslint": "sass-lint -c .sass-lint.yml 'src/**/*.scss' -v --no-exit",
+    "buildstaging": "node build/build-staging.js"
   },
   "husky": {
     "hooks": {
