@@ -63,6 +63,20 @@
     "accountCreation": {
       
     },
+    "payment": {
+      "title": "Payment details",
+      "intro": "Please note that payment will not be taken and your subscription fee will not be charged until you pass the compliance check.",
+      "paymentInfo": {
+        "accountSetupLabel": "Account setup",
+        "monthlySubscriptionLabel": "Monthly subscription",
+        "vatLabel": "VAT @ 20%",
+        "TotalLabel": "Total"
+      },
+      "form": {
+        "numberOfCompaniesLabel": "No. of companies",
+        "cardLabel": "Card details"
+      }
+    },
     "personalDetails": {
       "datepicker": {
         "button1": "cancel",
@@ -85,6 +99,7 @@
     "validateRequired": "Required",
     "validateMatching": "No match",
     "validatePhone": "Invalid phone",
-    "validateNumeric": "Number only"
+    "validateNumeric": "Number only",
+    "validateNoOfCompanies": "No more than 20"
   }
 }

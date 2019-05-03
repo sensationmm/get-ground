@@ -22,15 +22,20 @@ export const initFormState = (fieldsInit) => {
  * @param {object} scope - 'this' of current component/container
  * @param {string} stateKey - id of value to update
  * @param {any} value - value to update
+ * @param {function} validate - function passed to validate the field
+ * @param {function} callback - function to fire after the generic onChange
  * @return {void}
  */
-export const updateValue = (scope, stateKey, value) => {
+export const updateValue = (scope, stateKey, value, validate, callback) => {
   scope.setState({
     ...scope.state,
     values: {
       ...scope.state.values,
       [stateKey]: value
-    }
+    } 
+  },() => {
+    validate ? validate() : null;
+    callback ? callback(value) : null;
   });
 };
 
@@ -110,10 +115,10 @@ export const renderForm = (scope) => {
 
   return (
     scope.config.map((item, key) => {
-      const { stateKey, validationFunction } = item;
+      const { stateKey, validationFunction, callback } = item;
 
       // istanbul ignore next - bug in arrow function coverage
-      const onChange = stateKey ? (val) => formUtils.updateValue(scope, stateKey, val) : undefined;
+      const onChange = stateKey ? (val) => formUtils.updateValue(scope, stateKey, val, validate, callback) : undefined;
       // istanbul ignore next - bug in arrow function coverage
       const validate = validationFunction ? () => formUtils.validateField(scope, stateKey) : undefined;
       const error = functions.objectKeyExists(stateKey, errors) ? errors[stateKey] : undefined;

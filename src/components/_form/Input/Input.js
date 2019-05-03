@@ -26,6 +26,8 @@ const initialState = {
  * @param {function} onFocus - callback to execute on focus
  * @param {bool} [readOnly] - boolean to set the input to read only
  * @param {string} [note] - explanation text to show under input
+ * @param {number} [max]  - max value allowed in number input
+ * @param {number} [min]  - min value allowed in number input
  * @return {JSXElement} Input
  */
 class Input extends Component {
@@ -41,7 +43,9 @@ class Input extends Component {
       onFocus, 
       readOnly,
       note,
-      error
+      error,
+      min,
+      max
     } = this.props;
 
     return (
@@ -69,6 +73,8 @@ class Input extends Component {
           className={classNames([
             {'error': error }
           ])}
+          min={min}
+          max={max}
         />
 
         {note && <Note data-test="text-input-note">{note}</Note>}
@@ -80,7 +86,7 @@ class Input extends Component {
 Input.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string,
-  type: PropTypes.oneOf(['text', 'password']),
+  type: PropTypes.oneOf(['text', 'password', 'number']),
   placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   onFocus: PropTypes.func,
@@ -88,7 +94,9 @@ Input.propTypes = {
   value: PropTypes.string,
   validate: PropTypes.func,
   note: PropTypes.string,
-  error: PropTypes.string
+  error: PropTypes.string,
+  min: PropTypes.number,
+  max: PropTypes.number
 };
 
 Input.defaultProps = {
