@@ -42,7 +42,7 @@ export class ProcessTracker extends React.Component {
           'imageAltText': sectionsContent[1].imageAltText,
           'copy': sectionsContent[1].copy,
           'path': sectionsContent[1].path,
-          'status': null,
+          'status': 'incomplete',
           'image': Image,
         },
         {
@@ -50,7 +50,7 @@ export class ProcessTracker extends React.Component {
           'imageAltText': sectionsContent[2].imageAltText,
           'copy': sectionsContent[2].copy,
           'path': sectionsContent[2].path,
-          'status': 'todo',
+          'status': 'incomplete',
           'image': Image,
         },
         {
