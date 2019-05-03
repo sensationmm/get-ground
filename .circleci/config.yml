@@ -24,7 +24,7 @@ jobs:
 
       # build!
       - run: npm run build
-      - run: npm run buildstaging
+
   deploy:
     working_directory: ~/customer-frontend-pwa
     docker:
