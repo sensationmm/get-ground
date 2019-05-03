@@ -39,7 +39,9 @@ class Payment extends Component {
       monthlySubscriptionValue: this.baseMonthlySubValue,
       vatValue: this.vatValue,
       totalValue: this.baseSetupValue + this.baseMonthlySubValue + this.vatValue,
-      stripeToken: ''
+      stripeToken: '',
+      showErrorMessage: false,
+      errors: {}
     };
 
     this.config = [];
@@ -50,6 +52,7 @@ class Payment extends Component {
     const { showLoader, hideLoader } = this.props;
     const { stripeToken, isStripeValid, values: { numberOfCompanies } } = this.state;
 
+    /* istanbul ignore else */
     if (formUtils.validateForm(this) && isStripeValid) {
       showLoader();
 
@@ -93,6 +96,7 @@ class Payment extends Component {
     let vatValue = '--';
     let totalValue = '--';
 
+    /* istanbul ignore else */
     if(!isNaN(input) && input < 21 && input > 0) {
       setupValue = this.baseSetupValue * input;
       subValue = this.baseMonthlySubValue * input

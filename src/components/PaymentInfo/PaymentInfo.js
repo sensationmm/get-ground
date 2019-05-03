@@ -29,7 +29,7 @@ const PaymentInfo = props => {
   } = props;
 
   return (
-    <div className="payment-info" data-test="payment-info">
+    <div className="payment-info" data-test="component-payment-info">
       <div className="payment-info--row">
         <span>{accountSetupLabel}</span><span className="payment-info--value">£{accountSetupValue}</span>
       </div>

@@ -54,6 +54,7 @@ class Stripe extends Component {
         className={classNames('stripe-wrapper', [
           {'error': !isStripeValid }
         ])}
+        data-test="component-stripe"
       >
 
         {!isStripeValid &&
@@ -68,7 +69,7 @@ class Stripe extends Component {
         </label>
 
         <Button
-          data-test="create-account-button"
+          data-test="payment-button"
           classes="primary"
           label={nextButtonLabel}
           fullWidth
@@ -89,9 +90,10 @@ Stripe.propTypes = {
   handleChange: PropTypes.func,
   cardFieldLabel: PropTypes.string,
   stripe: PropTypes.object,
-  setIsStripeValid: PropTypes.func,
+  setIsStripeValid: PropTypes.any,
   setStripeToken: PropTypes.func,
   validateForm: PropTypes.func
 };
 
+export const RawComponent = Stripe
 export default injectStripe(Stripe);
