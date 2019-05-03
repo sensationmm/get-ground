@@ -24,6 +24,7 @@ jobs:
 
       # build!
       - run: npm run build
+      - run: npm run buildstaging
   deploy:
     working_directory: ~/customer-frontend-pwa
     docker:
@@ -32,9 +33,6 @@ jobs:
       - run: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
       - run: gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
 
-      - run: npm run build
-      - run: npm run buildstaging
-      - run: gcloud config set project customer-frontend-pwa
       - run: gcloud app deploy --quiet
 
 workflows:
