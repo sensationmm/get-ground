@@ -1,0 +1,6 @@
+'use strict'
+module.exports = {
+  NODE_ENV: '"staging"',
+
+  // ENV: '"staging"'
+}
