@@ -79,6 +79,10 @@
       "commit-msg": "echo 'Pre-commit checks... linting Sass and JS, please fix any errors'"
     }
   },
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 3.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/gatsbyjs/gatsby-starter-default"
