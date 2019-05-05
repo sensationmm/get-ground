@@ -1,0 +1,32 @@
+.address-finder .address-textarea {
+  position: relative; }
+  .address-finder .address-textarea img {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer; }
+  .address-finder .address-textarea-required {
+    position: absolute;
+    right: 0;
+    top: -20px;
+    color: #ff5a62;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px; }
+
+.address-finder .address-text-area {
+  display: block;
+  height: 100px;
+  box-sizing: border-box;
+  width: 100%;
+  border-color: #eeeeee;
+  /* TODO: update this and stick it in colours when there is an actual design */
+  background: #eeeeee;
+  padding: 10px;
+  font-size: 14px;
+  resize: none; }
+  .address-finder .address-text-area:focus {
+    outline: none; }
+  .address-finder .address-text-area.error {
+    border-color: #ff5a62;
+    color: #ff5a62; }
