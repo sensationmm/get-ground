@@ -1,5 +1,5 @@
-import { setupRTL } from '../../../test-utils/test-utils'
-import { fireEvent } from 'react-testing-library'
+import { setupRTL } from '../../../test-utils/test-utils';
+import { fireEvent } from 'react-testing-library';
 
 import Button from './Button'
 
