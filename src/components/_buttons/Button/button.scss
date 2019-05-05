@@ -42,4 +42,11 @@
     border: 2px solid $white;
     padding: 10px 15px;
   }
+
+  &.link {
+    color: $primary;
+    text-decoration: underline;
+    padding: 0;
+    background: transparent;
+  }
 }
