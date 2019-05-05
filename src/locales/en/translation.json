@@ -64,19 +64,35 @@
       
     },
     "personalDetails": {
+      "heading": "Personal details",
+      "intro": "These details are required to create your profile",
       "datepicker": {
         "button1": "cancel",
         "button2": "confirm"
       },
       "form": {
+        "firstNameLabel": "First name",
+        "middleNameLabel": "Middle name(s)",
+        "lastNameLabel": "Last name",
+        "previousNamesLabel": "Previous names",
         "dateOfBirthLabel": "Date of Birth",
+        "dateOfBirthNote": "You need to be 18 or over to use getGround",
+        "nationalityLabel": "Nationality",
+        "cityOfBirthLabel": "City of birth",
+        "jobTitleLabel": "Job title",
+        "countryLabel": "Country of residence",
         "addressFinderLabel": "Address Finder",
         "unitNumberLabel": "Unit Number",
         "streetLabel": "Street",
         "cityLabel": "City",
         "postcodeLabel": "Postcode",
         "manualAddressButtonLabel": "Enter Address Manually",
-        "addressFinderButtonLabel": "Find Address"
+        "addressFinderButtonLabel": "Find Address",
+        "nextButton": "Next",
+        "backButton": "Back",
+        "addNamesButton": "Any previous names",
+        "extraNameLabel": "Extra name",
+        "phoneLabel": "Mobile number"
       }
     }
   },

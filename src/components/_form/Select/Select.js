@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
-import chevron from '../../../assets/images/chevron-down.svg';
 import './select.scss';
 
 /**
@@ -21,32 +21,43 @@ const Select = (props) => {
     classes,
     onChange,
     options,
-    defaultOptionText
+    defaultOptionText,
+    value,
+    error,
+    validate
   } = props;
 
   return (
     <div data-test="component-select" className="select">
       <label>{label}</label>
+
+      {error &&
+        <div data-test="select-error" className="select-required">{error}</div>
+      }
+
       <select
-        className={classes}
-        onChange={onChange}
+        className={classNames([ classes,
+          {'error': error }
+        ])}
+        value={value}
+        onChange={(e) => onChange(e.target.value, validate)}
       >
         <option value="">{defaultOptionText}</option>
         {options}
       </select>
-      <span className="select__icon icon-chevron-down">
-        <img src={chevron} alt="" />
-      </span>
     </div>
   );
 };
 
 Select.propTypes = {
-  classes: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  classes: PropTypes.string,
+  label: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired,
-  defaultOptionText: PropTypes.string.isRequired
+  defaultOptionText: PropTypes.string,
+  value: PropTypes.string,
+  error: PropTypes.string,
+  validate: PropTypes.func
 };
 
 export default Select;
