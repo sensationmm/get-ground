@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { withTranslation } from 'react-i18next';
+import { CSSTransition } from 'react-transition-group';
 
 import Layout from '../components/Layout/Layout'
 import formUtils from '../utils/form';
@@ -37,7 +38,8 @@ class CreateAccount extends Component {
         passwordConfirm: '',
         optin: false,
         privacy: false
-      })
+      }),
+      termsMarkdown: ''
     };
 
     this.config = [];
@@ -84,17 +86,35 @@ class CreateAccount extends Component {
     }
   }
 
-  openModal = (e) => {
+  getModalContent = e => {
+    const { showLoader, hideLoader } = this.props;
     e.preventDefault();
-    this.props.showModal();
+
+    showLoader();
+
+    axios({
+      method: 'get',
+      url: 'https://staging-backend-236514.appspot.com/api/v1/markdown_templates_unique?category=other',
+      headers: {
+        'Authorization': 'avb068cbk2os5ujhodmt',
+        'Content-Type': 'application/json',
+      }
+    }).then(response => {
+      this.setState({ termsMarkdown: response.data[9].markdown_text });
+      
+      hideLoader();
+      this.openModal();
+    }).catch(() => {
+      hideLoader();
+    });
   }
 
-  closeModal = () => {
-    this.props.hideModal();
-  }
+  openModal = () => this.props.showModal();
+
+  closeModal = () => this.props.hideModal();
 
   render() {
-    const { values, errors, showErrorMessage } = this.state;
+    const { values, errors, showErrorMessage, termsMarkdown } = this.state;
     const { t, modal: { isOpen } } = this.props;
     // @TODO can this be moved out of render - fails on edit field currently
 
@@ -141,16 +161,15 @@ class CreateAccount extends Component {
         component: Checkbox,
         label: <div>
           {t('createAccount.form.label.privacyOne')}
-          <a onClick={(e) => { this.openModal(e)}}>{t('createAccount.form.label.privacyTermsLink')}</a>
+          <a onClick={(e) => { this.getModalContent(e)}}>{t('createAccount.form.label.privacyTermsLink')}</a>
           {t('createAccount.form.label.privacyTwo')}
           {t('createAccount.form.label.privacyPolicyLink')}
         </div>,
         checked: values.privacy,
-        validationFunction: 'validateRequired',
-        openModal: (e) => {this.openModal(e)}
+        validationFunction: 'validateRequired'
       }
     ];
-
+    
     return (
       <Layout>
         <div data-test="container-create-account" className="create-account" role="account">
@@ -182,12 +201,20 @@ class CreateAccount extends Component {
 
             <Button classes="secondary" label={ t('createAccount.ctaSecondary') } fullWidth />
           </Form>
-          { isOpen &&
+          <CSSTransition
+            in={isOpen}
+            timeout={600}
+            classNames="modal"
+            unmountOnExit
+          >
             <Modal>
               <TermsModalContent 
-              closeModal={this.closeModal} />
+                heading={t('createAccount.termsModalHeading')}
+                content={termsMarkdown}
+                closeModal={this.closeModal} 
+              />
             </Modal>
-          }
+          </CSSTransition>
         </div>
       </Layout>
     );

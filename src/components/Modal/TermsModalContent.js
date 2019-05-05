@@ -1,4 +1,4 @@
-import React, { Component, Fragment, createRef } from 'react';
+import React, { Component, createRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -22,7 +22,6 @@ class TermsModalContent extends Component {
     super(props);
 
     this.state = {
-      termsMarkdown: '',
       markdownContainerHeight: ''
     }
 
@@ -54,45 +53,22 @@ class TermsModalContent extends Component {
       link.click();
 
       hideLoader();
+    }).catch(() => {
+      hideLoader();
     });
   }
 
-  getJsonForContent = /* istanbul ignore next */ () => {
-    const { showLoader, hideLoader } = this.props;
-
-    showLoader();
-
-    axios({
-      method: 'get',
-      url: 'https://staging-backend-236514.appspot.com/api/v1/markdown_templates_unique?category=other',
-      headers: {
-        'Authorization': 'avb068cbk2os5ujhodmt',
-        'Content-Type': 'application/json',
-      }
-    }).then(response => {
-      const modalPadding = 70;
-      const modalHeaderHeight = this.modalHeader.current.clientHeight;
-      const markdownContainerHeight = window.innerHeight - (modalHeaderHeight + modalPadding);
-
-      this.setState({ 
-        termsMarkdown: response.data[9].markdown_text,
-        markdownContainerHeight: markdownContainerHeight
-      });
-
-      hideLoader();
-    })
-  }
-
   componentDidMount() {
-    this.getJsonForContent();
+    const modalPadding = 140;
+    this.setState({ markdownContainerHeight: window.innerHeight - modalPadding });
   }
 
   render() {
-    const { closeModal } = this.props;
-    const { termsMarkdown, markdownContainerHeight } = this.state;
+    const { closeModal, content, heading } = this.props;
+    const { markdownContainerHeight } = this.state;
 
     return (
-      <Fragment>
+      <div className="modal">
         <div data-test="terms-modal" ref={this.modalHeader} className="modal--header">
           <Button 
             label='Download'
@@ -105,15 +81,15 @@ class TermsModalContent extends Component {
             onClick={closeModal} />
         </div>
         <div className="modal--content" style={{ height: markdownContainerHeight }}>
-          <h2 className="modal--title">Terms and conditions</h2>
+          <h2 className="modal--title">{heading}</h2>
 
           <img src={termsImage} />
 
           <div className="modal--markdown">
-            <ReactMarkdown escapeHtml={false} source={termsMarkdown} />
+            <ReactMarkdown escapeHtml={false} source={content} />
           </div>
         </div>
-      </Fragment>
+      </div>
     );
   }
 }
@@ -121,7 +97,9 @@ class TermsModalContent extends Component {
 TermsModalContent.propTypes = {
   closeModal: PropTypes.func,
   showLoader: PropTypes.func,
-  hideLoader: PropTypes.func
+  hideLoader: PropTypes.func,
+  content: PropTypes.string,
+  heading: PropTypes.string
 };
 
 const actions = { 

@@ -11,6 +11,7 @@
     "intro": "These details are used to create your account",
     "ctaPrimary": "Next",
     "ctaSecondary": "Back",
+    "termsModalHeading": "Terms and conditions",
     "form": {
       "label": {
         "email": "Email",

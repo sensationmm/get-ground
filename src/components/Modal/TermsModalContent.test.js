@@ -6,10 +6,7 @@ describe('<TermsModalContent />', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = setupWithStore(TermsModalContent, {
-      termsMarkdown: '',
-      markdownContainerHeight: ''
-    });
+    wrapper = setupWithStore(TermsModalContent, {});
   });
   
   test('renders without error', () => {

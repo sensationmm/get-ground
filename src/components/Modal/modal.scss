@@ -47,4 +47,20 @@
     margin-left: auto;
     cursor: pointer;
   }
+
+  &.modal-enter {
+    transform: translateY(100%);
+  }
+  &.modal-enter-active {
+    transform: translateY(0);
+    transition: transform 600ms;
+  }
+  &.modal-exit {
+    transform: translateY(0);
+  }
+  &.modal-exit-active {
+    transition: transform 600ms;
+    transform: translateY(100%);
+  }
+  
 }
