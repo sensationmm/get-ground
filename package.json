@@ -70,7 +70,7 @@
     "test": "jest",
     "test-coverage": "jest --coverage",
     "cy:open": "cypress open",
-    "test:integration": "start-server-and-test develop http://localhost:8000 cy:open",
+    "test:integration-dev": "start-server-and-test develop http://localhost:8000 cy:open",
     "lint": "npm run eslint && npm run sasslint",
     "preeslint": "echo 'Running eslint'",
     "eslint": "eslint src",
