@@ -24,14 +24,15 @@ jobs:
 
       # build!
       - run: npm run build
+
   deploy:
     docker:
       - image: google/cloud-sdk
-      - image: circleci/node:11.13.0
     steps:
       - checkout
       - run: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
-      - run: bash ./deploy-staging.sh
+      - run: gcloud config set project staging-customer-frontend-pwa
+      - run: gcloud app deploy --quiet
 
 workflows:
   version: 2
