@@ -2,11 +2,12 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2.1
+version: 2
 jobs:
   build:
     docker:
       - image: circleci/node:11.13.0
+
     steps:
       - checkout
       - restore_cache:
@@ -24,9 +25,9 @@ jobs:
       # build!
       - run: npm run build
 
-  super:
-    docker:
-      - image: circleci/node:11.13.0
+  deploy:
+    setup:
+      - image: google/cloud-sdk
     steps:
       - checkout
       - run: go get -v -t -d ./...
@@ -34,19 +35,22 @@ jobs:
   deploy:
     docker:
       - image: circleci/golang:1.12
+      - image: google/cloud-sdk
     steps:
       - checkout
       - run: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
       - run: gcloud config set project customer-frontend-pwa
+      - run: go get -v -t -d ./...
       - run: gcloud app deploy --quiet
 
 workflows:
   version: 2
-  super-and-deploy:
+  build_and_deploy:
     jobs:
+      - build
       - deploy:
           requires:
-            - super
+            - build
           filters:
             branches:
               only: develop
