@@ -27,13 +27,10 @@ jobs:
   deploy:
     docker:
       - image: google/cloud-sdk
-      - image: circleci/golang:1.12
     steps:
       - checkout
       - run: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
-      - run: gcloud config set project customer-frontend-pwa
-      - run: go get -v -t -d ./...
-      - run: gcloud app deploy --quiet
+      - run: ./deploy-staging.sh
 
 workflows:
   version: 2
