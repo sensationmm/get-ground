@@ -6,8 +6,40 @@ version: 2
 jobs:
   build:
     docker:
+      - image: circleci/node:11.13.0
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      # run tests!
+      - run: npm test
+
+      # build!
+      - run: npm run build
+  deploy:
+    docker:
       - image: google/cloud-sdk
     steps:
       - checkout
       - run: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
       - run: ./deploy-staging.sh
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: develop
