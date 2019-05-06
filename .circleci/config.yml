@@ -25,8 +25,7 @@ jobs:
     steps:
       - checkout
       - run: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
-      - run: gcloud --quiet config set project staging-customer-frontend-pwa
-      - run: apt-get install google-cloud-sdk-app-engine-go
+      - run: gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
       - run: gcloud app deploy
 
 workflows:
