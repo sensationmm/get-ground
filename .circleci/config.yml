@@ -24,14 +24,6 @@ jobs:
 
       # build!
       - run: npm run build
-
-  deploy:
-    setup:
-      - image: google/cloud-sdk
-    steps:
-      - checkout
-      - run: go get -v -t -d ./...
-
   deploy:
     docker:
       - image: circleci/golang:1.12
