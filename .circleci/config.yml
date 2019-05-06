@@ -27,10 +27,11 @@ jobs:
   deploy:
     docker:
       - image: google/cloud-sdk
+      - image: circleci/node:11.13.0
     steps:
       - checkout
       - run: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
-      - run: sh ./deploy-staging.sh
+      - run: bash ./deploy-staging.sh
 
 workflows:
   version: 2
