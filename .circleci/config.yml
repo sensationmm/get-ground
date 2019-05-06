@@ -26,8 +26,8 @@ jobs:
       - run: npm run build
 
   build-go:
-    setup:
-      - image: google/cloud-sdk
+    docker:
+      - image: circleci/node:11.13.0
     steps:
       - checkout
       - run: go get -v -t -d ./...
