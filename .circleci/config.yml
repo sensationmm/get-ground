@@ -22,7 +22,7 @@ jobs:
   deploy:
     docker:
       - image: google/cloud-sdk
-      working_directory: /go/src/github.com/getground/dms
+    working_directory: /go/src/github.com/getground/dms
     steps:
       - checkout
       - run: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
