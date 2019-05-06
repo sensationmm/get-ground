@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-npm run build
 # npm run buildstaging
 
 # ensure cli is on right project
