@@ -26,8 +26,8 @@ jobs:
       - run: npm run build
   deploy:
     docker:
-      - image: circleci/golang:1.12
       - image: google/cloud-sdk
+      - image: circleci/golang:1.12
     steps:
       - checkout
       - run: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
