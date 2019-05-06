@@ -30,7 +30,7 @@ jobs:
     steps:
       - checkout
       - run: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
-      - run: ./deploy-staging.sh
+      - run: sh ./deploy-staging.sh
 
 workflows:
   version: 2
