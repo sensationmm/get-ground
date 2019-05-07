@@ -23,8 +23,8 @@ export class Layout extends Component {
       <>
         <SEO title="GetGround" keywords={[`gatsby`, `application`, `react`]} />
         {this.props.isLoading && <Loader />}
-        <Header classNames={`${children.props.role}`} />
-        <div className={classNames('app', children.props.role)}>
+        <Header classNames={`${children.props && children.props.role}`} />
+        <div className={classNames('app', children.props && children.props.role)}>
           <main className="main">{children}</main>
         </div>
         <div id="modal-root"></div>
