@@ -25,4 +25,9 @@ describe('ProcessSection', () => {
   test('img alt text', () => {
     expect(wrapper.find('img').props().alt).toEqual(props.imageAltText)
   })
+
+  test('is-disabled', () => {
+    wrapper = shallow(<ProcessSection {...props} isDisabled={true} />)
+    expect(wrapper.find('.process-section').hasClass('is-disabled')).toEqual(true)
+  })
 })

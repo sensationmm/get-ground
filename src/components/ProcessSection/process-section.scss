@@ -7,6 +7,11 @@
   margin-bottom: 3px;
   overflow: hidden;
 
+  &.is-disabled {
+    pointer-events: none;
+    opacity: 0.4;
+  }
+
   &-img {
     float: left;
     width: 26%;
