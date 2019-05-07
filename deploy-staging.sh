@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-npm run build
-npm run buildstaging
+# npm run buildstaging
 
 # ensure cli is on right project
 gcloud config set project customer-frontend-pwa
