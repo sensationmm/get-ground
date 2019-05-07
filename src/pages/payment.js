@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { withTranslation } from 'react-i18next';
 import { Elements, StripeProvider } from 'react-stripe-elements';
+import { navigate } from 'gatsby';
 
 import formUtils from 'src/utils/form';
 
@@ -49,7 +50,7 @@ class Payment extends Component {
 
   validateForm = () => {
     const requestUrl = 'https://staging-backend-236514.appspot.com/api/v1/users/1/payment';
-    const { showLoader, hideLoader } = this.props;
+    const { showLoader, hideLoader, t } = this.props;
     const { stripeToken, isStripeValid, values: { numberOfCompanies } } = this.state;
 
     /* istanbul ignore else */
@@ -70,7 +71,7 @@ class Payment extends Component {
       }).then(response => {
         if (response.status === 201) {
           hideLoader();
-          // this.props.history.push('/confirmation');
+          navigate('/confirmation');
         }
       }).catch((e) => {
         hideLoader();
@@ -78,7 +79,7 @@ class Payment extends Component {
         this.setState({
           ...this.state,
           errors: {
-            form: 'There was an issue with your payment'
+            form: t('onBoarding.payment.form.error'),
           },
           showErrorMessage: true
         });
