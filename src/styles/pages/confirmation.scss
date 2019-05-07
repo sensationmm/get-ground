@@ -1,0 +1,33 @@
+
+@import '../modules/_colors';
+@import '../../components//IntroSlider/intro-slider.scss';
+
+.onboarding-confirmation {
+  &--image-wrapper {
+    @extend .slick-slide--image-wrapper;
+  }
+
+  &--heading {
+    font-size: 36px;
+    padding: 20px 0;
+  }
+
+  .button {
+    display: block;
+
+    &:not(.link) {
+      margin: 35px auto 50px;
+    }
+
+    &.link {
+      margin: 0 auto;
+      color: $text-secondary;
+      font-size: 14px;
+    }
+  }
+
+  > p {
+    color: $text-secondary;
+  }
+  
+}
