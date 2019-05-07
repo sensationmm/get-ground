@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import './checkbox.css';
+import './checkbox.scss';
 
 /**
  * Checkbox
@@ -12,20 +12,25 @@ import './checkbox.css';
  * @param {string} label - text label to display above the input field
  * @param {function} onChange - callback to execute on click
  * @param {string} [error] - error message
+ * @param {bool} [disabled] - boolean for if the checkbox is disabled or not
  * @return {JSXElement} Checkbox
  */
 const Checkbox = (props) => {
-  const { label, checked, onChange, error } = props;
+  const { label, checked, onChange, error, disabled } = props;
 
   return (
     <div className="checkbox" data-test="component-checkbox">
-      <div data-test="component-checkbox-layout" className="checkbox-layout" onClick={() => onChange(!checked)}>
+      <div 
+        data-test="component-checkbox-layout" 
+        className="checkbox-layout" 
+        onClick={() => disabled ? null : onChange(!checked)}>
         <div 
           data-test="component-checkbox-toggle"
           className={classNames(
             'checkbox-toggle',
             { 'checked': checked },
-            { 'error': error }
+            { 'error': error },
+            { 'disabled': disabled }
           )} 
         />
 
@@ -41,7 +46,8 @@ Checkbox.propTypes = {
   label: PropTypes.any.isRequired,
   onChange: PropTypes.func.isRequired,
   checked: PropTypes.bool,
-  error: PropTypes.string
+  error: PropTypes.string,
+  disabled: PropTypes.bool
 };
 
 export default Checkbox;

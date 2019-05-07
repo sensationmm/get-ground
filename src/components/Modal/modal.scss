@@ -48,6 +48,10 @@
     cursor: pointer;
   }
 
+  &--footer {
+    padding: 0 20px;
+  }
+
   &.modal-enter {
     transform: translateY(100%);
   }

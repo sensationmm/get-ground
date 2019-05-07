@@ -161,7 +161,14 @@ class CreateAccount extends Component {
         component: Checkbox,
         label: <div>
           {t('createAccount.form.label.privacyOne')}
-          <a onClick={(e) => { this.getModalContent(e)}}>{t('createAccount.form.label.privacyTermsLink')}</a>
+          <a onClick={(e) => { 
+            if (termsMarkdown === '') {
+              this.getModalContent(e)
+            } else {
+              this.openModal();
+            }
+          }}>
+          {t('createAccount.form.label.privacyTermsLink')}</a>
           {t('createAccount.form.label.privacyTwo')}
           {t('createAccount.form.label.privacyPolicyLink')}
         </div>,
