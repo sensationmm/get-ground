@@ -12,7 +12,7 @@ import { isArray } from 'util';
 * @param {Object} props - props object (for jsdoc)
 * @param {array} options - array of Options elements to show (see Option.js for spec)
 * @param {function} onChange - callback function to execute options are clicked
-* @param {array} selected - array of selected values
+* @param {string|array} selected - selected value, array if 'multiple' is true
 * @param { boolean} multiple - whether to allow multiple value selections
 * @param {function} onDeselectAll - callback function to execute when all options are unclicked
 * @return {JSXElement} SelectOption
@@ -87,7 +87,7 @@ class OptionSelect extends Component {
 }
 
 OptionSelect.propTypes = {
-  selected: PropTypes.array,
+  selected: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   onChange: PropTypes.func,
   onDeselectAll: PropTypes.func,
   options: PropTypes.array,
