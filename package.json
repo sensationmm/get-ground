@@ -17,6 +17,7 @@
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.0",
     "react-redux": "^7.0.2",
+    "react-scroll": "^1.7.11",
     "redux": "^4.0.1"
   },
   "devDependencies": {
@@ -73,7 +74,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "test": "jest",
-    "test-coverage": "jest --coverage",
+    "test-coverage": "jest --coverage --watch",
     "lint": "npm run eslint && npm run sasslint",
     "preeslint": "echo 'Running eslint'",
     "eslint": "eslint src",

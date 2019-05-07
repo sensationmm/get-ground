@@ -42,4 +42,9 @@
     border: 2px solid $white;
     padding: 10px 15px;
   }
+
+  &.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
 }
