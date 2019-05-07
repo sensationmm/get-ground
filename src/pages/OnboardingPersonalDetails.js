@@ -5,6 +5,7 @@ import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import moment from 'moment';
+import Helmet from 'react-helmet'
 
 import Layout from 'src/components/Layout/Layout'
 import formUtils from 'src/utils/form';
@@ -22,6 +23,7 @@ import Button from 'src/components/_buttons/Button/Button';
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
 import countryData from 'src/countries.json';
+import { addressNow } from 'src/config/endpoints';
 import addIcon from 'src/assets/images/add-icon.svg';
 import 'src/styles/pages/onboarding-details.scss';
 
@@ -360,35 +362,44 @@ class OnboardingPersonalDetailsContainer extends Component {
     ];
 
     return (
-      <Layout>
-      <div className="onboarding-details" data-test="container-onboarding-details" role="account">
-        <h1>{t('onBoarding.personalDetails.heading')}</h1>
-
-        <IntroBox>{t('onBoarding.personalDetails.intro')}</IntroBox>
-
-        {showErrorMessage && 
-            <ErrorBox>
-            { errors.form 
-              ? errors.form
-              : 'Please fix your errors to proceed'
-            }
-            </ErrorBox>
+      <>
+      <Helmet
+        script={[
+          {
+            'src': addressNow , 'type': 'text/javascript', 'innerHTML': 'window.addressNow'
           }
+        ]}
+      />
+      <Layout>
+        <div className="onboarding-details" data-test="container-onboarding-details" role="account">
+          <h1>{t('onBoarding.personalDetails.heading')}</h1>
 
-        <Form>
-          {formUtils.renderForm(this)}
+          <IntroBox>{t('onBoarding.personalDetails.intro')}</IntroBox>
 
-          <Button
-            label={t('onBoarding.personalDetails.form.nextButton')}
-            fullWidth
-            onClick={this.submitPersonalDetails}
-            classes="primary"
-          />
+          {showErrorMessage && 
+              <ErrorBox>
+              { errors.form 
+                ? errors.form
+                : 'Please fix your errors to proceed'
+              }
+              </ErrorBox>
+            }
 
-          <Button classes="secondary" label={t('onBoarding.personalDetails.form.backButton')} fullWidth />
-        </Form>
-      </div>
-    </Layout>
+          <Form>
+            {formUtils.renderForm(this)}
+
+            <Button
+              label={t('onBoarding.personalDetails.form.nextButton')}
+              fullWidth
+              onClick={this.submitPersonalDetails}
+              classes="primary"
+            />
+
+            <Button classes="secondary" label={t('onBoarding.personalDetails.form.backButton')} fullWidth />
+          </Form>
+        </div>
+      </Layout>
+      </>
     );
   }
 }
