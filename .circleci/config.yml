@@ -27,7 +27,6 @@ jobs:
       - checkout
       - run: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
       - run: gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-      - run: apt-get install google-cloud-sdk-app-engine-go
       - run: gcloud app deploy
 
 workflows:
