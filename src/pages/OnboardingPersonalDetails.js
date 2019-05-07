@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import moment from 'moment';
 
 import Layout from 'src/components/Layout/Layout'
 import formUtils from 'src/utils/form';
@@ -52,6 +53,7 @@ class OnboardingPersonalDetailsContainer extends Component {
         previousNames: '',
         phone: ''
       }),
+      formattedDate: '',
       isAddressValid: true,
       isManualAddress: false,
       isDatepickerOpen: false,
@@ -92,24 +94,26 @@ class OnboardingPersonalDetailsContainer extends Component {
   }
 
   initFormValidation = /* istanbul ignore next */ () => {
-    const requestUrl = 'https://staging-backend-236514.appspot.com/api/v1/users/1';
+    const requestUrl = 'https://staging-backend-236514.appspot.com/api/v1/users/95';
     const { showLoader, hideLoader } = this.props;
     const { 
-      firstName,
-      middleName,
-      lastName,
-      dateOfBirth,
-      nationality,
-      cityOfBirth,
-      jobTitle,
-      country,
-      street,
-      city,
-      unitNumber,
-      postcode,
-      previousNames,
-      phone
-    } = this.state.values;
+      values: {
+        firstName,
+        middleName,
+        lastName,
+        nationality,
+        cityOfBirth,
+        jobTitle,
+        country,
+        street,
+        city,
+        unitNumber,
+        postcode,
+        previousNames,
+        phone
+      }, 
+      formattedDate 
+    } = this.state;
 
     const self = this;
 
@@ -117,18 +121,18 @@ class OnboardingPersonalDetailsContainer extends Component {
       showLoader();
 
       axios({
-        method: 'post',
+        method: 'put',
         url: requestUrl,
         headers: {
-          'Authorization': 'avb068cbk2os5ujhodmt',
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOjk1LCJSb2xlIjoiIiwiZXhwIjoxNTU3MjI5NzIxLCJuYmYiOjE1NTcyMjYxMjJ9.rpobSbMFlCfh1qsF-RPcCQ_ZcY7JKi9W26enwl2F-lE',
           'Content-Type': 'application/json',
         },
         data: {
-          'id': 1,
+          'id': 95,
           'first_name': firstName,
           'middle_name': middleName,
           'last_name': lastName,
-          'date_of_birth': dateOfBirth,
+          'date_of_birth': formattedDate,
           'nationality_name': nationality,
           'birth_town': cityOfBirth,
           'occupation': jobTitle,
@@ -187,10 +191,10 @@ class OnboardingPersonalDetailsContainer extends Component {
     /* istanbul ignore else */
     if (!element) return;
 
-    formUtils.setNativeValue(element, date);
+    formUtils.setNativeValue(element, moment(date).format('Do MMMM YYYY'));
     element.dispatchEvent(new Event('input', { bubbles: true }));
 
-    this.setState({ isDatepickerOpen: false });
+    this.setState({ formattedDate: moment(date).format('L'), isDatepickerOpen: false });
   }
 
   render() {

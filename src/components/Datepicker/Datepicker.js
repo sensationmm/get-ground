@@ -1,6 +1,5 @@
 import React, { Component, } from 'react';
 import MobileDatePicker from 'react-mobile-datepicker';
-import moment from 'moment';
 import PropTypes from 'prop-types';
 
 import './datepicker.scss';
@@ -20,7 +19,7 @@ class Datepicker extends Component {
     super(props);
   }
 
-  handleSelect = date => this.props.setDateOfBirth(moment(date).format('Do MMMM YYYY'));
+  handleSelect = date => this.props.setDateOfBirth(date);
 
   render() {
     const { 

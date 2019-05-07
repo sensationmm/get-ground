@@ -1,5 +1,4 @@
 import { setup, findByTestAttr } from '../../test-utils/test-utils';
-import moment from 'moment';
 
 import Datepicker from './Datepicker';
 import MobileDatePicker from 'react-mobile-datepicker';
@@ -32,6 +31,6 @@ describe('<Datepicker />', () => {
     const component = findByTestAttr(wrapper, 'datepicker');
     component.find(MobileDatePicker).props().onSelect();
 
-    expect(setDateFunctionMock).toHaveBeenCalledWith(moment(new Date()).format('Do MMMM YYYY'));
+    expect(setDateFunctionMock).toHaveBeenCalled();
   });
 });

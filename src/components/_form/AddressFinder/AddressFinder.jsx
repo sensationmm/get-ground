@@ -97,7 +97,7 @@ class AddressFinder extends Component {
         <Button
           onClick={this.toggleManualAddress}
           label={buttonLabel} 
-          classes='link' 
+          classes='link small' 
         />
       </div>
     );

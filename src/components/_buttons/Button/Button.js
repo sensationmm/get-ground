@@ -65,7 +65,7 @@ Button.propTypes = {
   opaque: PropTypes.bool,
   small: PropTypes.bool,
   hidden: PropTypes.bool,
-  icon: PropTypes.object
+  icon: PropTypes.string
 };
 
 Button.defaultProps = {
