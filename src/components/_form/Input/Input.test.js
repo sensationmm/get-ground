@@ -32,10 +32,10 @@ describe('<Input />', () => {
     test('onChange callback fires on type', () => {
       input.simulate('change', {
         preventDefault() {},
-        target: { value: inputMock, id: 'something' }
+        target: { value: inputMock }
       });
 
-      expect(changeMock).toHaveBeenCalledWith(inputMock, 'something');
+      expect(changeMock).toHaveBeenCalledWith(inputMock, validateMock);
     });
 
     test('onFocus callback fires on focus', () => {
@@ -46,26 +46,26 @@ describe('<Input />', () => {
       expect(focusMock).toHaveBeenCalled();
     });
 
-    test('error state is cleared on click', () => {
-      const wrapperError = setup(
-        Input, 
-        { 
-          id: 'input-name',
-          label: 'Name',
-          onChange: changeMock
-        },
-        {
-          validated: false,
-          validationMessage: 'Required'
-        }
-      );
+    // test('error state is cleared on click', () => {
+    //   const wrapperError = setup(
+    //     Input, 
+    //     { 
+    //       id: 'input-name',
+    //       label: 'Name',
+    //       onChange: changeMock
+    //     },
+    //     {
+    //       validated: false,
+    //       validationMessage: 'Required'
+    //     }
+    //   );
 
-      const inputError = findByTestAttr(wrapperError, 'component-input-field');
-      inputError.simulate('focus');
+    //   const inputError = findByTestAttr(wrapperError, 'component-input-field');
+    //   inputError.simulate('focus');
 
-      expect(wrapperError.state().validated).toBe(true);
-      expect(wrapperError.state().validationMessage).toBe(null);
-    });
+    //   expect(wrapperError.state().validated).toBe(true);
+    //   expect(wrapperError.state().validationMessage).toBe(null);
+    // });
 
     test('validate is called on blur', () => {
       input.simulate('blur', {
@@ -111,28 +111,29 @@ describe('<Input />', () => {
     });
   });
 
-  describe('without validation', () => {
-    beforeEach(() => {
-      wrapper = setup(Input, { 
-        id: 'input-name',
-        label: 'Name',
-        onChange: changeMock,
-        validationFunction: null
-      });
-      component = findByTestAttr(wrapper, 'component-input');
-      input = findByTestAttr(wrapper, 'component-input-field');
-    });
+  // describe('without validation', () => {
+  //   beforeEach(() => {
+  //     wrapper = setup(Input, { 
+  //       id: 'input-name',
+  //       label: 'Name',
+  //       onChange: changeMock,
+  //       validationFunction: null,
+  //       hidden: true
+  //     });
+  //     component = findByTestAttr(wrapper, 'component-input');
+  //     input = findByTestAttr(wrapper, 'component-input-field');
+  //   });
 
-    test('onValidate when no validation supplied', () => {
-      wrapper.instance().onValidate = jest.fn();
-      input.simulate('blur', {
-        preventDefault() {},
-        target: { value: inputMock }
-      });
+  //   test('onValidate when no validation supplied', () => {
+  //     wrapper.instance().onValidate = jest.fn();
+  //     input.simulate('blur', {
+  //       preventDefault() {},
+  //       target: { value: inputMock }
+  //     });
 
-      expect(wrapper.instance().onValidate).toHaveBeenCalledTimes(0);
-    });
-  });
+  //     expect(wrapper.instance().onValidate).toHaveBeenCalledTimes(0);
+  //   });
+  // });
 
   // describe('onValidate()', () => {
   //   test('passes validation (without param)', () => {

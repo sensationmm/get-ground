@@ -25,6 +25,17 @@
     background: $white-opaque;
   }
 
+  &.icon {
+    background: $icon-button;
+    padding: 12px 50px;
+  }
+
+  &-icon {
+    position: absolute;
+    left: 20px;
+    top: 13px;
+  }
+
   &.primary {
     @include gradient-horizontal($gradient-primary-1, $gradient-primary-2);
     color: $white;

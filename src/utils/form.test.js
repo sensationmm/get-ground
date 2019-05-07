@@ -27,6 +27,9 @@ const errorStateMock = {
   showErrorMessage: false
 };
 
+const mockValidate = jest.fn();
+const mockCallback = jest.fn();
+
 
 const configMock = [
   {
@@ -69,6 +72,15 @@ describe('initFormState()', () => {
 
 describe('updateValue()', () => {
   test('value is updated', () => {
+    const wrapper = setup(componentMock, {}, { ...formUtils.initFormState(fieldsMock) });
+    formUtils.updateValue(wrapper, 'name', 'Spongebob', mockValidate, mockCallback);
+
+    expect(wrapper.state().values.name).toBe('Spongebob');
+    expect(mockValidate).toHaveBeenCalled();
+    expect(mockCallback).toHaveBeenCalled();
+  });
+
+  test('value is updated without a validate or callback function', () => {
     const wrapper = setup(componentMock, {}, { ...formUtils.initFormState(fieldsMock) });
     formUtils.updateValue(wrapper, 'name', 'Spongebob');
 
