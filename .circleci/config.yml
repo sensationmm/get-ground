@@ -42,7 +42,6 @@ jobs:
     working_directory: /go/src/github.com/getground/customer-frontend-pwa
     steps:
       - checkout
-      - run: go get -v -t -d ./...
       - run: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
       - run: gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
       - run: gcloud app deploy
