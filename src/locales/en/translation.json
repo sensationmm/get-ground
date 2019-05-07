@@ -5,6 +5,87 @@
     "introBox": "If you didn‘t receive an email please check your spam folder and if it isn‘t there contact us.",
     "contactLink": "Contact us"
   },
+  "compliance": {
+    "header": "Compliance Check",
+    "text": "We need to know more about you as an investor, please answer the following four questions.",
+    "section": "Question {{count}} of {{total}}",
+    "quiz": {
+      "taxBracket": {
+        "title": "Select your UK tax bracket",
+        "options": {
+          "band1": {
+            "label": "Personal",
+            "text": "Up to £11,850"
+          },
+          "band2": {
+            "label": "Basic",
+            "text": "Up to £11,850"
+          },
+          "band3": {
+            "label": "Higher",
+            "text": "Under £150"
+          },
+          "band4": {
+            "label": "Additional",
+            "text": "Over £150k"
+          }
+        }
+      },
+      "largeEnterprise": {
+        "title": "Select the statements that apply to you",
+        "options": {
+          "band1": "I have under 250 employees",
+          "band2": "I have under £43 million on my balance sheet",
+          "band3": "I have under £50 million in annual turnover",
+          "band4": "None of the above"
+        },
+        "buttonNext": "Next"
+      },
+      "investmentConfirmation": {
+        "title": "Please confirm that you agree with the following statements",
+        "options": {
+          "band1": "I want to buy the property as an investment to rent out to tenants",
+          "band2": "No related party of mine will use the property"
+        },
+        "buttonAgree": "Yes, I agree",
+        "buttonDisagree": "No I do not agree"
+      },
+      "selfCertification": {
+        "title": "Which of the following applies to you?",
+        "options": {
+          "band1": {
+            "label": "High net worth",
+            "text": "Annual income £100k+ or Assets £250k+"
+          },
+          "band2": {
+            "label": "Self-certified sophisticated",
+            "text": "Experienced investor"
+          },
+          "band3": {
+            "label": "Restricted",
+            "text": "Casual investor"
+          }
+        }
+      },
+      "questionnaire": {
+        "title": "Select the statements below that you agree with",
+        "options": {
+          "band1": "Property prices don’t always go up in value",
+          "band2": "My investment returns are partly derived from movement in property prices",
+          "band3": "I should put all the money I have into one property",
+          "band4": "There are always buyers willing to pay the price I ask"
+        },
+        "buttonNext": "Next"
+      }
+    },
+    "buttonDone": "Finished",
+    "notSuitable": {
+      "title": "We are sorry!",
+      "text": "This is a buy to let service, please contact us if you’re not sure getGround is right for you",
+      "button": "Talk to us on LiveChat"
+    },
+    "failureMessage": "Sorry! You have not passed the quiz. Please try again."
+  },
   "contactUs": "Contact us",
   "createAccount": {
     "title": "Account details",
