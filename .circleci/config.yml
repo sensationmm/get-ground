@@ -19,20 +19,14 @@ jobs:
       - run: npm test
       - run: npm run build
 
-  supergo:
-    docker:
-      - image: circleci/golang:1.12
-    working_directory: /go/src/github.com/getground/customer-frontend-pwa
-    steps:
-      - checkout
-      - run: go get -v -t -d ./...
-
   deploy:
     docker:
+      - image: circleci/golang:1.12
       - image: google/cloud-sdk
     working_directory: /go/src/github.com/getground/customer-frontend-pwa
     steps:
       - checkout
+      - run: go get -v -t -d ./...
       - run: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
       - run: gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
       - run: gcloud app deploy
@@ -42,5 +36,9 @@ workflows:
   build_and_deploy:
     jobs:
       - build
-      - supergo
-      - deploy
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: develop
