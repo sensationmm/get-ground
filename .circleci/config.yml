@@ -38,8 +38,7 @@ jobs:
 
   deploy:
     docker:
-      - image: circleci/golang:1.12
-      - image: google/cloud-sdk
+      - image: getground/customer-frontend-pwa:v1
     working_directory: /go/src/github.com/getground/customer-frontend-pwa
     steps:
       - checkout
