@@ -38,22 +38,22 @@
       "slides": [
         {
           "title": "Get started",
-          "copy": "<p>In 5 Simple steps you will have created an account and profile.</p><p>It's then easy to set up and manage your Get Ground company.</p>",
+          "copy": "<p class='fs-large'>In 5 Simple steps you will have created an account and profile.</p><p class='fs-large'>It's then easy to set up and manage your Get Ground company.</p>",
           "imageAltText": "Arm chair"
         },
         {
           "title": "Save money",
-          "copy": "<p>Owning UK residential investment property in a company can save you money.</p><p>With Get Ground it has never been cheaper to own and run companies.</p>",
+          "copy": "<p class='fs-large'>Owning UK residential investment property in a company can save you money.</p><p class='fs-large'>With Get Ground it has never been cheaper to own and run companies.</p>",
           "imageAltText": "Arm chair"
         },
         {
           "title": "Fast and efficient",
-          "copy": "<p>Setting up and managing a company has never been easier. We use technology to take away the pain and hassle.</p>",
+          "copy": "<p class='fs-large'>Setting up and managing a company has never been easier. We use technology to take away the pain and hassle.</p>",
           "imageAltText": "Arm chair"
         },
         {
           "title": "All under one roof",
-          "copy": "<p>Everything your company needs right here at getGround. Seamless access to other services, such as mortgage and insurance product. Get started now.</p>",
+          "copy": "<p class='fs-large'>Everything your company needs right here at getGround. Seamless access to other services, such as mortgage and insurance product. Get started now.</p>",
           "imageAltText": "Arm chair"
         }
       ],
@@ -79,20 +79,44 @@
       }
     },
     "personalDetails": {
+      "heading": "Personal details",
+      "intro": "These details are required to create your profile",
       "datepicker": {
         "button1": "cancel",
         "button2": "confirm"
       },
       "form": {
+        "firstNameLabel": "First name",
+        "middleNameLabel": "Middle name(s)",
+        "lastNameLabel": "Last name",
+        "previousNamesLabel": "Previous names",
         "dateOfBirthLabel": "Date of Birth",
+        "dateOfBirthNote": "You need to be 18 or over to use getGround",
+        "nationalityLabel": "Nationality",
+        "cityOfBirthLabel": "City of birth",
+        "jobTitleLabel": "Job title",
+        "countryLabel": "Country of residence",
         "addressFinderLabel": "Address Finder",
         "unitNumberLabel": "Unit Number",
         "streetLabel": "Street",
         "cityLabel": "City",
         "postcodeLabel": "Postcode",
         "manualAddressButtonLabel": "Enter Address Manually",
-        "addressFinderButtonLabel": "Find Address"
+        "addressFinderButtonLabel": "Find Address",
+        "nextButton": "Next",
+        "backButton": "Back",
+        "addNamesButton": "Any previous names",
+        "extraNameLabel": "Extra name",
+        "phoneLabel": "Mobile number"
       }
+    },
+    "confirmation": {
+      "heading": "Well done",
+      "imageAltText": "confirmation image",
+      "copy": "<p class='fs-large'>Your details have been submitted. You will shortly receive an email with the result of your application.</p><p class='fs-large'>This typically takes 10 mins but it can take up to a day, so please be patient.</p>",
+      "buttonText": "View your dashboard",
+      "contactUsText": "If this is taking longer than expected please contact us.",
+      "contactUsLinkText": "Contact us"
     }
   },
   "validation": {

@@ -32,8 +32,8 @@ export const updateValue = (scope, stateKey, value, validate, callback) => {
     values: {
       ...scope.state.values,
       [stateKey]: value
-    } 
-  },() => {
+    }
+  }, () => {
     validate ? validate() : null;
     callback ? callback(value) : null;
   });
@@ -53,7 +53,7 @@ export const validateField = (scope, stateID) => {
 
   const configItem = functions.getByValue(scope.config, 'stateKey', stateID);
 
-  if(configItem && configItem.validationFunction) {
+  if(configItem && configItem.validationFunction && !configItem.hidden) {
     const isValid = (configItem.validationParam !== undefined) 
       ? validation[configItem.validationFunction](values[stateID], configItem.validationParam)
       : validation[configItem.validationFunction](values[stateID]);
@@ -115,13 +115,13 @@ export const renderForm = (scope) => {
 
   return (
     scope.config.map((item, key) => {
-      const { stateKey, validationFunction, callback } = item;
+      const { stateKey, validationFunction, hidden, callback } = item;
 
       // istanbul ignore next - bug in arrow function coverage
-      const onChange = stateKey ? (val) => formUtils.updateValue(scope, stateKey, val, validate, callback) : undefined;
+      const onChange = stateKey ? (val, validate) => formUtils.updateValue(scope, stateKey, val, validate, callback) : undefined;
       // istanbul ignore next - bug in arrow function coverage
-      const validate = validationFunction ? () => formUtils.validateField(scope, stateKey) : undefined;
-      const error = functions.objectKeyExists(stateKey, errors) ? errors[stateKey] : undefined;
+      const validate = validationFunction && !hidden ? () => formUtils.validateField(scope, stateKey) : undefined;
+      const error = functions.objectKeyExists(stateKey, errors) && !hidden ? errors[stateKey] : undefined;
 
       return (
         <item.component
@@ -138,12 +138,32 @@ export const renderForm = (scope) => {
   );
 };
 
+/**
+ * setNativeValue
+ * Fires onChange event for 'auto populated' input fields
+ * @param {object} element - element to set value on
+ * @param {object} value - value to be set
+ * @return {void}
+ */
+export const setNativeValue = /* istanbul ignore next */ (element, value) => {
+  const valueSetter = Object.getOwnPropertyDescriptor(element, 'value').set;
+  const prototype = Object.getPrototypeOf(element);
+  const prototypeValueSetter = Object.getOwnPropertyDescriptor(prototype, 'value').set;
+
+  if (valueSetter && valueSetter !== prototypeValueSetter) {
+      prototypeValueSetter.call(element, value);
+  } else {
+    valueSetter.call(element, value);
+  }
+};
+
 const formUtils = {
   initFormState,
   updateValue,
   validateField,
   validateForm,
-  renderForm
+  renderForm,
+  setNativeValue
 };
 
 export default formUtils;

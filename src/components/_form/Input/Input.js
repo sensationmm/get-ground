@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -8,87 +8,88 @@ import Note from '../../_layout/Note/Note';
 
 import './input.css';
 
-const initialState = {
-  validated: true,
-  validationMessage: null
-};
-
 /**
  * Input
  * Standard input component
- * 
+ * @param {object} props - for JSdoc
  * @param {string} [value] - existing value of the input field
  * @param {string} id - field identifier
  * @param {string} [label] - text label to display above the input field
  * @param {string} type - input variant type
  * @param {string} [placeholder] - placeholder text for the input field
- * @param {function} onChange - callback to execute on type
- * @param {function} onFocus - callback to execute on focus
+ * @param {function} [onChange] - callback to execute on type
+ * @param {function} [onFocus] - callback to execute on focus
  * @param {bool} [readOnly] - boolean to set the input to read only
  * @param {string} [note] - explanation text to show under input
  * @param {number} [max]  - max value allowed in number input
  * @param {number} [min]  - min value allowed in number input
+ * @param {bool} [hidden] - boolean to hide / show the button
+ * @param {string} [wrapperClass] - unique class name for container
  * @return {JSXElement} Input
  */
-class Input extends Component {
+const Input = (props) => {
 
-  render() {
-    const { 
-      id, 
-      type, 
-      label, 
-      onChange, 
-      value, 
-      validate, 
-      onFocus, 
-      readOnly,
-      note,
-      error,
-      min,
-      max
-    } = this.props;
+  const { 
+    id, 
+    type, 
+    label, 
+    onChange, 
+    value, 
+    validate, 
+    onFocus, 
+    readOnly,
+    note,
+    error,
+    min,
+    max,
+    hidden,
+    wrapperClass
+  } = props;
 
-    return (
-      <div className="text-input" data-test="component-input">
-        <div className="text-input-label">
-          {label}
-        </div>
-
-        {error &&
-          <div data-test="text-input-error" className="text-input-required">{error}</div>
-        }
-
-        <input
-          data-test="component-input-field"
-          type={type}
-          id={id}
-          onFocus={() => {
-            this.setState(initialState);
-            if (onFocus) onFocus();
-          }}
-          onBlur={(e) => validate ? validate() : null}
-          onChange={(e) => onChange(e.target.value, e.target.id)}
-          value={value}
-          readOnly={readOnly}
-          className={classNames([
-            {'error': error }
-          ])}
-          min={min}
-          max={max}
-        />
-
-        {note && <Note data-test="text-input-note">{note}</Note>}
+  return (
+    <div 
+      className={classNames('text-input', wrapperClass)}
+      data-test="component-input"
+      style={{ display: hidden ? 'none' : 'block'}}
+    >
+      <div className="text-input-label">
+        {label}
       </div>
-    );
-  }
-}
+
+      {error &&
+        <div data-test="text-input-error" className="text-input-required">{error}</div>
+      }
+
+      <input
+        data-test="component-input-field"
+        type={type}
+        id={id}
+        onFocus={() => {
+          /* istanbul ignore else */
+          if (onFocus) onFocus();
+        }}
+        onBlur={(e) => validate ? validate() : null}
+        onChange={(e) => onChange(e.target.value, validate)}
+        value={value}
+        readOnly={readOnly}
+        className={classNames([
+          {'error': error }
+        ])}
+        min={min}
+        max={max}
+      />
+
+      {note && <Note data-test="text-input-note">{note}</Note>}
+    </div>
+  );
+};
 
 Input.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string,
   type: PropTypes.oneOf(['text', 'password', 'number']),
   placeholder: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   onFocus: PropTypes.func,
   readOnly: PropTypes.bool,
   value: PropTypes.string,
@@ -96,7 +97,9 @@ Input.propTypes = {
   note: PropTypes.string,
   error: PropTypes.string,
   min: PropTypes.number,
-  max: PropTypes.number
+  max: PropTypes.number,
+  hidden: PropTypes.bool,
+  wrapperClass: PropTypes.string
 };
 
 Input.defaultProps = {

@@ -1,7 +1,7 @@
-import { setupRTL } from '../../../test-utils/test-utils';
-import { fireEvent } from 'react-testing-library';
+import { setup, findByTestAttr } from 'src/test-utils/test-utils';
 
 import Button from './Button'
+import addIcon from 'src/assets/images/add-icon.svg';
 
 describe('<Button />', () => {
   let wrapper;
@@ -9,14 +9,22 @@ describe('<Button />', () => {
 
   beforeEach(() => {
     props = {
-      onClick: jest.fn()
+      onClick: jest.fn(),
+      icon: addIcon,
+      hidden: false
     }
 
-   wrapper = setupRTL(Button, props, 'component-button')
+   wrapper = setup(Button, props);
   });
 
   test('renders without error', () => {
-    fireEvent.click(wrapper,  new MouseEvent('click'));
-    expect(props.onClick).toHaveBeenCalled();
+    const component = findByTestAttr(wrapper, 'component-button');
+    expect(component.length).toBe(1);
+  });
+
+  test('renders and is hidden', () => {
+    wrapper = setup(Button, { onClick: jest.fn(), hidden: true });
+    const component = findByTestAttr(wrapper, 'component-button');
+    expect(component.length).toBe(1);
   });
 });

@@ -1,0 +1,30 @@
+
+@import '../_buttons/Button/button.scss';
+
+.datepicker {
+  position: fixed;
+
+  .datepicker-navbar {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+
+    &-btn {
+      @extend .button;
+      height: auto;
+      line-height: initial;
+      text-decoration: none;
+
+      &:first-child {
+        @extend .primary;
+        order: 2;
+      }
+
+      &:last-child {
+        @extend .secondary;
+        order: 1;
+        margin-right: 30px;
+      }
+    }
+  }
+}

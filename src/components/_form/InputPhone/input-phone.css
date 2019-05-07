@@ -1,0 +1,77 @@
+.text-input, .input-phone {
+  margin-bottom: 2px;
+  position: relative;
+  box-sizing: border-box; }
+  .text-input-label, .input-phone-label {
+    text-transform: uppercase;
+    color: #8ac9c6;
+    padding-left: 10px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 14px; }
+  .text-input-required, .input-phone-required {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #ff5a62;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px; }
+  .text-input-box, .input-phone-box, .text-input input[type=text], .input-phone input[type=text], .text-input input[type=password], .input-phone input[type=password], .text-input textarea, .input-phone textarea {
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid #2f5472;
+    border-radius: 5px;
+    padding: 10px;
+    background: none;
+    font-size: 14px;
+    color: #2F5472;
+    outline: 0;
+    box-shadow: 0 0 0 0 #8ac9c6;
+    transition: all 0.3s; }
+    .text-input-box:focus, .input-phone-box:focus, .text-input input[type=text]:focus, .input-phone input[type=text]:focus, .text-input input[type=password]:focus, .input-phone input[type=password]:focus, .text-input textarea:focus, .input-phone textarea:focus {
+      box-shadow: 0 0 10px 0 #8ac9c6; }
+    .text-input-box::placeholder, .input-phone-box::placeholder, .text-input input[type=text]::placeholder, .input-phone input[type=text]::placeholder, .text-input input[type=password]::placeholder, .input-phone input[type=password]::placeholder, .text-input textarea::placeholder, .input-phone textarea::placeholder {
+      color: #8ac9c6;
+      opacity: 0.5; }
+    .text-input-box.error, .error.input-phone-box, .text-input input[type=text].error, .input-phone input[type=text].error, .text-input input[type=password].error, .input-phone input[type=password].error, .text-input textarea.error, .input-phone textarea.error {
+      border-color: #ff5a62; }
+  .text-input textarea, .input-phone textarea {
+    height: 120px; }
+
+.input-phone-required + .input-phone-box {
+  border-color: #ff5a62; }
+
+.input-phone-box {
+  display: flex; }
+  .input-phone-box input[type=text] {
+    outline: 0;
+    box-shadow: 0 0 0 0 #8ac9c6;
+    padding: 0;
+    margin: 0;
+    border: 0; }
+
+.input-phone-country {
+  padding-right: 10px;
+  border-right: 1px solid #2f5472;
+  margin-right: 10px; }
+  .input-phone-country select {
+    position: relative;
+    z-index: 2;
+    appearance: none;
+    padding: 0 30px 0 0;
+    margin: 0;
+    background: none;
+    border: 0; }
+  .input-phone-country:after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 0;
+    width: 20px;
+    height: 100%;
+    background: #8ac9c6;
+    mask: url("../../../assets/images/chevron-down.svg") center center no-repeat;
+    background-size: contain;
+    z-index: 1; }

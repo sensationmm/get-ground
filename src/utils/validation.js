@@ -41,6 +41,21 @@ export const validateRequired = (input) => {
 validationMessages.validateRequired = i18n.t('validation.validateRequired');
 
 /**
+ * validatePhone
+ * validates phone number entry ie. (+00)00000...
+ * @author Kevin Reynolds
+ * @param {string} input - string to be validated
+ * @return {boolean} whether string passes validation
+ */
+export const validatePhone = (input) => {
+  const inputVal = input.substr(input.indexOf(')') + 1);
+
+  if (inputVal === '') return false;
+  return !isNaN(inputVal);
+};
+validationMessages.validatePhone = i18n.t('validation.validatePhone');
+
+/**
  * validateMatching
  * validates input matches given argument
  * @author Kevin Reynolds
@@ -58,13 +73,26 @@ export const validateNoOfCompanies = (input) => {
 };
 validationMessages.validateNoOfCompanies = i18n.t('validation.validateNoOfCompanies');
 
+/**
+ * validateLettersOnly
+ * validates letters only input
+ * @param {string} input - value to be validated
+ * @return {boolean} whether value is entered
+ */
+export const validateLettersOnly = (input) => {
+  return !/[^a-zA-Z]/.test(input) && !!input;
+};
+validationMessages.validateLettersOnly = 'Required';
+
 const validation = {
   validateEmail,
+  validatePhone,
   validateRequired,
   validateMatching,
   validateNumeric,
   validateNoOfCompanies,
-  messages: validationMessages
+  validateLettersOnly,
+  messages: validationMessages,
 };
 
 export default validation;
