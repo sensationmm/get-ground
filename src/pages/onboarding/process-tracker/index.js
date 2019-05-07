@@ -28,12 +28,13 @@ export class ProcessTracker extends React.Component {
   render() {
     const { t, i18n } = this.props;
     const sectionsContent = i18n.t('onBoarding.progressTracker.sections', { returnObjects: true });
-    const sections = [
+    const sectionsConfig = {
+      sections: [
         {
           'title': sectionsContent[0].title,
           'imageAltText': sectionsContent[0].imageAltText,
           'copy': sectionsContent[0].copy,
-          'path': sectionsContent[0].path,
+          'path': '/create-account',
           'status': 'complete',
           'image': Image,
         },
@@ -41,7 +42,7 @@ export class ProcessTracker extends React.Component {
           'title': sectionsContent[1].title,
           'imageAltText': sectionsContent[1].imageAltText,
           'copy': sectionsContent[1].copy,
-          'path': sectionsContent[1].path,
+          'path': '/personal-details',
           'status': 'incomplete',
           'image': Image,
         },
@@ -49,7 +50,7 @@ export class ProcessTracker extends React.Component {
           'title': sectionsContent[2].title,
           'imageAltText': sectionsContent[2].imageAltText,
           'copy': sectionsContent[2].copy,
-          'path': sectionsContent[2].path,
+          'path': '/id-check',
           'status': 'incomplete',
           'image': Image,
         },
@@ -57,7 +58,7 @@ export class ProcessTracker extends React.Component {
           'title': sectionsContent[3].title,
           'imageAltText': sectionsContent[3].imageAltText,
           'copy': sectionsContent[3].copy,
-          'path': sectionsContent[3].path,
+          'path': '/compliance-check',
           'status': 'to_do',
           'image': Image,
         },
@@ -65,11 +66,12 @@ export class ProcessTracker extends React.Component {
           'title': sectionsContent[4].title,
           'imageAltText': sectionsContent[4].imageAltText,
           'copy': sectionsContent[4].copy,
-          'path': sectionsContent[4].path,
+          'path': '/payment',
           'status': 'to_do',
           'image': Image,
         }
-      ];
+      ]
+    };
 
       return (
         <Fragment>
@@ -77,7 +79,7 @@ export class ProcessTracker extends React.Component {
               <div className="process-tracker" role="fullscreen">
                 <h3 className="process-tracker--title">{t('onBoarding.progressTracker.inProgressTitle')}</h3>
                 <div className="process-tracker-sections">
-                  {sections.map((section, idx) => <ProcessSection key={`${idx} + ${section.title}`} {...section} />)}
+                  {sectionsConfig.sections.map((section, idx) => <ProcessSection key={`${idx} + ${section.title}`} {...section} />)}
                 </div>
                 <Checkbox label={t('onBoarding.progressTracker.confirmComplete')} checked={this.state.checkbox} onChange={() => this.setState({checkbox: !this.state.checkbox})} />
                 <Button classes="primary" fullWidth/>

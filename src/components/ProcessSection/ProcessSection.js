@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { navigate } from 'gatsby'
+import classNames from 'classnames'
+
 import './process-section.scss'
 
 /**
@@ -27,7 +29,7 @@ export const ProcessSection = ({title, imageAltText , copy, path, status, image,
   }
 
   return (
-    <div className={`process-section ${isDisabled ? `is-disabled` : ``}`} onClick={() => navigate(`${path}`)}>
+    <div className={classNames('process-section', {'is-disabled': isDisabled})} onClick={() => navigate(`${path}`)}>
       <div className="process-section-img">
         <img src={image} alt={imageAltText}/>
       </div>

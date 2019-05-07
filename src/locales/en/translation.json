@@ -88,32 +88,27 @@
         {
           "title": "Account Details",
           "copy": "Create your account",
-          "imageAltText": "Person",
-          "path": "/create-account"
+          "imageAltText": "Person"
         },
         {
           "title": "Personal Details",
           "copy": "Details to create your profile",
-          "imageAltText": "Person",
-          "path": "/personal-details"
+          "imageAltText": "Person"
         },
         {
           "title": "ID Check",
           "copy": "Tax and regulatory details",
-          "imageAltText": "ID card",
-          "path": "/id-check"
+          "imageAltText": "ID card"
         },
         {
           "title": "Compliance Check",
           "copy": "Verify your risk health",
-          "imageAltText": "Warning sign",
-          "path": "/compliance-check"
+          "imageAltText": "Warning sign"
         },
         {
           "title": "Payment",
           "copy": "Pay for service",
-          "imageAltText": "Warning sign",
-          "path": "/payment"
+          "imageAltText": "Warning sign"
         }
       ]
     }
