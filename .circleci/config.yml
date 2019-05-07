@@ -44,6 +44,3 @@ workflows:
       - build
       - supergo
       - deploy
-          filters:
-            branches:
-              only: develop
