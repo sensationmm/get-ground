@@ -19,18 +19,6 @@ $slider-image-background-color: #c9dacc;
         margin: 0;
         padding: 20px 0;
       }
-
-      &--image-wrapper {
-        width: 210px;
-        height: 210px;
-        background: $slider-image-background-color;
-        margin: 0 auto;
-        border-radius: 105px;
-      }
-
-      &--copy {
-
-      }
     }
   }
 
@@ -64,4 +52,12 @@ $slider-image-background-color: #c9dacc;
       }
     }
   }
+}
+
+.slick-slide--image-wrapper {
+  width: 210px;
+  height: 210px;
+  background: $slider-image-background-color;
+  margin: 0 auto;
+  border-radius: 105px;
 }
