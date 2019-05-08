@@ -9,11 +9,39 @@ describe('process-tracker', () => {
   let wrapper;
   let props;
 
+  const mockSections = {
+    step1: {
+      'title': 'Account Details',
+      'copy': 'Create your account',
+      'imageAltText': 'Person'
+    },
+    step2: {
+      'title': 'Personal Details',
+      'copy': 'Details to create your profile',
+      'imageAltText': 'Person'
+    },
+    step3: {
+      title: 'ID Check',
+      copy: 'Tax and regulatory details',
+      'imageAltText': 'ID card'
+    },
+    step4: {
+      'title': 'Compliance Check',
+      'copy': 'Verify your risk health',
+      'imageAltText': 'Warning sign'
+    },
+    step5: {
+      'title': 'Payment',
+      'copy': 'Pay for service',
+      'imageAltText': 'Warning sign'
+    }
+  }
+
   beforeEach(() => {
     props = {
       t: jest.fn().mockReturnValue('test-string'),
       i18n: {
-        t: jest.fn().mockReturnValue('string'),
+        t: jest.fn().mockReturnValue(mockSections),
       }
     }
     wrapper = shallow(<ProcessTracker {...props}/>);
