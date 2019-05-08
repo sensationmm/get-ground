@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { withTranslation } from 'react-i18next';
 import { Elements, StripeProvider } from 'react-stripe-elements';
 import { navigate } from 'gatsby';
@@ -17,6 +16,9 @@ import InputNumber from 'src/components/_form/InputNumber/InputNumber';
 import Stripe from 'src/components/Stripe/Stripe';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
+
+import PaymentServices from 'src/services/Payment';
+const { makePayment } = PaymentServices;
 
 /**
  * Payment
@@ -54,30 +56,15 @@ class Payment extends Component {
   }
 
   validateForm = () => {
-    const requestUrl = 'https://staging-backend-236514.appspot.com/api/v1/users/1/payment';
     const { showLoader, hideLoader, t } = this.props;
     const { stripeToken, isStripeValid, values: { numberOfCompanies } } = this.state;
 
     /* istanbul ignore else */
     if (formUtils.validateForm(this) && isStripeValid) {
       showLoader();
-
-      axios({
-        method: 'post',
-        url: requestUrl,
-        headers: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOjk1LCJSb2xlIjoiIiwiZXhwIjoxNTU2ODk0NDU3LCJuYmYiOjE1NTY4OTA4NTh9.x2Y3eYksHOmaxo7HF63tJXQIW7gQASUyRxDzwZtoCTw',
-          'Content-Type': 'application/json',
-        },
-        data: {
-          'stripe_token': stripeToken,
-          'quantity': numberOfCompanies
-        }
-      }).then(response => {
-        if (response.status === 201) {
-          hideLoader();
-          navigate('/confirmation');
-        }
+      return makePayment(stripeToken, numberOfCompanies).then(() => {
+        hideLoader();
+        navigate('/confirmation');
       }).catch((e) => {
         hideLoader();
 
