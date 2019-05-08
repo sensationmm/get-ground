@@ -26,7 +26,7 @@ IntroBox.propTypes = {
     PropTypes.element,
     PropTypes.array,
     PropTypes.string
-  ]).isRequired,
+  ])
 };
 
 export default IntroBox;
