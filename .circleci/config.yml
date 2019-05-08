@@ -38,7 +38,7 @@ jobs:
 
   deploy:
     docker:
-      - image: getground/customer-frontend-pwa:v1.0.1
+      - image: getground/customer-frontend-pwa:2.0.1
     working_directory: /go/src/github.com/getground/customer-frontend-pwa
     steps:
       - checkout
