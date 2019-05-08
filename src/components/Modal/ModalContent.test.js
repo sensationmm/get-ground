@@ -1,21 +1,21 @@
 import { setupWithStore, findByTestAttr } from 'src/test-utils/test-utils';
 
-import TermsModalContent from './TermsModalContent';
+import ModalContent from './ModalContent';
 
-describe('<TermsModalContent />', () => {
+describe('<ModalContent />', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = setupWithStore(TermsModalContent, {});
+    wrapper = setupWithStore(ModalContent, {});
   });
   
   test('renders without error', () => {
-    const component = findByTestAttr(wrapper, 'terms-modal');
+    const component = findByTestAttr(wrapper, 'modal-content');
     expect(component.length).toBe(1);
   });
 
   // test('getBlobForDownload is fired when the download button is clicked', () => {
-  //   const component = findByTestAttr(wrapper, 'terms-modal');
+  //   const component = findByTestAttr(wrapper, 'modal-content');
 
   //   jest.spyOn(wrapper.instance(), 'getBlobForDownload');
 

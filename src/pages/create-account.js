@@ -17,10 +17,15 @@ import Checkbox from '../components/_form/Checkbox/Checkbox';
 import Button from '../components/_buttons/Button/Button';
 import StrengthMeter from '../components/StrengthMeter/StrengthMeter';
 import Modal from '../components/Modal/Modal';
-import TermsModalContent from '../components/Modal/TermsModalContent';
+import ModalContent from '../components/Modal/ModalContent';
 
 import { showLoader, hideLoader } from '../state/actions/loader';
 import { showModal, hideModal } from '../state/actions/modal';
+
+import ModalServices from 'src/services/Modal';
+const { fetchModalContent } = ModalServices;
+
+import termsImage from 'src/assets/images/terms-image.svg';
 
 /**
  * CreateAccount
@@ -91,16 +96,8 @@ class CreateAccount extends Component {
     e.preventDefault();
 
     showLoader();
-
-    axios({
-      method: 'get',
-      url: 'https://staging-backend-236514.appspot.com/api/v1/markdown_templates_unique?category=other',
-      headers: {
-        'Authorization': 'avb068cbk2os5ujhodmt',
-        'Content-Type': 'application/json',
-      }
-    }).then(response => {
-      this.setState({ termsMarkdown: response.data[9].markdown_text });
+    return fetchModalContent().then(response => {
+      this.setState({ termsMarkdown: response[19].markdown_text });
       
       hideLoader();
       this.openModal();
@@ -215,10 +212,13 @@ class CreateAccount extends Component {
             unmountOnExit
           >
             <Modal>
-              <TermsModalContent 
+              <ModalContent 
                 heading={t('createAccount.termsModalHeading')}
                 content={termsMarkdown}
                 closeModal={this.closeModal} 
+                downloadButtonLabel="Download"
+                closeIconAltText="close icon"
+                modalImage={termsImage}
               />
             </Modal>
           </CSSTransition>

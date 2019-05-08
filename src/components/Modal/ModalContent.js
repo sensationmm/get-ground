@@ -1,30 +1,34 @@
 import React, { Component, createRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { connect } from 'react-redux';
 
 import Button from 'src/components/_buttons/Button/Button';
-
-import closeIcon from 'src/assets/images/close-modal-icon.svg';
-import investorStatementImage from 'src/assets/images/investor-statement-image.svg';
-
-import { showLoader, hideLoader } from 'src/state/actions/loader';
 import Checkbox from 'src/components/_form/Checkbox/Checkbox';
 
+import closeIcon from 'src/assets/images/close-modal-icon.svg';
+
+import { showLoader, hideLoader } from 'src/state/actions/loader';
+
+import ModalServices from 'src/services/Modal';
+const { markdownToPDF } = ModalServices;
+
 /**
- * HighNetWorthModalContent
+ * ModalContent
  * @param {object} e - scroll event (for JSdoc)
- * @param {string} requestUrl - url for grabbing terms markdown
  * @param {function} closeModal - function for closing the modal
  * @param {string} content - markdown to be rendered
  * @param {string} heading - modal heading 
- * @param {bool} hasCheckbox - boolean to check to render the checkbox 
- * @param {function} handleCheckboxChange - function to set container state on check
- * @param {bool} checkBoxChecked - boolean set for if the checkbox is checked or not
- * @return {JSXElement} HighNetWorthModalContent
+ * @param {bool} [hasCheckbox] - boolean to check to render the checkbox 
+ * @param {function} [handleCheckboxChange] - function to set container state on check
+ * @param {bool} [checkBoxChecked] - boolean set for if the checkbox is checked or not
+ * @param {string} downloadButtonLabel - text for download button
+ * @param {string} closeIconAltText - alt text for close icon
+ * @param {string} modalImage - main image for the modal
+ * @param {string} [checkboxLabel] - label for the checkbox
+ * @return {JSXElement} ModalContent
  */
-class HighNetWorthModalContent extends Component {
+class ModalContent extends Component {
   constructor(props) {
     super(props);
 
@@ -34,7 +38,6 @@ class HighNetWorthModalContent extends Component {
     }
 
     this.modalHeader = createRef();
-    this.requestUrl = 'https://staging-backend-236514.appspot.com/api/v1/markdown_templates_unique?category=other';
   }
 
   getBlobForDownload = /* istanbul ignore next */ () => {
@@ -42,19 +45,8 @@ class HighNetWorthModalContent extends Component {
 
     showLoader();
 
-    axios({
-      url: 'https://staging-backend-236514.appspot.com/api/v1/md2pdf',
-      method: 'POST',
-      data: {
-        'markdown_text': content
-      },
-      headers: {
-        /* TODO: UPDATE WHEN THERE IS A LOGIN PAGE */
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOjk1LCJSb2xlIjoiIiwiZXhwIjoxNTU3MjQxNzk1LCJuYmYiOjE1NTcyMzgxOTZ9.hRzEUoekMUueUh9tdXZmZ9Qp_7tu6yof7Jk6cPCH3zE'
-      },
-      responseType: 'blob'
-    }).then((response) => {
-      const url = window.URL.createObjectURL(new Blob([response.data]));
+    return markdownToPDF(content).then(response => {
+      const url = window.URL.createObjectURL(new Blob([response]));
       const link = document.createElement('a');
       link.href = url;
       link.setAttribute('download', 'file.pdf');
@@ -90,30 +82,34 @@ class HighNetWorthModalContent extends Component {
       heading, 
       hasCheckbox, 
       handleCheckboxChange, 
-      checkBoxChecked 
+      checkBoxChecked,
+      downloadButtonLabel,
+      closeIconAltText,
+      modalImage,
+      checkboxLabel
     } = this.props;
 
     return (
       <div className="modal">
-        <div data-test="terms-modal" ref={this.modalHeader} className="modal--header">
+        <div data-test="modal-content" ref={this.modalHeader} className="modal--header">
           <Button 
-            label='Download'
+            label={downloadButtonLabel}
             onClick={this.getBlobForDownload}
           />
           <img 
             className="modal--close-icon" 
             src={closeIcon} 
-            alt="close icon"
+            alt={closeIconAltText}
             onClick={closeModal} />
         </div>
         <div 
           className="modal--content" 
           style={{ height: markdownContainerHeight }}
-          onScroll={this.handleScroll}
+          onScroll={e => hasCheckbox ? this.handleScroll(e) : null }
         >
           <h2 className="modal--title">{heading}</h2>
 
-          <img src={investorStatementImage} />
+          <img src={modalImage} />
 
           <div className="modal--markdown">
             <ReactMarkdown escapeHtml={false} source={content} />
@@ -122,8 +118,7 @@ class HighNetWorthModalContent extends Component {
         {hasCheckbox && 
         <div className="modal--footer">
           <Checkbox 
-          /* TODO: COME BACK AND PASS THIS IN FROM THE CONTAINING PAGE WHEN THERE IS ONE */
-            label="I’ve read the Investor’s statement letter and confirm that I understand the risk associated with investing."
+            label={checkboxLabel}
             onChange={handleCheckboxChange}
             checked={checkBoxChecked}
             disabled={checkboxDisabled}
@@ -135,7 +130,7 @@ class HighNetWorthModalContent extends Component {
   }
 }
 
-HighNetWorthModalContent.propTypes = {
+ModalContent.propTypes = {
   closeModal: PropTypes.func,
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
@@ -143,7 +138,11 @@ HighNetWorthModalContent.propTypes = {
   heading: PropTypes.string,
   hasCheckbox: PropTypes.bool,
   handleCheckboxChange: PropTypes.func,
-  checkBoxChecked: PropTypes.bool
+  checkBoxChecked: PropTypes.bool,
+  downloadButtonLabel: PropTypes.string,
+  closeIconAltText: PropTypes.string,
+  modalImage: PropTypes.string,
+  checkboxLabel: PropTypes.string
 };
 
 const actions = { 
@@ -151,6 +150,6 @@ const actions = {
   hideLoader
 };
 
-export const RawComponent = HighNetWorthModalContent;
+export const RawComponent = ModalContent;
 
-export default connect(null, actions)(HighNetWorthModalContent);
+export default connect(null, actions)(ModalContent);
