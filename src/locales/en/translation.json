@@ -5,6 +5,12 @@
     "introBox": "If you didn‘t receive an email please check your spam folder and if it isn‘t there contact us.",
     "contactLink": "Contact us"
   },
+  "companyDesign": {
+    "propertyAddress": {
+      "heading": "Property Address",
+      "intro": "Some intro copy"
+    }
+  },
   "contactUs": "Contact us",
   "createAccount": {
     "title": "Account details",
