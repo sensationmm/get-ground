@@ -11,13 +11,19 @@
     "intro": "These details are used to create your account",
     "ctaPrimary": "Next",
     "ctaSecondary": "Back",
+    "termsModalHeading": "Terms and conditions",
+    "termsModalDownloadButtonLabel": "Download",
+    "termsModalCloseIconAltText": "close icon",
     "form": {
       "label": {
         "email": "Email",
         "password": "Password",
         "passwordConfirm": "Confirm Password",
         "optIn": "I would like to receive marketing emails and offers from GetGround",
-        "privacy": "Creating an account means you accept our terms of service and Privacy Policy"
+        "privacyOne": "Creating an account means you accept our ",
+        "privacyTermsLink": "terms of service",
+        "privacyTwo": " and ",
+        "privacyPolicyLink": "Privacy Policy"
       },
       "note": {
         "email": "This will be your username",
