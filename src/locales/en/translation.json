@@ -147,7 +147,13 @@
       "passport": {
         "title": "Add passport picture",
         "content": "In order to prove your identity we need you to take a picture of your passport, proof of address and then finally to take a selfie.",
-        "link": "If you already have it saved upload"
+        "link": "If you already have it saved Upload",
+        "image": {
+          "capture": "Capture photo",
+          "happy": "Yes, I'm happy",
+          "retake": "Retake"
+        },
+        "retakeImageContent": "Are you happy with this picture? Please make sure it is well-lit and that you can read the information clearly."
       }
     }
   },
