@@ -33,5 +33,12 @@
         background: $warning;
       }
     }
+    &.disabled {
+      border-color: $disabled;
+
+      + .checkbox-label {
+        color: $disabled;
+      }
+    }
   }
 }

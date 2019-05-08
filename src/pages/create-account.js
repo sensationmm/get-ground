@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { withTranslation } from 'react-i18next';
+import { CSSTransition } from 'react-transition-group';
 
 import Layout from '../components/Layout/Layout'
 import formUtils from '../utils/form';
@@ -15,12 +16,20 @@ import InputPassword from '../components/_form/InputPassword/InputPassword';
 import Checkbox from '../components/_form/Checkbox/Checkbox';
 import Button from '../components/_buttons/Button/Button';
 import StrengthMeter from '../components/StrengthMeter/StrengthMeter';
+import Modal from '../components/Modal/Modal';
+import ModalContent from '../components/Modal/ModalContent';
 
 import { showLoader, hideLoader } from '../state/actions/loader';
+import { showModal, hideModal } from '../state/actions/modal';
+
+import ModalServices from 'src/services/Modal';
+const { fetchModalContent } = ModalServices;
+
+import termsImage from 'src/assets/images/terms-image.svg';
 
 /**
  * CreateAccount
- *
+ * @param {object} e - event passed on openModal (for JSdoc)
  * @return {JSXElement} CreateAccount
  */
 class CreateAccount extends Component {
@@ -34,7 +43,8 @@ class CreateAccount extends Component {
         passwordConfirm: '',
         optin: false,
         privacy: false
-      })
+      }),
+      termsMarkdown: ''
     };
 
     this.config = [];
@@ -81,10 +91,30 @@ class CreateAccount extends Component {
     }
   }
 
+  getModalContent = e => {
+    const { showLoader, hideLoader } = this.props;
+    e.preventDefault();
+
+    showLoader();
+    return fetchModalContent().then(response => {
+      this.setState({ termsMarkdown: response[19].markdown_text });
+      
+      hideLoader();
+      this.openModal();
+    }).catch(() => {
+      hideLoader();
+    });
+  }
+
+  openModal = () => this.props.showModal();
+
+  closeModal = () => this.props.hideModal();
+
   render() {
-    const { values, errors, showErrorMessage } = this.state;
-    const { t } = this.props;
+    const { values, errors, showErrorMessage, termsMarkdown } = this.state;
+    const { t, modal: { isOpen } } = this.props;
     // @TODO can this be moved out of render - fails on edit field currently
+
     this.config = [
       {
         stateKey: 'email',
@@ -126,12 +156,24 @@ class CreateAccount extends Component {
       {
         stateKey: 'privacy',
         component: Checkbox,
-        label: t('createAccount.form.label.privacy'),
+        label: <div>
+          {t('createAccount.form.label.privacyOne')}
+          <a onClick={(e) => { 
+            if (termsMarkdown === '') {
+              this.getModalContent(e)
+            } else {
+              this.openModal();
+            }
+          }}>
+          {t('createAccount.form.label.privacyTermsLink')}</a>
+          {t('createAccount.form.label.privacyTwo')}
+          {t('createAccount.form.label.privacyPolicyLink')}
+        </div>,
         checked: values.privacy,
         validationFunction: 'validateRequired'
       }
     ];
-
+    
     return (
       <Layout>
         <div data-test="container-create-account" className="create-account" role="account">
@@ -163,6 +205,23 @@ class CreateAccount extends Component {
 
             <Button classes="secondary" label={ t('createAccount.ctaSecondary') } fullWidth />
           </Form>
+          <CSSTransition
+            in={isOpen}
+            timeout={600}
+            classNames="modal"
+            unmountOnExit
+          >
+            <Modal>
+              <ModalContent 
+                heading={t('createAccount.termsModalHeading')}
+                content={termsMarkdown}
+                closeModal={this.closeModal} 
+                downloadButtonLabel={t('createAccount.termsModalDownloadButtonLabel')}
+                closeIconAltText={t('createAccount.termsModalCloseIconAltText')}
+                modalImage={termsImage}
+              />
+            </Modal>
+          </CSSTransition>
         </div>
       </Layout>
     );
@@ -172,11 +231,27 @@ class CreateAccount extends Component {
 CreateAccount.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
-  t: PropTypes.func.isRequired
+  showModal: PropTypes.func,
+  hideModal: PropTypes.func,
+  t: PropTypes.func.isRequired,
+  modal: PropTypes.object
 };
 
-const actions = { showLoader, hideLoader };
+const mapStateToProps = state => {
+  return {
+    modal: {
+      isOpen: state.modal.isOpen
+    }
+  }
+};
+
+const actions = { 
+  showLoader, 
+  hideLoader ,
+  showModal,
+  hideModal
+};
 
 export const RawComponent = CreateAccount;
 
-export default connect(null, actions)(withTranslation()(CreateAccount));
+export default connect(mapStateToProps, actions)(withTranslation()(CreateAccount));
