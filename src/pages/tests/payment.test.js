@@ -8,6 +8,8 @@ import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 describe('Payment page', () => {
   let wrapper;
 
+  global.Stripe = jest.fn()
+
   beforeEach(() => {
     wrapper = setup(RawComponent, {
       t: jest.fn(),

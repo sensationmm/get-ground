@@ -35,6 +35,7 @@ class Payment extends Component {
       ...formUtils.initFormState({
         numberOfCompanies: '1'
       }),
+      stripe: null,
       isStripeValid: true,
       accountSetupValue: this.baseSetupValue,
       monthlySubscriptionValue: this.baseMonthlySubValue,
@@ -46,6 +47,10 @@ class Payment extends Component {
     };
 
     this.config = [];
+  }
+
+  componentDidMount() {
+    this.setState({ stripe: window.Stripe('pk_test_IekVa77loZrt2oMKeUXuHek7') });
   }
 
   validateForm = () => {
@@ -180,7 +185,7 @@ class Payment extends Component {
             totalValue={totalValue}
           />
 
-          <StripeProvider apiKey="pk_test_IekVa77loZrt2oMKeUXuHek7">
+          <StripeProvider stripe={this.state.stripe}>
             <Elements>
               <Form>
                 {formUtils.renderForm(this)}
