@@ -21,6 +21,8 @@ import './input.css';
  * @param {function} [onFocus] - callback to execute on focus
  * @param {bool} [readOnly] - boolean to set the input to read only
  * @param {string} [note] - explanation text to show under input
+ * @param {number} [max]  - max value allowed in number input
+ * @param {number} [min]  - min value allowed in number input
  * @param {bool} [hidden] - boolean to hide / show the button
  * @param {string} [wrapperClass] - unique class name for container
  * @return {JSXElement} Input
@@ -38,6 +40,8 @@ const Input = (props) => {
     readOnly,
     note,
     error,
+    min,
+    max,
     hidden,
     wrapperClass
   } = props;
@@ -71,6 +75,8 @@ const Input = (props) => {
         className={classNames([
           {'error': error }
         ])}
+        min={min}
+        max={max}
       />
 
       {note && <Note data-test="text-input-note">{note}</Note>}
@@ -81,7 +87,7 @@ const Input = (props) => {
 Input.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string,
-  type: PropTypes.oneOf(['text', 'password']),
+  type: PropTypes.oneOf(['text', 'password', 'number']),
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
@@ -90,6 +96,8 @@ Input.propTypes = {
   validate: PropTypes.func,
   note: PropTypes.string,
   error: PropTypes.string,
+  min: PropTypes.number,
+  max: PropTypes.number,
   hidden: PropTypes.bool,
   wrapperClass: PropTypes.string
 };

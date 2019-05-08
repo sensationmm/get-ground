@@ -16,6 +16,19 @@ export const validateEmail = (email) => {
 validationMessages.validateEmail = i18n.t('validation.validateEmail');
 
 /**
+ * validateNumeric
+ * validates numeric entry
+ * @author Kevin Reynolds
+ * @param {string} input - string to be validated
+ * @return {boolean} whether string passes validation
+ */
+export const validateNumeric = (input) => {
+  if (input === '') return false;
+  return !isNaN(input);
+};
+validationMessages.validateNumeric = i18n.t('validation.validateNumeric');
+
+/**
  * validateRequired
  * validates required input
  * @author Kevin Reynolds
@@ -55,6 +68,11 @@ export const validateMatching = (input, inputToMatch) => {
 };
 validationMessages.validateMatching = i18n.t('validation.validateMatching');
 
+export const validateNoOfCompanies = (input) => {
+  return input > 0 && input < 21;
+};
+validationMessages.validateNoOfCompanies = i18n.t('validation.validateNoOfCompanies');
+
 /**
  * validateLettersOnly
  * validates letters only input
@@ -71,6 +89,8 @@ const validation = {
   validatePhone,
   validateRequired,
   validateMatching,
+  validateNumeric,
+  validateNoOfCompanies,
   validateLettersOnly,
   messages: validationMessages,
 };
