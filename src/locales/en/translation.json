@@ -12,6 +12,8 @@
     "ctaPrimary": "Next",
     "ctaSecondary": "Back",
     "termsModalHeading": "Terms and conditions",
+    "termsModalDownloadButtonLabel": "Download",
+    "termsModalCloseIconAltText": "close icon",
     "form": {
       "label": {
         "email": "Email",

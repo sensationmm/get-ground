@@ -216,8 +216,8 @@ class CreateAccount extends Component {
                 heading={t('createAccount.termsModalHeading')}
                 content={termsMarkdown}
                 closeModal={this.closeModal} 
-                downloadButtonLabel="Download"
-                closeIconAltText="close icon"
+                downloadButtonLabel={t('createAccount.termsModalDownloadButtonLabel')}
+                closeIconAltText={t('createAccount.termsModalCloseIconAltText')}
                 modalImage={termsImage}
               />
             </Modal>
