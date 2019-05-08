@@ -6,7 +6,7 @@ import './checkbox.scss';
 
 /**
  * Checkbox
- * 
+ *
  * @param {Object} props - props object (for jest)
  * @param {string} checked - whether in selected state
  * @param {string} label - text label to display above the input field
@@ -20,18 +20,18 @@ const Checkbox = (props) => {
 
   return (
     <div className="checkbox" data-test="component-checkbox">
-      <div 
-        data-test="component-checkbox-layout" 
-        className="checkbox-layout" 
+      <div
+        data-test="component-checkbox-layout"
+        className="checkbox-layout"
         onClick={() => disabled ? null : onChange(!checked)}>
-        <div 
+        <div
           data-test="component-checkbox-toggle"
           className={classNames(
             'checkbox-toggle',
             { 'checked': checked },
             { 'error': error },
             { 'disabled': disabled }
-          )} 
+          )}
         />
 
         <div className="checkbox-label">

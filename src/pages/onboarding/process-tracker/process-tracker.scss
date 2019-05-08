@@ -1,0 +1,17 @@
+@import 'src/styles/modules/_colors';
+
+.process-tracker {
+  &--title {
+    color: $white;
+}
+  &-sections {
+    margin-top: 20px;
+  }
+  .checkbox {
+    margin-top: 37px;
+  }
+
+  button {
+    margin-top: 31px;
+  }
+}
