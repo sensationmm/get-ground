@@ -27,6 +27,7 @@ export class Layout extends Component {
         <div className={classNames('app', children.props && children.props.role)}>
           <main className="main">{children}</main>
         </div>
+        <div id="modal-root"></div>
       </>
     )
   }
@@ -41,6 +42,5 @@ Layout.propTypes = {
 const mapStateToProps = (state) => ({
   isLoading: state.loader.isLoading
 })
-
 
 export default connect(mapStateToProps, { setWidth })(Layout)
