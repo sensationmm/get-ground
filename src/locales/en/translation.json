@@ -61,7 +61,7 @@
       "button2": "Already on GG? Log In"
     },
     "accountCreation": {
-      
+
     },
     "personalDetails": {
       "heading": "Personal details",
@@ -102,6 +102,14 @@
       "buttonText": "View your dashboard",
       "contactUsText": "If this is taking longer than expected please contact us.",
       "contactUsLinkText": "Contact us"
+    },
+    "idCheck": {
+      "title": "ID Check",
+      "passport": {
+        "title": "Add passport picture",
+        "content": "In order to prove your identity we need you to take a picture of your passport, proof of address and then finally to take a selfie.",
+        "link": "If you already have it saved upload"
+      }
     }
   },
   "validation": {

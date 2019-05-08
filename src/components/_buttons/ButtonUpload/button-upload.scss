@@ -1,0 +1,11 @@
+@import 'src/styles/modules/_colors.scss';
+
+.button-upload {
+  width: 100%;
+  font-weight: 600;
+  line-height: 2.14;
+  letter-spacing: 0.9px;
+  color: $primary;
+  text-decoration: underline;
+  text-align: center;
+}
