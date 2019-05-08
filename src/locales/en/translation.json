@@ -67,7 +67,7 @@
       "button2": "Already on GG? Log In"
     },
     "accountCreation": {
-      
+
     },
     "personalDetails": {
       "heading": "Personal details",
@@ -99,6 +99,39 @@
         "addNamesButton": "Any previous names",
         "extraNameLabel": "Extra name",
         "phoneLabel": "Mobile number"
+      }
+    },
+    "progressTracker": {
+      "inProgressTitle": "Get Started in 5 simple steps",
+      "complete": "complete",
+      "completeTitle": "All 5 steps complete",
+      "confirmComplete": "I am happy with all my details and confirm they are all correct.",
+      "sections": {
+        "step1": {
+          "title": "Account Details",
+          "copy": "Create your account",
+          "imageAltText": "Person"
+        },
+       "step2": {
+          "title": "Personal Details",
+          "copy": "Details to create your profile",
+          "imageAltText": "Person"
+        },
+        "step3": {
+          "title": "ID Check",
+          "copy": "Tax and regulatory details",
+          "imageAltText": "ID card"
+        },
+        "step4": {
+          "title": "Compliance Check",
+          "copy": "Verify your risk health",
+          "imageAltText": "Warning sign"
+        },
+        "step5": {
+          "title": "Payment",
+          "copy": "Pay for service",
+          "imageAltText": "Warning sign"
+        }
       }
     },
     "confirmation": {
