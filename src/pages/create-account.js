@@ -40,9 +40,9 @@ class CreateAccount extends Component {
 
     this.state = {
       ...formUtils.initFormState({
-        email: 'kevin.reynolds@getground.co.uk',
-        password: 'asp',
-        passwordConfirm: 'asp',
+        email: '',
+        password: '',
+        passwordConfirm: '',
         optin: false,
         privacy: true
       }),
