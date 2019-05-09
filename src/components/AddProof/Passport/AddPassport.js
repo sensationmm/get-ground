@@ -1,4 +1,3 @@
-/* eslint-disable valid-jsdoc */
 import React, { Component } from 'react'
 import { withTranslation } from 'react-i18next'
 import PropTypes from 'prop-types';
@@ -14,7 +13,8 @@ import './add-passport.scss'
 /**
  * Add Passport img
  * @author Ravin Patel
- * @param {Function} web - t for labels
+ * @param {function} t - i18next function for translating
+ * @param {Object} videoConstraints -
  * @return {ReactComponent} AddPassport
  */
 export class AddPassport extends Component {
@@ -37,7 +37,11 @@ export class AddPassport extends Component {
     )
   }
 
-  setRef = webcam => {
+  /**
+   * @param {ReactComponent} webcam - React component to start webcam
+   * @return {void}
+   */
+  setWebcam = webcam => {
     this.setState({webcam})
   };
 
@@ -56,7 +60,7 @@ export class AddPassport extends Component {
           data-test="webcam"
           audio={false}
           height={350}
-          ref={this.setRef}
+          ref={this.setWebcam}
           screenshotFormat="image/jpeg"
           width={350}
           videoConstraints={videoConstraints}
@@ -80,6 +84,10 @@ export class AddPassport extends Component {
     return <img src={this.state.imageSrc} onClick={() => this.setState({ retakePicture: true })}/>
   }
 
+  /**
+   * @param {Object} file - uploaded file being turned into base64
+   * @return {void}
+   */
   getBase64 = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -92,6 +100,10 @@ export class AddPassport extends Component {
     };
  }
 
+ /**
+   * @param {Array} files - uploaded files from dropzone
+   * @return {void}
+   */
   onImageDrop = (files) => {
     this.getBase64(files[0])
     this.setState({
