@@ -29,6 +29,6 @@ describe('<Layout />', () => {
 
   test('passes role to classname', () => {
     const wrapper = shallow(<Layout {...props} />);
-    expect(wrapper.find('.app.test-role')).toHaveLength(1);
+    expect(wrapper.find('.wrapper.test-role')).toHaveLength(1);
   })
 })

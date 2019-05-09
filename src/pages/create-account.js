@@ -16,8 +16,8 @@ import InputPassword from 'src/components/_form/InputPassword/InputPassword';
 import Checkbox from 'src/components/_form/Checkbox/Checkbox';
 import Button from 'src/components/_buttons/Button/Button';
 import StrengthMeter from 'src/components/StrengthMeter/StrengthMeter';
-import Modal from '../components/Modal/Modal';
-import ModalContent from '../components/Modal/ModalContent';
+import Modal from 'src/components/Modal/Modal';
+import ModalContent from 'src/components/Modal/ModalContent';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 import { showModal, hideModal } from 'src/state/actions/modal';

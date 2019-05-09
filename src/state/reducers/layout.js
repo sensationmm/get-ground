@@ -6,7 +6,7 @@ export const initialState = {
   isMobile: false,
 };
 
-export const layout = (state = initialState, action = {}) => {
+export const layout = (state = initialState, action) => {
   switch (action.type) {
     case SET_WIDTH:
       return {
