@@ -207,7 +207,6 @@ class ComplianceCheck extends Component {
             <Element id="q1">
               <QuizQ1
                 numQuestions={numQuestions}
-                t={t}
                 selected={tax_bracket}
                 onChange={(val) => { FormUtils.updateValue(this, 'tax_bracket', val); this.goToStep('q2'); }}
               />
@@ -217,7 +216,6 @@ class ComplianceCheck extends Component {
               {showQ2 && 
                 <QuizQ2
                   numQuestions={numQuestions}
-                  t={t}
                   selected={large_enterprise}
                   onChange={(val) => {
                     if(val.indexOf('none') >= 0) {
@@ -236,7 +234,6 @@ class ComplianceCheck extends Component {
               {showQ3 && 
                 <QuizQ3
                   numQuestions={numQuestions}
-                  t={t}
                   onClick={() => { FormUtils.updateValue(this, 'investment_confirmation', true); this.goToStep('q4'); }}
                 />
               }
@@ -246,7 +243,6 @@ class ComplianceCheck extends Component {
               {showQ4 &&
                 <QuizQ4
                   numQuestions={numQuestions}
-                  t={t}
                   selected={self_certification}
                   onChange={(val) => { 
                     FormUtils.updateValue(this, 'self_certification', val); 
@@ -266,7 +262,6 @@ class ComplianceCheck extends Component {
               {showQ5 &&
                 <QuizQ5
                   numQuestions={numQuestions}
-                  t={t}
                   selected={restricted_quiz}
                   onChange={(val) => { FormUtils.updateValue(this, 'restricted_quiz', val); this.goToStep('done'); }}
                   onDeselectAll={() => FormUtils.updateValue(this, 'restricted_quiz_done', false)}
