@@ -60,4 +60,8 @@
     padding: 0;
     background: transparent;
   }
+
+  &.faded {
+    opacity: 0.7;
+  }
 }

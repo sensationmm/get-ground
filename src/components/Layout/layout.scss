@@ -39,10 +39,16 @@ body {
 
 .app {
   padding: $padding-vertical (($padding-horizontal-unit * 2) + 0px);
-  min-height: calc(100% - #{$header-height + ($padding-vertical-unit * 4) + 0px});
+  height: calc(100% - #{$header-height + ($padding-vertical-unit * 4) + 0px});
 
   &:not(.fullscreen) {
     background: $white;
+  }
+
+  .main {
+    position: relative;
+    display: block;
+    height: 100%;
   }
 }
 
@@ -64,4 +70,11 @@ p, select {
 
 .fs-large {
   font-size: 18px;
+}
+
+.fullscreen {
+  h1 {
+    color: $white;
+    font-size: 48px;
+  }
 }
