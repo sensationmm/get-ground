@@ -11,4 +11,7 @@ export const HIDE_LOADER = 'HIDE_LOADER';
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 
+export const USER_LOGIN = 'USER_LOGIN';
+export const SAVE_AUTH = 'SAVE_AUTH';
+
 export const SET_WIDTH = 'SET_WIDTH';

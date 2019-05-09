@@ -39,6 +39,17 @@
   "form": {
     "correctErrors": "Please correct all errors to proceed"
   },
+  "login": {
+    "ctaPrimary": "Sign in",
+    "ctaSecondary": "Forgot your password",
+    "form": {
+      "label": {
+        "email": "Email Address",
+        "password": "Password"
+      },
+      "error": "Invalid login - please try again"
+    }
+  },
   "onBoarding": {
     "intro": {
       "slides": [
