@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { loader } from './loader';
-import { modal } from './modal';
 import { layout } from './layout';
+import { modal } from './modal';
 import { user } from './user';
 import { auth } from './auth';
 

@@ -78,4 +78,4 @@ const actions = {
   saveAuth,
 };
 
-export default connect(mapStateToProps, actions)(Layout)
+export default connect(mapStateToProps, actions)(Layout);

@@ -28,8 +28,8 @@ class Login extends Component {
 
     this.state = {
       ...formUtils.initFormState({
-        email: 'kevin.reynolds@getground.co.uk',
-        password: 'asprilla'
+        email: '',
+        password: ''
       })
     };
 
