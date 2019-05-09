@@ -3,9 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import axios from 'axios';
-import moment from 'moment';
-import Helmet from 'react-helmet'
+import { navigate } from 'gatsby'
 
 import Layout from 'src/components/Layout/Layout'
 import formUtils from 'src/utils/form';
@@ -20,18 +18,19 @@ import Button from 'src/components/_buttons/Button/Button';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
-import countryData from 'src/countries.json';
 import { addressNow } from 'src/config/endpoints';
 import 'src/styles/pages/onboarding-details.scss';
 
+import PropertyServices from 'src/services/Property';
+const { SavePropertyAddress } = PropertyServices;
+
 /**
-  * OnboardingPersonalDetailsContainer
-  * @param {object} date - event object
+  * PropertyAddress
   * @param {object} e - event object
   * @param {function} t - i18next function for translating
-  * @return {JSXElement} OnboardingPersonalDetailsContainer
+  * @return {JSXElement} PropertyAddress
   */
-class OnboardingPersonalDetailsContainer extends Component {
+class PropertyAddress extends Component {
   constructor(props) {
     super(props);
 
@@ -45,6 +44,7 @@ class OnboardingPersonalDetailsContainer extends Component {
       }),
       isAddressValid: true,
       isManualAddress: false,
+      isTextAreaHidden: true
     };
 
     this.config = [];
@@ -52,97 +52,68 @@ class OnboardingPersonalDetailsContainer extends Component {
 
   /* istanbul ignore next */
   componentDidMount() {
-    window.addressNow.listen('load', (control) => {
-      control.listen('populate', (address) => {
-        this.setState({
-          street: address.Street,
-          city: address.City,
-          unitNumber: address.BuildingNumber,
-          postcode: address.PostalCode,
-          isAddressValid: true
+    const script = document.createElement('script');
+
+    script.onload = () => {
+      window.addressNow.listen('load', (control) =>  {
+        control.listen('populate', (address) => {
+          
+          this.setState((prevState) => ({
+            ...this.state,
+            values: {
+              ...prevState.values,
+              street: address.Street,
+              city: address.City,
+              unitNumber: address.BuildingNumber,
+              postcode: address.PostalCode,
+            },
+            isAddressValid: true,
+            isTextAreaHidden: false
+          }));
+
         });
       });
-    });
+    }
+
+    script.src = addressNow
+    script.async = true;
+    document.body.appendChild(script);
   }
-  
-  resetAddress = /* istanbul ignore next */ () => {
+
+  toggleManualAddress = /* istanbul ignore next */ () => {
     document.getElementById('addressArea').value = '';
 
     this.setState((prevState) => ({
-      values: {
-        ...prevState.values,
-        street: '',
-        city: '',
-        unitNumber: '',
-        postcode: '',
-      },
-      isManualAddress: !this.state.isManualAddress
-    }));
-  }
+      isManualAddress: !this.state.isManualAddress,
+      isTextAreaHidden: true
+    }))
+  };
 
   initFormValidation = /* istanbul ignore next */ () => {
-    const requestUrl = 'https://staging-backend-236514.appspot.com/api/v1/users/95';
-    const { showLoader, hideLoader } = this.props;
+    const { showLoader, hideLoader, t } = this.props;
     const { 
       values: {
-        firstName,
-        middleName,
-        lastName,
-        nationality,
-        cityOfBirth,
-        jobTitle,
         country,
         street,
         city,
         unitNumber,
         postcode,
-        previousNames,
-        phone
-      }, 
-      formattedDate 
+      }
     } = this.state;
-
-    const self = this;
 
     if (formUtils.validateForm(this)) {
       showLoader();
 
-      axios({
-        method: 'put',
-        url: requestUrl,
-        headers: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOjk1LCJSb2xlIjoiIiwiZXhwIjoxNTU3MjI5NzIxLCJuYmYiOjE1NTcyMjYxMjJ9.rpobSbMFlCfh1qsF-RPcCQ_ZcY7JKi9W26enwl2F-lE',
-          'Content-Type': 'application/json',
-        },
-        data: {
-          'id': 95,
-          'first_name': firstName,
-          'middle_name': middleName,
-          'last_name': lastName,
-          'date_of_birth': formattedDate,
-          'nationality_name': nationality,
-          'birth_town': cityOfBirth,
-          'occupation': jobTitle,
-          'country': country,
-          'street': street,
-          'city': city,
-          'unit_number': unitNumber,
-          'postcode': postcode,
-          'previous_names': previousNames,
-          'phone_number': phone
-        }
-      }).then(function(response) {
-        if(response.status === 201) {
-          self.props.history.push('/account-pending');
-          hideLoader();
-        }
+      SavePropertyAddress({country, street, city, unitNumber, postcode}).then((response) => {
+        navigate('/company-details/purchase-details');
+        hideLoader();
       }).catch((e) => {
         hideLoader();
 
-        self.setState({
+        this.setState({
           ...this.state,
           errors: {
-            form: 'There has been an issue with some of the details'
+            form: t('companyDesign.propertyAddress.form.error')
           },
           showErrorMessage: true
         });
@@ -151,7 +122,7 @@ class OnboardingPersonalDetailsContainer extends Component {
     }
   }
 
-  submitPersonalDetails =   /* istanbul ignore next */ () => {
+  submitPropertyAddress =   /* istanbul ignore next */ () => {
     const { isManualAddress } = this.state;
 
     if (!isManualAddress && document.getElementById('addressArea').value === '') {
@@ -167,23 +138,6 @@ class OnboardingPersonalDetailsContainer extends Component {
     */
   handleCountryChange = country => window.addressNow.setCountry(country);
 
-  openDatePicker = () => this.setState({isDatepickerOpen: true});
-
-  closeDatePicker = () => this.setState({isDatepickerOpen: false});
-
-  setDateOfBirth = date => {
-    const element = document.getElementById('datepicker-field');
-
-    // Element is null in unit test so blows up at this point...
-    /* istanbul ignore else */
-    if (!element) return;
-
-    formUtils.setNativeValue(element, moment(date).format('Do MMMM YYYY'));
-    element.dispatchEvent(new Event('input', { bubbles: true }));
-
-    this.setState({ formattedDate: moment(date).format('L'), isDatepickerOpen: false });
-  }
-
   render() {
     const { t } = this.props;
     const { 
@@ -191,20 +145,20 @@ class OnboardingPersonalDetailsContainer extends Component {
       isAddressValid, 
       values,
       errors, 
-      showErrorMessage
+      showErrorMessage,
+      isTextAreaHidden
     } = this.state;
   
-    const setCountries = countryData.map((country, index) => {
-      return (
-        <option key={`country-${index}`} value={country.country_name}>{country.country_name}</option>
-      );
-    });
-
+    const setCountries = [
+      <option key='country-0' value='England'>England</option>,
+      <option key='country-1' value='Wales'>Wales</option>
+    ];
+        
     this.config = [
       {
         stateKey: 'country',
         component: Select,
-        label: t('onBoarding.personalDetails.form.countryLabel'),
+        label: t('companyDesign.propertyAddress.form.countryLabel'),
         value: values.country,
         options: setCountries,
         classes: 'country-select',
@@ -214,16 +168,19 @@ class OnboardingPersonalDetailsContainer extends Component {
       {
         stateKey: 'isAddressValid',
         component: AddressFinder,
-        resetAddress: this.resetAddress,
+        toggleManualAddress: this.toggleManualAddress,
         isManualAddress: isManualAddress,
         isAddressValid: isAddressValid,
-        buttonLabel: t('onBoarding.personalDetails.form.manualAddressButtonLabel'),
-        addressFinderLabel: t('onBoarding.personalDetails.form.addressFinderLabel')
+        buttonLabel: t('companyDesign.propertyAddress.form.manualAddressButtonLabel'),
+        addressFinderLabel: t('companyDesign.propertyAddress.form.addressFinderLabel'),
+        isHidden: isTextAreaHidden,
+        editIconAltText: t('companyDesign.propertyAddress.form.editIconAltText'),
+        fieldErrorText: t('companyDesign.propertyAddress.form.fieldErrorText'),
       },
       {
         stateKey: 'unitNumber',
         component: InputText,
-        label: t('onBoarding.personalDetails.form.unitNumberLabel'),
+        label: t('companyDesign.propertyAddress.form.unitNumberLabel'),
         value: values.unitNumber,
         validationFunction: 'validateRequired',
         hidden: !isManualAddress
@@ -231,7 +188,7 @@ class OnboardingPersonalDetailsContainer extends Component {
       {
         stateKey: 'street',
         component: InputText,
-        label: t('onBoarding.personalDetails.form.streetLabel'),
+        label: t('companyDesign.propertyAddress.form.streetLabel'),
         value: values.street,
         validationFunction: 'validateRequired',
         hidden: !isManualAddress
@@ -239,7 +196,7 @@ class OnboardingPersonalDetailsContainer extends Component {
       {
         stateKey: 'city',
         component: InputText,
-        label: t('onBoarding.personalDetails.form.cityLabel'),
+        label: t('companyDesign.propertyAddress.form.cityLabel'),
         value: values.city,
         validationFunction: 'validateRequired',
         hidden: !isManualAddress
@@ -247,31 +204,24 @@ class OnboardingPersonalDetailsContainer extends Component {
       {
         stateKey: 'postcode',
         component: InputText,
-        label: t('onBoarding.personalDetails.form.postcodeLabel'),
+        label: t('companyDesign.propertyAddress.form.postcodeLabel'),
         value: values.postcode,
         validationFunction: 'validateRequired',
         hidden: !isManualAddress
       },
       {
         component: Button,
-        onClick: this.resetAddress,
-        label: t('onBoarding.personalDetails.form.addressFinderButtonLabel'),
+        onClick: this.toggleManualAddress,
+        label: t('companyDesign.propertyAddress.form.addressFinderButtonLabel'),
         hidden: !isManualAddress,
-        classes: 'link',
+        classes: 'link small',
       },
     ];
 
     return (
       <>
-      <Helmet
-        script={[
-          {
-            'src': addressNow , 'type': 'text/javascript', 'innerHTML': 'window.addressNow'
-          }
-        ]}
-      />
       <Layout>
-        <div className="onboarding-details" data-test="container-onboarding-details" role="account">
+        <div className="company-design-property-address" data-test="container-company-design-property-address">
           <h1>{t('companyDesign.propertyAddress.heading')}</h1>
 
           <IntroBox>{t('companyDesign.propertyAddress.intro')}</IntroBox>
@@ -280,7 +230,7 @@ class OnboardingPersonalDetailsContainer extends Component {
               <ErrorBox>
               { errors.form 
                 ? errors.form
-                : 'Please fix your errors to proceed'
+                : t('companyDesign.propertyAddress.form.error')
               }
               </ErrorBox>
             }
@@ -289,13 +239,13 @@ class OnboardingPersonalDetailsContainer extends Component {
             {formUtils.renderForm(this)}
 
             <Button
-              label={t('onBoarding.personalDetails.form.nextButton')}
+              label={t('companyDesign.propertyAddress.form.nextButton')}
               fullWidth
-              onClick={this.submitPersonalDetails}
+              onClick={this.submitPropertyAddress}
               classes="primary"
             />
 
-            <Button classes="secondary" label={t('onBoarding.personalDetails.form.backButton')} fullWidth />
+            <Button classes="secondary" label={t('companyDesign.propertyAddress.form.backButton')} fullWidth />
           </Form>
         </div>
       </Layout>
@@ -304,7 +254,7 @@ class OnboardingPersonalDetailsContainer extends Component {
   }
 }
 
-OnboardingPersonalDetailsContainer.propTypes = {
+PropertyAddress.propTypes = {
   t: PropTypes.func.isRequired,
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func
@@ -312,5 +262,5 @@ OnboardingPersonalDetailsContainer.propTypes = {
 
 const actions = { showLoader, hideLoader };
 
-export const RawComponent = OnboardingPersonalDetailsContainer;
-export default connect(null, actions)(withTranslation()(OnboardingPersonalDetailsContainer));
+export const RawComponent = PropertyAddress;
+export default connect(null, actions)(withTranslation()(PropertyAddress));

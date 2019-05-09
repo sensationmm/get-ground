@@ -9,7 +9,7 @@ describe('<AddressFinder />', () => {
 
   beforeEach(() => {
     wrapper = setup(AddressFinder, {
-      resetAddress: jest.fn(),
+      toggleManualAddress: jest.fn(),
       isManualAddress: false,
     }, {
       search: '',
@@ -22,7 +22,7 @@ describe('<AddressFinder />', () => {
   });
 
   test('call resetSearchValue when the manual address ButtonLink is clicked', () => {
-    const wrapper = setup(AddressFinder, { resetAddress: jest.fn(), isManualAddress: true }, { search: '' });
+    const wrapper = setup(AddressFinder, { toggleManualAddress: jest.fn(), isManualAddress: true }, { search: '' });
     const component = findByTestAttr(wrapper, 'component-address-finder');
 
     jest.spyOn(wrapper.instance(), 'resetSearchValue');

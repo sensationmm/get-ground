@@ -8,7 +8,22 @@
   "companyDesign": {
     "propertyAddress": {
       "heading": "Property Address",
-      "intro": "Some intro copy"
+      "intro": "Let's start with your property address.",
+      "form": {
+        "addressFinderLabel": "Address Finder",
+        "countryLabel": "Country",
+        "unitNumberLabel": "Unit Number",
+        "streetLabel": "Street",
+        "cityLabel": "City",
+        "postcodeLabel": "Postcode",
+        "manualAddressButtonLabel": "Enter Address Manually",
+        "addressFinderButtonLabel": "Find Address",
+        "editIconAltText": "edit icon",
+        "nextButton": "Next",
+        "backButton": "Back",
+        "fieldErrorText": "Required",
+        "error": "Please fix your errors to proceed"
+      }
     }
   },
   "contactUs": "Contact us",
@@ -119,7 +134,9 @@
         "backButton": "Back",
         "addNamesButton": "Any previous names",
         "extraNameLabel": "Extra name",
-        "phoneLabel": "Mobile number"
+        "phoneLabel": "Mobile number",
+        "editIconAltText": "edit icon",
+        "fieldErrorText": "Required"
       }
     },
     "progressTracker": {

@@ -15,7 +15,7 @@
     &-required {
       position: absolute;
       right: 0;
-      top: -20px;
+      top: 0;
       color: $warning;
       text-transform: uppercase;
       font-weight: bold;
@@ -24,13 +24,13 @@
   }
 
   .address-text-area {
+    margin-top: 20px;
     display: block;
     height: 100px;
     box-sizing: border-box;
     width: 100%;
-    border-color: #eeeeee;
-    /* TODO: update this and stick it in colours when there is an actual design */
-    background: #eeeeee;
+    border-radius: 5px;
+    border-color: $border;
     padding: 10px;
     font-size: 14px;
     resize: none;
@@ -38,10 +38,20 @@
     &:focus {
       outline: none;
     }
+  }
 
-    &.error {
+  .error {
+    #address-finder {
       border-color: $warning;
       color: $warning;
     }
   }
+
+  .link {
+    margin: 10px;
+  }
+}
+
+.pcafooter {
+  display: none;
 }

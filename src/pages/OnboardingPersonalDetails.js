@@ -5,7 +5,6 @@ import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import moment from 'moment';
-import Helmet from 'react-helmet'
 
 import Layout from 'src/components/Layout/Layout'
 import formUtils from 'src/utils/form';
@@ -59,7 +58,8 @@ class OnboardingPersonalDetailsContainer extends Component {
       isAddressValid: true,
       isManualAddress: false,
       isDatepickerOpen: false,
-      showPreviousNames: false
+      showPreviousNames: false,
+      isTextAreaHidden: true
     };
 
     this.config = [];
@@ -67,33 +67,42 @@ class OnboardingPersonalDetailsContainer extends Component {
 
   /* istanbul ignore next */
   componentDidMount() {
-    window.addressNow.listen('load', (control) => {
-      control.listen('populate', (address) => {
-        this.setState({
-          street: address.Street,
-          city: address.City,
-          unitNumber: address.BuildingNumber,
-          postcode: address.PostalCode,
-          isAddressValid: true
+    const script = document.createElement('script');
+
+    script.onload = () => {
+      window.addressNow.listen('load', (control) =>  {
+        control.listen('populate', (address) => {
+          
+          this.setState((prevState) => ({
+            ...this.state,
+            values: {
+              ...prevState.values,
+              street: address.Street,
+              city: address.City,
+              unitNumber: address.BuildingNumber,
+              postcode: address.PostalCode,
+            },
+            isAddressValid: true,
+            isTextAreaHidden: false
+          }));
+
         });
       });
-    });
+    }
+
+    script.src = addressNow
+    script.async = true;
+    document.body.appendChild(script);
   }
   
-  resetAddress = /* istanbul ignore next */ () => {
+  toggleManualAddress = /* istanbul ignore next */ () => {
     document.getElementById('addressArea').value = '';
 
     this.setState((prevState) => ({
-      values: {
-        ...prevState.values,
-        street: '',
-        city: '',
-        unitNumber: '',
-        postcode: '',
-      },
-      isManualAddress: !this.state.isManualAddress
-    }));
-  }
+      isManualAddress: !this.state.isManualAddress,
+      isTextAreaHidden: true
+    }))
+  };
 
   initFormValidation = /* istanbul ignore next */ () => {
     const requestUrl = 'https://staging-backend-236514.appspot.com/api/v1/users/95';
@@ -208,7 +217,8 @@ class OnboardingPersonalDetailsContainer extends Component {
       isDatepickerOpen,
       showPreviousNames,
       errors, 
-      showErrorMessage
+      showErrorMessage,
+      isTextAreaHidden
     } = this.state;
   
     const setCountries = countryData.map((country, index) => {
@@ -307,11 +317,14 @@ class OnboardingPersonalDetailsContainer extends Component {
       {
         stateKey: 'isAddressValid',
         component: AddressFinder,
-        resetAddress: this.resetAddress,
+        toggleManualAddress: this.toggleManualAddress,
         isManualAddress: isManualAddress,
         isAddressValid: isAddressValid,
         buttonLabel: t('onBoarding.personalDetails.form.manualAddressButtonLabel'),
-        addressFinderLabel: t('onBoarding.personalDetails.form.addressFinderLabel')
+        addressFinderLabel: t('onBoarding.personalDetails.form.addressFinderLabel'),
+        isHidden: isTextAreaHidden,
+        editIconAltText: t('onBoarding.personalDetails.form.editIconAltText'),
+        fieldErrorText: t('onBoarding.personalDetails.form.fieldErrorText'),
       },
       {
         stateKey: 'unitNumber',
@@ -347,10 +360,10 @@ class OnboardingPersonalDetailsContainer extends Component {
       },
       {
         component: Button,
-        onClick: this.resetAddress,
+        onClick: this.toggleManualAddress,
         label: t('onBoarding.personalDetails.form.addressFinderButtonLabel'),
         hidden: !isManualAddress,
-        classes: 'link',
+        classes: 'link small',
       },
       {
         stateKey: 'phone',
@@ -363,13 +376,6 @@ class OnboardingPersonalDetailsContainer extends Component {
 
     return (
       <>
-      <Helmet
-        script={[
-          {
-            'src': addressNow , 'type': 'text/javascript', 'innerHTML': 'window.addressNow'
-          }
-        ]}
-      />
       <Layout>
         <div className="onboarding-details" data-test="container-onboarding-details" role="account">
           <h1>{t('onBoarding.personalDetails.heading')}</h1>
