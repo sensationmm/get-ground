@@ -14,7 +14,7 @@ import './add-passport.scss'
  * Add Passport img
  * @author Ravin Patel
  * @param {function} t - i18next function for translating
- * @param {Object} videoConstraints -
+ * @param {Object} videoConstraints - config for webcam
  * @return {ReactComponent} AddPassport
  */
 export class AddPassport extends Component {
