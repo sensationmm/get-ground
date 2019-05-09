@@ -182,7 +182,7 @@ class ComplianceCheck extends Component {
     const showQ3 = showQ2 && large_enterprise_done && large_enterprise.length > 0;
     const showQ4 = showQ3 && investment_confirmation;
     const showQ5 = showQ4 && self_certification === 'restricted';
-    const showDone = showQ4 && (!showQ5 || restricted_quiz.length > 0) && !!self_certification && certificationComplete;
+    const showDone = showQ4 && (!showQ5 || restricted_quiz.length > 0) && Boolean(self_certification) && certificationComplete;
 
     if(showQ5) {
       numQuestions = 5;
