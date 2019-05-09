@@ -20,36 +20,49 @@ body {
 
 #___gatsby {
   width: 100%;
-  min-height: 100%;
+  height: 100%;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-#___gatsby > div > div {
-  width: 100%;
+#___gatsby > div {
+  position: relative;
+  display: block;
   height: 100%;
-  background: $background-main-start;
-  @include gradient-vertical-image($background-main-start, $background-main-end, '../../assets/images/background.png');
-  background-attachment: fixed;
+  
+  > div {
+    width: 100%;
+    height: 100%;
+    background: $background-main-start;
+    @include gradient-vertical-image($background-main-start, $background-main-end, '../../assets/images/background.png');
+    background-attachment: fixed;
 
-  &.account {
-    @include gradient-vertical-image($background-account-start, $background-account-end, '../../assets/images/background.png');
+    &.account {
+      @include gradient-vertical-image($background-account-start, $background-account-end, '../../assets/images/background.png');
+    }
   }
 }
 
 .app {
   padding: $padding-vertical (($padding-horizontal-unit * 2) + 0px);
   height: calc(100% - #{$header-height + ($padding-vertical-unit * 4) + 0px});
-  margin-top: calc((#{$header-height + ($padding-vertical-unit * 2) + 0px}));
-
-  &:not(.fullscreen) {
-    background: $white;
-  }
+  padding-top: calc((#{$header-height + ($padding-vertical-unit * 2) + 0px + $padding-vertical}));
+  background: $white;
 
   .main {
     position: relative;
     display: block;
     height: 100%;
+  }
+}
+
+div.fullscreen {
+  position: relative;
+  display: block;
+  height: 100%;
+
+  .app {
+    background: none;
   }
 }
 

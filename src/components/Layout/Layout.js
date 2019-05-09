@@ -42,14 +42,14 @@ export class Layout extends Component {
   render() {
     const { children, headerActions, isLoading } = this.props;
     return (
-      <div className={classNames(`${children.props && children.props.role}`)}>
+      <div className={classNames('wrapper', `${children.props && children.props.role}`)}>
         <SEO title="GetGround" keywords={[`gatsby`, `application`, `react`]} />
 
         {isLoading && <Loader />}
 
-        <Header classNames={`${children.props && children.props.role}`}>{headerActions}</Header>
+        <Header>{headerActions}</Header>
 
-        <div className={classNames('app', children.props && children.props.role)}>
+        <div className="app">
           <main className="main">{children}</main>
         </div>
         <div id="modal-root"></div>
