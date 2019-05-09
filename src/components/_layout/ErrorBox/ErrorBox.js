@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './error-box.css';
+import './error-box.scss';
 
 /**
 * ErrorBox

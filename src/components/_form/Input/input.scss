@@ -56,3 +56,12 @@
     height: 120px;
   }
 }
+
+.fullscreen {
+  .text-input {
+    &-label, &-required, input.error {
+      color: $white;
+      border-color: $white;
+    }
+  }
+}

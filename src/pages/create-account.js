@@ -4,17 +4,17 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { withTranslation } from 'react-i18next';
 
-import Layout from '../components/Layout/Layout'
-import formUtils from '../utils/form';
+import Layout from 'src/components/Layout/Layout'
+import formUtils from 'src/utils/form';
 
-import IntroBox from '../components/_layout/IntroBox/IntroBox';
-import ErrorBox from '../components/_layout/ErrorBox/ErrorBox';
-import Form from '../components/_layout/Form/Form';
-import InputText from '../components/_form/InputText/InputText';
-import InputPassword from '../components/_form/InputPassword/InputPassword';
-import Checkbox from '../components/_form/Checkbox/Checkbox';
-import Button from '../components/_buttons/Button/Button';
-import StrengthMeter from '../components/StrengthMeter/StrengthMeter';
+import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
+import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
+import Form from 'src/components/_layout/Form/Form';
+import InputText from 'src/components/_form/InputText/InputText';
+import InputPassword from 'src/components/_form/InputPassword/InputPassword';
+import Checkbox from 'src/components/_form/Checkbox/Checkbox';
+import Button from 'src/components/_buttons/Button/Button';
+import StrengthMeter from 'src/components/StrengthMeter/StrengthMeter';
 
 import { showLoader, hideLoader } from '../state/actions/loader';
 
