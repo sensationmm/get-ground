@@ -121,6 +121,7 @@
     "correctErrors": "Please correct all errors to proceed"
   },
   "login": {
+    "title": "Sign in",
     "ctaPrimary": "Sign in",
     "ctaSecondary": "Forgot your password",
     "form": {
@@ -251,7 +252,7 @@
     }
   },
   "validation": {
-    "validateEmail": "Invalid email address",
+    "validateEmail": "Invalid email",
     "validateRequired": "Required",
     "validateMatching": "No match",
     "validatePhone": "Invalid phone",

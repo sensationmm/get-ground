@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { navigate } from '@reach/router';
+import { Link } from 'gatsby';
 
 import Layout from 'src/components/Layout/Layout'
 import Button from 'src/components/_buttons/Button/Button';
@@ -16,6 +17,8 @@ import InputPassword from 'src/components/_form/InputPassword/InputPassword';
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 import authService from 'src/services/Auth';
 const AuthService = new authService();
+
+import 'src/styles/pages/login.scss';
 
 /**
  * Login
@@ -41,24 +44,26 @@ class Login extends Component {
     const { showLoader, hideLoader, t } = this.props;
     const self = this;
 
-    showLoader();
+    if(formUtils.validateForm(this)) {
+      showLoader();
 
-    return AuthService.login(email, password)
-    .then((res) => {
-      hideLoader();
-      if(res.status === 200) {
-        navigate('/onboarding-intro');
-      } else {
-        self.setState({
-          ...self.state,
-          errors: {
-            ...self.state.errors,
-            form: t('login.form.error')
-          },
-          showErrorMessage: true
-        });
-      }
-    });
+      return AuthService.login(email, password)
+      .then((res) => {
+        hideLoader();
+        if(res.status === 200) {
+          navigate('/onboarding-intro');
+        } else {
+          self.setState({
+            ...self.state,
+            errors: {
+              ...self.state.errors,
+              form: t('login.form.error')
+            },
+            showErrorMessage: true
+          });
+        }
+      });
+    }
   }
 
   render() {
@@ -84,24 +89,30 @@ class Login extends Component {
 
     return (
       <Layout>
-        <div data-test="container-login" role="account fullscreen">
-          <h1>Login</h1>
+        <div className="account-login" data-test="container-login" role="account fullscreen">
+          <h1>{ t('login.title') }</h1>
 
           {errors.form && <ErrorBox>{errors.form}</ErrorBox>}
 
-          <Form>
-          { formUtils.renderForm(this) }
+            <Form>
+              { formUtils.renderForm(this) }
+            </Form>
 
-            <Button
-              data-test="login-button"
-              classes="secondary"
-              label={ t('login.ctaPrimary') }
-              fullWidth
-              onClick={this.onLogin}
-            />
+            <Form className="account-login-actions">
+              <Button
+                data-test="login-button"
+                classes="secondary"
+                label={ t('login.ctaPrimary') }
+                fullWidth
+                onClick={this.onLogin}
+              />
 
-            <Button classes="secondary" label={ t('login.ctaSecondary') } small />
-          </Form>
+              <center>
+                <Link to="/forgot-password">
+                  <Button classes="secondary faded" label={ t('login.ctaSecondary') } small />
+                </Link>
+              </center>
+            </Form>
         </div>
       </Layout>
     );
