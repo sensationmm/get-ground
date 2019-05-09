@@ -1,0 +1,62 @@
+@import '../../../styles/modules/colors';
+@import '../../../styles/modules/variables';
+@import '../Input/input.scss';
+
+.input-phone {
+  @extend .text-input;
+
+  &-label {
+    @extend .text-input-label;
+  }
+
+  &-required {
+    @extend .text-input-required;
+
+    + .input-phone-box {
+      border-color: $warning;
+    }
+  }
+
+  &-box {
+    @extend .text-input-box;
+    display: flex;
+
+    input[type=text] {
+      outline: 0;
+      box-shadow: 0 0 0 0 $primary;
+      padding: 0;
+      margin: 0;
+      border: 0;
+    }
+  }
+
+  &-country {
+    padding-right: $padding-horizontal;
+    border-right: 1px solid $border;
+    margin-right: $padding-horizontal;
+
+    select {
+      position: relative;
+      z-index: 2;
+      appearance: none;
+      padding: 0 ($padding-horizontal-unit * 3) + 0px 0 0;
+      margin: 0;
+      background: none;
+      border: 0;
+    }
+
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      right: $padding-horizontal;
+      top: 0;
+      width: ($padding-horizontal-unit * 2) + 0px;
+      height: 100%;
+      background: $primary;
+      mask: url('../../../assets/images/chevron-down.svg') center center no-repeat;
+      background-size: contain;
+      z-index: 1;
+    }
+  }
+}

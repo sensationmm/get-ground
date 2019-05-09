@@ -67,3 +67,37 @@ describe('validMatching()', () => {
     expect(isValid).toBe(false);
   });
 });
+
+describe('validateLettersOnly()', () => {
+  test('returns true if string contains only letters', () => {
+    const string = 'something';
+    const isValid = validation.validateLettersOnly(string);
+
+    expect(isValid).toBe(true);
+  });
+
+  test('returns false if string contains numbers', () => {
+    const string = 'something123';
+    const isValid = validation.validateLettersOnly(string);
+    expect(isValid).toBe(false);
+  });
+});
+
+describe('validatePhone()', () => {
+  test('returns true for numeric string with phone number chars', () => {
+    const string = '(+44)123456';
+    const isValid = validation.validatePhone(string);
+    expect(isValid).toBe(true);
+  });
+  test('returns false for non-numeric string', () => {
+    const string = '(+44)123456asd';
+    const isValid = validation.validatePhone(string);
+    expect(isValid).toBe(false);
+  });
+
+  test('returns false if value is an empty string', () => {
+    const string = '';
+    const isValid = validation.validatePhone(string);
+    expect(isValid).toBe(false);
+  });
+});

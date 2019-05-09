@@ -1,0 +1,42 @@
+@import '../../styles/modules/colors';
+@import '../../styles/modules/variables';
+@import '../_form/Input/input.scss';
+
+.stripe-wrapper {
+
+  &.error {
+    .StripeElement {
+      border-color: $warning;
+    }
+  }
+
+  .StripeElement {
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid $border;
+    border-radius: 5px;
+    padding: $padding-horizontal;
+    background: none;
+    font-size: 14px;
+    color: $text;
+    outline: 0;
+    box-shadow: 0 0 0 0 $primary;
+
+    &--invalid {
+      border-color: $warning;
+    }
+  }
+
+  label {
+    @extend .text-input-label;
+  }
+
+  .stripe-required {
+    @extend .text-input-required;
+  }
+
+  .primary {
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+}

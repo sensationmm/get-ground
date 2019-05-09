@@ -10,14 +10,12 @@ body {
   font-weight: 400;
   color: $text;
   line-height: 1.3;
-  background: $background-main-start;
-  @include gradient-vertical-image($background-main-start, $background-main-end, '../../assets/images/background.png');
-  background-attachment: fixed;
+  
   font-size: 18px;
 }
 
 #___gatsby, div[role=group], .main {
-  height: 100%;
+  min-height: 100%;
 }
 
 #___gatsby {
@@ -27,12 +25,44 @@ body {
   margin: 0 auto;
 }
 
+#___gatsby > div {
+  position: relative;
+  display: block;
+  height: 100%;
+  
+  > div {
+    width: 100%;
+    height: 100%;
+    background: $background-main-start;
+    @include gradient-vertical-image($background-main-start, $background-main-end, '../../assets/images/background.png');
+    background-attachment: fixed;
+
+    &.account {
+      @include gradient-vertical-image($background-account-start, $background-account-end, '../../assets/images/background.png');
+    }
+  }
+}
+
 .app {
   padding: $padding-vertical (($padding-horizontal-unit * 2) + 0px);
-  min-height: calc(100% - #{$header-height + ($padding-vertical-unit * 4) + 0px});
+  height: calc(100% - #{$header-height + ($padding-vertical-unit * 4) + 0px});
+  padding-top: calc((#{$header-height + ($padding-vertical-unit * 2) + 0px + $padding-vertical}));
+  background: $white;
 
-  &:not(.fullscreen) {
-    background: $white;
+  .main {
+    position: relative;
+    display: block;
+    height: 100%;
+  }
+}
+
+div.fullscreen {
+  position: relative;
+  display: block;
+  height: 100%;
+
+  .app {
+    background: none;
   }
 }
 
@@ -42,6 +72,23 @@ h1, h2 {
   font-size: 24px;
 }
 
+h3 {
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 18px;
+}
+
 p, select {
   font-size: 14px;
+}
+
+.fs-large {
+  font-size: 18px;
+}
+
+.fullscreen {
+  h1 {
+    color: $white;
+    font-size: 48px;
+  }
 }
