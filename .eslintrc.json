@@ -32,6 +32,8 @@
     "App": true,
     "APP_GLOBALS": true,
     "APP_VERSION": true,
+    "Cypress": true,
+    "cy": true,
     "AuthenticationContext": true,
     "ScrollMagic": false,
     "EventDispatcher": false,

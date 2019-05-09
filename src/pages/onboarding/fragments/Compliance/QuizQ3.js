@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import Option from 'src/components/Option/Option';
 import Button from 'src/components/_buttons/Button/Button';
-import { Link } from 'gatsby'
+import { Link } from 'gatsby';
 import Form from 'src/components/_layout/Form/Form';
 
 const QuizQ3 = props => {
-  const { t, numQuestions, onClick } = props;
+  const { numQuestions, onClick } = props;
+  const [t] = useTranslation();
 
   return (
     <div data-test="component-quizq3">
@@ -33,7 +35,6 @@ const QuizQ3 = props => {
 };
 
 QuizQ3.propTypes = {
-  t: PropTypes.func,
   numQuestions: PropTypes.number,
   onClick: PropTypes.func
 };

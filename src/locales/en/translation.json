@@ -99,6 +99,10 @@
         "buttonNext": "Next"
       }
     },
+    "modalHeading": "Investors Statement",
+    "modalDownloadButtonText": "Download",
+    "modalCloseAltText": "Close Icon",
+    "modalCheckboxLabel": "I’ve read the Investor’s statement letter and confirm that I understand the risk associated with investing.",
     "buttonDone": "Finished",
     "notSuitable": {
       "title": "We are sorry!",
@@ -130,6 +134,9 @@
       "note": {
         "email": "This will be your username",
         "password": "Your password must be at least 6 characters long"
+      },
+      "errors": {
+        "duplicateEmail": "Email address already exists"
       }
     }
   },
@@ -140,6 +147,18 @@
   },
   "form": {
     "correctErrors": "Please correct all errors to proceed"
+  },
+  "login": {
+    "title": "Sign in",
+    "ctaPrimary": "Sign in",
+    "ctaSecondary": "Forgot your password",
+    "form": {
+      "label": {
+        "email": "Email Address",
+        "password": "Password"
+      },
+      "error": "Invalid login - please try again"
+    }
   },
   "onBoarding": {
     "intro": {
@@ -260,10 +279,24 @@
       "buttonText": "View your dashboard",
       "contactUsText": "If this is taking longer than expected please contact us.",
       "contactUsLinkText": "Contact us"
+    },
+    "idCheck": {
+      "title": "ID Check",
+      "passport": {
+        "title": "Add passport picture",
+        "content": "In order to prove your identity we need you to take a picture of your passport, proof of address and then finally to take a selfie.",
+        "link": "If you already have it saved Upload",
+        "image": {
+          "capture": "Capture photo",
+          "happy": "Yes, I'm happy",
+          "retake": "Retake"
+        },
+        "retakeImageContent": "Are you happy with this picture? Please make sure it is well-lit and that you can read the information clearly."
+      }
     }
   },
   "validation": {
-    "validateEmail": "Invalid email address",
+    "validateEmail": "Invalid email",
     "validateRequired": "Required",
     "validateMatching": "No match",
     "validatePhone": "Invalid phone",

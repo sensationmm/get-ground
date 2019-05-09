@@ -12,7 +12,7 @@ describe('<Input />', () => {
 
   describe('passing validation', () => {
     beforeEach(() => {
-      wrapper = setup(Input, { 
+      wrapper = setup(Input, {
         id: 'input-name',
         label: 'Name',
         stateKey: 'name',
@@ -24,7 +24,7 @@ describe('<Input />', () => {
       component = findByTestAttr(wrapper, 'component-input');
       input = findByTestAttr(wrapper, 'component-input-field');
     });
-    
+
     test('renders without error', () => {
       expect(component.length).toBe(1);
     });
@@ -48,8 +48,8 @@ describe('<Input />', () => {
 
     // test('error state is cleared on click', () => {
     //   const wrapperError = setup(
-    //     Input, 
-    //     { 
+    //     Input,
+    //     {
     //       id: 'input-name',
     //       label: 'Name',
     //       onChange: changeMock
@@ -82,7 +82,7 @@ describe('<Input />', () => {
     });
 
     test('does not render note if none passed', () => {
-      const noNote = setup(Input, { 
+      const noNote = setup(Input, {
         id: 'input-name',
         onChange: changeMock,
       });
@@ -93,7 +93,7 @@ describe('<Input />', () => {
 
   describe('failing validation', () => {
     beforeEach(() => {
-      wrapper = setup(Input, { 
+      wrapper = setup(Input, {
         id: 'input-name',
         label: 'Name',
         onChange: changeMock,
@@ -113,7 +113,7 @@ describe('<Input />', () => {
 
   // describe('without validation', () => {
   //   beforeEach(() => {
-  //     wrapper = setup(Input, { 
+  //     wrapper = setup(Input, {
   //       id: 'input-name',
   //       label: 'Name',
   //       onChange: changeMock,
@@ -138,8 +138,8 @@ describe('<Input />', () => {
   // describe('onValidate()', () => {
   //   test('passes validation (without param)', () => {
   //     wrapper = setup(
-  //       Input, 
-  //       { 
+  //       Input,
+  //       {
   //         id: 'input-name',
   //         label: 'Name',
   //         onChange: changeMock,
@@ -153,8 +153,8 @@ describe('<Input />', () => {
 
   //   test('passes validation (with param)', () => {
   //     wrapper = setup(
-  //       Input, 
-  //       { 
+  //       Input,
+  //       {
   //         id: 'input-name',
   //         label: 'Name',
   //         onChange: changeMock,
@@ -169,8 +169,8 @@ describe('<Input />', () => {
 
   //   test('fails validation', () => {
   //     wrapper = setup(
-  //       Input, 
-  //       { 
+  //       Input,
+  //       {
   //         id: 'input-name',
   //         label: 'Name',
   //         onChange: changeMock,
@@ -184,8 +184,8 @@ describe('<Input />', () => {
 
   //   test('no validation', () => {
   //     wrapper = setup(
-  //       Input, 
-  //       { 
+  //       Input,
+  //       {
   //         id: 'input-name',
   //         label: 'Name',
   //         onChange: changeMock,

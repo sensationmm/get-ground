@@ -15,21 +15,11 @@
   align-content: center;
   padding: $padding-vertical (($padding-horizontal-unit * 2) + 0px);
 
-  &:not(.fullscreen) {
-    @include gradient-vertical-image(
-      $background-main-start,
-      $background-main-end,
-      '../../assets/images/background.png'
-    );
-  }
-
-  &:not(.fullscreen).account {
-    @include gradient-vertical-image(
-      $background-account-start,
-      $background-account-end,
-      '../../assets/images/background.png'
-    );
-  }
+  @include gradient-vertical-image(
+    $background-main-start,
+    $background-main-end,
+    '../../assets/images/background.png'
+  );
 
   &-logo {
     width: 80px;
@@ -48,4 +38,17 @@
       background-size: contain;
     }
   }
+}
+
+
+.account .header {
+  @include gradient-vertical-image(
+    $background-account-start,
+    $background-account-end,
+    '../../assets/images/background.png'
+  );
+}
+
+.fullscreen .header {
+  background: none;
 }

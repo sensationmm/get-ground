@@ -17,8 +17,8 @@ import Stripe from 'src/components/Stripe/Stripe';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
-import PaymentServices from 'src/services/Payment';
-const { makePayment } = PaymentServices;
+import paymentService from 'src/services/Payment';
+const PaymentService = new paymentService();
 
 /**
  * Payment
@@ -62,19 +62,19 @@ class Payment extends Component {
     /* istanbul ignore else */
     if (formUtils.validateForm(this) && isStripeValid) {
       showLoader();
-      return makePayment(stripeToken, numberOfCompanies).then(() => {
+      return PaymentService.makePayment(stripeToken, numberOfCompanies).then((response) => {
         hideLoader();
-        navigate('/confirmation');
-      }).catch((e) => {
-        hideLoader();
-
-        this.setState({
-          ...this.state,
-          errors: {
-            form: t('onBoarding.payment.form.error'),
-          },
-          showErrorMessage: true
-        });
+        if(response.status === 201) {
+          navigate('/confirmation');
+        } else if(response.status === 400) {
+          this.setState({
+            ...this.state,
+            errors: {
+              form: t('onBoarding.payment.form.error'),
+            },
+            showErrorMessage: true
+          });
+        }
       });
     }
   }
@@ -146,7 +146,7 @@ class Payment extends Component {
     ];
 
     return (
-      <Layout>
+      <Layout secure>
         <div data-test="container-payment" className="payment" role="account">
           <h1>{ t('onBoarding.payment.title') }</h1>
 

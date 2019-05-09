@@ -1,12 +1,12 @@
 import { setupWithStore, findByTestAttr } from 'src/test-utils/test-utils';
 
-import ModalContent from './ModalContent';
+import { RawComponent as ModalContent } from './ModalContent';
 
 describe('<ModalContent />', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = setupWithStore(ModalContent, {});
+    wrapper = setupWithStore(ModalContent);
   });
   
   test('renders without error', () => {
