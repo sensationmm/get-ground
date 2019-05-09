@@ -24,6 +24,7 @@ module.exports = {
     "!src/index.js",
     "!src/containers/StyleGuide/*.{js,jsx}",
     "!src/utils/mockComponent.{js,jsx}",
-    "!**/**gatsby**.{js,jsx}"
+    "!**/**gatsby**.{js,jsx}",
+    "!src/services/BaseService.{js,jsx}",
   ]
 }

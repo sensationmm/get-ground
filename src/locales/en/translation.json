@@ -113,6 +113,9 @@
       "note": {
         "email": "This will be your username",
         "password": "Your password must be at least 6 characters long"
+      },
+      "errors": {
+        "duplicateEmail": "Email address already exists"
       }
     }
   },
@@ -123,6 +126,18 @@
   },
   "form": {
     "correctErrors": "Please correct all errors to proceed"
+  },
+  "login": {
+    "title": "Sign in",
+    "ctaPrimary": "Sign in",
+    "ctaSecondary": "Forgot your password",
+    "form": {
+      "label": {
+        "email": "Email Address",
+        "password": "Password"
+      },
+      "error": "Invalid login - please try again"
+    }
   },
   "onBoarding": {
     "intro": {
@@ -244,7 +259,7 @@
     }
   },
   "validation": {
-    "validateEmail": "Invalid email address",
+    "validateEmail": "Invalid email",
     "validateRequired": "Required",
     "validateMatching": "No match",
     "validatePhone": "Invalid phone",

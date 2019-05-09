@@ -13,3 +13,11 @@
     margin-bottom: 0;
   }
 }
+
+.fullscreen {
+  .error-box {
+    color: $white;
+    border-color: $white;
+    background: $white-opaque;
+  }
+}

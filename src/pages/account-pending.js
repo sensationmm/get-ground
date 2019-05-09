@@ -3,19 +3,21 @@ import React, { useEffect } from 'react'
 import { navigate } from 'gatsby'
 import { useTranslation } from 'react-i18next'
 
-import { fetchVerification } from '../services/Verification'
 import IntroBox from '../components/_layout/IntroBox/IntroBox';
 import Layout from '../components/Layout/Layout'
 import ContactUs from '../components/ContactUs/ContactUs'
 import ImageFull from '../components/ImageFull/ImageFull'
 import EmailSent from '../assets/images/email-sent.svg'
 
+import authService from 'src/services/Auth';
+const AuthService = new authService();
+
 const VerifyEmail = () => {
   const [t] = useTranslation();
 
   useEffect(() => {
-    fetchVerification().then((status => {
-      if(status === 200) {
+    AuthService.verifyEmail().then((response => {
+      if(response.status === 200) {
         navigate('/email-verified')
       }
     }))

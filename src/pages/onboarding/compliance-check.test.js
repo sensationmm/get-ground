@@ -1,4 +1,4 @@
-import { setup, findByTestAttr } from 'src/test-utils/test-utils';
+import { setup, setupWithStore, findByTestAttr } from 'src/test-utils/test-utils';
 import { scroller } from 'react-scroll';
 
 import { RawComponent as ComplianceCheck } from './compliance-check';
@@ -82,10 +82,10 @@ describe('<ComplianceCheck />', () => {
     });
 
     test('pass quiz', () => {
-      wrapper = setup(ComplianceCheck, defaultProps, { values: {
+      wrapper = setupWithStore(ComplianceCheck, defaultProps, { values: {
         ...quizResultMock
       }});
-
+      
       return wrapper.instance().checkResponses().then(() => {
         expect(showLoaderMock).toHaveBeenCalledTimes(1);
         expect(hideLoaderMock).toHaveBeenCalledTimes(1);
@@ -168,29 +168,20 @@ describe('<ComplianceCheck />', () => {
       expect(wrapper.instance().getModalContent).toHaveBeenCalledWith('selfcertified');
     });
 
-    test('executes and calls `openModal with a value of highnetworth`', () => {
+    test('executes and calls `showModal with a value of highnetworth`', () => {
       wrapper = setup(ComplianceCheck, defaultProps, { values: quizResultMock, highNetWorthMarkdown: 'Dummy' });
-      wrapper.instance().openModal = jest.fn();
       wrapper.instance().initModal('highnetworth');
 
-      expect(wrapper.instance().openModal).toHaveBeenCalled();
+      expect(showModalMock).toHaveBeenCalledTimes(1);
       expect(wrapper.state().modalMarkdown).toEqual('Dummy');
     });
 
-    test('executes and calls `openModal with a value of selfcertified`', () => {
+    test('executes and calls `showModal with a value of selfcertified`', () => {
       wrapper = setup(ComplianceCheck, defaultProps, { values: quizResultMock, selfCertifiedMarkdown: 'Dummy' });
-      wrapper.instance().openModal = jest.fn();
       wrapper.instance().initModal('selfcertified');
 
-      expect(wrapper.instance().openModal).toHaveBeenCalled();
-      expect(wrapper.state().modalMarkdown).toEqual('Dummy');
-    });
-  });
-
-  describe('openModal()', () => {
-    test('executes and calls `showModal`', () => {
-      wrapper.instance().openModal();
       expect(showModalMock).toHaveBeenCalledTimes(1);
+      expect(wrapper.state().modalMarkdown).toEqual('Dummy');
     });
   });
 

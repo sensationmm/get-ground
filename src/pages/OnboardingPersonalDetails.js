@@ -370,7 +370,7 @@ class OnboardingPersonalDetailsContainer extends Component {
           }
         ]}
       />
-      <Layout>
+      <Layout secure>
         <div className="onboarding-details" data-test="container-onboarding-details" role="account">
           <h1>{t('onBoarding.personalDetails.heading')}</h1>
 

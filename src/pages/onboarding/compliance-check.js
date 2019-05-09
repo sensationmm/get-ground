@@ -24,11 +24,10 @@ import { showModal, hideModal } from 'src/state/actions/modal';
 import FormUtils from 'src/utils/form';
 import { inArray } from 'src/utils/functions';
 
-import Compliance from 'src/services/Compliance';
-import ModalServices from 'src/services/Modal';
-
-const { saveComplianceQuiz } = Compliance;
-const { fetchModalContent } = ModalServices;
+import complianceService from 'src/services/Compliance';
+import modalService from 'src/services/Modal';
+const ComplianceService = new complianceService();
+const ModalService = new modalService();
 
 import investorStatementImage from 'src/assets/images/investor-statement-image.svg';
 import 'src/styles/pages/compliance-check.scss';
@@ -93,7 +92,7 @@ class ComplianceCheck extends Component {
         }, animateScroll.scrollToTop());
     } else {
       showLoader();
-      return saveComplianceQuiz({
+      return ComplianceService.saveComplianceQuiz({
         tax_bracket: values.tax_bracket,
         large_enterprise: values.large_enterprise,
         self_certification: values.self_certification
@@ -110,6 +109,7 @@ class ComplianceCheck extends Component {
    */
   initModal = val => {
     const { highNetWorthMarkdown, selfCertifiedMarkdown } = this.state;
+    const { showModal } = this.props;
 
     
     if ((val === 'highnetworth' && highNetWorthMarkdown =='') || 
@@ -117,7 +117,7 @@ class ComplianceCheck extends Component {
       this.getModalContent(val)
     } else {
       this.setState({ modalMarkdown: val === 'highnetworth' ? highNetWorthMarkdown : selfCertifiedMarkdown });
-      this.openModal();
+      showModal();
     }
 
     this.setState({ modalCheckBoxChecked: false });
@@ -128,11 +128,11 @@ class ComplianceCheck extends Component {
    * @return {void}
    */
   getModalContent = /* istanbul ignore next */ val => {
-    const { showLoader, hideLoader } = this.props;
+    const { showLoader, hideLoader, showModal } = this.props;
 
     showLoader();
-    return fetchModalContent().then(response => {
-      const markdownIndex = val === 'highnetworth' ? response[0] : response[18];
+    ModalService.fetchModalContent().then(response => {
+      const markdownIndex = val === 'highnetworth' ? response.data[0] : response.data[18];
       const stateKey = val === 'highnetworth' ? 'highNetWorthMarkdown' : 'selfCertifiedMarkdown';
 
       this.setState({ 
@@ -141,16 +141,13 @@ class ComplianceCheck extends Component {
       });
       
       hideLoader();
-      this.openModal();
-    }).catch(() => {
-      hideLoader();
+      showModal();
     });
   }
 
-  openModal = () => this.props.showModal();
-
   closeModal = () => {
     const { modalCheckBoxChecked } = this.state;
+    const { hideModal } = this.props;
 
     this.setState({ certificationComplete: false });
 
@@ -158,7 +155,7 @@ class ComplianceCheck extends Component {
       this.setState({ certificationComplete: true });
       this.goToStep('q5');
     }
-    this.props.hideModal();
+    hideModal();
   }
 
   render() {
@@ -194,7 +191,7 @@ class ComplianceCheck extends Component {
     const headerActions = <Link to="/onboarding/process-tracker"><ButtonHeader label="Exit" /></Link>;
 
     return (
-      <Layout headerActions={headerActions}>
+      <Layout headerActions={headerActions} secure>
         <div data-test="container-compliance-check" className="compliance-check" role="account">
           <h1>{ t('compliance.header') }</h1>
           <p>{ t('compliance.text') }</p>

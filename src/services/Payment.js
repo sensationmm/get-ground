@@ -1,26 +1,25 @@
-import { API } from 'src/config/endpoints';
+import BaseService from './BaseService';
+import store from 'src/state/store';
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOjk1LCJSb2xlIjoiIiwiZXhwIjoxNTU3MzE4MjU0LCJuYmYiOjE1NTczMTQ2NTV9.w-ItUrsFrrJ2OxBVQEhfTeTg06WPIBlVbbSeCI2RvRM';
+/**
+ * PaymentService
+ * @param {string} stripeToken - Stripe service auth token
+ * @param {integer} numberOfCompanies - number of companies payment taken for
+ * @return {Object} PaymentService
+ */
+class PaymentService extends BaseService {
+  makePayment = (stripeToken, numberOfCompanies) => {
+    const config = {
+      url: `users/${store.getState().user.id}/payment`,
+      method: 'post',
+      data: {
+        'stripe_token': stripeToken,
+        'quantity': numberOfCompanies
+      }
+    };
 
-export const makePayment = async (stripeToken, numberOfCompanies) => (
-  await fetch(`${API}/users/95/payment`, {
-    method: 'post',
-    headers: {
-      'Authorization': `Bearer ${token}`
-    },
-    body: JSON.stringify({ 
-      'stripe_token': stripeToken,
-      'quantity': numberOfCompanies
-    }),
-  })
-  .then(response => response.json())
-  .then(data => {
-    return data;
-  })
-);
+    return this.doRequest(config);
+  }
+}
 
-const PaymentServices = {
-  makePayment
-};
-
-export default PaymentServices;
+export default PaymentService;
