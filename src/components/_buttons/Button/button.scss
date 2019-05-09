@@ -60,4 +60,9 @@
     padding: 0;
     background: transparent;
   }
+  
+  &.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
 }

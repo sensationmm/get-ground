@@ -5,22 +5,22 @@ import axios from 'axios';
 import { withTranslation } from 'react-i18next';
 import { CSSTransition } from 'react-transition-group';
 
-import Layout from '../components/Layout/Layout'
-import formUtils from '../utils/form';
+import Layout from 'src/components/Layout/Layout'
+import formUtils from 'src/utils/form';
 
-import IntroBox from '../components/_layout/IntroBox/IntroBox';
-import ErrorBox from '../components/_layout/ErrorBox/ErrorBox';
-import Form from '../components/_layout/Form/Form';
-import InputText from '../components/_form/InputText/InputText';
-import InputPassword from '../components/_form/InputPassword/InputPassword';
-import Checkbox from '../components/_form/Checkbox/Checkbox';
-import Button from '../components/_buttons/Button/Button';
-import StrengthMeter from '../components/StrengthMeter/StrengthMeter';
+import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
+import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
+import Form from 'src/components/_layout/Form/Form';
+import InputText from 'src/components/_form/InputText/InputText';
+import InputPassword from 'src/components/_form/InputPassword/InputPassword';
+import Checkbox from 'src/components/_form/Checkbox/Checkbox';
+import Button from 'src/components/_buttons/Button/Button';
+import StrengthMeter from 'src/components/StrengthMeter/StrengthMeter';
 import Modal from '../components/Modal/Modal';
 import ModalContent from '../components/Modal/ModalContent';
 
-import { showLoader, hideLoader } from '../state/actions/loader';
-import { showModal, hideModal } from '../state/actions/modal';
+import { showLoader, hideLoader } from 'src/state/actions/loader';
+import { showModal, hideModal } from 'src/state/actions/modal';
 
 import ModalServices from 'src/services/Modal';
 const { fetchModalContent } = ModalServices;
@@ -112,7 +112,7 @@ class CreateAccount extends Component {
 
   render() {
     const { values, errors, showErrorMessage, termsMarkdown } = this.state;
-    const { t, modal: { isOpen } } = this.props;
+    const { t, modalIsOpen} = this.props;
     // @TODO can this be moved out of render - fails on edit field currently
 
     this.config = [
@@ -206,7 +206,7 @@ class CreateAccount extends Component {
             <Button classes="secondary" label={ t('createAccount.ctaSecondary') } fullWidth />
           </Form>
           <CSSTransition
-            in={isOpen}
+            in={modalIsOpen}
             timeout={600}
             classNames="modal"
             unmountOnExit
@@ -234,14 +234,12 @@ CreateAccount.propTypes = {
   showModal: PropTypes.func,
   hideModal: PropTypes.func,
   t: PropTypes.func.isRequired,
-  modal: PropTypes.object
+  modalIsOpen: PropTypes.bool
 };
 
 const mapStateToProps = state => {
   return {
-    modal: {
-      isOpen: state.modal.isOpen
-    }
+    modalIsOpen: state.modal.isOpen
   }
 };
 
