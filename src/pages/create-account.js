@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { withTranslation } from 'react-i18next';
 import { CSSTransition } from 'react-transition-group';
 
@@ -22,10 +21,13 @@ import ModalContent from 'src/components/Modal/ModalContent';
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 import { showModal, hideModal } from 'src/state/actions/modal';
 
-import ModalServices from 'src/services/Modal';
-const { fetchModalContent } = ModalServices;
+import accountService from 'src/services/Account';
+import modalService from 'src/services/Modal';
+const AccountService = new accountService();
+const ModalService = new modalService();
 
 import termsImage from 'src/assets/images/terms-image.svg';
+import { navigate } from 'gatsby';
 
 /**
  * CreateAccount
@@ -50,69 +52,49 @@ class CreateAccount extends Component {
     this.config = [];
   }
 
-  createAccount = /* istanbul ignore next */ () => {
-    var requestUrl = 'https://staging-backend-236514.appspot.com/api/v1/users';
-
-    const { showLoader, hideLoader } = this.props;
+  createAccount = () => {
+    const { showLoader, hideLoader, t } = this.props;
     const { email, password, optin } = this.state.values;
     const self = this;
 
     if(formUtils.validateForm(this)) {
       showLoader();
 
-      axios({
-        method: 'post',
-        url: requestUrl,
-        headers: {
-          'Authorization': 'avb068cbk2os5ujhodmt',
-          'Content-Type': 'application/json',
-        },
-        data: {
-          'email': email,
-          'password': password,
-          'receives_marketing': optin
-        }
-      }).then(function(response) {
-        if(response.status === 201) {
-          self.props.history.push('/account-pending');
-          hideLoader();
-        }
-      }).catch((e) => {
+      AccountService.createAccount(email, password, optin).then(function(response) {
         hideLoader();
-
-        self.setState({
-          ...this.state,
-          errors: {
-            form: 'Email address already exists'
-          },
-          showErrorMessage: true
-        });
+        if(response.status === 201) {
+          navigate('/account-pending');
+        } else if(response.status === 500) {
+          self.setState({
+            ...self.state,
+            errors: {
+              form: t('createAccount.form.errors.duplicateEmail')
+            },
+            showErrorMessage: true
+          });
+        }
       });
     }
   }
 
   getModalContent = e => {
-    const { showLoader, hideLoader } = this.props;
+    const { showLoader, hideLoader, showModal } = this.props;
+    const self = this;
     e.preventDefault();
 
     showLoader();
-    return fetchModalContent().then(response => {
-      this.setState({ termsMarkdown: response[19].markdown_text });
+
+    ModalService.fetchModalContent('ZwvX0BYNz_yQTRF2xyiF9s6qrZ4=').then(response => {
+      self.setState({ termsMarkdown: response.data.markdown_text });
       
       hideLoader();
-      this.openModal();
-    }).catch(() => {
-      hideLoader();
+      showModal();
     });
   }
 
-  openModal = () => this.props.showModal();
-
-  closeModal = () => this.props.hideModal();
-
   render() {
     const { values, errors, showErrorMessage, termsMarkdown } = this.state;
-    const { t, modalIsOpen} = this.props;
+    const { t, modalIsOpen, showModal, hideModal } = this.props;
     // @TODO can this be moved out of render - fails on edit field currently
 
     this.config = [
@@ -162,7 +144,7 @@ class CreateAccount extends Component {
             if (termsMarkdown === '') {
               this.getModalContent(e)
             } else {
-              this.openModal();
+              showModal();
             }
           }}>
           {t('createAccount.form.label.privacyTermsLink')}</a>
@@ -215,7 +197,7 @@ class CreateAccount extends Component {
               <ModalContent 
                 heading={t('createAccount.termsModalHeading')}
                 content={termsMarkdown}
-                closeModal={this.closeModal} 
+                closeModal={hideModal} 
                 downloadButtonLabel={t('createAccount.termsModalDownloadButtonLabel')}
                 closeIconAltText={t('createAccount.termsModalCloseIconAltText')}
                 modalImage={termsImage}
@@ -237,11 +219,9 @@ CreateAccount.propTypes = {
   modalIsOpen: PropTypes.bool
 };
 
-const mapStateToProps = state => {
-  return {
-    modalIsOpen: state.modal.isOpen
-  }
-};
+const mapStateToProps = state => ({
+  modalIsOpen: state.modal.isOpen
+});
 
 const actions = { 
   showLoader, 

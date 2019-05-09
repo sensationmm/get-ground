@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import { navigate } from '@reach/router';
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 
 import Layout from 'src/components/Layout/Layout'
 import Button from 'src/components/_buttons/Button/Button';
@@ -51,7 +50,7 @@ class Login extends Component {
       .then((res) => {
         hideLoader();
         if(res.status === 200) {
-          navigate('/onboarding-intro');
+          navigate('/onboarding/intro');
         } else {
           self.setState({
             ...self.state,

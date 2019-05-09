@@ -1,4 +1,4 @@
-import { setup, findByTestAttr } from 'src/test-utils/test-utils';
+import { setup, setupWithStore, findByTestAttr } from 'src/test-utils/test-utils';
 import { scroller } from 'react-scroll';
 
 import { RawComponent as ComplianceCheck } from './compliance-check';
@@ -76,10 +76,10 @@ describe('<ComplianceCheck />', () => {
     });
 
     test('pass quiz', () => {
-      wrapper = setup(ComplianceCheck, defaultProps, { values: {
+      wrapper = setupWithStore(ComplianceCheck, defaultProps, { values: {
         ...quizResultMock
       }});
-
+      
       return wrapper.instance().checkResponses().then(() => {
         expect(showLoaderMock).toHaveBeenCalledTimes(1);
         expect(hideLoaderMock).toHaveBeenCalledTimes(1);

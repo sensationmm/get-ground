@@ -20,8 +20,8 @@ import { showLoader, hideLoader } from 'src/state/actions/loader';
 import FormUtils from 'src/utils/form';
 import { inArray } from 'src/utils/functions';
 
-import Compliance from 'src/services/Compliance';
-const { saveComplianceQuiz } = Compliance;
+import complianceService from 'src/services/Compliance';
+const ComplianceService = new complianceService();
 
 import 'src/styles/pages/compliance-check.scss';
 
@@ -80,7 +80,7 @@ class ComplianceCheck extends Component {
         }, animateScroll.scrollToTop());
     } else {
       showLoader();
-      return saveComplianceQuiz({
+      return ComplianceService.saveComplianceQuiz({
         tax_bracket: values.tax_bracket,
         large_enterprise: values.large_enterprise,
         self_certification: values.self_certification

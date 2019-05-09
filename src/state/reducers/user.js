@@ -2,7 +2,9 @@ import {
   USER_LOGIN
 } from 'src/config/constants';
 
-const initialState = null;
+const initialState = {
+  id: null
+};
 
 export const user = (state = initialState, action) => {
   switch (action.type) {

@@ -48,6 +48,19 @@ class AuthService extends BaseService {
       store.dispatch(saveAuth(response.data.token));
     });
   };
+
+  verifyEmail = () => {
+    const config = {
+      url: 'users/verify_email',
+      method: 'post',
+      data: JSON.stringify({'email_verification_code': 'string'})
+    };
+
+    return this.doRequest(config, (response) => {
+      store.dispatch(userLogin(response.data.user));
+      store.dispatch(saveAuth(response.data.token));
+    });
+  };
 }
 
 export default AuthService;
