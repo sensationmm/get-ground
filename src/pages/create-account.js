@@ -40,11 +40,11 @@ class CreateAccount extends Component {
 
     this.state = {
       ...formUtils.initFormState({
-        email: '',
-        password: '',
-        passwordConfirm: '',
+        email: 'kevin.reynolds@getground.co.uk',
+        password: 'asp',
+        passwordConfirm: 'asp',
         optin: false,
-        privacy: false
+        privacy: true
       }),
       termsMarkdown: ''
     };
@@ -97,6 +97,7 @@ class CreateAccount extends Component {
     const { t, modalIsOpen, showModal, hideModal } = this.props;
     // @TODO can this be moved out of render - fails on edit field currently
 
+    /* istanbul ignore next */
     this.config = [
       {
         stateKey: 'email',

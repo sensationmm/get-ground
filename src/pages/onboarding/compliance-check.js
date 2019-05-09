@@ -117,7 +117,7 @@ class ComplianceCheck extends Component {
     const headerActions = <Link to="/onboarding/process-tracker"><ButtonHeader label="Exit" /></Link>;
 
     return (
-      <Layout headerActions={headerActions}>
+      <Layout headerActions={headerActions} secure>
         <div data-test="container-compliance-check" className="compliance-check" role="account">
           <h1>{ t('compliance.header') }</h1>
           <p>{ t('compliance.text') }</p>

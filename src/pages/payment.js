@@ -146,7 +146,7 @@ class Payment extends Component {
     ];
 
     return (
-      <Layout>
+      <Layout secure>
         <div data-test="container-payment" className="payment" role="account">
           <h1>{ t('onBoarding.payment.title') }</h1>
 
