@@ -38,11 +38,6 @@ class AddressFinder extends Component {
     if (prevProps.isManualAddress !== this.props.isManualAddress) searchField.focus();
   }
 
-  toggleManualAddress = () => {
-    this.props.toggleManualAddress();
-    this.resetSearchValue();
-  }
-
   resetSearchValue = () => this.setState({ search: '' });
 
   handleInputChange = value => this.setState({ search: value, value: value });
@@ -102,7 +97,7 @@ class AddressFinder extends Component {
         </div>
         
         <Button
-          onClick={this.toggleManualAddress}
+          onClick={toggleManualAddress}
           label={buttonLabel} 
           classes='link small' 
         />
