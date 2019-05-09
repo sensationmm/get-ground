@@ -112,7 +112,7 @@ class CreateAccount extends Component {
 
   render() {
     const { values, errors, showErrorMessage, termsMarkdown } = this.state;
-    const { t, modal: { isOpen } } = this.props;
+    const { t, modalIsOpen} = this.props;
     // @TODO can this be moved out of render - fails on edit field currently
 
     this.config = [
@@ -206,7 +206,7 @@ class CreateAccount extends Component {
             <Button classes="secondary" label={ t('createAccount.ctaSecondary') } fullWidth />
           </Form>
           <CSSTransition
-            in={isOpen}
+            in={modalIsOpen}
             timeout={600}
             classNames="modal"
             unmountOnExit
@@ -234,14 +234,12 @@ CreateAccount.propTypes = {
   showModal: PropTypes.func,
   hideModal: PropTypes.func,
   t: PropTypes.func.isRequired,
-  modal: PropTypes.object
+  modalIsOpen: PropTypes.bool
 };
 
 const mapStateToProps = state => {
   return {
-    modal: {
-      isOpen: state.modal.isOpen
-    }
+    modalIsOpen: state.modal.isOpen
   }
 };
 
