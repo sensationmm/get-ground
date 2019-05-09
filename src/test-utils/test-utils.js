@@ -44,10 +44,14 @@ export const setupRTL = (Component, props={}, componentTestId) => {
   return wrapper;
 }
 
-export const setupWithStore = (Component, initialState={}) => {
-  const store = storeFactory(initialState);
+export const setupWithStore = (Component, props={}, state=null, reduxState={}) => {
+  const store = storeFactory(reduxState);
 
-  const wrapper = shallow(<Component store={store} />).dive();
+  const wrapper = shallow(<Component store={store} {...props} />);
+
+  if(state) {
+      wrapper.setState({ ...state });
+  }
 
   return wrapper;
 }

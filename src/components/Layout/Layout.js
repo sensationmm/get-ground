@@ -17,13 +17,16 @@ const AuthService = new authService();
 
 import 'src/i18n';
 import './layout.scss';
+import { navigate } from 'gatsby';
 
 export class Layout extends Component {
   componentDidMount() {
+    const { userID, secure } = this.props;
+
     this.props.setWidth(window.innerWidth);
     window.addEventListener('resize', (window) => this.props.setWidth(window.currentTarget.innerWidth));
 
-    if(!this.props.user) {
+    if(!userID) {
       const auth = JSON.parse(localStorage.getItem('gg-auth'));
 
       const authed = (
@@ -35,12 +38,15 @@ export class Layout extends Component {
       if(auth && authed) {
         this.props.saveAuth(auth.token);
         AuthService.reauthenticate();
+      } else if(secure) {
+        navigate('/login');
       }
     }
   }
 
   render() {
     const { children, headerActions, isLoading } = this.props;
+
     return (
       <div className={classNames('wrapper', `${children.props && children.props.role}`)}>
         <SEO title="GetGround" keywords={[`gatsby`, `application`, `react`]} />
@@ -64,12 +70,17 @@ Layout.propTypes = {
   isLoading: PropTypes.bool,
   headerActions: PropTypes.element,
   saveAuth: PropTypes.func,
-  user: PropTypes.number
+  userID: PropTypes.number,
+  secure: PropTypes.bool
+}
+
+Layout.defaultProps = {
+  secure: false
 }
 
 const mapStateToProps = (state) => ({
   isLoading: state.loader.isLoading,
-  user: state.user ? state.user.id : null
+  userID: state.user.id
 });
 
 const actions = {

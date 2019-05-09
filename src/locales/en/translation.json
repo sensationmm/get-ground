@@ -109,6 +109,9 @@
       "note": {
         "email": "This will be your username",
         "password": "Your password must be at least 6 characters long"
+      },
+      "errors": {
+        "duplicateEmail": "Email address already exists"
       }
     }
   },

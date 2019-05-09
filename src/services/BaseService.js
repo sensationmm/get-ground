@@ -19,7 +19,7 @@ class BaseService {
     const auth = store.getState().auth;
     let token = null;
 
-    if (auth) {
+    if (auth.token) {
       token = `Bearer ${auth.token}`;
     } else {
       token = 'avb068cbk2os5ujhodmt';
@@ -63,7 +63,7 @@ class BaseService {
         return response;
       })
       .catch(e => {
-        return e;
+        return e.response;
       });
   }
 }
