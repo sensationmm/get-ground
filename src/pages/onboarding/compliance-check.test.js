@@ -11,6 +11,8 @@ import QuizQ3 from './fragments/Compliance/QuizQ3';
 import QuizQ4 from './fragments/Compliance/QuizQ4';
 import QuizQ5 from './fragments/Compliance/QuizQ5';
 
+import ModalContent from 'src/components/Modal/ModalContent';
+
 describe('<ComplianceCheck />', () => {
   let wrapper;
 
@@ -18,13 +20,17 @@ describe('<ComplianceCheck />', () => {
   const navigateMock = jest.fn();
   const showLoaderMock = jest.fn();
   const hideLoaderMock = jest.fn();
+  const hideModalMock = jest.fn();
+  const showModalMock = jest.fn();
   const updateValueMock = jest.spyOn(FormUtils, 'updateValue');
   const scrollerMock = jest.spyOn(scroller, 'scrollTo').mockReturnValue(() => {});
   const defaultProps = {
     t: tMock,
     navigate: navigateMock,
     showLoader: showLoaderMock,
-    hideLoader: hideLoaderMock
+    hideLoader: hideLoaderMock,
+    hideModal: hideModalMock,
+    showModal: showModalMock
   }
   const quizResultMock = {
     tax_bracket: 'personal',
@@ -37,7 +43,7 @@ describe('<ComplianceCheck />', () => {
   };
 
   beforeEach(() => {
-    wrapper = setup(ComplianceCheck, defaultProps, { values: quizResultMock });
+    wrapper = setup(ComplianceCheck, defaultProps, { values: quizResultMock, certificationComplete: true });
   });
   
   test('renders without error', () => {
@@ -125,6 +131,14 @@ describe('<ComplianceCheck />', () => {
       expect(updateValueMock).toHaveBeenCalledWith(expect.any(Object), 'self_certification', 'str');
     });
 
+    test('QuizQ4 - onChange calls `initModal`', () => {
+      wrapper.instance().initModal = jest.fn();
+      wrapper.find(QuizQ4).props().onChange('highnetworth');
+
+      expect(updateValueMock).toHaveBeenCalledWith(expect.any(Object), 'self_certification', 'highnetworth');
+      expect(wrapper.instance().initModal).toHaveBeenCalledWith('highnetworth');
+    })
+
     test('QuizQ5', () => {
       wrapper.find(QuizQ5).props().onChange(['str1','str2']);
       expect(updateValueMock).toHaveBeenCalledWith(expect.any(Object), 'restricted_quiz', ['str1','str2']);
@@ -139,9 +153,78 @@ describe('<ComplianceCheck />', () => {
     });
   });
 
+  describe('initModal()', () => {
+    test('executes and calls `getModalContent` with a value of `highnetworth`', () => {
+      wrapper.instance().getModalContent = jest.fn();
+      wrapper.instance().initModal('highnetworth');
+
+      expect(wrapper.instance().getModalContent).toHaveBeenCalledWith('highnetworth');
+    });
+
+    test('executes and calls `getModalContent` with a value of `selfcertified`', () => {
+      wrapper.instance().getModalContent = jest.fn();
+      wrapper.instance().initModal('selfcertified');
+
+      expect(wrapper.instance().getModalContent).toHaveBeenCalledWith('selfcertified');
+    });
+
+    test('executes and calls `openModal with a value of highnetworth`', () => {
+      wrapper = setup(ComplianceCheck, defaultProps, { values: quizResultMock, highNetWorthMarkdown: 'Dummy' });
+      wrapper.instance().openModal = jest.fn();
+      wrapper.instance().initModal('highnetworth');
+
+      expect(wrapper.instance().openModal).toHaveBeenCalled();
+      expect(wrapper.state().modalMarkdown).toEqual('Dummy');
+    });
+
+    test('executes and calls `openModal with a value of selfcertified`', () => {
+      wrapper = setup(ComplianceCheck, defaultProps, { values: quizResultMock, selfCertifiedMarkdown: 'Dummy' });
+      wrapper.instance().openModal = jest.fn();
+      wrapper.instance().initModal('selfcertified');
+
+      expect(wrapper.instance().openModal).toHaveBeenCalled();
+      expect(wrapper.state().modalMarkdown).toEqual('Dummy');
+    });
+  });
+
+  describe('openModal()', () => {
+    test('executes and calls `showModal`', () => {
+      wrapper.instance().openModal();
+      expect(showModalMock).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('closeModal()', () => {
+    test('executes and calls `hideModal`', () => {
+      wrapper.instance().closeModal();
+
+      expect(wrapper.state().certificationComplete).toEqual(false);
+      expect(hideModalMock).toHaveBeenCalledTimes(1);
+    });
+
+    test('executes and calls `hideModal`, `goTostep` & sets state', () => {
+      wrapper = setup(ComplianceCheck, defaultProps, { values: quizResultMock, modalCheckBoxChecked: true });
+      wrapper.instance().goToStep = jest.fn();
+      wrapper.instance().closeModal();
+
+      expect(wrapper.state().certificationComplete).toEqual(true);
+      expect(hideModalMock).toHaveBeenCalledTimes(1);
+      expect(wrapper.instance().goToStep).toHaveBeenCalledWith('q5');
+    });
+  });
+
+  describe('modal Checkbox', () => {
+    test('sets state for whether the modal checkbox is checked or not', () => {
+      wrapper.find(ModalContent).props().handleCheckboxChange();
+      expect(wrapper.state().modalCheckBoxChecked).toEqual(true);
+    });
+  });
+
   afterEach(() => {
     navigateMock.mockClear();
     showLoaderMock.mockClear();
     hideLoaderMock.mockClear();
+    hideModalMock.mockClear();
+    showModalMock.mockClear();
   });
 });

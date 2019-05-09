@@ -78,6 +78,10 @@
         "buttonNext": "Next"
       }
     },
+    "modalHeading": "Investors Statement",
+    "modalDownloadButtonText": "Download",
+    "modalCloseAltText": "Close Icon",
+    "modalCheckboxLabel": "I’ve read the Investor’s statement letter and confirm that I understand the risk associated with investing.",
     "buttonDone": "Finished",
     "notSuitable": {
       "title": "We are sorry!",
