@@ -14,33 +14,35 @@ import './add-passport.scss'
 /**
  * Add Passport img
  * @author Ravin Patel
- *  @param {Function} web - t for labels
+ * @param {Function} web - t for labels
  * @return {ReactComponent} AddPassport
  */
-class AddPassport extends Component {
+export class AddPassport extends Component {
   constructor(props) {
     super(props);
     this.inputOpenFileRef = React.createRef()
     this.state = {
-      file: null,
-      retakePicture: false
+      retakePicture: false,
+      takePicture: false,
+      imageSrc: null,
+      webcam: null
     }
   }
 
   initialLanding = () => {
     return (
-      <div onClick={() => this.setState({takePicture: true})}>
+      <div data-test="initial-img" onClick={() => this.setState({takePicture: true})}>
         <img src={Passport} alt="add-passport"/>
       </div>
     )
   }
 
   setRef = webcam => {
-    this.webcam = webcam;
+    this.setState({webcam})
   };
 
   capture = () => {
-    const imageSrc = this.webcam.getScreenshot();
+    const imageSrc = this.state.webcam.getScreenshot();
     this.setState({
       imageSrc,
       retakePicture: true
@@ -51,6 +53,7 @@ class AddPassport extends Component {
     return (
       <div>
         <Webcam
+          data-test="webcam"
           audio={false}
           height={350}
           ref={this.setRef}
@@ -58,7 +61,7 @@ class AddPassport extends Component {
           width={350}
           videoConstraints={videoConstraints}
         />
-        <Button classes="primary" fullWidth label={t('onBoarding.idCheck.passport.image.capture')} onClick={() => this.capture()}/>
+        <Button data-test="capture-button" classes="primary capture" fullWidth label={t('onBoarding.idCheck.passport.image.capture')} onClick={() => this.capture()}/>
       </div>
     )
   }
@@ -67,8 +70,8 @@ class AddPassport extends Component {
     return (
       <>
         <img src={this.state.imageSrc}/>
-        <Button classes="primary" fullWidth label={t('onBoarding.idCheck.passport.image.happy')} onClick={() => this.setState({ retakePicture: false})}/>
-        <Button classes="secondary" fullWidth label={t('onBoarding.idCheck.passport.image.retake')} onClick={() => this.setState({imageSrc: null, retakePicture: true})}/>
+        <Button data-test="happy-button" classes="primary" fullWidth label={t('onBoarding.idCheck.passport.image.happy')} onClick={() => this.setState({ retakePicture: false})}/>
+        <Button data-test="retake-button" classes="secondary" fullWidth label={t('onBoarding.idCheck.passport.image.retake')} onClick={() => this.setState({imageSrc: null, retakePicture: true})}/>
       </>
     )
   }
@@ -115,6 +118,7 @@ class AddPassport extends Component {
   uploadImg = (t) => {
     return (
       <Dropzone
+        data-test="dropzone"
         onDrop={this.onImageDrop}
         accept="image/*"
         multiple={false}
@@ -136,11 +140,11 @@ class AddPassport extends Component {
   }
 
   render() {
-    const { t } = this.props;
+    const { t } = this.props
 
     return (
       <div data-test="component-add-passport" className="add-passport" role="account">
-        <IntroBox>{ t('onBoarding.idCheck.passport.title') }</IntroBox>
+        <IntroBox data-test="intro-box">{ t('onBoarding.idCheck.passport.title') }</IntroBox>
         <p>{ !this.state.takePicture ? t('onBoarding.idCheck.passport.content') : t('onBoarding.idCheck.passport.retakeImageContent')}</p>
         {this.handlePassport(t)}
         {this.uploadImg(t)}
