@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { Element, animateScroll, scroller } from 'react-scroll';
 import { Link } from 'gatsby';
+import { CSSTransition } from 'react-transition-group';
 import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 
 import Layout from 'src/components/Layout/Layout';
@@ -15,14 +16,20 @@ import QuizQ2 from './fragments/Compliance/QuizQ2';
 import QuizQ3 from './fragments/Compliance/QuizQ3';
 import QuizQ4 from './fragments/Compliance/QuizQ4';
 import QuizQ5 from './fragments/Compliance/QuizQ5';
+import Modal from 'src/components/Modal/Modal';
+import ModalContent from 'src/components/Modal/ModalContent';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
+import { showModal, hideModal } from 'src/state/actions/modal';
 import FormUtils from 'src/utils/form';
 import { inArray } from 'src/utils/functions';
 
 import complianceService from 'src/services/Compliance';
+import modalService from 'src/services/Modal';
 const ComplianceService = new complianceService();
+const ModalService = new modalService();
 
+import investorStatementImage from 'src/assets/images/investor-statement-image.svg';
 import 'src/styles/pages/compliance-check.scss';
 
 const initialState = {
@@ -48,6 +55,11 @@ class ComplianceCheck extends Component {
       ...FormUtils.initFormState(
         initialState
       ),
+      highNetWorthMarkdown: '',
+      selfCertifiedMarkdown: '',
+      modalMarkdown: '',
+      modalCheckboxChecked: false,
+      certificationComplete: false
     };
   }
   
@@ -91,9 +103,71 @@ class ComplianceCheck extends Component {
     }
   }
 
+  /**
+   * @param {string} val - The certification value
+   * @return {void}
+   */
+  initModal = val => {
+    const { highNetWorthMarkdown, selfCertifiedMarkdown } = this.state;
+    const { showModal } = this.props;
+
+    
+    if ((val === 'highnetworth' && highNetWorthMarkdown === '') || 
+      val === 'selfcertified' && selfCertifiedMarkdown === '') {
+      this.getModalContent(val)
+    } else {
+      this.setState({ modalMarkdown: val === 'highnetworth' ? highNetWorthMarkdown : selfCertifiedMarkdown });
+      showModal();
+    }
+
+    this.setState({ modalCheckBoxChecked: false });
+  }
+
+  /**
+   * @param {string} val - The certification value
+   * @return {void}
+   */
+  getModalContent = /* istanbul ignore next */ val => {
+    const { showLoader, hideLoader, showModal } = this.props;
+
+    showLoader();
+    ModalService.fetchModalContent().then(response => {
+      const markdownIndex = val === 'highnetworth' ? response.data[0] : response.data[18];
+      const stateKey = val === 'highnetworth' ? 'highNetWorthMarkdown' : 'selfCertifiedMarkdown';
+
+      this.setState({ 
+        modalMarkdown: markdownIndex.markdown_text,
+        [stateKey]: markdownIndex.markdown_text
+      });
+      
+      hideLoader();
+      showModal();
+    });
+  }
+
+  closeModal = () => {
+    const { modalCheckBoxChecked } = this.state;
+    const { hideModal } = this.props;
+
+    this.setState({ certificationComplete: false });
+
+    if (modalCheckBoxChecked) {
+      this.setState({ certificationComplete: true });
+      this.goToStep('q5');
+    }
+    hideModal();
+  }
+
   render() {
-    const { t } = this.props;
-    const { values, errors, showErrorMessage } = this.state;
+    const { t, modalIsOpen } = this.props;
+    const { 
+      values, 
+      errors, 
+      showErrorMessage, 
+      certificationComplete,
+      modalMarkdown,
+      modalCheckBoxChecked
+    } = this.state;
     const {
       tax_bracket,
       large_enterprise,
@@ -108,7 +182,7 @@ class ComplianceCheck extends Component {
     const showQ3 = showQ2 && large_enterprise_done && large_enterprise.length > 0;
     const showQ4 = showQ3 && investment_confirmation;
     const showQ5 = showQ4 && self_certification === 'restricted';
-    const showDone = showQ4 && (!showQ5 || restricted_quiz.length > 0) && !!self_certification;
+    const showDone = showQ4 && (!showQ5 || restricted_quiz.length > 0) && Boolean(self_certification) && certificationComplete;
 
     if(showQ5) {
       numQuestions = 5;
@@ -130,7 +204,6 @@ class ComplianceCheck extends Component {
             <Element id="q1">
               <QuizQ1
                 numQuestions={numQuestions}
-                t={t}
                 selected={tax_bracket}
                 onChange={(val) => { FormUtils.updateValue(this, 'tax_bracket', val); this.goToStep('q2'); }}
               />
@@ -140,7 +213,6 @@ class ComplianceCheck extends Component {
               {showQ2 && 
                 <QuizQ2
                   numQuestions={numQuestions}
-                  t={t}
                   selected={large_enterprise}
                   onChange={(val) => {
                     if(val.indexOf('none') >= 0) {
@@ -159,7 +231,6 @@ class ComplianceCheck extends Component {
               {showQ3 && 
                 <QuizQ3
                   numQuestions={numQuestions}
-                  t={t}
                   onClick={() => { FormUtils.updateValue(this, 'investment_confirmation', true); this.goToStep('q4'); }}
                 />
               }
@@ -169,9 +240,17 @@ class ComplianceCheck extends Component {
               {showQ4 &&
                 <QuizQ4
                   numQuestions={numQuestions}
-                  t={t}
                   selected={self_certification}
-                  onChange={(val) => { FormUtils.updateValue(this, 'self_certification', val); this.goToStep('q5'); }}
+                  onChange={(val) => { 
+                    FormUtils.updateValue(this, 'self_certification', val); 
+
+                    if (val === 'highnetworth' || val === 'selfcertified') {
+                      this.initModal(val);
+                    } else {
+                      this.setState({ certificationComplete: true })
+                      this.goToStep('q5'); 
+                    }
+                  }}
                 />
               }
             </Element>
@@ -180,7 +259,6 @@ class ComplianceCheck extends Component {
               {showQ5 &&
                 <QuizQ5
                   numQuestions={numQuestions}
-                  t={t}
                   selected={restricted_quiz}
                   onChange={(val) => { FormUtils.updateValue(this, 'restricted_quiz', val); this.goToStep('done'); }}
                   onDeselectAll={() => FormUtils.updateValue(this, 'restricted_quiz_done', false)}
@@ -199,6 +277,28 @@ class ComplianceCheck extends Component {
             }
             </Element>
           </Form>
+
+          <CSSTransition
+              in={modalIsOpen}
+              timeout={600}
+              classNames="modal"
+              unmountOnExit
+            >
+              <Modal>
+                <ModalContent 
+                  heading={t('compliance.modalHeading')}
+                  content={modalMarkdown}
+                  closeModal={this.closeModal} 
+                  downloadButtonLabel={t('compliance.modalDownloadButtonText')}
+                  closeIconAltText={t('compliance.modalCloseAltText')}
+                  modalImage={investorStatementImage}
+                  checkboxLabel={t('compliance.modalCheckboxLabel')}
+                  hasCheckbox={true}
+                  checkBoxChecked={modalCheckBoxChecked}
+                  handleCheckboxChange={() => this.setState({ modalCheckBoxChecked: !modalCheckBoxChecked})}
+                />
+              </Modal>
+            </CSSTransition>
         </div>
       </Layout>
     );
@@ -208,12 +308,26 @@ class ComplianceCheck extends Component {
 ComplianceCheck.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
+  showModal: PropTypes.func,
+  hideModal: PropTypes.func,
   t: PropTypes.func.isRequired,
-  navigate: PropTypes.func
+  navigate: PropTypes.func,
+  modalIsOpen: PropTypes.bool
 };
 
-const actions = { showLoader, hideLoader };
+const mapStateToProps = state => {
+  return {
+    modalIsOpen: state.modal.isOpen
+  }
+};
+
+const actions = { 
+  showLoader,
+  hideLoader,
+  showModal,
+  hideModal
+};
 
 export const RawComponent = ComplianceCheck;
 
-export default connect(null, actions)(withTranslation()(ComplianceCheck));
+export default connect(mapStateToProps, actions)(withTranslation()(ComplianceCheck));
