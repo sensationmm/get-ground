@@ -18,12 +18,12 @@ export class Layout extends Component {
   }
 
   render() {
-    const { children } = this.props;
+    const { children, headerActions, isLoading } = this.props;
     return (
       <>
         <SEO title="GetGround" keywords={[`gatsby`, `application`, `react`]} />
-        {this.props.isLoading && <Loader />}
-        <Header classNames={`${children.props && children.props.role}`} />
+        {isLoading && <Loader />}
+        <Header classNames={`${children.props && children.props.role}`}>{headerActions}</Header>
         <div className={classNames('app', children.props && children.props.role)}>
           <main className="main">{children}</main>
         </div>
@@ -36,7 +36,8 @@ export class Layout extends Component {
 Layout.propTypes = {
   children: PropTypes.object,
   setWidth: PropTypes.func,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  headerActions: PropTypes.element
 }
 
 const mapStateToProps = (state) => ({

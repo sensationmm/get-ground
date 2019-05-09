@@ -4,6 +4,10 @@
 @import '../../styles/modules/_variables';
 
 .header {
+  position: fixed;
+  width: calc(100% - #{($padding-horizontal-unit * 4) + 0px});
+  z-index: 2;
+  top: 0px;
   height: $header-height + 0px;
   display: flex;
   justify-content: space-between;
