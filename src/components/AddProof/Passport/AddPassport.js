@@ -34,7 +34,7 @@ export class AddPassport extends Component {
       <div data-test="initial-img" onClick={() => this.setState({takePicture: true})}>
         <img src={Passport} alt="add-passport"/>
       </div>
-    )
+  )
   }
 
   /**
@@ -65,7 +65,7 @@ export class AddPassport extends Component {
           width={350}
           videoConstraints={videoConstraints}
         />
-        <Button data-test="capture-button" classes="primary capture" fullWidth label={t('onBoarding.idCheck.passport.image.capture')} onClick={() => this.capture()}/>
+        <Button style={`display: inline;`} data-test="capture-button" classes="primary capture" fullWidth label={t('onBoarding.idCheck.passport.image.capture')} onClick={() => this.capture()}/>
       </div>
     )
   }
@@ -134,6 +134,7 @@ export class AddPassport extends Component {
         onDrop={this.onImageDrop}
         accept="image/*"
         multiple={false}
+        className="dropzone"
       >
         {({getRootProps, getInputProps}) => {
           return (
@@ -142,7 +143,7 @@ export class AddPassport extends Component {
             >
               <input {...getInputProps()} />
               {
-              <Button classes="upload-img link" label={t('onBoarding.idCheck.passport.link')}/>
+              <Button classes="upload-file-button link" label={t('onBoarding.idCheck.passport.link')}/>
               }
             </div>
           )
@@ -157,9 +158,9 @@ export class AddPassport extends Component {
     return (
       <div data-test="component-add-passport" className="add-passport" role="account">
         <IntroBox data-test="intro-box">{ t('onBoarding.idCheck.passport.title') }</IntroBox>
-        <p>{ !this.state.takePicture ? t('onBoarding.idCheck.passport.content') : t('onBoarding.idCheck.passport.retakeImageContent')}</p>
-        {this.handlePassport(t)}
-        {this.uploadImg(t)}
+        <p className="add-passport-content">{ !this.state.takePicture ? t('onBoarding.idCheck.passport.content') : t('onBoarding.idCheck.passport.retakeImageContent')}</p>
+        <div className="add-passport-img">{this.handlePassport(t)}</div>
+        <div className="add-passport-upload-file">{this.uploadImg(t)}</div>
       </div>
     );
   }
