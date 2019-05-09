@@ -112,7 +112,7 @@ class ComplianceCheck extends Component {
     const { showModal } = this.props;
 
     
-    if ((val === 'highnetworth' && highNetWorthMarkdown =='') || 
+    if ((val === 'highnetworth' && highNetWorthMarkdown === '') || 
       val === 'selfcertified' && selfCertifiedMarkdown === '') {
       this.getModalContent(val)
     } else {
