@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { addressNow } from 'src/config/endpoints';
-
 /**
  * HTML
  * Wrapper for select list
@@ -20,7 +18,6 @@ export default function HTML(props) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         <link rel="stylesheet" type="text/css" href="http://api.addressnow.co.uk/css/addressnow-2.20.min.css?key=ga99-ng57-pk67-yy33" />
-        <script type="text/javascript" src={addressNow}></script>
         {props.headComponents}
       </head>
       <body {...props.bodyAttributes}>
