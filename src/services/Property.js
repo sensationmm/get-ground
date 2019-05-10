@@ -1,30 +1,29 @@
-import { API } from 'src/config/endpoints';
+import BaseService from './BaseService';
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOjk1LCJSb2xlIjoiIiwiZXhwIjoxNTU3Mzk3OTM5LCJuYmYiOjE1NTczOTQzNDB9.RSyteMgMBIpJ66QhaJNu4DVf71jHZG_igyVXQ1uhq5A';
+/**
+ * PropertyService
+ * @param {object} data - data object passed to the service
+ * @param {string} street - street name passed in data object
+ * @param {string} city - city passed in data object
+ * @param {string} unitnumber - house/flat number passed in data object
+ * @param {string} postcode - postcode passed in data object
+ * @return {Object} PropertyService
+ */
+class PropertyService extends BaseService {
+  SavePropertyAddress = data => {
+    const config = {
+      url: `companies`,
+      method: 'post',
+      data: {
+        'property_street': data.street,
+        'property_posttown': data.city,
+        'property_premise': data.unitNumber,
+        'property_postcode': data.postcode
+      }
+    };
 
-export const SavePropertyAddress = async data => (
-  await fetch(`${API}/companies`, {
-    method: 'post',
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ 
-      'property_country': data.country,
-      'property_street': data.street,
-      'property_city': data.city,
-      'unit_number': data.unitNumber,
-      'property_postcode': data.postcode
-    }),
-  })
-  .then(response => response.json())
-  .then(data => {
-    return data;
-  })
-);
+    return this.doRequest(config);
+  }
+}
 
-const PropertyServices = {
-  SavePropertyAddress,
-};
-
-export default PropertyServices;
+export default PropertyService;

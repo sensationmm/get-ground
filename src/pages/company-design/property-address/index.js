@@ -21,8 +21,8 @@ import { showLoader, hideLoader } from 'src/state/actions/loader';
 import { addressNow } from 'src/config/endpoints';
 import 'src/styles/pages/onboarding-details.scss';
 
-import PropertyServices from 'src/services/Property';
-const { SavePropertyAddress } = PropertyServices;
+import propertyService from 'src/services/Property';
+const PropertyService = new propertyService();
 
 /**
   * PropertyAddress
@@ -93,7 +93,6 @@ class PropertyAddress extends Component {
     const { showLoader, hideLoader, t } = this.props;
     const { 
       values: {
-        country,
         street,
         city,
         unitNumber,
@@ -104,21 +103,20 @@ class PropertyAddress extends Component {
     if (formUtils.validateForm(this)) {
       showLoader();
 
-      SavePropertyAddress({country, street, city, unitNumber, postcode}).then((response) => {
-        navigate('/company-details/purchase-details');
+      return PropertyService.SavePropertyAddress({street, city, unitNumber, postcode}).then((response) => {
         hideLoader();
-      }).catch((e) => {
-        hideLoader();
-
-        this.setState({
-          ...this.state,
-          errors: {
-            form: t('companyDesign.propertyAddress.form.error')
-          },
-          showErrorMessage: true
-        });
+        if (response.status === 201) {
+          navigate('/company-details/purchase-details');
+        } else if (response.status === 400) {
+          this.setState({
+            ...this.state,
+            errors: {
+              form: t('companyDesign.propertyAddress.form.error')
+            },
+            showErrorMessage: true
+          });
+        }
       });
-
     }
   }
 
