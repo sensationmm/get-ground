@@ -60,7 +60,6 @@ class Payment extends Component {
 
     if (search.indexOf('retakePayment=true')>=0) {
       this.setState({
-        ...this.state,
         errors: {
           form: t('onBoarding.payment.form.retakePaymentError')
         },
