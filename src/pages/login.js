@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { Link, navigate } from 'gatsby';
+import queryString from 'query-string'
 
 import Layout from 'src/components/Layout/Layout'
 import Button from 'src/components/_buttons/Button/Button';
@@ -50,8 +51,10 @@ class Login extends Component {
       .then((res) => {
         hideLoader();
         if(res.status === 200) {
-          if (search.indexOf('retakePayment=true')>=0) {
-            navigate('/onboarding/payment?retakePayment=true');
+          const queryStringValues = queryString.parse(search)
+
+          if (queryStringValues.redirect) {
+            navigate(queryStringValues.redirect);
           } else {
             navigate('/onboarding/intro');
           }
