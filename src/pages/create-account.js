@@ -29,6 +29,8 @@ const ModalService = new modalService();
 
 import termsImage from 'src/assets/images/terms-image.svg';
 
+import RadioGroup from 'src/components/_form/RadioGroup/RadioGroup';
+
 /**
  * CreateAccount
  * @param {object} e - event passed on openModal (for JSdoc)
@@ -95,10 +97,31 @@ class CreateAccount extends Component {
   render() {
     const { values, errors, showErrorMessage, termsMarkdown } = this.state;
     const { t, modalIsOpen, showModal, hideModal } = this.props;
+
+    this.radioConfig = [
+      {
+        value: 'no',
+        label: 'no'
+      },
+      {
+        value: 'yes',
+        label: 'yes'
+      }
+    ];
+
     // @TODO can this be moved out of render - fails on edit field currently
 
     /* istanbul ignore next */
     this.config = [
+      {
+        stateKey: 'newBuild',
+        component: RadioGroup,
+        groupLabel: 'radio group label',
+        value: values.newBuild,
+        name: 'newBuildRadio',
+        items: this.radioConfig,
+        selectedValue: values.newBuild
+      },
       {
         stateKey: 'email',
         component: InputText,
