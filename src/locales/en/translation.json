@@ -202,7 +202,8 @@
       "form": {
         "numberOfCompaniesLabel": "No. of companies",
         "cardLabel": "Card details",
-        "error": "There was an issue with your payment"
+        "error": "There was an issue with your payment",
+        "retakePaymentError": "Your payment has failed. Please update your payment details so we can finalise your application"
       }
     },
     "personalDetails": {

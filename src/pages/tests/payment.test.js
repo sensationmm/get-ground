@@ -1,6 +1,6 @@
 import { setup, findByTestAttr } from 'src/test-utils/test-utils';
 
-import { RawComponent } from 'src/pages/payment';
+import { RawComponent } from 'src/pages/onboarding/payment';
 import InputNumber from 'src/components/_form/InputNumber/InputNumber';
 import Stripe from 'src/components/Stripe/Stripe';
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
@@ -14,7 +14,10 @@ describe('Payment page', () => {
     wrapper = setup(RawComponent, {
       t: jest.fn(),
       showLoader: jest.fn(),
-      hideLoader: jest.fn()
+      hideLoader: jest.fn(),
+      location: {
+        search: '?retakePayment=true'
+      }
     }, {
       showErrorMessage: false,
       errors: {}
@@ -80,7 +83,10 @@ describe('Payment page', () => {
 
   test('error box has rendered', () => {
     wrapper = setup(RawComponent, {
-      t: jest.fn()
+      t: jest.fn(),
+      location: {
+        search: '?retakePayment=true'
+      }
     }, {
       showErrorMessage: true,
       errors: {
