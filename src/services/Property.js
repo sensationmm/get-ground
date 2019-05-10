@@ -5,7 +5,7 @@ import BaseService from './BaseService';
  * @param {object} data - data object passed to the service
  * @param {string} street - street name passed in data object
  * @param {string} city - city passed in data object
- * @param {string} unitnumber - house/flat number passed in data object
+ * @param {string} unitNumber - house/flat number passed in data object
  * @param {string} postcode - postcode passed in data object
  * @return {Object} PropertyService
  */

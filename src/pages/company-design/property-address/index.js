@@ -103,7 +103,7 @@ class PropertyAddress extends Component {
     if (formUtils.validateForm(this)) {
       showLoader();
 
-      return PropertyService.SavePropertyAddress({street, city, unitNumber, postcode}).then((response) => {
+      PropertyService.SavePropertyAddress({street, city, unitNumber, postcode}).then((response) => {
         hideLoader();
         if (response.status === 201) {
           navigate('/company-details/purchase-details');
