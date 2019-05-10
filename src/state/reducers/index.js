@@ -4,11 +4,13 @@ import { layout } from './layout';
 import { modal } from './modal';
 import { user } from './user';
 import { auth } from './auth';
+import { idCheck } from './idCheck';
 
-export default combineReducers({ 
+export default combineReducers({
+  auth,
+  idCheck,
   layout,
-  modal,
   loader,
-  user,
-  auth
+  modal,
+  user
 });

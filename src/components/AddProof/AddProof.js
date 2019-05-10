@@ -1,23 +1,23 @@
 import React, { Component } from 'react'
 import { withTranslation } from 'react-i18next'
-import PropTypes from 'prop-types';
-import Dropzone from 'react-dropzone';
+import PropTypes from 'prop-types'
+import Dropzone from 'react-dropzone'
 import Webcam from 'react-webcam'
+import { connect } from 'react-redux'
 
-import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
-import Button from 'src/components/_buttons/Button/Button';
+import IntroBox from 'src/components/_layout/IntroBox/IntroBox'
+import Button from 'src/components/_buttons/Button/Button'
+import { setImg } from 'src/state/actions/idCheck'
 
-import Passport from 'src/assets/images/add-passport.svg'
-
-import './add-passport.scss'
+import './add-proof.scss'
 /**
- * Add Passport img
+ * Add Proof img
  * @author Ravin Patel
  * @param {function} t - i18next function for translating
  * @param {Object} videoConstraints - config for webcam
- * @return {ReactComponent} AddPassport
+ * @return {ReactComponent} AddProof
  */
-export class AddPassport extends Component {
+export class AddProof extends Component {
   constructor(props) {
     super(props);
     this.inputOpenFileRef = React.createRef()
@@ -29,12 +29,15 @@ export class AddPassport extends Component {
     }
   }
 
+
   initialLanding = () => {
+    const { initialImg, section } = this.props;
+
     return (
       <div data-test="initial-img" onClick={() => this.setState({takePicture: true})}>
-        <img src={Passport} alt="add-passport"/>
+        <img src={initialImg} alt={`add-proof-${section}`}/>
       </div>
-  )
+    )
   }
 
   /**
@@ -65,7 +68,7 @@ export class AddPassport extends Component {
           width={350}
           videoConstraints={videoConstraints}
         />
-        <Button style={`display: inline;`} data-test="capture-button" classes="primary capture" fullWidth label={t('onBoarding.idCheck.passport.image.capture')} onClick={() => this.capture()}/>
+        <Button style={`display: inline;`} data-test="capture-button" classes="primary capture" fullWidth label={t('onBoarding.idCheck.image.capture')} onClick={() => this.capture()}/>
       </div>
     )
   }
@@ -74,13 +77,14 @@ export class AddPassport extends Component {
     return (
       <>
         <img src={this.state.imageSrc}/>
-        <Button data-test="happy-button" classes="primary" fullWidth label={t('onBoarding.idCheck.passport.image.happy')} onClick={() => this.setState({ retakePicture: false})}/>
-        <Button data-test="retake-button" classes="secondary" fullWidth label={t('onBoarding.idCheck.passport.image.retake')} onClick={() => this.setState({imageSrc: null, retakePicture: true})}/>
+        <Button data-test="happy-button" classes="primary confirm-happy" fullWidth label={t('onBoarding.idCheck.image.happy')} onClick={() => this.setState({ retakePicture: false})}/>
+        <Button data-test="retake-button" classes="secondary" fullWidth label={t('onBoarding.idCheck.image.retake')} onClick={() => this.setState({imageSrc: null, retakePicture: true})}/>
       </>
     )
   }
 
-  showFinalPassport = () => {
+  showFinalImg = () => {
+    this.props.setImg(this.props.section, this.state.imageSrc)
     return <img src={this.state.imageSrc} onClick={() => this.setState({ retakePicture: true })}/>
   }
 
@@ -106,19 +110,23 @@ export class AddPassport extends Component {
    */
   onImageDrop = (files) => {
     this.getBase64(files[0])
+
     this.setState({
       uploadedFile: files[0]
     });
 
   }
 
-  handlePassport = (t) => {
+  handleProof = (t) => {
+    const { isSelfie } = this.props
+
     const videoConstraints = {
       width: 1280,
       height: 720,
+      facingMode: isSelfie ? 'user' : { exact: 'environment' }
     };
 
-    if (this.state.imageSrc && !this.state.retakePicture) return this.showFinalPassport()
+    if (this.state.imageSrc && !this.state.retakePicture) return this.showFinalImg()
 
     if (!this.state.takePicture) return this.initialLanding()
 
@@ -143,7 +151,7 @@ export class AddPassport extends Component {
             >
               <input {...getInputProps()} />
               {
-              <Button classes="upload-file-button link" label={t('onBoarding.idCheck.passport.link')}/>
+              <Button classes="upload-file-button link" label={t('onBoarding.idCheck.link')}/>
               }
             </div>
           )
@@ -153,21 +161,27 @@ export class AddPassport extends Component {
   }
 
   render() {
-    const { t } = this.props
-
+    const { t, section } = this.props
     return (
-      <div data-test="component-add-passport" className="add-passport" role="account">
-        <IntroBox data-test="intro-box">{ t('onBoarding.idCheck.passport.title') }</IntroBox>
-        <p className="add-passport-content">{ !this.state.takePicture ? t('onBoarding.idCheck.passport.content') : t('onBoarding.idCheck.passport.retakeImageContent')}</p>
-        <div className="add-passport-img">{this.handlePassport(t)}</div>
-        <div className="add-passport-upload-file">{this.uploadImg(t)}</div>
+      <div data-test="component-add-proof" className="add-proof" role="account">
+        <IntroBox data-test="intro-box">{ t(`onBoarding.idCheck.${section}.title`) }</IntroBox>
+        <p className="add-proof-content">{ !this.state.takePicture || !this.state.retakePicture ? t(`onBoarding.idCheck.${section}.content`) : t(`onBoarding.idCheck.${section}.retakeImageContent`)}</p>
+        <div className="add-proof-img">{this.handleProof(t)}</div>
+        <div className="add-proof-upload-file">{this.uploadImg(t)}</div>
       </div>
     );
   }
 }
 
-AddPassport.propTypes = {
+AddProof.propTypes = {
   t: PropTypes.func.isRequired,
+  section: PropTypes.string.isRequired,
+  initialImg: PropTypes.string.isRequired,
+  setImg: PropTypes.func,
+  isSelfie: PropTypes.bool.isRequired
+}
+const actions = {
+  setImg
 }
 
-export default withTranslation()(AddPassport)
+export default connect(null, actions)(withTranslation()(AddProof));
