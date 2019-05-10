@@ -27,6 +27,7 @@ export const initFormState = (fieldsInit) => {
  * @return {void}
  */
 export const updateValue = (scope, stateKey, value, validate, callback) => {
+  
   scope.setState({
     ...scope.state,
     values: {

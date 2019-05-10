@@ -64,9 +64,9 @@ const Input = (props) => {
         data-test="component-input-field"
         type={type}
         id={id}
-        onFocus={() => {
+        onFocus={(e) => {
           /* istanbul ignore else */
-          if (onFocus) onFocus();
+          if (onFocus) onFocus(e);
         }}
         onBlur={(e) => validate ? validate() : null}
         onChange={(e) => onChange(e.target.value, validate)}
