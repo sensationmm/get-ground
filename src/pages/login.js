@@ -40,7 +40,7 @@ class Login extends Component {
 
   onLogin = async () => {
     const { email, password } = this.state.values;
-    const { showLoader, hideLoader, t } = this.props;
+    const { showLoader, hideLoader, t, location: { search } } = this.props;
     const self = this;
 
     if(formUtils.validateForm(this)) {
@@ -50,7 +50,12 @@ class Login extends Component {
       .then((res) => {
         hideLoader();
         if(res.status === 200) {
-          navigate('/onboarding/intro');
+          if (search.indexOf('retakePayment=true')>=0) {
+            navigate('/onboarding/payment?retakePayment=true');
+          } else {
+            navigate('/onboarding/intro');
+          }
+
         } else {
           self.setState({
             ...self.state,
@@ -121,7 +126,8 @@ class Login extends Component {
 Login.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
-  t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired,
+  location: PropTypes.object
 };
 
 export const RawComponent = Login;

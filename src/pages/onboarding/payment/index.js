@@ -15,6 +15,8 @@ import Form from 'src/components/_layout/Form/Form';
 import InputNumber from 'src/components/_form/InputNumber/InputNumber';
 import Stripe from 'src/components/Stripe/Stripe';
 
+import { stripeKey } from 'src/config/endpoints';
+
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
 import paymentService from 'src/services/Payment';
@@ -52,7 +54,20 @@ class Payment extends Component {
   }
 
   componentDidMount() {
-    this.setState({ stripe: window.Stripe('pk_test_IekVa77loZrt2oMKeUXuHek7') });
+    const { t, location: { search } } = this.props;
+
+    this.setState({ stripe: window.Stripe(stripeKey) });
+
+    if (search.indexOf('retakePayment=true')>=0) {
+      this.setState({
+        ...this.state,
+        errors: {
+          form: t('onBoarding.payment.form.retakePaymentError')
+        },
+        showErrorMessage: true,
+        stripe: window.Stripe(stripeKey)
+      });
+    }
   }
 
   validateForm = () => {
@@ -146,6 +161,7 @@ class Payment extends Component {
     ];
 
     return (
+      
       <Layout secure>
         <div data-test="container-payment" className="payment" role="account">
           <h1>{ t('onBoarding.payment.title') }</h1>
@@ -188,7 +204,8 @@ class Payment extends Component {
 Payment.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
-  t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired,
+  location: PropTypes.object
 };
 
 const actions = { showLoader, hideLoader };
