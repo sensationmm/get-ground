@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { CSSTransition } from 'react-transition-group';
+import { navigate } from 'gatsby';
 
 import Layout from 'src/components/Layout/Layout'
 import formUtils from 'src/utils/form';
@@ -22,12 +23,11 @@ import { showLoader, hideLoader } from 'src/state/actions/loader';
 import { showModal, hideModal } from 'src/state/actions/modal';
 
 import accountService from 'src/services/Account';
+export const AccountService = new accountService();
 import modalService from 'src/services/Modal';
-const AccountService = new accountService();
 const ModalService = new modalService();
 
 import termsImage from 'src/assets/images/terms-image.svg';
-import { navigate } from 'gatsby';
 
 /**
  * CreateAccount
@@ -60,7 +60,7 @@ class CreateAccount extends Component {
     if(formUtils.validateForm(this)) {
       showLoader();
 
-      AccountService.createAccount(email, password, optin).then(function(response) {
+      AccountService.createAccount(email, password, optin).then(response => {
         hideLoader();
         if(response.status === 201) {
           navigate('/account-pending');
@@ -77,7 +77,7 @@ class CreateAccount extends Component {
     }
   }
 
-  getModalContent = e => {
+  getModalContent = /* istanbul ignore next */ (e) => {
     const { showLoader, hideLoader, showModal } = this.props;
     const self = this;
     e.preventDefault();

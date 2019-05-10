@@ -196,7 +196,7 @@ class ComplianceCheck extends Component {
           <h1>{ t('compliance.header') }</h1>
           <p>{ t('compliance.text') }</p>
 
-          {showErrorMessage && errors.form.length > 0 &&
+          {showErrorMessage && errors.form &&
             <ErrorBox>{errors.form}</ErrorBox>
           }
 
@@ -315,11 +315,9 @@ ComplianceCheck.propTypes = {
   modalIsOpen: PropTypes.bool
 };
 
-const mapStateToProps = state => {
-  return {
-    modalIsOpen: state.modal.isOpen
-  }
-};
+const mapStateToProps = state => ({
+  modalIsOpen: state.modal.isOpen
+});
 
 const actions = { 
   showLoader,
