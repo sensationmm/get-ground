@@ -38,10 +38,14 @@
         "depositAmountLabel": "Deposit Amount",
         "firstInstallmentDateLabel": "First installment date?",
         "firstInstallmentLabel": "First installment amount",
+        "secondInstallmentDateLabel": "Second installment date?",
+        "secondInstallmentLabel": "Second installment amount",
         "expectedExchangeLabel": "Do you have an expected exchange date",
         "expectedExchangeDateLabel": "Please provide your exchange date",
+        "addButton": "Another payment date",
         "nextButton": "Next",
-        "backButton": "Back"
+        "backButton": "Back",
+        "error": "Please fix your errors to proceed"
       },
       "datepicker": {
         "button1": "cancel",

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import { navigate } from 'gatsby';
 
 import Layout from 'src/components/Layout/Layout'
 import formUtils from 'src/utils/form';
@@ -12,13 +13,18 @@ import Form from 'src/components/_layout/Form/Form';
 import InputText from 'src/components/_form/InputText/InputText';
 import InputNumber from 'src/components/_form/InputNumber/InputNumber';
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
+import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import Button from 'src/components/_buttons/Button/Button';
 import RadioGroup from 'src/components/_form/RadioGroup/RadioGroup';
 import Datepicker from 'src/components/Datepicker/Datepicker';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
-import 'src/styles/pages/onboarding-details.scss';
+import propertyService from 'src/services/Property';
+const PropertyService = new propertyService();
+
+import addIcon from 'src/assets/images/add-icon.svg';
+import 'src/styles/pages/purchase-details.scss';
 
 /**
   * PurchaseDetails
@@ -40,10 +46,13 @@ class PurchaseDetails extends Component {
         depositAmount: '',
         exchangeDate: '',
         firstInstallmentDate: '',
-        firstInstallmentAmount: ''
+        firstInstallmentAmount: '',
+        secondInstallmentDate: '',
+        secondInstallmentAmount: ''
       }),
       isDatepickerOpen: false,
-      focusedDateField: ''
+      focusedDateField: '',
+      extraInstallmentFieldsShowing: 0
     };
 
     this.config = [];
@@ -81,8 +90,41 @@ class PurchaseDetails extends Component {
     return (newBuild === '') || (newBuild === 'yes' && completionDate === '')
   }
 
+  showNextInstallment = () => {
+    const { extraInstallmentFieldsShowing } = this.state;
+    const installmentDateField = document.getElementsByClassName('installment-date');
+    const installmentDateAmount = document.getElementsByClassName('installment-amount');
+
+    if (installmentDateField.length === extraInstallmentFieldsShowing) return;
+
+    this.setState({ extraInstallmentFieldsShowing: extraInstallmentFieldsShowing + 1});
+
+    installmentDateField[extraInstallmentFieldsShowing].style.display = 'block';
+    installmentDateAmount[extraInstallmentFieldsShowing].style.display = 'block';
+  }
+
   submitPurchaseDetails = () => {
-    //console.log(this.state)
+    const { showLoader, hideLoader, t } = this.props;
+
+    if (formUtils.validateForm(this)) {
+      showLoader();
+
+      PropertyService.SavePurchaseDetails({ 'placeholder': 'bla' }).then((response) => {
+        hideLoader();
+        if (response.status === 201) {
+          navigate('/company-details/solicitor-details');
+        } else if (response.status === 400) {
+          this.setState({
+            ...this.state,
+            errors: {
+              form: t('companyDesign.purchaseDetails.form.error')
+            },
+            showErrorMessage: true
+          });
+        }
+      });
+    }
+
   }
 
   render() {
@@ -96,10 +138,14 @@ class PurchaseDetails extends Component {
         depositAmount,
         firstInstallmentDate,
         firstInstallmentAmount,
+        secondInstallmentDate,
+        secondInstallmentAmount,
         expectedExchange,
         exchangeDate
       },
-      isDatepickerOpen
+      isDatepickerOpen,
+      showErrorMessage,
+      errors
     } = this.state;
 
     this.radioConfig = [
@@ -184,6 +230,30 @@ class PurchaseDetails extends Component {
         hidden: this.checkElementHidden()
       },
       {
+        stateKey: 'secondInstallmentDate',
+        component: InputText,
+        label: t('companyDesign.purchaseDetails.form.secondInstallmentDateLabel'),
+        value: secondInstallmentDate,
+        onFocus: this.openDatePicker,
+        id: 'secondInstallmentDate',
+        wrapperClass: 'installment-date'
+      },
+      {
+        stateKey: 'secondInstallmentAmount',
+        component: InputNumber,
+        label: t('companyDesign.purchaseDetails.form.secondInstallmentLabel'),
+        value: secondInstallmentAmount,
+        wrapperClass: 'background-gradient installment-amount',
+      },
+      {
+        component: Button,
+        onClick: () => this.showNextInstallment(),
+        icon: addIcon,
+        small: true,
+        label: t('companyDesign.purchaseDetails.form.addButton'),
+        hidden: this.checkElementHidden()
+      },
+      {
         stateKey: 'expectedExchange',
         component: RadioGroup,
         groupLabel: t('companyDesign.purchaseDetails.form.expectedExchangeLabel'),
@@ -220,14 +290,14 @@ class PurchaseDetails extends Component {
 
           <IntroBox>{t('companyDesign.purchaseDetails.intro')}</IntroBox>
 
-          {/* {showErrorMessage && 
+          {showErrorMessage && 
               <ErrorBox>
               { errors.form 
                 ? errors.form
-                : t('companyDesign.propertyAddress.form.error')
+                : t('companyDesign.purchaseDetails.form.error')
               }
               </ErrorBox>
-            } */}
+            }
 
           <Form>
             {formUtils.renderForm(this)}

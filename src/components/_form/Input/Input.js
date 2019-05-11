@@ -50,7 +50,7 @@ const Input = (props) => {
     <div 
       className={classNames('text-input', wrapperClass)}
       data-test="component-input"
-      style={{ display: hidden ? 'none' : 'block'}}
+      style={ hidden !== undefined ? { display: hidden ? 'none' : 'block'} : {}}
     >
       <div className="text-input-label">
         {label}
