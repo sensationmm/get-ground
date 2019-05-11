@@ -10,6 +10,7 @@ import formUtils from 'src/utils/form';
 
 import Form from 'src/components/_layout/Form/Form';
 import InputText from 'src/components/_form/InputText/InputText';
+import InputNumber from 'src/components/_form/InputNumber/InputNumber';
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
 import Button from 'src/components/_buttons/Button/Button';
 import RadioGroup from 'src/components/_form/RadioGroup/RadioGroup';
@@ -36,8 +37,10 @@ class PurchaseDetails extends Component {
         expectedExchange: '',
         completionDate: '',
         depositDueDate: '',
+        depositAmount: '',
         exchangeDate: '',
-        firstInstallmentDate: ''
+        firstInstallmentDate: '',
+        firstInstallmentAmount: ''
       }),
       isDatepickerOpen: false,
       focusedDateField: ''
@@ -73,10 +76,29 @@ class PurchaseDetails extends Component {
     this.setState({ [focusedDateField]: moment(date).format('L'), isDatepickerOpen: false });
   }
 
+  checkElementHidden = () => {
+    const { values: { newBuild, completionDate } } = this.state;
+    return (newBuild === '') || (newBuild === 'yes' && completionDate === '')
+  }
+
+  submitPurchaseDetails = () => {
+    //console.log(this.state)
+  }
+
   render() {
     const { t } = this.props;
     const { 
-      values,
+      values: {
+        priceOfProperty,
+        newBuild,
+        completionDate,
+        depositDueDate,
+        depositAmount,
+        firstInstallmentDate,
+        firstInstallmentAmount,
+        expectedExchange,
+        exchangeDate
+      },
       isDatepickerOpen
     } = this.state;
 
@@ -94,9 +116,9 @@ class PurchaseDetails extends Component {
     this.config = [
       {
         stateKey: 'priceOfProperty',
-        component: InputText,
+        component: InputNumber,
         label: t('companyDesign.purchaseDetails.form.priceOfPropertyLabel'),
-        value: values.priceOfProperty,
+        value: priceOfProperty,
         validationFunction: 'validateRequired',
         note: t('companyDesign.purchaseDetails.form.priceOfPropertyNote'),
       },
@@ -104,59 +126,81 @@ class PurchaseDetails extends Component {
         stateKey: 'newBuild',
         component: RadioGroup,
         groupLabel: t('companyDesign.purchaseDetails.form.newBuildLabel'),
-        value: values.newBuild,
         name: 'newBuildRadio',
         items: this.radioConfig,
-        selectedValue: values.newBuild
+        value: newBuild
       },
       {
         stateKey: 'completionDate',
         component: InputText,
         label: t('companyDesign.purchaseDetails.form.completionDateLabel'),
-        value: values.completionDate,
+        value: completionDate,
         validationFunction: 'validateRequired',
         onFocus: this.openDatePicker,
         id: 'completionDate',
+        hidden: newBuild !== 'yes'
       },
       {
         component: 'h1',
-        children: t('companyDesign.purchaseDetails.heading2')
+        children: t('companyDesign.purchaseDetails.heading2'),
+        style: { display: this.checkElementHidden() ? 'none' : 'block' }
       },
       {
         stateKey: 'depositDueDate',
         component: InputText,
         label: t('companyDesign.purchaseDetails.form.depositDueLabel'),
-        value: values.depositDueDate,
+        value: depositDueDate,
         validationFunction: 'validateRequired',
         onFocus: this.openDatePicker,
         id: 'depositDueDate',
+        hidden: this.checkElementHidden()
+      },
+      {
+        stateKey: 'depositAmount',
+        component: InputNumber,
+        label: t('companyDesign.purchaseDetails.form.depositAmountLabel'),
+        value: depositAmount,
+        validationFunction: 'validateRequired',
+        wrapperClass: 'background-gradient',
+        hidden: this.checkElementHidden()
       },
       {
         stateKey: 'firstInstallmentDate',
         component: InputText,
         label: t('companyDesign.purchaseDetails.form.firstInstallmentDateLabel'),
-        value: values.firstInstallmentDate,
+        value: firstInstallmentDate,
         validationFunction: 'validateRequired',
         onFocus: this.openDatePicker,
         id: 'firstInstallmentDate',
+        hidden: this.checkElementHidden()
+      },
+      {
+        stateKey: 'firstInstallmentAmount',
+        component: InputNumber,
+        label: t('companyDesign.purchaseDetails.form.firstInstallmentLabel'),
+        value: firstInstallmentAmount,
+        validationFunction: 'validateRequired',
+        wrapperClass: 'background-gradient',
+        hidden: this.checkElementHidden()
       },
       {
         stateKey: 'expectedExchange',
         component: RadioGroup,
         groupLabel: t('companyDesign.purchaseDetails.form.expectedExchangeLabel'),
-        value: values.expectedExchange,
+        value: expectedExchange,
         name: 'exchangeDateRadios',
         items: this.radioConfig,
-        selectedValue: values.expectedExchange
+        hidden: this.checkElementHidden()
       },
       {
         stateKey: 'exchangeDate',
         component: InputText,
         label: t('companyDesign.purchaseDetails.form.expectedExchangeDateLabel'),
-        value: values.exchangeDate,
+        value: exchangeDate,
         validationFunction: 'validateRequired',
         onFocus: this.openDatePicker,
         id: 'exchangeDate',
+        hidden: expectedExchange !== 'yes'
       },
       {
         component: Datepicker,
@@ -188,12 +232,14 @@ class PurchaseDetails extends Component {
           <Form>
             {formUtils.renderForm(this)}
 
-            <Button
-              label={t('companyDesign.purchaseDetails.form.nextButton')}
-              fullWidth
-              onClick={this.submitPropertyAddress}
-              classes="primary"
-            />
+            { expectedExchange !== '' &&
+              <Button
+                label={t('companyDesign.purchaseDetails.form.nextButton')}
+                fullWidth
+                onClick={this.submitPurchaseDetails}
+                classes="primary"
+              />
+            }
 
             <Button classes="secondary" label={t('companyDesign.purchaseDetails.form.backButton')} fullWidth />
           </Form>
