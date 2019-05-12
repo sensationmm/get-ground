@@ -4,10 +4,11 @@ import PropTypes from 'prop-types'
 import Dropzone from 'react-dropzone'
 import Webcam from 'react-webcam'
 import { connect } from 'react-redux'
+import classNames from 'classnames'
 
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox'
 import Button from 'src/components/_buttons/Button/Button'
-import { setImg } from 'src/state/actions/idCheck'
+import { setImg, setActive, resetActive } from 'src/state/actions/idCheck'
 
 import './add-proof.scss'
 /**
@@ -34,10 +35,20 @@ export class AddProof extends Component {
     const { initialImg, section } = this.props;
 
     return (
-      <div data-test="initial-img" onClick={() => this.setState({takePicture: true})}>
+      <div data-test="initial-img" onClick={() => this.handleActiveSection({takePicture: true})}>
         <img src={initialImg} alt={`add-proof-${section}`}/>
       </div>
     )
+  }
+
+  /**
+   * @param {Object} newState - new state object passed by parent function to set state
+   * @return {void}
+   */
+  handleActiveSection = (newState) => {
+    const { section } = this.props
+    this.props.setActive(section)
+    this.setState(newState)
   }
 
   /**
@@ -84,8 +95,11 @@ export class AddProof extends Component {
   }
 
   showFinalImg = () => {
-    this.props.setImg(this.props.section, this.state.imageSrc)
-    return <img src={this.state.imageSrc} onClick={() => this.setState({ retakePicture: true })}/>
+    if (this.props.active === this.props.section) {
+      this.props.setImg(this.props.section, this.state.imageSrc)
+      this.props.resetActive()
+    }
+    return <img src={this.state.imageSrc} onClick={() => this.handleActiveSection({ retakePicture: true })}/>
   }
 
   /**
@@ -118,12 +132,12 @@ export class AddProof extends Component {
   }
 
   handleProof = (t) => {
-    const { isSelfie } = this.props
+    const { isMobile } = this.props
 
     const videoConstraints = {
       width: 1280,
       height: 720,
-      facingMode: isSelfie ? 'user' : { exact: 'environment' }
+      facingMode: isMobile ? 'user' : 'environment'
     };
 
     if (this.state.imageSrc && !this.state.retakePicture) return this.showFinalImg()
@@ -163,7 +177,7 @@ export class AddProof extends Component {
   render() {
     const { t, section } = this.props
     return (
-      <div data-test="component-add-proof" className="add-proof" role="account">
+      <div data-test="component-add-proof" className={classNames(['add-proof', {'disabled': this.props.active && this.props.active !== section  }])} role="account">
         <IntroBox data-test="intro-box">{ t(`onBoarding.idCheck.${section}.title`) }</IntroBox>
         <p className="add-proof-content">{ !this.state.takePicture || !this.state.retakePicture ? t(`onBoarding.idCheck.${section}.content`) : t(`onBoarding.idCheck.${section}.retakeImageContent`)}</p>
         <div className="add-proof-img">{this.handleProof(t)}</div>
@@ -177,11 +191,22 @@ AddProof.propTypes = {
   t: PropTypes.func.isRequired,
   section: PropTypes.string.isRequired,
   initialImg: PropTypes.string.isRequired,
-  setImg: PropTypes.func,
-  isSelfie: PropTypes.bool.isRequired
+  isSelfie: PropTypes.bool,
+  setImg: PropTypes.func.isRequired,
+  setActive: PropTypes.func.isRequired,
+  resetActive: PropTypes.func.isRequired,
+  active: PropTypes.string.isRequired,
+  isMobile: PropTypes.bool.isRequired
 }
+const mapStataToProps = (state) => ({
+  active: state.idCheck.active,
+  isMobile: state.layout.isMobile
+})
+
 const actions = {
-  setImg
+  setImg,
+  setActive,
+  resetActive
 }
 
-export default connect(null, actions)(withTranslation()(AddProof));
+export default connect(mapStataToProps, actions)(withTranslation()(AddProof));

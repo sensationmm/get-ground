@@ -33,7 +33,7 @@ export class IdCheck extends Component {
         <h1 className="id-check-title">{ t('onBoarding.idCheck.title') }</h1>
         <AddProof section="passport" initialImg={Passport} />
         <AddProof section="address" initialImg={Address} />
-        <AddProof section="selfie" initialImg= {Selfie} isSelfie />
+        <AddProof section="selfie" initialImg= {Selfie} />
         <Button classes="primary id-check-next" label={ t('onBoarding.idCheck.buttonNext') } fullWidth />
         <Link to="/onboarding/process-tracker"><Button classes="secondary id-check-back" label={ t('onBoarding.idCheck.buttonBack') } fullWidth /></Link>
         <Button classes="link small id-check-skip" label={ t('onBoarding.idCheck.buttonSkip') } fullWidth />
@@ -47,13 +47,14 @@ IdCheck.propTypes = {
   t: PropTypes.func.isRequired,
   passport: PropTypes.string,
   address: PropTypes.string,
-  selfie: PropTypes.string
+  selfie: PropTypes.string,
+  isMobile: PropTypes.string,
 }
 
 const mapStateToProps = state => ({
   passport: state.idCheck.passport,
   address: state.idCheck.address,
-  selfie: state.idCheck.selfie,
+  selfie: state.idCheck.selfie
 })
 
 export default connect(mapStateToProps, null)(withTranslation()(IdCheck));

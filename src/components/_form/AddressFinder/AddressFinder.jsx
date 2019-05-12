@@ -46,17 +46,17 @@ class AddressFinder extends Component {
 
   render() {
     const { search } = this.state;
-    const { 
-      resetAddress, 
-      isManualAddress, 
-      isAddressValid, 
+    const {
+      resetAddress,
+      isManualAddress,
+      isAddressValid,
       buttonLabel,
       addressFinderLabel
     } = this.props;
 
     return (
-      <div 
-        className="address-finder" 
+      <div
+        className="address-finder"
         data-test="component-address-finder"
         style={{ display: isManualAddress ? 'none' : 'block'}}
       >
@@ -74,30 +74,30 @@ class AddressFinder extends Component {
           {!isAddressValid &&
             <div data-test="address-textarea-error" className="address-textarea-required">Required</div>
           }
-          
-          <textarea 
-            id="addressArea" 
+
+          <textarea
+            id="addressArea"
             name="addressArea"
             readOnly
             className={classNames([ 'address-text-area',
               {'error': !isAddressValid }
             ])}
           />
-          <img 
-            src={editIcon} 
+          <img
+            src={editIcon}
             className="edit-icon"
             onClick={() => {
               resetAddress();
               this.resetSearchValue();
-            }} 
-            alt="edit icon" 
+            }}
+            alt="edit icon"
           />
         </div>
-        
+
         <Button
           onClick={this.toggleManualAddress}
-          label={buttonLabel} 
-          classes='link small' 
+          label={buttonLabel}
+          classes='link small'
         />
       </div>
     );

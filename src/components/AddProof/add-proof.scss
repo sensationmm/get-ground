@@ -7,6 +7,11 @@ video {
 .add-proof {
   margin-bottom: 10px;
 
+  &.disabled {
+    opacity: 0.4;
+    pointer-events: none
+  }
+
   &-content {
     color: $text-secondary;
   }
@@ -35,5 +40,3 @@ video {
     text-align: center;
   }
 }
-
-

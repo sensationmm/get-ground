@@ -31,6 +31,10 @@ describe('<AddProof />', () => {
       isSelfie: false,
       setImg: jest.fn(),
       t: jest.fn(),
+      setActive: jest.fn(),
+      resetActive: jest.fn(),
+      active: '',
+      isMobile: false,
       i18n: {
         t: jest.fn().mockReturnValue('mock-string'),
       }
