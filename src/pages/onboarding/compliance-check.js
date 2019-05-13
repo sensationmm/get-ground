@@ -127,17 +127,20 @@ class ComplianceCheck extends Component {
    * @param {string} val - The certification value
    * @return {void}
    */
-  getModalContent = /* istanbul ignore next */ val => {
+  getModalContent = val => {
     const { showLoader, hideLoader, showModal } = this.props;
 
+    const markdown = val === 'highnetworth' 
+      ? 'Investor Statement - High Net Worth'
+      : 'Investor Statement - Sophisticated';
+
     showLoader();
-    ModalService.fetchModalContent().then(response => {
-      const markdownIndex = val === 'highnetworth' ? response.data[0] : response.data[18];
+    ModalService.fetchModalContent(markdown).then(response => {
       const stateKey = val === 'highnetworth' ? 'highNetWorthMarkdown' : 'selfCertifiedMarkdown';
 
       this.setState({ 
-        modalMarkdown: markdownIndex.markdown_text,
-        [stateKey]: markdownIndex.markdown_text
+        modalMarkdown: response.data.markdown_text,
+        [stateKey]: response.data.markdown_text
       });
       
       hideLoader();

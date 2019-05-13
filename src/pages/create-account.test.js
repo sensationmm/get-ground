@@ -4,7 +4,7 @@ import { navigate } from 'gatsby';
 import { setup, findByTestAttr } from 'src/test-utils/test-utils';
 import formUtils from 'src/utils/form';
 
-import { RawComponent as CreateAccount, AccountService } from './create-account';
+import { RawComponent as CreateAccount, AccountService, ModalService } from './create-account';
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 
 jest.mock('gatsby', () => ({
@@ -15,6 +15,7 @@ describe('<CreateAccount />', () => {
   let wrapper;
 
   AccountService.createAccount = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
+  ModalService.fetchModalContent = jest.fn('val').mockReturnValue(Promise.resolve({ data: { markdown_text: '<h1>HI</h1>' } }));
   const showLoaderMock = jest.fn();
   const hideLoaderMock = jest.fn();
   const tMock = jest.fn().mockReturnValue('string');
@@ -44,6 +45,15 @@ describe('<CreateAccount />', () => {
       { showErrorMessage: true, errors: { form: 'Test error' } }
     );
     expect(wrapper.contains(<ErrorBox>Test error</ErrorBox>)).toBe(true);
+  });
+
+  describe('getModalContent()', () => {
+    test('gets content and shows modal', async () => {
+      await wrapper.instance().getModalContent({ preventDefault: jest.fn() });
+      expect(showLoaderMock).toHaveBeenCalledTimes(1);
+      expect(wrapper.state().termsMarkdown).toEqual('<h1>HI</h1>');
+      expect(hideLoaderMock).toHaveBeenCalledTimes(1);
+    });
   });
 
   describe('createAccount()', () => {
