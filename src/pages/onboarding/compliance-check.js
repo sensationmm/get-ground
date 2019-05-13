@@ -127,17 +127,20 @@ class ComplianceCheck extends Component {
    * @param {string} val - The certification value
    * @return {void}
    */
-  getModalContent = /* istanbul ignore next */ val => {
+  getModalContent = val => {
     const { showLoader, hideLoader, showModal } = this.props;
 
+    const markdown = val === 'highnetworth' 
+      ? 'Investor Statement - High Net Worth'
+      : 'Investor Statement - Sophisticated';
+
     showLoader();
-    ModalService.fetchModalContent().then(response => {
-      const markdownIndex = val === 'highnetworth' ? response.data[0] : response.data[18];
+    ModalService.fetchModalContent(markdown).then(response => {
       const stateKey = val === 'highnetworth' ? 'highNetWorthMarkdown' : 'selfCertifiedMarkdown';
 
       this.setState({ 
-        modalMarkdown: markdownIndex.markdown_text,
-        [stateKey]: markdownIndex.markdown_text
+        modalMarkdown: response.data.markdown_text,
+        [stateKey]: response.data.markdown_text
       });
       
       hideLoader();
@@ -196,7 +199,7 @@ class ComplianceCheck extends Component {
           <h1>{ t('compliance.header') }</h1>
           <p>{ t('compliance.text') }</p>
 
-          {showErrorMessage && errors.form.length > 0 &&
+          {showErrorMessage && errors.form &&
             <ErrorBox>{errors.form}</ErrorBox>
           }
 
@@ -315,11 +318,9 @@ ComplianceCheck.propTypes = {
   modalIsOpen: PropTypes.bool
 };
 
-const mapStateToProps = state => {
-  return {
-    modalIsOpen: state.modal.isOpen
-  }
-};
+const mapStateToProps = state => ({
+  modalIsOpen: state.modal.isOpen
+});
 
 const actions = { 
   showLoader,

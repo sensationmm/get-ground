@@ -42,6 +42,7 @@ export class Layout extends Component {
         if (redirect) navigate(redirect);
 
       } else if(secure) {
+        localStorage.removeItem('gg-auth');
         navigate(`/login${redirect ? `?redirect=${redirect}` : ``}`);
       }
     }
