@@ -9,6 +9,7 @@ import AddProof from 'src/components/AddProof/AddProof'
 import Passport from 'src/assets/images/add-passport.svg'
 import Address from 'src/assets/images/add-address.svg'
 import Selfie from 'src/assets/images/add-selfie.svg'
+import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 import Button from 'src/components/_buttons/Button/Button'
 import kycService from 'src/services/KYC'
 
@@ -25,11 +26,12 @@ export class IdCheck extends Component {
     const { passport, address, selfie } = this.props
     KYCService.makeCheck(passport, address, selfie)
   }
-
   render() {
     const { t } = this.props
+    const headerActions = <Link to="/onboarding/process-tracker"><ButtonHeader label="Exit" /></Link>;
+
     return (
-      <Layout>
+      <Layout headerActions={headerActions}>
       <div data-test="container-id-check" className="id-check" role="account">
         <h1 className="id-check-title">{ t('onBoarding.idCheck.title') }</h1>
         <AddProof section="passport" initialImg={Passport} />
