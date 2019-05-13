@@ -132,12 +132,12 @@ export class AddProof extends Component {
   }
 
   handleProof = (t) => {
-    const { isMobile } = this.props
+    const { section } = this.props
 
     const videoConstraints = {
       width: 1280,
       height: 720,
-      facingMode: isMobile ? 'user' : 'environment'
+      facingMode: section === 'selfie' ? 'user' : 'environment'
     };
 
     if (this.state.imageSrc && !this.state.retakePicture) return this.showFinalImg()
@@ -195,12 +195,10 @@ AddProof.propTypes = {
   setImg: PropTypes.func.isRequired,
   setActive: PropTypes.func.isRequired,
   resetActive: PropTypes.func.isRequired,
-  active: PropTypes.string.isRequired,
-  isMobile: PropTypes.bool.isRequired
+  active: PropTypes.string.isRequired
 }
 const mapStataToProps = (state) => ({
-  active: state.idCheck.active,
-  isMobile: state.layout.isMobile
+  active: state.idCheck.active
 })
 
 const actions = {

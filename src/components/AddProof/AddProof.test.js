@@ -169,10 +169,10 @@ describe('<AddProof />', () => {
     expect(wrapper.state().uploadedFile).toEqual({ mockFile: 'mock-uploaded-file' })
   })
 
-  it('change video constraints when isMobile is true', () => {
+  it('change video constraints when section is selfie', () => {
     const customProps = {
       ...props,
-      isMobile: true
+      section: 'selfie'
     }
 
     wrapper = shallow(<AddProof {...customProps} />);
