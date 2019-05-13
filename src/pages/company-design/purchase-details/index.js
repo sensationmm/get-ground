@@ -296,7 +296,7 @@ class PurchaseDetails extends Component {
               <ErrorBox>
               { errors.form 
                 ? errors.form
-                : t('companyDesign.purchaseDetails.form.error')
+                : t('form.correctErrors')
               }
               </ErrorBox>
             }
