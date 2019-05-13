@@ -25,11 +25,9 @@ import { showModal, hideModal } from 'src/state/actions/modal';
 import accountService from 'src/services/Account';
 export const AccountService = new accountService();
 import modalService from 'src/services/Modal';
-const ModalService = new modalService();
+export const ModalService = new modalService();
 
 import termsImage from 'src/assets/images/terms-image.svg';
-
-import RadioGroup from 'src/components/_form/RadioGroup/RadioGroup';
 
 /**
  * CreateAccount
@@ -79,14 +77,14 @@ class CreateAccount extends Component {
     }
   }
 
-  getModalContent = /* istanbul ignore next */ (e) => {
+  getModalContent = (e) => {
     const { showLoader, hideLoader, showModal } = this.props;
     const self = this;
     e.preventDefault();
 
     showLoader();
 
-    ModalService.fetchModalContent('ZwvX0BYNz_yQTRF2xyiF9s6qrZ4=').then(response => {
+    ModalService.fetchModalContent('getGround Terms and Conditions').then(response => {
       self.setState({ termsMarkdown: response.data.markdown_text });
       
       hideLoader();
@@ -98,30 +96,8 @@ class CreateAccount extends Component {
     const { values, errors, showErrorMessage, termsMarkdown } = this.state;
     const { t, modalIsOpen, showModal, hideModal } = this.props;
 
-    this.radioConfig = [
-      {
-        value: 'no',
-        label: 'no'
-      },
-      {
-        value: 'yes',
-        label: 'yes'
-      }
-    ];
-
-    // @TODO can this be moved out of render - fails on edit field currently
-
     /* istanbul ignore next */
     this.config = [
-      {
-        stateKey: 'newBuild',
-        component: RadioGroup,
-        groupLabel: 'radio group label',
-        value: values.newBuild,
-        name: 'newBuildRadio',
-        items: this.radioConfig,
-        selectedValue: values.newBuild
-      },
       {
         stateKey: 'email',
         component: InputText,
@@ -165,6 +141,7 @@ class CreateAccount extends Component {
         label: <div>
           {t('createAccount.form.label.privacyOne')}
           <a onClick={(e) => { 
+            e.stopPropagation();
             if (termsMarkdown === '') {
               this.getModalContent(e)
             } else {
