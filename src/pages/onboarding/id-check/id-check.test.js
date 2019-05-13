@@ -3,10 +3,19 @@ import { shallow } from 'enzyme'
 import { IdCheck } from './index'
 import AddProof from 'src/components/AddProof/AddProof'
 
+import kycService from 'src/services/KYC'
+
+jest.mock('src/services/KYC', () => {
+  return jest.fn().mockImplementation(() => {
+    return {
+      makeCheck: jest.fn()
+    };
+  });
+});
+
 describe('id-check', () => {
   let wrapper;
   let props;
-
   beforeEach(() => {
     props = {
       t: jest.fn(),
@@ -28,5 +37,10 @@ describe('id-check', () => {
 
   test('renders AddPassport', () => {
     expect(wrapper.find(AddProof).length).toEqual(3)
+  })
+
+  test('onUnmount calls KYC service', () => {
+    wrapper.unmount()
+    expect(kycService).toHaveBeenCalled();
   })
 })

@@ -106,7 +106,7 @@ export class AddProof extends Component {
    * @param {Object} file - uploaded file being turned into base64
    * @return {void}
    */
-  getBase64 = (file) => {
+  getDataUrl = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
@@ -123,7 +123,7 @@ export class AddProof extends Component {
    * @return {void}
    */
   onImageDrop = (files) => {
-    this.getBase64(files[0])
+    this.getDataUrl(files[0])
 
     this.setState({
       uploadedFile: files[0]

@@ -23,8 +23,9 @@ const KYCService = new kycService();
 export class IdCheck extends Component {
   componentWillUnmount() {
     const { passport, address, selfie } = this.props
-    KYCService.makeCheck(passport, address, selfie).then(res => res)
+    KYCService.makeCheck(passport, address, selfie)
   }
+
   render() {
     const { t } = this.props
     return (

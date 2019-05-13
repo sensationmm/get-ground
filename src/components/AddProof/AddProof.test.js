@@ -168,4 +168,88 @@ describe('<AddProof />', () => {
 
     expect(wrapper.state().uploadedFile).toEqual({ mockFile: 'mock-uploaded-file' })
   })
+
+  it('change video constraints when isMobile is true', () => {
+    const customProps = {
+      ...props,
+      isMobile: true
+    }
+
+    wrapper = shallow(<AddProof {...customProps} />);
+
+    wrapper.setState({
+      takePicture: true,
+      webcam: {
+        getScreenshot: jest.fn().mockReturnValue('base-img')
+      }
+    });
+
+    expect(wrapper.find('[data-test="webcam"]').length).toEqual(1)
+    expect(wrapper.find('[data-test="webcam"]').props().videoConstraints).toEqual({
+      width: 1280,
+      height: 720,
+      facingMode: 'user'
+    })
+  })
+
+  it('changes content when passed different section prop', () => {
+    const customProps = {
+      ...props,
+      section: 'address'
+    }
+
+    wrapper = shallow(<AddProof {...customProps} />);
+
+    expect(wrapper.find('[data-test="intro-box"]').length).toEqual(1)
+    expect(wrapper.find('p').length).toEqual(1)
+    expect(props.t).toHaveBeenCalledWith('onBoarding.idCheck.address.title')
+    expect(props.t).toHaveBeenCalledWith('onBoarding.idCheck.address.content')
+  })
+
+  it('adds disable classname to section when prop active is equal to a different section', () => {
+    const customProps = {
+      ...props,
+      active: 'address',
+    }
+
+    wrapper = shallow(<AddProof {...customProps} />);
+
+    expect(wrapper.find('[data-test="component-add-proof"]').length).toEqual(1)
+    expect(wrapper.find('[data-test="component-add-proof"]').hasClass('disabled')).toEqual(true)
+  })
+
+  it('does not fire actions to setImg and resetActive when prop active !== section', () => {
+    const customProps = {
+      ...props,
+      active: 'address',
+    }
+
+    wrapper = shallow(<AddProof {...customProps} />);
+
+    expect(props.resetActive).not.toHaveBeenCalled()
+    expect(props.setImg).not.toHaveBeenCalled()
+  })
+
+  it('on final img, fire actions to setImg and resetActive when prop active === section', () => {
+    const customProps = {
+      ...props,
+      active: 'passport'
+    }
+
+    wrapper = shallow(<AddProof {...customProps} />);
+
+    wrapper.setState({
+      takePicture: true,
+      retakePicture: false,
+      imageSrc: 'base-img',
+      webcam: {
+        getScreenshot: jest.fn().mockReturnValue('base-img')
+      }
+    });
+
+    expect(wrapper.find('[data-test="intro-box"]').length).toEqual(1)
+    expect(wrapper.find('img').props().src).toEqual('base-img')
+    expect(props.resetActive).toHaveBeenCalled()
+    expect(props.setImg).toHaveBeenCalledWith('passport', 'base-img')
+  })
 })

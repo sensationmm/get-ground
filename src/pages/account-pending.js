@@ -28,7 +28,7 @@ const VerifyEmail = () => {
       <div data-test="container-account-pending" className="account-pending" role="account">
         <h1>{ t('accountPending.title') }</h1>
         <p>{ t('accountPending.text') }</p>
-        
+
         <ImageFull src={EmailSent} />
 
         <IntroBox>{ t('accountPending.introBox') }</IntroBox>
