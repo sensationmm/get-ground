@@ -21,6 +21,7 @@ const Radio = ({ id, isChecked, label, name, value, onChange }) => {
         'radio',
         { 'checked': isChecked }
       )}
+      data-test="component-radio"
     >
       <input id={id} name={name} onChange={onChange} type="radio" value={value} />
       <label htmlFor={id}>

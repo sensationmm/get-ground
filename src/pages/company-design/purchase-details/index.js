@@ -71,11 +71,10 @@ class PurchaseDetails extends Component {
 
   closeDatePicker = () => this.setState({isDatepickerOpen: false});
 
-  setDateFieldValue = date => {
+  setDateFieldValue = /* istanbul ignore next */ date => {
     const { focusedDateField } = this.state
     const element = document.getElementById(focusedDateField);
 
-    // Element is null in unit test so blows up at this point...
     /* istanbul ignore else */
     if (!element) return;
 
@@ -90,7 +89,7 @@ class PurchaseDetails extends Component {
     return (newBuild === '') || (newBuild === 'yes' && completionDate === '')
   }
 
-  showNextInstallment = () => {
+  showNextInstallment = /* istanbul ignore next */ () => {
     const { extraInstallmentFieldsShowing } = this.state;
     const installmentDateField = document.getElementsByClassName('installment-date');
     const installmentDateAmount = document.getElementsByClassName('installment-amount');
@@ -103,7 +102,7 @@ class PurchaseDetails extends Component {
     installmentDateAmount[extraInstallmentFieldsShowing].style.display = 'block';
   }
 
-  submitPurchaseDetails = () => {
+  submitPurchaseDetails = /* istanbul ignore next */ () => {
     const { showLoader, hideLoader, t } = this.props;
 
     if (formUtils.validateForm(this)) {
@@ -304,6 +303,7 @@ class PurchaseDetails extends Component {
 
             { expectedExchange !== '' &&
               <Button
+                data-test="submit-button"
                 label={t('companyDesign.purchaseDetails.form.nextButton')}
                 fullWidth
                 onClick={this.submitPurchaseDetails}

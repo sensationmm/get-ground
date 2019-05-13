@@ -22,6 +22,7 @@ const RadioGroup = ({ items, name, onChange, value, groupLabel, hidden }) => {
       className={classNames(
         'radio-group',
       )}
+      data-test="component-radio-group"
       style={{ display: hidden ? 'none' : 'block'}}
     >
       <div className='radio-group--label'>{groupLabel}</div>
