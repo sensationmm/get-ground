@@ -1,12 +1,11 @@
 
-import React from 'react'
-import { Link } from 'gatsby'
-import { useTranslation } from 'react-i18next'
+import React from 'react';
+import { Link } from 'gatsby';
+import { useTranslation } from 'react-i18next';
 
-import Button from 'src/components/_buttons/Button/Button'
-import Layout from 'src/components/Layout/Layout'
-/* TODO: replace this when I have the proper svg from design */
-import successImg from 'src/assets/images/email-verified.png'
+import Button from 'src/components/_buttons/Button/Button';
+import Layout from 'src/components/Layout/Layout';
+import successImg from 'src/assets/images/star.svg';
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
 
 import './company-complete.scss'
