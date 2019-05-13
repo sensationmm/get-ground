@@ -6,6 +6,12 @@
     "contactLink": "Contact us"
   },
   "companyDesign": {
+    "companyComplete": {
+      "title": "Well done!",
+      "copy": "We have all the details we need to set up your company.",
+      "info":  "Your shareholders will receive an email now so they can begin setting up their account on getGround. In order to speed up your company setup perhaps you would like to encourage them to do so ASAP.",
+      "button": "next"
+    },
     "propertyAddress": {
       "heading": "Property Address",
       "intro": "Let's start with your property address.",

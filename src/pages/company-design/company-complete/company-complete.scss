@@ -1,0 +1,18 @@
+.company-complete {
+
+  &--image {
+    display: block;
+    margin: 0 auto;
+  }
+
+  &--heading {
+    font-size: 34px;
+    margin-bottom: 40px;
+  }
+
+  &--copy {
+    font-weight: lighter;
+    font-size: 19px;
+    margin-bottom: 40px;
+  }
+}
