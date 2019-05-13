@@ -21,7 +21,7 @@ import Datepicker from 'src/components/Datepicker/Datepicker';
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
 import propertyService from 'src/services/Property';
-const PropertyService = new propertyService();
+export const PropertyService = new propertyService();
 
 import addIcon from 'src/assets/images/add-icon.svg';
 import 'src/styles/pages/purchase-details.scss';
@@ -102,21 +102,24 @@ class PurchaseDetails extends Component {
     installmentDateAmount[extraInstallmentFieldsShowing].style.display = 'block';
   }
 
-  submitPurchaseDetails = /* istanbul ignore next */ () => {
+  submitPurchaseDetails = () => {
     const { showLoader, hideLoader, t } = this.props;
 
+    /* istanbul ignore else */
     if (formUtils.validateForm(this)) {
       showLoader();
 
       PropertyService.SavePurchaseDetails({ 'placeholder': 'bla' }).then((response) => {
         hideLoader();
+        /* istanbul ignore else */
         if (response.status === 201) {
           navigate('/company-details/solicitor-details');
+          
         } else if (response.status === 400) {
           this.setState({
             ...this.state,
             errors: {
-              form: t('companyDesign.purchaseDetails.form.error')
+              form: t('form.correctErrors')
             },
             showErrorMessage: true
           });

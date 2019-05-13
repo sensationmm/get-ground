@@ -44,8 +44,7 @@
         "expectedExchangeDateLabel": "Please provide your exchange date",
         "addButton": "Another payment date",
         "nextButton": "Next",
-        "backButton": "Back",
-        "error": "Please fix your errors to proceed"
+        "backButton": "Back"
       },
       "datepicker": {
         "button1": "cancel",
