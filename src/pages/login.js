@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { Link, navigate } from 'gatsby';
+import queryString from 'query-string'
 
 import Layout from 'src/components/Layout/Layout'
 import Button from 'src/components/_buttons/Button/Button';
@@ -40,7 +41,7 @@ class Login extends Component {
 
   onLogin = async () => {
     const { email, password } = this.state.values;
-    const { showLoader, hideLoader, t } = this.props;
+    const { showLoader, hideLoader, t, location: { search } } = this.props;
     const self = this;
 
     if(formUtils.validateForm(this)) {
@@ -50,7 +51,14 @@ class Login extends Component {
       .then((res) => {
         hideLoader();
         if(res.status === 200) {
-          navigate('/onboarding/intro');
+          const queryStringValues = queryString.parse(search)
+
+          if (queryStringValues.redirect) {
+            navigate(queryStringValues.redirect);
+          } else {
+            navigate('/onboarding/intro');
+          }
+
         } else {
           self.setState({
             ...self.state,
@@ -121,7 +129,8 @@ class Login extends Component {
 Login.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
-  t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired,
+  location: PropTypes.object
 };
 
 export const RawComponent = Login;

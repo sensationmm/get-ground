@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import { navigate } from 'gatsby'
 import { useTranslation } from 'react-i18next'
 
@@ -10,18 +10,16 @@ import ImageFull from '../components/ImageFull/ImageFull'
 import EmailSent from '../assets/images/email-sent.svg'
 
 import authService from 'src/services/Auth';
-const AuthService = new authService();
+export const AuthService = new authService();
 
-const VerifyEmail = () => {
+const AccountPending = () => {
   const [t] = useTranslation();
 
-  useEffect(() => {
-    AuthService.verifyEmail().then((response => {
-      if(response.status === 200) {
-        navigate('/email-verified')
-      }
-    }))
-  });
+  AuthService.verifyEmail().then((response => {
+    if(response.status === 200) {
+      navigate('/email-verified')
+    }
+  }));
 
   return (
     <Layout>
@@ -39,4 +37,4 @@ const VerifyEmail = () => {
   );
 }
 
-export default VerifyEmail;
+export default AccountPending;

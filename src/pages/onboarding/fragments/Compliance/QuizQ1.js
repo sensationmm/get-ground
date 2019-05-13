@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import OptionSelect from 'src/components/OptionSelect/OptionSelect';
 import { taxBrackets } from 'src/config/legal';
 
 const QuizQ1 = props => {
-  const { t, numQuestions, selected, onChange } = props;
+  const { numQuestions, selected, onChange } = props;
+  const [t] = useTranslation();
 
   return (
     <div data-test="component-quiz1">
@@ -45,7 +47,6 @@ const QuizQ1 = props => {
 };
 
 QuizQ1.propTypes = {
-  t: PropTypes.func,
   numQuestions: PropTypes.number,
   selected: PropTypes.string,
   onChange: PropTypes.func

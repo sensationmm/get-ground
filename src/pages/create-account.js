@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { CSSTransition } from 'react-transition-group';
+import { navigate } from 'gatsby';
 
 import Layout from 'src/components/Layout/Layout'
 import formUtils from 'src/utils/form';
@@ -22,12 +23,11 @@ import { showLoader, hideLoader } from 'src/state/actions/loader';
 import { showModal, hideModal } from 'src/state/actions/modal';
 
 import accountService from 'src/services/Account';
+export const AccountService = new accountService();
 import modalService from 'src/services/Modal';
-const AccountService = new accountService();
-const ModalService = new modalService();
+export const ModalService = new modalService();
 
 import termsImage from 'src/assets/images/terms-image.svg';
-import { navigate } from 'gatsby';
 
 /**
  * CreateAccount
@@ -60,7 +60,7 @@ class CreateAccount extends Component {
     if(formUtils.validateForm(this)) {
       showLoader();
 
-      AccountService.createAccount(email, password, optin).then(function(response) {
+      AccountService.createAccount(email, password, optin).then(response => {
         hideLoader();
         if(response.status === 201) {
           navigate('/account-pending');
@@ -77,14 +77,14 @@ class CreateAccount extends Component {
     }
   }
 
-  getModalContent = e => {
+  getModalContent = (e) => {
     const { showLoader, hideLoader, showModal } = this.props;
     const self = this;
     e.preventDefault();
 
     showLoader();
 
-    ModalService.fetchModalContent('ZwvX0BYNz_yQTRF2xyiF9s6qrZ4=').then(response => {
+    ModalService.fetchModalContent('getGround Terms and Conditions').then(response => {
       self.setState({ termsMarkdown: response.data.markdown_text });
       
       hideLoader();
@@ -95,7 +95,6 @@ class CreateAccount extends Component {
   render() {
     const { values, errors, showErrorMessage, termsMarkdown } = this.state;
     const { t, modalIsOpen, showModal, hideModal } = this.props;
-    // @TODO can this be moved out of render - fails on edit field currently
 
     /* istanbul ignore next */
     this.config = [
@@ -142,6 +141,7 @@ class CreateAccount extends Component {
         label: <div>
           {t('createAccount.form.label.privacyOne')}
           <a onClick={(e) => { 
+            e.stopPropagation();
             if (termsMarkdown === '') {
               this.getModalContent(e)
             } else {

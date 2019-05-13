@@ -1,13 +1,15 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import OptionSelect from 'src/components/OptionSelect/OptionSelect';
 import Option from 'src/components/Option/Option';
 import Button from 'src/components/_buttons/Button/Button';
 import { inArray } from 'src/utils/functions';
 
 const QuizQ2 = props => {
-  const { t, numQuestions, selected, onChange, onClickNone, onClickNext, onDeselectAll } = props;
+  const { numQuestions, selected, onChange, onClickNone, onClickNext, onDeselectAll } = props;
+  const [t] = useTranslation();
 
   return (
     <div data-test="component-quizq2">
@@ -35,14 +37,13 @@ const QuizQ2 = props => {
         classes="primary"
         fullWidth
         onClick={onClickNext} label={t('compliance.quiz.largeEnterprise.buttonNext')}
-        disabled={selected.length === 0}
+        disabled={selected && selected.length === 0}
       />
     </div>
   );
 };
 
 QuizQ2.propTypes = {
-  t: PropTypes.func,
   numQuestions: PropTypes.number,
   selected: PropTypes.array,
   onChange: PropTypes.func,

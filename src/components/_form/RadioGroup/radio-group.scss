@@ -1,0 +1,12 @@
+@import '../Input/input.scss';
+
+.radio-group {
+
+  &--radio-wrapper {
+    display: flex;
+  }
+
+  &--label {
+    @extend .text-input-label;
+  }
+}

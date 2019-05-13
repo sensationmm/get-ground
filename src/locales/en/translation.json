@@ -5,6 +5,27 @@
     "introBox": "If you didn‘t receive an email please check your spam folder and if it isn‘t there contact us.",
     "contactLink": "Contact us"
   },
+  "companyDesign": {
+    "propertyAddress": {
+      "heading": "Property Address",
+      "intro": "Let's start with your property address.",
+      "form": {
+        "addressFinderLabel": "Address Finder",
+        "countryLabel": "Country",
+        "unitNumberLabel": "Unit Number",
+        "streetLabel": "Street",
+        "cityLabel": "City",
+        "postcodeLabel": "Postcode",
+        "manualAddressButtonLabel": "Enter Address Manually",
+        "addressFinderButtonLabel": "Find Address",
+        "editIconAltText": "edit icon",
+        "nextButton": "Next",
+        "backButton": "Back",
+        "fieldErrorText": "Required",
+        "error": "Please fix your errors to proceed"
+      }
+    }
+  },
   "compliance": {
     "header": "Compliance Check",
     "text": "We need to know more about you as an investor, please answer the following four questions.",
@@ -78,6 +99,10 @@
         "buttonNext": "Next"
       }
     },
+    "modalHeading": "Investors Statement",
+    "modalDownloadButtonText": "Download",
+    "modalCloseAltText": "Close Icon",
+    "modalCheckboxLabel": "I’ve read the Investor’s statement letter and confirm that I understand the risk associated with investing.",
     "buttonDone": "Finished",
     "notSuitable": {
       "title": "We are sorry!",
@@ -177,7 +202,8 @@
       "form": {
         "numberOfCompaniesLabel": "No. of companies",
         "cardLabel": "Card details",
-        "error": "There was an issue with your payment"
+        "error": "There was an issue with your payment",
+        "retakePaymentError": "Your payment has failed. Please update your payment details so we can finalise your application"
       }
     },
     "personalDetails": {
@@ -209,7 +235,9 @@
         "backButton": "Back",
         "addNamesButton": "Any previous names",
         "extraNameLabel": "Extra name",
-        "phoneLabel": "Mobile number"
+        "phoneLabel": "Mobile number",
+        "editIconAltText": "edit icon",
+        "fieldErrorText": "Required"
       }
     },
     "progressTracker": {

@@ -21,7 +21,7 @@ import { navigate } from 'gatsby';
 
 export class Layout extends Component {
   componentDidMount() {
-    const { userID, secure } = this.props;
+    const { userID, secure, redirect } = this.props;
 
     this.props.setWidth(window.innerWidth);
     window.addEventListener('resize', (window) => this.props.setWidth(window.currentTarget.innerWidth));
@@ -38,8 +38,12 @@ export class Layout extends Component {
       if(auth && authed) {
         this.props.saveAuth(auth.token);
         AuthService.reauthenticate();
+
+        if (redirect) navigate(redirect);
+
       } else if(secure) {
-        navigate('/login');
+        localStorage.removeItem('gg-auth');
+        navigate(`/login${redirect ? `?redirect=${redirect}` : ``}`);
       }
     }
   }
@@ -71,7 +75,8 @@ Layout.propTypes = {
   headerActions: PropTypes.element,
   saveAuth: PropTypes.func,
   userID: PropTypes.number,
-  secure: PropTypes.bool
+  secure: PropTypes.bool,
+  redirect: PropTypes.string
 }
 
 Layout.defaultProps = {

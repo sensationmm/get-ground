@@ -6,10 +6,11 @@ import InputText from '../InputText/InputText';
 
 describe('<AddressFinder />', () => {
   let wrapper;
+  const toggleManualAddressMock = jest.fn();
 
   beforeEach(() => {
     wrapper = setup(AddressFinder, {
-      resetAddress: jest.fn(),
+      toggleManualAddress: toggleManualAddressMock,
       isManualAddress: false,
     }, {
       search: '',
@@ -21,15 +22,13 @@ describe('<AddressFinder />', () => {
     expect(component.length).toBe(1);
   });
 
-  test('call resetSearchValue when the manual address ButtonLink is clicked', () => {
-    const wrapper = setup(AddressFinder, { resetAddress: jest.fn(), isManualAddress: true }, { search: '' });
+  test('call toggleManualAddress when the manual address Button is clicked', () => {
+    const wrapper = setup(AddressFinder, { toggleManualAddress: toggleManualAddressMock, isManualAddress: true }, { search: '' });
     const component = findByTestAttr(wrapper, 'component-address-finder');
-
-    jest.spyOn(wrapper.instance(), 'resetSearchValue');
 
     component.find(Button).simulate('click');
 
-    expect(wrapper.instance().resetSearchValue).toHaveBeenCalled();
+    expect(toggleManualAddressMock).toHaveBeenCalledTimes(1);
   });
 
   test('expect resetSearchValue to be fired on edit icon click', () => {

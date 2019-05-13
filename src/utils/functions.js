@@ -7,6 +7,7 @@
  * @return {boolean} whether item exists
  */
 export const inArray = (item, array) => {
+  if (array === undefined) return false;
   return array.indexOf(item) >= 0;
 };
 

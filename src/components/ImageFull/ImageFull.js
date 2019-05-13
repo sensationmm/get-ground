@@ -19,8 +19,8 @@ const ImageFull = props => {
 };
 
 ImageFull.propTypes = {
-  src: PropTypes.string,
-  alt: PropTypes.string
+  alt: PropTypes.string,
+  src: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 };
 
 ImageFull.defaultProps = {

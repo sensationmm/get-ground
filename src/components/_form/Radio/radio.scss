@@ -1,0 +1,46 @@
+@import 'src/styles/modules/_colors.scss';
+@import 'src/styles/modules/_mixins.scss';
+
+.radio {
+  width: 90px;
+  height: 48px;
+  border: 1px solid #2f5472;
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  &:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  &:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
+  &.checked {
+    @include gradient-horizontal(#f2b47e, #fec858);
+    border: 0;
+    height: 50px;
+    width: 92px;
+  }
+
+  input {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    cursor: pointer;
+    outline: 0;
+  }
+}
