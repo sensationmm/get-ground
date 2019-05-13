@@ -9,6 +9,7 @@ describe('id-check', () => {
   beforeEach(() => {
     wrapper = shallow(<IdCheck />);
   })
+
   test('renders id-check', () => {
     expect(wrapper.length).toEqual(1);
   })

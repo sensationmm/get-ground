@@ -24,6 +24,14 @@
         "fieldErrorText": "Required",
         "error": "Please fix your errors to proceed"
       }
+    },
+    "shareholder": {
+      "allOwnership": "Currently you have 100% ownership",
+      "addShareholdersContent": "Would you like to add shareholders?",
+      "button": {
+        "yesAdd": "Yes, add shareholders",
+        "no": "No, I'm the only one"
+      }
     }
   },
   "compliance": {
