@@ -1,49 +1,110 @@
 version: 2
+
 references:
-    js_deps_cache_key: 'v8-dependency-js-deps-{{ checksum "package-lock.json" }}'
-    js_deps_backup_cache_key: v8-dependency-js-deps
-    workspace_root: /tmp/workspace
+  js_deps_cache_key: &js_deps_cache_key
+    v8-dependency-js-deps-{{ checksum "package-lock.json" }}
+  js_deps_backup_cache_key: &js_deps_backup_cache_key
+    v8-dependency-js-deps
+  workspace_root: &workspace_root
+    /tmp/workspace
+  attach_workspace: &attach_workspace
     attach_workspace:
-        attach_workspace:
-            at: /tmp/workspace
+      at: *workspace_root
+
 jobs:
-    build:
-        docker:
-            - {image: 'circleci/node:11.13.0'}
-        steps:
-            - {attach_workspace: {at: /tmp/workspace}}
-            - checkout
-            - {restore_cache: {keys: ['v8-dependency-js-deps-{{ checksum "package-lock.json" }}', v8-dependency-js-deps]}}
-            - {run: {name: 'npm dependencies', command: 'npm install'}}
-            - {run: {name: 'Prepare JS assets', command: 'npm run build'}}
-            - {run: {name: 'Persist JS assets', command: "set -exu\nmkdir -p /tmp/workspace/public\nmv public/* /tmp/workspace/public/\n"}}
-            - {persist_to_workspace: {root: /tmp/workspace, paths: [js]}}
-            - {save_cache: {key: 'v8-dependency-js-deps-{{ checksum "package-lock.json" }}', paths: [node_modules]}}
-    test:
-        docker:
-            - {image: 'circleci/node:11.13.0'}
-        steps:
-            - checkout
-            - {restore_cache: {keys: ['v1-dependencies-{{ checksum "package.json" }}', v1-dependencies-]}}
-            - {run: 'npm install'}
-            - {save_cache: {paths: [node_modules], key: 'v1-dependencies-{{ checksum "package.json" }}'}}
-            - {run: 'npm test'}
-    deploy:
-        docker:
-            - {image: 'getground/customer-frontend-pwa:2.0.1'}
-        working_directory: /go/src/github.com/getground/customer-frontend-pwa
-        steps:
-            - checkout
-            - {attach_workspace: {at: /tmp/workspace}}
-            - {run: {name: 'Restore js', command: "set -exu\nmkdir -p /tmp/workspace/public\nmv /tmp/workspace/public/* public/\n"}}
-            - {run: 'go get -v -t -d ./...'}
-            - {run: 'echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-'}
-            - {run: 'gcloud --quiet config set project ${GOOGLE_PROJECT_ID}'}
-            - {run: 'gcloud app deploy'}
+  build:
+    docker:
+      - image: circleci/node:11.13.0
+    steps:
+      - *attach_workspace
+      - checkout
+      - restore_cache:
+          keys:
+            - *js_deps_cache_key
+            - *js_deps_backup_cache_key
+      - run:
+          name: npm dependencies
+          command: npm install
+      - run:
+          name: Prepare JS assets
+          command: npm run build
+      - run:
+          name: Persist JS assets
+          command: |
+            set -exu
+            mkdir -p /tmp/workspace/public
+            mv public/* /tmp/workspace/public/
+      - persist_to_workspace:
+          root: *workspace_root
+          paths:
+            - js
+      - save_cache:
+          key: *js_deps_cache_key
+          paths:
+            - node_modules
+#   build:
+#     docker:
+#       - image: circleci/node:11.13.0
+#     steps:
+#       - checkout
+#       - restore_cache:
+#           keys:
+#             - v1-dependencies-{{ checksum "package.json" }}
+#             - v1-dependencies-
+#       - run: npm install
+#       - save_cache:
+#           paths:
+#             - node_modules
+#           key: v1-dependencies-{{ checksum "package.json" }}
+
+#       - run: npm run build
+
+  test:
+    docker:
+      - image: circleci/node:11.13.0
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run: npm test
+
+  deploy:
+    docker:
+      - image: getground/customer-frontend-pwa:2.0.1
+    working_directory: /go/src/github.com/getground/customer-frontend-pwa
+    steps:
+     - checkout
+     - *attach_workspace
+     - run:
+        name: Restore js
+        command: |
+          set -exu
+          mkdir -p /tmp/workspace/public
+          mv /tmp/workspace/public/* public/
+     - run: go get -v -t -d ./...
+     - run: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+     - run: gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+     - run: gcloud app deploy
+
 workflows:
-    version: 2
-    build_and_deploy:
-        jobs:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+      - test
+      - deploy:
+          requires:
             - build
             - test
-            - {deploy: {requires: [build, test], filters: {branches: {only: develop}}}}
+          filters:
+            branches:
+              only: develop
