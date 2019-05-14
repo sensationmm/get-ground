@@ -10,15 +10,28 @@ import BaseService from './BaseService';
  * @return {Object} PropertyService
  */
 class PropertyService extends BaseService {
+
   SavePropertyAddress = data => {
     const config = {
-      url: `companies`,
+      url: 'companies',
       method: 'post',
       data: {
         'property_street': data.street,
         'property_posttown': data.city,
         'property_premise': data.unitNumber,
         'property_postcode': data.postcode
+      }
+    };
+
+    return this.doRequest(config);
+  }
+
+  SavePurchaseDetails = data => {
+    const config = {
+      url: 'companies/1',
+      method: 'put',
+      data: {
+        'placeholder': data.placeholder
       }
     };
 

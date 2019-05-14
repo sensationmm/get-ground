@@ -10,7 +10,7 @@ describe('<Datepicker />', () => {
 
   beforeEach(() => {
     wrapper = setup(Datepicker, {
-      setDateOfBirth: setDateFunctionMock,
+      setDateFieldValue: setDateFunctionMock,
       closeDatepicker: closeFunctionMock
     });
   });
@@ -27,7 +27,7 @@ describe('<Datepicker />', () => {
     expect(closeFunctionMock).toHaveBeenCalled();
   });
 
-  test('expect `setDateOfBirth` to be called when MobileDatePicker fires `onSelect`', () => {
+  test('expect `setDateFieldValue` to be called when MobileDatePicker fires `onSelect`', () => {
     const component = findByTestAttr(wrapper, 'datepicker');
     component.find(MobileDatePicker).props().onSelect();
 

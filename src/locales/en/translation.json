@@ -12,6 +12,38 @@
       "info":  "Your shareholders will receive an email now so they can begin setting up their account on getGround. In order to speed up your company setup perhaps you would like to encourage them to do so ASAP.",
       "button": "next"
     },
+    "progressTracker": {
+      "inProgressTitle": "Design your company in 5 steps",
+      "complete": "complete",
+      "completeTitle": "All 5 steps complete",
+      "sections": {
+        "step1": {
+          "title": "Property Address",
+          "copy": "Property your company will hold",
+          "imageAltText": "Property"
+        },
+       "step2": {
+          "title": "Purchase details",
+          "copy": "Property type and purchase info",
+          "imageAltText": "Purchase"
+        },
+        "step3": {
+          "title": "Solicitor Details",
+          "copy": "Add Solicitor",
+          "imageAltText": "Solicitor Details"
+        },
+        "step4": {
+          "title": "Shareholder details",
+          "copy": "Add additional shareholders",
+          "imageAltText": "Shareholder details"
+        },
+        "step5": {
+          "title": "Add Services",
+          "copy": "Additional services you will need",
+          "imageAltText": "Services"
+        }
+      }
+    },
     "propertyAddress": {
       "heading": "Property Address",
       "intro": "Let's start with your property address.",
@@ -29,6 +61,32 @@
         "backButton": "Back",
         "fieldErrorText": "Required",
         "error": "Please fix your errors to proceed"
+      }
+    },
+    "purchaseDetails": {
+      "heading": "Purchase details",
+      "heading2": "Tell us about your payment schedule",
+      "intro": "Please provide your property purchase details below.",
+      "form": {
+        "priceOfPropertyLabel": "*Price of property",
+        "priceOfPropertyNote": "*excludes all costs and stamp duty",
+        "newBuildLabel": "Is your property a new build",
+        "completionDateLabel": "When is the completion date?",
+        "depositDueLabel": "What date is your deposit due?",
+        "depositAmountLabel": "Deposit Amount",
+        "firstInstallmentDateLabel": "First installment date?",
+        "firstInstallmentLabel": "First installment amount",
+        "secondInstallmentDateLabel": "Second installment date?",
+        "secondInstallmentLabel": "Second installment amount",
+        "expectedExchangeLabel": "Do you have an expected exchange date",
+        "expectedExchangeDateLabel": "Please provide your exchange date",
+        "addButton": "Another payment date",
+        "nextButton": "Next",
+        "backButton": "Back"
+      },
+      "datepicker": {
+        "button1": "cancel",
+        "button2": "confirm"
       }
     }
   },
