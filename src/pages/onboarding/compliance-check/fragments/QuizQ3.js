@@ -24,7 +24,7 @@ const QuizQ3 = props => {
           label={t('compliance.quiz.investmentConfirmation.buttonAgree')}
         />
 
-        <Link to="/not-suitable">
+        <Link to="/onboarding/not-suitable">
           <div className="contact-us">
             {t('compliance.quiz.investmentConfirmation.buttonDisagree')}
           </div>

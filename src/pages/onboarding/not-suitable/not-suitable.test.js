@@ -1,6 +1,6 @@
 import { setup, findByTestAttr } from 'src/test-utils/test-utils';
 
-import NotSuitable from './not-suitable';
+import NotSuitable from './index';
 
 describe('<NotSuitable />', () => {
   let wrapper;

@@ -2,7 +2,7 @@ import { navigate } from 'gatsby';
 
 import { setup, findByTestAttr } from 'src/test-utils/test-utils';
 
-import AccountPending, { AuthService } from './account-pending';
+import AccountPending, { AuthService } from './index';
 
 jest.mock('gatsby', () => ({
   navigate: jest.fn()
@@ -20,7 +20,7 @@ describe('<AccountPending />', () => {
   describe('verifyEmail()', () => {
     test('success', () => {
       setup(AccountPending);
-      expect(navigate).toHaveBeenCalledWith('/email-verified');
+      expect(navigate).toHaveBeenCalledWith('/onboarding/email-verified');
     });
     
     test('failure', () => {

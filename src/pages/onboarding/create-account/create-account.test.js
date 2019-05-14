@@ -4,7 +4,7 @@ import { navigate } from 'gatsby';
 import { setup, findByTestAttr } from 'src/test-utils/test-utils';
 import formUtils from 'src/utils/form';
 
-import { RawComponent as CreateAccount, AccountService, ModalService } from './create-account';
+import { RawComponent as CreateAccount, AccountService, ModalService } from './index';
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 
 jest.mock('gatsby', () => ({
@@ -75,7 +75,7 @@ describe('<CreateAccount />', () => {
       
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
-      expect(navigate).toHaveBeenCalledWith('/account-pending');
+      expect(navigate).toHaveBeenCalledWith('/onboarding/account-pending');
     });
 
     test('duplicate email failure', async () => {
