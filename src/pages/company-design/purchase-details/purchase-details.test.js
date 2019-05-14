@@ -85,6 +85,11 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
   });
 
   test('expect showNextInstallment to be called when button is clicked', () => {
+    const wrapper = setup(PurchaseDetails, defaultProps, {
+      values: {
+        newBuild: 'yes',
+      }
+    });
     const component = findByTestAttr(wrapper, 'container-company-design-purchase-details');
     wrapper.instance().showNextInstallment = jest.fn();
 
@@ -109,6 +114,11 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
   });
 
   test('expect openDatePicker to be called when the Datepicker is opened', () => {
+    const wrapper = setup(PurchaseDetails, defaultProps, {
+      values: {
+        newBuild: 'yes',
+      }
+    });
     const component = findByTestAttr(wrapper, 'container-company-design-purchase-details');
 
     jest.spyOn(wrapper.instance(), 'openDatePicker');

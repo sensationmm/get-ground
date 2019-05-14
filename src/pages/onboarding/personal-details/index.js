@@ -98,14 +98,7 @@ class OnboardingPersonalDetailsContainer extends Component {
     document.body.appendChild(script);
   }
   
-  toggleManualAddress = /* istanbul ignore next */ () => {
-    document.getElementById('addressArea').value = '';
-
-    this.setState((prevState) => ({
-      isManualAddress: !this.state.isManualAddress,
-      isTextAreaHidden: true
-    }))
-  };
+  toggleManualAddress = () => this.setState({ isManualAddress: !this.state.isManualAddress });
 
   initFormValidation = () => {
     const { showLoader, hideLoader, t, userID } = this.props;
