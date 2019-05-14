@@ -277,7 +277,7 @@ class OnboardingPersonalDetailsContainer extends Component {
         component: Datepicker,
         isDatepickerOpen: isDatepickerOpen,
         closeDatepicker: () => this.closeDatePicker(),
-        setDateOfBirth: date => this.setDateOfBirth(date),
+        setDateFieldValue: date => this.setDateOfBirth(date),
         confirmButtonText: t('onBoarding.personalDetails.datepicker.button2'),
         cancelButtonText: t('onBoarding.personalDetails.datepicker.button1')
       },

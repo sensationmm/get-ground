@@ -8,7 +8,7 @@ import './datepicker.scss';
  * Datepicker
  * @param {string} date - for JSdoc
  * @param {func} closeDatepicker - function for closing the datepicker
- * @param {func} setDateOfBirth - function to format and set the DOB
+ * @param {func} setDateFieldValue - function to format and set the DOB
  * @param {bool} isDatepickerOpen - boolean to check whether the picker is open or not
  * @param {string} confirmButtonText - text for the confirm button
  * @param {string} cancelButtonText - text for the cancel button
@@ -19,7 +19,7 @@ class Datepicker extends Component {
     super(props);
   }
 
-  handleSelect = date => this.props.setDateOfBirth(date);
+  handleSelect = date => this.props.setDateFieldValue(date);
 
   render() {
     const { 
@@ -46,7 +46,7 @@ class Datepicker extends Component {
 
 Datepicker.propTypes = {
   isDatepickerOpen: PropTypes.bool,
-  setDateOfBirth: PropTypes.func,
+  setDateFieldValue: PropTypes.func,
   closeDatepicker: PropTypes.func,
   confirmButtonText: PropTypes.string,
   cancelButtonText: PropTypes.string

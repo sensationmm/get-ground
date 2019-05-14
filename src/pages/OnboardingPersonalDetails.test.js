@@ -70,7 +70,7 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
 
     jest.spyOn(wrapper.instance(), 'setDateOfBirth');
 
-    component.find(Datepicker).props().setDateOfBirth();
+    component.find(Datepicker).props().setDateFieldValue();
 
     expect(wrapper.instance().setDateOfBirth).toHaveBeenCalled();
   });

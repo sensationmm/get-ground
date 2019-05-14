@@ -11,7 +11,7 @@ const Shareholder = () => {
   const [t] = useTranslation()
   return (
     <Layout>
-      <div className="shareholder" role="company">
+      <div className="shareholder" role="company-design">
         <img className="shareholder-icon" src={icon} alt="100% ownership" />
         <h1 className="shareholder-title">{t('companyDesign.shareholder.allOwnership')}</h1>
         <p className="shareholder-question">{t('companyDesign.shareholder.addShareholdersContent')}</p>

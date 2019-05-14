@@ -5,16 +5,17 @@ import PropTypes from 'prop-types';
 
 import { ProcessSection } from 'src/components/ProcessSection/ProcessSection'
 import Layout from 'src/components/Layout/Layout'
-import Checkbox from 'src/components/_form/Checkbox/Checkbox'
 import Button from 'src/components/_buttons/Button/Button'
-import Image from 'src/assets/images/person.svg'
+import PropertyImage from 'src/assets/images/property.svg'
+import PurchaseImage from 'src/assets/images/purchase.svg'
+import SolicitorImage from 'src/assets/images/solicitor.svg'
+import ShareholderImage from 'src/assets/images/shareholder.svg'
+import ServicesImage from 'src/assets/images/services.svg'
 
 import './process-tracker.scss'
 
 /**
  * ProcessTracker
- * @author Ravin Patel
- * @class
  * @return {ReactComponent} ProcessTracker
  */
 export class ProcessTracker extends React.Component {
@@ -27,66 +28,65 @@ export class ProcessTracker extends React.Component {
 
   render() {
     const { t, i18n } = this.props;
-    const sectionsContent = i18n.t('onBoarding.progressTracker.sections', { returnObjects: true });
+    const sectionsContent = i18n.t('companyDesign.progressTracker.sections', { returnObjects: true });
     const sectionsConfig = {
       sections: [
         {
           'title': sectionsContent['step1'].title,
           'imageAltText': sectionsContent['step1'].imageAltText,
           'copy': sectionsContent['step1'].copy,
-          'path': '/create-account',
+          'path': '/company-design/property-address',
           'status': 'complete',
-          'image': Image,
+          'image': PropertyImage,
         },
         {
           'title': sectionsContent['step2'].title,
           'imageAltText': sectionsContent['step2'].imageAltText,
           'copy': sectionsContent['step2'].copy,
-          'path': '/personal-details',
+          'path': '/company-design/purchase-details',
           'status': 'incomplete',
-          'image': Image,
+          'image': PurchaseImage,
         },
         {
           'title': sectionsContent['step3'].title,
           'imageAltText': sectionsContent['step3'].imageAltText,
           'copy': sectionsContent['step3'].copy,
-          'path': '/onboarding/id-check',
+          'path': '/company-design/solicitor-details',
           'status': 'incomplete',
-          'image': Image,
+          'image': SolicitorImage,
         },
         {
           'title': sectionsContent['step4'].title,
           'imageAltText': sectionsContent['step4'].imageAltText,
           'copy': sectionsContent['step4'].copy,
-          'path': '/compliance-check',
+          'path': '/company-design/shareholder-details',
           'status': 'to_do',
-          'image': Image,
+          'image': ShareholderImage,
         },
         {
           'title': sectionsContent['step5'].title,
           'imageAltText': sectionsContent['step5'].imageAltText,
           'copy': sectionsContent['step5'].copy,
-          'path': '/payment',
+          'path': '/add-services',
           'status': 'to_do',
-          'image': Image,
+          'image': ServicesImage,
         }
       ]
     };
 
-      return (
-        <Fragment>
-            <Layout>
-              <div className="process-tracker" role="fullscreen">
-                <h3 className="process-tracker--title">{t('onBoarding.progressTracker.inProgressTitle')}</h3>
-                <div className="process-tracker-sections">
-                  {sectionsConfig.sections.map((section, idx) => <ProcessSection key={`${idx} + ${section.title}`} {...section} />)}
-                </div>
-                <Checkbox label={t('onBoarding.progressTracker.confirmComplete')} checked={this.state.checkbox} onChange={() => this.setState({checkbox: !this.state.checkbox})} />
-                <Button classes="primary" fullWidth/>
+    return (
+      <Fragment>
+          <Layout>
+            <div className="process-tracker" role="fullscreen company-design">
+              <h3 className="process-tracker--title">{t('companyDesign.progressTracker.inProgressTitle')}</h3>
+              <div className="process-tracker-sections">
+                {sectionsConfig.sections.map((section, idx) => <ProcessSection key={`${idx} + ${section.title}`} {...section} />)}
               </div>
-            </Layout>
-          </Fragment>
-      );
+              <Button classes="primary" fullWidth/>
+            </div>
+          </Layout>
+        </Fragment>
+    );
   }
 }
 

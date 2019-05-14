@@ -44,10 +44,10 @@ class AddressFinder extends Component {
 
   render() {
     const { search } = this.state;
-    const { 
-      toggleManualAddress, 
-      isManualAddress, 
-      isAddressValid, 
+    const {
+      toggleManualAddress,
+      isManualAddress,
+      isAddressValid,
       buttonLabel,
       addressFinderLabel,
       isHidden,
@@ -56,8 +56,8 @@ class AddressFinder extends Component {
     } = this.props;
 
     return (
-      <div 
-        className="address-finder" 
+      <div
+        className="address-finder"
         data-test="component-address-finder"
         style={{ display: isManualAddress ? 'none' : 'block'}}
       >
@@ -74,32 +74,32 @@ class AddressFinder extends Component {
         />
 
         <div className="address-textarea">
-          
+
           <div style={{ display: isHidden ? 'none' : 'block'}}>
-            <textarea 
-              id="addressArea" 
+            <textarea
+              id="addressArea"
               name="addressArea"
               readOnly
               className={classNames([ 'address-text-area',
                 {'error': !isAddressValid }
               ])}
             />
-            <img 
-              src={editIcon} 
+            <img
+              src={editIcon}
               className="edit-icon"
               onClick={() => {
                 toggleManualAddress();
                 this.resetSearchValue();
-              }} 
-              alt={editIconAltText} 
+              }}
+              alt={editIconAltText}
             />
           </div>
         </div>
-        
+
         <Button
           onClick={toggleManualAddress}
-          label={buttonLabel} 
-          classes='link small' 
+          label={buttonLabel}
+          classes='link small'
         />
       </div>
     );
