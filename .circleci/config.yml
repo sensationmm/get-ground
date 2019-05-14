@@ -89,6 +89,7 @@ jobs:
         command: |
           set -exu
           mkdir -p /tmp/workspace/public
+          mkdir -p public
           mv /tmp/workspace/public/* public/
      - run: go get -v -t -d ./...
      - run: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
