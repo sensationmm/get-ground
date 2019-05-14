@@ -13,7 +13,7 @@ jest.mock('gatsby', () => ({
   navigate: jest.fn()
 }));
 
-describe('<OnboardingPersonalDetailsContainer />', () => {
+describe('purchase details', () => {
   let wrapper;
   const showLoaderMock = jest.fn();
   const hideLoaderMock = jest.fn();
