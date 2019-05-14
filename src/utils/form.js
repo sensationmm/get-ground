@@ -118,6 +118,10 @@ export const renderForm = (scope) => {
     scope.config.map((item, key) => {
       const { stateKey, validationFunction, hidden, callback } = item;
 
+      if(hidden) {
+        return;
+      }
+
       // istanbul ignore next - bug in arrow function coverage
       const onChange = stateKey ? (val, validate) => formUtils.updateValue(scope, stateKey, val, validate, callback) : undefined;
       // istanbul ignore next - bug in arrow function coverage
