@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import moment from 'moment';
+import { navigate } from 'gatsby';
 
 import Layout from 'src/components/Layout/Layout'
 import formUtils from 'src/utils/form';
@@ -20,6 +20,9 @@ import Select from 'src/components/_form/Select/Select';
 import Button from 'src/components/_buttons/Button/Button';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
+
+import accountService from 'src/services/Account';
+export const AccountService = new accountService();
 
 import countryData from 'src/countries.json';
 import { addressNow } from 'src/config/endpoints';
@@ -104,9 +107,9 @@ class OnboardingPersonalDetailsContainer extends Component {
     }))
   };
 
-  initFormValidation = /* istanbul ignore next */ () => {
-    const requestUrl = 'https://staging-backend-236514.appspot.com/api/v1/users/95';
-    const { showLoader, hideLoader } = this.props;
+  initFormValidation = () => {
+    const { showLoader, hideLoader, t, userID } = this.props;
+
     const { 
       values: {
         firstName,
@@ -126,52 +129,41 @@ class OnboardingPersonalDetailsContainer extends Component {
       formattedDate 
     } = this.state;
 
-    const self = this;
-
+    /* istanbul ignore else */
     if (formUtils.validateForm(this)) {
       showLoader();
-
-      axios({
-        method: 'put',
-        url: requestUrl,
-        headers: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOjk1LCJSb2xlIjoiIiwiZXhwIjoxNTU3MjI5NzIxLCJuYmYiOjE1NTcyMjYxMjJ9.rpobSbMFlCfh1qsF-RPcCQ_ZcY7JKi9W26enwl2F-lE',
-          'Content-Type': 'application/json',
-        },
-        data: {
-          'id': 95,
-          'first_name': firstName,
-          'middle_name': middleName,
-          'last_name': lastName,
-          'date_of_birth': formattedDate,
-          'nationality_name': nationality,
-          'birth_town': cityOfBirth,
-          'occupation': jobTitle,
-          'country': country,
-          'street': street,
-          'city': city,
-          'unit_number': unitNumber,
-          'postcode': postcode,
-          'previous_names': previousNames,
-          'phone_number': phone
-        }
-      }).then(function(response) {
-        if(response.status === 201) {
-          self.props.history.push('/account-pending');
-          hideLoader();
-        }
-      }).catch((e) => {
+      
+      AccountService.savePersonalDetails({
+        userID,
+        firstName,
+        middleName,
+        lastName,
+        formattedDate,
+        nationality,
+        cityOfBirth,
+        jobTitle,
+        country,
+        street,
+        city,
+        unitNumber,
+        postcode,
+        previousNames,
+        phone
+      }).then((response) => {
         hideLoader();
-
-        self.setState({
-          ...this.state,
-          errors: {
-            form: 'There has been an issue with some of the details'
-          },
-          showErrorMessage: true
-        });
+        /* istanbul ignore else */
+        if (response.status === 201) {
+          navigate('/account-pending');
+        } else if (response.status === 400) {
+          this.setState({
+            ...this.state,
+            errors: {
+              form: t('form.correctErrors'),
+            },
+            showErrorMessage: true
+          });
+        }
       });
-
     }
   }
 
@@ -413,10 +405,15 @@ class OnboardingPersonalDetailsContainer extends Component {
 OnboardingPersonalDetailsContainer.propTypes = {
   t: PropTypes.func.isRequired,
   showLoader: PropTypes.func,
-  hideLoader: PropTypes.func
+  hideLoader: PropTypes.func,
+  userID: PropTypes.number,
 };
+
+const mapStateToProps = (state) => ({
+  userID: state.user.id
+});
 
 const actions = { showLoader, hideLoader };
 
 export const RawComponent = OnboardingPersonalDetailsContainer;
-export default connect(null, actions)(withTranslation()(OnboardingPersonalDetailsContainer));
+export default connect(mapStateToProps, actions)(withTranslation()(OnboardingPersonalDetailsContainer));
