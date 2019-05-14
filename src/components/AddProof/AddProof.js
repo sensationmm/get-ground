@@ -9,6 +9,7 @@ import classNames from 'classnames'
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox'
 import Button from 'src/components/_buttons/Button/Button'
 import { setImg, setActive, resetActive } from 'src/state/actions/idCheck'
+import { showLoader, hideLoader } from 'src/state/actions/loader'
 
 import './add-proof.scss'
 /**
@@ -181,7 +182,7 @@ export class AddProof extends Component {
         <IntroBox data-test="intro-box">{ t(`onBoarding.idCheck.${section}.title`) }</IntroBox>
         <p className="add-proof-content">{ !this.state.takePicture || !this.state.retakePicture ? t(`onBoarding.idCheck.${section}.content`) : t(`onBoarding.idCheck.${section}.retakeImageContent`)}</p>
         <div className="add-proof-img">{this.handleProof(t)}</div>
-        <div className="add-proof-upload-file">{this.uploadImg(t)}</div>
+        {section !== 'selfie' && <div className="add-proof-upload-file">{this.uploadImg(t)}</div>}
       </div>
     );
   }
@@ -191,7 +192,6 @@ AddProof.propTypes = {
   t: PropTypes.func.isRequired,
   section: PropTypes.string.isRequired,
   initialImg: PropTypes.string.isRequired,
-  isSelfie: PropTypes.bool,
   setImg: PropTypes.func.isRequired,
   setActive: PropTypes.func.isRequired,
   resetActive: PropTypes.func.isRequired,
@@ -204,7 +204,9 @@ const mapStataToProps = (state) => ({
 const actions = {
   setImg,
   setActive,
-  resetActive
+  resetActive,
+  showLoader,
+  hideLoader
 }
 
 export default connect(mapStataToProps, actions)(withTranslation()(AddProof));

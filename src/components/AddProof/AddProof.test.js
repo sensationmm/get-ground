@@ -28,7 +28,6 @@ describe('<AddProof />', () => {
     props = {
       section: 'passport',
       initialImg: '/img',
-      isSelfie: false,
       setImg: jest.fn(),
       t: jest.fn(),
       setActive: jest.fn(),
@@ -251,5 +250,17 @@ describe('<AddProof />', () => {
     expect(wrapper.find('img').props().src).toEqual('base-img')
     expect(props.resetActive).toHaveBeenCalled()
     expect(props.setImg).toHaveBeenCalledWith('passport', 'base-img')
+  })
+
+  it('does not show upload link if section is selfie', () => {
+    const customProps = {
+      ...props,
+      section: 'selfie',
+      active: 'selfie'
+    }
+
+    wrapper = shallow(<AddProof {...customProps} />);
+
+    expect(wrapper.find('.add-proof-upload-file').length).toEqual(0)
   })
 })
