@@ -85,11 +85,11 @@ jobs:
      - checkout
      - *attach_workspace
      - run:
-      name: Restore js
-      command: |
-        set -exu
-        mkdir -p /tmp/workspace/public
-        mv /tmp/workspace/public/* public/
+        name: Restore js
+        command: |
+          set -exu
+          mkdir -p /tmp/workspace/public
+          mv /tmp/workspace/public/* public/
       - run: go get -v -t -d ./...
       - run: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
       - run: gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
