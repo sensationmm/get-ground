@@ -3,7 +3,6 @@ import { Link } from 'gatsby'
 import { connect } from 'react-redux'
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import querystring from 'querystring'
 
 import Layout from 'src/components/Layout/Layout'
 import AddProof from 'src/components/AddProof/AddProof'
@@ -13,7 +12,6 @@ import Selfie from 'src/assets/images/add-selfie.svg'
 import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 import Button from 'src/components/_buttons/Button/Button'
 import kycService from 'src/services/KYC'
-import { dataURLToBlob, srcToFile } from 'src/utils/dataURLToBlob'
 
 import './id-check.scss'
 
@@ -26,20 +24,9 @@ const KYCService = new kycService();
 export class IdCheck extends Component {
   componentWillUnmount() {
     const { passport, address, selfie } = this.props
-    const blobPassport = passport ? dataURLToBlob(passport) : null
-    // const blobAddress = address ? dataURLToBlob(address) : null;
-    // const blobSelfie = selfie ? dataURLToBlob(selfie) : null;
-
-    const fd = new FormData();
-    const file = new File( [blobPassport], 'passport.jpg', { type: 'image/jpeg' } )
-    // type is image/jpeg
-    console.log('file', file)
-    fd.append('file_passport', file)
-    fd.append('file_selfie', file)
-    fd.append('file_proof_of_address', file)
-    KYCService.makeCheck(fd)
-
+    KYCService.makeCheck(passport, address, selfie)
   }
+
   render() {
     const { t } = this.props
     const headerActions = <Link to="/onboarding/process-tracker"><ButtonHeader label="Exit" /></Link>;
