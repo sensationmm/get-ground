@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:11.13.0
-
+    working_directory: /go/src/github.com/getground/customer-frontend-pwa
     steps:
       - checkout
       - restore_cache:
