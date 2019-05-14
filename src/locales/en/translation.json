@@ -347,16 +347,29 @@
     },
     "idCheck": {
       "title": "ID Check",
+      "buttonNext": "Next",
+      "buttonBack": "Back",
+      "buttonSkip": "Skip for now",
+      "link": "If you already have it saved Upload",
+      "image": {
+        "capture": "Capture photo",
+        "happy": "Yes, I'm happy",
+        "retake": "Retake"
+      },
       "passport": {
         "title": "Add passport picture",
         "content": "In order to prove your identity we need you to take a picture of your passport, proof of address and then finally to take a selfie.",
-        "link": "If you already have it saved Upload",
-        "image": {
-          "capture": "Capture photo",
-          "happy": "Yes, I'm happy",
-          "retake": "Retake"
-        },
         "retakeImageContent": "Are you happy with this picture? Please make sure it is well-lit and that you can read the information clearly."
+      },
+      "address": {
+        "title": "Add proof of address",
+        "content": "Now we need a picture of a utility bill, a bank statement or any government letter (e.g. HMRC). Please make sure the document is recent (inside the past 3 months) and the address is clearly visible.",
+        "retakeImageContent": "Are you happy with this picture? Please make sure both your full name and address is clearly visible."
+      },
+      "selfie": {
+        "title": "Take a selfie",
+        "content": "Tips for taking a good selfie. Hold the camera in front. Position the camera. Ensure the light is right.",
+        "retakeImageContent": "Are you happy with this picture? Please make sure the picture is well-lit and not blurred."
       }
     }
   },

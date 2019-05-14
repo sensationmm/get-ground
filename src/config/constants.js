@@ -15,3 +15,12 @@ export const USER_LOGIN = 'USER_LOGIN';
 export const SAVE_AUTH = 'SAVE_AUTH';
 
 export const SET_WIDTH = 'SET_WIDTH';
+
+export const SET_PASSPORT = 'SET_PASSPORT';
+export const SET_ADDRESS = 'SET_ADDRESS';
+export const SET_SELFIE = 'SET_SELFIE';
+
+export const ACTIVE_PASSPORT = 'ACTIVE_PASSPORT';
+export const ACTIVE_ADDRESS = 'ACTIVE_ADDRESS';
+export const ACTIVE_SELFIE = 'ACTIVE_SELFIE';
+export const ACTIVE_RESET = 'ACTIVE_RESET';

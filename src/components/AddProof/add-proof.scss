@@ -4,8 +4,13 @@ video {
   height: 200px;
 }
 
-.add-passport {
+.add-proof {
   margin-bottom: 10px;
+
+  &.disabled {
+    opacity: 0.4;
+    pointer-events: none
+  }
 
   &-content {
     color: $text-secondary;
@@ -13,6 +18,14 @@ video {
 
   &-img {
     text-align: center
+  }
+
+  .capture, .confirm-happy {
+    margin-top: 38px;
+  }
+
+  .confirm-happy {
+    margin-bottom: 20px;
   }
 
   button.upload-file-button.link {
@@ -27,5 +40,3 @@ video {
     text-align: center;
   }
 }
-
-
