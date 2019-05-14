@@ -1,15 +1,15 @@
 import { setup, setupWithStore, findByTestAttr } from 'src/test-utils/test-utils';
 import { scroller } from 'react-scroll';
 
-import { RawComponent as ComplianceCheck } from './compliance-check';
+import { RawComponent as ComplianceCheck } from './index';
 import FormUtils from 'src/utils/form';
 
 import Button from 'src/components/_buttons/Button/Button';
-import QuizQ1 from './fragments/Compliance/QuizQ1';
-import QuizQ2 from './fragments/Compliance/QuizQ2';
-import QuizQ3 from './fragments/Compliance/QuizQ3';
-import QuizQ4 from './fragments/Compliance/QuizQ4';
-import QuizQ5 from './fragments/Compliance/QuizQ5';
+import QuizQ1 from './fragments/QuizQ1';
+import QuizQ2 from './fragments/QuizQ2';
+import QuizQ3 from './fragments/QuizQ3';
+import QuizQ4 from './fragments/QuizQ4';
+import QuizQ5 from './fragments/QuizQ5';
 
 import ModalContent from 'src/components/Modal/ModalContent';
 
@@ -90,7 +90,7 @@ describe('<ComplianceCheck />', () => {
         expect(showLoaderMock).toHaveBeenCalledTimes(1);
         expect(hideLoaderMock).toHaveBeenCalledTimes(1);
         expect(navigateMock).toHaveBeenCalledTimes(1);
-        expect(navigateMock).toHaveBeenCalledWith('payment');
+        expect(navigateMock).toHaveBeenCalledWith('/onboarding/payment');
       });
     });
   });

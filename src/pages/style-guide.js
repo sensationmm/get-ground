@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../components/_buttons/Button/Button';
+import Button from 'src/components/_buttons/Button/Button';
 
 /**
  * Home

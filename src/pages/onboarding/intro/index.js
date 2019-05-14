@@ -52,7 +52,7 @@ const OnboardingIntroContainer = () => {
               slides={slidesConfig.slides}
             />
             <div className="buttons-container">
-              <Link to="/create-account">
+              <Link to="/onboarding/create-account">
                 <Button
                   fullWidth
                   label={t('onBoarding.intro.button1')}

@@ -1,11 +1,10 @@
-
 import React from 'react'
 import { Link } from 'gatsby'
 import { useTranslation } from 'react-i18next'
 
 import confirmationImage from 'src/assets/images/intro-slide-image.png'
-import Button from '../components/_buttons/Button/Button'
-import Layout from '../components/Layout/Layout'
+import Button from 'src/components/_buttons/Button/Button'
+import Layout from 'src/components/Layout/Layout'
 
 import 'src/styles/pages/confirmation.scss'
 

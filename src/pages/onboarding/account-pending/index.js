@@ -3,11 +3,11 @@ import React from 'react'
 import { navigate } from 'gatsby'
 import { useTranslation } from 'react-i18next'
 
-import IntroBox from '../components/_layout/IntroBox/IntroBox';
-import Layout from '../components/Layout/Layout'
-import ContactUs from '../components/ContactUs/ContactUs'
-import ImageFull from '../components/ImageFull/ImageFull'
-import EmailSent from '../assets/images/email-sent.svg'
+import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
+import Layout from 'src/components/Layout/Layout'
+import ContactUs from 'src/components/ContactUs/ContactUs'
+import ImageFull from 'src/components/ImageFull/ImageFull'
+import EmailSent from 'src/assets/images/email-sent.svg'
 
 import authService from 'src/services/Auth';
 export const AuthService = new authService();
@@ -17,7 +17,7 @@ const AccountPending = () => {
 
   AuthService.verifyEmail().then((response => {
     if(response.status === 200) {
-      navigate('/email-verified')
+      navigate('/onboarding/email-verified')
     }
   }));
 

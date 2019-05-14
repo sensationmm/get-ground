@@ -11,11 +11,11 @@ import Layout from 'src/components/Layout/Layout';
 import Form from 'src/components/_layout/Form/Form';
 import Button from 'src/components/_buttons/Button/Button';
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
-import QuizQ1 from './fragments/Compliance/QuizQ1';
-import QuizQ2 from './fragments/Compliance/QuizQ2';
-import QuizQ3 from './fragments/Compliance/QuizQ3';
-import QuizQ4 from './fragments/Compliance/QuizQ4';
-import QuizQ5 from './fragments/Compliance/QuizQ5';
+import QuizQ1 from './fragments/QuizQ1';
+import QuizQ2 from './fragments/QuizQ2';
+import QuizQ3 from './fragments/QuizQ3';
+import QuizQ4 from './fragments/QuizQ4';
+import QuizQ5 from './fragments/QuizQ5';
 import Modal from 'src/components/Modal/Modal';
 import ModalContent from 'src/components/Modal/ModalContent';
 
@@ -98,7 +98,7 @@ class ComplianceCheck extends Component {
         self_certification: values.self_certification
       }).then((res) => {
         hideLoader();
-        navigate('payment');
+        navigate('/onboarding/payment');
       });
     }
   }

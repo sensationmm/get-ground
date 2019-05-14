@@ -63,7 +63,7 @@ class CreateAccount extends Component {
       AccountService.createAccount(email, password, optin).then(response => {
         hideLoader();
         if(response.status === 201) {
-          navigate('/account-pending');
+          navigate('/onboarding/account-pending');
         } else if(response.status === 500) {
           self.setState({
             ...self.state,
