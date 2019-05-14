@@ -4,7 +4,7 @@ import { navigate } from 'gatsby';
 import { setup, findByTestAttr } from 'src/test-utils/test-utils';
 import formUtils from 'src/utils/form';
 
-import { RawComponent as SolicitorDetails, ModalService, CompanyService } from './solicitor-details';
+import { RawComponent as SolicitorDetails, ModalService, CompanyService } from './index';
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 
 jest.mock('gatsby', () => ({
