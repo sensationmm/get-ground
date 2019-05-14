@@ -146,7 +146,12 @@
     "button": "Continue"
   },
   "form": {
-    "correctErrors": "Please correct all errors to proceed"
+    "correctErrors": "Please correct all errors to proceed",
+    "radioConfirm": {
+      "true": "Yes",
+      "false": "No"
+    },
+    "skipStep": "Skip this step for now"
   },
   "login": {
     "title": "Sign in",
@@ -159,6 +164,10 @@
       },
       "error": "Invalid login - please try again"
     }
+  },
+  "modal": {
+    "closeIconAltText": "Close",
+    "downloadButtonLabel": "Download"
   },
   "onBoarding": {
     "intro": {
@@ -294,6 +303,27 @@
         },
         "retakeImageContent": "Are you happy with this picture? Please make sure it is well-lit and that you can read the information clearly."
       }
+    }
+  },
+  "solicitorDetails": {
+    "title": "Solicitor details",
+    "intro": "We need your solicitor details so we can get all the legal documents in order for your property purchase.",
+    "form": {
+      "label": {
+        "haveSolicitor": "Do you have a solicitor?",
+        "needSolicitor": "Would you like us to help find a solicitor for you?",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "email": "Email",
+        "phone": "Phone number",
+        "authority": "I give permission to GetGround to",
+        "authorityLink": "email my solicitor"
+      }
+    },
+    "ctaPrimary": "Next",
+    "ctaSecondary": "Back",
+    "modal": {
+      "heading": "Pending Email"
     }
   },
   "validation": {
