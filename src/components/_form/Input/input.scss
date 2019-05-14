@@ -1,5 +1,6 @@
-@import '../../../styles/modules/colors';
-@import '../../../styles/modules/variables';
+@import 'src/styles/modules/colors';
+@import 'src/styles/modules/_mixins.scss';
+@import 'src/styles/modules/variables';
 
 .text-input {
   margin-bottom: 2px;
@@ -23,6 +24,14 @@
     text-transform: uppercase;
     font-weight: bold;
     font-size: 14px;
+  }
+
+  &.background-gradient {
+    input[type=number] {
+      @include gradient-vertical($gradient-primary-1, $gradient-primary-2);
+      color: $white;
+      border-color: transparent;
+    }
   }
 
   input[type=text], input[type=password], input[type=number], textarea {
