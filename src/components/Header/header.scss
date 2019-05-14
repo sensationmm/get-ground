@@ -49,6 +49,14 @@
   );
 }
 
+.company-design .header {
+  @include gradient-vertical-image(
+    $gradient-primary-1,
+    $gradient-primary-2,
+    '../../assets/images/background.png'
+  );
+}
+
 .fullscreen .header {
   background: none;
 }

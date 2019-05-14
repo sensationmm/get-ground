@@ -26,6 +26,7 @@ describe('id-check', () => {
 
     wrapper = shallow(<IdCheck {...props} />);
   })
+
   test('renders id-check', () => {
     expect(wrapper.length).toEqual(1);
   })

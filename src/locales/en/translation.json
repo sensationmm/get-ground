@@ -88,6 +88,14 @@
         "button1": "cancel",
         "button2": "confirm"
       }
+    },
+    "shareholder": {
+      "allOwnership": "Currently you have 100% ownership",
+      "addShareholdersContent": "Would you like to add shareholders?",
+      "button": {
+        "yesAdd": "Yes, add shareholders",
+        "no": "No, I'm the only one"
+      }
     }
   },
   "compliance": {
