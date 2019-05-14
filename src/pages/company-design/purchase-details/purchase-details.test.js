@@ -61,11 +61,10 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
     expect(wrapper.instance().checkElementHidden()).toEqual(true);
   });
 
-  test('expect checkElementHidden to return true if newBuild is equal to yes & completionDate is an empty string', () => {
+  test('expect checkElementHidden to return true if newBuild is equal to no', () => {
     const wrapper = setup(PurchaseDetails, defaultProps, {
       values: {
-        newBuild: 'yes',
-        completionDate: ''
+        newBuild: 'no'
       }
     });
     wrapper.instance().checkElementHidden();
@@ -73,10 +72,10 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
     expect(wrapper.instance().checkElementHidden()).toEqual(true);
   });
 
-  test('expect checkElementHidden to return false if newBuild is equal to no', () => {
+  test('expect checkElementHidden to return false if newBuild is equal to yes', () => {
     const wrapper = setup(PurchaseDetails, defaultProps, {
       values: {
-        newBuild: 'no',
+        newBuild: 'yes',
       }
     });
     wrapper.instance().checkElementHidden();
@@ -85,6 +84,11 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
   });
 
   test('expect showNextInstallment to be called when button is clicked', () => {
+    const wrapper = setup(PurchaseDetails, defaultProps, {
+      values: {
+        newBuild: 'yes',
+      }
+    });
     const component = findByTestAttr(wrapper, 'container-company-design-purchase-details');
     wrapper.instance().showNextInstallment = jest.fn();
 
@@ -95,6 +99,9 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
 
   test('expect closeDatePicker to be called when the Datepicker is closed', () => {
     const wrapper = setup(PurchaseDetails, defaultProps, {
+      values: {
+        newBuild: 'yes',
+      },
       showErrorMessage: true
     });
 
@@ -109,6 +116,11 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
   });
 
   test('expect openDatePicker to be called when the Datepicker is opened', () => {
+    const wrapper = setup(PurchaseDetails, defaultProps, {
+      values: {
+        newBuild: 'yes',
+      }
+    });
     const component = findByTestAttr(wrapper, 'container-company-design-purchase-details');
 
     jest.spyOn(wrapper.instance(), 'openDatePicker');
