@@ -1,4 +1,5 @@
 import BaseService from './BaseService';
+import store from 'src/state/store';
 
 /**
  * AccountService
@@ -53,6 +54,33 @@ class AccountService extends BaseService {
         'previous_names': data.previousNames,
         'phone_number': data.phone
       }
+    };
+
+    return this.doRequest(config);
+  };
+
+  /**
+   * saveSignature
+   * saves the users signature
+   * @param {Blob} signatureBlob - signature blob
+   * @return {Promise} saveSignature response
+   */
+  saveSignature = signatureBlob => {
+    const formData = new FormData();
+    const data = {
+      'file': signatureBlob,
+      'user_id': store.getState().user.id.toString(),
+      'description': 'signature'
+    }
+
+    for ( const key in data ) {
+      formData.append(key, data[key]);
+    }
+
+    const config = {
+      url: 'documents',
+      method: 'post',
+      data: formData
     };
 
     return this.doRequest(config);

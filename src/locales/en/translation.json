@@ -9,6 +9,18 @@
         "choose": "Choose your signature",
         "upload": "Upload your signature"
       }
+    },
+    "drawSignature": {
+      "title": "Draw your signature",
+      "title2": "Your signature",
+      "yourSignatureIntro": "Your signature is saved to your profile. Now you are ready to continue and sign your company documents.",
+      "signaturePadLabel": "Your Signature",
+      "buttons": {
+        "continue": "Continue",
+        "redo": "Redo",
+        "save": "Save",
+        "edit": "edit"
+      }
     }
   },
   "accountPending": {

@@ -10,7 +10,7 @@ import Button from 'src/components/_buttons/Button/Button';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
-import 'src/styles/pages/signature-setup.scss'
+import 'src/styles/pages/signature-setup.scss';
 
 /**
  * SignatureSetup
@@ -30,7 +30,7 @@ export class SignatureSetup extends Component {
     const { t } = this.props;
 
     return (
-      <Layout>
+      <Layout secure>
         <div className="signature-setup">
           <h1 className="signature-setup--title">{t('account.signature.title')}</h1>
           <IntroBox data-test="intro-box">{t('account.signature.intro')}</IntroBox>
