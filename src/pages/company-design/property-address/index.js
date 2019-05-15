@@ -106,7 +106,7 @@ class PropertyAddress extends Component {
       PropertyService.SavePropertyAddress({street, city, unitNumber, postcode}).then((response) => {
         hideLoader();
         if (response.status === 201) {
-          navigate('/company-details/purchase-details');
+          navigate('/company-design/purchase-details');
         } else if (response.status === 400) {
           this.setState({
             ...this.state,
