@@ -124,18 +124,20 @@ class OnboardingPersonalDetailsContainer extends Component {
 
     /* istanbul ignore else */
     if (formUtils.validateForm(this)) {
+      const countryName = country.split('] ').pop();
+      const nationalityName = nationality.split('] ').pop();
       showLoader();
-      
+
       AccountService.savePersonalDetails({
         userID,
         firstName,
         middleName,
         lastName,
         formattedDate,
-        nationality,
+        nationalityName,
         cityOfBirth,
         jobTitle,
-        country,
+        countryName,
         street,
         city,
         unitNumber,
@@ -145,8 +147,8 @@ class OnboardingPersonalDetailsContainer extends Component {
       }).then((response) => {
         hideLoader();
         /* istanbul ignore else */
-        if (response.status === 201) {
-          navigate('/account-pending');
+        if (response.status === 200) {
+          navigate('/onboarding/id-check');
         } else if (response.status === 400) {
           this.setState({
             ...this.state,
@@ -174,7 +176,10 @@ class OnboardingPersonalDetailsContainer extends Component {
     * @param {string} country - value to set
     * @return {void}
     */
-  handleCountryChange = country => window.addressNow.setCountry(country);
+  handleCountryChange = country => {
+    const countryCode = country.split('[').pop().split(']')[0];
+    window.addressNow.setCountry(countryCode);
+  }
 
   openDatePicker = () => this.setState({isDatepickerOpen: true});
 
@@ -190,7 +195,7 @@ class OnboardingPersonalDetailsContainer extends Component {
     formUtils.setNativeValue(element, moment(date).format('Do MMMM YYYY'));
     element.dispatchEvent(new Event('input', { bubbles: true }));
 
-    this.setState({ formattedDate: moment(date).format('L'), isDatepickerOpen: false });
+    this.setState({ formattedDate: moment(date).format('YYYY-MM-DDTHH:mm:ss+00:00'), isDatepickerOpen: false });
   }
 
   render() {
@@ -208,7 +213,12 @@ class OnboardingPersonalDetailsContainer extends Component {
   
     const setCountries = countryData.map((country, index) => {
       return (
-        <option key={`country-${index}`} value={country.country_name}>{country.country_name}</option>
+        <option 
+          key={`country-${index}`} 
+          value={`[${country.alpha_2_code}] ${country.country_name}`}
+        >
+          {country.country_name}
+        </option>
       );
     });
 
@@ -256,7 +266,8 @@ class OnboardingPersonalDetailsContainer extends Component {
         validationFunction: 'validateRequired',
         onFocus: this.openDatePicker,
         id: 'datepicker-field',
-        note: t('onBoarding.personalDetails.form.dateOfBirthNote')
+        note: t('onBoarding.personalDetails.form.dateOfBirthNote'),
+        readOnly: true
       },
       {
         component: Datepicker,

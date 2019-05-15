@@ -101,14 +101,14 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
 
     test('savePersonalDetails details success', async () => {
       spy = jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
-      AccountService.savePersonalDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 201 }));
+      AccountService.savePersonalDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
       const wrapperNew = setup(PersonalDetails, defaultProps);
       
       await wrapperNew.instance().initFormValidation();
       
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
-      expect(navigate).toHaveBeenCalledWith('/account-pending');
+      expect(navigate).toHaveBeenCalledWith('/onboarding/id-check');
       expect(spy).toHaveBeenCalled();
     });
 
