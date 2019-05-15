@@ -76,9 +76,10 @@ export class AddProof extends Component {
           height={350}
           ref={this.setWebcam}
           screenshotFormat="image/jpeg"
-          width={350}
+          width={335}
           videoConstraints={videoConstraints}
         />
+        <p className="add-proof-loading">...loading camera</p>
         <Button style={`display: inline;`} data-test="capture-button" classes="primary capture" fullWidth label={t('onBoarding.idCheck.image.capture')} onClick={() => this.capture()}/>
       </div>
     )
