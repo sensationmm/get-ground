@@ -5,6 +5,16 @@
     "introBox": "If you didn‘t receive an email please check your spam folder and if it isn‘t there contact us.",
     "contactLink": "Contact us"
   },
+  "additionalServices": {
+    "title": "Additional services",
+    "introBox": "If you require help with any of the following services below, we will find options for you, which you can choose to explore further or not.",
+    "mortgageOptionsQuestion": "Can we help find mortgage options for you?",
+    "propertyInsuranceQuestion": "Can we help find property insurance for you?",
+    "property_managementQuestion": "Can we help find property management options for you?",
+    "nextButton": "Next",
+    "backButton": "Back",
+    "skipButton": "Skip for now"
+  },
   "companyDesign": {
     "companyComplete": {
       "title": "Well done!",

@@ -5,8 +5,10 @@ import { modal } from './modal';
 import { user } from './user';
 import { auth } from './auth';
 import { idCheck } from './idCheck';
+import { additionalServices } from './additionalServices';
 
 export default combineReducers({
+  additionalServices,
   auth,
   idCheck,
   layout,
