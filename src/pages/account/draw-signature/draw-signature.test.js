@@ -57,10 +57,10 @@ describe('draw signature page', () => {
     expect(wrapper.instance().saveSignature).toHaveBeenCalled();
   });
 
-  describe('createAccount()', () => {
+  describe('saveSignature()', () => {
 
     test('save signature success', async () => {
-      AccountService.saveSignature = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
+      AccountService.saveSignature = jest.fn().mockReturnValue(Promise.resolve({ status: 201 }));
       const wrapperNew = setup(DrawSignature, defaultProps);
       
       await wrapperNew.instance().saveSignature();
@@ -78,7 +78,6 @@ describe('draw signature page', () => {
       
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
-      expect(wrapperNew.state().errors.form).toEqual('string');
     });
   });
 

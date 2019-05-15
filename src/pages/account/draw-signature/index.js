@@ -74,22 +74,16 @@ class DrawSignature extends Component {
     * @return {void}
     */
   saveSignature = signatureBlob => {
-    const { showLoader, hideLoader, t } = this.props;
+    const { showLoader, hideLoader } = this.props;
 
     showLoader();
     AccountService.saveSignature(signatureBlob).then(response => {
       hideLoader();
-      if (response.status === 200) {
+      if (response.status === 201) {
         if ( this.signature === null) return;
         this.setState({ savedSignature: this.signature.toDataURL() });
       } else if (response.status === 400) {
-        this.setState({
-          ...this.state,
-          errors: {
-            form: t('form.correctErrors'),
-          },
-          showErrorMessage: true
-        });
+        /** NEED AC added for the error state of this page... */
       }
     });
   }
@@ -132,7 +126,7 @@ class DrawSignature extends Component {
           </Fragment>
         }
         { savedSignature !== '' && 
-          <div>
+          <Fragment>
             <h1>{t('account.drawSignature.title2')}</h1>
             <IntroBox data-test="intro-box">{t('account.drawSignature.yourSignatureIntro')}</IntroBox>
             <img className="draw-signature--saved-image" src={savedSignature} />
@@ -148,7 +142,7 @@ class DrawSignature extends Component {
                 label={t('account.drawSignature.buttons.continue')} 
               />
             </Link>
-          </div>
+          </Fragment>
         }
         </div>
       </Layout>
