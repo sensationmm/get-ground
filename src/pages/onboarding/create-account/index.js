@@ -44,7 +44,7 @@ class CreateAccount extends Component {
         password: '',
         passwordConfirm: '',
         optin: false,
-        privacy: true
+        privacy: false
       }),
       termsMarkdown: ''
     };
