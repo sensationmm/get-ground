@@ -85,8 +85,8 @@ class PurchaseDetails extends Component {
   }
 
   checkElementHidden = () => {
-    const { values: { newBuild, completionDate } } = this.state;
-    return (newBuild === '') || (newBuild === 'yes' && completionDate === '')
+    const { values: { newBuild } } = this.state;
+    return newBuild === '' || newBuild === 'no';
   }
 
   showNextInstallment = /* istanbul ignore next */ () => {
@@ -262,7 +262,7 @@ class PurchaseDetails extends Component {
         value: expectedExchange,
         name: 'exchangeDateRadios',
         items: this.radioConfig,
-        hidden: this.checkElementHidden()
+        hidden: newBuild === ''
       },
       {
         stateKey: 'exchangeDate',
