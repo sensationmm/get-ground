@@ -9,7 +9,6 @@ import classNames from 'classnames'
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox'
 import Button from 'src/components/_buttons/Button/Button'
 import { setImg, setActive, resetActive } from 'src/state/actions/idCheck'
-import { showLoader, hideLoader } from 'src/state/actions/loader'
 
 import './add-proof.scss'
 /**
@@ -177,6 +176,7 @@ export class AddProof extends Component {
 
   render() {
     const { t, section } = this.props
+
     return (
       <div data-test="component-add-proof" className={classNames(['add-proof', {'disabled': this.props.active && this.props.active !== section  }])} role="account">
         <IntroBox data-test="intro-box">{ t(`onBoarding.idCheck.${section}.title`) }</IntroBox>
@@ -204,9 +204,7 @@ const mapStataToProps = (state) => ({
 const actions = {
   setImg,
   setActive,
-  resetActive,
-  showLoader,
-  hideLoader
+  resetActive
 }
 
 export default connect(mapStataToProps, actions)(withTranslation()(AddProof));
