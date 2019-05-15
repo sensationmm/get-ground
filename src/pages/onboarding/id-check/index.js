@@ -26,12 +26,13 @@ export class IdCheck extends Component {
     const { passport, address, selfie } = this.props
     KYCService.makeCheck(passport, address, selfie)
   }
+
   render() {
     const { t } = this.props
     const headerActions = <Link to="/onboarding/process-tracker"><ButtonHeader label="Exit" /></Link>;
 
     return (
-      <Layout headerActions={headerActions}>
+      <Layout headerActions={headerActions} secure>
       <div data-test="container-id-check" className="id-check" role="account">
         <h1 className="id-check-title">{ t('onBoarding.idCheck.title') }</h1>
         <AddProof section="passport" initialImg={Passport} />
