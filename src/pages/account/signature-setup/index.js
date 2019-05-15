@@ -36,19 +36,19 @@ export class SignatureSetup extends Component {
           <IntroBox data-test="intro-box">{t('account.signature.intro')}</IntroBox>
           <h2 className="signature-setup--heading2">{t('account.signature.heading2')}</h2>
 
-          <Link to="/account/draw-signature">
-            <Button classes="full signature" label={t('account.signature.buttons.draw')} />
-          </Link>
-
-          <Link to="/account/choose-signature">
-            <Button classes="full signature" label={t('account.signature.buttons.choose')} />
-          </Link>
-
           <Button 
             classes="full signature" 
             onClick={this.uploadSignature}
             label={t('account.signature.buttons.upload')}
           />
+
+          <Link to="/account/create-signature">
+            <Button classes="full signature" label={t('account.signature.buttons.create')} />
+          </Link>
+
+          <Link to="/account/draw-signature">
+            <Button classes="full signature" label={t('account.signature.buttons.draw')} />
+          </Link>
         </div>
       </Layout>
     );

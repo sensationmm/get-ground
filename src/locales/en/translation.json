@@ -6,7 +6,7 @@
       "heading2": "Choose option",
       "buttons": {
         "draw": "Draw your signature",
-        "choose": "Choose your signature",
+        "create": "Create digital signature",
         "upload": "Upload your signature"
       }
     },
