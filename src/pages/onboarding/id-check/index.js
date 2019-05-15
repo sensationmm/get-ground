@@ -58,8 +58,7 @@ IdCheck.propTypes = {
 const mapStateToProps = state => ({
   passport: state.idCheck.passport,
   address: state.idCheck.address,
-  selfie: state.idCheck.selfie,
-  userId: state.user.id
+  selfie: state.idCheck.selfie
 })
 
 export default connect(mapStateToProps, null)(withTranslation()(IdCheck));
