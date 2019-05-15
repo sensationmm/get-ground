@@ -1,4 +1,4 @@
-@import '../Input/input.scss';
+@import 'src/components/_form/Input/input.scss';
 
 .select {
   label {
@@ -18,8 +18,6 @@
     font-size: 14px;
     color: $text;
     outline: 0;
-    position: relative;
-    z-index: 12;
 
     &.error {
       border-color: $warning;
@@ -43,5 +41,6 @@
     mask: url('../../../assets/images/chevron-down.svg') center center no-repeat;
     background-size: contain;
     z-index: 1;
+    pointer-events: none;
   }
 }

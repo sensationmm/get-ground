@@ -2,7 +2,7 @@ import { setup, findByTestAttr } from 'src/test-utils/test-utils';
 import formUtils from 'src/utils/form';
 import { navigate } from 'gatsby';
 
-import { RawComponent as PurchaseDetails, AccountService } from './index';
+import { RawComponent as PersonalDetails, AccountService } from './index';
 import Select from 'src/components/_form/Select/Select';
 import Button from 'src/components/_buttons/Button/Button';
 import Datepicker from 'src/components/Datepicker/Datepicker';
@@ -30,7 +30,7 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
   };
 
   beforeEach(() => {
-    wrapper = setup(PurchaseDetails, defaultProps, {
+    wrapper = setup(PersonalDetails, defaultProps, {
       showErrorMessage: true,
       errors: {
         form: 'There has been an issue with some of the details'
@@ -62,7 +62,7 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
   });
 
   test('expect closeDatePicker to be called when the Datepicker is closed', () => {
-    const wrapper = setup(PurchaseDetails, defaultProps, {
+    const wrapper = setup(PersonalDetails, defaultProps, {
       showErrorMessage: true
     });
 
@@ -101,21 +101,21 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
 
     test('savePersonalDetails details success', async () => {
       spy = jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
-      AccountService.savePersonalDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 201 }));
-      const wrapperNew = setup(PurchaseDetails, defaultProps);
+      AccountService.savePersonalDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
+      const wrapperNew = setup(PersonalDetails, defaultProps);
       
       await wrapperNew.instance().initFormValidation();
       
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
-      expect(navigate).toHaveBeenCalledWith('/account-pending');
+      expect(navigate).toHaveBeenCalledWith('/onboarding/id-check');
       expect(spy).toHaveBeenCalled();
     });
 
     test('savePersonalDetails details failure', async () => {
       spy = jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
       AccountService.savePersonalDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 400 }));
-      const wrapperNew = setup(PurchaseDetails, defaultProps);
+      const wrapperNew = setup(PersonalDetails, defaultProps);
       
       await wrapperNew.instance().initFormValidation();
       
@@ -129,6 +129,26 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
       spy.mockClear();
     });
 
+  });
+
+  test('toggleManualAddress sets isManualAddress to false if it is true', () => {
+    const wrapper = setup(PersonalDetails, defaultProps, {
+      isManualAddress: true
+    });
+
+    wrapper.instance().toggleManualAddress();
+
+    expect(wrapper.state().isManualAddress).toEqual(false);
+  });
+
+  test('toggleManualAddress sets isManualAddress to true if it is false', () => {
+    const wrapper = setup(PersonalDetails, defaultProps, {
+      isManualAddress: false
+    });
+
+    wrapper.instance().toggleManualAddress();
+
+    expect(wrapper.state().isManualAddress).toEqual(true);
   });
 
   afterEach(() => {
