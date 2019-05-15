@@ -1,6 +1,7 @@
+import { dataURLToBlob } from 'blob-util'
 import BaseService from './BaseService';
 import store from 'src/state/store';
-import { dataURLToBlob } from 'src/utils/dataURLToBlob'
+
 /**
  * PaymentService
  * @param {Image} passport - Image of passport
