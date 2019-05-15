@@ -1,4 +1,5 @@
 import React from 'react';
+import useLockBodyScroll from 'react-use/lib/useLockBodyScroll';
 import './loader.scss';
 
 /**
@@ -7,6 +8,8 @@ import './loader.scss';
  * @return {JSXElement} Loader
  */
 const Loader = () => {
+  useLockBodyScroll(true);
+
   return (
     <div className="loader" data-test="component-loader">
       <div className="lds-ripple">
