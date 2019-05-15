@@ -60,6 +60,14 @@
     padding: 0;
     background: transparent;
   }
+
+  &.signature {
+    text-align: left;
+    color: $text-secondary;
+    padding: 25px 17px;
+    border: 1px solid $text-secondary;
+    border-radius: 10px;
+  }
   
   &.disabled {
     opacity: 0.4;

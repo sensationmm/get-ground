@@ -1,4 +1,16 @@
 {
+  "account": {
+    "signature": {
+      "title": "Set up your signature",
+      "intro": "First you must setup your signature.",
+      "heading2": "Choose option",
+      "buttons": {
+        "draw": "Draw your signature",
+        "choose": "Choose your signature",
+        "upload": "Upload your signature"
+      }
+    }
+  },
   "accountPending": {
     "title": "We‘ve sent you an email",
     "text": "With a magic link to the email address you provided. Please click the button on the email to verify your account.",
