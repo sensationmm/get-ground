@@ -5,6 +5,7 @@ video {
 }
 
 .add-proof {
+  z-index: 0;
   margin-bottom: 10px;
 
   &.disabled {
@@ -17,7 +18,16 @@ video {
   }
 
   &-img {
-    text-align: center
+    text-align: center;
+    z-index: 2;
+  }
+
+  &-loading {
+    position: relative;
+    font-style: italic;
+    z-index: -1;
+    margin-top: -100px;
+    margin-bottom: 105px;
   }
 
   .capture, .confirm-happy {

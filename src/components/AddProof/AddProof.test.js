@@ -28,7 +28,6 @@ describe('<AddProof />', () => {
     props = {
       section: 'passport',
       initialImg: '/img',
-      isSelfie: false,
       setImg: jest.fn(),
       t: jest.fn(),
       setActive: jest.fn(),
@@ -68,7 +67,8 @@ describe('<AddProof />', () => {
     expect(wrapper.state().takePicture).toEqual(true)
     expect(wrapper.length).toEqual(1)
     expect(wrapper.find('[data-test="intro-box"]').length).toEqual(1)
-    expect(wrapper.find('p').length).toEqual(1)
+    expect(wrapper.find('.add-proof-loading').length).toEqual(1)
+    expect(wrapper.find('.add-proof-content').length).toEqual(1)
     expect(props.t).toHaveBeenCalledWith('onBoarding.idCheck.passport.content')
     expect(wrapper.find('[data-test="webcam"]').length).toEqual(1)
     expect(wrapper.find('[data-test="capture-button"]').length).toEqual(1)
@@ -91,7 +91,8 @@ describe('<AddProof />', () => {
 
     expect(wrapper.length).toEqual(1)
     expect(wrapper.find('[data-test="intro-box"]').length).toEqual(1)
-    expect(wrapper.find('p').length).toEqual(1)
+    expect(wrapper.find('.add-proof-loading').length).toEqual(1)
+    expect(wrapper.find('.add-proof-content').length).toEqual(1)
     expect(wrapper.find('[data-test="webcam"]').length).toEqual(1)
     expect(wrapper.find('[data-test="capture-button"]').length).toEqual(1)
     expect(props.t).toHaveBeenCalledWith('onBoarding.idCheck.image.capture')
@@ -251,5 +252,17 @@ describe('<AddProof />', () => {
     expect(wrapper.find('img').props().src).toEqual('base-img')
     expect(props.resetActive).toHaveBeenCalled()
     expect(props.setImg).toHaveBeenCalledWith('passport', 'base-img')
+  })
+
+  it('does not show upload link if section is selfie', () => {
+    const customProps = {
+      ...props,
+      section: 'selfie',
+      active: 'selfie'
+    }
+
+    wrapper = shallow(<AddProof {...customProps} />);
+
+    expect(wrapper.find('.add-proof-upload-file').length).toEqual(0)
   })
 })
