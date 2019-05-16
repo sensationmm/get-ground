@@ -8,7 +8,9 @@ const IndexPage = () => {
     <Fragment>
       <Layout>
         <div data-test="container-home" className="home" role="homepage">
-      </div>
+          <Link to="/onboarding">Onboarding</Link>
+          <Link to="/company-design">Company Design</Link>
+        </div>
       </Layout>
     </Fragment>
   )
