@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react'
+import React, { Fragment } from 'react';
+import { Link } from 'gatsby';
 
 import Layout from 'src/components/Layout/Layout'
 
