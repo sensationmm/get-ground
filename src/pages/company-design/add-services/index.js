@@ -21,7 +21,7 @@ import additionalServices from 'src/services/AdditionalServices'
 
 const services = new additionalServices();
 
-class AdditionalServices extends Component {
+export class AdditionalServices extends Component {
   constructor(props) {
     super(props);
 
@@ -118,7 +118,7 @@ class AdditionalServices extends Component {
         <div className="add-services" role="company-design">
         <h1 className="add-services-title">{t('additionalServices.title')}</h1>
         <IntroBox>{t('additionalServices.introBox')}</IntroBox>
-          <Form>
+          <Form className="add-services-form">
             {formUtils.renderForm(this)}
           </Form>
         </div>

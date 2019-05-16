@@ -2,7 +2,7 @@ import {
   SET_ADDITIONAL_SERVICES
 } from 'src/config/constants';
 
-const initialState = {
+export const initialState = {
   mortgage: false,
   insurance: false,
   management: false
