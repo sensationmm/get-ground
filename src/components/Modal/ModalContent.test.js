@@ -57,18 +57,6 @@ describe('<ModalContent />', () => {
     expect(modalSignature.length).toBe(1);
   });
 
-  // test('renders signature img when there is a signature', () => {
-  //   wrapper = setupWithStore(ModalContent, {
-  //     t: tMock,
-  //     showLoader: showLoaderMock,
-  //     hideLoader: hideLoaderMock,
-  //     isDocumentSigned: true,
-  //     signatureUrl: 'someimgurl'
-  //   });
-  //   const modalSignatureImage = wrapper.find('.modal--signature-image');
-  //   expect(modalSignatureImage.length).toBe(1);
-  // });
-
   describe('getBlobForDownload()', () => {
 
     test('getBlobForDownload success', async () => {
@@ -89,7 +77,7 @@ describe('<ModalContent />', () => {
       
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
-      /* WERE NOT DOING ANYTHING ELSE YET - PLACHOLDER TEST */
+      expect(wrapperNew.state().modalError).toEqual(true);
     });
 
   });
@@ -97,7 +85,6 @@ describe('<ModalContent />', () => {
   test('setSignature()', () => {
     wrapper.instance().setSignature();
     expect(handleOnSignMock).toHaveBeenCalled();
-    //expect(wrapper.state().signatureImageUrl).toEqual('dummysignatureurl');
   });
 
   describe('handleScroll()', () => {
