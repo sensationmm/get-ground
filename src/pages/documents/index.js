@@ -39,26 +39,35 @@ export class MyDocuments extends Component {
     super(props)
     this.state = {
       checkbox: false,
+      modalDocumentKey: '',
+      shareholdersAgreementSigned: false,
+      companyArticlesSigned: false,
+      directorsLoanSigned: false,
+      consentToActSigned: false,
+      BoardResolutionSigned: false,
       shareholdersAgreementMarkdown: '',
       companyArticlesMarkdown: '',
       directorsLoanMarkdown: '',
       consentToActMarkdown: '',
       BoardResolutionMarkdown: '',
       modalMarkdown: '',
-      test: ''
     }
   }
 
   /**
    * @param {string} markdownStateKey - The state key to assign the mark down value to
    * @param {string} markdownTitle - The markdown title to use in the GET url
+   * @param {string} signedDocStateKey - The state key for checking if the doc is signed within the modal
    * @return {void}
    */
-  initModal = (markdownStateKey, markdownTitle) => {
+  initModal = (markdownStateKey, markdownTitle, signedDocStateKey) => {
     const { showModal } = this.props;
     
     if (this.state[markdownStateKey] === '') {
       this.getModalContent(markdownStateKey, markdownTitle)
+      this.setState({ 
+        modalDocumentKey: signedDocStateKey
+      })
     } else {
       this.setState({ modalMarkdown: this.state[markdownStateKey] });
       showModal();
@@ -92,49 +101,67 @@ export class MyDocuments extends Component {
 
   render() {
     const { t, i18n, modalIsOpen } = this.props;
-    const { modalMarkdown } = this.state;
+    const { 
+      modalMarkdown,
+      modalDocumentKey,
+      shareholdersAgreementSigned,
+      companyArticlesSigned, 
+      directorsLoanSigned,
+      consentToActSigned,
+      BoardResolutionSigned
+    } = this.state;
     const documentsContent = i18n.t('myDocuments.documents', { returnObjects: true });
     const documentsConfig = {
       documents: [
         {
           'title': documentsContent['document1'].title,
           'imageAltText': documentsContent['document1'].imageAltText,
-          'status': 'signed',
+          'status': shareholdersAgreementSigned ? 'signed' : 'not_signed',
           'image': ShareholdersAgreementImage,
           'completeImage': ShareholdersAgreementSignedImage,
-          'onClick': () => { this.initModal('shareholdersAgreementMarkdown', 'Investor Statement - High Net Worth'); }
+          'onClick': () => { 
+            this.initModal('shareholdersAgreementMarkdown', 'Investor Statement - High Net Worth', 'shareholdersAgreementSigned'); 
+          }
         },
         {
           'title': documentsContent['document2'].title,
           'imageAltText': documentsContent['document2'].imageAltText,
-          'status': 'signed',
+          'status': companyArticlesSigned ? 'signed' : 'not_signed',
           'image': CompanyArticlesImage,
           'completeImage': CompanyArticlesSignedImage,
-          'onClick': () => { this.initModal('companyArticlesMarkdown', 'Investor Statement - Sophisticated'); }
+          'onClick': () => { 
+            this.initModal('companyArticlesMarkdown', 'Investor Statement - Sophisticated', 'companyArticlesSigned'); 
+          }
         },
         {
           'title': documentsContent['document3'].title,
           'imageAltText': documentsContent['document3'].imageAltText,
-          'status': 'not_signed',
+          'status': directorsLoanSigned ? 'signed' : 'not_signed',
           'image': DirectorsLoanImage,
           'completeImage': DirectorsLoanSignedImage,
-          'onClick': () => { this.initModal('directorsLoanMarkdown', 'directors loan agreement'); }
+          'onClick': () => { 
+            this.initModal('directorsLoanMarkdown', 'directors loan agreement', 'directorsLoanSigned'); 
+          }
         },
         {
           'title': documentsContent['document4'].title,
           'imageAltText': documentsContent['document4'].imageAltText,
-          'status': 'not_signed',
+          'status': consentToActSigned ? 'signed' : 'not_signed',
           'image': ConsentToActImage,
           'completeImage': ConsentToActSignedImage,
-          'onClick': () => { this.initModal('consentToActMarkdown', 'consent to act as director'); }
+          'onClick': () => { 
+            this.initModal('consentToActMarkdown', 'consent to act as director', 'consentToActSigned'); 
+          }
         },
         {
           'title': documentsContent['document5'].title,
           'imageAltText': documentsContent['document5'].imageAltText,
-          'status': 'not_signed',
+          'status': BoardResolutionSigned ? 'signed' : 'not_signed',
           'image': BoardResolutionImage,
           'completeImage': BoardResolutionSignedImage,
-          'onClick': () => { this.initModal('BoardResolutionMarkdown', 'board resolution to exchange contracts'); }
+          'onClick': () => { 
+            this.initModal('BoardResolutionMarkdown', 'board resolution to exchange contracts', 'BoardResolutionSigned'); 
+          }
         }
       ]
     };
@@ -169,6 +196,9 @@ export class MyDocuments extends Component {
                   modalImage={investorStatementImage}
                   modalErrorText={t('myDocuments.modalDownloadError')}
                   hasSignature={true}
+                  isDocumentSigned={this.state[modalDocumentKey]}
+                  currentModalSignature={modalDocumentKey}
+                  handleOnSign={() => this.setState({ [modalDocumentKey]: true })}
                   signatureLabel={t('myDocuments.modalSignatureLabel')}
                   signaturePlaceholderText={t('myDocuments.modalSignaturePlaceholderText')}
                   signatureButtonLabel={t('myDocuments.modalSignatureButtonLabel')}

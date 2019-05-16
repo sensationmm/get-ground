@@ -35,7 +35,6 @@ class ModalContent extends Component {
     this.state = {
       markdownContainerHeight: '',
       checkboxDisabled: true,
-      signatureImageUrl: '',
       modalError: false
     }
 
@@ -51,7 +50,6 @@ class ModalContent extends Component {
     return ModalService.markdownToPDF(content).then(response => {
       hideLoader();
       if (response.status === 400) {
-        // NEED AN ERROR MODAL STATE
         this.setState({ modalError: true });
       } else {
         const url = window.URL.createObjectURL(new Blob([response]));
@@ -81,12 +79,12 @@ class ModalContent extends Component {
     if (bottom) this.setState({ checkboxDisabled: false });
   }
   setSignature = () => {
-    const { signatureUrl } = this.props;
-    this.setState({ signatureImageUrl: signatureUrl });
+    const { handleOnSign, currentModalSignature } = this.props;
+    handleOnSign(currentModalSignature);
   }
 
   render() {
-    const { markdownContainerHeight, checkboxDisabled, signatureImageUrl, modalError } = this.state;
+    const { markdownContainerHeight, checkboxDisabled, modalError } = this.state;
     const { 
       closeModal, 
       content, 
@@ -102,7 +100,9 @@ class ModalContent extends Component {
       signatureLabel,
       signaturePlaceholderText,
       signatureButtonLabel,
-      modalErrorText
+      modalErrorText,
+      isDocumentSigned,
+      signatureUrl
     } = this.props;
 
     return (
@@ -138,17 +138,17 @@ class ModalContent extends Component {
           <div className="modal--signature-wrapper">
             <span className="modal--signature-label">{signatureLabel}</span>
             <div className="modal--signature" onClick={this.setSignature}>
-              {signatureImageUrl === '' &&
+              {!isDocumentSigned &&
                 <span className="modal--signature-placeholder">{signaturePlaceholderText}</span>
               }
-              {signatureImageUrl !== '' &&
-                <img className="modal--signature-image" src={signatureImageUrl} />
+              {isDocumentSigned &&
+                <img className="modal--signature-image" src={signatureUrl} />
               }
             </div>
             <Button 
               classes="primary full" 
               label={signatureButtonLabel} 
-              disabled={signatureImageUrl === ''} 
+              disabled={!isDocumentSigned} 
               onClick={closeModal}
             />
           </div>
@@ -187,7 +187,10 @@ ModalContent.propTypes = {
   signatureLabel: PropTypes.string,
   signaturePlaceholderText: PropTypes.string,
   signatureButtonLabel: PropTypes.string,
-  signatureUrl: PropTypes.string
+  signatureUrl: PropTypes.string,
+  handleOnSign: PropTypes.func,
+  isDocumentSigned: PropTypes.bool,
+  currentModalSignature: PropTypes.string
 };
 
 const actions = { 
