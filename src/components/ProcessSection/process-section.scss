@@ -18,7 +18,7 @@
   }
 
   img {
-    width: 80px;
+    min-width: 80px;
     height: 80px;
   }
 
@@ -36,6 +36,9 @@
 
   &-complete, &-todo {
     color: $process-status;
+  }
+
+  &-complete, &-todo, &-signed, &-not-signed {
     font-style: italic;
   }
 

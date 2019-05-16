@@ -22,7 +22,7 @@
           "copy": "Property your company will hold",
           "imageAltText": "Property"
         },
-       "step2": {
+        "step2": {
           "title": "Purchase details",
           "copy": "Property type and purchase info",
           "imageAltText": "Purchase"
@@ -240,6 +240,39 @@
   "modal": {
     "closeIconAltText": "Close",
     "downloadButtonLabel": "Download"
+  },
+  "myDocuments": {
+    "title": "My Documents",
+    "intro": "Please read and sign all your company documents below. Your shareholders have also been notified that they to sign the relevant documents.",
+    "downloadButtonText": "Download Documents",
+    "modalHeading": "Shareholders agreement",
+    "modalSignatureLabel": "Your signature",
+    "modalSignaturePlaceholderText": "Tap here to sign",
+    "modalSignatureButtonLabel": "Done",
+    "modalDownloadButtonText": "Download",
+    "modalCloseAltText": "close icon",
+    "documents": {
+      "document1": {
+        "title": "Shareholders Agreement",
+        "imageAltText": "Shareholders"
+      },
+      "document2": {
+        "title": "Company Articles of Association",
+        "imageAltText": "Company Articles of Association"
+      },
+      "document3": {
+        "title": "Director's Loan Agreement",
+        "imageAltText": "Director's Loan"
+      },
+      "document4": {
+        "title": "Consent to Act as a Director",
+        "imageAltText": "Consent to Act as a Director"
+      },
+      "document5": {
+        "title": "Board Resolution to Exchange Contracts",
+        "imageAltText": "Board Resolution to Exchange Contracts"
+      }
+    }
   },
   "onBoarding": {
     "intro": {

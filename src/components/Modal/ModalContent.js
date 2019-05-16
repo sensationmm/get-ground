@@ -10,8 +10,8 @@ import closeIcon from 'src/assets/images/close-modal-icon.svg';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
-import ModalServices from 'src/services/Modal';
-const { markdownToPDF } = ModalServices;
+import modalService from 'src/services/Modal';
+export const ModalService = new modalService();
 
 /**
  * ModalContent
@@ -34,7 +34,8 @@ class ModalContent extends Component {
 
     this.state = {
       markdownContainerHeight: '',
-      checkboxDisabled: true
+      checkboxDisabled: true,
+      signatureImageUrl: ''
     }
 
     this.modalHeader = createRef();
@@ -45,17 +46,18 @@ class ModalContent extends Component {
 
     showLoader();
 
-    return markdownToPDF(content).then(response => {
-      const url = window.URL.createObjectURL(new Blob([response]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', 'file.pdf');
-      this.modalHeader.current.appendChild(link);
-      link.click();
-
+    return ModalService.markdownToPDF(content).then(response => {
       hideLoader();
-    }).catch(() => {
-      hideLoader();
+      if (response.status === 400) {
+        // NEED AN ERROR MODAL STATE
+      } else {
+        const url = window.URL.createObjectURL(new Blob([response]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'file.pdf');
+        this.modalHeader.current.appendChild(link);
+        link.click();
+      }
     });
   }
 
@@ -74,8 +76,13 @@ class ModalContent extends Component {
     if (bottom) this.setState({ checkboxDisabled: false });
   }
 
+  setSignature = () => {
+    const { signatureUrl } = this.props;
+    this.setState({ signatureImageUrl: signatureUrl });
+  }
+
   render() {
-    const { markdownContainerHeight, checkboxDisabled } = this.state;
+    const { markdownContainerHeight, checkboxDisabled, signatureImageUrl } = this.state;
     const { 
       closeModal, 
       content, 
@@ -86,7 +93,11 @@ class ModalContent extends Component {
       downloadButtonLabel,
       closeIconAltText,
       modalImage,
-      checkboxLabel
+      checkboxLabel,
+      hasSignature,
+      signatureLabel,
+      signaturePlaceholderText,
+      signatureButtonLabel
     } = this.props;
 
     return (
@@ -114,6 +125,26 @@ class ModalContent extends Component {
           <div className="modal--markdown">
             <ReactMarkdown escapeHtml={false} source={content} />
           </div>
+
+          {hasSignature && 
+          <div className="modal--signature-wrapper">
+            <span className="modal--signature-label">{signatureLabel}</span>
+            <div className="modal--signature" onClick={this.setSignature}>
+              {signatureImageUrl === '' &&
+                <span className="modal--signature-placeholder">{signaturePlaceholderText}</span>
+              }
+              {signatureImageUrl !== '' &&
+                <img src={signatureImageUrl} />
+              }
+            </div>
+            <Button 
+              classes="primary full" 
+              label={signatureButtonLabel} 
+              disabled={signatureImageUrl === ''} 
+              onClick={closeModal}
+            />
+          </div>
+          }
         </div>
         {hasCheckbox && 
         <div className="modal--footer">
@@ -142,7 +173,12 @@ ModalContent.propTypes = {
   downloadButtonLabel: PropTypes.string,
   closeIconAltText: PropTypes.string,
   modalImage: PropTypes.string,
-  checkboxLabel: PropTypes.string
+  checkboxLabel: PropTypes.string,
+  hasSignature: PropTypes.bool,
+  signatureLabel: PropTypes.string,
+  signaturePlaceholderText: PropTypes.string,
+  signatureButtonLabel: PropTypes.string,
+  signatureUrl: PropTypes.string
 };
 
 const actions = { 

@@ -17,25 +17,36 @@ import './process-section.scss'
  * @param {function} onClick - action to fire when button is clicked
  * @return {JSXElement} ProcessSection
  */
-export const ProcessSection = ({title, imageAltText , copy, path, status, image, isDisabled=false }) => {
+export const ProcessSection = ({title, imageAltText , copy, path, status, image, isDisabled=false, onClick }) => {
 
   const progress = (status) => {
     if (status === 'complete') {
       return <p className="process-section-complete">100% complete</p>
     } else if(status === 'to_do') {
       return  <div className="process-section-todo"><p>To do</p></div>
+    } else if (status === 'signed') {
+      return <p className="process-section-signed">Signed</p>
+    } else if (status === 'not_signed') {
+      return <p className="process-section-not-signed">To be signed</p>
     }
     return <div className="process-section-incomplete"><p>Incomplete</p></div>
   }
 
   return (
-    <div className={classNames('process-section', {'is-disabled': isDisabled})} onClick={() => navigate(`${path}`)}>
+    <div 
+      className={classNames('process-section', 
+        {'is-disabled': isDisabled})
+      } 
+      onClick={ onClick ? onClick : () => navigate(`${path}`) }
+    >
       <div className="process-section-img">
         <img src={image} alt={imageAltText}/>
       </div>
       <div className="process-section-body">
         <h3>{title}</h3>
-        <p className="process-section-copy">{copy}</p>
+        { copy &&
+          <p className="process-section-copy">{copy}</p>
+        }
         {progress(status)}
       </div>
     </div>
@@ -49,5 +60,6 @@ ProcessSection.propTypes = {
   path: PropTypes.string,
   status: PropTypes.string,
   image: PropTypes.string,
-  isDisabled: PropTypes.bool
+  isDisabled: PropTypes.bool,
+  onClick: PropTypes.any
 }
