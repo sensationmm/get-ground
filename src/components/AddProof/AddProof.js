@@ -76,9 +76,10 @@ export class AddProof extends Component {
           height={350}
           ref={this.setWebcam}
           screenshotFormat="image/jpeg"
-          width={350}
+          width={335}
           videoConstraints={videoConstraints}
         />
+        <p className="add-proof-loading">...loading camera</p>
         <Button style={`display: inline;`} data-test="capture-button" classes="primary capture" fullWidth label={t('onBoarding.idCheck.image.capture')} onClick={() => this.capture()}/>
       </div>
     )
@@ -176,12 +177,13 @@ export class AddProof extends Component {
 
   render() {
     const { t, section } = this.props
+
     return (
       <div data-test="component-add-proof" className={classNames(['add-proof', {'disabled': this.props.active && this.props.active !== section  }])} role="account">
         <IntroBox data-test="intro-box">{ t(`onBoarding.idCheck.${section}.title`) }</IntroBox>
         <p className="add-proof-content">{ !this.state.takePicture || !this.state.retakePicture ? t(`onBoarding.idCheck.${section}.content`) : t(`onBoarding.idCheck.${section}.retakeImageContent`)}</p>
         <div className="add-proof-img">{this.handleProof(t)}</div>
-        <div className="add-proof-upload-file">{this.uploadImg(t)}</div>
+        {section !== 'selfie' && <div className="add-proof-upload-file">{this.uploadImg(t)}</div>}
       </div>
     );
   }
@@ -191,7 +193,6 @@ AddProof.propTypes = {
   t: PropTypes.func.isRequired,
   section: PropTypes.string.isRequired,
   initialImg: PropTypes.string.isRequired,
-  isSelfie: PropTypes.bool,
   setImg: PropTypes.func.isRequired,
   setActive: PropTypes.func.isRequired,
   resetActive: PropTypes.func.isRequired,
