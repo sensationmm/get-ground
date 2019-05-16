@@ -12,11 +12,13 @@ class AdditionalServices extends BaseService {
   addServices = (mortgage, insurance, management) => {
     const config = {
       url: `companies/${store.getState().user.id}/services`,
-      method: 'post',
+      method: 'put',
       data: {
-        additional_services_mortgage: mortgage,
-        additional_services_insurance: insurance,
-        additional_services_management: management,
+        services: {
+          mortgage,
+          insurance,
+          management
+        }
       }
     };
 
