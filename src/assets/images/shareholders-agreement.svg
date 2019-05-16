@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="87px" height="71px" viewBox="0 0 87 71" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>paper address copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="0.322001689%" y1="49.7637194%" x2="100%" y2="50.2378121%" id="linearGradient-1">
+            <stop stop-color="#F27E8D" offset="0%"></stop>
+            <stop stop-color="#F29886" offset="48.791174%"></stop>
+            <stop stop-color="#F2B47E" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Company-Documents" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="5-My-documents--(default-state-with-none-signed-yet)" transform="translate(-51.000000, -373.000000)">
+            <g id="paper-address-copy" transform="translate(51.000000, 373.000000)">
+                <rect id="Rectangle" stroke="#2F5472" stroke-width="2" fill="#FFFFFF" x="1" y="1" width="85" height="69" rx="2"></rect>
+                <text id="S.A" font-family="OpenSans-Regular, Open Sans" font-size="13" font-weight="normal" fill="#2F5472">
+                    <tspan x="9" y="36">S.A</tspan>
+                </text>
+                <rect id="Rectangle-Copy-6" fill="#2F5472" x="9" y="42" width="69" height="2" rx="1"></rect>
+                <rect id="Rectangle-Copy-7" fill="url(#linearGradient-1)" x="9" y="51" width="29" height="2" rx="1"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

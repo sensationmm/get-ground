@@ -251,6 +251,7 @@
     "modalSignatureButtonLabel": "Done",
     "modalDownloadButtonText": "Download",
     "modalCloseAltText": "close icon",
+    "modalDownloadError": "We couldn't download the file, please try again",
     "documents": {
       "document1": {
         "title": "Shareholders Agreement",

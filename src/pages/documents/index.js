@@ -16,11 +16,16 @@ import { showModal, hideModal } from 'src/state/actions/modal';
 import modalService from 'src/services/Modal';
 export const ModalService = new modalService();
 
-import PropertyImage from 'src/assets/images/property.svg'
-import PurchaseImage from 'src/assets/images/purchase.svg'
-import SolicitorImage from 'src/assets/images/solicitor.svg'
-import ShareholderImage from 'src/assets/images/shareholder.svg'
-import ServicesImage from 'src/assets/images/services.svg'
+import ShareholdersAgreementImage from 'src/assets/images/shareholders-agreement.svg';
+import CompanyArticlesImage from 'src/assets/images/company-articles.svg';
+import DirectorsLoanImage from 'src/assets/images/directors-loan.svg';
+import ConsentToActImage from 'src/assets/images/consent-to-act.svg';
+import BoardResolutionImage from 'src/assets/images/board-resolution.svg';
+import ShareholdersAgreementSignedImage from 'src/assets/images/shareholders-agreement-signed.svg';
+import CompanyArticlesSignedImage from 'src/assets/images/company-articles-signed.svg';
+import DirectorsLoanSignedImage from 'src/assets/images/directors-loan-signed.svg';
+import ConsentToActSignedImage from 'src/assets/images/consent-to-act-signed.svg';
+import BoardResolutionSignedImage from 'src/assets/images/board-resolution-signed.svg';
 import investorStatementImage from 'src/assets/images/investor-statement-image.svg';
 
 import './my-documents.scss';
@@ -95,35 +100,40 @@ export class MyDocuments extends Component {
           'title': documentsContent['document1'].title,
           'imageAltText': documentsContent['document1'].imageAltText,
           'status': 'signed',
-          'image': PropertyImage,
+          'image': ShareholdersAgreementImage,
+          'completeImage': ShareholdersAgreementSignedImage,
           'onClick': () => { this.initModal('shareholdersAgreementMarkdown', 'Investor Statement - High Net Worth'); }
         },
         {
           'title': documentsContent['document2'].title,
           'imageAltText': documentsContent['document2'].imageAltText,
           'status': 'signed',
-          'image': PurchaseImage,
+          'image': CompanyArticlesImage,
+          'completeImage': CompanyArticlesSignedImage,
           'onClick': () => { this.initModal('companyArticlesMarkdown', 'Investor Statement - Sophisticated'); }
         },
         {
           'title': documentsContent['document3'].title,
           'imageAltText': documentsContent['document3'].imageAltText,
           'status': 'not_signed',
-          'image': SolicitorImage,
+          'image': DirectorsLoanImage,
+          'completeImage': DirectorsLoanSignedImage,
           'onClick': () => { this.initModal('directorsLoanMarkdown', 'directors loan agreement'); }
         },
         {
           'title': documentsContent['document4'].title,
           'imageAltText': documentsContent['document4'].imageAltText,
           'status': 'not_signed',
-          'image': ShareholderImage,
+          'image': ConsentToActImage,
+          'completeImage': ConsentToActSignedImage,
           'onClick': () => { this.initModal('consentToActMarkdown', 'consent to act as director'); }
         },
         {
           'title': documentsContent['document5'].title,
           'imageAltText': documentsContent['document5'].imageAltText,
           'status': 'not_signed',
-          'image': ServicesImage,
+          'image': BoardResolutionImage,
+          'completeImage': BoardResolutionSignedImage,
           'onClick': () => { this.initModal('BoardResolutionMarkdown', 'board resolution to exchange contracts'); }
         }
       ]
@@ -157,6 +167,7 @@ export class MyDocuments extends Component {
                   downloadButtonLabel={t('myDocuments.modalDownloadButtonText')}
                   closeIconAltText={t('myDocuments.modalCloseAltText')}
                   modalImage={investorStatementImage}
+                  modalErrorText={t('myDocuments.modalDownloadError')}
                   hasSignature={true}
                   signatureLabel={t('myDocuments.modalSignatureLabel')}
                   signaturePlaceholderText={t('myDocuments.modalSignaturePlaceholderText')}

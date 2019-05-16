@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="95px" height="79px" viewBox="0 0 95 79" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>paper address copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="0.322001689%" y1="16.9141512%" x2="100%" y2="83.3003039%" id="linearGradient-1">
+            <stop stop-color="#F27E8D" offset="0%"></stop>
+            <stop stop-color="#F29886" offset="48.791174%"></stop>
+            <stop stop-color="#F2B47E" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="0" y="0" width="87" height="71" rx="2"></rect>
+        <filter x="-8.0%" y="-7.0%" width="116.1%" height="119.7%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="C-Docs-illusz-Copy-5" transform="translate(4.000000, 2.000000)">
+            <g id="paper-address-copy">
+                <g id="Rectangle">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+                    <rect stroke="#2F5472" stroke-width="2" stroke-linejoin="square" fill="url(#linearGradient-1)" fill-rule="evenodd" x="1" y="1" width="85" height="69" rx="2"></rect>
+                </g>
+                <text id="C.A.A" font-family="OpenSans-Regular, Open Sans" font-size="13" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="9" y="36">C.A.A</tspan>
+                </text>
+                <rect id="Rectangle-Copy-6" fill="#2F5472" x="9" y="42" width="69" height="2" rx="1"></rect>
+                <rect id="Rectangle-Copy-7" fill="#FFFFFF" x="9" y="51" width="29" height="2" rx="1"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

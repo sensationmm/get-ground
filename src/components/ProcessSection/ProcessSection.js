@@ -17,7 +17,17 @@ import './process-section.scss'
  * @param {function} onClick - action to fire when button is clicked
  * @return {JSXElement} ProcessSection
  */
-export const ProcessSection = ({title, imageAltText , copy, path, status, image, isDisabled=false, onClick }) => {
+export const ProcessSection = ({
+  title, 
+  imageAltText, 
+  copy, 
+  path, 
+  status, 
+  image, 
+  completeImage,
+  isDisabled=false, 
+  onClick 
+}) => {
 
   const progress = (status) => {
     if (status === 'complete') {
@@ -40,7 +50,12 @@ export const ProcessSection = ({title, imageAltText , copy, path, status, image,
       onClick={ onClick ? onClick : () => navigate(`${path}`) }
     >
       <div className="process-section-img">
-        <img src={image} alt={imageAltText}/>
+        {status === 'signed' &&
+          <img src={completeImage} alt={imageAltText}/>
+        }
+        {status !== 'signed' &&
+          <img src={image} alt={imageAltText}/>
+        }
       </div>
       <div className="process-section-body">
         <h3>{title}</h3>
@@ -60,6 +75,7 @@ ProcessSection.propTypes = {
   path: PropTypes.string,
   status: PropTypes.string,
   image: PropTypes.string,
+  completeImage: PropTypes.string,
   isDisabled: PropTypes.bool,
   onClick: PropTypes.any
 }

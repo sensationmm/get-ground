@@ -35,7 +35,8 @@ class ModalContent extends Component {
     this.state = {
       markdownContainerHeight: '',
       checkboxDisabled: true,
-      signatureImageUrl: ''
+      signatureImageUrl: '',
+      modalError: false
     }
 
     this.modalHeader = createRef();
@@ -45,11 +46,13 @@ class ModalContent extends Component {
     const { showLoader, hideLoader, content } = this.props;
 
     showLoader();
+    this.setState({ modalError: false });
 
     return ModalService.markdownToPDF(content).then(response => {
       hideLoader();
       if (response.status === 400) {
         // NEED AN ERROR MODAL STATE
+        this.setState({ modalError: true });
       } else {
         const url = window.URL.createObjectURL(new Blob([response]));
         const link = document.createElement('a');
@@ -83,7 +86,7 @@ class ModalContent extends Component {
   }
 
   render() {
-    const { markdownContainerHeight, checkboxDisabled, signatureImageUrl } = this.state;
+    const { markdownContainerHeight, checkboxDisabled, signatureImageUrl, modalError } = this.state;
     const { 
       closeModal, 
       content, 
@@ -98,7 +101,8 @@ class ModalContent extends Component {
       hasSignature,
       signatureLabel,
       signaturePlaceholderText,
-      signatureButtonLabel
+      signatureButtonLabel,
+      modalErrorText
     } = this.props;
 
     return (
@@ -114,6 +118,9 @@ class ModalContent extends Component {
             alt={closeIconAltText}
             onClick={closeModal} />
         </div>
+        { modalError &&
+          <div className="modal--error">{modalErrorText}</div>
+        }
         <div 
           className="modal--content" 
           style={{ height: markdownContainerHeight }}
@@ -174,6 +181,7 @@ ModalContent.propTypes = {
   downloadButtonLabel: PropTypes.string,
   closeIconAltText: PropTypes.string,
   modalImage: PropTypes.string,
+  modalErrorText: PropTypes.string,
   checkboxLabel: PropTypes.string,
   hasSignature: PropTypes.bool,
   signatureLabel: PropTypes.string,
