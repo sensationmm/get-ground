@@ -128,21 +128,21 @@ workflows:
           filters:
             branches:
               only: develop
-     - deploy_staging:
+      - deploy_staging:
           requires:
             - build
             - test
           filters:
             branches:
               only: develop
-     - hold:
+      - hold:
           requires:
             - build
             - test
           filters:
             branches:
               only: qa
-     - deploy_qa:
+      - deploy_qa:
           requires:
             - hold
           filters:
