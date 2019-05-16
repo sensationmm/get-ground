@@ -1,5 +1,3 @@
-/* eslint-disable react/prefer-stateless-function */
-/* eslint-disable require-jsdoc */
 import React, { Component } from 'react'
 import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
@@ -21,6 +19,10 @@ import additionalServices from 'src/services/AdditionalServices'
 
 const services = new additionalServices();
 
+/**
+ * AdditionalServices
+ * @return {ReactComponent} AdditionalServices
+ */
 export class AdditionalServices extends Component {
   constructor(props) {
     super(props);
