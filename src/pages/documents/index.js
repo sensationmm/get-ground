@@ -168,7 +168,7 @@ export class MyDocuments extends Component {
 
     return (
       <Fragment>
-        <Layout>
+        <Layout secure>
           <div className="process-tracker" role="fullscreen company-design">
             <h3 className="process-tracker--title">{t('myDocuments.title')}</h3>
             <p className="process-tracker--intro">{t('myDocuments.intro')}</p>
