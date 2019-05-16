@@ -41,7 +41,7 @@ class ModalContent extends Component {
     this.modalHeader = createRef();
   }
 
-  getBlobForDownload = /* istanbul ignore next */ () => {
+  getBlobForDownload = () => {
     const { showLoader, hideLoader, content } = this.props;
 
     showLoader();
@@ -55,8 +55,10 @@ class ModalContent extends Component {
         const link = document.createElement('a');
         link.href = url;
         link.setAttribute('download', 'file.pdf');
-        this.modalHeader.current.appendChild(link);
-        link.click();
+        if (this.modalHeader.current !== null) {
+          this.modalHeader.current.appendChild(link);
+          link.click();
+        }
       }
     });
   }
@@ -75,7 +77,6 @@ class ModalContent extends Component {
 
     if (bottom) this.setState({ checkboxDisabled: false });
   }
-
   setSignature = () => {
     const { signatureUrl } = this.props;
     this.setState({ signatureImageUrl: signatureUrl });
@@ -134,7 +135,7 @@ class ModalContent extends Component {
                 <span className="modal--signature-placeholder">{signaturePlaceholderText}</span>
               }
               {signatureImageUrl !== '' &&
-                <img src={signatureImageUrl} />
+                <img className="modal--signature-image" src={signatureImageUrl} />
               }
             </div>
             <Button 

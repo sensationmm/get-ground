@@ -40,6 +40,7 @@ export class MyDocuments extends Component {
       consentToActMarkdown: '',
       BoardResolutionMarkdown: '',
       modalMarkdown: '',
+      test: ''
     }
   }
 
@@ -194,4 +195,5 @@ const actions = {
   hideModal
 };
 
+export const RawComponent = MyDocuments;
 export default connect(mapStateToProps, actions)(withTranslation()(MyDocuments))
