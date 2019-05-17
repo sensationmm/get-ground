@@ -75,7 +75,7 @@ export class ProcessTracker extends React.Component {
 
       return (
         <Fragment>
-            <Layout>
+            <Layout secure>
               <div className="process-tracker" role="fullscreen">
                 <h3 className="process-tracker--title">{t('onBoarding.progressTracker.inProgressTitle')}</h3>
                 <div className="process-tracker-sections">

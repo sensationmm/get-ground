@@ -86,7 +86,7 @@ class ComplianceCheck extends Component {
       this.setState({
         ...this.state,
         errors: {
-          form: t('compliance.failureMessage')
+          form: t('onBoarding.compliance.failureMessage')
         },
         showErrorMessage: true
         }, animateScroll.scrollToTop());
@@ -196,8 +196,8 @@ class ComplianceCheck extends Component {
     return (
       <Layout headerActions={headerActions} secure>
         <div data-test="container-compliance-check" className="compliance-check" role="account">
-          <h1>{ t('compliance.header') }</h1>
-          <p>{ t('compliance.text') }</p>
+          <h1>{ t('onBoarding.compliance.header') }</h1>
+          <p>{ t('onBoarding.compliance.text') }</p>
 
           {showErrorMessage && errors.form &&
             <ErrorBox>{errors.form}</ErrorBox>
@@ -275,7 +275,7 @@ class ComplianceCheck extends Component {
                 classes="primary"
                 fullWidth
                 onClick={() => this.checkResponses(showQ5)}
-                label={t('compliance.buttonDone')}
+                label={t('onBoarding.compliance.buttonDone')}
               />
             }
             </Element>
@@ -289,13 +289,13 @@ class ComplianceCheck extends Component {
             >
               <Modal>
                 <ModalContent 
-                  heading={t('compliance.modalHeading')}
+                  heading={t('onBoarding.compliance.modalHeading')}
                   content={modalMarkdown}
                   closeModal={this.closeModal} 
-                  downloadButtonLabel={t('compliance.modalDownloadButtonText')}
-                  closeIconAltText={t('compliance.modalCloseAltText')}
+                  downloadButtonLabel={t('onBoarding.compliance.modalDownloadButtonText')}
+                  closeIconAltText={t('onBoarding.compliance.modalCloseAltText')}
                   modalImage={investorStatementImage}
-                  checkboxLabel={t('compliance.modalCheckboxLabel')}
+                  checkboxLabel={t('onBoarding.compliance.modalCheckboxLabel')}
                   hasCheckbox={true}
                   checkBoxChecked={modalCheckBoxChecked}
                   handleCheckboxChange={() => this.setState({ modalCheckBoxChecked: !modalCheckBoxChecked})}

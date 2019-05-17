@@ -16,8 +16,5 @@ func main() {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		http.Redirect(w, r, "/", http.StatusFound)
-		return
-	}
+	http.ServeFile(w, r, "public/index.html")
 }

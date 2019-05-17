@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react'
+import React, { Fragment } from 'react';
+import { Link } from 'gatsby';
 
 import Layout from 'src/components/Layout/Layout'
 
@@ -8,7 +9,9 @@ const IndexPage = () => {
     <Fragment>
       <Layout>
         <div data-test="container-home" className="home" role="homepage">
-      </div>
+          <Link to="/onboarding">Onboarding</Link>
+          <Link to="/company-design">Company Design</Link>
+        </div>
       </Layout>
     </Fragment>
   )

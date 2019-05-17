@@ -12,21 +12,21 @@ const QuizQ3 = props => {
 
   return (
     <div data-test="component-quizq3">
-      <div className="compliance-check-section-header">{ t('compliance.section', { count: 3, total: numQuestions }) }</div>
-      <h2>{ t('compliance.quiz.investmentConfirmation.title') }</h2>
+      <div className="compliance-check-section-header">{ t('onBoarding.compliance.section', { count: 3, total: numQuestions }) }</div>
+      <h2>{ t('onBoarding.compliance.quiz.investmentConfirmation.title') }</h2>
       <Form>
-        <Option id="under250" title={t('compliance.quiz.investmentConfirmation.options.band1')} />
-        <Option id="under250" title={t('compliance.quiz.investmentConfirmation.options.band2')} />
+        <Option id="under250" title={t('onBoarding.compliance.quiz.investmentConfirmation.options.band1')} />
+        <Option id="under250" title={t('onBoarding.compliance.quiz.investmentConfirmation.options.band2')} />
         <Button
           classes="primary"
           fullWidth
           onClick={onClick}
-          label={t('compliance.quiz.investmentConfirmation.buttonAgree')}
+          label={t('onBoarding.compliance.quiz.investmentConfirmation.buttonAgree')}
         />
 
         <Link to="/onboarding/not-suitable">
           <div className="contact-us">
-            {t('compliance.quiz.investmentConfirmation.buttonDisagree')}
+            {t('onBoarding.compliance.quiz.investmentConfirmation.buttonDisagree')}
           </div>
         </Link>
       </Form>

@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 import Layout from 'src/components/Layout/Layout'
 import AddProof from 'src/components/AddProof/AddProof'
+import IntroBox from 'src/components/_layout/IntroBox/IntroBox'
 import Passport from 'src/assets/images/add-passport.svg'
 import Address from 'src/assets/images/add-address.svg'
 import Selfie from 'src/assets/images/add-selfie.svg'
@@ -26,20 +27,28 @@ export class IdCheck extends Component {
     const { passport, address, selfie } = this.props
     KYCService.makeCheck(passport, address, selfie)
   }
+
   render() {
     const { t } = this.props
-    const headerActions = <Link to="/onboarding/process-tracker"><ButtonHeader label="Exit" /></Link>;
+    const headerActions = <Link to="/onboarding"><ButtonHeader label="Exit" /></Link>;
 
     return (
-      <Layout headerActions={headerActions}>
+      <Layout headerActions={headerActions} secure>
       <div data-test="container-id-check" className="id-check" role="account">
         <h1 className="id-check-title">{ t('onBoarding.idCheck.title') }</h1>
+        <IntroBox>{ t('onBoarding.idCheck.text') }</IntroBox>
         <AddProof section="passport" initialImg={Passport} />
         <AddProof section="address" initialImg={Address} />
         <AddProof section="selfie" initialImg= {Selfie} />
-        <Button classes="primary id-check-next" label={ t('onBoarding.idCheck.buttonNext') } fullWidth />
-        <Link to="/onboarding/process-tracker"><Button classes="secondary id-check-back" label={ t('onBoarding.idCheck.buttonBack') } fullWidth /></Link>
-        <Button classes="link small id-check-skip" label={ t('onBoarding.idCheck.buttonSkip') } fullWidth />
+        <Link to="/onboarding/compliance-check">
+          <Button classes="primary id-check-next" label={ t('onBoarding.idCheck.buttonNext') } fullWidth />
+        </Link>
+        <Link to="/onboarding/personal-details">
+          <Button classes="secondary id-check-back" label={ t('onBoarding.idCheck.buttonBack') } fullWidth />
+        </Link>
+        <Link to="/onboarding/compliance-check">
+          <Button classes="link small id-check-skip" label={ t('onBoarding.idCheck.buttonSkip') } fullWidth />
+        </Link>
       </div>
     </Layout>
     )

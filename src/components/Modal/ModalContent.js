@@ -10,8 +10,8 @@ import closeIcon from 'src/assets/images/close-modal-icon.svg';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
-import ModalServices from 'src/services/Modal';
-const { markdownToPDF } = ModalServices;
+import modalService from 'src/services/Modal';
+export const ModalService = new modalService();
 
 /**
  * ModalContent
@@ -34,28 +34,33 @@ class ModalContent extends Component {
 
     this.state = {
       markdownContainerHeight: '',
-      checkboxDisabled: true
+      checkboxDisabled: true,
+      modalError: false
     }
 
     this.modalHeader = createRef();
   }
 
-  getBlobForDownload = /* istanbul ignore next */ () => {
+  getBlobForDownload = () => {
     const { showLoader, hideLoader, content } = this.props;
 
     showLoader();
+    this.setState({ modalError: false });
 
-    return markdownToPDF(content).then(response => {
-      const url = window.URL.createObjectURL(new Blob([response]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', 'file.pdf');
-      this.modalHeader.current.appendChild(link);
-      link.click();
-
+    return ModalService.markdownToPDF(content).then(response => {
       hideLoader();
-    }).catch(() => {
-      hideLoader();
+      if (response.status === 400) {
+        this.setState({ modalError: true });
+      } else {
+        const url = window.URL.createObjectURL(new Blob([response]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'file.pdf');
+        if (this.modalHeader.current !== null) {
+          this.modalHeader.current.appendChild(link);
+          link.click();
+        }
+      }
     });
   }
 
@@ -73,9 +78,13 @@ class ModalContent extends Component {
 
     if (bottom) this.setState({ checkboxDisabled: false });
   }
+  setSignature = () => {
+    const { handleOnSign, currentModalSignature } = this.props;
+    handleOnSign(currentModalSignature);
+  }
 
   render() {
-    const { markdownContainerHeight, checkboxDisabled } = this.state;
+    const { markdownContainerHeight, checkboxDisabled, modalError } = this.state;
     const { 
       closeModal, 
       content, 
@@ -86,7 +95,14 @@ class ModalContent extends Component {
       downloadButtonLabel,
       closeIconAltText,
       modalImage,
-      checkboxLabel
+      checkboxLabel,
+      hasSignature,
+      signatureLabel,
+      signaturePlaceholderText,
+      signatureButtonLabel,
+      modalErrorText,
+      isDocumentSigned,
+      signatureUrl
     } = this.props;
 
     return (
@@ -102,6 +118,9 @@ class ModalContent extends Component {
             alt={closeIconAltText}
             onClick={closeModal} />
         </div>
+        { modalError &&
+          <div className="modal--error">{modalErrorText}</div>
+        }
         <div 
           className="modal--content" 
           style={{ height: markdownContainerHeight }}
@@ -114,6 +133,26 @@ class ModalContent extends Component {
           <div className="modal--markdown">
             <ReactMarkdown escapeHtml={false} source={content} />
           </div>
+
+          {hasSignature && 
+          <div className="modal--signature-wrapper">
+            <span className="modal--signature-label">{signatureLabel}</span>
+            <div className="modal--signature" onClick={this.setSignature}>
+              {!isDocumentSigned &&
+                <span className="modal--signature-placeholder">{signaturePlaceholderText}</span>
+              }
+              {isDocumentSigned &&
+                <img className="modal--signature-image" src={signatureUrl} />
+              }
+            </div>
+            <Button 
+              classes="primary full" 
+              label={signatureButtonLabel} 
+              disabled={!isDocumentSigned} 
+              onClick={closeModal}
+            />
+          </div>
+          }
         </div>
         {hasCheckbox && 
         <div className="modal--footer">
@@ -142,7 +181,16 @@ ModalContent.propTypes = {
   downloadButtonLabel: PropTypes.string,
   closeIconAltText: PropTypes.string,
   modalImage: PropTypes.string,
-  checkboxLabel: PropTypes.string
+  modalErrorText: PropTypes.string,
+  checkboxLabel: PropTypes.string,
+  hasSignature: PropTypes.bool,
+  signatureLabel: PropTypes.string,
+  signaturePlaceholderText: PropTypes.string,
+  signatureButtonLabel: PropTypes.string,
+  signatureUrl: PropTypes.string,
+  handleOnSign: PropTypes.func,
+  isDocumentSigned: PropTypes.bool,
+  currentModalSignature: PropTypes.string
 };
 
 const actions = { 
