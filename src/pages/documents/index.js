@@ -50,7 +50,7 @@ export class MyDocuments extends Component {
       directorsLoanMarkdown: '',
       consentToActMarkdown: '',
       BoardResolutionMarkdown: '',
-      modalMarkdown: '',
+      modalMarkdown: ''
     }
   }
 
@@ -97,6 +97,71 @@ export class MyDocuments extends Component {
   closeModal = () => {
     const { hideModal } = this.props;
     hideModal();
+  }
+
+  getAllMarkdown = () => {
+    /* TODO: THIS IS CURRENTLY DUMMY MARKUP - WE NEED THE REAL ENDPOINTS SET UP FOR EACH DOC */
+    const markdowns = [
+      {
+        markdownStateKey: 'shareholdersAgreementMarkdown',
+        title: 'Investor Statement - High Net Worth'
+      },
+      {
+        markdownStateKey: 'companyArticlesMarkdown',
+        title: 'Investor Statement - Sophisticated'
+      },
+      {
+        markdownStateKey: 'directorsLoanMarkdown',
+        title: 'Investor Statement - High Net Worth'
+      },
+      {
+        markdownStateKey: 'consentToActMarkdown',
+        title: 'Investor Statement - Sophisticated'
+      },
+      {
+        markdownStateKey: 'BoardResolutionMarkdown',
+        title: 'Investor Statement - High Net Worth'
+      }
+    ];
+
+    // If getAllMarkdown has already been fired and the download links already exist just click them and get out...
+    if (document.querySelectorAll('.pdf-link').length === markdowns.length) {
+      document.querySelectorAll('.pdf-link').forEach(link => {
+        link.click();
+      })
+      return;
+    }
+
+    markdowns.forEach((markdown) => {
+      // If the markdowns haven't been stored yet, get them before downloading...
+      if (this.state[markdown.markdownStateKey] === '') {
+        ModalService.fetchModalContent(markdown.title).then(response => {
+          this.setState({ 
+            [markdown.markdownStateKey]: response.data.markdown_text
+          });
+          this.downloadAllFiles(response.data.markdown_text);
+        });
+      // Else just download them ( they could have previously been stored by opening the 
+      // relevant modal OR by firing getAllMarkdown once already... )
+      } else {
+        this.downloadAllFiles(this.state[markdown.markdownStateKey]);
+      }
+    });
+  }
+
+  // Transform the markdown into PDF urls, create links and click them progromatically for download
+  downloadAllFiles = (markdown) => {
+    return ModalService.markdownToPDF(markdown).then(response => {
+      const url = window.URL.createObjectURL(new Blob([response]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'file.pdf');
+      link.setAttribute('class', 'pdf-link');
+      if (document.getElementById('my-documents') !== null) {
+        document.getElementById('my-documents').appendChild(link);
+        link.click();
+      }
+    });
   }
 
   render() {
@@ -169,7 +234,7 @@ export class MyDocuments extends Component {
     return (
       <Fragment>
         <Layout secure>
-          <div className="process-tracker" role="fullscreen company-design">
+          <div id="my-documents" className="process-tracker" role="fullscreen company-design">
             <h3 className="process-tracker--title">{t('myDocuments.title')}</h3>
             <p className="process-tracker--intro">{t('myDocuments.intro')}</p>
             <div className="process-tracker-sections">
@@ -179,6 +244,7 @@ export class MyDocuments extends Component {
               classes="tertiary" 
               fullWidth 
               label={t('myDocuments.downloadButtonText')} 
+              onClick={this.getAllMarkdown}
             />
             <CSSTransition
               in={modalIsOpen}
