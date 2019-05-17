@@ -9,24 +9,24 @@ const QuizQ4 = props => {
 
   return (
     <div data-test="component-quizq4">
-      <div className="compliance-check-section-header">{ t('compliance.section', { count: 4, total: numQuestions }) }</div>
-      <h2>{ t('compliance.quiz.selfCertification.title') }</h2>
+      <div className="compliance-check-section-header">{ t('onBoarding.compliance.section', { count: 4, total: numQuestions }) }</div>
+      <h2>{ t('onBoarding.compliance.quiz.selfCertification.title') }</h2>
       <OptionSelect
         options={[
           {
             id: 'highnetworth',
-            title: t('compliance.quiz.selfCertification.options.band1.label'),
-            text: t('compliance.quiz.selfCertification.options.band1.text')
+            title: t('onBoarding.compliance.quiz.selfCertification.options.band1.label'),
+            text: t('onBoarding.compliance.quiz.selfCertification.options.band1.text')
           },
           {
             id: 'selfcertified',
-            title: t('compliance.quiz.selfCertification.options.band2.label'),
-            text: t('compliance.quiz.selfCertification.options.band2.text')
+            title: t('onBoarding.compliance.quiz.selfCertification.options.band2.label'),
+            text: t('onBoarding.compliance.quiz.selfCertification.options.band2.text')
           },
           {
             id: 'restricted',
-            title: t('compliance.quiz.selfCertification.options.band3.label'),
-            text: t('compliance.quiz.selfCertification.options.band3.text')
+            title: t('onBoarding.compliance.quiz.selfCertification.options.band3.label'),
+            text: t('onBoarding.compliance.quiz.selfCertification.options.band3.text')
           }
         ]}
         onChange={onChange}

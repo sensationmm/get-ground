@@ -103,7 +103,7 @@ class SolicitorDetails extends Component {
       {
         stateKey: 'have_solicitor',
         component: RadioGroup,
-        groupLabel: t('solicitorDetails.form.label.haveSolicitor'),
+        groupLabel: t('companyDesign.solicitorDetails.form.label.haveSolicitor'),
         name: 'have_solicitor',
         items: [
           { value: 'no', label: t('form.radioConfirm.false') },
@@ -115,7 +115,7 @@ class SolicitorDetails extends Component {
       {
         stateKey: 'need_solicitor',
         component: RadioGroup,
-        groupLabel: t('solicitorDetails.form.label.needSolicitor'),
+        groupLabel: t('companyDesign.solicitorDetails.form.label.needSolicitor'),
         name: 'need_solicitor',
         items: [
           { value: 'no', label: t('form.radioConfirm.false') },
@@ -128,7 +128,7 @@ class SolicitorDetails extends Component {
       {
         stateKey: 'first_name',
         component: InputText,
-        label: t('solicitorDetails.form.label.firstName'),
+        label: t('companyDesign.solicitorDetails.form.label.firstName'),
         value: values.first_name,
         validationFunction: 'validateRequired',
         hidden: !values.have_solicitor || values.have_solicitor === 'no'
@@ -136,7 +136,7 @@ class SolicitorDetails extends Component {
       {
         stateKey: 'last_name',
         component: InputText,
-        label: t('solicitorDetails.form.label.lastName'),
+        label: t('companyDesign.solicitorDetails.form.label.lastName'),
         value: values.last_name,
         validationFunction: 'validateRequired',
         hidden: !values.have_solicitor || values.have_solicitor === 'no'
@@ -144,7 +144,7 @@ class SolicitorDetails extends Component {
       {
         stateKey: 'email',
         component: InputText,
-        label: t('solicitorDetails.form.label.email'),
+        label: t('companyDesign.solicitorDetails.form.label.email'),
         value: values.email,
         validationFunction: 'validateEmail',
         hidden: !values.have_solicitor || values.have_solicitor === 'no'
@@ -152,7 +152,7 @@ class SolicitorDetails extends Component {
       {
         stateKey: 'phone',
         component: InputPhone,
-        label: t('solicitorDetails.form.label.phone'),
+        label: t('companyDesign.solicitorDetails.form.label.phone'),
         value: values.phone,
         validationFunction: 'validatePhone',
         hidden: !values.have_solicitor || values.have_solicitor === 'no'
@@ -164,7 +164,7 @@ class SolicitorDetails extends Component {
         stateKey: 'authority',
         component: Checkbox,
         label: <div>
-          {t('solicitorDetails.form.label.authority')}&nbsp;
+          {t('companyDesign.solicitorDetails.form.label.authority')}&nbsp;
           <a onClick={(e) => { 
             e.stopPropagation();
             if (termsMarkdown === '') {
@@ -172,7 +172,7 @@ class SolicitorDetails extends Component {
             } else {
               showModal();
             }
-          }}>{t('solicitorDetails.form.label.authorityLink')}</a>
+          }}>{t('companyDesign.solicitorDetails.form.label.authorityLink')}</a>
         </div>,
         checked: values.authority,
         validationFunction: 'validateRequired',
@@ -195,9 +195,9 @@ class SolicitorDetails extends Component {
     return (
       <Layout>
         <div data-test="container-solicitor-details" className="create-account" role="account">
-          <h1>{ t('solicitorDetails.title') }</h1>
+          <h1>{ t('companyDesign.solicitorDetails.title') }</h1>
 
-          <IntroBox>{ t('solicitorDetails.intro') }</IntroBox>
+          <IntroBox>{ t('companyDesign.solicitorDetails.intro') }</IntroBox>
 
           {showErrorMessage &&
             <ErrorBox>
@@ -217,13 +217,13 @@ class SolicitorDetails extends Component {
               <Button
                 data-test="save-details-button"
                 classes="primary"
-                label={ t('solicitorDetails.ctaPrimary') }
+                label={ t('companyDesign.solicitorDetails.ctaPrimary') }
                 fullWidth
                 onClick={this.saveDetails}
               />
             }
 
-            {/* <Button classes="secondary" label={ t('solicitorDetails.ctaSecondary') } fullWidth /> */}
+            {/* <Button classes="secondary" label={ t('companyDesign.solicitorDetails.ctaSecondary') } fullWidth /> */}
 
             <br />
             
@@ -245,7 +245,7 @@ class SolicitorDetails extends Component {
           >
             <Modal>
               <ModalContent 
-                heading={t('solicitorDetails.modal.heading')}
+                heading={t('companyDesign.solicitorDetails.modal.heading')}
                 content={termsMarkdown}
                 closeModal={hideModal} 
                 downloadButtonLabel={t('modal.downloadButtonLabel')}

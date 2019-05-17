@@ -13,13 +13,13 @@ const QuizQ2 = props => {
 
   return (
     <div data-test="component-quizq2">
-      <div className="compliance-check-section-header">{ t('compliance.section', { count: 2, total: numQuestions }) }</div>
-      <h2>{ t('compliance.quiz.largeEnterprise.title') }</h2>
+      <div className="compliance-check-section-header">{ t('onBoarding.compliance.section', { count: 2, total: numQuestions }) }</div>
+      <h2>{ t('onBoarding.compliance.quiz.largeEnterprise.title') }</h2>
       <OptionSelect
         options={[
-          { id:'under250', title: t('compliance.quiz.largeEnterprise.options.band1') },
-          { id:'under43balance', title: t('compliance.quiz.largeEnterprise.options.band2') },
-          { id:'under50turnover', title: t('compliance.quiz.largeEnterprise.options.band3') },
+          { id:'under250', title: t('onBoarding.compliance.quiz.largeEnterprise.options.band1') },
+          { id:'under43balance', title: t('onBoarding.compliance.quiz.largeEnterprise.options.band2') },
+          { id:'under50turnover', title: t('onBoarding.compliance.quiz.largeEnterprise.options.band3') },
         ]}
         onChange={onChange}
         onDeselectAll={onDeselectAll}
@@ -28,7 +28,7 @@ const QuizQ2 = props => {
       />
       <Option
         id="none"
-        title={t('compliance.quiz.largeEnterprise.options.band4')}
+        title={t('onBoarding.compliance.quiz.largeEnterprise.options.band4')}
         onClick={onClickNone}
         selected={inArray('none', selected)}
       />
@@ -36,7 +36,7 @@ const QuizQ2 = props => {
       <Button
         classes="primary"
         fullWidth
-        onClick={onClickNext} label={t('compliance.quiz.largeEnterprise.buttonNext')}
+        onClick={onClickNext} label={t('onBoarding.compliance.quiz.largeEnterprise.buttonNext')}
         disabled={selected && selected.length === 0}
       />
     </div>

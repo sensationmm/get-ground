@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 import Layout from 'src/components/Layout/Layout'
 import AddProof from 'src/components/AddProof/AddProof'
+import IntroBox from 'src/components/_layout/IntroBox/IntroBox'
 import Passport from 'src/assets/images/add-passport.svg'
 import Address from 'src/assets/images/add-address.svg'
 import Selfie from 'src/assets/images/add-selfie.svg'
@@ -35,6 +36,7 @@ export class IdCheck extends Component {
       <Layout headerActions={headerActions} secure>
       <div data-test="container-id-check" className="id-check" role="account">
         <h1 className="id-check-title">{ t('onBoarding.idCheck.title') }</h1>
+        <IntroBox>{ t('onBoarding.idCheck.text') }</IntroBox>
         <AddProof section="passport" initialImg={Passport} />
         <AddProof section="address" initialImg={Address} />
         <AddProof section="selfie" initialImg= {Selfie} />

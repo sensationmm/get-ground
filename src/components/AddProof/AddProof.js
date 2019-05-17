@@ -180,7 +180,7 @@ export class AddProof extends Component {
 
     return (
       <div data-test="component-add-proof" className={classNames(['add-proof', {'disabled': this.props.active && this.props.active !== section  }])} role="account">
-        <IntroBox data-test="intro-box">{ t(`onBoarding.idCheck.${section}.title`) }</IntroBox>
+        <h2 data-test="intro-box">{ t(`onBoarding.idCheck.${section}.title`) }</h2>
         <p className="add-proof-content">{ !this.state.takePicture || !this.state.retakePicture ? t(`onBoarding.idCheck.${section}.content`) : t(`onBoarding.idCheck.${section}.retakeImageContent`)}</p>
         <div className="add-proof-img">{this.handleProof(t)}</div>
         {section !== 'selfie' && <div className="add-proof-upload-file">{this.uploadImg(t)}</div>}
