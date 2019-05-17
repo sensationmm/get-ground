@@ -91,7 +91,6 @@ class DrawSignature extends Component {
   render() {
     const { t } = this.props;
     const { isSignature, savedSignature } = this.state;
-
     return (
       <Layout secure>
         <div className="draw-signature" data-test="container-draw-signature">
