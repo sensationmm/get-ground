@@ -67,7 +67,7 @@ export class ProcessTracker extends React.Component {
           'title': sectionsContent['step5'].title,
           'imageAltText': sectionsContent['step5'].imageAltText,
           'copy': sectionsContent['step5'].copy,
-          'path': '/add-services',
+          'path': '/company-design/add-services',
           'status': 'to_do',
           'image': ServicesImage,
         }

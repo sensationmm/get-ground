@@ -16,7 +16,7 @@ import './radio.scss';
  */
 const Radio = ({ id, isChecked, label, name, value, onChange }) => {
   return (
-    <div 
+    <div
       className={classNames(
         'radio',
         { 'checked': isChecked }

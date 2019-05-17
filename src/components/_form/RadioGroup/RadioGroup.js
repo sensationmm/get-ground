@@ -14,14 +14,15 @@ import './radio-group.scss';
  * @param {string} groupLabel - label for the radio group
  * @return {JSXElement} RadioGroup
  */
-const RadioGroup = ({ items, name, onChange, value, groupLabel, hidden }) => {
+const RadioGroup = ({ items, name, onChange, value, groupLabel, hidden, isAdditionalServices }) => {
   const radioValue = value;
 
   return (
-    <div       
-      className={classNames(
+    <div
+      className={classNames([
         'radio-group',
-      )}
+        {'additional-services': isAdditionalServices}
+      ])}
       data-test="component-radio-group"
       style={{ display: hidden ? 'none' : 'block'}}
     >
@@ -57,7 +58,8 @@ RadioGroup.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.string,
   groupLabel: PropTypes.string,
-  hidden: PropTypes.bool
+  hidden: PropTypes.bool,
+  isAdditionalServices: PropTypes.bool
 };
 
 export default RadioGroup;

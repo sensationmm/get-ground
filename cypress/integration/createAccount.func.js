@@ -1,7 +1,7 @@
 describe('create-account', () => {
   beforeEach(() => {
     cy.viewport(1920, 1080)
-    cy.visit(`http://localhost:8000/create-account`)
+    cy.visit(`http://localhost:8000/onboarding/create-account`)
   })
 
   it('email verification ', () => {
