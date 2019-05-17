@@ -1,6 +1,7 @@
-@import '../../styles/modules/_mixins';
-@import '../../styles/modules/_variables';
-@import '../../styles/modules/_colors';
+@import 'src/styles/modules/_mixins';
+@import 'src/styles/modules/_variables';
+@import 'src/styles/modules/_colors';
+@import 'src/components/_form/Input/input.scss';
 
 .modal {
   background-color: $white;
@@ -38,6 +39,13 @@
     margin-bottom: 40px;
   }
 
+  &--error {
+    background-color: $modal-error-color;
+    padding: 7px 20px;
+    font-size: 12px;
+    text-align: center;
+  }
+
   &--markdown {
     font-size: 16px;
   }
@@ -45,6 +53,35 @@
   &--close-icon {
     margin-left: auto;
     cursor: pointer;
+  }
+
+  &--signature-wrapper {
+    text-align: left;
+    padding-bottom: 20px;
+  }
+
+  &--signature-label {
+    text-transform: uppercase;
+    color: $primary;
+    padding-left: $padding-horizontal;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+
+  &--signature {
+    padding: 40px 15px;
+    border: 1px solid $border;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 35px;
+    cursor: pointer;
+  }
+
+  &--signature-placeholder {
+    font-size: 14px;
+    color: $placeholder-text;
+    font-style: italic;
   }
 
   &--footer {
