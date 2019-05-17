@@ -16,10 +16,10 @@ const VerifyEmailSucess = () => {
     <Layout>
       <div data-test="container-email-verified" className="email-verified" role="account">
       <img className="email-verified--img" src={successImg} />
-        <h1>{t('emailVerified.title')}</h1>
-        <p>{t('emailVerified.copy')}</p>
+        <h1>{t('onBoarding.emailVerified.title')}</h1>
+        <p>{t('onBoarding.emailVerified.copy')}</p>
         <Link to="/onboarding">
-          <Button label={t('emailVerified.button')} classes="primary" />
+          <Button label={t('onBoarding.emailVerified.button')} classes="primary" />
         </Link>
       </div>
     </Layout>

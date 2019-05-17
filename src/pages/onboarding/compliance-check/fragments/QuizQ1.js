@@ -10,32 +10,32 @@ const QuizQ1 = props => {
 
   return (
     <div data-test="component-quiz1">
-      <div className="compliance-check-section-header">{ t('compliance.section', { count: 1, total: numQuestions }) }</div>
-      <h2>{ t('compliance.quiz.taxBracket.title') }</h2>
+      <div className="compliance-check-section-header">{ t('onBoarding.compliance.section', { count: 1, total: numQuestions }) }</div>
+      <h2>{ t('onBoarding.compliance.quiz.taxBracket.title') }</h2>
       <OptionSelect
         options={[
           {
             id: 'personal',
-            title: t('compliance.quiz.taxBracket.options.band1.label'),
-            text: t('compliance.quiz.taxBracket.options.band1.text'),
+            title: t('onBoarding.compliance.quiz.taxBracket.options.band1.label'),
+            text: t('onBoarding.compliance.quiz.taxBracket.options.band1.text'),
             value: `${taxBrackets.band1}%`
           },
           {
             id: 'basic',
-            title: t('compliance.quiz.taxBracket.options.band2.label'),
-            text: t('compliance.quiz.taxBracket.options.band2.text'),
+            title: t('onBoarding.compliance.quiz.taxBracket.options.band2.label'),
+            text: t('onBoarding.compliance.quiz.taxBracket.options.band2.text'),
             value: `${taxBrackets.band2}%`
           },
           {
             id: 'higher',
-            title: t('compliance.quiz.taxBracket.options.band3.label'),
-            text: t('compliance.quiz.taxBracket.options.band3.text'),
+            title: t('onBoarding.compliance.quiz.taxBracket.options.band3.label'),
+            text: t('onBoarding.compliance.quiz.taxBracket.options.band3.text'),
             value: `${taxBrackets.band3}%`
           },
           {
             id: 'additional',
-            title: t('compliance.quiz.taxBracket.options.band4.label'),
-            text: t('compliance.quiz.taxBracket.options.band4.text'),
+            title: t('onBoarding.compliance.quiz.taxBracket.options.band4.label'),
+            text: t('onBoarding.compliance.quiz.taxBracket.options.band4.text'),
             value: `${taxBrackets.band4}%`
           }
         ]}

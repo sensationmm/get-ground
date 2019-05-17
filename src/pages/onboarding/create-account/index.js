@@ -68,7 +68,7 @@ class CreateAccount extends Component {
           self.setState({
             ...self.state,
             errors: {
-              form: t('createAccount.form.errors.duplicateEmail')
+              form: t('onBoarding.createAccount.form.errors.duplicateEmail')
             },
             showErrorMessage: true
           });
@@ -101,18 +101,18 @@ class CreateAccount extends Component {
       {
         stateKey: 'email',
         component: InputText,
-        label: t('createAccount.form.label.email'),
+        label: t('onBoarding.createAccount.form.label.email'),
         value: values.email,
         validationFunction: 'validateEmail',
-        note: t('createAccount.form.note.email')
+        note: t('onBoarding.createAccount.form.note.email')
       },
       {
         stateKey: 'password',
         component: InputPassword,
-        label: t('createAccount.form.label.password'),
+        label: t('onBoarding.createAccount.form.label.password'),
         value: values.password,
         validationFunction: 'validateRequired',
-        note: t('createAccount.form.note.password')
+        note: t('onBoarding.createAccount.form.note.password')
       },
       {
         component: StrengthMeter,
@@ -121,7 +121,7 @@ class CreateAccount extends Component {
       {
         stateKey: 'passwordConfirm',
         component: InputPassword,
-        label: t('createAccount.form.label.passwordConfirm'),
+        label: t('onBoarding.createAccount.form.label.passwordConfirm'),
         value: values.passwordConfirm,
         validationFunction: 'validateMatching',
         validationParam: values.password
@@ -132,14 +132,14 @@ class CreateAccount extends Component {
       {
         stateKey: 'optin',
         component: Checkbox,
-        label: t('createAccount.form.label.optIn'),
+        label: t('onBoarding.createAccount.form.label.optIn'),
         checked: values.optin,
       },
       {
         stateKey: 'privacy',
         component: Checkbox,
         label: <div>
-          {t('createAccount.form.label.privacyOne')}
+          {t('onBoarding.createAccount.form.label.privacyOne')}
           <a onClick={(e) => { 
             e.stopPropagation();
             if (termsMarkdown === '') {
@@ -148,9 +148,9 @@ class CreateAccount extends Component {
               showModal();
             }
           }}>
-          {t('createAccount.form.label.privacyTermsLink')}</a>
-          {t('createAccount.form.label.privacyTwo')}
-          {t('createAccount.form.label.privacyPolicyLink')}
+          {t('onBoarding.createAccount.form.label.privacyTermsLink')}</a>
+          {t('onBoarding.createAccount.form.label.privacyTwo')}
+          {t('onBoarding.createAccount.form.label.privacyPolicyLink')}
         </div>,
         checked: values.privacy,
         validationFunction: 'validateRequired'
@@ -160,9 +160,9 @@ class CreateAccount extends Component {
     return (
       <Layout>
         <div data-test="container-create-account" className="create-account" role="account">
-          <h1>{ t('createAccount.title') }</h1>
+          <h1>{ t('onBoarding.createAccount.title') }</h1>
 
-          <IntroBox>{ t('createAccount.intro') }</IntroBox>
+          <IntroBox>{ t('onBoarding.createAccount.intro') }</IntroBox>
 
           {showErrorMessage &&
             <ErrorBox>
@@ -181,12 +181,12 @@ class CreateAccount extends Component {
             <Button
               data-test="create-account-button"
               classes="primary"
-              label={ t('createAccount.ctaPrimary') }
+              label={ t('onBoarding.createAccount.ctaPrimary') }
               fullWidth
               onClick={this.createAccount}
             />
 
-            <Button classes="secondary" label={ t('createAccount.ctaSecondary') } fullWidth />
+            <Button classes="secondary" label={ t('onBoarding.createAccount.ctaSecondary') } fullWidth />
           </Form>
           <CSSTransition
             in={modalIsOpen}
@@ -196,11 +196,11 @@ class CreateAccount extends Component {
           >
             <Modal>
               <ModalContent 
-                heading={t('createAccount.termsModalHeading')}
+                heading={t('onBoarding.createAccount.termsModalHeading')}
                 content={termsMarkdown}
                 closeModal={hideModal} 
-                downloadButtonLabel={t('createAccount.termsModalDownloadButtonLabel')}
-                closeIconAltText={t('createAccount.termsModalCloseIconAltText')}
+                downloadButtonLabel={t('onBoarding.createAccount.termsModalDownloadButtonLabel')}
+                closeIconAltText={t('onBoarding.createAccount.termsModalCloseIconAltText')}
                 modalImage={termsImage}
               />
             </Modal>

@@ -24,12 +24,12 @@ const AccountPending = () => {
   return (
     <Layout>
       <div data-test="container-account-pending" className="account-pending" role="account">
-        <h1>{ t('accountPending.title') }</h1>
-        <p>{ t('accountPending.text') }</p>
+        <h1>{ t('onBoarding.accountPending.title') }</h1>
+        <p>{ t('onBoarding.accountPending.text') }</p>
 
         <ImageFull src={EmailSent} />
 
-        <IntroBox>{ t('accountPending.introBox') }</IntroBox>
+        <IntroBox>{ t('onBoarding.accountPending.introBox') }</IntroBox>
 
         <ContactUs />
       </div>

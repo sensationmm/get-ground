@@ -9,14 +9,14 @@ const QuizQ5 = props => {
 
   return (
     <div data-test="component-quizq5">
-      <div className="compliance-check-section-header">{ t('compliance.section', { count: 5, total: numQuestions }) }</div>
-      <h2>{ t('compliance.quiz.questionnaire.title') }</h2>
+      <div className="compliance-check-section-header">{ t('onBoarding.compliance.section', { count: 5, total: numQuestions }) }</div>
+      <h2>{ t('onBoarding.compliance.quiz.questionnaire.title') }</h2>
       <OptionSelect
         options={[
-          { id:'propertyvalues', title: t('compliance.quiz.questionnaire.options.band1') },
-          { id:'investmentreturns', title: t('compliance.quiz.questionnaire.options.band2') },
-          { id:'putallmoney', title: t('compliance.quiz.questionnaire.options.band3') },
-          { id:'alwaysbuyers', title: t('compliance.quiz.questionnaire.options.band4') }
+          { id:'propertyvalues', title: t('onBoarding.compliance.quiz.questionnaire.options.band1') },
+          { id:'investmentreturns', title: t('onBoarding.compliance.quiz.questionnaire.options.band2') },
+          { id:'putallmoney', title: t('onBoarding.compliance.quiz.questionnaire.options.band3') },
+          { id:'alwaysbuyers', title: t('onBoarding.compliance.quiz.questionnaire.options.band4') }
         ]}
         onChange={onChange}
         onDeselectAll={onDeselectAll}
