@@ -6,7 +6,6 @@ import Webcam from 'react-webcam'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 
-import IntroBox from 'src/components/_layout/IntroBox/IntroBox'
 import Button from 'src/components/_buttons/Button/Button'
 import { setImg, setActive, resetActive } from 'src/state/actions/idCheck'
 

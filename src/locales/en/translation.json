@@ -1,4 +1,34 @@
 {
+  "account": {
+    "signature": {
+      "title": "Set up your signature",
+      "intro": "First you must setup your signature.",
+      "heading2": "Choose option",
+      "buttons": {
+        "draw": "Draw your signature",
+        "create": "Create digital signature",
+        "upload": "Upload your signature"
+      }
+    },
+    "drawSignature": {
+      "title": "Draw your signature",
+      "title2": "Your signature",
+      "yourSignatureIntro": "Your signature is saved to your profile. Now you are ready to continue and sign your company documents.",
+      "signaturePadLabel": "Your Signature",
+      "buttons": {
+        "continue": "Continue",
+        "redo": "Redo",
+        "save": "Save",
+        "edit": "edit"
+      }
+    }
+  },
+  "accountPending": {
+    "title": "We‘ve sent you an email",
+    "text": "With a magic link to the email address you provided. Please click the button on the email to verify your account.",
+    "introBox": "If you didn‘t receive an email please check your spam folder and if it isn‘t there contact us.",
+    "contactLink": "Contact us"
+  },
   "companyDesign": {
     "companyComplete": {
       "title": "Well done!",
