@@ -1,8 +1,13 @@
 
 import { RawComponent as MyDocuments, ModalService } from './index';
+import { navigate } from 'gatsby';
 import { setup, setupWithStore } from 'src/test-utils/test-utils';
 
 jest.mock('src/assets/images/property.svg', () => '');
+
+jest.mock('gatsby', () => ({
+  navigate: jest.fn()
+}));
 
 describe('process-tracker', () => {
   let wrapper;
@@ -101,6 +106,20 @@ describe('process-tracker', () => {
     wrapper.instance().closeModal();
     expect(hideModalMock).toHaveBeenCalledTimes(1);
   });
+
+  test('checkAllSigned navigates to confirmation if all docs are signed', () => {
+    wrapper = wrapper = setup(MyDocuments, defaultProps, {
+      shareholdersAgreementSigned: true,
+      companyArticlesSigned: true,
+      directorsLoanSigned: true,
+      consentToActSigned: true,
+      BoardResolutionSigned: true
+    });
+
+    wrapper.instance().checkAllSigned();
+
+    expect(navigate).toHaveBeenCalledWith('/documents/confirmation');
+  })
 
   test('getAllMarkdown fetches and stores the markdown', async () => {
     const wrapper = setupWithStore(MyDocuments, defaultProps, { 

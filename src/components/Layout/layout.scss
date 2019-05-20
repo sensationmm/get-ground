@@ -40,7 +40,7 @@ body {
       @include gradient-vertical-image($background-account-start, $background-account-end, '../../assets/images/background.png');
     }
 
-    &.company-design {
+    &.company-design, &.documents {
       @include gradient-vertical-image($gradient-primary-1, $gradient-primary-2, '../../assets/images/background.png');
     }
   }
