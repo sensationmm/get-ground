@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import jwtDecode from 'jwt-decode';
 import PropTypes from 'prop-types';
+import LiveChat from 'react-livechat';
+import Drift from 'react-driftjs'
 
 import SEO from 'src/components/seo';
 import Header from 'src/components/Header/Header';
@@ -52,6 +54,7 @@ export class Layout extends Component {
     const { children, headerActions, isLoading } = this.props;
 
     return (
+
       <div className={classNames('wrapper', `${children.props && children.props.role}`)}>
         <SEO title="GetGround" keywords={[`gatsby`, `application`, `react`]} />
 
@@ -63,6 +66,8 @@ export class Layout extends Component {
           <main className="main">{children}</main>
         </div>
         <div id="modal-root"></div>
+        <LiveChat license={10911047} />
+        {/* <Drift appId="nks68e25uvih" /> */}
       </div>
     )
   }

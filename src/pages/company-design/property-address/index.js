@@ -57,7 +57,7 @@ class PropertyAddress extends Component {
     script.onload = () => {
       window.addressNow.listen('load', (control) =>  {
         control.listen('populate', (address) => {
-          
+
           this.setState((prevState) => ({
             ...this.state,
             values: {
@@ -91,7 +91,7 @@ class PropertyAddress extends Component {
 
   initFormValidation = /* istanbul ignore next */ () => {
     const { showLoader, hideLoader, t } = this.props;
-    const { 
+    const {
       values: {
         street,
         city,
@@ -138,20 +138,20 @@ class PropertyAddress extends Component {
 
   render() {
     const { t } = this.props;
-    const { 
-      isManualAddress, 
-      isAddressValid, 
+    const {
+      isManualAddress,
+      isAddressValid,
       values,
-      errors, 
+      errors,
       showErrorMessage,
       isTextAreaHidden
     } = this.state;
-  
+
     const setCountries = [
       <option key='country-0' value='England'>England</option>,
       <option key='country-1' value='Wales'>Wales</option>
     ];
-        
+
     this.config = [
       {
         stateKey: 'country',
@@ -160,7 +160,7 @@ class PropertyAddress extends Component {
         value: values.country,
         options: setCountries,
         classes: 'country-select',
-        validationFunction: 'validateRequired', 
+        validationFunction: 'validateRequired',
         callback: country => this.handleCountryChange(country)
       },
       {
@@ -224,9 +224,9 @@ class PropertyAddress extends Component {
 
           <IntroBox>{t('companyDesign.propertyAddress.intro')}</IntroBox>
 
-          {showErrorMessage && 
+          {showErrorMessage &&
               <ErrorBox>
-              { errors.form 
+              { errors.form
                 ? errors.form
                 : t('companyDesign.propertyAddress.form.error')
               }
