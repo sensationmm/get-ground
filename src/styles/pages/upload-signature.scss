@@ -1,0 +1,28 @@
+
+@import 'src/styles/modules/_colors';
+@import './your-signature.scss';
+
+.upload-signature {
+
+  &--signature-wrapper {
+    cursor: pointer;
+
+    > img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .button.secondary {
+    margin-bottom: 15px;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  > div {
+    outline: 0;
+  }
+
+}
