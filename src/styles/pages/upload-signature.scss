@@ -5,6 +5,8 @@
 .upload-signature {
 
   &--signature-wrapper {
+    background: url('../../assets/images/upload-sig.svg') center center no-repeat;
+    background-size: 50px;
     cursor: pointer;
 
     > img {
