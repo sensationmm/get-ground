@@ -69,7 +69,7 @@ const Input = (props) => {
           if (onFocus) onFocus(e);
         }}
         onBlur={(e) => validate ? validate() : null}
-        onChange={(e) => onChange(e.target.value, validate)}
+        onChange={(e) => onChange(e.target.value)}
         value={value}
         readOnly={readOnly}
         className={classNames([
