@@ -115,6 +115,7 @@ describe('process-tracker', () => {
       consentToActSigned: true,
       BoardResolutionSigned: true
     });
+    
 
     wrapper.instance().checkAllSigned();
 
