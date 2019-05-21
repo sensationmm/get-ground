@@ -37,25 +37,32 @@ class PurchaseDetails extends Component {
     super(props);
 
     this.state = {
-      ...formUtils.initFormState({
-        priceOfProperty: '',
-        newBuild: '',
-        expectedExchange: '',
-        completionDate: '',
-        depositDueDate: '',
-        depositAmount: '',
-        exchangeDate: '',
-        firstInstallmentDate: '',
-        firstInstallmentAmount: '',
-        secondInstallmentDate: '',
-        secondInstallmentAmount: ''
-      }),
       isDatepickerOpen: false,
       focusedDateField: '',
       extraInstallmentFieldsShowing: 0
     };
 
     this.config = [];
+  }
+  
+  componentDidMount() {
+    formUtils.initFormState({
+      priceOfProperty: '',
+      newBuild: '',
+      expectedExchange: '',
+      completionDate: '',
+      depositDueDate: '',
+      depositAmount: '',
+      exchangeDate: '',
+      firstInstallmentDate: '',
+      firstInstallmentAmount: '',
+      secondInstallmentDate: '',
+      secondInstallmentAmount: ''
+    });
+  }
+
+  componentWillUnmount() {
+    formUtils.clearFormState();
   }
 
   /**
@@ -85,7 +92,7 @@ class PurchaseDetails extends Component {
   }
 
   checkElementHidden = () => {
-    const { values: { newBuild } } = this.state;
+    const { form: { values: { newBuild } } } = this.props;
     return newBuild === '' || newBuild === 'no';
   }
 
@@ -106,7 +113,7 @@ class PurchaseDetails extends Component {
     const { showLoader, hideLoader, t } = this.props;
 
     /* istanbul ignore else */
-    if (formUtils.validateForm(this)) {
+    if (formUtils.validateForm(this.config)) {
       showLoader();
 
       PropertyService.SavePurchaseDetails({ 'placeholder': 'bla' }).then((response) => {
@@ -116,13 +123,7 @@ class PurchaseDetails extends Component {
           navigate('/company-details/solicitor-details');
           
         } else if (response.status === 400) {
-          this.setState({
-            ...this.state,
-            errors: {
-              form: t('form.correctErrors')
-            },
-            showErrorMessage: true
-          });
+          formUtils.setFormError(t('form.correctErrors'));
         }
       });
     }
@@ -130,8 +131,9 @@ class PurchaseDetails extends Component {
   }
 
   render() {
-    const { t } = this.props;
-    const { 
+    const { t, form } = this.props;
+    const { isDatepickerOpen } = this.state;
+    const {
       values: {
         priceOfProperty,
         newBuild,
@@ -145,10 +147,9 @@ class PurchaseDetails extends Component {
         expectedExchange,
         exchangeDate
       },
-      isDatepickerOpen,
       showErrorMessage,
       errors
-    } = this.state;
+    } = form;
 
     this.radioConfig = [
       {
@@ -286,7 +287,7 @@ class PurchaseDetails extends Component {
 
     return (
       <>
-      <Layout>
+      <Layout secure>
         <div className="company-design-purchase-details" data-test="container-company-design-purchase-details">
           <h1>{t('companyDesign.purchaseDetails.heading')}</h1>
 
@@ -302,14 +303,14 @@ class PurchaseDetails extends Component {
             }
 
           <Form>
-            {formUtils.renderForm(this)}
+            {formUtils.renderForm(this.config)}
 
             { expectedExchange !== '' &&
               <Button
                 data-test="submit-button"
                 label={t('companyDesign.purchaseDetails.form.nextButton')}
                 fullWidth
-                onClick={this.submitPurchaseDetails}
+                onClick={() => this.submitPurchaseDetails()}
                 classes="primary"
               />
             }
@@ -326,10 +327,15 @@ class PurchaseDetails extends Component {
 PurchaseDetails.propTypes = {
   t: PropTypes.func.isRequired,
   showLoader: PropTypes.func,
-  hideLoader: PropTypes.func
+  hideLoader: PropTypes.func,
+  form: PropTypes.object
 };
+
+const mapStateToProps = state => ({
+  form: state.form
+});
 
 const actions = { showLoader, hideLoader };
 
 export const RawComponent = PurchaseDetails;
-export default connect(null, actions)(withTranslation()(PurchaseDetails));
+export default connect(mapStateToProps, actions)(withTranslation()(PurchaseDetails));

@@ -2,6 +2,7 @@
 @import 'src/styles/modules/_mixins.scss';
 
 .button {
+  position: relative;
   padding: 12px 20px;
   text-align: center;
   font-size: 18px;
@@ -34,6 +35,15 @@
     position: absolute;
     left: 20px;
     top: 13px;
+  }
+
+  &.small.icon {
+    padding: 8px 14px 8px 40px;
+  }
+
+  .small &-icon {
+    top: 9px;
+    left: 15px;
   }
 
   &.primary {

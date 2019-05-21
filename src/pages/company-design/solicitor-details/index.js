@@ -39,25 +39,35 @@ class SolicitorDetails extends Component {
     super(props);
 
     this.state = {
-      ...formUtils.initFormState({
-        have_solicitor: null,
-        need_solicitor: null,
-        first_name: '',
-        last_name: '',
-        email: '',
-        phone: '',
-        authority: false
-      }),
+      termsMarkdown: null
     };
 
-    this.config = [];
+    this.config = null;
+  }
+
+  componentDidMount = () => {
+    const { activeCompany, companies } = this.props;
+
+    formUtils.initFormState({
+      have_solicitor: null,
+      need_solicitor: null,
+      first_name: '',
+      last_name: '',
+      email: '',
+      phone: '',
+      authority: false
+    }, companies[activeCompany], 'solicitor');
+  }
+
+  componentWillUnmount() {
+    formUtils.clearFormState();
   }
 
   saveDetails = () => {
-    const { showLoader, hideLoader } = this.props;
-    const { values } = this.state;
+    const { showLoader, hideLoader, form } = this.props;
+    const { values } = form;
 
-    if(formUtils.validateForm(this)) {
+    if(formUtils.validateForm(this.config)) {
       showLoader();
 
       const solicitor = values;
@@ -95,8 +105,8 @@ class SolicitorDetails extends Component {
   }
 
   render() {
-    const { values, errors, showErrorMessage, termsMarkdown } = this.state;
-    const { t, modalIsOpen, showModal, hideModal } = this.props;
+    const { termsMarkdown } = this.state;
+    const { t, modalIsOpen, showModal, hideModal, form: { values, errors, showErrorMessage } } = this.props;
 
     /* istanbul ignore next */
     this.config = [
@@ -181,7 +191,7 @@ class SolicitorDetails extends Component {
     ];
 
     const showDone = (
-      values.have_solicitor === 'no' && values.need_solicitor !== null ||
+      (values.have_solicitor === 'no' && values.need_solicitor !== null) ||
       (
         values.have_solicitor === 'yes' &&
         values.first_name &&
@@ -191,9 +201,9 @@ class SolicitorDetails extends Component {
         values.authority
       )
     );
-    
+
     return (
-      <Layout>
+      <Layout secure>
         <div data-test="container-solicitor-details" className="create-account" role="account">
           <h1>{ t('companyDesign.solicitorDetails.title') }</h1>
 
@@ -209,7 +219,7 @@ class SolicitorDetails extends Component {
           }
 
           <Form>
-            {formUtils.renderForm(this)}
+            {formUtils.renderForm(this.config)}
 
             <br />
 
@@ -266,11 +276,17 @@ SolicitorDetails.propTypes = {
   showModal: PropTypes.func,
   hideModal: PropTypes.func,
   t: PropTypes.func.isRequired,
-  modalIsOpen: PropTypes.bool
+  modalIsOpen: PropTypes.bool,
+  form: PropTypes.object,
+  companies: PropTypes.array,
+  activeCompany: PropTypes.number
 };
 
 const mapStateToProps = state => ({
-  modalIsOpen: state.modal.isOpen
+  modalIsOpen: state.modal.isOpen,
+  activeCompany: state.activeCompany,
+  companies: state.companies,
+  form: state.form
 });
 
 const actions = { 
