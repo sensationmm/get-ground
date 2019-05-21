@@ -2,7 +2,7 @@ import { setup, setupWithStore, findByTestAttr } from 'src/test-utils/test-utils
 import { scroller } from 'react-scroll';
 
 import { RawComponent as ComplianceCheck } from './index';
-import FormUtils from 'src/utils/form';
+import formUtils from 'src/utils/form';
 
 import Button from 'src/components/_buttons/Button/Button';
 import QuizQ1 from './fragments/QuizQ1';
@@ -12,26 +12,20 @@ import QuizQ4 from './fragments/QuizQ4';
 import QuizQ5 from './fragments/QuizQ5';
 
 import ModalContent from 'src/components/Modal/ModalContent';
+import { initialState as ReduxFormMock } from 'src/state/reducers/form';
 
 describe('<ComplianceCheck />', () => {
   let wrapper;
 
-  const tMock = jest.fn().mockReturnValue('str');
+  const tMock = jest.fn().mockImplementation(id => id)
   const navigateMock = jest.fn();
   const showLoaderMock = jest.fn();
   const hideLoaderMock = jest.fn();
   const hideModalMock = jest.fn();
   const showModalMock = jest.fn();
-  const updateValueMock = jest.spyOn(FormUtils, 'updateValue');
+  const updateValueMock = jest.spyOn(formUtils, 'updateValue');
+  const errorSpy = jest.spyOn(formUtils, 'setFormError');
   const scrollerMock = jest.spyOn(scroller, 'scrollTo').mockReturnValue(() => {});
-  const defaultProps = {
-    t: tMock,
-    navigate: navigateMock,
-    showLoader: showLoaderMock,
-    hideLoader: hideLoaderMock,
-    hideModal: hideModalMock,
-    showModal: showModalMock
-  }
   const quizResultMock = {
     tax_bracket: 'personal',
     large_enterprise: ['option','option2'],
@@ -41,56 +35,113 @@ describe('<ComplianceCheck />', () => {
     large_enterprise_done: true,
     restricted_quiz_done: true
   };
+  const defaultProps = {
+    t: tMock,
+    navigate: navigateMock,
+    showLoader: showLoaderMock,
+    hideLoader: hideLoaderMock,
+    hideModal: hideModalMock,
+    showModal: showModalMock,
+    form: {
+      ...ReduxFormMock,
+      values: quizResultMock
+    }
+  };
+  jest.spyOn(formUtils, 'initFormState');
+  jest.spyOn(formUtils, 'clearFormState');
 
   beforeEach(() => {
-    wrapper = setup(ComplianceCheck, defaultProps, { values: quizResultMock, certificationComplete: true });
+    wrapper = setup(
+      ComplianceCheck, 
+      {
+        ...defaultProps,
+        form: {
+          ...defaultProps.form,
+          certificationComplete: true
+        }
+      }
+    );
   });
   
   test('renders without error', () => {
     const component = findByTestAttr(wrapper, 'container-compliance-check');
     expect(component.length).toBe(1);
+    expect(formUtils.initFormState).toHaveBeenCalledTimes(1);
+  });
+
+  test('form cleared on unmount', () => {
+    wrapper.unmount();
+    expect(formUtils.clearFormState).toHaveBeenCalledTimes(1);
   });
 
   describe('checkResponses()', () => {
-    describe('fail quiz', () => {
-      test('missing property values', () => {
-        wrapper = setup(ComplianceCheck, defaultProps, { values: {
-          ...quizResultMock,
-          restricted_quiz: ['propertyvalues']
-        }});
-        wrapper.instance().checkResponses(true);
-        expect(wrapper.state('errors')).toEqual({ form: 'str' });
-      });
-
-      test('missing investmentreturns', () => {
-        wrapper = setup(ComplianceCheck, defaultProps, { values: {
-          ...quizResultMock,
-          restricted_quiz: ['investmentreturns']
-        }});
-        wrapper.instance().checkResponses(true);
-        expect(wrapper.state('errors')).toEqual({ form: 'str' });
-      });
-
-      test('fails quiz with too many answer', () => {
-        wrapper = setup(ComplianceCheck, defaultProps, { values: {
-          ...quizResultMock,
-          restricted_quiz: ['propertyvalues', 'investmentreturns', 'putallmoney']
-        }});
-        wrapper.instance().checkResponses(true);
-        expect(wrapper.state('errors')).toEqual({ form: 'str' });
-      });
-    });
-
-    test('pass quiz', () => {
-      wrapper = setupWithStore(ComplianceCheck, defaultProps, { values: {
-        ...quizResultMock
-      }});
+    test('pass quiz', async () => {
+      const wrapperNew = setupWithStore(
+        ComplianceCheck, 
+        defaultProps
+      );
       
-      return wrapper.instance().checkResponses().then(() => {
+      await wrapperNew.instance().checkResponses().then(() => {
         expect(showLoaderMock).toHaveBeenCalledTimes(1);
         expect(hideLoaderMock).toHaveBeenCalledTimes(1);
         expect(navigateMock).toHaveBeenCalledTimes(1);
         expect(navigateMock).toHaveBeenCalledWith('/onboarding/payment');
+      });
+    });
+
+    describe('fail quiz', () => {
+      test('missing investment returns', async () => {
+        const wrapperNew = setup(
+          ComplianceCheck,
+          {
+            ...defaultProps,
+            form: {
+              ...defaultProps.form,
+              values: {
+                ...defaultProps.form.values,
+                restricted_quiz: ['propertyvalues']
+              }
+            }
+          }
+        );
+        await wrapperNew.instance().checkResponses(true);
+        expect(errorSpy).toHaveBeenCalledWith('onBoarding.compliance.failureMessage');
+      });
+
+      test('missing property values', async () => {
+        const wrapperNew = setup(
+          ComplianceCheck, 
+          {
+            ...defaultProps,
+            form: {
+              ...defaultProps.form,
+              values: {
+                ...defaultProps.form.values,
+                restricted_quiz: ['investmentreturns']
+              }
+            }
+          }
+        );
+        await wrapperNew.instance().checkResponses(true);
+        expect(errorSpy).toHaveBeenCalledWith('onBoarding.compliance.failureMessage');
+      });
+
+      test('fails quiz with too many answer', async () => {
+        const wrapperNew = setup(
+          ComplianceCheck, 
+          {
+            ...defaultProps,
+            form: {
+              ...defaultProps.form,
+              values: {
+                ...defaultProps.form.values,
+                restricted_quiz: ['propertyvalues', 'investmentreturns', 'putallmoney']
+              }
+            }
+          }
+        );
+        await wrapperNew.instance().checkResponses(true);
+        expect(errorSpy).toHaveBeenCalledWith('onBoarding.compliance.failureMessage');
       });
     });
   });
@@ -103,47 +154,51 @@ describe('<ComplianceCheck />', () => {
   });
 
   describe('fragment function props', () => {
+    beforeEach(() => {
+      wrapper = setup(ComplianceCheck, defaultProps, { certificationComplete: true });
+    });
+
     test('QuizQ1', () => {
       wrapper.find(QuizQ1).props().onChange('str');
-      expect(updateValueMock).toHaveBeenCalledWith(expect.any(Object), 'tax_bracket', 'str');
+      expect(updateValueMock).toHaveBeenCalledWith('tax_bracket', 'str');
     });
 
     test('QuizQ2', () => {
       wrapper.find(QuizQ2).props().onChange(['none','str1','str2']);
-      expect(updateValueMock).toHaveBeenLastCalledWith(expect.any(Object), 'large_enterprise', ['str1','str2']);
+      expect(updateValueMock).toHaveBeenLastCalledWith('large_enterprise', ['str1','str2']);
       wrapper.find(QuizQ2).props().onChange(['str1','str2']);
-      expect(updateValueMock).toHaveBeenLastCalledWith(expect.any(Object), 'large_enterprise', ['str1','str2']);
+      expect(updateValueMock).toHaveBeenLastCalledWith('large_enterprise', ['str1','str2']);
       wrapper.find(QuizQ2).props().onClickNone();
-      expect(updateValueMock).toHaveBeenCalledWith(expect.any(Object), 'large_enterprise', ['none']);
+      expect(updateValueMock).toHaveBeenCalledWith('large_enterprise', ['none']);
       wrapper.find(QuizQ2).props().onClickNext();
-      expect(updateValueMock).toHaveBeenCalledWith(expect.any(Object), 'large_enterprise_done', true);
+      expect(updateValueMock).toHaveBeenCalledWith('large_enterprise_done', true);
       wrapper.find(QuizQ2).props().onDeselectAll();
-      expect(updateValueMock).toHaveBeenCalledWith(expect.any(Object), 'large_enterprise_done', false);
+      expect(updateValueMock).toHaveBeenCalledWith('large_enterprise_done', false);
     });
 
     test('QuizQ3', () => {
       wrapper.find(QuizQ3).props().onClick();
-      expect(updateValueMock).toHaveBeenCalledWith(expect.any(Object), 'investment_confirmation', true);
+      expect(updateValueMock).toHaveBeenCalledWith('investment_confirmation', true);
     });
 
     test('QuizQ4', () => {
       wrapper.find(QuizQ4).props().onChange('str');
-      expect(updateValueMock).toHaveBeenCalledWith(expect.any(Object), 'self_certification', 'str');
+      expect(updateValueMock).toHaveBeenCalledWith('self_certification', 'str');
     });
 
     test('QuizQ4 - onChange calls `initModal`', () => {
       wrapper.instance().initModal = jest.fn();
       wrapper.find(QuizQ4).props().onChange('highnetworth');
 
-      expect(updateValueMock).toHaveBeenCalledWith(expect.any(Object), 'self_certification', 'highnetworth');
+      expect(updateValueMock).toHaveBeenCalledWith('self_certification', 'highnetworth');
       expect(wrapper.instance().initModal).toHaveBeenCalledWith('highnetworth');
     })
 
     test('QuizQ5', () => {
       wrapper.find(QuizQ5).props().onChange(['str1','str2']);
-      expect(updateValueMock).toHaveBeenCalledWith(expect.any(Object), 'restricted_quiz', ['str1','str2']);
+      expect(updateValueMock).toHaveBeenCalledWith('restricted_quiz', ['str1','str2']);
       wrapper.find(QuizQ5).props().onDeselectAll();
-      expect(updateValueMock).toHaveBeenCalledWith(expect.any(Object), 'restricted_quiz_done', false);
+      expect(updateValueMock).toHaveBeenCalledWith('restricted_quiz_done', false);
     });
 
     test('Button', () => {
@@ -168,16 +223,40 @@ describe('<ComplianceCheck />', () => {
       expect(wrapper.instance().getModalContent).toHaveBeenCalledWith('selfcertified');
     });
 
-    test('executes and calls `showModal with a value of highnetworth`', () => {
-      wrapper = setup(ComplianceCheck, defaultProps, { values: quizResultMock, highNetWorthMarkdown: 'Dummy' });
+    test('executes and calls `showModal` with a value of `highnetworth`', () => {
+      wrapper = setup(
+        ComplianceCheck, 
+        {
+          ...defaultProps,
+          form: {
+            ...defaultProps.form,
+            values: quizResultMock,
+          }
+        },
+        {
+          highNetWorthMarkdown: 'Dummy'
+        }
+      );
       wrapper.instance().initModal('highnetworth');
 
       expect(showModalMock).toHaveBeenCalledTimes(1);
       expect(wrapper.state().modalMarkdown).toEqual('Dummy');
     });
 
-    test('executes and calls `showModal with a value of selfcertified`', () => {
-      wrapper = setup(ComplianceCheck, defaultProps, { values: quizResultMock, selfCertifiedMarkdown: 'Dummy' });
+    test('executes and calls `showModal` with a value of `selfcertified`', () => {
+      wrapper = setup(
+        ComplianceCheck, 
+        {
+          ...defaultProps,
+          form: {
+            ...defaultProps.form,
+            values: quizResultMock,
+          }
+        },
+        {
+          selfCertifiedMarkdown: 'Dummy'
+        }
+      );
       wrapper.instance().initModal('selfcertified');
 
       expect(showModalMock).toHaveBeenCalledTimes(1);
@@ -194,7 +273,19 @@ describe('<ComplianceCheck />', () => {
     });
 
     test('executes and calls `hideModal`, `goTostep` & sets state', () => {
-      wrapper = setup(ComplianceCheck, defaultProps, { values: quizResultMock, modalCheckBoxChecked: true });
+      wrapper = setup(
+        ComplianceCheck, 
+        {
+          ...defaultProps,
+          form: {
+            ...defaultProps.form,
+            values: quizResultMock,
+          }
+        },
+        {
+          modalCheckBoxChecked: true
+        }
+      );
       wrapper.instance().goToStep = jest.fn();
       wrapper.instance().closeModal();
 
@@ -212,10 +303,10 @@ describe('<ComplianceCheck />', () => {
   });
 
   afterEach(() => {
-    navigateMock.mockClear();
-    showLoaderMock.mockClear();
-    hideLoaderMock.mockClear();
-    hideModalMock.mockClear();
-    showModalMock.mockClear();
+    navigateMock.mockReset();
+    showLoaderMock.mockReset();
+    hideLoaderMock.mockReset();
+    hideModalMock.mockReset();
+    showModalMock.mockReset();
   });
 });

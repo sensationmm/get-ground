@@ -4,11 +4,16 @@ import { RawComponent } from 'src/pages/onboarding/payment';
 import InputNumber from 'src/components/_form/InputNumber/InputNumber';
 import Stripe from 'src/components/Stripe/Stripe';
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
+import { initialState as ReduxFormMock } from 'src/state/reducers/form';
+import formUtils from 'src/utils/form';
 
 describe('Payment page', () => {
   let wrapper;
 
-  global.Stripe = jest.fn()
+  global.Stripe = jest.fn();
+  jest.spyOn(formUtils, 'initFormState');
+  jest.spyOn(formUtils, 'clearFormState');
+
 
   beforeEach(() => {
     wrapper = setup(RawComponent, {
@@ -17,16 +22,21 @@ describe('Payment page', () => {
       hideLoader: jest.fn(),
       location: {
         search: '?retakePayment=true'
-      }
-    }, {
-      showErrorMessage: false,
-      errors: {}
+      },
+      form: ReduxFormMock
     });
   });
   
   test('renders without error', () => {
     const component = findByTestAttr(wrapper, 'container-payment');
     expect(component.length).toBe(1);
+    expect(formUtils.initFormState).toHaveBeenCalledTimes(1);
+  });
+
+  test('form cleared on unmount', () => {
+    jest.spyOn(formUtils, 'clearFormState');
+    wrapper.unmount();
+    expect(formUtils.clearFormState).toHaveBeenCalledTimes(1);
   });
 
   test('payment values should update on input type', () => {
@@ -86,11 +96,13 @@ describe('Payment page', () => {
       t: jest.fn(),
       location: {
         search: '?retakePayment=true'
-      }
-    }, {
-      showErrorMessage: true,
-      errors: {
-        form: 'There was an issue with your payment'
+      },
+      form: {
+        ...ReduxFormMock,
+        showErrorMessage: true,
+        errors: {
+          form: 'There was an issue with your payment'
+        }
       }
     });
   

@@ -8,6 +8,7 @@ import { RawComponent as PurchaseDetails, PropertyService } from './index';
 import Button from 'src/components/_buttons/Button/Button';
 import Datepicker from 'src/components/Datepicker/Datepicker';
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
+import { initialState as ReduxFormMock } from 'src/state/reducers/form';
 
 jest.mock('gatsby', () => ({
   navigate: jest.fn()
@@ -27,8 +28,12 @@ describe('purchase details', () => {
   const defaultProps = {
     t: tMock,
     showLoader: showLoaderMock,
-    hideLoader: hideLoaderMock
+    hideLoader: hideLoaderMock,
+    form: ReduxFormMock
   };
+  jest.spyOn(formUtils, 'initFormState');
+  jest.spyOn(formUtils, 'clearFormState');
+
 
   beforeEach(() => {
     wrapper = setup(PurchaseDetails, defaultProps, {
@@ -43,91 +48,108 @@ describe('purchase details', () => {
   test('renders without error', () => {
     const component = findByTestAttr(wrapper, 'container-company-design-purchase-details');
     expect(component.length).toBe(1);
+    expect(formUtils.initFormState).toHaveBeenCalledTimes(1);
+  });
+
+  test('form cleared on unmount', () => {
+    jest.spyOn(formUtils, 'clearFormState');
+    wrapper.unmount();
+    expect(formUtils.clearFormState).toHaveBeenCalledTimes(1);
   });
 
   test('renders error message if errors present', () => {
-    wrapper = setup(PurchaseDetails, defaultProps, { showErrorMessage: true });
+    wrapper = setup(PurchaseDetails, {
+      ...defaultProps,
+      form: {
+        ...defaultProps.form,
+        showErrorMessage: true
+      }
+    });
     expect(wrapper.contains(<ErrorBox>string</ErrorBox>)).toBe(true);
   });
 
   test('expect checkElementHidden to return true if newBuild is equal to an empty string', () => {
-    const wrapper = setup(PurchaseDetails, defaultProps, {
-      values: {
-        newBuild: ''
+    const wrapper = setup(PurchaseDetails, {
+      ...defaultProps, 
+      form: {
+        ...defaultProps.form,
+        values: {
+          ...defaultProps.form.values,
+          newBuild: ''
+        }
       }
     });
-    wrapper.instance().checkElementHidden();
+    const hidden = wrapper.instance().checkElementHidden();
 
-    expect(wrapper.instance().checkElementHidden()).toEqual(true);
+    expect(hidden).toEqual(true);
   });
 
   test('expect checkElementHidden to return true if newBuild is equal to no', () => {
-    const wrapper = setup(PurchaseDetails, defaultProps, {
-      values: {
-        newBuild: 'no'
+    const wrapper = setup(PurchaseDetails, {
+      ...defaultProps, 
+      form: {
+        ...defaultProps.form,
+        values: {
+          ...defaultProps.form.values,
+          newBuild: 'no'
+        }
       }
     });
-    wrapper.instance().checkElementHidden();
+    const hidden = wrapper.instance().checkElementHidden();
 
-    expect(wrapper.instance().checkElementHidden()).toEqual(true);
+    expect(hidden).toEqual(true);
   });
 
-  test('expect checkElementHidden to return false if newBuild is equal to yes', () => {
-    const wrapper = setup(PurchaseDetails, defaultProps, {
-      values: {
-        newBuild: 'yes',
-      }
-    });
-    wrapper.instance().checkElementHidden();
+  describe('newBuild', () => {
+    let wrapper;
+    beforeEach(() => {
+      wrapper = setup(PurchaseDetails, {
+        ...defaultProps, 
+        form: {
+          ...defaultProps.form,
+          values: {
+            ...defaultProps.form.values,
+            newBuild: 'yes'
+          }
+        }
+      });
+    })
 
-    expect(wrapper.instance().checkElementHidden()).toEqual(false);
-  });
+    test('expect checkElementHidden to return false if newBuild is equal to yes', () => {
+      const hidden = wrapper.instance().checkElementHidden();
 
-  test('expect showNextInstallment to be called when button is clicked', () => {
-    const wrapper = setup(PurchaseDetails, defaultProps, {
-      values: {
-        newBuild: 'yes',
-      }
-    });
-    const component = findByTestAttr(wrapper, 'container-company-design-purchase-details');
-    wrapper.instance().showNextInstallment = jest.fn();
-
-    component.find(Button).at(0).props().onClick();
-
-    expect(wrapper.instance().showNextInstallment).toHaveBeenCalled();
-  });
-
-  test('expect closeDatePicker to be called when the Datepicker is closed', () => {
-    const wrapper = setup(PurchaseDetails, defaultProps, {
-      values: {
-        newBuild: 'yes',
-      },
-      showErrorMessage: true
+      expect(hidden).toEqual(false);
     });
 
-    const component = findByTestAttr(wrapper, 'container-company-design-purchase-details');
+    test('expect showNextInstallment to be called when button is clicked', () => {
+      const component = findByTestAttr(wrapper, 'container-company-design-purchase-details');
+      wrapper.instance().showNextInstallment = jest.fn();
 
-    jest.spyOn(wrapper.instance(), 'closeDatePicker');
+      component.find(Button).at(0).props().onClick();
 
-    component.find(Datepicker).props().closeDatepicker();
-
-    expect(wrapper.instance().closeDatePicker).toHaveBeenCalled();
-    expect(wrapper.state().isDatepickerOpen).toEqual(false);
-  });
-
-  test('expect openDatePicker to be called when the Datepicker is opened', () => {
-    const wrapper = setup(PurchaseDetails, defaultProps, {
-      values: {
-        newBuild: 'yes',
-      }
+      expect(wrapper.instance().showNextInstallment).toHaveBeenCalled();
     });
-    const component = findByTestAttr(wrapper, 'container-company-design-purchase-details');
 
-    jest.spyOn(wrapper.instance(), 'openDatePicker');
+    test('expect closeDatePicker to be called when the Datepicker is closed', () => {
+      const component = findByTestAttr(wrapper, 'container-company-design-purchase-details');
 
-    component.find('#depositDueDate').props().onFocus(mockEvent);
+      jest.spyOn(wrapper.instance(), 'closeDatePicker');
 
-    expect(wrapper.state().isDatepickerOpen).toEqual(true);
+      component.find(Datepicker).props().closeDatepicker();
+
+      expect(wrapper.instance().closeDatePicker).toHaveBeenCalled();
+      expect(wrapper.state().isDatepickerOpen).toEqual(false);
+    });
+
+    test('expect openDatePicker to be called when the Datepicker is opened', () => {
+      const component = findByTestAttr(wrapper, 'container-company-design-purchase-details');
+
+      jest.spyOn(wrapper.instance(), 'openDatePicker');
+
+      component.find('#depositDueDate').props().onFocus(mockEvent);
+
+      expect(wrapper.state().isDatepickerOpen).toEqual(true);
+    });
   });
 
   test('expect setDateFieldValue to called when a date is selected in the Datepicker', () => {
@@ -158,6 +180,7 @@ describe('purchase details', () => {
 
     test('submit purchase details failure', async () => {
       spy = jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
+      const errorSpy = jest.spyOn(formUtils, 'setFormError');
       PropertyService.SavePurchaseDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 400 }));
       const wrapperNew = setup(PurchaseDetails, defaultProps);
       
@@ -165,7 +188,7 @@ describe('purchase details', () => {
       
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
-      expect(wrapperNew.state().errors.form).toEqual('string');
+      expect(errorSpy).toHaveBeenCalledWith('string');
       expect(spy).toHaveBeenCalled();
     });
 

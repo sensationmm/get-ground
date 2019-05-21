@@ -35,23 +35,24 @@ class PropertyAddress extends Component {
     super(props);
 
     this.state = {
-      ...formUtils.initFormState({
-        country: '',
-        street: '',
-        city: '',
-        unitNumber: '',
-        postcode: ''
-      }),
       isAddressValid: true,
       isManualAddress: false,
       isTextAreaHidden: true
     };
 
-    this.config = [];
+    this.config = null;
   }
 
   /* istanbul ignore next */
   componentDidMount() {
+    formUtils.initFormState({
+      country: '',
+      street: '',
+      city: '',
+      unitNumber: '',
+      postcode: ''
+    });
+
     const script = document.createElement('script');
 
     script.onload = () => {
@@ -80,6 +81,10 @@ class PropertyAddress extends Component {
     document.body.appendChild(script);
   }
 
+  componentWillUnmount() {
+    formUtils.clearFormState();
+  }
+
   toggleManualAddress = /* istanbul ignore next */ () => {
     document.getElementById('addressArea').value = '';
 
@@ -90,7 +95,7 @@ class PropertyAddress extends Component {
   };
 
   initFormValidation = /* istanbul ignore next */ () => {
-    const { showLoader, hideLoader, t } = this.props;
+    const { showLoader, hideLoader, t, form } = this.props;
     const { 
       values: {
         street,
@@ -98,9 +103,9 @@ class PropertyAddress extends Component {
         unitNumber,
         postcode,
       }
-    } = this.state;
+    } = form;
 
-    if (formUtils.validateForm(this)) {
+    if (formUtils.validateForm(this.config)) {
       showLoader();
 
       PropertyService.SavePropertyAddress({street, city, unitNumber, postcode}).then((response) => {
@@ -137,15 +142,13 @@ class PropertyAddress extends Component {
   handleCountryChange = country => window.addressNow.setCountry(country);
 
   render() {
-    const { t } = this.props;
+    const { t, form } = this.props;
     const { 
       isManualAddress, 
       isAddressValid, 
-      values,
-      errors, 
-      showErrorMessage,
       isTextAreaHidden
     } = this.state;
+    const { values, errors, showErrorMessage } = form;
   
     const setCountries = [
       <option key='country-0' value='England'>England</option>,
@@ -234,7 +237,7 @@ class PropertyAddress extends Component {
             }
 
           <Form>
-            {formUtils.renderForm(this)}
+            {formUtils.renderForm(this.config)}
 
             <Button
               label={t('companyDesign.propertyAddress.form.nextButton')}
@@ -255,10 +258,15 @@ class PropertyAddress extends Component {
 PropertyAddress.propTypes = {
   t: PropTypes.func.isRequired,
   showLoader: PropTypes.func,
-  hideLoader: PropTypes.func
+  hideLoader: PropTypes.func,
+  form: PropTypes.object
 };
+
+const mapStateToProps = state => ({
+  form: state.form
+});
 
 const actions = { showLoader, hideLoader };
 
 export const RawComponent = PropertyAddress;
-export default connect(null, actions)(withTranslation()(PropertyAddress));
+export default connect(mapStateToProps, actions)(withTranslation()(PropertyAddress));

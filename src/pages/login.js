@@ -29,22 +29,25 @@ class Login extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      ...formUtils.initFormState({
-        email: '',
-        password: ''
-      })
-    };
+    this.config = null;
+  }
 
-    this.config = [];
+  componentDidMount = () => {
+    formUtils.initFormState({
+      email: '',
+      password: ''
+    });
+  }
+
+  componentWillUnmount() {
+    formUtils.clearFormState();
   }
 
   onLogin = async () => {
-    const { email, password } = this.state.values;
-    const { showLoader, hideLoader, t, location: { search } } = this.props;
-    const self = this;
+    const { showLoader, hideLoader, t, location: { search }, form} = this.props;
+    const { values: { email, password }} = form;
 
-    if(formUtils.validateForm(this)) {
+    if(formUtils.validateForm(this.config)) {
       showLoader();
 
       return AuthService.login(email, password)
@@ -60,22 +63,14 @@ class Login extends Component {
           }
 
         } else {
-          self.setState({
-            ...self.state,
-            errors: {
-              ...self.state.errors,
-              form: t('login.form.error')
-            },
-            showErrorMessage: true
-          });
+          formUtils.setFormError(t('login.form.error'));
         }
       });
     }
   }
 
   render() {
-    const { t } = this.props;
-    const { values, errors } = this.state;
+    const { form: { values, errors, showErrorMessage }, t } = this.props;
 
     this.config = [
       {
@@ -99,10 +94,10 @@ class Login extends Component {
         <div className="account-login" data-test="container-login" role="account fullscreen">
           <h1>{ t('login.title') }</h1>
 
-          {errors.form && <ErrorBox>{errors.form}</ErrorBox>}
+          {showErrorMessage && errors.form && <ErrorBox>{errors.form}</ErrorBox>}
 
             <Form>
-              { formUtils.renderForm(this) }
+              { formUtils.renderForm(this.config) }
             </Form>
 
             <Form className="account-login-actions">
@@ -111,7 +106,7 @@ class Login extends Component {
                 classes="secondary"
                 label={ t('login.ctaPrimary') }
                 fullWidth
-                onClick={this.onLogin}
+                onClick={() => this.onLogin()}
               />
 
               <center>
@@ -130,11 +125,16 @@ Login.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   t: PropTypes.func.isRequired,
-  location: PropTypes.object
+  location: PropTypes.object,
+  form: PropTypes.object
 };
+
+const mapStateToProps = state => ({
+  form: state.form
+});
 
 export const RawComponent = Login;
 
 const actions = { showLoader, hideLoader };
 
-export default connect(null, actions)(withTranslation()(Login));
+export default connect(mapStateToProps, actions)(withTranslation()(Login));
