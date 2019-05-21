@@ -169,6 +169,17 @@
     }
   },
   "contactUs": "Contact us",
+  "forgotPassword": {
+    "title": "Forgot password",
+    "cta": "Reset Password",
+    "goBack": "Back",
+    "reset": {
+      "title": "Set your new Password",
+      "confirmPassword": "Confirm your password",
+      "setPasswordButton": "Set password"
+    },
+    "emailPending": "With a magic link to the email address you provided. Please click the button on the email to change your password"
+  },
   "form": {
     "correctErrors": "Please correct all errors to proceed",
     "radioConfirm": {

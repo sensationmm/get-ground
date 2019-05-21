@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import { Link, navigate } from 'gatsby';
-import queryString from 'query-string'
+import { navigate } from 'gatsby';
 
 import Layout from 'src/components/Layout/Layout'
 import Button from 'src/components/_buttons/Button/Button';
@@ -11,54 +10,50 @@ import Form from 'src/components/_layout/Form/Form';
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import formUtils from 'src/utils/form';
 
-import InputText from 'src/components/_form/InputText/InputText';
+import StrengthMeter from 'src/components/StrengthMeter/StrengthMeter';
 import InputPassword from 'src/components/_form/InputPassword/InputPassword';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
+
+import './reset-password.scss'
+
 import authService from 'src/services/Auth';
 const AuthService = new authService();
 
-import 'src/styles/pages/login.scss';
-
 /**
- * Login
- * @author Kevin Reynolds <kevin.reynolds@somoglobal.com>
- * @return {JSXElement} - Login
+ * Reset Password
+ * @author Ravin Patel <ravin.patel@getground.co.uk>
+ * @return {JSXElement} - ResetPassword
  */
-class Login extends Component {
+class ResetPassword extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       ...formUtils.initFormState({
-        email: '',
-        password: ''
+        password: '',
+        passwordConfirm: '',
+        optin: false,
+        privacy: false
       })
     };
 
     this.config = [];
   }
 
-  onLogin = async () => {
-    const { email, password } = this.state.values;
+  onSetNewPassword = async () => {
+    const { password } = this.state.values;
     const { showLoader, hideLoader, t, location: { search } } = this.props;
     const self = this;
 
     if(formUtils.validateForm(this)) {
       showLoader();
 
-      return AuthService.login(email, password)
+      return AuthService.setNewPassword(password, search)
       .then((res) => {
         hideLoader();
         if(res.status === 200) {
-          const queryStringValues = queryString.parse(search)
-
-          if (queryStringValues.redirect) {
-            navigate(queryStringValues.redirect);
-          } else {
-            navigate('/onboarding/intro');
-          }
-
+            navigate('/login');
         } else {
           self.setState({
             ...self.state,
@@ -79,46 +74,43 @@ class Login extends Component {
 
     this.config = [
       {
-        stateKey: 'email',
-        component: InputText,
-        label: t('login.form.label.email'),
-        value: values.email,
-        validationFunction: 'validateEmail'
-      },
-      {
         stateKey: 'password',
         component: InputPassword,
-        label: t('login.form.label.password'),
+        label: t('onBoarding.createAccount.form.label.password'),
         value: values.password,
-        validationFunction: 'validateRequired'
-      }
+        validationFunction: 'validateRequired',
+        note: t('onBoarding.createAccount.form.note.password')
+      },
+      {
+        component: StrengthMeter,
+        valueToCheck: values.password
+      },
+      {
+        stateKey: 'passwordConfirm',
+        component: InputPassword,
+        label: t('onBoarding.createAccount.form.label.passwordConfirm'),
+        value: values.passwordConfirm,
+        validationFunction: 'validateMatching',
+        validationParam: values.password
+      },
     ];
 
     return (
       <Layout>
-        <div className="account-login" data-test="container-login" role="account fullscreen">
-          <h1>{ t('login.title') }</h1>
+        <div className="reset-password" data-test="container-reset-password" role="account fullscreen">
+          <h1 className="reset-password-title">{ t('forgotPassword.reset.title') }</h1>
 
           {errors.form && <ErrorBox>{errors.form}</ErrorBox>}
 
             <Form>
               { formUtils.renderForm(this) }
-            </Form>
-
-            <Form className="account-login-actions">
               <Button
-                data-test="login-button"
+                data-test="reset-password-button"
                 classes="secondary"
-                label={ t('login.ctaPrimary') }
+                label={ t('forgotPassword.reset.setPasswordButton') }
                 fullWidth
-                onClick={this.onLogin}
+                onClick={this.onSetNewPassword}
               />
-
-              <center>
-                <Link to="/forgot-password/enter-email">
-                  <Button classes="secondary faded" label={ t('login.ctaSecondary') } small />
-                </Link>
-              </center>
             </Form>
         </div>
       </Layout>
@@ -126,15 +118,15 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
+ResetPassword.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   t: PropTypes.func.isRequired,
   location: PropTypes.object
 };
 
-export const RawComponent = Login;
+export const RawComponent = ResetPassword;
 
 const actions = { showLoader, hideLoader };
 
-export default connect(null, actions)(withTranslation()(Login));
+export default connect(null, actions)(withTranslation()(ResetPassword));

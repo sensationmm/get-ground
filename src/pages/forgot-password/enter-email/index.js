@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { Link, navigate } from 'gatsby';
-import queryString from 'query-string'
 
 import Layout from 'src/components/Layout/Layout'
 import Button from 'src/components/_buttons/Button/Button';
@@ -12,53 +11,48 @@ import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import formUtils from 'src/utils/form';
 
 import InputText from 'src/components/_form/InputText/InputText';
-import InputPassword from 'src/components/_form/InputPassword/InputPassword';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 import authService from 'src/services/Auth';
+
+import './enter-email.scss'
 const AuthService = new authService();
 
-import 'src/styles/pages/login.scss';
-
 /**
- * Login
- * @author Kevin Reynolds <kevin.reynolds@somoglobal.com>
- * @return {JSXElement} - Login
+ * Enter Email
+ * @author Ravin Patel <ravin.patel@getground.co.uk>
+ * @return {JSXElement} - EnterEmail
  */
-class Login extends Component {
+class EnterEmail extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       ...formUtils.initFormState({
-        email: '',
-        password: ''
+        email: ''
       })
     };
 
     this.config = [];
   }
 
-  onLogin = async () => {
-    const { email, password } = this.state.values;
-    const { showLoader, hideLoader, t, location: { search } } = this.props;
+  onSendEmailForReset = async () => {
+    const { email } = this.state.values;
+    const { showLoader, hideLoader, t } = this.props;
     const self = this;
 
     if(formUtils.validateForm(this)) {
       showLoader();
 
-      return AuthService.login(email, password)
+      return AuthService.resetPassword(email)
       .then((res) => {
         hideLoader();
         if(res.status === 200) {
-          const queryStringValues = queryString.parse(search)
-
-          if (queryStringValues.redirect) {
-            navigate(queryStringValues.redirect);
-          } else {
-            navigate('/onboarding/intro');
-          }
-
+          navigate('/onboarding/account-pending', {
+            state: {
+              passwordReset: true,
+            }
+          });
         } else {
           self.setState({
             ...self.state,
@@ -85,19 +79,12 @@ class Login extends Component {
         value: values.email,
         validationFunction: 'validateEmail'
       },
-      {
-        stateKey: 'password',
-        component: InputPassword,
-        label: t('login.form.label.password'),
-        value: values.password,
-        validationFunction: 'validateRequired'
-      }
     ];
 
     return (
       <Layout>
-        <div className="account-login" data-test="container-login" role="account fullscreen">
-          <h1>{ t('login.title') }</h1>
+        <div className="enter-email" data-test="container-enter-email" role="account fullscreen">
+          <h1 className="enter-email-title">{ t('forgotPassword.title') }</h1>
 
           {errors.form && <ErrorBox>{errors.form}</ErrorBox>}
 
@@ -105,18 +92,18 @@ class Login extends Component {
               { formUtils.renderForm(this) }
             </Form>
 
-            <Form className="account-login-actions">
+            <Form className="enter-email-actions">
               <Button
-                data-test="login-button"
+                data-test="enter-email-button"
                 classes="secondary"
-                label={ t('login.ctaPrimary') }
+                label={ t('forgotPassword.cta') }
                 fullWidth
-                onClick={this.onLogin}
+                onClick={this.onSendEmailForReset}
               />
 
               <center>
-                <Link to="/forgot-password/enter-email">
-                  <Button classes="secondary faded" label={ t('login.ctaSecondary') } small />
+                <Link to="/login">
+                  <Button classes="secondary faded" label={ t('forgotPassword.goBack') } small />
                 </Link>
               </center>
             </Form>
@@ -126,15 +113,15 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
+EnterEmail.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   t: PropTypes.func.isRequired,
   location: PropTypes.object
 };
 
-export const RawComponent = Login;
+export const RawComponent = EnterEmail;
 
 const actions = { showLoader, hideLoader };
 
-export default connect(null, actions)(withTranslation()(Login));
+export default connect(null, actions)(withTranslation()(EnterEmail));

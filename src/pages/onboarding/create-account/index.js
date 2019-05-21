@@ -63,7 +63,11 @@ class CreateAccount extends Component {
       AccountService.createAccount(email, password, optin).then(response => {
         hideLoader();
         if(response.status === 201) {
-          navigate('/onboarding/account-pending');
+          navigate('/onboarding/account-pending', {
+            state: {
+              passwordReset: false,
+            }
+          });
         } else if(response.status === 500) {
           self.setState({
             ...self.state,
@@ -86,7 +90,7 @@ class CreateAccount extends Component {
 
     ModalService.fetchModalContent('getGround Terms and Conditions').then(response => {
       self.setState({ termsMarkdown: response.data.markdown_text });
-      
+
       hideLoader();
       showModal();
     });
@@ -140,7 +144,7 @@ class CreateAccount extends Component {
         component: Checkbox,
         label: <div>
           {t('onBoarding.createAccount.form.label.privacyOne')}
-          <a onClick={(e) => { 
+          <a onClick={(e) => {
             e.stopPropagation();
             if (termsMarkdown === '') {
               this.getModalContent(e)
@@ -156,7 +160,7 @@ class CreateAccount extends Component {
         validationFunction: 'validateRequired'
       }
     ];
-    
+
     return (
       <Layout>
         <div data-test="container-create-account" className="create-account" role="account">
@@ -195,10 +199,10 @@ class CreateAccount extends Component {
             unmountOnExit
           >
             <Modal>
-              <ModalContent 
+              <ModalContent
                 heading={t('onBoarding.createAccount.termsModalHeading')}
                 content={termsMarkdown}
-                closeModal={hideModal} 
+                closeModal={hideModal}
                 downloadButtonLabel={t('onBoarding.createAccount.termsModalDownloadButtonLabel')}
                 closeIconAltText={t('onBoarding.createAccount.termsModalCloseIconAltText')}
                 modalImage={termsImage}
@@ -224,8 +228,8 @@ const mapStateToProps = state => ({
   modalIsOpen: state.modal.isOpen
 });
 
-const actions = { 
-  showLoader, 
+const actions = {
+  showLoader,
   hideLoader ,
   showModal,
   hideModal

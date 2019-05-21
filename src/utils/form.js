@@ -27,7 +27,7 @@ export const initFormState = (fieldsInit) => {
  * @return {void}
  */
 export const updateValue = (scope, stateKey, value, validate, callback) => {
-  
+
   scope.setState({
     ...scope.state,
     values: {
@@ -55,7 +55,7 @@ export const validateField = (scope, stateID) => {
   const configItem = functions.getByValue(scope.config, 'stateKey', stateID);
 
   if(configItem && configItem.validationFunction && !configItem.hidden) {
-    const isValid = (configItem.validationParam !== undefined) 
+    const isValid = (configItem.validationParam !== undefined)
       ? validation[configItem.validationFunction](values[stateID], configItem.validationParam)
       : validation[configItem.validationFunction](values[stateID]);
 

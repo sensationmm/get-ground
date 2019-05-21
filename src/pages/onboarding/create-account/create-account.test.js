@@ -28,7 +28,7 @@ describe('<CreateAccount />', () => {
   beforeEach(() => {
     wrapper = setup(CreateAccount, defaultProps);
   });
-  
+
   test('renders without error', () => {
     const component = findByTestAttr(wrapper, 'container-create-account');
     expect(component.length).toBe(1);
@@ -40,8 +40,8 @@ describe('<CreateAccount />', () => {
   });
 
   test('renders custom error message if set', () => {
-    wrapper = setup(CreateAccount, 
-      { t: jest.fn().mockReturnValue('string') }, 
+    wrapper = setup(CreateAccount,
+      { t: jest.fn().mockReturnValue('string') },
       { showErrorMessage: true, errors: { form: 'Test error' } }
     );
     expect(wrapper.contains(<ErrorBox>Test error</ErrorBox>)).toBe(true);
@@ -62,27 +62,27 @@ describe('<CreateAccount />', () => {
       spy = jest.spyOn(formUtils, 'validateForm').mockImplementation(() => {});
       const button = findByTestAttr(wrapper, 'create-account-button');
       button.simulate('click');
-      
+
       expect(spy).toHaveBeenCalled();
     });
-    
+
     test('creates account', async () => {
       spy = jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
       AccountService.createAccount = jest.fn().mockReturnValue(Promise.resolve({ status: 201 }));
       const wrapperNew = setup(CreateAccount, defaultProps);
-      
+
       await wrapperNew.instance().createAccount();
-      
+
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
-      expect(navigate).toHaveBeenCalledWith('/onboarding/account-pending');
+      expect(navigate).toHaveBeenCalledWith('/onboarding/account-pending', {'state': {'passwordReset': false}});
     });
 
     test('duplicate email failure', async () => {
       spy = jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
       AccountService.createAccount = jest.fn().mockReturnValue(Promise.resolve({ status: 500 }));
       const wrapperNew = setup(CreateAccount, defaultProps);
-      
+
       await wrapperNew.instance().createAccount();
 
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
@@ -94,7 +94,7 @@ describe('<CreateAccount />', () => {
       spy = jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
       AccountService.createAccount = jest.fn().mockReturnValue(Promise.resolve({ status: 501 }));
       const wrapperNew = setup(CreateAccount, defaultProps);
-      
+
       await wrapperNew.instance().createAccount();
 
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
