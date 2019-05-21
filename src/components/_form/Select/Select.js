@@ -23,8 +23,7 @@ const Select = (props) => {
     options,
     defaultOptionText,
     value,
-    error,
-    validate
+    error
   } = props;
 
   return (
@@ -40,7 +39,7 @@ const Select = (props) => {
           {'error': error }
         ])}
         value={value}
-        onChange={(e) => onChange(e.target.value, validate)}
+        onChange={(e) => onChange(e.target.value)}
       >
         <option value="">{defaultOptionText}</option>
         {options}
@@ -56,8 +55,7 @@ Select.propTypes = {
   options: PropTypes.array.isRequired,
   defaultOptionText: PropTypes.string,
   value: PropTypes.string,
-  error: PropTypes.string,
-  validate: PropTypes.func
+  error: PropTypes.string
 };
 
 export default Select;

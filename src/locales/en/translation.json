@@ -12,13 +12,26 @@
     },
     "drawSignature": {
       "title": "Draw your signature",
-      "title2": "Your signature",
-      "yourSignatureIntro": "Your signature is saved to your profile. Now you are ready to continue and sign your company documents.",
       "signaturePadLabel": "Your Signature",
       "buttons": {
-        "continue": "Continue",
         "redo": "Redo",
-        "save": "Save",
+        "save": "Save"
+      }
+    },
+    "uploadSignature": {
+      "title": "Upload your signature",
+      "intro": "Tap below to upload your signature. You can only upload .jpeg and .png files",
+      "buttons": {
+        "upload": "Upload signature",
+        "save": "Save signature",
+        "reupload": "Re-upload"
+      }
+    },
+    "yourSignature": {
+      "title": "Your signature",
+      "intro": "Your signature is saved to your profile. Now you are ready to continue and sign your company documents.",
+      "buttons": {
+        "continue": "Continue",
         "edit": "edit"
       }
     }
