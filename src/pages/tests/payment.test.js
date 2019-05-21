@@ -23,7 +23,7 @@ describe('Payment page', () => {
       errors: {}
     });
   });
-  
+
   test('renders without error', () => {
     const component = findByTestAttr(wrapper, 'container-payment');
     expect(component.length).toBe(1);
@@ -93,10 +93,10 @@ describe('Payment page', () => {
         form: 'There was an issue with your payment'
       }
     });
-  
+
     const component = findByTestAttr(wrapper, 'container-payment');
     expect(component.find(ErrorBox).length).toBe(1);
-  }); 
+  });
 
   test('validateForm has been called from within Stripe', () => {
     const component = findByTestAttr(wrapper, 'container-payment');

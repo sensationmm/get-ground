@@ -18,7 +18,7 @@ import { showLoader, hideLoader } from 'src/state/actions/loader';
 import './reset-password.scss'
 
 import authService from 'src/services/Auth';
-const AuthService = new authService();
+export const AuthService = new authService();
 
 /**
  * Reset Password
@@ -100,9 +100,9 @@ class ResetPassword extends Component {
         <div className="reset-password" data-test="container-reset-password" role="account fullscreen">
           <h1 className="reset-password-title">{ t('forgotPassword.reset.title') }</h1>
 
-          {errors.form && <ErrorBox>{errors.form}</ErrorBox>}
+          {errors.form && <ErrorBox data-test="reset-password-error">{errors.form}</ErrorBox>}
 
-            <Form>
+            <Form data-test="reset-password-form">
               { formUtils.renderForm(this) }
               <Button
                 data-test="reset-password-button"

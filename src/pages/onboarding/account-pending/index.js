@@ -31,7 +31,7 @@ const AccountPending = ({ location }) => {
     <Layout>
       <div data-test="container-account-pending" className="account-pending" role="account">
         <h1>{ t('onBoarding.accountPending.title') }</h1>
-        <p>{ isPasswordReset ? t('forgotPassword.emailPending') :  t('onBoarding.accountPending.text') }</p>
+        <p data-test="account-pending-content">{ isPasswordReset ? t('forgotPassword.emailPending') :  t('onBoarding.accountPending.text') }</p>
 
         <ImageFull src={EmailSent} />
 

@@ -38,9 +38,9 @@ class AuthService extends BaseService {
    * @param {string} email - email address for login
    * @return {Promise} reset password response
    */
-  resetPassword = (email) => {
+  requestResetPassword = (email) => {
     const config = {
-      url: 'auth/reset_password',
+      url: '/auth/request_reset_password',
       method: 'post',
       data: {
         'email': email

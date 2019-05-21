@@ -16,7 +16,8 @@ import { showLoader, hideLoader } from 'src/state/actions/loader';
 import authService from 'src/services/Auth';
 
 import './enter-email.scss'
-const AuthService = new authService();
+
+export const AuthService = new authService();
 
 /**
  * Enter Email
@@ -44,7 +45,7 @@ class EnterEmail extends Component {
     if(formUtils.validateForm(this)) {
       showLoader();
 
-      return AuthService.resetPassword(email)
+      return AuthService.requestResetPassword(email)
       .then((res) => {
         hideLoader();
         if(res.status === 200) {
@@ -92,7 +93,7 @@ class EnterEmail extends Component {
               { formUtils.renderForm(this) }
             </Form>
 
-            <Form className="enter-email-actions">
+            <Form className="enter-email-actions" data-test="reset-password-form">
               <Button
                 data-test="enter-email-button"
                 classes="secondary"
