@@ -6,6 +6,7 @@ import Webcam from 'react-webcam'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 
+import IntroBox from 'src/components/_layout/IntroBox/IntroBox'
 import Button from 'src/components/_buttons/Button/Button'
 import { setImg, setActive, resetActive } from 'src/state/actions/idCheck'
 
@@ -78,7 +79,10 @@ export class AddProof extends Component {
           width={335}
           videoConstraints={videoConstraints}
         />
-        <p className="add-proof-loading">...loading camera</p>
+        <div className="add-proof-camera-tools">
+          <img className="add-proof-overlay" src={this.props.overlay} />
+          <p className="add-proof-loading">...loading camera</p>
+        </div>
         <Button style={`display: inline;`} data-test="capture-button" classes="primary capture" fullWidth label={t('onBoarding.idCheck.image.capture')} onClick={() => this.capture()}/>
       </div>
     )
@@ -179,7 +183,7 @@ export class AddProof extends Component {
 
     return (
       <div data-test="component-add-proof" className={classNames(['add-proof', {'disabled': this.props.active && this.props.active !== section  }])} role="account">
-        <h2 data-test="intro-box">{ t(`onBoarding.idCheck.${section}.title`) }</h2>
+        <IntroBox data-test="intro-box">{ t(`onBoarding.idCheck.${section}.title`) }</IntroBox>
         <p className="add-proof-content">{ !this.state.takePicture || !this.state.retakePicture ? t(`onBoarding.idCheck.${section}.content`) : t(`onBoarding.idCheck.${section}.retakeImageContent`)}</p>
         <div className="add-proof-img">{this.handleProof(t)}</div>
         {section !== 'selfie' && <div className="add-proof-upload-file">{this.uploadImg(t)}</div>}
@@ -195,7 +199,8 @@ AddProof.propTypes = {
   setImg: PropTypes.func.isRequired,
   setActive: PropTypes.func.isRequired,
   resetActive: PropTypes.func.isRequired,
-  active: PropTypes.string.isRequired
+  active: PropTypes.string.isRequired,
+  overlay: PropTypes.string
 }
 const mapStataToProps = (state) => ({
   active: state.idCheck.active
