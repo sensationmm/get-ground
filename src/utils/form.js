@@ -1,56 +1,71 @@
 import React from 'react';
 import validation from './validation';
 import functions from './functions';
+import store from 'src/state/store';
+import { initForm, clearForm, updateForm, setErrors } from 'src/state/actions/form';
 
 /**
  * initFormState
  * Output default values/error state required by form setup
  * @param {object} fieldsInit - form field initial values
- * @return {object} state initial object
+ * @return {void}
  */
 export const initFormState = (fieldsInit) => {
-  return {
-    values: fieldsInit,
-    errors: {},
-    showErrorMessage: false
-  };
+  return store.dispatch(
+    initForm({
+      values: fieldsInit,
+      errors: {},
+      showErrorMessage: false
+    })
+  );
+};
+
+/**
+ * clearFormState
+ * @return {void}
+ */
+export const clearFormState = () => {
+  store.dispatch(clearForm());
+};
+
+/**
+ * setErrors
+ * @param {string} error - error to set
+ * @return {void}
+ */
+export const setFormError = (error) => {
+  store.dispatch(setErrors({ form: error }, true));
 };
 
 /**
  * updateValue
  * Helper function to update state.values item
- * @param {object} scope - 'this' of current component/container
  * @param {string} stateKey - id of value to update
  * @param {any} value - value to update
  * @param {function} callback - function to fire after the generic onChange
  * @return {void}
  */
-export const updateValue = (scope, stateKey, value, callback) => {
-  
-  scope.setState({
-    ...scope.state,
-    values: {
-      ...scope.state.values,
-      [stateKey]: value
-    }
-  }, () => {
-    callback ? callback(value) : null;
-  });
+export const updateValue = (stateKey, value, callback) => {
+  store.dispatch(updateForm(stateKey, value));
+
+  if(callback) {
+    callback(value);
+  }
 };
 
 /**
  * validateField
  * Validates every field defined in the this.config object that has a validationFunction prop defined
  * Sets state.error value for field if validation fails
- * @param {object} scope - 'this of current component/container
+ * @param {object} config - form config object
  * @param {string} stateID - id of state.values to validate
  * @return {void}
  */
-export const validateField = (scope, stateID) => {
-  const { values, errors } = scope.state;
+export const validateField = (config, stateID) => {
+  const { values, errors } = store.getState().form;
   const errorsList = errors;
 
-  const configItem = functions.getByValue(scope.config, 'stateKey', stateID);
+  const configItem = functions.getByValue(config, 'stateKey', stateID);
 
   if(configItem && configItem.validationFunction && !configItem.hidden) {
     const isValid = (configItem.validationParam !== undefined) 
@@ -63,10 +78,7 @@ export const validateField = (scope, stateID) => {
       delete errorsList[stateID];
     }
 
-    scope.setState({
-      ...scope.state,
-      errors: errorsList
-    });
+    store.dispatch(setErrors(errorsList));
   }
 };
 
@@ -74,28 +86,21 @@ export const validateField = (scope, stateID) => {
  * validateForm
  * Validates every field defined in the this.config parent object that has a validationFunction prop defined
  * Shows 'correct errors' message if any failures
- * @param {object} scope - 'this' of current component/container
- * @return {void} whether form validates successfully
+ * @param {object} config - form config object
+ * @return {boolean} whether form validates successfully
  */
-export const validateForm = (scope) => {
-  scope.config.forEach(configItem => {
+export const validateForm = (config) => {
+  config.forEach(configItem => {
     if(configItem.stateKey && configItem.validationFunction) {
-      formUtils.validateField(scope, configItem.stateKey);
+      formUtils.validateField(config, configItem.stateKey);
     }
   });
 
-  const errors = scope.state.errors;
+  const errors = store.getState().form.errors;
   delete errors.form;
 
   if(Object.keys(errors).length > 0) {
-    scope.setState({
-      ...scope.state,
-      errors: {
-        ...scope.state.errors,
-        form: null
-      },
-      showErrorMessage: true
-    });
+    store.dispatch(setErrors(errors, true));
 
     return false;
   } else {
@@ -106,14 +111,14 @@ export const validateForm = (scope) => {
 /**
  * renderForm
  * Renders form defined in this.config of parent
- * @param {object} scope - 'this' of current component/container
+ * @param {object} config - form config object
  * @return {JSXElement[]} - array of form elements
  */
-export const renderForm = (scope) => {
-  const { errors } = scope.state;
+export const renderForm = (config) => {
+  const { errors } = store.getState().form;
 
   return (
-    scope.config.map((item, key) => {
+    config.map((item, key) => {
       const { stateKey, validationFunction, hidden, callback } = item;
 
       if(hidden) {
@@ -121,9 +126,9 @@ export const renderForm = (scope) => {
       }
 
       // istanbul ignore next - bug in arrow function coverage
-      const onChange = stateKey ? (val) => formUtils.updateValue(scope, stateKey, val, callback) : undefined;
+      const onChange = stateKey ? val => formUtils.updateValue(stateKey, val, callback) : undefined;
       // istanbul ignore next - bug in arrow function coverage
-      const validate = validationFunction && !hidden ? () => formUtils.validateField(scope, stateKey) : undefined;
+      const validate = validationFunction && !hidden ? () => formUtils.validateField(config, stateKey) : undefined;
       const error = functions.objectKeyExists(stateKey, errors) && !hidden ? errors[stateKey] : undefined;
 
       return (
@@ -131,7 +136,7 @@ export const renderForm = (scope) => {
           key={`form-item-${key}`}
           data-test={`form-item-${key}`}
           id={`create-account-${stateKey}`}
-          onChange={onChange}
+          onChange={item.onChange ? item.onChange : onChange}
           {...item}
           error={error}
           validate={validate}
@@ -162,6 +167,8 @@ export const setNativeValue = /* istanbul ignore next */ (element, value) => {
 
 const formUtils = {
   initFormState,
+  setFormError,
+  clearFormState,
   updateValue,
   validateField,
   validateForm,
