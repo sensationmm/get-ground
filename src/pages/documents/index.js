@@ -3,6 +3,7 @@ import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
+import { navigate } from 'gatsby'
 
 import { ProcessSection } from 'src/components/ProcessSection/ProcessSection';
 import Layout from 'src/components/Layout/Layout';
@@ -164,6 +165,21 @@ export class MyDocuments extends Component {
     });
   }
 
+  checkAllSigned = () => {
+    const { 
+      shareholdersAgreementSigned,
+      companyArticlesSigned, 
+      directorsLoanSigned,
+      consentToActSigned,
+      BoardResolutionSigned
+    } = this.state;
+
+    if (shareholdersAgreementSigned && companyArticlesSigned &&
+      directorsLoanSigned && consentToActSigned && BoardResolutionSigned) {
+      navigate('/documents/confirmation');
+    }
+  }
+
   render() {
     const { t, i18n, modalIsOpen } = this.props;
     const { 
@@ -251,6 +267,7 @@ export class MyDocuments extends Component {
               timeout={600}
               classNames="modal"
               unmountOnExit
+              onExited={this.checkAllSigned}
             >
               <Modal>
                 <ModalContent 

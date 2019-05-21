@@ -1,8 +1,8 @@
 
-@import '../modules/_colors';
-@import '../../components//IntroSlider/intro-slider.scss';
+@import 'src/styles/modules/_colors';
+@import 'src/components//IntroSlider/intro-slider.scss';
 
-.onboarding-confirmation {
+.confirmation {
   &--image-wrapper {
     @extend .slick-slide--image-wrapper;
   }
@@ -30,4 +30,16 @@
     color: $text-secondary;
   }
 
+}
+
+.documents {
+  color: $white;
+  .confirmation--image-wrapper {
+    background: $background-2;
+  }
+
+  .button.link {
+    color: $white;
+    margin-top: 40px;
+  }
 }

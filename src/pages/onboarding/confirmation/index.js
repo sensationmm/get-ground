@@ -13,12 +13,12 @@ const OnboardingConfirmation = () => {
 
   return (
     <Layout>
-      <div className="onboarding-confirmation" role="fullscreen">
-        <div className="onboarding-confirmation--image-wrapper">
+      <div className="confirmation" role="fullscreen">
+        <div className="confirmation--image-wrapper">
           <img src={confirmationImage} alt={t('onBoarding.confirmation.imageAltText')} />
         </div>
-        <h2 className="onboarding-confirmation--heading">{t('onBoarding.confirmation.heading')}</h2>
-        <div className="onboarding-confirmation--copy" dangerouslySetInnerHTML={{ __html: t('onBoarding.confirmation.copy') }} />
+        <h2 className="confirmation--heading">{t('onBoarding.confirmation.heading')}</h2>
+        <div className="confirmation--copy" dangerouslySetInnerHTML={{ __html: t('onBoarding.confirmation.copy') }} />
         <Link to="/dashboard">
           <Button
             label={t('onBoarding.confirmation.buttonText')}

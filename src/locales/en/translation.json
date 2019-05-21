@@ -240,6 +240,12 @@
         "title": "Board Resolution to Exchange Contracts",
         "imageAltText": "Board Resolution to Exchange Contracts"
       }
+    },
+    "confirmation": {
+      "heading": "Well done",
+      "imageAltText": "confirmation image",
+      "copy": "<p class='fs-large'>All your documents are signed.</p><p class='fs-large'>Please remind your shareholders to sign their documents.</p>",
+      "buttonText": "View your dashboard"
     }
   },
   "onBoarding": {
