@@ -68,9 +68,9 @@ export const validateField = (config, stateID) => {
   const configItem = functions.getByValue(config, 'stateKey', stateID);
 
   if(configItem && configItem.validationFunction && !configItem.hidden) {
-    const isValid = (configItem.validationParam !== undefined) 
-      ? validation[configItem.validationFunction](values[stateID], configItem.validationParam)
-      : validation[configItem.validationFunction](values[stateID]);
+    const isValid = (configItem.validationParam !== undefined)
+    ? validation[configItem.validationFunction](values[stateID], configItem.validationParam)
+    : validation[configItem.validationFunction](values[stateID]);
 
     if(!isValid) {
       errorsList[stateID] = validation.messages[configItem.validationFunction];

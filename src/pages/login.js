@@ -110,7 +110,7 @@ class Login extends Component {
               />
 
               <center>
-                <Link to="/forgot-password">
+                <Link to="/forgot-password/enter-email">
                   <Button classes="secondary faded" label={ t('login.ctaSecondary') } small />
                 </Link>
               </center>
