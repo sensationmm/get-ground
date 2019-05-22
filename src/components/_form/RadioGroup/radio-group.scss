@@ -1,0 +1,39 @@
+@import '../Input/input.scss';
+
+.radio-group {
+
+  &--radio-wrapper {
+    display: flex;
+  }
+
+  &--label {
+    @extend .text-input-label;
+  }
+}
+
+.radio-group.additional-services {
+  .radio-group {
+    &--radio-wrapper {
+      display: flex;
+      justify-content: center;
+      .radio {
+        width: 111px;
+        height: 47px;
+        border: 1px solid #2f5472;
+        border-radius: 5px;
+        &:last-child {
+          margin-left: 14px;
+        }
+      }
+    }
+    &--label {
+      font-size: 19px;
+      font-weight: 300;
+      line-height: 1.26;
+      color: #2f5472;
+      padding-left: 16px;
+      margin: 35px auto;
+      text-transform: none;
+    }
+  }
+}

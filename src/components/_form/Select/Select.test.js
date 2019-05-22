@@ -5,6 +5,12 @@ import Select from './Select';
 describe('<Select />', () => {
   let wrapper;
   const changeMock = jest.fn();
+  const validateMock = jest.fn();
+  const mockEvent = {
+    target: {
+      value: 'spain'
+    }
+  };
 
   beforeEach(() => {
     wrapper = setup(Select, { 
@@ -12,7 +18,9 @@ describe('<Select />', () => {
       classes: 'my-class',
       onChange: changeMock,
       options: [],
-      defaultOptionText: 'select option'
+      defaultOptionText: 'select option',
+      validate: validateMock,
+      error: 'field required'
     });
   });
   
@@ -24,9 +32,16 @@ describe('<Select />', () => {
   test('onChange callback fires on select', () => {
     const component = findByTestAttr(wrapper, 'component-select');
 
-    component.find('select').simulate('change');
+    component.find('select').props().onChange(mockEvent);
 
-    expect(changeMock).toHaveBeenCalled();
+    expect(changeMock).toHaveBeenCalledWith('spain');
+  });
+
+  test('error message is set', () => {
+    const error = findByTestAttr(wrapper, 'select-error');
+
+    expect(error.length).toBe(1);
+    expect(error.text()).toBe('field required');
   });
 
 });

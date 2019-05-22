@@ -1,0 +1,58 @@
+@import 'src/styles/modules/_colors';
+
+video {
+  height: 200px;
+}
+
+.add-proof {
+  z-index: 0;
+  margin-bottom: 10px;
+
+  &.disabled {
+    opacity: 0.4;
+    pointer-events: none
+  }
+
+  &-content {
+    color: $text-secondary;
+  }
+
+  &-img {
+    text-align: center;
+    z-index: 5;
+  }
+  &-camera-tools {
+    position: relative;
+    margin-top: -181px;
+  }
+
+  &-overlay {
+    z-index: 3;
+  }
+
+  &-loading {
+    font-style: italic;
+    z-index: -1;
+    margin-top: -30px;
+  }
+
+  .capture, .confirm-happy {
+    margin-top: 60px;
+  }
+
+  .confirm-happy {
+    margin-bottom: 20px;
+  }
+
+  button.upload-file-button.link {
+    font-size: 12px;
+    margin: 12px auto;
+    font-weight: 600;
+    line-height: 2.5;
+    letter-spacing: 0.8px;
+  }
+
+  .dropzone {
+    text-align: center;
+  }
+}

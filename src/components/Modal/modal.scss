@@ -1,0 +1,106 @@
+@import 'src/styles/modules/_mixins';
+@import 'src/styles/modules/_variables';
+@import 'src/styles/modules/_colors';
+@import 'src/components/_form/Input/input.scss';
+
+.modal {
+  background-color: $white;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+
+  &--header {
+    display: flex;
+    height: $header-height + 0px;
+    padding: $padding-vertical (($padding-horizontal-unit * 2) + 0px);
+
+    @include gradient-vertical-image(
+      $gradient-primary-1,
+      $gradient-primary-2,
+      '../../assets/images/background.png'
+    );
+
+    a {
+      display: none;
+    }
+  }
+
+  &--content {
+    margin: 30px;
+    text-align: center;
+    overflow: auto;
+  }
+
+  &--title {
+    font-size: 34px;
+    margin-bottom: 40px;
+  }
+
+  &--error {
+    background-color: $modal-error-color;
+    padding: 7px 20px;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  &--markdown {
+    font-size: 16px;
+  }
+
+  &--close-icon {
+    margin-left: auto;
+    cursor: pointer;
+  }
+
+  &--signature-wrapper {
+    text-align: left;
+    padding-bottom: 20px;
+  }
+
+  &--signature-label {
+    text-transform: uppercase;
+    color: $primary;
+    padding-left: $padding-horizontal;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+
+  &--signature {
+    padding: 40px 15px;
+    border: 1px solid $border;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 35px;
+    cursor: pointer;
+  }
+
+  &--signature-placeholder {
+    font-size: 14px;
+    color: $placeholder-text;
+    font-style: italic;
+  }
+
+  &--footer {
+    padding: 0 20px;
+  }
+
+  &.modal-enter {
+    transform: translateY(100%);
+  }
+  &.modal-enter-active {
+    transform: translateY(0);
+    transition: transform 600ms;
+  }
+  &.modal-exit {
+    transform: translateY(0);
+  }
+  &.modal-exit-active {
+    transition: transform 600ms;
+    transform: translateY(100%);
+  }
+  
+}

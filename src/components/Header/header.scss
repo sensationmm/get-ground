@@ -1,0 +1,62 @@
+@import '../../styles/modules/reset';
+@import '../../styles/modules/_colors';
+@import '../../styles/modules/_mixins';
+@import '../../styles/modules/_variables';
+
+.header {
+  position: fixed;
+  width: calc(100% - #{($padding-horizontal-unit * 4) + 0px});
+  z-index: 2;
+  top: 0px;
+  height: $header-height + 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  padding: $padding-vertical (($padding-horizontal-unit * 2) + 0px);
+
+  @include gradient-vertical-image(
+    $background-main-start,
+    $background-main-end,
+    '../../assets/images/background.png'
+  );
+
+  &-logo {
+    width: 80px;
+
+    img {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  &-menu {
+    &-toggle {
+      width: 32px;
+      height: 32px;
+      background: url('../../assets/images/burger-menu.svg') center center no-repeat;
+      background-size: contain;
+    }
+  }
+}
+
+
+.account .header {
+  @include gradient-vertical-image(
+    $background-account-start,
+    $background-account-end,
+    '../../assets/images/background.png'
+  );
+}
+
+.company-design .header {
+  @include gradient-vertical-image(
+    $gradient-primary-1,
+    $gradient-primary-2,
+    '../../assets/images/background.png'
+  );
+}
+
+.fullscreen .header {
+  background: none;
+}

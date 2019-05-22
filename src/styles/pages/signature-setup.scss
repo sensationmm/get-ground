@@ -1,0 +1,18 @@
+@import 'src/styles/modules/colors';
+
+.signature-setup {
+
+  &--heading2 {
+    font-size: 22px;
+    color: $text-secondary;
+    padding: 0 15px 10px;
+  }
+
+  .button.signature {
+    margin-bottom: 15px;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}

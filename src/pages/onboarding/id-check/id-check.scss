@@ -1,0 +1,18 @@
+.id-check {
+  &-title {
+    margin: 20px auto;
+  }
+
+  &-next {
+    margin-top: 39px;
+  }
+
+  &-back {
+    margin-top: 20px;
+  }
+
+  &-skip.button.link.small.full {
+    padding-top: 20px;
+    padding-bottom: 40px;
+  }
+}

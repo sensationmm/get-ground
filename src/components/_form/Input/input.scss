@@ -1,5 +1,6 @@
-@import '../../../styles/modules/colors';
-@import '../../../styles/modules/variables';
+@import 'src/styles/modules/colors';
+@import 'src/styles/modules/_mixins.scss';
+@import 'src/styles/modules/variables';
 
 .text-input {
   margin-bottom: 2px;
@@ -25,7 +26,15 @@
     font-size: 14px;
   }
 
-  input[type=text], input[type=password], textarea {
+  &.background-gradient {
+    input[type=number] {
+      @include gradient-vertical($gradient-primary-1, $gradient-primary-2);
+      color: $white;
+      border-color: transparent;
+    }
+  }
+
+  input[type=text], input[type=password], input[type=number], textarea {
     box-sizing: border-box;
     width: 100%;
     border: 1px solid $border;
@@ -54,5 +63,14 @@
 
   textarea {
     height: 120px;
+  }
+}
+
+.fullscreen {
+  .text-input {
+    &-label, &-required, input.error {
+      color: $white;
+      border-color: $white;
+    }
   }
 }

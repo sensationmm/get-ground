@@ -16,6 +16,7 @@
     min-width: 39px;
     height: 39px;
     margin-right: 10px;
+    background: $white;
 
     &.checked:before {
       content: '';
@@ -32,6 +33,20 @@
       &.checked:before {
         background: $warning;
       }
+    }
+    &.disabled {
+      border-color: $disabled;
+
+      + .checkbox-label {
+        color: $disabled;
+      }
+    }
+  }
+
+  &-label {
+    a {
+      color: $primary;
+      text-decoration: underline;
     }
   }
 }

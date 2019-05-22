@@ -1,15 +1,24 @@
 @import 'src/styles/modules/_colors.scss';
 @import 'src/styles/modules/_mixins.scss';
+@import 'src/styles/modules/_variables.scss';
 
 .error-box {
   font-size: 14px;
   margin-bottom: 20px;
-  padding: 10px;
+  padding: $padding-vertical $padding-horizontal;
   background: $warning-offset;
   border: 1px solid $warning;
   color: $warning;
  
   > :last-child {
     margin-bottom: 0;
+  }
+}
+
+.fullscreen {
+  .error-box {
+    color: $white;
+    border-color: $white;
+    background: $white-opaque;
   }
 }

@@ -1,25 +1,398 @@
 {
+  "account": {
+    "signature": {
+      "title": "Set up your signature",
+      "intro": "First you must setup your signature.",
+      "heading2": "Choose option",
+      "buttons": {
+        "draw": "Draw your signature",
+        "create": "Create digital signature",
+        "upload": "Upload your signature"
+      }
+    },
+    "drawSignature": {
+      "title": "Draw your signature",
+      "signaturePadLabel": "Your Signature",
+      "buttons": {
+        "redo": "Redo",
+        "save": "Save"
+      }
+    },
+    "uploadSignature": {
+      "title": "Upload your signature",
+      "intro": "Tap below to upload your signature. You can only upload .jpeg and .png files",
+      "buttons": {
+        "upload": "Upload signature",
+        "save": "Save signature",
+        "reupload": "Re-upload"
+      }
+    },
+    "yourSignature": {
+      "title": "Your signature",
+      "intro": "Your signature is saved to your profile. Now you are ready to continue and sign your company documents.",
+      "buttons": {
+        "continue": "Continue",
+        "edit": "edit"
+      }
+    }
+  },
+  "accountPending": {
+    "title": "We‘ve sent you an email",
+    "text": "With a magic link to the email address you provided. Please click the button on the email to verify your account.",
+    "introBox": "If you didn‘t receive an email please check your spam folder and if it isn‘t there contact us.",
+    "contactLink": "Contact us"
+  },
+  "additionalServices": {
+    "title": "Additional services",
+    "introBox": "If you require help with any of the following services below, we will find options for you, which you can choose to explore further or not.",
+    "mortgageOptionsQuestion": "Can we help find mortgage options for you?",
+    "propertyInsuranceQuestion": "Can we help find property insurance for you?",
+    "property_managementQuestion": "Can we help find property management options for you?",
+    "nextButton": "Next",
+    "backButton": "Back",
+    "skipButton": "Skip for now"
+  },
+  "companyDesign": {
+    "companyComplete": {
+      "title": "Well done!",
+      "copy": "We have all the details we need to set up your company.",
+      "info":  "Your shareholders will receive an email now so they can begin setting up their account on GetGround. In order to speed up your company setup perhaps you would like to encourage them to do so ASAP.",
+      "button": "next"
+    },
+    "progressTracker": {
+      "inProgressTitle": "Design your company in 5 steps",
+      "complete": "complete",
+      "completeTitle": "All 5 steps complete",
+      "sections": {
+        "step1": {
+          "title": "Property Address",
+          "copy": "Please provide the address of the property your company will hold",
+          "imageAltText": "Property"
+        },
+        "step2": {
+          "title": "Purchase details",
+          "copy": "Property type and purchase info",
+          "imageAltText": "Purchase"
+        },
+        "step3": {
+          "title": "Solicitor Details",
+          "copy": "Add Solicitor",
+          "imageAltText": "Solicitor Details"
+        },
+        "step4": {
+          "title": "Shareholder details",
+          "copy": "Add additional shareholders",
+          "imageAltText": "Shareholder details"
+        },
+        "step5": {
+          "title": "Add Services",
+          "copy": "Additional services you will need",
+          "imageAltText": "Services"
+        }
+      }
+    },
+    "propertyAddress": {
+      "heading": "Property Address",
+      "intro": "Let's start with your property address.",
+      "form": {
+        "addressFinderLabel": "Address Finder",
+        "countryLabel": "Country",
+        "unitNumberLabel": "Unit Number",
+        "streetLabel": "Street",
+        "cityLabel": "City",
+        "postcodeLabel": "Postcode",
+        "manualAddressButtonLabel": "Enter Address Manually",
+        "addressFinderButtonLabel": "Find Address",
+        "editIconAltText": "edit icon",
+        "nextButton": "Next",
+        "backButton": "Back",
+        "fieldErrorText": "Required",
+        "error": "Please fix your errors to proceed"
+      }
+    },
+    "purchaseDetails": {
+      "heading": "Purchase details",
+      "heading2": "Tell us about your payment schedule",
+      "intro": "Please provide your property purchase details below.",
+      "form": {
+        "priceOfPropertyLabel": "*Price of property",
+        "priceOfPropertyNote": "*excludes all costs and stamp duty",
+        "newBuildLabel": "Is your property a new build",
+        "completionDateLabel": "When is the expected completion date?",
+        "depositDueLabel": "What date is your deposit due?",
+        "depositAmountLabel": "Deposit Amount",
+        "firstInstallmentDateLabel": "First installment date?",
+        "firstInstallmentLabel": "First installment amount",
+        "secondInstallmentDateLabel": "Second installment date?",
+        "secondInstallmentLabel": "Second installment amount",
+        "expectedExchangeLabel": "Do you have an expected exchange date",
+        "expectedExchangeDateLabel": "Please provide your expected exchange date",
+        "addButton": "Another payment date",
+        "nextButton": "Next",
+        "backButton": "Back"
+      },
+      "datepicker": {
+        "button1": "cancel",
+        "button2": "confirm"
+      }
+    },
+    "shareholderDetails": {
+      "choice": {
+        "allOwnership": "Currently you have 100% ownership",
+        "addShareholdersContent": "Would you like to add shareholders?",
+        "button": {
+          "yesAdd": "Yes, add shareholders",
+          "no": "No, I'm the only one"
+        }
+      },
+      "add": {
+        "title": "Shareholder's details",
+        "text": "You can have a maximum of 8 shareholders (including you). All shareholders need to be people not companies.\n\nPlease note that each of your shareholders will need to create an account on GetGround. They must also be over 18.",
+        "new": {
+          "title": "Add a Shareholder",
+          "form": {
+            "firstName": "First name",
+            "lastName": "Last name",
+            "email": "Email"
+          },
+          "cta": "Another shareholder"
+        }
+      }
+    },
+    "solicitorDetails": {
+      "title": "Solicitor details",
+      "intro": "We need your solicitor details so we can get all the legal documents in order for your property purchase.",
+      "form": {
+        "label": {
+          "haveSolicitor": "Do you have a solicitor?",
+          "needSolicitor": "Would you like us to help find a solicitor for you?",
+          "firstName": "First name",
+          "lastName": "Last name",
+          "email": "Email",
+          "phone": "Phone number",
+          "authority": "I give permission to GetGround to",
+          "authorityLink": "email my solicitor"
+        }
+      },
+      "ctaPrimary": "Next",
+      "ctaSecondary": "Back",
+      "modal": {
+        "heading": "Pending Email"
+      }
+    }
+  },
+  "contactUs": "Contact us",
+  "form": {
+    "correctErrors": "Please correct all errors to proceed",
+    "radioConfirm": {
+      "true": "Yes",
+      "false": "No"
+    },
+    "ctaPrimary": "Next",
+    "ctaSecondary": "Back",
+    "skipStep": "Skip this step for now"
+  },
+  "login": {
+    "title": "Sign in",
+    "ctaPrimary": "Sign in",
+    "ctaSecondary": "Forgot your password",
+    "form": {
+      "label": {
+        "email": "Email Address",
+        "password": "Password"
+      },
+      "error": "Invalid login - please try again"
+    }
+  },
+  "modal": {
+    "closeIconAltText": "Close",
+    "downloadButtonLabel": "Download"
+  },
+  "myDocuments": {
+    "title": "My Documents",
+    "intro": "Please read and sign all your company documents below. Your shareholders have also been notified that they to sign the relevant documents.",
+    "downloadButtonText": "Download Documents",
+    "modalHeading": "Shareholders agreement",
+    "modalSignatureLabel": "Your signature",
+    "modalSignaturePlaceholderText": "Tap here to sign",
+    "modalSignatureButtonLabel": "Done",
+    "modalDownloadButtonText": "Download",
+    "modalCloseAltText": "close icon",
+    "modalDownloadError": "We couldn't download the file, please try again",
+    "documents": {
+      "document1": {
+        "title": "Shareholders Agreement",
+        "imageAltText": "Shareholders"
+      },
+      "document2": {
+        "title": "Company Articles of Association",
+        "imageAltText": "Company Articles of Association"
+      },
+      "document3": {
+        "title": "Director's Loan Agreement",
+        "imageAltText": "Director's Loan"
+      },
+      "document4": {
+        "title": "Consent to Act as a Director",
+        "imageAltText": "Consent to Act as a Director"
+      },
+      "document5": {
+        "title": "Board Resolution to Exchange Contracts",
+        "imageAltText": "Board Resolution to Exchange Contracts"
+      }
+    },
+    "confirmation": {
+      "heading": "Well done",
+      "imageAltText": "confirmation image",
+      "copy": "<p class='fs-large'>All your documents are signed.</p><p class='fs-large'>Please remind your shareholders to sign their documents.</p>",
+      "buttonText": "View your dashboard"
+    }
+  },
   "onBoarding": {
+    "accountPending": {
+      "title": "We‘ve sent you an email",
+      "text": "With a magic link to the email address you provided. Please click the button on the email to verify your account.",
+      "introBox": "If you didn‘t receive an email please check your spam folder and if it isn‘t there contact us.",
+      "contactLink": "Contact us"
+    },
+    "compliance": {
+      "header": "Compliance Check",
+      "text": "We need to know more about you as an investor, please answer the following four questions.",
+      "section": "Question {{count}} of {{total}}",
+      "quiz": {
+        "taxBracket": {
+          "title": "Select your UK tax bracket",
+          "options": {
+            "band1": {
+              "label": "Personal",
+              "text": "Up to £11,850"
+            },
+            "band2": {
+              "label": "Basic",
+              "text": "Up to £11,850"
+            },
+            "band3": {
+              "label": "Higher",
+              "text": "Under £150"
+            },
+            "band4": {
+              "label": "Additional",
+              "text": "Over £150k"
+            }
+          }
+        },
+        "largeEnterprise": {
+          "title": "Select the statements that apply to you",
+          "options": {
+            "band1": "I have under 250 employees",
+            "band2": "I have under £43 million on my balance sheet",
+            "band3": "I have under £50 million in annual turnover",
+            "band4": "None of the above"
+          },
+          "buttonNext": "Next"
+        },
+        "investmentConfirmation": {
+          "title": "Please confirm that you agree with the following statements",
+          "options": {
+            "band1": "I want to buy the property as an investment to rent out to tenants",
+            "band2": "No related party of mine will use the property"
+          },
+          "buttonAgree": "Yes, I agree",
+          "buttonDisagree": "No I do not agree"
+        },
+        "selfCertification": {
+          "title": "Which of the following applies to you?",
+          "options": {
+            "band1": {
+              "label": "High net worth",
+              "text": "Annual income £100k+ or Assets £250k+"
+            },
+            "band2": {
+              "label": "Self-certified sophisticated",
+              "text": "Experienced investor"
+            },
+            "band3": {
+              "label": "Restricted",
+              "text": "Casual investor"
+            }
+          }
+        },
+        "questionnaire": {
+          "title": "Select the statements below that you agree with",
+          "options": {
+            "band1": "Property prices don’t always go up in value",
+            "band2": "My investment returns are partly derived from movement in property prices",
+            "band3": "I should put all the money I have into one property",
+            "band4": "There are always buyers willing to pay the price I ask"
+          },
+          "buttonNext": "Next"
+        }
+      },
+      "modalHeading": "Investors Statement",
+      "modalDownloadButtonText": "Download",
+      "modalCloseAltText": "Close Icon",
+      "modalCheckboxLabel": "I’ve read the Investor’s statement letter and confirm that I understand the risk associated with investing.",
+      "buttonDone": "Finished",
+      "notSuitable": {
+        "title": "We are sorry!",
+        "text": "This is a buy to let service, please contact us if you’re not sure GetGround is right for you",
+        "button": "Talk to us on LiveChat"
+      },
+      "failureMessage": "Sorry! You have not passed the quiz. Please try again."
+    },
+    "createAccount": {
+      "title": "Account details",
+      "intro": "These details are used to create your account",
+      "ctaPrimary": "Next",
+      "ctaSecondary": "Back",
+      "termsModalHeading": "Terms and conditions",
+      "termsModalDownloadButtonLabel": "Download",
+      "termsModalCloseIconAltText": "close icon",
+      "form": {
+        "label": {
+          "email": "Email",
+          "password": "Password",
+          "passwordConfirm": "Confirm Password",
+          "optIn": "I would like to receive news and updates from GetGround",
+          "privacyOne": "Creating an account means you accept our ",
+          "privacyTermsLink": "Terms of Service",
+          "privacyTwo": " and ",
+          "privacyPolicyLink": "Privacy Policy"
+        },
+        "note": {
+          "email": "This will be your username",
+          "password": "Minimum six characters"
+        },
+        "errors": {
+          "duplicateEmail": "Email address already exists"
+        }
+      }
+    },
+    "emailVerified": {
+      "title": "Thanks!",
+      "copy": "Your email has been verified.",
+      "button": "Continue"
+    },
     "intro": {
       "slides": [
         {
           "title": "Get started",
-          "copy": "<p>In 5 Simple steps you will have created an account and profile.</p><p>It's then easy to set up and manage your Get Ground company.</p>",
+          "copy": "<p class='fs-large'>You’ll create your account in 3 simple steps.</p><p class='fs-large'>You’ll need your passport and a proof of address at hand.</p><p class='fs-large'>You can then access your dashboard and start creating companies.</p>",
           "imageAltText": "Arm chair"
         },
         {
           "title": "Save money",
-          "copy": "<p>Owning UK residential investment property in a company can save you money.</p><p>With Get Ground it has never been cheaper to own and run companies.</p>",
+          "copy": "<p class='fs-large'>Owning UK residential investment property in a company can save you money.</p><p class='fs-large'>With GetGround it has never been cheaper to own and run companies.</p>",
           "imageAltText": "Arm chair"
         },
         {
-          "title": "Fast and efficient",
-          "copy": "<p>Setting up and managing a company has never been easier. We use technology to take away the pain and hassle.</p>",
+          "title": "Save time",
+          "copy": "<p class='fs-large'>We use technology to make setting up and managing a company painless and hassle free.</p>",
           "imageAltText": "Arm chair"
         },
         {
-          "title": "All under one roof",
-          "copy": "<p>Everything your company needs right here at getGround. Seamless access to other services, such as mortgage and insurance product. Get started now.</p>",
+          "title": "All in one place",
+          "copy": "<p class='fs-large'>Everything your company needs right here at GetGround. Seamless access to other services, such as mortgage and insurance product. Get started now.</p>",
           "imageAltText": "Arm chair"
         }
       ],
@@ -29,50 +402,133 @@
     "accountCreation": {
 
     },
+    "confirmation": {
+      "heading": "Well done",
+      "imageAltText": "confirmation image",
+      "copy": "<p class='fs-large'>Your details have been submitted. You will shortly receive an email with the result of your application.</p><p class='fs-large'>This typically takes 10 mins but it can take up to a day, so please be patient.</p>",
+      "buttonText": "View your dashboard",
+      "contactUsText": "If this is taking longer than expected please contact us.",
+      "contactUsLinkText": "Contact us"
+    },
+    "idCheck": {
+      "title": "ID Check",
+      "text": "To prove your identity we need you to take a picture of your passport, proof of address and take a picture of yourself.",
+      "buttonNext": "Next",
+      "buttonBack": "Back",
+      "buttonSkip": "Skip for now",
+      "link": "If you already have it saved, upload instead",
+      "image": {
+        "capture": "Capture photo",
+        "happy": "Yes, I'm happy",
+        "retake": "Retake"
+      },
+      "passport": {
+        "title": "Add a picture of your passport",
+        "content": "Please make sure you take a picture of the page of your passport that contains your picture and your details. The full page should be visible on the picture.",
+        "retakeImageContent": "Are you happy with this picture? Please make sure it is well-lit and that you can read the information clearly."
+      },
+      "address": {
+        "title": "Add proof of address",
+        "content": "Now we need a picture of a utility bill, bank statement or any government letter (e.g. HMRC). Please make sure the document is recent (inside the past 3 months) and the address and your name are clearly visible.",
+        "retakeImageContent": "Are you happy with this picture? Please make sure the date, your full name and address are clearly visible."
+      },
+      "selfie": {
+        "title": "Take a picture of yourself",
+        "content": "We need this picture so we can match it with the one in your passport. This is to make sure no one is trying to create a false account using your documents.",
+        "retakeImageContent": "Are you happy with this picture? Please make sure the picture is well-lit and not blurred."
+      }
+    },
+    "payment": {
+      "title": "Payment details",
+      "intro": "Please note that payment will not be taken and your subscription fee will not be charged until you pass the compliance check.",
+      "paymentInfo": {
+        "accountSetupLabel": "Account setup",
+        "monthlySubscriptionLabel": "Monthly subscription",
+        "vatLabel": "VAT @ 20%",
+        "TotalLabel": "Total"
+      },
+      "form": {
+        "numberOfCompaniesLabel": "No. of companies",
+        "cardLabel": "Card details",
+        "error": "There was an issue with your payment",
+        "retakePaymentError": "Your payment has failed. Please update your payment details so we can finalise your application"
+      },
+      "stripeError": "Enter card details"
+    },
     "personalDetails": {
+      "heading": "Personal details",
+      "intro": "These details are required to create your profile",
       "datepicker": {
         "button1": "cancel",
         "button2": "confirm"
       },
       "form": {
-        "dateOfBirth": "Date of Birth"
+        "firstNameLabel": "First name",
+        "middleNameLabel": "Middle name(s)",
+        "lastNameLabel": "Last name",
+        "previousNamesLabel": "Previous names",
+        "dateOfBirthLabel": "Date of Birth",
+        "dateOfBirthNote": "You need to be 18 or over to use GetGround",
+        "nationalityLabel": "Nationality",
+        "cityOfBirthLabel": "City of birth",
+        "jobTitleLabel": "Profession",
+        "countryLabel": "Country of residence",
+        "addressFinderLabel": "Address Finder",
+        "unitNumberLabel": "Unit Number",
+        "streetLabel": "Street",
+        "cityLabel": "City",
+        "postcodeLabel": "Postcode",
+        "manualAddressButtonLabel": "Enter Address Manually",
+        "addressFinderButtonLabel": "Find Address",
+        "nextButton": "Next",
+        "backButton": "Back",
+        "addNamesButton": "Any previous names",
+        "extraNameLabel": "Extra name",
+        "phoneLabel": "Mobile number",
+        "editIconAltText": "edit icon",
+        "fieldErrorText": "Required"
+      }
+    },
+    "progressTracker": {
+      "inProgressTitle": "Get Started in 3 simple steps",
+      "complete": "complete",
+      "completeTitle": "All 3 steps complete",
+      "confirmComplete": "I am happy with all my details and confirm they are all correct.",
+      "sections": {
+        "step1": {
+          "title": "Account Details",
+          "copy": "Create your account",
+          "imageAltText": "Person"
+        },
+       "step2": {
+          "title": "Personal Details",
+          "copy": "Details to create your profile",
+          "imageAltText": "Person"
+        },
+        "step3": {
+          "title": "ID Check",
+          "copy": "Document verification",
+          "imageAltText": "ID card"
+        },
+        "step4": {
+          "title": "Compliance Check",
+          "copy": "Verify your risk health",
+          "imageAltText": "Warning sign"
+        },
+        "step5": {
+          "title": "Payment",
+          "copy": "Pay for service",
+          "imageAltText": "Warning sign"
+        }
       }
     }
-  },
-  "contactUs": "Contact us",
-  "createAccount": {
-    "title": "Account details",
-    "intro": "These details are used to create your account",
-    "ctaPrimary": "Next",
-    "ctaSecondary": "Back",
-    "form": {
-      "label": {
-        "email": "Email",
-        "password": "Password",
-        "passwordConfirm": "Confirm Password",
-        "optIn": "I would like to receive marketing emails and offers from GetGround",
-        "privacy": "Creating an account means you accept our terms of service and Privacy Policy"
-      },
-      "note": {
-        "email": "This will be your username",
-        "password": "Your password must be at least 6 characters long"
-      }
-    }
-  },
-  "emailVerified": {
-    "title": "Thanks!",
-    "copy": "Your email has been verified.",
-    "button": "Continue"
-  },
-  "accountPending": {
-    "title": "We‘ve sent you an email",
-    "text": "With a magic link to the email address you provided. Please click the button on the email to verify your account.",
-    "introBox": "If you didn‘t receive an email please check your spam folder and if it isn‘t there contact us.",
-    "contactLink": "Contact us"
   },
   "validation": {
-    "validateEmail": "Invalid email address",
+    "validateEmail": "Invalid email",
     "validateRequired": "Required",
-    "validateMatching": "No match"
+    "validateMatching": "No match",
+    "validatePhone": "Invalid phone",
+    "validateNumeric": "Number only",
+    "validateNoOfCompanies": "No more than 20"
   }
 }

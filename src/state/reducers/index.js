@@ -1,4 +1,24 @@
 import { combineReducers } from 'redux';
-import { loader } from './loader'
+import { loader } from './loader';
+import { layout } from './layout';
+import { modal } from './modal';
+import { user } from './user';
+import { auth } from './auth';
+import { idCheck } from './idCheck';
+import { form } from './form';
+import { companies } from './companies';
+import { activeCompany } from './activeCompany';
+import { additionalServices } from './additionalServices';
 
-export default combineReducers({ loader });
+export default combineReducers({
+  activeCompany,
+  additionalServices,
+  auth,
+  companies,
+  form,
+  idCheck,
+  layout,
+  loader,
+  modal,
+  user
+});

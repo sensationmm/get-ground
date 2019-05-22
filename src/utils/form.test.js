@@ -1,12 +1,11 @@
 import formUtils, { validateField } from './form';
-import functions from '../utils/functions';
-import validation from '../utils/validation';
-import { setup } from '../test-utils/test-utils';
-import componentMock from '../test-utils/componentMock';
+import functions from 'src/utils/functions';
+import validation from 'src/utils/validation';
+import store from 'src/state/store';
 
-import InputText from '../components/_form/InputText/InputText';
-import InputPassword from '../components/_form/InputPassword/InputPassword';
-import Checkbox from '../components/_form/Checkbox/Checkbox';
+import InputText from 'src/components/_form/InputText/InputText';
+import InputPassword from 'src/components/_form/InputPassword/InputPassword';
+import Checkbox from 'src/components/_form/Checkbox/Checkbox';
 
 const fieldsMock = {
   name: '',
@@ -21,12 +20,7 @@ const stateMock = {
   showErrorMessage: false
 };
 
-const errorStateMock = {
-  values: fieldsMock,
-  errors: { password: 'Enter password' },
-  showErrorMessage: false
-};
-
+const mockCallback = jest.fn();
 
 const configMock = [
   {
@@ -56,23 +50,44 @@ const configMock = [
     label: 'Agree'
   },
   {
-    component: 'br'
+    component: 'br',
+    hidden: true
   }
 ];
 
 describe('initFormState()', () => {
   test('returns correct form state', () => {
     const formState = formUtils.initFormState(fieldsMock);
-    expect(formState).toEqual(stateMock);
+    expect(formState.payload).toEqual(stateMock);
+  });
+});
+
+describe('clearFormState()', () => {
+  test('clears form state', () => {
+    formUtils.clearFormState();
+    expect(store.getState().form.values).toEqual({});
+  });
+});
+
+describe('setFormError', () => {
+  test('sets error correctly', () => {
+    formUtils.setFormError('test');
+    expect(store.getState().form.errors.form).toBe('test');
   });
 });
 
 describe('updateValue()', () => {
   test('value is updated', () => {
-    const wrapper = setup(componentMock, {}, { ...formUtils.initFormState(fieldsMock) });
-    formUtils.updateValue(wrapper, 'name', 'Spongebob');
+    formUtils.updateValue('name', 'Spongebob', mockCallback);
 
-    expect(wrapper.state().values.name).toBe('Spongebob');
+    expect(store.getState().form.values.name).toBe('Spongebob');
+    expect(mockCallback).toHaveBeenCalled();
+  });
+
+  test('value is updated without a validate or callback function', () => {
+    formUtils.updateValue('name', 'Spongebob');
+
+    expect(store.getState().form.values.name).toBe('Spongebob');
   });
 });
 
@@ -80,83 +95,18 @@ describe('renderForm()', () => {
   let form;
 
   beforeEach(() => {
-    form = formUtils.renderForm({
-      state: stateMock,
-      config: configMock
-    });
+    form = formUtils.renderForm(configMock);
   });
 
   test('renders form', () => {
     expect(form.length).toEqual(configMock.length);
   });
 
-  test('renders form with errors', () => {
-    const formWithErrors = formUtils.renderForm({
-      state: errorStateMock,
-      config: configMock
-    });
-
-    expect(formWithErrors.length).toEqual(configMock.length);
-  });
-
   test('renders minimal form', () => {
-    const emptyForm = formUtils.renderForm({
-      state: errorStateMock,
-      config: [ { component: 'br' }]
-    });
+    const emptyForm = formUtils.renderForm([ { component: 'br' }]);
     
     expect(emptyForm[0].props.onChange).toBe(undefined);
-    expect(form[0].props.validate).toBe(undefined);
-  });
-
-  // test('renders field with missing onChange prop', () => {
-  // });
-
-  // test('renders field with missing validate prop', () => {
-  //   console.log(form[0])
-  // });
-});
-
-describe('validateForm()', () => {
-  let spy;
-  const setStateMock = jest.fn();
-
-  beforeEach(() => {
-    spy = jest.spyOn(formUtils, 'validateField').mockImplementation(() => {});
-  });
-
-  test('validates each field', () => {
-    formUtils.validateForm({
-      setState: jest.fn(),
-      state: stateMock,
-      config: configMock
-    });
-
-    expect(spy).toHaveBeenCalledTimes(2);
-    expect(spy).toHaveBeenCalledWith(expect.any(Object), 'password');
-    expect(spy).toHaveBeenCalledWith(expect.any(Object), 'passwordConfirm');
-  });
-
-  test('errors get set in state', () => {
-    const wrapper = setup(componentMock, {}, { ...formUtils.initFormState(fieldsMock) });
-    wrapper.state().errors = {
-      password: 'You must enter a password'
-    };
-
-    formUtils.validateForm({
-      setState: setStateMock,
-      state: wrapper.state(),
-      config: configMock
-    });
-
-    expect(setStateMock).toHaveBeenCalledWith({
-      values: fieldsMock,
-      errors: {
-        ...wrapper.state().errors,
-        form: null
-      },
-      showErrorMessage: true
-    });
+    expect(emptyForm[0].props.validate).toBe(undefined);
   });
 });
 
@@ -164,62 +114,62 @@ describe('validateField', () => {
   test('retrieves field', () => {
     const spy = jest.spyOn(functions, 'getByValue');
 
-    validateField({
-      state: stateMock,
-      config: configMock
-    }, 'name');
+    formUtils.validateField(configMock, 'name');
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
   test('validation called', () => {
     const spy2 = jest.spyOn(validation, 'validateRequired');
-    validateField({
-      state: stateMock,
-      config: configMock,
-      setState: jest.fn()
-    }, 'password');
+    validateField(configMock, 'password');
 
     expect(spy2).toHaveBeenCalled();
   });
 
   test('validation called with param', () => {
     const spy3 = jest.spyOn(validation, 'validateMatching');
-    validateField({
-      state: stateMock,
-      config: configMock,
-      setState: jest.fn()
-    }, 'passwordConfirm');
+    formUtils.initFormState(fieldsMock);
+    formUtils.validateField(configMock, 'passwordConfirm');
 
     expect(spy3).toHaveBeenCalledWith(fieldsMock.passwordConfirm, fieldsMock.password);
   });
 
   test('error set if invalid field', () => {
-    const setErrorState = jest.fn();
+    formUtils.validateField(configMock, 'passwordConfirm');
 
-    validateField({
-      state: stateMock,
-      config: configMock,
-      setState: setErrorState
-    }, 'passwordConfirm');
-
-    expect(setErrorState).toHaveBeenCalledWith(expect.objectContaining({
-      errors: expect.objectContaining(
-        { passwordConfirm: expect.any(String) }
-      )}
+    expect(store.getState().form.errors).toEqual(expect.objectContaining(
+      { passwordConfirm: expect.any(String) }
     ));
   });
 
   test('error cleared when invalid field made valid ',() => {
-    const clearErrorState = jest.fn();
+    formUtils.updateValue('passwordConfirm', 'test');
+    formUtils.validateField(configMock, 'passwordConfirm');
 
-    validateField({
-      state: errorStateMock,
-      config: configMock,
-      setState: clearErrorState
-    }, 'password');
-
-    expect(clearErrorState).toHaveBeenCalledWith(expect.objectContaining({
+    expect(store.getState().form).toEqual(expect.objectContaining({
       errors: {}
     }));
+  });
+});
+
+describe('validateForm()', () => {
+  let spy;
+
+  beforeEach(() => {
+    spy = jest.spyOn(formUtils, 'validateField');
+  });
+
+  test('validates each field', () => {
+    formUtils.validateForm(configMock);
+
+    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenCalledWith(expect.any(Object), 'password');
+    expect(spy).toHaveBeenCalledWith(expect.any(Object), 'passwordConfirm');
+  });
+
+  test('sets errors in state', () => {
+    formUtils.initFormState(fieldsMock);
+    formUtils.validateForm(configMock);
+
+    expect(store.getState().form.errors).toEqual(expect.objectContaining({ passwordConfirm: expect.any(String) }));
   });
 });

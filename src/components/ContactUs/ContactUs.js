@@ -15,10 +15,10 @@ const ContactUs = () => {
   const [t] = useTranslation();
 
   return (
-    <Link to="/onboarding">
-      <div className="contact-us" data-testid="component-contact-us">
+    <Link to="/contact-us">
+      <p className="contact-us" data-testid="component-contact-us">
         {t('contactUs')}
-      </div>
+      </p>
     </Link>
   )
 }

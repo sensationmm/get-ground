@@ -1,0 +1,57 @@
+@import '../../../styles/modules/colors';
+
+.address-finder {
+
+  .address-textarea {
+    position: relative;
+
+    img {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      cursor: pointer;
+    }
+
+    &-required {
+      position: absolute;
+      right: 0;
+      top: 0;
+      color: $warning;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 14px;
+    }
+  }
+
+  .address-text-area {
+    margin-top: 20px;
+    display: block;
+    height: 100px;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 5px;
+    border-color: $border;
+    padding: 10px;
+    font-size: 14px;
+    resize: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .error {
+    #address-finder {
+      border-color: $warning;
+      color: $warning;
+    }
+  }
+
+  .link {
+    margin: 10px;
+  }
+}
+
+.pcafooter {
+  display: none;
+}

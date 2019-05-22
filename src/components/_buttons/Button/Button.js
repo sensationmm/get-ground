@@ -16,6 +16,7 @@ import './button.scss'
  * @param {string} [classes] - list of css classes passed from wrapper components
  * @param {bool} [fullWidth] - button fills parent horizontal space if true
  * @param {bool} [opaque] - button background is semi-transparent if true
+ * @param {bool} [hidden] - boolean to hide / show the button
  * @return {JSXElement} Button
  */
 const Button = props => {
@@ -26,24 +27,31 @@ const Button = props => {
     classes,
     fullWidth,
     opaque,
-    small
+    small,
+    hidden,
+    icon
   } = props;
 
   return (
     <button
-      data-testid="component-button"
+      data-test='component-button'
       disabled={disabled}
+      style={{ display: hidden ? 'none' : 'block'}}
       className={classNames(
         'button',
         classes,
         {'disabled': disabled},
         {'full': fullWidth},
         {'opaque': opaque},
-        {'small': small}
+        {'small': small},
+        {'icon': icon}
       )}
       onClick={onClick}
     >
       {label}
+      {icon &&
+        <img className="button-icon" alt="" src={icon} />
+      }
     </button>
   );
 };
@@ -55,7 +63,9 @@ Button.propTypes = {
   classes: PropTypes.string,
   fullWidth: PropTypes.bool,
   opaque: PropTypes.bool,
-  small: PropTypes.bool
+  small: PropTypes.bool,
+  hidden: PropTypes.bool,
+  icon: PropTypes.any
 };
 
 Button.defaultProps = {
