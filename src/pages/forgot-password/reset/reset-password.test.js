@@ -2,6 +2,9 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { navigate } from 'gatsby'
 import { RawComponent as ResetPassword, AuthService } from './index'
+import { initialState as ReduxFormMock } from 'src/state/reducers/form';
+
+import formUtils from 'src/utils/form';
 
 jest.mock('gatsby', () => ({
   navigate: jest.fn()
@@ -13,11 +16,13 @@ describe('ResetPassword', () => {
 
   beforeEach(() => {
     AuthService.setNewPassword = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
+    jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
 
     props = {
       t: jest.fn(),
       showLoader: jest.fn(),
       hideLoader: jest.fn(),
+      form: ReduxFormMock,
       location: {
         search: ''
       }
@@ -30,12 +35,15 @@ describe('ResetPassword', () => {
   })
 
   test('makes call to set new password', async () => {
-    wrapper.setState({
-      values: {
-        password: 'test1',
-        passwordConfirm: 'test1',
-        optin: false,
-        privacy: false
+    wrapper.setProps({
+      form: {
+        ...props.form,
+        values: {
+          password: 'test1',
+          passwordConfirm: 'test1',
+          optin: false,
+          privacy: false
+        }
       }
     })
     const form = wrapper.find('[data-test="reset-password-form"]')
@@ -48,18 +56,21 @@ describe('ResetPassword', () => {
   })
 
   test('error state', async () => {
-    wrapper.setState({
-      values: {
-        password: 'test1',
-        passwordConfirm: 'test1',
-        optin: false,
-        privacy: false
-      },
-      errors: {
-        form: 'error-form'
+    wrapper.setProps({
+      form: {
+        ...props.form,
+        showErrorMessage: true,
+        errors: {
+          form: 'Test error'
+        }
       }
     })
-    const error = wrapper.find('[data-test="reset-password-error"]')
+    AuthService.setNewPassword = jest.fn().mockReturnValue(Promise.resolve({ status: 501 }));
+    const button = wrapper.find('[data-test="reset-password-button"]')
+    const error = wrapper.find('[data-test="create-error-box"]')
+    await button.props().onClick()
+
     expect(error.length).toEqual(1)
+    expect(error.props().children).toBe('Test error');
   })
 })

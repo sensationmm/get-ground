@@ -2,6 +2,8 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { navigate } from 'gatsby';
 import { RawComponent as EnterEmail, AuthService } from './index'
+import formUtils from 'src/utils/form';
+import { initialState as ReduxFormMock } from 'src/state/reducers/form';
 
 jest.mock('gatsby', () => ({
   navigate: jest.fn()
@@ -13,11 +15,13 @@ describe('<EnterEmail />', () => {
 
   beforeEach(() => {
     AuthService.requestResetPassword = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
+    jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
 
     props = {
       t: jest.fn(),
       showLoader: jest.fn(),
       hideLoader: jest.fn(),
+      form: ReduxFormMock
     }
     wrapper = shallow(<EnterEmail {...props}/>)
   })
@@ -27,9 +31,12 @@ describe('<EnterEmail />', () => {
   })
 
   test('makes call to make a request to set new password', async () => {
-    wrapper.setState({
-      values: {
-       email: 'fancy-email@email.com'
+    wrapper.setProps({
+      form: {
+        ...props.form,
+        values: {
+         email: 'fancy-email@email.com'
+        }
       }
     })
     const form = wrapper.find('[data-test="reset-password-form"]')

@@ -1,4 +1,5 @@
 @import 'src/components/_form/Input/input.scss';
+@import './your-signature.scss';
 
 .draw-signature {
 
@@ -23,13 +24,6 @@
 
   .button.edit {
     margin-bottom: 20px;
-  }
-
-  &--saved-image, .m-signature-pad {
-    border: 1px solid $text-secondary;
-    border-radius: 5px;
-    height: 150px;
-    margin-bottom: 40px;
   }
 
   canvas {

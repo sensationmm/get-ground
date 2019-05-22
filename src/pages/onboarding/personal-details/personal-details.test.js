@@ -6,6 +6,7 @@ import { RawComponent as PersonalDetails, AccountService } from './index';
 import Select from 'src/components/_form/Select/Select';
 import Button from 'src/components/_buttons/Button/Button';
 import Datepicker from 'src/components/Datepicker/Datepicker';
+import { initialState as ReduxFormMock } from 'src/state/reducers/form';
 
 jest.mock('gatsby', () => ({
   navigate: jest.fn()
@@ -17,11 +18,12 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
   const showLoaderMock = jest.fn();
   const hideLoaderMock = jest.fn();
   AccountService.savePersonalDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
-  const tMock = jest.fn().mockReturnValue('string');
+  const tMock = jest.fn().mockImplementation(id => id);
   const defaultProps = {
     t: tMock,
     showLoader: showLoaderMock,
-    hideLoader: hideLoaderMock
+    hideLoader: hideLoaderMock,
+    form: ReduxFormMock
   };
 
   global.addressNow = {
@@ -30,12 +32,7 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
   };
 
   beforeEach(() => {
-    wrapper = setup(PersonalDetails, defaultProps, {
-      showErrorMessage: true,
-      errors: {
-        form: 'There has been an issue with some of the details'
-      }
-    });
+    wrapper = setup(PersonalDetails, defaultProps);
   });
   
   test('renders without error', () => {
@@ -62,8 +59,12 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
   });
 
   test('expect closeDatePicker to be called when the Datepicker is closed', () => {
-    const wrapper = setup(PersonalDetails, defaultProps, {
+    const wrapper = setup(PersonalDetails, {
+      ...defaultProps, 
+      form: {
+      ...defaultProps.form, 
       showErrorMessage: true
+      }
     });
 
     const component = findByTestAttr(wrapper, 'container-onboarding-details');
@@ -114,6 +115,7 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
 
     test('savePersonalDetails details failure', async () => {
       spy = jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
+      const errorsSpy = jest.spyOn(formUtils, 'setFormError');
       AccountService.savePersonalDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 400 }));
       const wrapperNew = setup(PersonalDetails, defaultProps);
       
@@ -121,7 +123,7 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
       
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
-      expect(wrapperNew.state().errors.form).toEqual('string');
+      expect(errorsSpy).toHaveBeenCalledWith('form.correctErrors');
       expect(spy).toHaveBeenCalled();
     });
 

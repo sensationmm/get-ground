@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import SEO from 'src/components/seo';
 import Header from 'src/components/Header/Header';
 import Loader from 'src/components/Loader/Loader';
+
 import { setWidth } from 'src/state/actions/layout';
 import { userLogin } from 'src/state/actions/user';
 import { saveAuth } from 'src/state/actions/auth';

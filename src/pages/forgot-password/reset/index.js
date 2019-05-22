@@ -29,48 +29,43 @@ class ResetPassword extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      ...formUtils.initFormState({
-        password: '',
-        passwordConfirm: '',
-        optin: false,
-        privacy: false
-      })
-    };
+    this.config = null;
+  }
 
-    this.config = [];
+  componentDidMount() {
+    formUtils.initFormState({
+      password: '',
+      passwordConfirm: '',
+      optin: false,
+      privacy: false
+    })
+  }
+
+  componentWillUnmount() {
+    formUtils.clearFormState();
   }
 
   onSetNewPassword = async () => {
-    const { password } = this.state.values;
-    const { showLoader, hideLoader, t, location: { search } } = this.props;
-    const self = this;
+    const { showLoader, hideLoader, t, location: { search }, form } = this.props;
+    const { values: { password } } = form;
 
-    if(formUtils.validateForm(this)) {
+    if(formUtils.validateForm(this.config)) {
       showLoader();
 
-      return AuthService.setNewPassword(password, search)
-      .then((res) => {
+      AuthService.setNewPassword(password, search).then((res) => {
         hideLoader();
         if(res.status === 200) {
             navigate('/login');
         } else {
-          self.setState({
-            ...self.state,
-            errors: {
-              ...self.state.errors,
-              form: t('login.form.error')
-            },
-            showErrorMessage: true
-          });
+          formUtils.setFormError(t('forgotPassword.reset.form.errors.formFail'));
         }
       });
     }
   }
 
   render() {
-    const { t } = this.props;
-    const { values, errors } = this.state;
+    const { t, form } = this.props;
+    const { values, errors, showErrorMessage } = form;
 
     this.config = [
       {
@@ -83,7 +78,7 @@ class ResetPassword extends Component {
       },
       {
         component: StrengthMeter,
-        valueToCheck: values.password
+        valueToCheck: values.password ? values.password : ''
       },
       {
         stateKey: 'passwordConfirm',
@@ -102,8 +97,17 @@ class ResetPassword extends Component {
 
           {errors.form && <ErrorBox data-test="reset-password-error">{errors.form}</ErrorBox>}
 
+          {showErrorMessage &&
+            <ErrorBox data-test="create-error-box">
+            { errors.form
+              ? errors.form
+              : t('form.correctErrors')
+            }
+            </ErrorBox>
+          }
+
             <Form data-test="reset-password-form">
-              { formUtils.renderForm(this) }
+              { formUtils.renderForm(this.config) }
               <Button
                 data-test="reset-password-button"
                 classes="secondary"
@@ -122,11 +126,15 @@ ResetPassword.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   t: PropTypes.func.isRequired,
-  location: PropTypes.object
+  location: PropTypes.object,
+  form: PropTypes.object
 };
 
 export const RawComponent = ResetPassword;
 
+const mapStateToProps = (state) => ({
+  form: state.form
+})
 const actions = { showLoader, hideLoader };
 
-export default connect(null, actions)(withTranslation()(ResetPassword));
+export default connect(mapStateToProps, actions)(withTranslation()(ResetPassword));

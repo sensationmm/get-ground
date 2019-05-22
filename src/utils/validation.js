@@ -48,7 +48,7 @@ validationMessages.validateRequired = i18n.t('validation.validateRequired');
  * @return {boolean} whether string passes validation
  */
 export const validatePhone = (input) => {
-  const inputVal = input.substr(input.indexOf(')') + 1);
+  const inputVal = input ? input.substr(input.indexOf(')') + 1) : '';
 
   if (inputVal === '') return false;
   return !isNaN(inputVal);

@@ -34,7 +34,7 @@ describe('<Select />', () => {
 
     component.find('select').props().onChange(mockEvent);
 
-    expect(changeMock).toHaveBeenCalledWith('spain', validateMock);
+    expect(changeMock).toHaveBeenCalledWith('spain');
   });
 
   test('error message is set', () => {

@@ -39,25 +39,31 @@ class CreateAccount extends Component {
     super(props);
 
     this.state = {
-      ...formUtils.initFormState({
-        email: '',
-        password: '',
-        passwordConfirm: '',
-        optin: false,
-        privacy: false
-      }),
       termsMarkdown: ''
     };
 
-    this.config = [];
+    this.config = null;
+  }
+
+  componentDidMount() {
+    formUtils.initFormState({
+      email: '',
+      password: '',
+      passwordConfirm: '',
+      optin: false,
+      privacy: false
+    });
+  }
+
+  componentWillUnmount() {
+    formUtils.clearFormState();
   }
 
   createAccount = () => {
-    const { showLoader, hideLoader, t } = this.props;
-    const { email, password, optin } = this.state.values;
-    const self = this;
+    const { showLoader, hideLoader, t, form } = this.props;
+    const { values: { email, password, optin }} = form
 
-    if(formUtils.validateForm(this)) {
+    if(formUtils.validateForm(this.config)) {
       showLoader();
 
       AccountService.createAccount(email, password, optin).then(response => {
@@ -69,13 +75,7 @@ class CreateAccount extends Component {
             }
           });
         } else if(response.status === 500) {
-          self.setState({
-            ...self.state,
-            errors: {
-              form: t('onBoarding.createAccount.form.errors.duplicateEmail')
-            },
-            showErrorMessage: true
-          });
+          formUtils.setFormError(t('onBoarding.createAccount.form.errors.duplicateEmail'));
         }
       });
     }
@@ -97,8 +97,9 @@ class CreateAccount extends Component {
   }
 
   render() {
-    const { values, errors, showErrorMessage, termsMarkdown } = this.state;
-    const { t, modalIsOpen, showModal, hideModal } = this.props;
+    const { termsMarkdown } = this.state;
+    const { t, modalIsOpen, showModal, hideModal, form } = this.props;
+    const { values, errors, showErrorMessage } = form;
 
     /* istanbul ignore next */
     this.config = [
@@ -120,7 +121,7 @@ class CreateAccount extends Component {
       },
       {
         component: StrengthMeter,
-        valueToCheck: values.password
+        valueToCheck: values.password ? values.password : ''
       },
       {
         stateKey: 'passwordConfirm',
@@ -169,7 +170,7 @@ class CreateAccount extends Component {
           <IntroBox>{ t('onBoarding.createAccount.intro') }</IntroBox>
 
           {showErrorMessage &&
-            <ErrorBox>
+            <ErrorBox data-test="create-error-box">
             { errors.form
               ? errors.form
               : t('form.correctErrors')
@@ -178,7 +179,7 @@ class CreateAccount extends Component {
           }
 
           <Form>
-            {formUtils.renderForm(this)}
+            {formUtils.renderForm(this.config)}
 
             <br />
 
@@ -187,7 +188,7 @@ class CreateAccount extends Component {
               classes="primary"
               label={ t('onBoarding.createAccount.ctaPrimary') }
               fullWidth
-              onClick={this.createAccount}
+              onClick={() => this.createAccount()}
             />
 
             <Button classes="secondary" label={ t('onBoarding.createAccount.ctaSecondary') } fullWidth />
@@ -221,11 +222,13 @@ CreateAccount.propTypes = {
   showModal: PropTypes.func,
   hideModal: PropTypes.func,
   t: PropTypes.func.isRequired,
-  modalIsOpen: PropTypes.bool
+  modalIsOpen: PropTypes.bool,
+  form: PropTypes.object
 };
 
 const mapStateToProps = state => ({
-  modalIsOpen: state.modal.isOpen
+  modalIsOpen: state.modal.isOpen,
+  form: state.form
 });
 
 const actions = {

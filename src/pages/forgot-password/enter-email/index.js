@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import { Link, navigate } from 'gatsby';
+import { navigate } from 'gatsby';
 
 import Layout from 'src/components/Layout/Layout'
 import Button from 'src/components/_buttons/Button/Button';
@@ -28,25 +28,27 @@ class EnterEmail extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      ...formUtils.initFormState({
-        email: ''
-      })
-    };
+    this.config = null;
+  }
 
-    this.config = [];
+  componentDidMount() {
+    formUtils.initFormState({
+      email: ''
+    })
+  }
+
+  componentWillUnmount() {
+    formUtils.clearFormState();
   }
 
   onSendEmailForReset = async () => {
-    const { email } = this.state.values;
-    const { showLoader, hideLoader, t } = this.props;
-    const self = this;
+    const { showLoader, hideLoader, t, form } = this.props;
+    const { values: { email } } = form;
 
-    if(formUtils.validateForm(this)) {
+    if(formUtils.validateForm(this.config)) {
       showLoader();
 
-      return AuthService.requestResetPassword(email)
-      .then((res) => {
+      return AuthService.requestResetPassword(email).then((res) => {
         hideLoader();
         if(res.status === 200) {
           navigate('/onboarding/account-pending', {
@@ -55,22 +57,15 @@ class EnterEmail extends Component {
             }
           });
         } else {
-          self.setState({
-            ...self.state,
-            errors: {
-              ...self.state.errors,
-              form: t('login.form.error')
-            },
-            showErrorMessage: true
-          });
+          formUtils.setFormError(t('forgotPassword.reset.form.errors.formFail'));
         }
       });
     }
   }
 
   render() {
-    const { t } = this.props;
-    const { values, errors } = this.state;
+    const { t, form } = this.props;
+    const { values, errors, showErrorMessage } = form;
 
     this.config = [
       {
@@ -87,10 +82,17 @@ class EnterEmail extends Component {
         <div className="enter-email" data-test="container-enter-email" role="account fullscreen">
           <h1 className="enter-email-title">{ t('forgotPassword.title') }</h1>
 
-          {errors.form && <ErrorBox>{errors.form}</ErrorBox>}
+          {showErrorMessage &&
+            <ErrorBox data-test="create-error-box">
+            { errors.form
+              ? errors.form
+              : t('form.correctErrors')
+            }
+            </ErrorBox>
+          }
 
             <Form>
-              { formUtils.renderForm(this) }
+              { formUtils.renderForm(this.config) }
             </Form>
 
             <Form className="enter-email-actions" data-test="reset-password-form">
@@ -103,9 +105,7 @@ class EnterEmail extends Component {
               />
 
               <center>
-                <Link to="/login">
-                  <Button classes="secondary faded" label={ t('forgotPassword.goBack') } small />
-                </Link>
+                <Button classes="secondary faded" label={ t('forgotPassword.goBack') } small onClick={() => navigate('/login')} />
               </center>
             </Form>
         </div>
@@ -118,11 +118,16 @@ EnterEmail.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   t: PropTypes.func.isRequired,
-  location: PropTypes.object
+  location: PropTypes.object,
+  form: PropTypes.object
 };
 
 export const RawComponent = EnterEmail;
 
+const mapStateToProps = (state) => ({
+  form: state.form
+});
+
 const actions = { showLoader, hideLoader };
 
-export default connect(null, actions)(withTranslation()(EnterEmail));
+export default connect(mapStateToProps, actions)(withTranslation()(EnterEmail));
