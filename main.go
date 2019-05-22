@@ -11,14 +11,6 @@ import (
 )
 
 func main() {
-  // http.HandleFunc("/", indexHandler)
   http.Handle("/", http.FileServer(http.Dir("./public")))
 	appengine.Main()
-}
-
-func indexHandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		http.Redirect(w, r, "/", http.StatusFound)
-		return
-	}
 }
