@@ -1,11 +1,32 @@
 @import 'src/styles/modules/_colors.scss';
 
 .contact-us {
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 2.14;
-  letter-spacing: 0.9px;
-  color: $primary;
-  text-decoration: underline;
-  text-align: center;
+  width: 343px;
+  height: 244px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.15);
+
+  &-title {
+    font-size: 20px;
+    font-weight: 300;
+    margin-left: 15px;
+    padding-top: 25px;
+  }
+
+  &-phone, &-email {
+    img {
+      width: 16px;
+      display: inline-block;
+      margin: 20px;
+    }
+
+    p {
+      font-size: 16px;
+      display: inline-block;
+      margin: 10px auto;
+      font-weight: 300;
+      width: 80%;
+    }
+  }
+
 }

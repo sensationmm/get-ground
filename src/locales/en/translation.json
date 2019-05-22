@@ -181,7 +181,11 @@
       }
     }
   },
-  "contactUs": "Contact us",
+  "contactUs": {
+    "title": "Contact us",
+    "phone": "Phone: 0208 123 1234",
+    "email": "Email: info@getground.com"
+  },
   "form": {
     "correctErrors": "Please correct all errors to proceed",
     "radioConfirm": {
@@ -191,6 +195,13 @@
     "ctaPrimary": "Next",
     "ctaSecondary": "Back",
     "skipStep": "Skip this step for now"
+  },
+  "landing": {
+    "title": "GetGround for smarter property purchasing.",
+    "secondaryTitle": "Protect your wealth and be tax efficient.",
+    "firstParagraph": "GetGround makes it easy and affordable to purchase investment property the smarter way – through a company.",
+    "secondParagraph": "By using our platform you better protect your personal wealth, drive tax efficiency and create more flexibility in how you buy, manage and sell your property. ",
+    "thirdParagraph": "GetGround sets up your company that purchases your investment property. We manage all your company’s on-going needs under one roof. "
   },
   "login": {
     "title": "Sign in",

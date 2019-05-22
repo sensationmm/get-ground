@@ -1,0 +1,17 @@
+.home {
+  h1 {
+    font-size: 44px;
+    font-weight: 600;
+    line-height: 1.16
+  }
+  .image-full {
+    margin: 15px auto;
+  }
+  &-content {
+    p {
+      margin-bottom: 10px;
+      font-size: 20px;
+      font-weight: 300;
+    }
+  }
+}
