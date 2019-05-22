@@ -106,6 +106,9 @@ class ResetPassword extends Component {
 
             <Form data-test="reset-password-form">
               { formUtils.renderForm(this.config) }
+            </Form>
+
+            <Form data-test="reset-password-form">
               <Button
                 data-test="reset-password-button"
                 classes="secondary"
@@ -113,6 +116,7 @@ class ResetPassword extends Component {
                 fullWidth
                 onClick={this.onSetNewPassword}
               />
+              <br />
             </Form>
         </div>
       </Layout>

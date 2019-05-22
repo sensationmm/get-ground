@@ -1,9 +1,8 @@
 .enter-email {
-  &-title {
-    margin-bottom: 120px;
-  }
+  height: 100%;
 
-  .button.secondary.full {
-    margin-top: 50px;
-  }
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
 }

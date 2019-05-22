@@ -49,7 +49,7 @@ describe('ResetPassword', () => {
     const form = wrapper.find('[data-test="reset-password-form"]')
     const button = wrapper.find('[data-test="reset-password-button"]')
     await button.props().onClick()
-    expect(form.length).toEqual(1);
+    expect(form.length).toEqual(2);
     expect(props.showLoader).toHaveBeenCalled();
     expect(props.hideLoader).toHaveBeenCalled();
     expect(navigate).toHaveBeenCalledWith('/login')
