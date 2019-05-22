@@ -95,8 +95,6 @@ class ResetPassword extends Component {
         <div className="reset-password" data-test="container-reset-password" role="account fullscreen">
           <h1 className="reset-password-title">{ t('forgotPassword.reset.title') }</h1>
 
-          {errors.form && <ErrorBox data-test="reset-password-error">{errors.form}</ErrorBox>}
-
           {showErrorMessage &&
             <ErrorBox data-test="create-error-box">
             { errors.form
