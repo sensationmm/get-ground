@@ -11,7 +11,8 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", indexHandler)
+  // http.HandleFunc("/", indexHandler)
+  http.Handle("/", http.FileServer(http.Dir("./public")))
 	appengine.Main()
 }
 

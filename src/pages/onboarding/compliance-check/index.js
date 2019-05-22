@@ -50,7 +50,7 @@ const initialState = {
 class ComplianceCheck extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       highNetWorthMarkdown: '',
       selfCertifiedMarkdown: '',
@@ -67,7 +67,7 @@ class ComplianceCheck extends Component {
   componentWillUnmount() {
     formUtils.clearFormState();
   }
-  
+
   /**
    * @param {string} step - step to jump to
    * @return {void}
@@ -88,7 +88,6 @@ class ComplianceCheck extends Component {
       !inArray('propertyvalues', values.restricted_quiz) ||
       !inArray('investmentreturns', values.restricted_quiz))
     ) {
-      console.log(t('onBoarding.compliance.failureMessage'))
       formUtils.setFormError(t('onBoarding.compliance.failureMessage'));
       animateScroll.scrollToTop();
     } else {
@@ -112,8 +111,8 @@ class ComplianceCheck extends Component {
     const { highNetWorthMarkdown, selfCertifiedMarkdown } = this.state;
     const { showModal } = this.props;
 
-    
-    if ((val === 'highnetworth' && highNetWorthMarkdown === '') || 
+
+    if ((val === 'highnetworth' && highNetWorthMarkdown === '') ||
       val === 'selfcertified' && selfCertifiedMarkdown === '') {
       this.getModalContent(val)
     } else {
@@ -131,7 +130,7 @@ class ComplianceCheck extends Component {
   getModalContent = val => {
     const { showLoader, hideLoader, showModal } = this.props;
 
-    const markdown = val === 'highnetworth' 
+    const markdown = val === 'highnetworth'
       ? 'Investor Statement - High Net Worth'
       : 'Investor Statement - Sophisticated';
 
@@ -139,11 +138,11 @@ class ComplianceCheck extends Component {
     ModalService.fetchModalContent(markdown).then(response => {
       const stateKey = val === 'highnetworth' ? 'highNetWorthMarkdown' : 'selfCertifiedMarkdown';
 
-      this.setState({ 
+      this.setState({
         modalMarkdown: response.data.markdown_text,
         [stateKey]: response.data.markdown_text
       });
-      
+
       hideLoader();
       showModal();
     });
@@ -164,7 +163,7 @@ class ComplianceCheck extends Component {
 
   render() {
     const { t, modalIsOpen, form } = this.props;
-    const { 
+    const {
       certificationComplete,
       modalMarkdown,
       modalCheckBoxChecked
@@ -212,7 +211,7 @@ class ComplianceCheck extends Component {
             </Element>
 
             <Element name="q2">
-              {showQ2 && 
+              {showQ2 &&
                 <QuizQ2
                   numQuestions={numQuestions}
                   selected={large_enterprise}
@@ -230,7 +229,7 @@ class ComplianceCheck extends Component {
             </Element>
 
             <Element id="q3">
-              {showQ3 && 
+              {showQ3 &&
                 <QuizQ3
                   numQuestions={numQuestions}
                   onClick={() => { formUtils.updateValue('investment_confirmation', true); this.goToStep('q4'); }}
@@ -243,14 +242,14 @@ class ComplianceCheck extends Component {
                 <QuizQ4
                   numQuestions={numQuestions}
                   selected={self_certification}
-                  onChange={(val) => { 
-                    formUtils.updateValue('self_certification', val); 
+                  onChange={(val) => {
+                    formUtils.updateValue('self_certification', val);
 
                     if (val === 'highnetworth' || val === 'selfcertified') {
                       this.initModal(val);
                     } else {
                       this.setState({ certificationComplete: true })
-                      this.goToStep('q5'); 
+                      this.goToStep('q5');
                     }
                   }}
                 />
@@ -267,7 +266,7 @@ class ComplianceCheck extends Component {
                 />
               }
             </Element>
-            
+
             <Element id="done">
             {showDone &&
               <Button
@@ -287,10 +286,10 @@ class ComplianceCheck extends Component {
               unmountOnExit
             >
               <Modal>
-                <ModalContent 
+                <ModalContent
                   heading={t('onBoarding.compliance.modalHeading')}
                   content={modalMarkdown}
-                  closeModal={this.closeModal} 
+                  closeModal={this.closeModal}
                   downloadButtonLabel={t('onBoarding.compliance.modalDownloadButtonText')}
                   closeIconAltText={t('onBoarding.compliance.modalCloseAltText')}
                   modalImage={investorStatementImage}
@@ -320,10 +319,10 @@ ComplianceCheck.propTypes = {
 
 const mapStateToProps = state => ({
   modalIsOpen: state.modal.isOpen,
-  form: state.form  
+  form: state.form
 });
 
-const actions = { 
+const actions = {
   showLoader,
   hideLoader,
   showModal,
