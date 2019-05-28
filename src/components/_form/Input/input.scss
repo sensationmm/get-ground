@@ -59,10 +59,22 @@
     &.error {
       border-color: $warning;
     }
+
+    &:read-only {
+      border: $disabled;
+      background: $disabled;
+      box-shadow: none;
+    }
   }
 
   textarea {
     height: 120px;
+  }
+
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
   }
 }
 

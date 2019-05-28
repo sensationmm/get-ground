@@ -1,0 +1,20 @@
+@import 'src/styles/modules/_variables.scss';
+@import 'src/styles/modules/_colors.scss';
+
+.shareholder {
+  .table-headers {
+    padding-left: calc((100% - ((50px + #{$padding-horizontal-unit * 1.75 + 0px}) * 2)));
+    display: flex;
+    margin-bottom: $padding-vertical;
+
+    > div {
+      width: 48px;
+      font-size: 11px;
+      margin-right: $padding-horizontal-unit * 1.75 + 0px;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: $text-secondary;
+    }
+  }
+}

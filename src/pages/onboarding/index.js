@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
+import { navigate } from 'gatsby';
 
 import { ProcessSection } from 'src/components/ProcessSection/ProcessSection'
 import Layout from 'src/components/Layout/Layout'
@@ -82,7 +83,7 @@ export class ProcessTracker extends React.Component {
                   {sectionsConfig.sections.map((section, idx) => <ProcessSection key={`${idx} + ${section.title}`} {...section} />)}
                 </div>
                 <Checkbox label={t('onBoarding.progressTracker.confirmComplete')} checked={this.state.checkbox} onChange={() => this.setState({checkbox: !this.state.checkbox})} />
-                <Button classes="primary" fullWidth/>
+                <Button classes="primary" fullWidth onClick={() => navigate('/company-design')} />
               </div>
             </Layout>
           </Fragment>

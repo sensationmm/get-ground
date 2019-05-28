@@ -1,4 +1,5 @@
 import formUtils, { validateField } from './form';
+
 import functions from 'src/utils/functions';
 import validation from 'src/utils/validation';
 import store from 'src/state/store';
@@ -13,6 +14,12 @@ const fieldsMock = {
   error: false,
   passwordConfirm: 'test1'
 };
+
+const fieldsArrayMock = [
+  fieldsMock,
+  fieldsMock,
+  fieldsMock
+];
 
 const stateMock = {
   values: fieldsMock,
@@ -41,13 +48,14 @@ const configMock = [
     component: InputPassword,
     label: 'Confirm Password',
     value: fieldsMock.passwordConfirm,
-    validationFunction: 'validateMatching',
-    validationParam: fieldsMock.password
+    validationFunction: ['validateMatching', 'validateMatching'],
+    validationParam: [fieldsMock.password, fieldsMock.password]
   },
   {
     stateKey: 'error',
     component: Checkbox,
-    label: 'Agree'
+    label: 'Agree',
+    onChange: jest.fn().mockReturnValue('hi')
   },
   {
     component: 'br',
@@ -102,6 +110,10 @@ describe('renderForm()', () => {
     expect(form.length).toEqual(configMock.length);
   });
 
+  test('uses onChange override', () => {
+    expect(form[3].props.onChange()).toEqual('hi');
+  });
+
   test('renders minimal form', () => {
     const emptyForm = formUtils.renderForm([ { component: 'br' }]);
     
@@ -110,7 +122,7 @@ describe('renderForm()', () => {
   });
 });
 
-describe('validateField', () => {
+describe('validateField()', () => {
   test('retrieves field', () => {
     const spy = jest.spyOn(functions, 'getByValue');
 
@@ -135,19 +147,20 @@ describe('validateField', () => {
 
   test('error set if invalid field', () => {
     formUtils.validateField(configMock, 'passwordConfirm');
+    const form = formUtils.renderForm(configMock);
 
     expect(store.getState().form.errors).toEqual(expect.objectContaining(
       { passwordConfirm: expect.any(String) }
     ));
+    expect(form[2].props.error).toEqual(expect.any(String));
+
   });
 
   test('error cleared when invalid field made valid ',() => {
     formUtils.updateValue('passwordConfirm', 'test');
     formUtils.validateField(configMock, 'passwordConfirm');
 
-    expect(store.getState().form).toEqual(expect.objectContaining({
-      errors: {}
-    }));
+    expect(store.getState().form.errors).toEqual({});
   });
 });
 
@@ -162,8 +175,8 @@ describe('validateForm()', () => {
     formUtils.validateForm(configMock);
 
     expect(spy).toHaveBeenCalledTimes(2);
-    expect(spy).toHaveBeenCalledWith(expect.any(Object), 'password');
-    expect(spy).toHaveBeenCalledWith(expect.any(Object), 'passwordConfirm');
+    expect(spy).toHaveBeenCalledWith(expect.any(Object), 'password', null);
+    expect(spy).toHaveBeenCalledWith(expect.any(Object), 'passwordConfirm', null);
   });
 
   test('sets errors in state', () => {
@@ -171,5 +184,54 @@ describe('validateForm()', () => {
     formUtils.validateForm(configMock);
 
     expect(store.getState().form.errors).toEqual(expect.objectContaining({ passwordConfirm: expect.any(String) }));
+  });
+});
+
+describe('values array state', () => {
+  beforeEach(() => {
+    formUtils.initFormState(fieldsArrayMock);
+  });
+
+  describe('validateField', () => {
+    beforeEach(() => {
+      formUtils.validateField(configMock, 'passwordConfirm', 0);
+    });
+
+    test('sets error in state', () => {
+      expect(store.getState().form.errors.fields).toEqual(expect.arrayContaining(
+        [expect.objectContaining(
+          { passwordConfirm: expect.any(String) }
+        )]
+      ));
+      const form = formUtils.renderForm(configMock, 0);
+
+      expect(form[2].props.error).toEqual(expect.any(String));
+    });
+
+    test('clears error from state', () => {
+      formUtils.updateValue(0, {
+        ...fieldsMock,
+        passwordConfirm: 'test'
+      });
+      formUtils.validateField(configMock, 'passwordConfirm', 0);
+      const form = formUtils.renderForm(configMock, 0);
+
+      expect(store.getState().form.errors.fields).toEqual([{},{},{}]);
+      expect(form[2].props.error).toBe(undefined);
+    });
+  });
+
+  test('renderForm', () => {
+    const arrayForm = formUtils.renderForm(configMock, 2);
+    expect(arrayForm.length).toEqual(configMock.length);
+    
+    const arrayForm2 = formUtils.renderForm(configMock);
+    expect(arrayForm2.length).toEqual(configMock.length);
+  });
+
+  describe('validateForm', () => {
+    test('checks errors', () => {
+      formUtils.validateForm(configMock, 1);
+    });
   });
 });
