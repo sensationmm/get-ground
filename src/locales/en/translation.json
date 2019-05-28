@@ -57,7 +57,7 @@
       "title": "Well done!",
       "copy": "We have all the details we need to set up your company.",
       "info":  "Your shareholders will receive an email now so they can begin setting up their account on GetGround. In order to speed up your company setup perhaps you would like to encourage them to do so ASAP.",
-      "button": "next"
+      "button": "Next"
     },
     "progressTracker": {
       "inProgressTitle": "Design your company in 5 steps",
@@ -157,6 +157,20 @@
           },
           "cta": "Another shareholder"
         }
+      },
+      "shares": {
+        "title": "Shareholder's details",
+        "text": "Now it is time to divide company shares between your shareholders and specify which shareholders are directors.",
+        "you": "You",
+        "sharesLabel": "%shares",
+        "directorLabel": "Director",
+        "error": "Please review the highlighted errors below. It is mandatory to assign shares to all your shareholders, and all the shares allocated need to add up to 100%."
+      },
+      "confirm": {
+        "title": "Shareholder's details",
+        "text": "Please confirm all the details below are correct",
+        "ctaPrimary": "Yes I confirm",
+        "ctaSecondary": "Make changes"
       }
     },
     "solicitorDetails": {
@@ -545,6 +559,8 @@
     "validateMatching": "No match",
     "validatePhone": "Invalid phone",
     "validateNumeric": "Number only",
-    "validateNoOfCompanies": "No more than 20"
+    "validateNoOfCompanies": "No more than 20",
+    "validateLettersOnly": "Invalid characters",
+    "validateTotal": "Max {{max}}"
   }
 }

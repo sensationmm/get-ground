@@ -1,4 +1,5 @@
 @import 'src/styles/modules/_colors.scss';
+@import 'src/styles/modules/_mixins.scss';
 
 .checkbox {
   font-size: 14px;
@@ -36,6 +37,8 @@
     }
     &.disabled {
       border-color: $disabled;
+      background: $disabled;
+      pointer-events: none;
 
       + .checkbox-label {
         color: $disabled;
@@ -47,6 +50,30 @@
     a {
       color: $primary;
       text-decoration: underline;
+    }
+  }
+}
+
+.shareholder-shares {
+  .checkbox-toggle {
+    &.checked:before {
+      content: 'YES';
+      display: flex;
+      letter-spacing: 1px;
+      position: absolute;
+      left: -1px;
+      top: -1px;
+      width: calc(100% + 2px);
+      height: calc(100% + 2px);
+      justify-content: center;
+      align-items: center;
+      @include gradient-horizontal($gradient-option-1, $gradient-option-2);
+      mask: none;
+      border-radius: 5px;
+    }
+
+    &.disabled:before {
+      background: $disabled;
     }
   }
 }

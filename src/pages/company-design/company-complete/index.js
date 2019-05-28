@@ -6,26 +6,25 @@ import { useTranslation } from 'react-i18next';
 import Button from 'src/components/_buttons/Button/Button';
 import Layout from 'src/components/Layout/Layout';
 import successImg from 'src/assets/images/star.svg';
-import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
 
 import './company-complete.scss'
 
-const VerifyEmailSucess = () => {
+const CompanyComplete = () => {
   const [t] = useTranslation();
 
   return (
     <Layout>
-      <div data-test="container-company-complete" className="company-complete">
+      <div data-test="container-company-complete" className="company-complete" role="fullscreen">
       <img className="company-complete--image" src={successImg} />
         <h1 className="company-complete--heading">{t('companyDesign.companyComplete.title')}</h1>
         <p className="company-complete--copy">{t('companyDesign.companyComplete.copy')}</p>
-        <IntroBox>{ t('companyDesign.companyComplete.info') }</IntroBox>
-        <Link to="/company-design/process-tracker">
-          <Button label={t('companyDesign.companyComplete.button')} classes="primary full" />
+        <p className="company-complete--copy">{ t('companyDesign.companyComplete.info') }</p>
+        <Link to="/dashboard">
+          <Button label={t('companyDesign.companyComplete.button')} classes="full" />
         </Link>
       </div>
     </Layout>
   );
 }
 
-export default VerifyEmailSucess;
+export default CompanyComplete;

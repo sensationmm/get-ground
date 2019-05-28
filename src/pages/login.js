@@ -59,13 +59,24 @@ class Login extends Component {
           if (queryStringValues.redirect) {
             navigate(queryStringValues.redirect);
           } else {
-            navigate('/onboarding/intro');
+            navigate('/onboarding');
           }
 
         } else {
           formUtils.setFormError(t('login.form.error'));
         }
       });
+    }
+  }
+
+  /**
+   * enterSubmit
+   * @param {event} e - event object
+   * @return {void}
+   */
+  enterSubmit = (e) => {
+    if(e.key === 'Enter') {
+      this.onLogin();
     }
   }
 
@@ -78,14 +89,16 @@ class Login extends Component {
         component: InputText,
         label: t('login.form.label.email'),
         value: values.email,
-        validationFunction: 'validateEmail'
+        validationFunction: 'validateEmail',
+        onKeyPress: this.enterSubmit
       },
       {
         stateKey: 'password',
         component: InputPassword,
         label: t('login.form.label.password'),
         value: values.password,
-        validationFunction: 'validateRequired'
+        validationFunction: 'validateRequired',
+        onKeyPress: this.enterSubmit
       }
     ];
 
