@@ -2,7 +2,8 @@ import {
   INIT_FORM,
   CLEAR_FORM,
   UPDATE_FORM,
-  SET_ERRORS
+  SET_ERRORS,
+  SET_FORM_ERRORS
 } from '../../config/constants';
 
 export const initForm = (payload) => {
@@ -18,11 +19,12 @@ export const clearForm = (payload) => {
   };
 };
 
-export const updateForm = (key, value) => {
+export const updateForm = (key, value, arrayUpdate = false) => {
   return {
     type: UPDATE_FORM,
     key,
-    value
+    value,
+    arrayUpdate
   }
 };
 
@@ -31,5 +33,12 @@ export const setErrors = (errorsList, showErrorMessage = false) => {
     type: SET_ERRORS,
     errorsList,
     showErrorMessage
+  }
+};
+
+export const setFormErrors = (error) => {
+  return {
+    type: SET_FORM_ERRORS,
+    error
   }
 };

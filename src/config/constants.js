@@ -31,3 +31,4 @@ export const INIT_FORM = 'INIT_FORM';
 export const CLEAR_FORM = 'CLEAR_FORM';
 export const UPDATE_FORM = 'UPDATE_FORM';
 export const SET_ERRORS = 'SET_ERRORS';
+export const SET_FORM_ERRORS = 'SET_FORM_ERRORS';

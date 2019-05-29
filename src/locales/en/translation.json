@@ -57,7 +57,7 @@
       "title": "Well done!",
       "copy": "We have all the details we need to set up your company.",
       "info":  "Your shareholders will receive an email now so they can begin setting up their account on GetGround. In order to speed up your company setup perhaps you would like to encourage them to do so ASAP.",
-      "button": "next"
+      "button": "Next"
     },
     "progressTracker": {
       "inProgressTitle": "Design your company in 5 steps",
@@ -157,6 +157,20 @@
           },
           "cta": "Another shareholder"
         }
+      },
+      "shares": {
+        "title": "Shareholder's details",
+        "text": "Now it is time to divide company shares between your shareholders and specify which shareholders are directors.",
+        "you": "You",
+        "sharesLabel": "%shares",
+        "directorLabel": "Director",
+        "error": "Please review the highlighted errors below. It is mandatory to assign shares to all your shareholders, and all the shares allocated need to add up to 100%."
+      },
+      "confirm": {
+        "title": "Shareholder's details",
+        "text": "Please confirm all the details below are correct",
+        "ctaPrimary": "Yes I confirm",
+        "ctaSecondary": "Make changes"
       }
     },
     "solicitorDetails": {
@@ -185,6 +199,29 @@
     "title": "Contact us",
     "phone": "Phone: 0208 123 1234",
     "email": "Email: info@getground.com"
+  },
+  "dashboard": {
+    "company": {
+      "overview": {
+        "sections": {
+          "company": "Company name",
+          "address": "Full address",
+          "shareholders": "Shareholders",
+          "directors": "Directors",
+          "documents": "Documents"
+        },
+        "ctaPrimary": "Manage my company",
+        "ctaSecondary": "See my bank account"
+      },
+      "bankAccount": {
+        "sortCode": "Sort Code",
+        "accountNumber": "Account Number",
+        "address": "Address",
+        "iban": "BIC/IBAN",
+        "back": "Back to overview",
+        "available": "Available funds"
+      }
+    }
   },
   "footer": {
     "navigation": {
@@ -222,6 +259,22 @@
     "login": "Register / Login",
     "location": "Terranova.network Limited (t/a getGround) is registered in England with Company No. 11273793 and VAT registered. VAT No. 313087625. Registered office: 5 Theale Lakes Business Park, Reading, RG7 4GB.",
     "legal": "Terranova.network Limited (t/a getGround) is authorised and regulated by the Financial Conduct Authority (firm reference number 829031) as an AR of Resolution Compliance (firm reference number 574048). Terranova.network Limited (t/a getGround) is registered with the Information Commissioner’s Office under registration number ZA481725 for the purposes of the protection of data."
+  },
+  "forgotPassword": {
+    "title": "Forgot password",
+    "cta": "Reset Password",
+    "goBack": "Back",
+    "reset": {
+      "title": "Set your new Password",
+      "confirmPassword": "Confirm your password",
+      "setPasswordButton": "Set password",
+      "form" : {
+        "errors": {
+          "formFail": "Sorry we cannot set your new password right now, please try again later"
+        }
+      }
+    },
+    "emailPending": "With a magic link to the email address you provided. Please click the button on the email to change your password"
   },
   "form": {
     "correctErrors": "Please correct all errors to proceed",
@@ -577,6 +630,8 @@
     "validateMatching": "No match",
     "validatePhone": "Invalid phone",
     "validateNumeric": "Number only",
-    "validateNoOfCompanies": "No more than 20"
+    "validateNoOfCompanies": "No more than 20",
+    "validateLettersOnly": "Invalid characters",
+    "validateTotal": "Max {{max}}"
   }
 }

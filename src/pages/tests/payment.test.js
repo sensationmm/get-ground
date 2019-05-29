@@ -26,7 +26,7 @@ describe('Payment page', () => {
       form: ReduxFormMock
     });
   });
-  
+
   test('renders without error', () => {
     const component = findByTestAttr(wrapper, 'container-payment');
     expect(component.length).toBe(1);
@@ -105,10 +105,10 @@ describe('Payment page', () => {
         }
       }
     });
-  
+
     const component = findByTestAttr(wrapper, 'container-payment');
     expect(component.find(ErrorBox).length).toBe(1);
-  }); 
+  });
 
   test('validateForm has been called from within Stripe', () => {
     const component = findByTestAttr(wrapper, 'container-payment');

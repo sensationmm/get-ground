@@ -1,5 +1,6 @@
-.company-complete {
+@import 'src/styles/modules/_colors.scss';
 
+.company-complete {
   &--image {
     display: block;
     margin: 40px auto 0;
@@ -14,5 +15,6 @@
     font-weight: lighter;
     font-size: 19px;
     margin-bottom: 40px;
+    color: $white;
   }
 }

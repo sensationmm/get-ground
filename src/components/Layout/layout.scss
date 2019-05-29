@@ -4,13 +4,14 @@
 @import '../../styles/modules/_variables';
 @import '../../styles/address-now.css';
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600');
 
 body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   color: $text;
   line-height: 1.3;
+  letter-spacing: 1px;
 
   font-size: 18px;
 }
@@ -75,6 +76,10 @@ h1, h2 {
   font-size: 24px;
 }
 
+h1 {
+  margin: $padding-vertical 0 ($padding-vertical-unit * 2 + 0px) 0;
+}
+
 h3 {
   font-family: inherit;
   font-weight: 600;
@@ -94,4 +99,14 @@ p, select {
     color: $white;
     font-size: 48px;
   }
+}
+
+.back {
+  font-size: 16px;
+  background: url('../../assets/images/chevron-left.svg') left center no-repeat;
+  padding-left: 25px;
+  background-size:  10px;
+  font-weight: 300;
+  margin-bottom: ($padding-horizontal-unit * 2) + 0px;
+  cursor: pointer;
 }

@@ -33,6 +33,24 @@ class AuthService extends BaseService {
   };
 
   /**
+   * reset password
+   * Authenticates user via api and stores auth token and user object
+   * @param {string} email - email address for login
+   * @return {Promise} reset password response
+   */
+  requestResetPassword = (email) => {
+    const config = {
+      url: '/auth/request_reset_password',
+      method: 'post',
+      data: {
+        'email': email
+      }
+    };
+
+    return this.doRequest(config);
+  };
+
+  /**
    * reauthenticate
    * Refetch user with existing JWT in localStorage
    * @return {Promise} reauthenticate response
@@ -47,6 +65,27 @@ class AuthService extends BaseService {
       store.dispatch(userLogin(response.data.user));
       store.dispatch(saveAuth(response.data.token));
     });
+  };
+
+  /**
+   * setNewPassword
+   * sets new password for user
+   * @param {string} password - new password
+   * @param {string} token - token passed from reset email
+   * @return {Promise} set new password
+   */
+  setNewPassword = (password, token) => {
+    const config = {
+      url: 'auth/new_password',
+      method: 'post',
+      data: {
+        'password': password,
+        'token': token
+      }
+    };
+
+    return this.doRequest(config);
+
   };
 
   verifyEmail = () => {
