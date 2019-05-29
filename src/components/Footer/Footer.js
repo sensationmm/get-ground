@@ -46,17 +46,17 @@ const Footer = () => {
 
   return (
     <div className="footer" data-test="component-footer">
-      <img className="footer-logo" src={logo} />
-      <div className="footer-navigation">
+      <img className="footer-logo" src={logo} data-test="component-footer-img" />
+      <div className="footer-navigation" data-test="component-footer-navigation">
         {linksConfig.links.map((link, idx) => (
-          <div key={`${idx} + ${link.title}`} className="footer-link">
+          <div key={`${idx} + ${link.title}`} className="footer-link" data-test="component-footer-link">
           {link.title}
           </div>
         ))}
       </div>
-      <div className="footer-login">{t('footer.login')}</div>
-      <div className="footer-location">{t('footer.location')}</div>
-      <div className="footer-legal">{t('footer.legal')}</div>
+      <div data-test="component-footer-login" className="footer-login">{t('footer.login')}</div>
+      <div data-test="component-footer-location" className="footer-location">{t('footer.location')}</div>
+      <div data-test="component-footer-legal" className="footer-legal">{t('footer.legal')}</div>
     </div>
   )
 }

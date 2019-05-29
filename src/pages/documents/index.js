@@ -63,10 +63,10 @@ export class MyDocuments extends Component {
    */
   initModal = (markdownStateKey, markdownTitle, signedDocStateKey) => {
     const { showModal } = this.props;
-    
+
     if (this.state[markdownStateKey] === '') {
       this.getModalContent(markdownStateKey, markdownTitle)
-      this.setState({ 
+      this.setState({
         modalDocumentKey: signedDocStateKey
       })
     } else {
@@ -85,11 +85,11 @@ export class MyDocuments extends Component {
 
     showLoader();
     ModalService.fetchModalContent(markdownTitle).then(response => {
-      this.setState({ 
+      this.setState({
         modalMarkdown: response.data.markdown_text,
         [markdownStateKey]: response.data.markdown_text
       });
-      
+
       hideLoader();
       showModal();
     });
@@ -137,12 +137,12 @@ export class MyDocuments extends Component {
       // If the markdowns haven't been stored yet, get them before downloading...
       if (this.state[markdown.markdownStateKey] === '') {
         ModalService.fetchModalContent(markdown.title).then(response => {
-          this.setState({ 
+          this.setState({
             [markdown.markdownStateKey]: response.data.markdown_text
           });
           this.downloadAllFiles(response.data.markdown_text);
         });
-      // Else just download them ( they could have previously been stored by opening the 
+      // Else just download them ( they could have previously been stored by opening the
       // relevant modal OR by firing getAllMarkdown once already... )
       } else {
         this.downloadAllFiles(this.state[markdown.markdownStateKey]);
@@ -166,9 +166,9 @@ export class MyDocuments extends Component {
   }
 
   checkAllSigned = () => {
-    const { 
+    const {
       shareholdersAgreementSigned,
-      companyArticlesSigned, 
+      companyArticlesSigned,
       directorsLoanSigned,
       consentToActSigned,
       BoardResolutionSigned
@@ -182,11 +182,11 @@ export class MyDocuments extends Component {
 
   render() {
     const { t, i18n, modalIsOpen } = this.props;
-    const { 
+    const {
       modalMarkdown,
       modalDocumentKey,
       shareholdersAgreementSigned,
-      companyArticlesSigned, 
+      companyArticlesSigned,
       directorsLoanSigned,
       consentToActSigned,
       BoardResolutionSigned
@@ -200,8 +200,8 @@ export class MyDocuments extends Component {
           'status': shareholdersAgreementSigned ? 'signed' : 'not_signed',
           'image': ShareholdersAgreementImage,
           'completeImage': ShareholdersAgreementSignedImage,
-          'onClick': () => { 
-            this.initModal('shareholdersAgreementMarkdown', 'Investor Statement - High Net Worth', 'shareholdersAgreementSigned'); 
+          'onClick': () => {
+            this.initModal('shareholdersAgreementMarkdown', 'Investor Statement - High Net Worth', 'shareholdersAgreementSigned');
           }
         },
         {
@@ -210,8 +210,8 @@ export class MyDocuments extends Component {
           'status': companyArticlesSigned ? 'signed' : 'not_signed',
           'image': CompanyArticlesImage,
           'completeImage': CompanyArticlesSignedImage,
-          'onClick': () => { 
-            this.initModal('companyArticlesMarkdown', 'Investor Statement - Sophisticated', 'companyArticlesSigned'); 
+          'onClick': () => {
+            this.initModal('companyArticlesMarkdown', 'Investor Statement - Sophisticated', 'companyArticlesSigned');
           }
         },
         {
@@ -220,8 +220,8 @@ export class MyDocuments extends Component {
           'status': directorsLoanSigned ? 'signed' : 'not_signed',
           'image': DirectorsLoanImage,
           'completeImage': DirectorsLoanSignedImage,
-          'onClick': () => { 
-            this.initModal('directorsLoanMarkdown', 'directors loan agreement', 'directorsLoanSigned'); 
+          'onClick': () => {
+            this.initModal('directorsLoanMarkdown', 'directors loan agreement', 'directorsLoanSigned');
           }
         },
         {
@@ -230,8 +230,8 @@ export class MyDocuments extends Component {
           'status': consentToActSigned ? 'signed' : 'not_signed',
           'image': ConsentToActImage,
           'completeImage': ConsentToActSignedImage,
-          'onClick': () => { 
-            this.initModal('consentToActMarkdown', 'consent to act as director', 'consentToActSigned'); 
+          'onClick': () => {
+            this.initModal('consentToActMarkdown', 'consent to act as director', 'consentToActSigned');
           }
         },
         {
@@ -240,8 +240,8 @@ export class MyDocuments extends Component {
           'status': BoardResolutionSigned ? 'signed' : 'not_signed',
           'image': BoardResolutionImage,
           'completeImage': BoardResolutionSignedImage,
-          'onClick': () => { 
-            this.initModal('BoardResolutionMarkdown', 'board resolution to exchange contracts', 'BoardResolutionSigned'); 
+          'onClick': () => {
+            this.initModal('BoardResolutionMarkdown', 'board resolution to exchange contracts', 'BoardResolutionSigned');
           }
         }
       ]
@@ -256,10 +256,10 @@ export class MyDocuments extends Component {
             <div className="process-tracker-sections">
               {documentsConfig.documents.map((document, idx) => <ProcessSection key={`${idx} + ${document.title}`} {...document} />)}
             </div>
-            <Button 
-              classes="tertiary" 
-              fullWidth 
-              label={t('myDocuments.downloadButtonText')} 
+            <Button
+              classes="tertiary"
+              fullWidth
+              label={t('myDocuments.downloadButtonText')}
               onClick={this.getAllMarkdown}
             />
             <CSSTransition
@@ -270,10 +270,10 @@ export class MyDocuments extends Component {
               onExited={this.checkAllSigned}
             >
               <Modal>
-                <ModalContent 
+                <ModalContent
                   heading={t('myDocuments.modalHeading')}
                   content={modalMarkdown}
-                  closeModal={this.closeModal} 
+                  closeModal={this.closeModal}
                   downloadButtonLabel={t('myDocuments.modalDownloadButtonText')}
                   closeIconAltText={t('myDocuments.modalCloseAltText')}
                   modalImage={investorStatementImage}
@@ -312,8 +312,8 @@ MyDocuments.propTypes = {
   i18n: PropTypes.object.isRequired
 };
 
-const actions = { 
-  showLoader, 
+const actions = {
+  showLoader,
   hideLoader ,
   showModal,
   hideModal

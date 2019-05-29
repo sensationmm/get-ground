@@ -17,19 +17,19 @@ const ContactUs = () => {
   const [t] = useTranslation();
 
   return (
-    <div className="contact-us">
-      <p className="contact-us-title" data-testid="component-contact-us">
+    <div className="contact-us" data-test="component-contact-us">
+      <p className="contact-us-title" data-test="contact-title">
         {t('contactUs.title')}
       </p>
       <div className="contact-us-phone">
-        <img src={Phone} />
-        <p>{t('contactUs.phone')}</p>
+        <img src={Phone} data-test="phone-img"/>
+        <p data-test="phone-title">{t('contactUs.phone')}</p>
      </div>
       <div className="contact-us-email">
-        <img src={Email} />
-        <p>{t('contactUs.email')}</p>
+        <img src={Email} data-test="email-img"/>
+        <p data-test="email-title">{t('contactUs.email')}</p>
      </div>
-     <div className="contact-us-divider"></div>
+     <div className="contact-us-divider" data-test="contact-divider"></div>
     </div>
   )
 }

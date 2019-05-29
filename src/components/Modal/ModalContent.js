@@ -18,8 +18,8 @@ export const ModalService = new modalService();
  * @param {object} e - scroll event (for JSdoc)
  * @param {function} closeModal - function for closing the modal
  * @param {string} content - markdown to be rendered
- * @param {string} heading - modal heading 
- * @param {bool} [hasCheckbox] - boolean to check to render the checkbox 
+ * @param {string} heading - modal heading
+ * @param {bool} [hasCheckbox] - boolean to check to render the checkbox
  * @param {function} [handleCheckboxChange] - function to set container state on check
  * @param {bool} [checkBoxChecked] - boolean set for if the checkbox is checked or not
  * @param {string} downloadButtonLabel - text for download button
@@ -85,12 +85,12 @@ class ModalContent extends Component {
 
   render() {
     const { markdownContainerHeight, checkboxDisabled, modalError } = this.state;
-    const { 
-      closeModal, 
-      content, 
-      heading, 
-      hasCheckbox, 
-      handleCheckboxChange, 
+    const {
+      closeModal,
+      content,
+      heading,
+      hasCheckbox,
+      handleCheckboxChange,
       checkBoxChecked,
       downloadButtonLabel,
       closeIconAltText,
@@ -108,21 +108,21 @@ class ModalContent extends Component {
     return (
       <div className="modal">
         <div data-test="modal-content" ref={this.modalHeader} className="modal--header">
-          <Button 
+          <Button
             label={downloadButtonLabel}
             onClick={this.getBlobForDownload}
           />
-          <img 
-            className="modal--close-icon" 
-            src={closeIcon} 
+          <img
+            className="modal--close-icon"
+            src={closeIcon}
             alt={closeIconAltText}
             onClick={closeModal} />
         </div>
         { modalError &&
           <div className="modal--error">{modalErrorText}</div>
         }
-        <div 
-          className="modal--content" 
+        <div
+          className="modal--content"
           style={{ height: markdownContainerHeight }}
           onScroll={e => hasCheckbox ? this.handleScroll(e) : null }
         >
@@ -134,7 +134,7 @@ class ModalContent extends Component {
             <ReactMarkdown escapeHtml={false} source={content} />
           </div>
 
-          {hasSignature && 
+          {hasSignature &&
           <div className="modal--signature-wrapper">
             <span className="modal--signature-label">{signatureLabel}</span>
             <div className="modal--signature" onClick={this.setSignature}>
@@ -145,18 +145,18 @@ class ModalContent extends Component {
                 <img className="modal--signature-image" src={signatureUrl} />
               }
             </div>
-            <Button 
-              classes="primary full" 
-              label={signatureButtonLabel} 
-              disabled={!isDocumentSigned} 
+            <Button
+              classes="primary full"
+              label={signatureButtonLabel}
+              disabled={!isDocumentSigned}
               onClick={closeModal}
             />
           </div>
           }
         </div>
-        {hasCheckbox && 
+        {hasCheckbox &&
         <div className="modal--footer">
-          <Checkbox 
+          <Checkbox
             label={checkboxLabel}
             onChange={handleCheckboxChange}
             checked={checkBoxChecked}
@@ -193,8 +193,8 @@ ModalContent.propTypes = {
   currentModalSignature: PropTypes.string
 };
 
-const actions = { 
-  showLoader, 
+const actions = {
+  showLoader,
   hideLoader
 };
 
