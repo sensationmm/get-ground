@@ -1,0 +1,52 @@
+@import 'src/styles/modules/_colors.scss';
+@import '../../styles/modules/_variables';
+
+.footer {
+  width: 100%;
+  height: 100%;
+  background-color: $border;
+  margin-left: -20px;
+  padding-right: (($padding-horizontal-unit * 2) + 0px);
+  padding-left: (($padding-horizontal-unit * 2) + 0px);
+  color: $placeholder-text;
+
+  &-logo {
+    width: 150px;
+    margin-left: -45px;
+    margin-bottom: -20px;
+  }
+
+  &-login {
+    font-weight: 600;
+    color: $white;
+    margin-top: 10px;
+    margin-bottom: 20%;
+  }
+
+  &-location, &-legal {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 2.15;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: $placeholder-text;
+  }
+
+  &-navigation {
+    display: flex;
+    align-content: flex-start;
+    height: 250px;
+    flex-direction: column;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 300;
+    width: 100%;
+
+    .footer-link {
+      display: inline-block;
+      width: 50%;
+      height: 17%;
+    }
+  }
+
+}

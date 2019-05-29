@@ -4,10 +4,10 @@ import { navigate } from 'gatsby'
 import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types';
 
-import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
+import IntroBox from 'src/components/_layout/IntroBox/IntroBox'
 import Layout from 'src/components/Layout/Layout'
-import ContactUs from 'src/components/ContactUs/ContactUs'
 import ImageFull from 'src/components/ImageFull/ImageFull'
+import Button from 'src/components/_buttons/Button/Button'
 import EmailSent from 'src/assets/images/email-sent.svg'
 
 import authService from 'src/services/Auth';
@@ -37,7 +37,8 @@ const AccountPending = ({ location }) => {
 
         <IntroBox>{ t('onBoarding.accountPending.introBox') }</IntroBox>
 
-        <ContactUs />
+        <Button classes="link small full" data-test="button-redo" label={t('contactUs.title')} onClick={() => navigate('/contact-us')} />
+
       </div>
     </Layout>
   );
