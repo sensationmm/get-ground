@@ -13,6 +13,9 @@
       margin-bottom: 10px;
       font-size: 20px;
       font-weight: 300;
+      &:last-child {
+        margin-bottom: 50px;
+      }
     }
   }
 }
