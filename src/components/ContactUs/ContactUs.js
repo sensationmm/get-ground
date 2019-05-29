@@ -29,6 +29,7 @@ const ContactUs = () => {
         <img src={Email} />
         <p>{t('contactUs.email')}</p>
      </div>
+     <div className="contact-us-divider"></div>
     </div>
   )
 }

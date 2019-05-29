@@ -16,7 +16,7 @@ const IndexPage = () => {
         <div data-test="container-home" className="home" role="company-design">
           <h1>{t('landing.title')}</h1>
           <h1>{t('landing.secondaryTitle')}</h1>
-          <ImageFull src={house} alt="house"/>
+          <ImageFull src={house} alt="house" />
           <div className="home-content">
             <p>{t('landing.firstParagraph')}</p>
             <p>{t('landing.secondParagraph')}</p>
