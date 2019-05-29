@@ -196,6 +196,29 @@
     }
   },
   "contactUs": "Contact us",
+  "dashboard": {
+    "company": {
+      "overview": {
+        "sections": {
+          "company": "Company name",
+          "address": "Full address",
+          "shareholders": "Shareholders",
+          "directors": "Directors",
+          "documents": "Documents"
+        },
+        "ctaPrimary": "Manage my company",
+        "ctaSecondary": "See my bank account"
+      },
+      "bankAccount": {
+        "sortCode": "Sort Code",
+        "accountNumber": "Account Number",
+        "address": "Address",
+        "iban": "BIC/IBAN",
+        "back": "Back to overview",
+        "available": "Available funds"
+      }
+    }
+  },
   "forgotPassword": {
     "title": "Forgot password",
     "cta": "Reset Password",

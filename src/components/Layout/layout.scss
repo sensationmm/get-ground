@@ -100,3 +100,13 @@ p, select {
     font-size: 48px;
   }
 }
+
+.back {
+  font-size: 16px;
+  background: url('../../assets/images/chevron-left.svg') left center no-repeat;
+  padding-left: 25px;
+  background-size:  10px;
+  font-weight: 300;
+  margin-bottom: ($padding-horizontal-unit * 2) + 0px;
+  cursor: pointer;
+}
