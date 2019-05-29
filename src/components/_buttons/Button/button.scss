@@ -52,6 +52,12 @@
     box-shadow: 0px 3px 5px $shadow;
   }
 
+  &.account {
+    @include gradient-horizontal($background-account-start, $background-account-end);
+    color: $white;
+    box-shadow: 0px 3px 5px $shadow;
+  }
+
   &.secondary {
     background: $grey;
   }

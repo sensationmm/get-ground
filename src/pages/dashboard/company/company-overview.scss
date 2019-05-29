@@ -1,0 +1,138 @@
+@import 'src/styles/modules/_colors';
+@import 'src/styles/modules/_variables';
+@import 'src/styles/modules/_mixins.scss';
+
+.company-overview {
+  .company-header {
+    display: flex;
+    align-items: center;
+    min-height: 25px;
+    font-weight: 300;
+    font-size: 16px;
+    color: $heading;
+    padding: $padding-vertical 0 $padding-vertical (($padding-vertical-unit * 2.5) + 0px);
+    background: url('../../../assets/images/house.svg') left center no-repeat;
+    background-size:  25px;
+    margin-bottom: ($padding-vertical-unit * 2) + 0px;
+    
+    &.link {
+      padding: $padding-vertical $padding-horizontal $padding-vertical (($padding-vertical-unit * 4) + 0px);
+      background-position: ($padding-horizontal-unit * 2 + 0px) center;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px $shadow;
+      cursor: pointer;
+    }
+  }
+
+  .bank-header {
+    @include gradient-horizontal($gradient-option-1, $gradient-option-2);
+    padding: $padding-vertical $padding-horizontal;
+    margin: 0 ($padding-horizontal-unit * -2 + 0px) 0 ($padding-horizontal-unit * -2 + 0px);
+    color: $white;
+    text-align: center;
+    cursor: pointer;
+
+    &-company {
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    &-account {
+      font-size: 13px;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+    }
+
+    &-balance {
+      p {
+        font-size: 13px;
+        margin: 0 0 5px 0;
+        letter-spacing: 1px;
+      }
+
+      letter-spacing: 2px;
+    }
+
+    &:after {
+      content: '';
+      top: 50%;
+      transform: translateY(-50%);
+      width: 10px;
+      height: 23px;
+      background: $white;
+      mask:  url('../../../assets/images/chevron-right.svg') right center no-repeat;
+      position: absolute;
+      right: $padding-horizontal-unit * 2 + 0px;
+    }
+  }
+
+  .transaction {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    &-header {
+      margin-top: ($padding-vertical-unit * 3) + 0px;
+      margin-bottom: ($padding-vertical-unit * 2) + 0px;
+    }
+
+    &-name {
+      text-transform: uppercase;
+      font-weight: 300;
+      font-size: 16px;
+      color: $heading;
+    }
+
+    &-value {
+      text-align: right;
+    }
+
+    &-sum {
+      margin-bottom: 5px;
+
+      &.debit {
+        color: $warning;
+      }
+    }
+
+    &-balance {
+      font-size: 13px;
+      font-weight: 300;
+    }
+  }
+
+  &-section {
+    padding-bottom: ($padding-vertical-unit * 2) + 0px;
+    border-bottom: 1px solid $grey;
+    margin-bottom: ($padding-vertical-unit * 2) + 0px;
+
+    &:last-of-type:not(.transaction) {
+      border: 0;
+    }
+
+    h2 {
+      text-transform: uppercase;
+      font-weight: 300;
+      font-size: 16px;
+      color: $heading;
+    }
+
+    p {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    ul {
+      font-size: 16px;
+      padding: 0;
+
+      li {
+        padding: $padding-horizontal 0 $padding-horizontal 30px;
+        list-style-type: none;
+        background: url('../../../assets/images/pdf.svg') left center no-repeat;
+        background-size:  15px;
+      }
+    }
+  }
+}
