@@ -186,6 +186,43 @@
     "phone": "Phone: 0208 123 1234",
     "email": "Email: info@getground.com"
   },
+  "footer": {
+    "navigation": {
+      "link0": {
+        "title": "Why GetGround"
+      },
+      "link1": {
+        "title": "About us"
+      },
+      "link2": {
+        "title": "GetGround Advantages"
+      },
+      "link3": {
+        "title": "Partnerships"
+      },
+      "link4": {
+        "title": "How it works"
+      },
+      "link5": {
+        "title": "FAQs"
+      },
+      "link6": {
+        "title": "Pricing"
+      },
+      "link7": {
+        "title": "Contact us"
+      },
+      "link8": {
+        "title": "Terms and Conditions"
+      },
+      "link9": {
+        "title": "Privacy Policy"
+      }
+    },
+    "login": "Register / Login",
+    "location": "Terranova.network Limited (t/a getGround) is registered in England with Company No. 11273793 and VAT registered. VAT No. 313087625. Registered office: 5 Theale Lakes Business Park, Reading, RG7 4GB.",
+    "legal": "Terranova.network Limited (t/a getGround) is authorised and regulated by the Financial Conduct Authority (firm reference number 829031) as an AR of Resolution Compliance (firm reference number 574048). Terranova.network Limited (t/a getGround) is registered with the Information Commissioner’s Office under registration number ZA481725 for the purposes of the protection of data."
+  },
   "form": {
     "correctErrors": "Please correct all errors to proceed",
     "radioConfirm": {
