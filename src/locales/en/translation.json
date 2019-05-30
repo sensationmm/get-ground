@@ -198,7 +198,8 @@
   "contactUs": {
     "title": "Contact us",
     "phone": "Phone: 0208 123 1234",
-    "email": "Email: info@getground.com"
+    "email": "Email: info@getground.com",
+    "liveChat": "Live Chat"
   },
   "dashboard": {
     "company": {
