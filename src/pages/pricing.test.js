@@ -2,7 +2,6 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import Pricing from './pricing'
 import ContactUs from 'src/components/ContactUs/ContactUs'
-import ImageFull from 'src/components/ImageFull/ImageFull'
 
 describe('Pricing', () => {
   let wrapper;
@@ -12,7 +11,7 @@ describe('Pricing', () => {
   })
 
   test('pricing image', () => {
-    expect(wrapper.find('[data-test="pricing-img"]').type()).toEqual(ImageFull)
+    expect(wrapper.find('[data-test="pricing-img"]').type()).toEqual('img')
   })
 
   test('title', () => {

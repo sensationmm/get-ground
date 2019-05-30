@@ -2,6 +2,12 @@
 @import 'src/styles/modules/_variables.scss';
 
 .pricing {
+  &-img {
+    width: 313px;
+    float: right;
+    margin: (($padding-vertical-unit * 2) + 0px) (- ($padding-horizontal-unit * 2) + 0px);
+  }
+
   &-title {
     line-height: 2.5;
   }
