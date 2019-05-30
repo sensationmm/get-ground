@@ -624,6 +624,31 @@
       }
     }
   },
+  "pricing": {
+    "title": "Pricing",
+    "vat": "(+VAT)",
+    "property": {
+      "title": "PRICING PER PROPERTY",
+      "oneTime": {
+        "price": "£500",
+        "caption": "One-time sign up fee"
+      },
+      "monthly": {
+        "price": "£20",
+        "caption": "Monthly subscription"
+      },
+      "annual": {
+        "price": "£200-300*",
+        "caption": "Annual directors and officers insurance",
+        "smallCaption": "*Actual pricing depends on the value of your property"
+      }
+    },
+    "services": {
+      "title": "OPTIONAL SERVICES PRICING",
+      "firstContent": "Our partners may charge a fee if you decide to use their mortgage, insurance, solicitor or property management services.",
+      "secondContent": "We charge 0.2% of the property’s sale value if you buy or sell shares in companies holding property on the GetGround platform. You do not have to sell through us, this is an optional service."
+    }
+  },
   "validation": {
     "validateEmail": "Invalid email",
     "validateRequired": "Required",
