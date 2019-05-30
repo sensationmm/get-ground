@@ -29,15 +29,15 @@ import './input.scss';
  */
 const Input = (props) => {
 
-  const { 
-    id, 
-    type, 
-    label, 
-    onChange, 
+  const {
+    id,
+    type,
+    label,
+    onChange,
     onKeyPress,
-    value, 
-    validate, 
-    onFocus, 
+    value,
+    validate,
+    onFocus,
     readOnly,
     note,
     error,
@@ -48,7 +48,7 @@ const Input = (props) => {
   } = props;
 
   return (
-    <div 
+    <div
       className={classNames('text-input', wrapperClass)}
       data-test="component-input"
       style={ hidden !== undefined ? { display: hidden ? 'none' : 'block'} : {}}

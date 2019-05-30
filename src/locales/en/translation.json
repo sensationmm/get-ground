@@ -624,6 +624,12 @@
       }
     }
   },
+  "partnerships": {
+    "cta": "Submit",
+    "input": {
+      "title": "Your Email"
+    }
+  },
   "validation": {
     "validateEmail": "Invalid email",
     "validateRequired": "Required",

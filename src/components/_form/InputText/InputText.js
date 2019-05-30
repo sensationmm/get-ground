@@ -5,7 +5,7 @@ import Input from '../Input/Input';
 /**
  * InputText
  * Wrapper for text variant of Input
- * 
+ *
  * @param {Object} props - props object (see Input component)
  * @return {JSXElement} InputText
  */
