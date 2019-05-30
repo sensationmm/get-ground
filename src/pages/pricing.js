@@ -1,9 +1,11 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next';
 
+import ImageFull from 'src/components/ImageFull/ImageFull'
 import Layout from 'src/components/Layout/Layout'
 import ContactUs from 'src/components/ContactUs/ContactUs'
 
+import CoinAndHand from 'src/assets/images/coins-and-hand.svg'
 import 'src/styles/pages/pricing.scss'
 
 const Pricing = () => {
@@ -12,6 +14,7 @@ const Pricing = () => {
   return (
     <Layout>
       <div>
+        <ImageFull src={CoinAndHand} alt="coins in a jar" data-test="pricing-img" />
         <h1 className="pricing-title">{t('pricing.title')}</h1>
         <div className="pricing-property">
           <h3 className="pricing-property-title">{t('pricing.property.title')}</h3>
