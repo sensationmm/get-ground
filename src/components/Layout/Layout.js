@@ -66,8 +66,6 @@ export class Layout extends Component {
           <main className="main">{children}</main>
         </div>
         <div id="modal-root"></div>
-        <LiveChat license={10911047} />
-        {/* <Drift appId="nks68e25uvih" /> */}
       </div>
     )
   }
