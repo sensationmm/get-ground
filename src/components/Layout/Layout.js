@@ -14,7 +14,7 @@ import { userLogin } from 'src/state/actions/user';
 import { saveAuth } from 'src/state/actions/auth';
 
 import authService from 'src/services/Auth';
-const AuthService = new authService();
+export const AuthService = new authService();
 
 import 'src/i18n';
 import './layout.scss';
@@ -49,8 +49,18 @@ export class Layout extends Component {
     }
   }
 
+  validateCompanyID = () => {
+    const { companyID, activeCompany } = this.props;
+
+    if(companyID && activeCompany === null) {
+      navigate('/dashboard');
+    }
+  }
+
   render() {
     const { children, headerActions, isLoading } = this.props;
+
+    this.validateCompanyID();
 
     return (
       <div className={classNames('wrapper', `${children.props && children.props.role}`)}>
@@ -77,7 +87,9 @@ Layout.propTypes = {
   saveAuth: PropTypes.func,
   userID: PropTypes.number,
   secure: PropTypes.bool,
-  redirect: PropTypes.string
+  redirect: PropTypes.string,
+  activeCompany: PropTypes.number,
+  companyID: PropTypes.bool
 }
 
 Layout.defaultProps = {
@@ -86,7 +98,8 @@ Layout.defaultProps = {
 
 const mapStateToProps = (state) => ({
   isLoading: state.loader.isLoading,
-  userID: state.user.id
+  userID: state.user.id,
+  activeCompany: state.activeCompany
 });
 
 const actions = {

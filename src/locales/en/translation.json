@@ -202,6 +202,30 @@
   },
   "dashboard": {
     "company": {
+      "bankAccount": {
+        "sortCode": "Sort Code",
+        "accountNumber": "Account Number",
+        "address": "Address",
+        "iban": "BIC/IBAN",
+        "back": "Back to overview",
+        "available": "Available funds"
+      },
+      "manage": {
+        "title": "Manage my company",
+        "text": "Please let us know what you want to do, we are here to help.",
+        "select": "Select an item below:",
+        "options": {
+          "buyShares": "Make an offer to buy shares",
+          "lendMoney": "Lend money to the company",
+          "withdrawDividend": "Take money out of the company (as a dividend)",
+          "loanRepayment": "Take money out of the company (as a director loan repayment)",
+          "allotShares": "Allot new shares",
+          "appointDirector": "Appoint a director",
+          "removeDirector": "Remove a director",
+          "delist": "Delist from the GetGround platform",
+          "dissolveCompany": "Dissolve the company"
+        }
+      },
       "overview": {
         "sections": {
           "company": "Company name",
@@ -212,14 +236,6 @@
         },
         "ctaPrimary": "Manage my company",
         "ctaSecondary": "See my bank account"
-      },
-      "bankAccount": {
-        "sortCode": "Sort Code",
-        "accountNumber": "Account Number",
-        "address": "Address",
-        "iban": "BIC/IBAN",
-        "back": "Back to overview",
-        "available": "Available funds"
       }
     }
   },
@@ -292,6 +308,9 @@
     "firstParagraph": "GetGround makes it easy and affordable to purchase investment property the smarter way – through a company.",
     "secondParagraph": "By using our platform you better protect your personal wealth, drive tax efficiency and create more flexibility in how you buy, manage and sell your property. ",
     "thirdParagraph": "GetGround sets up your company that purchases your investment property. We manage all your company’s on-going needs under one roof. "
+  },
+  "liveChat": {
+    "button": "Live chat"
   },
   "login": {
     "title": "Sign in",
