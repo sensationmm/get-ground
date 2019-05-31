@@ -32,7 +32,7 @@ const ContactUs = () => {
         <p data-test="email-title">{t('contactUs.email')}</p>
      </div>
      <div className="contact-us-divider" data-test="contact-divider"></div>
-     <Button classes="contact-us-livechat" data-test="livechat-button" liveChat label={t('contactUs.liveChat')} />
+     <Button classes="contact-us-livechat" data-test="livechat-button" liveChat label={t('liveChat.button')} />
     </div>
   )
 }
