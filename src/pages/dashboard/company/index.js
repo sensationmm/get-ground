@@ -7,6 +7,7 @@ import { navigate } from 'gatsby';
 import Layout from 'src/components/Layout/Layout';
 import Form from 'src/components/_layout/Form/Form';
 import Button from 'src/components/_buttons/Button/Button';
+import { companyModel } from 'src/state/reducers/companies';
 
 import './company-overview.scss';
 
@@ -20,10 +21,10 @@ const Company = (props) => {
   const [ t ] = useTranslation();
   const { companies, activeCompany } = props;
 
-  const company = companies[activeCompany];
+  const company = activeCompany !== null ? companies[activeCompany] : companyModel;
 
   return (
-    <Layout secure>
+    <Layout secure companyID>
       <div className="company-overview" data-test="component-company">
         <div className="company-header">{ company.address.premise }, { company.address.postcode }</div>
 

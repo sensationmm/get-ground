@@ -8,7 +8,7 @@
 
 body {
   font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   color: $text;
   line-height: 1.3;
   letter-spacing: 1px;
@@ -90,6 +90,10 @@ p, select {
   font-size: 14px;
 }
 
+b {
+  font-weight: 400;
+}
+
 .fs-large {
   font-size: 18px;
 }
@@ -109,4 +113,16 @@ p, select {
   font-weight: 300;
   margin-bottom: ($padding-horizontal-unit * 2) + 0px;
   cursor: pointer;
+}
+
+.hero-button {
+  position: fixed;
+  bottom: $padding-vertical;
+  display: flex;
+  justify-content: center;
+  width: calc(100% - #{($padding-horizontal-unit * 4) + 0px});
+}
+
+.has-hero-button {
+  padding-bottom: 60px;
 }
