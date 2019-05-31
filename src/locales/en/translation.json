@@ -672,7 +672,41 @@
   "trustAndPrivacy" : {
     "title": "Trust and Privacy",
     "subTitle": "At GetGround, we take the trust our customers place in us very seriously.",
-    "cta": "Read more"
+    "cta": "Read more",
+    "sections": {
+      "info0": {
+        "title": "You own and control your company",
+        "copy": "GetGround is a service provider and does not have any directorship or ownershipin your company. We cannot perform any activities on your company without your explicit consent."
+      },
+     "info1": {
+        "title": "You can leave us at any time",
+        "copy": "You are free to leave our services at any time without penalty."
+      },
+      "info2": {
+        "title": "We work with your lawyers",
+        "copy": "When you purchase your property through GetGround you continue to use your conveyancing lawyer as per normal. You send your funds to purchase the property directly to your conveyancing lawyer’s client account. As a result, the underlying checks and procedures operating in the market are maintained."
+      },
+      "info3": {
+        "title": "Funded by the UK Government",
+        "copy": "We are funded in part by the Government through HM Land Registry’s Geovation program as well as being funded by other prestigious private investors."
+      },
+      "info4": {
+        "title": "FCA regulated",
+        "copy": "We are regulated by the UK Financial Conduct Authority and abide to high standards with regard to compliance. We are subject to regular supervision to ensure we meet these standards and treat our customers fairly."
+      },
+      "info5": {
+        "title": "Compliance",
+        "copy": "All GetGround customers need to pass UK approved Know-Your-Customer (KYC) and Anti-Money Laundering (AML) checks. GetGround is registered with the Information Commissioner’s Office and adheres to UK General Data Protection Regulation (GDPR)."
+      },
+      "info6": {
+        "title": "Transparency",
+        "copy": "We believe transparency is key in establishing trust. All GetGround companies are UK limited companies and as such their details are recorded at Companies House in the UK. This is a public register that anyone is able to check and includes company details, owner and director information and copies of key company documents."
+      },
+      "info7": {
+        "title": "We work with industry leaders",
+        "copy": "GetGround works with the best in the industry. All legal documents for GetGround companies are produced by CMS Cameron McKenna Nabarro OlswangLLP. GetGround is proud to partner with One Global Property Service, RPI Complete, Paradigm Land and numerous others in the residential buy-to-let property sector."
+      }
+    }
   },
   "validation": {
     "validateEmail": "Invalid email",

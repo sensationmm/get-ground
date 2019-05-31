@@ -1,6 +1,13 @@
 @import '../../styles/modules/_colors';
+@import 'src/styles/modules/_variables.scss';
 
 .whatWeDo {
+  &-img {
+    width: 237px;
+    float: right;
+    margin: (($padding-vertical-unit * 2) + 0px) (- ($padding-horizontal-unit * 2) + 0px);
+  }
+
   &-title {
     line-height: 2.5;
     color: $text;
