@@ -643,6 +643,11 @@
       }
     }
   },
+  "trustAndPrivacy" : {
+    "title": "Trust and Privacy",
+    "subTitle": "At GetGround, we take the trust our customers place in us very seriously.",
+    "cta": "Read more"
+  },
   "validation": {
     "validateEmail": "Invalid email",
     "validateRequired": "Required",
@@ -652,5 +657,16 @@
     "validateNoOfCompanies": "No more than 20",
     "validateLettersOnly": "Invalid characters",
     "validateTotal": "Max {{max}}"
+  },
+  "whatWeDo": {
+    "title": "What we do",
+    "content": {
+      "first": "Through technology GetGround makes it easier and cheaper than ever to own property in a company. We provide all the services your company needs under one roof.",
+      "second": "Our simple website means you no longer have to spend time on the phone or email chasing your company lawyers, accountants, secretaries or banks.",
+      "third": "We’ve have crafted the optimal company structure for UK investment property. Using it means you are likely to pay less tax.",
+      "fourth": "Through our partners we can provide seamless access to the best services for all your property needs; including mortgages, insurance, property management and solicitors.",
+      "fifth": "GetGround customers also have access to the GetGround marketplace making buying and selling shares in companies holding property fast and cost effective."
+    }
+
   }
 }
