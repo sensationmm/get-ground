@@ -3,22 +3,26 @@ import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 
+import { showLoader, hideLoader } from 'src/state/actions/loader';
+
 import Layout from 'src/components/Layout/Layout'
+import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import ContactUs from 'src/components/ContactUs/ContactUs'
 import InputText from 'src/components/_form/InputText/InputText';
 import Button from 'src/components/_buttons/Button/Button';
 import formUtils from 'src/utils/form';
 import Form from 'src/components/_layout/Form/Form';
-import ImageFull from 'src/components/ImageFull/ImageFull'
+import partners from 'src/services/Partners';
+export const PartnerService = new partners();
 
 import ShakingHands from 'src/assets/images/shaking-hands.svg'
 
 import 'src/styles/pages/partnerships.scss'
 
 /**
- * Enter Email
+ * Partnerships
  * @author Ravin Patel <ravin.patel@getground.co.uk>
- * @return {JSXElement} - EnterEmail
+ * @return {JSXElement} - Partnerships
  */
 class Partnerships extends Component {
   constructor(props) {
@@ -44,16 +48,12 @@ class Partnerships extends Component {
     if(formUtils.validateForm(this.config)) {
       showLoader();
 
-      return AuthService.requestResetPassword(email).then((res) => {
+      return PartnerService.sendEmail(email).then((res) => {
         hideLoader();
         if(res.status === 200) {
-          navigate('/onboarding/account-pending', {
-            state: {
-              passwordReset: true,
-            }
-          });
+
         } else {
-          formUtils.setFormError(t('forgotPassword.reset.form.errors.formFail'));
+          formUtils.setFormError(t('partnerships.form.error'));
         }
       });
     }
@@ -61,7 +61,7 @@ class Partnerships extends Component {
 
   render() {
     const { t, form } = this.props;
-    const { values } = form;
+    const { values, errors, showErrorMessage } = form;
 
     this.config = [
       {
@@ -75,17 +75,25 @@ class Partnerships extends Component {
 
     return (
       <Layout>
-        <div className="partnerships">
+        <div className="partnerships" data-token="e2c37163dc95b4351b82ab699ae28b29" data-executed="true">
           <img className="partnerships-img" src={ShakingHands} alt="shaking-hands" data-test="partnerships-img" />
           <h1 className="partnerships-title">Partnerships</h1>
           <p className="partnerships-content">Interested in selling GetGround and earning a commission? We work with partners such as estate agents, mortgage brokers and property developers. If you’d like to know more, enter your email and we’ll be in touch.</p>
           <p className="partnerships-content">If you’d like to know more, enter your email and we’ll be in touch.</p>
 
-            <Form>
+          {showErrorMessage &&
+            <ErrorBox data-test="create-error-box">
+            { errors.form
+              ? errors.form
+              : t('form.correctErrors')
+            }
+            </ErrorBox>
+          }
+            <Form data-test="partnership-form">
               { formUtils.renderForm(this.config) }
             </Form>
 
-            <Form className="enter-email-actions" data-test="reset-password-form">
+            <Form className="enter-email-actions" data-test="partnership-form">
             <Button
                 data-test="enter-email-button"
                 classes="primary"
@@ -116,5 +124,10 @@ const mapStateToProps = (state) => ({
   form: state.form
 });
 
-export default connect(mapStateToProps, null)(withTranslation()(Partnerships));
+const actions = {
+  showLoader,
+  hideLoader
+};
+
+export default connect(mapStateToProps, actions)(withTranslation()(Partnerships));
 

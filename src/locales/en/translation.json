@@ -628,6 +628,9 @@
     "cta": "Submit",
     "input": {
       "title": "Your Email"
+    },
+    "form": {
+      "error": "Sorry we cannot subscribe you to our list right now, please try again later"
     }
   },
   "validation": {
