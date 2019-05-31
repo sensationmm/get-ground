@@ -2,6 +2,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
+import Button from 'src/components/_buttons/Button/Button'
+
 import Email from 'src/assets/images/email-contact-us.svg'
 import Phone from 'src/assets/images/phone-contact-us.svg'
 import './contact-us.scss'
@@ -30,6 +32,7 @@ const ContactUs = () => {
         <p data-test="email-title">{t('contactUs.email')}</p>
      </div>
      <div className="contact-us-divider" data-test="contact-divider"></div>
+     <Button classes="contact-us-livechat" data-test="livechat-button" liveChat label={t('liveChat.button')} />
     </div>
   )
 }

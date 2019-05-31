@@ -5,8 +5,9 @@ import ContactUs from 'src/components/ContactUs/ContactUs'
 
 import house from 'src/assets/images/house-landing.svg'
 import Layout from 'src/components/Layout/Layout'
-import 'src/styles/pages/landing.scss'
 import Footer from 'src/components/Footer/Footer';
+
+import 'src/styles/pages/landing.scss'
 
 const IndexPage = () => {
   const [t] = useTranslation();
