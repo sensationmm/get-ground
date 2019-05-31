@@ -25,4 +25,8 @@ describe('<ContactUs />', () => {
   it('divider', () => {
     expect(wrapper.find('[data-test="contact-divider"]').length).toEqual(1)
   })
+
+  it('live chat button', () => {
+    expect(wrapper.find('[data-test="livechat-button"]').length).toEqual(1)
+  })
 })
