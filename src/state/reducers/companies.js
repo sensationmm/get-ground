@@ -1,3 +1,20 @@
+export const companyModel = {
+  name: '',
+  address: { premise: '', street: '', posttown: '', postcode: '' },
+  shareholders: [],
+  directors: [],
+  documents: [],
+  bank_account: {
+    name: '',
+    sort_code: '',
+    account_number: '',
+    address: { branch: '', street: '', town: '', postcode: '' },
+    iban: '',
+    balance: '',
+    transactions: []
+  }
+};
+
 export const initialState = [
   {
     name: 'Dunmow Limited',

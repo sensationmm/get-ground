@@ -10,6 +10,8 @@ import { isArray } from 'util';
 * OptionSelect
 *
 * @param {Object} props - props object (for jsdoc)
+* @param {boolean} small - small styling variant
+* @param {boolean} center - center option text styling
 * @param {array} options - array of Options elements to show (see Option.js for spec)
 * @param {function} onChange - callback function to execute options are clicked
 * @param {string|array} selected - selected value, array if 'multiple' is true
@@ -63,7 +65,7 @@ class OptionSelect extends Component {
   }
 
   render() {
-    const { selected, options } = this.props;
+    const { selected, options, small, center } = this.props;
 
     return (
       <div data-test="component-option-select">
@@ -76,6 +78,8 @@ class OptionSelect extends Component {
                 { ...item }
                 onClick={() => this.onClick(item.id)}
                 selected={isArray(selected) ? inArray(item.id, selected) : selected === item.id}
+                small={small}
+                center={center}
               />
             )
           })
@@ -92,6 +96,8 @@ OptionSelect.propTypes = {
   onDeselectAll: PropTypes.func,
   options: PropTypes.array,
   multiple: PropTypes.bool,
+  small: PropTypes.bool,
+  center: PropTypes.bool
 };
 
 OptionSelect.defaultProps = {
