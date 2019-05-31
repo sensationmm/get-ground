@@ -2,7 +2,7 @@
 @import '../../styles/modules/_variables';
 
 .trustAndPrivacy {
-  height: 375px;
+  height: 420px;
   margin-right: -(($padding-horizontal-unit * 2) + 0px);
   margin-bottom: 54px;
   margin-left: -(($padding-horizontal-unit * 2) + 0px);
@@ -12,11 +12,12 @@
   background-color: $background-info;
 
   &.read-more {
-    height: 1745px;
+    height: 1949px;
   }
 
   &-title {
     font-size: 22px;
+    font-weight: 400;
     color: $text;
   }
 

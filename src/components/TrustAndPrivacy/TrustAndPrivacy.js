@@ -62,15 +62,15 @@ const TrustAndPrivacy = () => {
       {show
         ?
           infoConfig.infos.map((info, idx) => (
-            <div key={`${idx} + ${info.title}`} className="trustAndPrivacy-info">
+            <div key={`${idx} + ${info.title}`} className="trustAndPrivacy-info" data-test="trustAndPrivacy-info">
               <div className="trustAndPrivacy-info-title">{info.title}</div>
               <div className="trustAndPrivacy-info-copy">{info.copy}</div>
             </div>
           ))
         :
         <Button
-          classes="trustAndPrivacy-livechat"
-          data-test="livechat-button"
+          classes="trustAndPrivacy-read-more"
+          data-test="read-more-button"
           liveChat
           label={t('trustAndPrivacy.cta')}
           onClick={() => toggleShow(!show)}
