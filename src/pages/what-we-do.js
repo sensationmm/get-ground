@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
+
+import Layout from 'src/components/Layout/Layout'
+import TrustAndPrivacy from 'src/components/TrustAndPrivacy/TrustAndPrivacy'
 import ContactUs from 'src/components/ContactUs/ContactUs'
 
 import HandsAndPhone from 'src/assets/images/hands-and-phone.svg'
-import Layout from 'src/components/Layout/Layout'
-import TrustAndPrivacy from 'src/components/TrustAndPrivacy/TrustAndPrivacy'
-
 import 'src/styles/pages/what-we-do.scss'
 
 const WhatWeDo = () => {
