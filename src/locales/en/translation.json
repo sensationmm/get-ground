@@ -650,6 +650,7 @@
       "title": "Your Email"
     },
     "form": {
+      "success": "Thanks! Your email has been submitted",
       "error": "Sorry we cannot subscribe you to our list right now, please try again later"
     }
   },

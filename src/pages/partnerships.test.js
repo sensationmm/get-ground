@@ -41,10 +41,16 @@ describe('Partnerships' ,() => {
     })
     const form = wrapper.find('[data-test="partnership-form"]')
     const button = wrapper.find('[data-test="enter-email-button"]')
-    await button.props().onClick()
+
+    expect(wrapper.find('[data-test="intro-box"]').length).toEqual(0);
     expect(form.length).toEqual(2);
+
+    await button.props().onClick()
+
     expect(props.showLoader).toHaveBeenCalled();
     expect(props.hideLoader).toHaveBeenCalled();
+    expect(wrapper.state().sentEmail).toEqual(true)
+    expect(wrapper.find('[data-test="intro-box"]').length).toEqual(1);
   })
 
   test('error state', async () => {
@@ -64,6 +70,6 @@ describe('Partnerships' ,() => {
     await button.props().onClick()
 
     expect(error.length).toEqual(1)
-    expect(error.props().children).toBe('Test error');
+    expect(error.props().children).toEqual('Test error');
   })
 })
