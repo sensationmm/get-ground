@@ -2,7 +2,7 @@
 @import '../../styles/modules/_variables';
 
 .footer {
-  width: 100%;
+  width: 101%;
   height: 100%;
   background-color: $border;
   margin-left: -20px;
@@ -19,7 +19,7 @@
   &-login {
     font-weight: 600;
     color: $white;
-    margin-top: 10px;
+    margin-top: 30px;
     margin-bottom: 20%;
   }
 

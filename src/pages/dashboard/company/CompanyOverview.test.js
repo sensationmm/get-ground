@@ -92,6 +92,12 @@ describe('CompanyOverview', () => {
     expect(component.length).toBe(1);
   });
 
+  test('renders without error when activeCompany not set', () => {
+    wrapper = setup(CompanyOverview, { ...defaultProps, activeCompany: null });
+    const component = findByTestAttr(wrapper, 'component-company');
+    expect(component.length).toBe(1);
+  });
+
   test('manage button', () => {
     const button = findByTestAttr(wrapper, 'manage-company-button');
     button.simulate('click');

@@ -18,6 +18,20 @@
     border-color: $border;
   }
 
+  &.small {
+    min-height: 0;
+    padding: $padding-horizontal $padding-vertical;
+    border-color: $border-offset;
+    font-size: 14px;
+    font-weight: 300;
+    border-radius: 5px;
+  }
+
+  &.center {
+    justify-content: center;
+    text-align: center;
+  }
+
   &-title {
     &-header {
       text-transform: uppercase;
@@ -36,11 +50,12 @@
   }
 
   &.selected {
+    color: $white;
     border-color: $gradient-option-1;
     @include gradient-horizontal($gradient-option-1, $gradient-option-2);
 
     .option-value {
-      color: $text;
+      color: $white;
     }
   }
 }

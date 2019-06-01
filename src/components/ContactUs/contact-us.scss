@@ -2,7 +2,7 @@
 
 .contact-us {
   width: 343px;
-  height: 185px;
+  height: 230px;
   border-radius: 8px;
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.15);
   margin-bottom: 30px;
@@ -35,5 +35,10 @@
     width: 311px;
     border: solid 1px $divider-color;
     margin-left: 15px;
+  }
+  &-livechat {
+    float: right;
+    margin-top: 15px;
+    margin-right: 16px;
   }
 }

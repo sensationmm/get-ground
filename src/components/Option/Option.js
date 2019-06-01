@@ -8,6 +8,8 @@ import './option.scss';
 * Option
 *
 * @param {Object} props - props object (for jsdoc)
+* @param {boolean} small - small styling variant
+* @param {boolean} center - center option text styling
 * @param {string} title - main title of Option
 * @param {boolean} selected - whether to render in selected state
 * @param {string} [text] - option text to show under title
@@ -16,7 +18,7 @@ import './option.scss';
 * @return {JSXElement} Option
 */
 const Option = props => {
-  const { selected, title, text, value, onClick } = props;
+  const { selected, title, text, value, onClick, small, center } = props;
 
   return (
     <div
@@ -24,7 +26,9 @@ const Option = props => {
       className={classNames(
         'option',
         { selected: selected },
-        { clickable: !!onClick }
+        { clickable: !!onClick },
+        { small: small },
+        { center: center }
       )}
       onClick={onClick}
     >
@@ -42,7 +46,9 @@ Option.propTypes = {
   selected: PropTypes.bool,
   text: PropTypes.string,
   value: PropTypes.any,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  small: PropTypes.bool,
+  center: PropTypes.bool
 };
 
 Option.defaultProps = {
