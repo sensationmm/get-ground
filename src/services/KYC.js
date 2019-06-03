@@ -3,11 +3,11 @@ import BaseService from './BaseService';
 import store from 'src/state/store';
 
 /**
- * PaymentService
+ * KYCService
  * @param {Image} passport - Image of passport
  * @param {Image} address - Image of address
  * @param {Blob} selfie - Blob of selfie
- * @return {Object} PaymentService
+ * @return {Object} KYCService
  */
 class KYCService extends BaseService {
   makeCheck = (passport, address, selfie) => {
