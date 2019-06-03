@@ -8,6 +8,8 @@ import { connect } from 'react-redux'
 
 import { setImg, setRetake } from 'src/state/actions/idCheck'
 
+import './camera.scss'
+
 export class Camera extends React.Component {
   constructor (props, context) {
     super(props, context);
@@ -22,7 +24,7 @@ export class Camera extends React.Component {
     const { section } = this.props.section
     this.cameraPhoto = new CameraPhoto(this.videoRef.current);
     const facingMode = section === 'selfie' ? FACING_MODES.USER : FACING_MODES.ENVIRONMENT;
-    const idealResolution = { width: 720, height: 480 };
+    const idealResolution = { width: 1280, height: 720 };
     this.cameraPhoto.startCamera(facingMode, idealResolution)
   }
 
@@ -51,6 +53,7 @@ export class Camera extends React.Component {
       <>
       <video
           data-test="camera"
+          className="camera-video"
           ref={this.videoRef}
           autoPlay="true"
         />
@@ -63,7 +66,7 @@ export class Camera extends React.Component {
     const { t } = this.props
 
     return (
-      <div>
+      <div className="camera">
         {this.startCamera(t)}
       </div>
     );
