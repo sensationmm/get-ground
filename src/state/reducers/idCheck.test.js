@@ -8,7 +8,9 @@ describe('idCheck reducer', () => {
     }
     const expectedState = {
       ...initialState,
-      passport: 'test-passport-img'
+      passport: {
+        img: 'test-passport-img'
+      }
     }
 
     const newState = idCheck(initialState, action)
@@ -23,7 +25,9 @@ describe('idCheck reducer', () => {
     }
     const expectedState = {
      ...initialState,
-      address: 'test-address-img'
+      address: {
+        img: 'test-address-img'
+      }
     }
 
     const newState = idCheck(initialState, action)
@@ -38,7 +42,63 @@ describe('idCheck reducer', () => {
     }
     const expectedState = {
       ...initialState,
-      selfie: 'test-selfie-img'
+      selfie: {
+        img:'test-selfie-img'
+      }
+    }
+
+    const newState = idCheck(initialState, action)
+
+    expect(newState).toEqual(expectedState)
+  })
+
+  it('SET_RETAKE_PASSPORT', () => {
+    const action = {
+      type: 'SET_RETAKE_PASSPORT',
+      payload: true
+    }
+    const expectedState = {
+      ...initialState,
+      passport: {
+        ...initialState.passport,
+        retake: true
+      }
+    }
+
+    const newState = idCheck(initialState, action)
+
+    expect(newState).toEqual(expectedState)
+  })
+
+  it('SET_RETAKE_ADDRESS', () => {
+    const action = {
+      type: 'SET_RETAKE_ADDRESS',
+      payload: true
+    }
+    const expectedState = {
+      ...initialState,
+      address: {
+        ...initialState.address,
+        retake: true
+      }
+    }
+
+    const newState = idCheck(initialState, action)
+
+    expect(newState).toEqual(expectedState)
+  })
+
+  it('SET_RETAKE_SELFIE', () => {
+    const action = {
+      type: 'SET_RETAKE_SELFIE',
+      payload: true
+    }
+    const expectedState = {
+      ...initialState,
+      selfie: {
+        ...initialState.selfie,
+        retake: true
+      }
     }
 
     const newState = idCheck(initialState, action)

@@ -12,6 +12,7 @@
     "gatsby-plugin-stripe": "^1.2.0",
     "gatsby-source-filesystem": "^2.0.31",
     "gatsby-transformer-sharp": "^2.1.18",
+    "jslib-html5-camera-photo": "^3.0.2-beta.0",
     "jwt-decode": "^2.2.0",
     "prop-types": "^15.7.2",
     "raf": "^3.4.1",

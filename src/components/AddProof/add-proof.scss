@@ -21,19 +21,29 @@ video {
     text-align: center;
     z-index: 5;
   }
-  &-camera-tools {
+  &-start-camera {
     position: relative;
-    margin-top: -181px;
   }
 
   &-overlay {
     z-index: 3;
+    position: absolute;
+    top: 20px;
+    left: 8%;
+
+    &.selfie {
+      top: 10%;
+      left: 39%;
+    }
   }
 
   &-loading {
     font-style: italic;
     z-index: -1;
-    margin-top: -30px;
+    margin-top: 0;
+    position: absolute;
+    top: 35%;
+    left: 30%;
   }
 
   .capture, .confirm-happy {

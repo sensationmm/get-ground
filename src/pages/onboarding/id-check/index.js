@@ -26,7 +26,7 @@ const KYCService = new kycService();
 export class IdCheck extends Component {
   componentWillUnmount() {
     const { passport, address, selfie } = this.props
-    KYCService.makeCheck(passport, address, selfie)
+    KYCService.makeCheck(passport.img, address.img, selfie.img)
   }
 
   render() {
@@ -57,10 +57,9 @@ export class IdCheck extends Component {
 
 IdCheck.propTypes = {
   t: PropTypes.func.isRequired,
-  passport: PropTypes.string,
-  address: PropTypes.string,
-  selfie: PropTypes.string,
-  isMobile: PropTypes.string,
+  passport: PropTypes.object,
+  address: PropTypes.object,
+  selfie: PropTypes.object
 }
 
 const mapStateToProps = state => ({

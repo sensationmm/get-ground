@@ -538,6 +538,7 @@
       "buttonBack": "Back",
       "buttonSkip": "Skip for now",
       "link": "If you already have it saved, upload instead",
+      "loading": "...loading camera",
       "image": {
         "capture": "Capture photo",
         "happy": "Yes, I'm happy",
