@@ -1,4 +1,18 @@
 {
+  "aboutUs": {
+    "title": {
+      "first": "About us",
+      "second": "We want to change that. "
+    },
+    "content": {
+      "first": "Our mission is to create a more productive and fairer world.",
+      "second": "Trillions of dollars of real assets (e.g., houses, ships, machinery) are stuck in illiquid non-transparent markets.  If we can’t understand the real assets that drive the world’s economy it is likely they are not fully productive. If many cannot access real asset ownership it is likely we create greater inequality.",
+      "third": "We believe we can do it by holding a single asset in a single company. Each company gives its asset an identity through which we can better understand it, a framework of governance to own and operate it and through shares, the ability to effectively change ownership.",
+      "fourth": "The issue with companies is that they are expensive and difficult to manage. And on their own, they do not necessarily create trust. This is what we are solving. Make companies cheap and easy to use. Create a platform that builds trust.",
+      "fifth": "We are starting with the residential buy-to-let sector in the UK. There is £1.3 trillion of stock in this market. A huge business. But ironically nearly all of it is in personal rather than company ownership.",
+      "sixth": "Come join us create a more productive and fairer world."
+    }
+  },
   "account": {
     "signature": {
       "title": "Set up your signature",
@@ -323,6 +337,29 @@
         "password": "Password"
       },
       "error": "Invalid login - please try again"
+    }
+  },
+  "meetTheFounders": {
+    "title": "Meet the founders",
+    "cta": "Read more",
+    "moubin": {
+      "name": "Moubin",
+      "content": {
+        "first": "Moubin has experience in investing, commercial strategy, tax and structuring. He was an investment professional at Apax Partners, one of the world’s leading private equity houses.",
+        "second": "There he was involved in numerous key transaction in the retail, consumer and IT services sectors. Previously Moubin was at McKinsey & Company and is trained as a medical doctor at Imperial College where he graduated with distinctions."
+      }
+    },
+    "misrab": {
+      "name": "Misrab Faizullah Khan",
+      "content": {
+        "first": "Misrab is a computer scientist. He set up the data science team and Singapore office at Go-Jek, Indonesia’s first technology ‘unicorn’.",
+        "second": "There he was involved in numerous key transaction in the retail, consumer and IT services sectors. Previously Moubin was at McKinsey & Company and is trained as a medical doctor at Imperial College where he graduated with distinctions.",
+        "third": "Misrab is a Stanford University graduate with Bachelor’s and Master’s degrees focused around computer science, economics and mathematics."
+      }
+    },
+    "joinUs": {
+      "title": "Join us",
+      "content": "Our team is rapidly growing. If you believe in our mission and would like to contribute to our growth, please get in touch."
     }
   },
   "modal": {

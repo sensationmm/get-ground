@@ -1,0 +1,19 @@
+@import '../../styles/modules/_colors';
+
+.meet-the-founders {
+  h3 {
+    text-align: center;
+  }
+
+  .chat {
+    color: $text;
+    width: 169px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+  }
+
+  &-join-us {
+    margin-top: 30px;
+  }
+}
+
