@@ -5,6 +5,13 @@ export const setImg = (section, img) => {
   };
 };
 
+export const setRetake = (section, payload) => {
+  return {
+    type: `SET_RETAKE_${section.toUpperCase()}`,
+    payload
+  };
+};
+
 export const setActive = (section) => {
   return {
     type: `ACTIVE_${section.toUpperCase()}`,
