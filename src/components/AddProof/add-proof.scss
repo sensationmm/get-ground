@@ -1,12 +1,58 @@
 @import 'src/styles/modules/_colors';
 
-video {
-  height: 200px;
+#container-circles {
+  z-index: 10000;
 }
 
 .add-proof {
   z-index: 0;
   margin-bottom: 10px;
+
+  &-initial {
+    width: 310px;
+    height: 181px;
+    margin: 0 auto;
+    position: relative;
+
+    &-img {
+      z-index: 3;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      -webkit-transform: translate(-50%, -70%);
+      -moz-transform: translate(-50%, -70%);
+      transform: translate(-50%, -70%);
+    }
+
+    &-camera-icon {
+      z-index: 3;
+      position: absolute;
+      left: 35%;
+      top: 75%;
+      -webkit-transform: translate(-0%, -70%);
+      -moz-transform: translate(-50%, -70%);
+      transform: translate(-50%, 0%);
+
+      &.selfie {
+        left: 40%;
+      }
+    }
+
+    &-name {
+      z-index: 3;
+      position: absolute;
+      left: 55%;
+      top: 73%;
+      -webkit-transform: translate(-0%, -70%);
+      -moz-transform: translate(-50%, -70%);
+      transform: translate(-50%, 0%);
+      font-size: 18px;
+
+      &.selfie {
+        left: 55%;
+      }
+    }
+  }
 
   &.disabled {
     opacity: 0.4;
@@ -28,12 +74,14 @@ video {
   &-overlay {
     z-index: 3;
     position: absolute;
-    top: 20px;
-    left: 8%;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 
     &.selfie {
-      top: 10%;
-      left: 39%;
+      width: 50%;
     }
   }
 
@@ -42,8 +90,11 @@ video {
     z-index: -1;
     margin-top: 0;
     position: absolute;
-    top: 35%;
-    left: 30%;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    transform: translate(-50%, -80%);
   }
 
   .capture, .confirm-happy {

@@ -8,6 +8,9 @@ import classNames from 'classnames'
 import Camera from 'src/components/Camera/Camera'
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox'
 import Button from 'src/components/_buttons/Button/Button'
+import CameraIcon from 'src/assets/images/camera-icon.svg'
+import Rectangle from 'src/assets/images/rectangle.svg'
+
 import { setActive, resetActive, setRetake, setImg } from 'src/state/actions/idCheck'
 
 import './add-proof.scss'
@@ -29,11 +32,14 @@ export class AddProof extends Component {
 
 
   initialLanding = () => {
-    const { initialImg, section } = this.props;
+    const { initialImg, section, t } = this.props;
 
     return (
-      <div data-test="initial-img" onClick={() => this.handleActiveSection({takePicture: true})}>
-        <img src={initialImg} alt={`add-proof-${section}`}/>
+      <div className={`add-proof-initial`} data-test="initial-img" onClick={() => this.handleActiveSection({takePicture: true})}>
+        <img src={Rectangle} />
+        <img src={initialImg} alt={`add-proof-${section}`} className={`add-proof-initial-img ${section}`}/>
+        <img src={CameraIcon} className={`add-proof-initial-camera-icon ${section}`} />
+        <p className={`add-proof-initial-name ${section}`}>{t(`onBoarding.idCheck.${section}.name`)}</p>
       </div>
     )
   }
