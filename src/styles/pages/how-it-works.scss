@@ -1,0 +1,32 @@
+.how-it-works {
+
+  ul {
+    list-style: discs;
+    margin-bottom: 30%;
+  }
+
+  &-step {
+    display: flex;
+    margin-bottom: 10%;
+    img {
+      width: 28px;
+      height: 28px;
+    }
+    &-li {
+      margin-left: 11%;
+    }
+    &-bullet {
+      // border-left: 1px solid #000;
+    }
+    &-title {
+      font-size: 13px;
+      font-weight: bold;
+      line-height: 2.15;
+    }
+    &-copy {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.75;
+    }
+  }
+}

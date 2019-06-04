@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="313" height="117" viewBox="0 0 313 117">
+    <defs>
+        <path id="a" d="M0 .154h9.846V10H0z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd" transform="translate(0 -4)">
+        <text fill="#42505C" font-family="OpenSans-Light, Open Sans" font-size="16" font-weight="300">
+            <tspan x="82" y="58">GetGround will coordinate with </tspan> <tspan x="82" y="86">your lawyers to purchase your </tspan> <tspan x="82" y="114">property through your company</tspan>
+        </text>
+        <text fill="#42505C" font-family="OpenSans-Bold, Open Sans" font-size="13" font-weight="bold">
+            <tspan x="82" y="14">Step 3</tspan>
+        </text>
+        <path fill="#2F5472" d="M15.286 19.66h-2.889a.408.408 0 0 1-.278-.116.42.42 0 0 1-.005-.58L20.537 10c1.904 1.56 2.806 4.091 2.344 6.565-.685 3.642-4.085 6.018-7.595 5.31V19.66z"/>
+        <path fill="#2F5472" d="M23.047 7.325L26.315 4l6.931 7.051V7.468h3.574v7.215l4.066 4.139a.404.404 0 0 1-.293.683h-2.966V31H15v-5.51c5.722.697 10.926-3.34 11.629-9.02a10.336 10.336 0 0 0-3.582-9.145"/>
+        <g transform="translate(0 22)">
+            <mask id="b" fill="#fff">
+                <use xlink:href="#a"/>
+            </mask>
+            <path fill="#2F5472" d="M0 8.226L8.073.154 9.846 1.93 1.776 10z" mask="url(#b)"/>
+        </g>
+        <path fill="#2F5472" d="M24.202 14.502c0-4.196-3.225-7.598-7.202-7.598-3.975 0-7.198 3.402-7.198 7.598 0 4.2 3.223 7.601 7.198 7.601 3.977 0 7.202-3.401 7.202-7.6m1.798 0C26 19.748 21.971 24 17 24c-4.968 0-9-4.25-9-9.498C8 9.26 12.032 5 17 5c4.971 0 9 4.259 9 9.502"/>
+        <circle cx="58.5" cy="17.5" r="4.5" fill="#2F5472"/>
+    </g>
+</svg>

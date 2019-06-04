@@ -22,6 +22,7 @@
     "react-markdown": "^4.0.8",
     "react-mobile-datepicker": "^4.0.1",
     "react-redux": "^7.0.2",
+    "react-reveal": "^1.2.2",
     "react-scroll": "^1.7.11",
     "react-signature-pad": "0.0.6",
     "react-stripe-elements": "^3.0.0",

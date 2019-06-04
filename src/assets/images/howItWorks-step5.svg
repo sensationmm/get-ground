@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="323" height="152" viewBox="0 0 323 152">
+    <defs>
+        <path id="a" d="M0 0h34v34H0z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <text fill="#42505C" font-family="OpenSans-Light, Open Sans" font-size="16" font-weight="300">
+            <tspan x="78" y="61">GetGround can connect you to </tspan> <tspan x="78" y="89">other investors on the platform to </tspan> <tspan x="78" y="117">buy and sell shares in companies </tspan> <tspan x="78" y="145">holding property (optional service)</tspan>
+        </text>
+        <text fill="#42505C" font-family="OpenSans-Bold, Open Sans" font-size="13" font-weight="bold">
+            <tspan x="78" y="17">Step 5</tspan>
+        </text>
+        <mask id="b" fill="#fff">
+            <use xlink:href="#a"/>
+        </mask>
+        <path fill="#2F5472" d="M17.087 32.404a.195.195 0 0 1-.043.004l-.005.01-14.622-7.191 6.914-3.237 7.004 3.444c.26.128.529.155.709.155.19 0 .472-.03.744-.17l7.415-3.833 6.468 3.275-14.584 7.543zm.858-30.809c.003 0 .019-.003.042-.003.024 0 .042.003.032-.003l13.653 6.912-14.587 7.544c-.004 0-.02.004-.04.004l-.007.008-14.622-7.19 15.529-7.272zM33.41 23.957l-6.706-3.395 6.347-3.281c.202-.106.202-.274-.001-.377l-7.158-3.624 7.526-3.89c.365-.19.582-.527.58-.902-.002-.373-.223-.707-.588-.891L18.733.167A1.678 1.678 0 0 0 17.987 0c-.175 0-.437.025-.69.143L.611 7.954c-.38.178-.609.511-.612.89-.004.38.22.716.597.902l8.013 3.94-7.66 3.587c-.205.095-.205.255-.002.355l6.802 3.345-7.138 3.342c-.38.177-.61.51-.612.889-.004.38.22.716.597.9l15.74 7.742c.259.127.527.154.707.154.19 0 .472-.029.745-.17l15.63-8.08c.366-.19.583-.527.581-.901-.003-.374-.224-.708-.59-.892z" mask="url(#b)"/>
+        <circle cx="54.5" cy="18.5" r="4.5" fill="#2F5472"/>
+    </g>
+</svg>

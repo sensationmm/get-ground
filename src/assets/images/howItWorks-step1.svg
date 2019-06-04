@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="325" height="90" viewBox="0 0 325 90">
+    <g fill="none" fill-rule="evenodd" transform="translate(0 -2)">
+        <text fill="#42505C" font-family="OpenSans-Light, Open Sans" font-size="16" font-weight="300">
+            <tspan x="73" y="57">GetGround will set up a UK Limited </tspan> <tspan x="73" y="85">company and bank account for you</tspan>
+        </text>
+        <text fill="#42505C" font-family="OpenSans-Bold, Open Sans" font-size="13" font-weight="bold">
+            <tspan x="73" y="14">Step 1</tspan>
+        </text>
+        <path fill="#2F5472" d="M14 2L7 6.782l-7 4.781h2.028V13h23.944v-1.437H28l-7-4.781L14 2zm5 11v13h5l-.863-13H19zm-6.567 0L12 26h5l-.431-13h-4.136zm-7.567 0L4 26h5V13H4.866zM2.432 26v1.866H1V30h26v-2.134h-1.432V26H2.432z"/>
+        <circle cx="49.5" cy="16.5" r="4.5" fill="#2F5472"/>
+    </g>
+</svg>

@@ -303,6 +303,36 @@
     "ctaSecondary": "Back",
     "skipStep": "Skip this step for now"
   },
+  "howItWorks": {
+    "title": "How it works",
+    "sections": {
+      "step1": {
+        "title": "Step 1",
+        "copy": "GetGround will set up a UK Limited company and bank account for you",
+        "imageAltText": "Property"
+      },
+      "step2": {
+        "title": "Step 2",
+        "copy": "GetGround can connect you to mortgages, insurance, property management and solicitors (optional service)",
+        "imageAltText": "Purchase"
+      },
+      "step3": {
+        "title": "Step 3",
+        "copy": "GetGround will coordinate with your lawyers to purchase your property through your company",
+        "imageAltText": "Solicitor Details"
+      },
+      "step4": {
+        "title": "Step 4",
+        "copy": "GetGround will manage on an on-going basis all your company requirements including accounting, tax, legal documents, filings and secretarial work",
+        "imageAltText": "Shareholder details"
+      },
+      "step5": {
+        "title": "Step 5",
+        "copy": "GetGround can connect you to other investors on the platform to buy and sell shares in companies holding property (optional service)",
+        "imageAltText": "Services"
+      }
+    }
+  },
   "landing": {
     "title": "GetGround for smarter property purchasing.",
     "secondaryTitle": "Protect your wealth and be tax efficient.",
