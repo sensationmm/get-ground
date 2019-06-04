@@ -343,14 +343,16 @@
     "title": "Meet the founders",
     "cta": "Read more",
     "moubin": {
-      "name": "Moubin",
+      "nameLong": "Moubin Faizullah Khan",
+      "nameShort": "Moubin",
       "content": {
         "first": "Moubin has experience in investing, commercial strategy, tax and structuring. He was an investment professional at Apax Partners, one of the world’s leading private equity houses.",
         "second": "There he was involved in numerous key transaction in the retail, consumer and IT services sectors. Previously Moubin was at McKinsey & Company and is trained as a medical doctor at Imperial College where he graduated with distinctions."
       }
     },
     "misrab": {
-      "name": "Misrab Faizullah Khan",
+      "nameLong": "Misrab Faizullah Khan",
+      "nameShort": "Misrab",
       "content": {
         "first": "Misrab is a computer scientist. He set up the data science team and Singapore office at Go-Jek, Indonesia’s first technology ‘unicorn’.",
         "second": "There he was involved in numerous key transaction in the retail, consumer and IT services sectors. Previously Moubin was at McKinsey & Company and is trained as a medical doctor at Imperial College where he graduated with distinctions.",

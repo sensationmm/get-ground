@@ -1,19 +1,53 @@
 @import '../../styles/modules/_colors';
 
 .meet-the-founders {
-  h3 {
-    text-align: center;
-  }
-
   .chat {
     color: $text;
     width: 169px;
-    margin: 0 auto;
-    margin-bottom: 30px;
+    margin: 20px auto 30px auto;
+  }
+
+  &-expanded {
+    h3 {
+      text-align: center;
+    }
+
+    img {
+      margin: 0 auto;
+      display: flex;
+      margin-bottom: 30px;
+    }
+
+    &-moubin {
+      margin-bottom: 50px;
+      &-img {
+        width: 151px;
+        height: 151px;
+      }
+    }
   }
 
   &-join-us {
     margin-top: 30px;
   }
-}
 
+  &-closed {
+    text-align: center;
+    h3 {
+      margin-top: 10px;
+    }
+    &-moubin {
+      float: left;
+      width: 50%;
+    }
+    &-misrab {
+      float: right;
+      width: 50%;
+      margin-bottom: 30px;
+    }
+    img {
+      width: 115px;
+      height: 115px;
+    }
+  }
+}
