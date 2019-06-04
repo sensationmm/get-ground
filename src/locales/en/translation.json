@@ -545,16 +545,19 @@
         "retake": "Retake"
       },
       "passport": {
+        "name": "Passport",
         "title": "Add a picture of your passport",
         "content": "Please make sure you take a picture of the page of your passport that contains your picture and your details. The full page should be visible on the picture.",
         "retakeImageContent": "Are you happy with this picture? Please make sure it is well-lit and that you can read the information clearly."
       },
       "address": {
+        "name": "Proof of Address",
         "title": "Add proof of address",
         "content": "Now we need a picture of a utility bill, bank statement or any government letter (e.g. HMRC). Please make sure the document is recent (inside the past 3 months) and the address and your name are clearly visible.",
         "retakeImageContent": "Are you happy with this picture? Please make sure the date, your full name and address are clearly visible."
       },
       "selfie": {
+        "name": "Selfie",
         "title": "Take a picture of yourself",
         "content": "We need this picture so we can match it with the one in your passport. This is to make sure no one is trying to create a false account using your documents.",
         "retakeImageContent": "Are you happy with this picture? Please make sure the picture is well-lit and not blurred."

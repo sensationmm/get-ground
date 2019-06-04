@@ -66,10 +66,10 @@ describe('<AddProof />', () => {
 
     expect(wrapper.length).toEqual(1)
     expect(wrapper.find('[data-test="intro-box"]').length).toEqual(1)
-    expect(wrapper.find('p').length).toEqual(1)
+    expect(wrapper.find('p').length).toEqual(2)
     expect(props.t).toHaveBeenCalledWith('onBoarding.idCheck.passport.title')
     expect(props.t).toHaveBeenCalledWith('onBoarding.idCheck.passport.content')
-    expect(wrapper.find('img').length).toEqual(1)
+    expect(wrapper.find('img').length).toEqual(3)
     expect(wrapper.find('[data-test="camera"]').length).toEqual(0)
     expect(wrapper.find('[data-test="dropzone"]').length).toEqual(1)
   })
@@ -202,9 +202,10 @@ describe('<AddProof />', () => {
     wrapper = shallow(<AddProof {...customProps} />);
 
     expect(wrapper.find('[data-test="intro-box"]').length).toEqual(1)
-    expect(wrapper.find('p').length).toEqual(1)
+    expect(wrapper.find('p').length).toEqual(2)
     expect(props.t).toHaveBeenCalledWith('onBoarding.idCheck.address.title')
     expect(props.t).toHaveBeenCalledWith('onBoarding.idCheck.address.content')
+    expect(props.t).toHaveBeenCalledWith('onBoarding.idCheck.address.name')
   })
 
   it('adds disable classname to section when prop active is equal to a different section', () => {

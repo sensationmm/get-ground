@@ -1,91 +1,71 @@
-/* eslint-disable require-jsdoc */
-import React from 'react';
-import CameraPhoto, { FACING_MODES } from 'jslib-html5-camera-photo';
-import Button from 'src/components/_buttons/Button/Button'
-import { withTranslation } from 'react-i18next'
+import React, { Component } from 'react';
+import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { setImg, setRetake } from 'src/state/actions/idCheck'
 
-import './camera.scss'
+import 'react-html5-camera-photo/build/css/index.css';
 
-export class Camera extends React.Component {
-  constructor (props, context) {
-    super(props, context);
-    this.cameraPhoto = null;
-    this.videoRef = React.createRef();
-    this.state = {
-      dataUri: ''
-    }
-  }
-
-  componentDidMount () {
-    const { section } = this.props.section
-    this.cameraPhoto = new CameraPhoto(this.videoRef.current);
-    const facingMode = section === 'selfie' ? FACING_MODES.USER : FACING_MODES.ENVIRONMENT;
-    const idealResolution = { width: 1280, height: 720 };
-    this.cameraPhoto.startCamera(facingMode, idealResolution)
-  }
-
-  takePhoto () {
-    const config = {
-      sizeFactor: 1
-    };
-
-    const dataUri = this.cameraPhoto.getDataUri(config);
-    this.setState({ dataUri });
+/**
+ * ProofCamera
+ * @author Ravin Patel <ravin.patel@getground.co.uk>
+ * @return {JSXElement} - ProofCamera
+ */
+export class ProofCamera extends Component {
+  onTakePhoto (dataUri) {
     this.props.setImg(this.props.section, dataUri)
     if (this.props.active === this.props.section) {
       this.props.setRetake(this.props.section, true)
     }
-    this.stopCamera()
+    this.onCameraStop()
   }
 
-  stopCamera () {
-    this.cameraPhoto.stopCamera()
+  onCameraError (error) {
+    // eslint-disable-next-line no-console
+    console.error('onCameraError', error);
   }
 
-  startCamera = () => {
-    const { t } = this.props;
+  onCameraStart (stream) {}
 
-    return (
-      <>
-      <video
-          data-test="camera"
-          className="camera-video"
-          ref={this.videoRef}
-          autoPlay="true"
-        />
-        <Button style={`display: inline;`} data-test="capture-button" classes="primary capture" fullWidth label={t('onBoarding.idCheck.image.capture')} onClick={() => this.takePhoto()}/>
-        </>
-    )
-  }
+  onCameraStop () {}
 
   render () {
-    const { t } = this.props
-
+    const { section } = this.props
     return (
-      <div className="camera">
-        {this.startCamera(t)}
+      <div className="App">
+        <Camera
+          data-test="camera"
+          onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
+          onCameraError = { (error) => { this.onCameraError(error); } }
+          idealFacingMode = {section === 'selfie' ? FACING_MODES.USER : FACING_MODES.ENVIRONMENT}
+          idealResolution = {{width: 1216, height: 912}}
+          imageType = {IMAGE_TYPES.JPG}
+          imageCompression = {0.97}
+          isMaxResolution = {false}
+          isImageMirror = {false}
+          isSilentMode = {true}
+          isDisplayStartCameraError = {true}
+          isFullscreen = {false}
+          sizeFactor = {1}
+          onCameraStart = { (stream) => { this.onCameraStart(stream); } }
+          onCameraStop = { () => { this.onCameraStop(); } }
+        />
       </div>
     );
   }
 }
 
-Camera.propTypes = {
-  t: PropTypes.func.isRequired,
+ProofCamera.propTypes = {
   section: PropTypes.string.isRequired,
   setImg: PropTypes.func.isRequired,
   setRetake: PropTypes.func.isRequired,
   active: PropTypes.string.isRequired,
-  overlay: PropTypes.string
 }
-
 
 const actions = {
   setImg,
   setRetake
 }
 
-export default connect(null, actions)(withTranslation()(Camera));
+export default connect(null, actions)(ProofCamera);
