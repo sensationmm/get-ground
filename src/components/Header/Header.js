@@ -18,12 +18,14 @@ import './header.scss'
 const Header = (props) => {
   return (
     <header data-test="component-header" className={classNames('header', props.classNames)}>
-      <div className="header-logo"><img src={Logo} alt="GetGround logo" /></div>
+      <div className="header-inner">
+        <div className="header-logo"><img src={Logo} alt="GetGround logo" /></div>
 
-      {props.children
-        ? props.children
-        : <div className="header-menu-toggle" />
-      }
+        {props.children
+          ? props.children
+          : <div className="header-menu-toggle" />
+        }
+      </div>
     </header>
   );
 }

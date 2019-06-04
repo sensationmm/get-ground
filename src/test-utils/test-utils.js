@@ -31,7 +31,7 @@ export const setup = (Component, props={}, state=null) => {
   const wrapper = shallow(<Component {...props} />)
 
   if(state) {
-      wrapper.setState({ ...state });
+      wrapper.setState({ ...wrapper.state(), ...state });
   }
 
   return wrapper;

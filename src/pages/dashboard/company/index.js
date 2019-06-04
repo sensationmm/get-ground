@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { navigate } from 'gatsby';
 
+import { getByValue } from 'src/utils/functions';
+
 import Layout from 'src/components/Layout/Layout';
 import Form from 'src/components/_layout/Form/Form';
 import Button from 'src/components/_buttons/Button/Button';
@@ -21,7 +23,7 @@ const Company = (props) => {
   const [ t ] = useTranslation();
   const { companies, activeCompany } = props;
 
-  const company = activeCompany !== null ? companies[activeCompany] : companyModel;
+  const company = activeCompany !== null ? getByValue(companies, 'id', activeCompany) : companyModel;
 
   return (
     <Layout secure companyID>
@@ -102,7 +104,7 @@ Company.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   companies: PropTypes.array,
-  activeCompany: PropTypes.number
+  activeCompany: PropTypes.string
 };
 
 export const RawComponent = Company;

@@ -1,7 +1,0 @@
-.intro-box {
-  font-size: 14px;
-  margin-bottom: 20px;
-  padding: 10px;
-  background-image: linear-gradient(to right, #cef2e6, #f1f6cf); }
-  .intro-box > :last-child {
-    margin-bottom: 0; }

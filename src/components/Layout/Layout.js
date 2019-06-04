@@ -88,7 +88,7 @@ Layout.propTypes = {
   userID: PropTypes.number,
   secure: PropTypes.bool,
   redirect: PropTypes.string,
-  activeCompany: PropTypes.number,
+  activeCompany: PropTypes.string,
   companyID: PropTypes.bool
 }
 

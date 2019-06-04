@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { navigate } from 'gatsby';
 
+import { getByValue } from 'src/utils/functions';
+
 import Layout from 'src/components/Layout/Layout';
 
 import '../company-overview.scss';
@@ -19,10 +21,10 @@ const Details = (props) => {
   const [ t ] = useTranslation();
   const { companies, activeCompany } = props;
 
-  const company = companies[activeCompany];
+  const company = getByValue(companies, 'id', activeCompany);
 
   return (
-    <Layout secure>
+    <Layout secure companyID>
       <div className="company-overview" data-test="component-bank-details">
         <div className="back" onClick={() => navigate('/dashboard/company/bank-account')}>{ t('dashboard.company.bankAccount.back') }</div>
 
@@ -68,7 +70,7 @@ Details.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   companies: PropTypes.array,
-  activeCompany: PropTypes.number
+  activeCompany: PropTypes.string
 };
 
 export const RawComponent = Details;
