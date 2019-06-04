@@ -16,8 +16,6 @@ const MeetTheFounders = () => {
   const [t] = useTranslation();
   const [show, toggleShow] = useState(false);
 
-  const joinUsCTA = () => {}
-
    return (
     <div className={classNames(
       'meet-the-founders',
@@ -51,13 +49,14 @@ const MeetTheFounders = () => {
             <img src={MisrabSmall} alt="Misrab"/>
             <h3>{t('meetTheFounders.misrab.nameShort')}</h3>
           </div>
+          <div className="meet-the-founders-closed-btn">
           <Button
-            classes="meet-the-founders-closed-btn"
             data-test="read-more-button"
             liveChat
             label={t('meetTheFounders.cta')}
             onClick={() => toggleShow(!show)}
           />
+          </div>
         </div>
       }
       <div className="meet-the-founders-join-us">
@@ -68,7 +67,7 @@ const MeetTheFounders = () => {
           data-test="join-us-button"
           liveChat
           label={t('meetTheFounders.joinUs.title')}
-          onClick={() => joinUsCTA()}
+          onClick={ () => window.location.assign('mailto:info@getground.com')}
         />
       </div>
     </div>
