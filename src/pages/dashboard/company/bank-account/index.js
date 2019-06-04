@@ -7,6 +7,7 @@ import moment from 'moment';
 import classNames from 'classnames';
 
 import { getByValue } from 'src/utils/functions';
+import { companyModel } from 'src/state/reducers/companies';
 
 import Layout from 'src/components/Layout/Layout';
 
@@ -22,7 +23,7 @@ const BankAccount = (props) => {
   const [ t ] = useTranslation();
   const { companies, activeCompany } = props;
 
-  const company = getByValue(companies, 'id', activeCompany);
+  const company = activeCompany !== null ? getByValue(companies, 'id', activeCompany) : companyModel;
   const { bank_account } = company;
 
   const groupedTransactions = bank_account.transactions.reduce((accum, { date, name, sum, balance }) => {

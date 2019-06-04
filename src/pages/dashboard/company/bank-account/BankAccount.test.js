@@ -25,6 +25,12 @@ describe('BankAccount', () => {
     expect(component.length).toBe(1);
   });
 
+  test('renders without error when activeCompany not set', () => {
+    wrapper = setup(BankAccount, { ...defaultProps, activeCompany: null });
+    const component = findByTestAttr(wrapper, 'component-bank-account');
+    expect(component.length).toBe(1);
+  });
+
   test('company link', () => {
     const button = wrapper.find('.company-header');
     button.simulate('click');

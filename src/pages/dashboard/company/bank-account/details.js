@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { navigate } from 'gatsby';
 
 import { getByValue } from 'src/utils/functions';
+import { companyModel } from 'src/state/reducers/companies';
 
 import Layout from 'src/components/Layout/Layout';
 
@@ -21,7 +22,7 @@ const Details = (props) => {
   const [ t ] = useTranslation();
   const { companies, activeCompany } = props;
 
-  const company = getByValue(companies, 'id', activeCompany);
+  const company = activeCompany !== null ? getByValue(companies, 'id', activeCompany) : companyModel;
 
   return (
     <Layout secure companyID>
