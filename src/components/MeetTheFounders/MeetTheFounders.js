@@ -20,7 +20,7 @@ const MeetTheFounders = () => {
       <h1 className="meet-the-founders-title">{t('meetTheFounders.title')}</h1>
       {show
         ?
-          <div>
+          <div data-test="meet-the-founders-expanded">
             <h3>{t('meetTheFounders.moubin.name')}</h3>
             <p>{t('meetTheFounders.moubin.content.first')}</p>
             <p>{t('meetTheFounders.moubin.content.second')}</p>
