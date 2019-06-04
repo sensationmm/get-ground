@@ -47,6 +47,8 @@ export class Layout extends Component {
         navigate(`/login${redirect ? `?redirect=${redirect}` : ``}`);
       }
     }
+
+    this.validateCompanyID();
   }
 
   validateCompanyID = () => {
@@ -59,8 +61,6 @@ export class Layout extends Component {
 
   render() {
     const { children, headerActions, isLoading } = this.props;
-
-    this.validateCompanyID();
 
     return (
       <div className={classNames('wrapper', `${children.props && children.props.role}`)}>
