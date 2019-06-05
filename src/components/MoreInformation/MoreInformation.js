@@ -44,13 +44,13 @@ const MoreInformation = () => {
           <div className="more-information-expanded">
             <h1 className="more-information-expanded-title">{t('howItWorks.findOutMore.title')}</h1>
               {infos.map((info, idx) => (
-                <div key={`${idx} + ${info}`} className="more-information-expanded-info">
+                <div key={`${idx} + ${info}`} className="more-information-expanded-info" data-test="more-information-info">
                   <p>{info.title}</p>
                 </div>
               ))}
           </div>
           :
-          <Button onClick={() => toggleShow(!show)} classes="full chat more-information-cta" label={t('howItWorks.findOutMore.label')} fullWidth/>
+          <Button data-test="more-information-button" onClick={() => toggleShow(!show)} classes="full chat more-information-cta" label={t('howItWorks.findOutMore.label')} fullWidth/>
         }
     </div>
   )
