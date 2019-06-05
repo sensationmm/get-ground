@@ -93,6 +93,24 @@
     "backButton": "Back",
     "skipButton": "Skip for now"
   },
+  "advantages": {
+    "title": "GetGround Advantages",
+    "cta": "Find out more",
+    "tax": {
+      "title": "UK TAX ADVANTAGES",
+      "info1": "When you buy investment property that you rent out, there is no difference in stamp duty and land tax (SDLT) versus personal ownership.",
+      "info2": "There is no SDLT when you buy shares, rather than property. Benefit from this if you sell or buy shares of property holding companies on the GetGround marketplace.",
+      "info3": "Deduct mortgage interest from your tax bill. Under personal ownership this is being phased out and replaced with a basic rate credit.",
+      "info4": "There is lower capital gains tax on a sale of shares, rather than property.",
+      "info5": "Choose multiple ways to take money from your company e.g., capital repayments or dividends (utilise your tax-free dividend allowance; non-UK residents do not pay dividend tax)."
+    },
+    "company": {
+      "title": "ADDITIONAL COMPANY ADVANTAGES",
+      "info1": "Purchase easily with friends, family and business partners.",
+      "info2": "Contain your liabilities in the company. If your investment goes wrong your personal wealth is safer.",
+      "info3": "Using a company could mean you get a bigger mortgage. It could also mean banks have lower income requirements for you."
+    }
+  },
   "companyDesign": {
     "companyComplete": {
       "title": "Well done!",

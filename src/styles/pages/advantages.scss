@@ -1,0 +1,30 @@
+.advantages {
+  &-uk-tax {
+    &-title {
+      font-size: 13px;
+      font-weight: bold;
+      line-height: 2.15;
+    }
+
+    &-info {
+      line-height: 1.75;
+    }
+  }
+  &-company {
+    &-title {
+      font-size: 13px;
+      font-weight: bold;
+      line-height: 2.15;
+    }
+
+    &-info {
+      line-height: 1.75;
+    }
+  }
+
+  &-btn.chat {
+    width: 223px;
+    margin: 83px auto;
+    margin-top: 83px;
+  }
+}
