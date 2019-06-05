@@ -59,7 +59,7 @@ const HowItWorks = () => {
         <ul>
         {stepConfig.steps.map((step, idx) => (
           <div key={`${idx} + ${step.title}`}>
-            <Bounce>
+            <Bounce delay={1000}>
               <div className="how-it-works-step">
                 <img src={CoinAndHand}/>
                 <li className="how-it-works-step-li">
