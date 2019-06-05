@@ -1,28 +1,45 @@
+@import 'src/styles/modules/_variables.scss';
+
 .how-it-works {
+
+  &-img {
+    margin: (($padding-vertical-unit * 2) + 0px) (- ($padding-horizontal-unit * 2) + 0px);
+    margin-top: 104px;
+  }
 
   ul {
     list-style: discs;
     margin-bottom: 30%;
+    margin-top: 57px;
+    padding: 0;
+    position: relative;
+
+    .how-it-works-step-verticalLine {
+      position: absolute;
+      width: 1px;
+      border-left: solid 0.5px #616161;
+      left: 14.3%;
+      top: 1.5%;
+    }
   }
 
   &-step {
     display: flex;
-    margin-bottom: 10%;
     img {
       width: 28px;
       height: 28px;
     }
+
     &-li {
       margin-left: 11%;
     }
-    &-bullet {
-      // border-left: 1px solid #000;
-    }
+
     &-title {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: bold;
       line-height: 2.15;
     }
+
     &-copy {
       font-size: 16px;
       font-weight: 300;

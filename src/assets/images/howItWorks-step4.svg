@@ -1,25 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="314" height="179" viewBox="0 0 314 179">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="31px" height="27px" viewBox="0 0 31 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Group 8</title>
+    <desc>Created with Sketch.</desc>
     <defs>
-        <path id="a" d="M0 .18h30.786V27H0z"/>
-        <path id="c" d="M0 27h31V1H0z"/>
+        <polygon id="path-1" points="0.000106896552 0.18018 30.7862069 0.18018 30.7862069 27 0.000106896552 27"></polygon>
+        <polygon id="path-3" points="0 27 31 27 31 1 0 1"></polygon>
     </defs>
-    <g fill="none" fill-rule="evenodd">
-        <text fill="#42505C" font-family="OpenSans-Light, Open Sans" font-size="16" font-weight="300">
-            <tspan x="77" y="60">GetGround will manage on an </tspan> <tspan x="77" y="88">on-going basis all your company </tspan> <tspan x="77" y="116">requirements including </tspan> <tspan x="77" y="144">accounting, tax, legal documents, </tspan> <tspan x="77" y="172">filings and secretarial work</tspan>
-        </text>
-        <text fill="#42505C" font-family="OpenSans-Bold, Open Sans" font-size="13" font-weight="bold">
-            <tspan x="77" y="14">Step 4</tspan>
-        </text>
-        <circle cx="53.5" cy="15.5" r="4.5" fill="#2F5472"/>
-        <g>
-            <mask id="b" fill="#fff">
-                <use xlink:href="#a"/>
-            </mask>
-            <path fill="#2F5472" d="M9.158 18.144c-.59 0-1.07.484-1.07 1.08v2.628c0 1.66-1.331 3.006-2.975 3.006-1.643 0-2.975-1.346-2.975-3.006V2.34h20.88l.143 15.768-14.003.036zm20.56 0h-4.419L25.156 1.26c0-.597-.478-1.08-1.069-1.08H1.07C.48.18 0 .663 0 1.26v20.592C0 24.695 2.281 27 5.096 27h20.773c2.744-.097 4.919-2.374 4.917-5.148v-2.628c0-.596-.479-1.08-1.069-1.08z" mask="url(#b)"/>
+    <g id="Landing-Pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Landing-Page---1--Copy-11" transform="translate(-16.000000, -1095.000000)">
+            <g id="Group-8" transform="translate(16.000000, 1095.000000)">
+                <g id="Group-3" transform="translate(0.000000, -0.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Clip-2"></g>
+                    <path d="M9.15757816,18.14418 C8.56715287,18.14418 8.08861264,18.62766 8.08861264,19.22418 L8.08861264,21.85218 C8.08861264,23.51214 6.75668161,24.85782 5.11296897,24.85782 C3.46996897,24.85782 2.13803793,23.51214 2.13803793,21.85218 L2.13803793,2.34018 L23.0181414,2.34018 L23.1610264,18.10782 L9.15757816,18.14418 Z M29.7173483,18.14418 L25.2989575,18.14418 L25.1560724,1.26018 C25.1560724,0.6633 24.6778885,0.18018 24.0871069,0.18018 L1.06907241,0.18018 C0.478647126,0.18018 0.000106896552,0.6633 0.000106896552,1.26018 L0.000106896552,21.85218 C0.000106896552,24.6951 2.28127931,27.00018 5.0955092,27.00018 L25.8687161,27.00018 C28.6134632,26.90298 30.7877391,24.62634 30.7863138,21.85218 L30.7863138,19.22418 C30.7863138,18.62766 30.3074172,18.14418 29.7173483,18.14418 L29.7173483,18.14418 Z" id="Fill-1" fill="#2F5472" mask="url(#mask-2)"></path>
+                </g>
+                <mask id="mask-4" fill="white">
+                    <use xlink:href="#path-3"></use>
+                </mask>
+                <g id="Clip-5"></g>
+                <polygon id="Fill-4" fill="#2F5472" mask="url(#mask-4)" points="5 7 14 7 14 5 5 5"></polygon>
+                <polygon id="Fill-6" fill="#2F5472" mask="url(#mask-4)" points="5 11 21 11 21 9 5 9"></polygon>
+                <polygon id="Fill-7" fill="#2F5472" mask="url(#mask-4)" points="5 16 21 16 21 14 5 14"></polygon>
+            </g>
         </g>
-        <mask id="d" fill="#fff">
-            <use xlink:href="#c"/>
-        </mask>
-        <path fill="#2F5472" d="M5 7h9V5H5zM5 11h16V9H5zM5 16h16v-2H5z" mask="url(#d)"/>
     </g>
 </svg>

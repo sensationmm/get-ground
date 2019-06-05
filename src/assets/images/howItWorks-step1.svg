@@ -1,12 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="325" height="90" viewBox="0 0 325 90">
-    <g fill="none" fill-rule="evenodd" transform="translate(0 -2)">
-        <text fill="#42505C" font-family="OpenSans-Light, Open Sans" font-size="16" font-weight="300">
-            <tspan x="73" y="57">GetGround will set up a UK Limited </tspan> <tspan x="73" y="85">company and bank account for you</tspan>
-        </text>
-        <text fill="#42505C" font-family="OpenSans-Bold, Open Sans" font-size="13" font-weight="bold">
-            <tspan x="73" y="14">Step 1</tspan>
-        </text>
-        <path fill="#2F5472" d="M14 2L7 6.782l-7 4.781h2.028V13h23.944v-1.437H28l-7-4.781L14 2zm5 11v13h5l-.863-13H19zm-6.567 0L12 26h5l-.431-13h-4.136zm-7.567 0L4 26h5V13H4.866zM2.432 26v1.866H1V30h26v-2.134h-1.432V26H2.432z"/>
-        <circle cx="49.5" cy="16.5" r="4.5" fill="#2F5472"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Fill 1</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Landing-Pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Landing-Page---1--Copy-11" transform="translate(-18.000000, -555.000000)" fill="#2F5472">
+            <path d="M32,555 L25,559.78166 L18,564.562984 L20.0275111,564.562984 L20.0275111,566 L43.9724889,566 L43.9724889,564.562984 L46,564.562984 L39,559.78166 L32,555 Z M37,566 L37,579 L42,579 L41.1369498,566 L37,566 Z M30.4326108,566 L30,579 L35,579 L34.5689029,566 L30.4326108,566 Z M22.8660774,566 L22,579 L27,579 L27,566 L22.8660774,566 Z M20.4318033,579 L20.4318033,580.866077 L19,580.866077 L19,583 L45,583 L45,580.866077 L43.5681967,580.866077 L43.5681967,579 L20.4318033,579 Z" id="Fill-1"></path>
+        </g>
     </g>
 </svg>
