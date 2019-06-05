@@ -5,14 +5,13 @@
 
 .header {
   position: fixed;
+  display: flex;
+  justify-content: center;
   width: calc(100% - #{($padding-horizontal-unit * 4) + 0px});
   z-index: 2;
   top: 0px;
+  left: 0px;
   height: $header-height + 0px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  align-content: center;
   padding: $padding-vertical (($padding-horizontal-unit * 2) + 0px);
 
   @include gradient-vertical-image(
@@ -20,6 +19,15 @@
     $background-main-end,
     '../../assets/images/background.png'
   );
+
+  &-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    max-width: calc(1200px - #{(($padding-horizontal-unit * 4) + 0px)});
+  }
 
   &-logo {
     width: 80px;
