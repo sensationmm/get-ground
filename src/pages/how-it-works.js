@@ -1,25 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next';
 import Bounce from 'react-reveal/Bounce'
 import useWindowScroll from 'react-use/lib/useWindowScroll';
 
 import Layout from 'src/components/Layout/Layout'
 import ContactUs from 'src/components/ContactUs/ContactUs'
-import Button from 'src/components/_buttons/Button/Button';
+import MoreInformation from 'src/components/MoreInformation/MoreInformation';
 
+import Roof from 'src/assets/images/roof.svg'
 import Step1 from 'src/assets/images/HowItWorks-step1.svg'
 import Step2 from 'src/assets/images/HowItWorks-step2.svg'
 import Step3 from 'src/assets/images/HowItWorks-step3.svg'
 import Step4 from 'src/assets/images/HowItWorks-step4.svg'
 import Step5 from 'src/assets/images/HowItWorks-step5.svg'
 
-import Roof from 'src/assets/images/roof.svg'
-
 import 'src/styles/pages/how-it-works.scss'
 
 const HowItWorks = () => {
   const [t, i18n] = useTranslation()
-  const [show, toggleShow] = useState(false)
+
   const { y } = useWindowScroll()
 
   const stepContent = i18n.t('howItWorks.sections', { returnObjects: true });
@@ -53,36 +52,7 @@ const HowItWorks = () => {
     ]
   };
 
-  const moreInformation = i18n.t('howItWorks.findOutMore.moreInfo', { returnObjects: true });
-
-    const infos = [
-      {
-        'title': moreInformation['info1'],
-      },
-      {
-        'title': moreInformation['info2'],
-      },
-      {
-        'title': moreInformation['info3'],
-      },
-      {
-        'title': moreInformation['info4'],
-      },
-      {
-        'title': moreInformation['info5'],
-      },
-      {
-        'title': moreInformation['info6'],
-      },
-      {
-        'title': moreInformation['info7'],
-      },
-      {
-        'title': moreInformation['info8'],
-      },
-    ]
-
-  const lineHeight = (y/window.innerHeight) * 100
+  const lineHeight = Math.round((y/window.innerHeight) * 100)
 
   return (
     <Layout>
@@ -92,7 +62,7 @@ const HowItWorks = () => {
           <ul>
           {stepConfig.steps.map((step, idx) => (
             <div key={`${idx} + ${step.title}`} className="how-it-works-steps">
-              <Bounce>
+              <Bounce fraction={0.8}>
                 <div className="how-it-works-step">
                   <img src={step.image}/>
                   <li className="how-it-works-step-li">
@@ -103,22 +73,10 @@ const HowItWorks = () => {
               </Bounce>
             </div>
           ))}
-          <div className="how-it-works-step-verticalLine" style={{height: lineHeight > 88 ? `77.5%` : `${lineHeight}%`}}></div>
+          <div className="how-it-works-step-verticalLine" style={{height: lineHeight > 74.5 ? `74.5%` : `${lineHeight}%`}} data-test="how-it-works-vertical-line"></div>
         </ul>
-        {show
-          ?
-          <div className="how-it-works-find-out-more-expanded">
-            <h1 className="how-it-works-find-out-more-expanded-title">{t('howItWorks.findOutMore.title')}</h1>
-              {infos.map((info, idx) => (
-                <div key={`${idx} + ${info}`} className="how-it-works-find-out-more-expanded-info">
-                  <p>{info.title}</p>
-                </div>
-              ))}
-          </div>
-          :
-          <Button onClick={() => toggleShow(!show)} classes="full chat how-it-works-find-out-more-cta" label={t('howItWorks.findOutMore.label')} fullWidth/>
-        }
-        <ContactUs data-test="pricing-contact-us"/>
+        <MoreInformation data-test="how-it-works-more-information" />
+        <ContactUs data-test="how-it-works-contact-us"/>
       </div>
       </Layout>
   )
