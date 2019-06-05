@@ -18,14 +18,9 @@ import Roof from 'src/assets/images/roof.svg'
 import 'src/styles/pages/how-it-works.scss'
 
 const HowItWorks = () => {
-  const [t, i18n] = useTranslation();
-  const { y } = useWindowScroll() ;
-
-  console.log((y /window.innerHeight) * 100);
-
-  const height = () => {
-
-  }
+  const [t, i18n] = useTranslation()
+  const [show, toggleShow] = useState(false)
+  const { y } = useWindowScroll()
 
   const stepContent = i18n.t('howItWorks.sections', { returnObjects: true });
   const stepConfig = {
@@ -58,6 +53,35 @@ const HowItWorks = () => {
     ]
   };
 
+  const moreInformation = i18n.t('howItWorks.findOutMore.moreInfo', { returnObjects: true });
+
+    const infos = [
+      {
+        'title': moreInformation['info1'],
+      },
+      {
+        'title': moreInformation['info2'],
+      },
+      {
+        'title': moreInformation['info3'],
+      },
+      {
+        'title': moreInformation['info4'],
+      },
+      {
+        'title': moreInformation['info5'],
+      },
+      {
+        'title': moreInformation['info6'],
+      },
+      {
+        'title': moreInformation['info7'],
+      },
+      {
+        'title': moreInformation['info8'],
+      },
+    ]
+
   const lineHeight = (y/window.innerHeight) * 100
 
   return (
@@ -81,7 +105,19 @@ const HowItWorks = () => {
           ))}
           <div className="how-it-works-step-verticalLine" style={{height: lineHeight > 88 ? `77.5%` : `${lineHeight}%`}}></div>
         </ul>
-        <Button classes="full chat how-it-works-find-out-more" label={t('howItWorks.findOutMore.label')} fullWidth/>
+        {show
+          ?
+          <div className="how-it-works-find-out-more-expanded">
+            <h1 className="how-it-works-find-out-more-expanded-title">{t('howItWorks.findOutMore.title')}</h1>
+              {infos.map((info, idx) => (
+                <div key={`${idx} + ${info}`} className="how-it-works-find-out-more-expanded-info">
+                  <p>{info.title}</p>
+                </div>
+              ))}
+          </div>
+          :
+          <Button onClick={() => toggleShow(!show)} classes="full chat how-it-works-find-out-more-cta" label={t('howItWorks.findOutMore.label')} fullWidth/>
+        }
         <ContactUs data-test="pricing-contact-us"/>
       </div>
       </Layout>
