@@ -8,7 +8,7 @@ import MeetTheFounders from 'src/components/MeetTheFounders/MeetTheFounders'
 import Clock from 'src/assets/images/clock.svg'
 import 'src/styles/pages/about-us.scss'
 
-const Pricing = () => {
+const AboutUs = () => {
   const [t] = useTranslation();
 
   return (
@@ -30,4 +30,4 @@ const Pricing = () => {
   )
 }
 
-export default Pricing
+export default AboutUs
