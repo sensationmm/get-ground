@@ -331,6 +331,9 @@
         "copy": "GetGround can connect you to other investors on the platform to buy and sell shares in companies holding property (optional service)",
         "imageAltText": "Services"
       }
+    },
+    "findOutMore": {
+      "label": "Find out more"
     }
   },
   "landing": {

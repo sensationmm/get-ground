@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next';
+import Bounce from 'react-reveal/Bounce'
+import useWindowScroll from 'react-use/lib/useWindowScroll';
 
 import Layout from 'src/components/Layout/Layout'
 import ContactUs from 'src/components/ContactUs/ContactUs'
-import Bounce from 'react-reveal/Bounce'
-import useWindowScroll from 'react-use/lib/useWindowScroll';
+import Button from 'src/components/_buttons/Button/Button';
 
 import Step1 from 'src/assets/images/HowItWorks-step1.svg'
 import Step2 from 'src/assets/images/HowItWorks-step2.svg'
@@ -80,6 +81,7 @@ const HowItWorks = () => {
           ))}
           <div className="how-it-works-step-verticalLine" style={{height: lineHeight > 88 ? `77.5%` : `${lineHeight}%`}}></div>
         </ul>
+        <Button classes="full chat how-it-works-find-out-more" label={t('howItWorks.findOutMore.label')} fullWidth/>
         <ContactUs data-test="pricing-contact-us"/>
       </div>
       </Layout>
