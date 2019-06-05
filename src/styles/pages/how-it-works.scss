@@ -22,13 +22,18 @@
       position: absolute;
       width: 1px;
       border-left: solid 0.5px $text-secondary;
-      left: 14.3%;
+      left: 14%;
       top: 1.5%;
     }
   }
 
+  &-steps {
+    z-index: 3;
+  }
+
   &-step {
     display: flex;
+    padding-right: 10px;
     img {
       width: 28px;
       height: 28px;

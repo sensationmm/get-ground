@@ -73,7 +73,7 @@ const HowItWorks = () => {
               </Bounce>
             </div>
           ))}
-          <div className="how-it-works-step-verticalLine" style={{height: lineHeight > 74.5 ? `74.5%` : `${lineHeight}%`}} data-test="how-it-works-vertical-line"></div>
+          <div className="how-it-works-step-verticalLine" style={{height: lineHeight > 78 ? `78%` : `${lineHeight}%`}} data-test="how-it-works-vertical-line"></div>
         </ul>
         <MoreInformation data-test="how-it-works-more-information" />
         <ContactUs data-test="how-it-works-contact-us"/>
