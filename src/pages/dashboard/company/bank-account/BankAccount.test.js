@@ -12,7 +12,7 @@ describe('BankAccount', () => {
   let wrapper;
   const defaultProps = {
     t: jest.fn().mockImplementation((id) => id ),
-    activeCompany: 0,
+    activeCompany: '1',
     companies: [ companyMock ]
   };
 
@@ -21,6 +21,12 @@ describe('BankAccount', () => {
   });
 
   test('renders without error', () => {
+    const component = findByTestAttr(wrapper, 'component-bank-account');
+    expect(component.length).toBe(1);
+  });
+
+  test('renders without error when activeCompany not set', () => {
+    wrapper = setup(BankAccount, { ...defaultProps, activeCompany: null });
     const component = findByTestAttr(wrapper, 'component-bank-account');
     expect(component.length).toBe(1);
   });

@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { navigate } from 'gatsby';
 
+import { getByValue } from 'src/utils/functions';
+
 import Layout from 'src/components/Layout/Layout';
 import Button from 'src/components/_buttons/Button/Button';
 import OptionSelect from 'src/components/OptionSelect/OptionSelect';
@@ -40,7 +42,7 @@ class Manage extends Component {
     const { t, companies, activeCompany } = this.props;
     const { liveChatTopic } = this.state;
 
-    const company = activeCompany !== null ? companies[activeCompany] : companyModel;
+    const company = activeCompany !== null ? getByValue(companies, 'id', activeCompany) : companyModel;
 
     return (
       <Layout secure companyID>
@@ -99,7 +101,7 @@ Manage.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   companies: PropTypes.array,
-  activeCompany: PropTypes.number,
+  activeCompany: PropTypes.string,
   t: PropTypes.func.isRequired
 };
 

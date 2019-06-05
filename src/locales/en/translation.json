@@ -42,6 +42,33 @@
     "introBox": "If you didn‘t receive an email please check your spam folder and if it isn‘t there contact us.",
     "contactLink": "Contact us"
   },
+  "actionBox": {
+    "title": "What's Next?",
+    "noActions": "Great! Everything is up to date.",
+    "dismiss": "Remind later",
+    "actions": {
+      "add_company": {
+        "label": "Create your first company",
+        "labelShort": "Add Company",
+        "cta": "Add Company"
+      },
+      "directors_insurance": {
+        "label": "Your Director's Insurance is due",
+        "labelShort": "Director's Insurance",
+        "cta": "Pay now"
+      },
+      "documents_ready": {
+        "label": "Your company documents are ready",
+        "labelShort": "Documents to sign",
+        "cta": "Sign now"
+      },
+      "prompt_shareholders": {
+        "label": "There are outstanding shareholder documents to be signed",
+        "labelShort": "Prompt Shareholders",
+        "cta": "More"
+      }
+    }
+  },
   "additionalServices": {
     "title": "Additional services",
     "introBox": "If you require help with any of the following services below, we will find options for you, which you can choose to explore further or not.",
@@ -238,6 +265,12 @@
         "ctaPrimary": "Manage my company",
         "ctaSecondary": "See my bank account"
       }
+    },
+    "main": {
+      "portfolioHeader": "My Portfolio",
+      "profileLink": "My Profile",
+      "todoHeader": "To do",
+      "addCompanyButton": "Add new company"
     }
   },
   "footer": {
@@ -367,6 +400,12 @@
       "imageAltText": "confirmation image",
       "copy": "<p class='fs-large'>All your documents are signed.</p><p class='fs-large'>Please remind your shareholders to sign their documents.</p>",
       "buttonText": "View your dashboard"
+    },
+    "prompt": {
+      "heading": "Nudge your shareholders",
+      "text": "Your shareholders will need to create an account on GetGround and accept their roles so they can proceed to sign their documents.",
+      "text2": "Until then, we won’t be able to finalise your company set up. Give them a gentle nudge so we can speed up the process.",
+      "cta": "Back to Dashboard"
     }
   },
   "onBoarding": {

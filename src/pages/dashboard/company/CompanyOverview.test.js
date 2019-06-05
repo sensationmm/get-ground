@@ -5,6 +5,7 @@ import { navigate } from 'gatsby';
 import Button from 'src/components/_buttons/Button/Button';
 
 export const companyMock = {
+  id: '1',
   name: 'Dunmow Limited',
   address: {
     premise: '93  Dunmow Road',
@@ -79,7 +80,7 @@ describe('CompanyOverview', () => {
   let wrapper;
   const defaultProps = {
     t: jest.fn().mockImplementation((id) => id ),
-    activeCompany: 0,
+    activeCompany: '1',
     companies: [ companyMock ]
   };
 
