@@ -8,11 +8,11 @@ import ContactUs from 'src/components/ContactUs/ContactUs'
 import MoreInformation from 'src/components/MoreInformation/MoreInformation';
 
 import Roof from 'src/assets/images/roof.svg'
-import Step1 from 'src/assets/images/HowItWorks-step1.svg'
-import Step2 from 'src/assets/images/HowItWorks-step2.svg'
-import Step3 from 'src/assets/images/HowItWorks-step3.svg'
-import Step4 from 'src/assets/images/HowItWorks-step4.svg'
-import Step5 from 'src/assets/images/HowItWorks-step5.svg'
+import Step1 from 'src/assets/images/howItWorks-step1.svg'
+import Step2 from 'src/assets/images/howItWorks-step2.svg'
+import Step3 from 'src/assets/images/howItWorks-step3.svg'
+import Step4 from 'src/assets/images/howItWorks-step4.svg'
+import Step5 from 'src/assets/images/howItWorks-step5.svg'
 
 import 'src/styles/pages/how-it-works.scss'
 
@@ -62,7 +62,7 @@ const HowItWorks = () => {
           <ul>
           {stepConfig.steps.map((step, idx) => (
             <div key={`${idx} + ${step.title}`} className="how-it-works-steps">
-              <Bounce fraction={0.8}>
+              <Bounce fraction={0.8} >
                 <div className="how-it-works-step">
                   <img src={step.image}/>
                   <li className="how-it-works-step-li">
