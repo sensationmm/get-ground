@@ -136,10 +136,8 @@ workflows:
             branches:
               only: develop
       - deploy_qa:
-          type: approval
           requires:
             - build
-            - test
           filters:
             branches:
               only: qa
