@@ -69,9 +69,13 @@ const Advantages = () => {
           </>
         } */}
         <div className="advantages-uk-tax-more-expanded">
-          <Table sections={sections} />
-          <Table classes="small" sections={sectionsFeed} />
-          <Table classes="small" sections={sectionsFeed} />
+          <div className="advantages-uk-tax-more-expanded-table-first">
+            <Table sections={sections} />
+          </div>
+          <div className="advantages-uk-tax-more-expanded-table-second">
+            <Table classes="small" sections={sectionsFeed} />
+            <Table classes="small" sections={sectionsFeed} />
+          </div>
         </div>
         </div>
         <div className="advantages-company">
