@@ -9,6 +9,27 @@
     &-info {
       line-height: 1.75;
     }
+
+    &-more {
+      width: 100%;
+      &-expanded {
+        .table {
+          margin: 0;
+          float: right;
+          &:first-child {
+            width: 40%;
+            float: left;
+          }
+
+          &.small {
+            width: 20%;
+            .table-section-line {
+              width: 22px;
+            }
+          }
+        }
+      }
+    }
   }
   &-company {
     &-title {
