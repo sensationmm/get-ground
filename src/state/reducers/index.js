@@ -10,6 +10,7 @@ import { actions } from './actions';
 import { companies } from './companies';
 import { activeCompany } from './activeCompany';
 import { additionalServices } from './additionalServices';
+import { menu } from './menu';
 
 export default combineReducers({
   actions,
@@ -22,5 +23,6 @@ export default combineReducers({
   layout,
   loader,
   modal,
-  user
+  user,
+  menu
 });

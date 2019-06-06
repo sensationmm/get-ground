@@ -4,14 +4,21 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import jwtDecode from 'jwt-decode';
 import PropTypes from 'prop-types';
+import { CSSTransition } from 'react-transition-group';
+import { withTranslation } from 'react-i18next';
 
 import SEO from 'src/components/seo';
 import Header from 'src/components/Header/Header';
 import Loader from 'src/components/Loader/Loader';
+import Modal from 'src/components/Modal/Modal';
+import Menu from 'src/components/Menu/Menu';
 
+import store from 'src/state/store';
 import { setWidth } from 'src/state/actions/layout';
 import { userLogin } from 'src/state/actions/user';
 import { saveAuth } from 'src/state/actions/auth';
+import { showMenu, hideMenu } from 'src/state/actions/menu';
+import { hideLoader } from 'src/state/actions/loader';
 
 import authService from 'src/services/Auth';
 export const AuthService = new authService();
@@ -21,8 +28,11 @@ import './layout.scss';
 import { navigate } from 'gatsby';
 
 export class Layout extends Component {
+
   componentDidMount() {
-    const { userID, secure, redirect } = this.props;
+    const { userID, secure, redirect, hideLoader } = this.props;
+
+    store.dispatch(hideMenu());
 
     this.props.setWidth(window.innerWidth);
     window.addEventListener('resize', (window) => this.props.setWidth(window.currentTarget.innerWidth));
@@ -38,13 +48,17 @@ export class Layout extends Component {
 
       if(auth && authed) {
         this.props.saveAuth(auth.token);
-        AuthService.reauthenticate();
+        AuthService.reauthenticate().then(() => {
+          hideLoader();
+        });
 
         if (redirect) navigate(redirect);
 
       } else if(secure) {
         localStorage.removeItem('gg-auth');
         navigate(`/login${redirect ? `?redirect=${redirect}` : ``}`);
+      } else {
+        hideLoader();
       }
     }
 
@@ -59,8 +73,52 @@ export class Layout extends Component {
     }
   }
 
+  toggleMenu = () => {
+    const { showMenu, hideMenu, menuIsOpen } = this.props;
+    menuIsOpen ? hideMenu() : showMenu();  
+  }
+
   render() {
-    const { children, headerActions, isLoading } = this.props;
+    const { children, headerActions, isLoading, userID, t, menuIsOpen } = this.props;
+
+    const menuLinks = [
+      {
+        text: t('menu.links.first'),
+        link: '/what-we-do'
+      },
+      {
+        text: t('menu.links.second'),
+        link: '/get-ground-advantages'
+      },
+      {
+        text: t('menu.links.third'),
+        link: '/how-it-works'
+      },
+      {
+        text: t('menu.links.fourth'),
+        link: '/pricing'
+      },
+      {
+        text: t('menu.links.fifth'),
+        link: '/about-us'
+      },
+      {
+        text: t('menu.links.sixth'),
+        link: '/partnerships'
+      },
+      {
+        text: t('menu.links.seventh'),
+        link: '/faqs'
+      },
+      {
+        text: t('menu.links.eigth'),
+        function: (e) => {
+          e.preventDefault('wambam');
+          localStorage.removeItem('gg-auth');
+          navigate('/login');
+        }
+      }
+    ];
 
     return (
       <div className={classNames('wrapper', `${children.props && children.props.role}`)}>
@@ -68,12 +126,33 @@ export class Layout extends Component {
 
         {isLoading && <Loader />}
 
-        <Header>{headerActions}</Header>
+        <Header
+          isLoading={isLoading}
+          userID={userID}
+          classNames={userID ? '' : 'extra-padding'}
+          onClick={this.toggleMenu}
+          menuIsOpen={menuIsOpen}
+        >
+          {headerActions}
+        </Header>
 
-        <div className="app">
+        <div className={classNames('app', { 'extra-top-padding': !userID })}>
           <main className="main">{children}</main>
         </div>
         <div id="modal-root"></div>
+        <CSSTransition
+          in={menuIsOpen}
+          timeout={400}
+          classNames="menu"
+          unmountOnExit
+        >
+          <Modal>
+            <Menu 
+              menuLinks={menuLinks}
+              menuIsOpen={menuIsOpen}
+            />
+          </Modal>
+        </CSSTransition>
       </div>
     )
   }
@@ -89,7 +168,12 @@ Layout.propTypes = {
   secure: PropTypes.bool,
   redirect: PropTypes.string,
   activeCompany: PropTypes.string,
-  companyID: PropTypes.bool
+  companyID: PropTypes.bool,
+  menuIsOpen: PropTypes.bool,
+  showMenu: PropTypes.func,
+  hideMenu: PropTypes.func,
+  t: PropTypes.func.isRequired,
+  hideLoader: PropTypes.func,
 }
 
 Layout.defaultProps = {
@@ -99,13 +183,17 @@ Layout.defaultProps = {
 const mapStateToProps = (state) => ({
   isLoading: state.loader.isLoading,
   userID: state.user.id,
-  activeCompany: state.activeCompany
+  activeCompany: state.activeCompany,
+  menuIsOpen: state.menu.isOpen,
 });
 
 const actions = {
   setWidth,
   userLogin,
   saveAuth,
+  showMenu,
+  hideMenu,
+  hideLoader
 };
 
-export default connect(mapStateToProps, actions)(Layout);
+export default connect(mapStateToProps, actions)(withTranslation()(Layout));

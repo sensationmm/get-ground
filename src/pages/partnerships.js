@@ -100,7 +100,7 @@ class Partnerships extends Component {
 
     return (
       <Layout>
-        <div className="partnerships">
+        <div className="partnerships" role="brochure">
           <img className="partnerships-img" src={ShakingHands} alt="shaking-hands" data-test="partnerships-img" />
           <h1 className="partnerships-title">Partnerships</h1>
           <p className="partnerships-content">Interested in selling GetGround and earning a commission? We work with partners such as estate agents, mortgage brokers and property developers. If you’d like to know more, enter your email and we’ll be in touch.</p>

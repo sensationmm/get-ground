@@ -15,7 +15,7 @@ const IndexPage = () => {
   return (
     <Fragment>
       <Layout>
-        <div data-test="container-landing" className="landing" role="company-design">
+        <div data-test="container-landing" className="landing" role="company-design brochure">
           <h1 data-test="landing-title" >{t('landing.title')}</h1>
           <h1 data-test="landing-secondary-title" >{t('landing.secondaryTitle')}</h1>
           <ImageFull src={house} alt="house" data-test="landing-img" />

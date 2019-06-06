@@ -1,0 +1,67 @@
+@import '../../styles/modules/_mixins';
+@import '../../styles/modules/_variables';
+@import 'src/styles/modules/_colors';
+
+.menu {
+  @include gradient-horizontal($gradient-primary-1, $gradient-primary-2);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  padding: 110px 20px 20px;
+  box-sizing: border-box;
+
+  &--list {
+    list-style: none;
+    color: $white;
+    font-size: 20px;
+    padding: 0;
+    opacity: 0;
+    transition: all 0.4s;
+
+    &.fade-in {
+      opacity: 1;
+    }
+
+    &-item {
+      margin-bottom: 30px;
+      position: relative;
+
+      &:after {
+        content: '';
+        mask: url('../../assets/images/chevron-right.svg') center right no-repeat;
+        width: 15px;
+        height: 22px;
+        position: absolute;
+        right: 0;
+        top: 2px;
+        background: $white;
+      }
+      
+      a {
+        display: block;
+      }
+    }
+  }
+
+  &.menu-enter {
+    transform: translateY(-100%);
+  }
+  &.menu-enter-active {
+    transform: translateY(0);
+    transition: transform 400ms;
+  }
+  &.menu-exit {
+    transform: translateY(0);
+  }
+  &.menu-exit-active {
+    transition: transform 400ms;
+    transform: translateY(-100%);
+  }
+}
+
+.account .menu {
+  @include gradient-horizontal($background-account-start,$background-account-end);
+}

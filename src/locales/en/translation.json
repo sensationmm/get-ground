@@ -350,6 +350,12 @@
     "ctaSecondary": "Back",
     "skipStep": "Skip this step for now"
   },
+  "header": {
+    "buttons": {
+      "register": "Register",
+      "login": "Log In"
+    }
+  },
   "landing": {
     "title": "GetGround for smarter property purchasing.",
     "secondaryTitle": "Protect your wealth and be tax efficient.",
@@ -395,6 +401,18 @@
     "joinUs": {
       "title": "Join us",
       "content": "Our team is rapidly growing. If you believe in our mission and would like to contribute to our growth, please get in touch."
+    }
+  },
+  "menu": {
+    "links": {
+      "first": "What we do",
+      "second": "GetGround Advantages",
+      "third": "How it works",
+      "fourth": "Pricing",
+      "fifth": "About us",
+      "sixth": "Partnerships",
+      "seventh": "FAQs",
+      "eigth": "Logout"
     }
   },
   "modal": {

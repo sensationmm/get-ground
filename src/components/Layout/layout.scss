@@ -126,3 +126,7 @@ b {
 .has-hero-button {
   padding-bottom: 60px;
 }
+
+.brochure .app.extra-top-padding {
+  padding-top: calc((#{$header-height + ($padding-vertical-unit * 5) + 0px + $padding-vertical}));
+}
