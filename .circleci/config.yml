@@ -138,7 +138,6 @@ workflows:
       - deploy_qa:
           requires:
             - build
-            - test
           filters:
             branches:
               only: qa
