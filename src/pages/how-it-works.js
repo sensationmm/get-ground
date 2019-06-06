@@ -52,7 +52,7 @@ const HowItWorks = () => {
     ]
   };
 
-  const lineHeight = Math.round((y/window.innerHeight) * 100)
+  const lineHeight = window ? Math.round((y/window.innerHeight) * 100) : 79;
 
   return (
     <Layout>
