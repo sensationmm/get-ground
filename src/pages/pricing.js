@@ -12,7 +12,7 @@ const Pricing = () => {
 
   return (
     <Layout>
-      <div>
+      <div role="brochure">
         <img className="pricing-img" src={CoinAndHand} alt="coins in a jar" data-test="pricing-img" />
         <h1 className="pricing-title">{t('pricing.title')}</h1>
         <div className="pricing-property">

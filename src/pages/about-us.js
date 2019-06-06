@@ -13,7 +13,7 @@ const AboutUs = () => {
 
   return (
     <Layout>
-      <div>
+      <div role="brochure">
         <img className="about-us-img" src={Clock} alt="clock" data-test="about-us-img" />
         <h1 className="about-us-title">{t('aboutUs.title.first')}</h1>
         <p className="about-us-content" data-test="content-first">{t('aboutUs.content.first')}</p>
