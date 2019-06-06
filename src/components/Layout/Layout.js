@@ -121,9 +121,7 @@ export class Layout extends Component {
     ];
 
     return (
-      <div className={classNames('wrapper',
-      `${children.props && children.props.role}`
-      )}>
+      <div className={classNames('wrapper', `${children.props && children.props.role}`)}>
         <SEO title="GetGround" keywords={[`gatsby`, `application`, `react`]} />
 
         {isLoading && <Loader />}
@@ -138,11 +136,7 @@ export class Layout extends Component {
           {headerActions}
         </Header>
 
-        <div 
-          className={classNames('app', 
-            { 'extra-top-padding': !userID }
-          )}
-        >
+        <div className={classNames('app', { 'extra-top-padding': !userID })}>
           <main className="main">{children}</main>
         </div>
         <div id="modal-root"></div>

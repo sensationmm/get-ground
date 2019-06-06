@@ -49,7 +49,7 @@
       cursor: pointer;
 
       &:after, &:before, div {
-        background-color: #fff;
+        background-color: $white;
         border-radius: 3px;
         content: '';
         display: block;
