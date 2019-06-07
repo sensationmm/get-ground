@@ -2,10 +2,6 @@ import React, { useState, useEffect } from 'react'
 import Layout from 'src/components/Layout/Layout'
 import { useTranslation } from 'react-i18next'
 
-// import ReactSwipe from 'react-swipe';
-// import { Carousel } from 'react-responsive-carousel';
-// import SwipeableViews from 'react-swipeable-views';
-
 import Piggy from 'src/assets/images/piggy.svg'
 import whiteTick from 'src/assets/images/white-tick.svg'
 import orangeCross from 'src/assets/images/orange-cross.svg'
@@ -160,21 +156,21 @@ const Advantages = () => {
     if(index === 0) {
       return (
         <div className="answers tax">
-          <Table classes="right small" sections={smallFeed} images />
-          <Table classes="right small blue" sections={smallFeed2} images />
+          <Table header="Personal ownership" classes="right" sections={smallFeed} images small/>
+          <Table header="Company ownership" classes="right blue" sections={smallFeed2} images small />
         </div>
       )
     }
 
     if (index === 1) {
       return (
-        <Table classes="answers right tax" sections={feed1} />
+        <Table header="Personal ownership" classes="answers right tax" sections={feed1} />
       )
     }
 
     if (index === 2) {
       return (
-        <Table classes="answers right blue tax" sections={feed2} />
+        <Table header="Company ownership" classes="answers right blue tax" sections={feed2} />
       )
     }
   }
@@ -218,7 +214,7 @@ const Advantages = () => {
           onClick={() => toggleTableIndex(2)}
         />
       </div>
-      {/* <p className="advantages-uk-tax-more-expanded-info">None of the information contained here, nor anywhere in this presentation contributes advice</p> */}
+      <p className="advantages-uk-tax-more-expanded-info">None of the information contained here, nor anywhere in this presentation contributes advice</p>
     </div>
   )
 

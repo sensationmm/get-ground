@@ -6,6 +6,16 @@
   border-radius: 8px;
   box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.15);
   padding: 10px;
+  margin-top: 50px;
+
+
+  &-header {
+    font-size: 16px;
+    text-align: center;
+    &.small {
+      font-size: 12px;
+    }
+  }
 
   &.blue {
     background-image: linear-gradient(to bottom, #559bab, #8ad9d0);
@@ -37,7 +47,7 @@
     }
 
     &-line {
-      width: 111.4px;
+      width: 122.4px;
       height: 1px;
       border: solid 0.5px $line;
       position: absolute;
@@ -47,12 +57,16 @@
   }
 
   &.small {
+    &.blue {
+      // margin-top: 5px;
+    }
     .table-section-line {
       left: 30%;
     }
   }
 
   &.right {
+    // margin-top: 30px;
     .table-section-copy {
       font-size: 11px;
       width: 70%;

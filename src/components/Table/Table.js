@@ -4,13 +4,20 @@ import classNames from 'classnames';
 
 import './table.scss'
 
-const Table = ({ sections, classes, images }) => {
+const Table = ({ sections, classes, images, header, small }) => {
   return (
   <>
+    {header &&
+      <div className={classNames(
+        'table-header',
+        {'small': small}
+      )}>{header}</div>
+    }
     <div className={classNames(
       'table',
-      classes,
+      {'small': small},
       {'images': images},
+      classes
     )}>
       {sections.map((section, idx) => (
         <div key={`${section} + ${idx}`} className="table-section">
@@ -34,7 +41,8 @@ Table.propTypes = {
   sections: PropTypes.array,
   classes: PropTypes.string,
   images: PropTypes.bool,
-  header: PropTypes.string
+  header: PropTypes.string,
+  small: PropTypes.bool
 }
 
 export default Table;

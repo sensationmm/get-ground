@@ -20,7 +20,6 @@
       width: 100%;
       &-expanded {
         .table {
-          margin: 0;
           float: right;
           &:first-child {
             width: 40%;
@@ -63,7 +62,8 @@
           float: right;
           font-size: 10px;
           color: $text-secondary;
-          width: 100%;
+          width: 236px;
+          margin-top: 28px;
         }
       }
     }
