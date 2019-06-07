@@ -57,6 +57,6 @@ describe('How it works page', () => {
 
   test('vertical line', () => {
     expect(wrapper.find('[data-test="how-it-works-vertical-line"]').length).toEqual(1)
-    expect(wrapper.find('[data-test="how-it-works-vertical-line"]').props().style).toEqual({height: '13%'})
+    expect(wrapper.find('[data-test="how-it-works-vertical-line"]').props().style).toEqual({height: '78%'})
   })
 })

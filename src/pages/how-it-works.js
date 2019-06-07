@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next';
 import Bounce from 'react-reveal/Bounce'
 import useWindowScroll from 'react-use/lib/useWindowScroll';
@@ -52,7 +52,12 @@ const HowItWorks = () => {
     ]
   };
 
-  const lineHeight = window ? Math.round((y/window.innerHeight) * 100) : 79;
+  let lineHeight = 79;
+
+  useEffect(() => {
+    lineHeight = Math.round((y/window.innerHeight) * 100);
+  })
+
 
   return (
     <Layout>
