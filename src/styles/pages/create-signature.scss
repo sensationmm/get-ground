@@ -1,0 +1,22 @@
+@import 'src/components/_form/Input/input.scss';
+
+.create-signature {
+  padding-bottom: 20px;
+
+  .button {
+
+    &.edit {
+      margin-bottom: 20px;
+    }
+  }
+
+  .signatures {
+    margin-bottom: 40px;
+  }
+
+  // .signatures-label {
+  //   margin-top: 40px;
+  //   display: block;
+  //   @extend .text-input-label;
+  // }
+}
