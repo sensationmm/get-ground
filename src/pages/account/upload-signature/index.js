@@ -76,8 +76,10 @@ class UploadSignature extends Component {
   }
 
   render() {
-    const { t } = this.props;
+    const { t, location } = this.props;
     const { imageSrc, imageSaved } = this.state;
+
+    const isEditMode = location.search === '?edit';
 
     return (
       <Layout secure>
@@ -135,9 +137,16 @@ class UploadSignature extends Component {
           { imageSaved &&
             <Fragment>
               <h1>{t('account.yourSignature.title')}</h1>
-              <IntroBox data-test="intro-box-2">{t('account.yourSignature.intro')}</IntroBox>
+
+              <IntroBox data-test="intro-box-2">
+              { isEditMode
+                ? t('account.yourSignature.edited')
+                : t('account.yourSignature.intro')
+              }
+              </IntroBox>
+
               <img className="your-signature--saved-image" src={imageSrc} />
-              <Link to="/documents">
+              <Link to={isEditMode ? '/account' : '/documents'}>
                 <Button 
                   classes="primary full"
                   label={t('account.yourSignature.buttons.continue')} 
@@ -155,6 +164,7 @@ UploadSignature.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   t: PropTypes.func.isRequired,
+  location: PropTypes.object
 };
 
 const actions = { showLoader, hideLoader };

@@ -1,6 +1,8 @@
 import BaseService from './BaseService';
 import store from 'src/state/store';
 
+import { saveDocuments } from 'src/state/actions/documents';
+
 /**
  * AccountService
  * @return {Object} AccountService
@@ -60,6 +62,25 @@ class AccountService extends BaseService {
   };
 
   /**
+   * updatePersonalDetails
+   * Updates specified keys on the user model
+   * @param {object} data - data object for post
+   * @return {Promise} updatePersonalDetails response
+   */
+  updatePersonalDetails = data => {
+    const userID = data.userID;
+    delete data.userID;
+
+    const config = {
+      url: `users/${userID}`,
+      method: 'put',
+      data
+    };
+
+    return this.doRequest(config);
+  };
+
+  /**
    * saveSignature
    * saves the users signature
    * @param {Blob} signatureBlob - signature blob
@@ -84,6 +105,22 @@ class AccountService extends BaseService {
     };
 
     return this.doRequest(config);
+  };
+
+  /**
+   * getDocuments
+   * Gets documents for current user
+   * @return {Promise} getDocuments response
+   */
+  getDocuments = () => {
+    const config = {
+      url: `documents`,
+      method: 'get'
+    };
+  
+    return this.doRequest(config, (response) => {
+      store.dispatch(saveDocuments(response.data.filter(item => item.creator === store.getState().user.id)));
+    });
   };
 }
 
