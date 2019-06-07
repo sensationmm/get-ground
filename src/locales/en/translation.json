@@ -18,6 +18,7 @@
       "title": "Set up your signature",
       "intro": "First you must setup your signature.",
       "heading2": "Choose option",
+      "edit": "Edit your signature",
       "buttons": {
         "draw": "Draw your signature",
         "create": "Create digital signature",
@@ -44,9 +45,10 @@
     "yourSignature": {
       "title": "Your signature",
       "intro": "Your signature is saved to your profile. Now you are ready to continue and sign your company documents.",
+      "edited": "Your new signature has been saved.",
       "buttons": {
         "continue": "Continue",
-        "edit": "edit"
+        "edit": "Edit"
       }
     }
   },
@@ -778,6 +780,24 @@
       "firstContent": "Our partners may charge a fee if you decide to use their mortgage, insurance, solicitor or property management services.",
       "secondContent": "We charge 0.2% of the property’s sale value if you buy or sell shares in companies holding property on the GetGround platform. You do not have to sell through us, this is an optional service."
     }
+  },
+  "profile": {
+    "sections": {
+      "name": "Full name",
+      "previousNames": "Previous name(s)",
+      "dob": "Date of birth",
+      "birthCity": "City of birth",
+      "occupation": "Occupation",
+      "phone": "Phone number",
+      "email": "Email address",
+      "homeAddress": "Home address",
+      "payment": "Payment methods",
+      "passport": "Passport documents",
+      "proofAddress": "Proof of address",
+      "signature": "Signature"
+    },
+    "edit": "Edit",
+    "save": "Save"
   },
   "trustAndPrivacy" : {
     "title": "Trust and Privacy",

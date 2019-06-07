@@ -80,7 +80,7 @@ validationMessages.validateNoOfCompanies = i18n.t('validation.validateNoOfCompan
  * @return {boolean} whether value is entered
  */
 export const validateLettersOnly = (input) => {
-  return !/[^a-zA-Z]/.test(input) && !!input;
+  return !/[^a-zA-Z\s]/.test(input) && !!input;
 };
 validationMessages.validateLettersOnly = i18n.t('validation.validateLettersOnly');
 

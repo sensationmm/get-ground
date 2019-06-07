@@ -1,0 +1,40 @@
+@import 'src/styles/modules/_colors';
+@import 'src/styles/modules/_variables';
+
+.account {
+  &-edit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  .company-header.profile {
+    font-size: 20px;
+    font-weight: 400;
+    padding-left: 45px;
+  }
+
+  .text-input-required, .input-phone-required {
+    bottom: -20px;
+    top: auto;
+  }
+
+  &-proof-edit {
+    .icon-button {
+      position: absolute;
+      top: -15px;
+      right: 0;
+    }
+  }
+
+  .signature {
+    border-radius: 10px;
+    border: 1px solid $shadow;
+    padding: $padding-vertical $padding-horizontal;
+  }
+}

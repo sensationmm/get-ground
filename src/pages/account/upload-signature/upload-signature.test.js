@@ -29,7 +29,8 @@ describe('upload signature page', () => {
   const defaultProps = {
     t: tMock,
     showLoader: showLoaderMock,
-    hideLoader: hideLoaderMock
+    hideLoader: hideLoaderMock,
+    location: { search: null }
   };
   const originalFileReader = FileReader;
 

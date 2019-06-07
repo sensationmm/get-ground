@@ -26,5 +26,6 @@ module.exports = {
     "!src/utils/mockComponent.{js,jsx}",
     "!**/**gatsby**.{js,jsx}",
     "!src/services/BaseService.{js,jsx}",
+    "!cypress/**/**.{js,jsx}"
   ]
 }

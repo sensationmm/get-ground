@@ -62,8 +62,10 @@ class DrawSignature extends Component {
   }
 
   render() {
-    const { t } = this.props;
+    const { t, location } = this.props;
     const { isSignature, savedSignature } = this.state;
+
+    const isEditMode = location.search === '?edit';
 
     return (
       <Layout secure>
@@ -101,7 +103,14 @@ class DrawSignature extends Component {
         { savedSignature !== '' && 
           <Fragment>
             <h1>{t('account.yourSignature.title')}</h1>
-            <IntroBox data-test="intro-box">{t('account.yourSignature.intro')}</IntroBox>
+
+            <IntroBox data-test="intro-box">
+            { isEditMode
+              ? t('account.yourSignature.edited')
+              : t('account.yourSignature.intro')
+            }
+            </IntroBox>
+
             <img className="your-signature--saved-image" src={savedSignature} />
             <Button 
               data-test="button-edit"
@@ -109,7 +118,7 @@ class DrawSignature extends Component {
               label={t('account.yourSignature.buttons.edit')}
               onClick={() => this.setState({ savedSignature: '', isSignature: false })}
             />
-            <Link to="/documents">
+            <Link to={isEditMode ? '/account' : '/documents'}>
               <Button 
                 classes="primary full"
                 label={t('account.yourSignature.buttons.continue')} 
@@ -127,6 +136,7 @@ DrawSignature.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   t: PropTypes.func.isRequired,
+  location: PropTypes.object
 };
 
 const actions = { showLoader, hideLoader };
