@@ -110,13 +110,13 @@ class PurchaseDetails extends Component {
   }
 
   submitPurchaseDetails = () => {
-    const { showLoader, hideLoader, t } = this.props;
+    const { showLoader, hideLoader, t, form } = this.props;
 
     /* istanbul ignore else */
     if (formUtils.validateForm(this.config)) {
       showLoader();
 
-      PropertyService.SavePurchaseDetails({ 'placeholder': 'bla' }).then((response) => {
+      PropertyService.SavePurchaseDetails(form.values).then((response) => {
         hideLoader();
         /* istanbul ignore else */
         if (response.status === 201) {
