@@ -47,6 +47,23 @@
   }
 
   &.menu-enter {
+    transform: translateY(calc(-100% + 70px));
+  }
+  &.menu-enter-active {
+    transform: translateY(0);
+    transition: transform 400ms;
+  }
+  &.menu-exit {
+    transform: translateY(0);
+  }
+  &.menu-exit-active {
+    transition: transform 400ms;
+    transform: translateY(calc(-100% + 70px));
+  }
+}
+
+.fullscreen .menu {
+  &.menu-enter {
     transform: translateY(-100%);
   }
   &.menu-enter-active {
