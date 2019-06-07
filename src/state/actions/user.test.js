@@ -1,9 +1,9 @@
 import { mockStore } from '../../test-utils/test-utils';
 
-import { USER_LOGIN } from '../../config/constants';
-import { userLogin } from './user'
+import { USER_LOGIN, USER_UPDATE } from '../../config/constants';
+import { userLogin, userUpdate } from './user'
 
-describe('Auth actions', () => {
+describe('User actions', () => {
   let store;
 
   beforeEach(() => {
@@ -14,5 +14,11 @@ describe('Auth actions', () => {
     const user = { name: 'Spongebob', email: 'spongebob@test.com' };
     store.dispatch(userLogin(user));
     expect(store.getActions()).toEqual([{ type: USER_LOGIN, user: user }]);
+  });
+
+  test('userUpdate', () => {
+    const name = 'Spongebob';
+    store.dispatch(userUpdate('name', name));
+    expect(store.getActions()).toEqual([{ type: USER_UPDATE, key: 'name', value: name }]);
   });
 });

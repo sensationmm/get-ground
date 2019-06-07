@@ -22,6 +22,11 @@
       box-shadow: 0px 0px 10px $shadow;
       cursor: pointer;
     }
+
+    &.profile {
+      background-image: url('../../../assets/images/profile.svg');
+      background-size: 30px;
+    }
   }
 
   .bank-header {
