@@ -1,11 +1,9 @@
 import React, { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import ImageFull from 'src/components/ImageFull/ImageFull'
-import ContactUs from 'src/components/ContactUs/ContactUs'
 
 import house from 'src/assets/images/house-landing.svg'
 import Layout from 'src/components/Layout/Layout'
-import Footer from 'src/components/Footer/Footer';
 
 import 'src/styles/pages/landing.scss'
 
@@ -24,8 +22,6 @@ const IndexPage = () => {
             <p data-test="landing-content-second" >{t('landing.secondParagraph')}</p>
             <p data-test="landing-content-third" >{t('landing.thirdParagraph')}</p>
           </div>
-          <ContactUs />
-          <Footer />
         </div>
       </Layout>
     </Fragment>

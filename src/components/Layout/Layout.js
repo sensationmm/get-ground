@@ -12,6 +12,7 @@ import Header from 'src/components/Header/Header';
 import Loader from 'src/components/Loader/Loader';
 import Modal from 'src/components/Modal/Modal';
 import Menu from 'src/components/Menu/Menu';
+import Footer from 'src/components/Footer/Footer';
 
 import store from 'src/state/store';
 import { setWidth } from 'src/state/actions/layout';
@@ -140,6 +141,7 @@ export class Layout extends Component {
           <main className="main">{children}</main>
         </div>
         <div id="modal-root"></div>
+        <Footer />
         <CSSTransition
           in={menuIsOpen}
           timeout={400}

@@ -2,7 +2,6 @@ import React from 'react';
 
 import WhatWeDo from './what-we-do'
 import TrustAndPrivacy from 'src/components/TrustAndPrivacy/TrustAndPrivacy'
-import ContactUs from 'src/components/ContactUs/ContactUs'
 
 import { shallow } from 'enzyme'
 
@@ -43,9 +42,5 @@ describe('what-we-do page', () => {
 
   test('TrustAndPrivacy', () => {
     expect(wrapper.find(TrustAndPrivacy).length).toEqual(1)
-  })
-
-  test('ContactUs', () => {
-    expect(wrapper.find(ContactUs).length).toEqual(1)
   })
 })

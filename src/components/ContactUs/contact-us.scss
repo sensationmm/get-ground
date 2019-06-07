@@ -1,17 +1,17 @@
 @import 'src/styles/modules/_colors.scss';
+@import 'src/styles/modules/_variables.scss';
 
 .contact-us {
-  width: 343px;
-  height: 230px;
   border-radius: 8px;
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.15);
   margin-bottom: 30px;
+  padding: $padding-vertical ($padding-horizontal-unit * 2 + 0px);
+  display: flex;
+  flex-direction: column;
 
   &-title {
     font-size: 20px;
     font-weight: 300;
-    margin-left: 15px;
-    padding-top: 25px;
   }
 
   &-phone, &-email {
@@ -19,7 +19,7 @@
     img {
       width: 16px;
       display: inline-block;
-      margin-left: 20px;
+      margin-left: 5px;
       margin-right: 20px;
     }
 
@@ -27,18 +27,15 @@
       font-size: 16px;
       display: inline-block;
       font-weight: 300;
-      width: 80%;
       margin-bottom: 0;
     }
   }
   &-divider {
-    width: 311px;
     border: solid 1px $divider-color;
-    margin-left: 15px;
   }
+
   &-livechat {
-    float: right;
     margin-top: 15px;
-    margin-right: 16px;
+    align-self: flex-end;
   }
 }
