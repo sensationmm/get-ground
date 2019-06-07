@@ -8,7 +8,6 @@ import { showLoader, hideLoader } from 'src/state/actions/loader';
 import Layout from 'src/components/Layout/Layout'
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
-import ContactUs from 'src/components/ContactUs/ContactUs'
 import InputText from 'src/components/_form/InputText/InputText';
 import Button from 'src/components/_buttons/Button/Button';
 import formUtils from 'src/utils/form';
@@ -120,7 +119,6 @@ class Partnerships extends Component {
             />
             <br/>
           </Form>
-          <ContactUs />
         </div>
       </Layout>
     );

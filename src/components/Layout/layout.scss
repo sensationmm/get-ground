@@ -49,7 +49,7 @@ body {
 
 .app {
   padding: $padding-vertical (($padding-horizontal-unit * 2) + 0px);
-  height: calc(100vh - #{$header-height + ($padding-vertical-unit * 4) + 0px});
+  min-height: calc(100vh - #{$header-height + ($padding-vertical-unit * 4) + 0px});
   padding-top: calc((#{$header-height + ($padding-vertical-unit * 2) + 0px + $padding-vertical}));
   background: $white;
 
