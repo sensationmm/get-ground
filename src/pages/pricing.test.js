@@ -1,7 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import Pricing from './pricing'
-import ContactUs from 'src/components/ContactUs/ContactUs'
 
 describe('Pricing', () => {
   let wrapper;
@@ -56,9 +55,5 @@ describe('Pricing', () => {
 
   test('services secondary content', () => {
     expect(wrapper.find('[data-test="services-content-second"]').text()).toEqual('pricing.services.secondContent')
-  })
-
-  test('pricing contact us', () => {
-    expect(wrapper.find('[data-test="pricing-contact-us"]').type()).toEqual(ContactUs)
   })
 })
