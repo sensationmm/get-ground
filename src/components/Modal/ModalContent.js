@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import Button from 'src/components/_buttons/Button/Button';
 import Checkbox from 'src/components/_form/Checkbox/Checkbox';
 
-import closeIcon from 'src/assets/images/close-modal-icon.svg';
+import closeIcon from 'src/assets/images/close-icon.svg';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 

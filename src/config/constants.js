@@ -37,3 +37,9 @@ export const SET_ERRORS = 'SET_ERRORS';
 export const SET_FORM_ERRORS = 'SET_FORM_ERRORS';
 
 export const SET_ACTIVE_COMPANY = 'SET_ACTIVE_COMPANY';
+
+export const SHOW_MENU = 'SHOW_MENU';
+export const HIDE_MENU = 'HIDE_MENU';
+export const USER_UPDATE = 'USER_UPDATE';
+
+export const SAVE_DOCUMENTS = 'SAVE_DOCUMENTS';

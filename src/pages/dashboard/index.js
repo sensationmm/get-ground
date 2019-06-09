@@ -42,7 +42,7 @@ const Dashboard = (props) => {
   return (
     <Layout secure>
       <div data-test="component-dashboard" className="company-overview">
-        <div className="company-header link" data-test="profile-button" onClick={() => navigate('/profile')}>
+        <div className="company-header link profile" data-test="profile-button" onClick={() => navigate('/account')}>
           { t('dashboard.main.profileLink') }
         </div>
 
@@ -92,14 +92,6 @@ const Dashboard = (props) => {
             />
           </center>
         </List>
-
-        <center>
-          <Button
-            data-test="live-chat-button"
-            classes="chat"
-            label={ t('liveChat.button') }
-          />
-        </center>
       </div>
     </Layout>
   );

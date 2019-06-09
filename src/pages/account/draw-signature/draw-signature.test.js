@@ -16,7 +16,8 @@ describe('draw signature page', () => {
   const defaultProps = {
     t: tMock,
     showLoader: showLoaderMock,
-    hideLoader: hideLoaderMock
+    hideLoader: hideLoaderMock,
+    location: { search: null }
   };
 
   global.atob = jest.fn().mockReturnValue('just some string');

@@ -58,11 +58,7 @@ describe('', () => {
   })
 
   test('footer links', () => {
-    expect(wrapper.find('[data-test="component-footer-navigation"]').children().length).toEqual(10)
-  })
-
-  test('footer login', () => {
-    expect(wrapper.find('[data-test="component-footer-login"]').length).toEqual(1)
+    expect(wrapper.find('[data-test="component-footer-navigation"]').children().length).toEqual(9)
   })
 
   test('footer location', () => {

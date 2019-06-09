@@ -8,25 +8,30 @@
   display: flex;
   justify-content: center;
   width: calc(100% - #{($padding-horizontal-unit * 4) + 0px});
-  z-index: 2;
+  z-index: 3;
   top: 0px;
   left: 0px;
-  height: $header-height + 0px;
-  padding: $padding-vertical (($padding-horizontal-unit * 2) + 0px);
 
-  @include gradient-vertical-image(
+  @include gradient-horizontal-image(
     $background-main-start,
     $background-main-end,
     '../../assets/images/background.png'
   );
+
+  &-inner-wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    flex-direction: column;
+  }
 
   &-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
     align-content: center;
-    width: 100%;
-    max-width: calc(1200px - #{(($padding-horizontal-unit * 4) + 0px)});
+    width: calc(100% - #{($padding-horizontal-unit * 4) + 0px});
+    padding: $padding-vertical (($padding-horizontal-unit * 2) + 0px);
   }
 
   &-logo {
@@ -41,30 +46,75 @@
   &-menu {
     &-toggle {
       width: 32px;
-      height: 32px;
-      background: url('../../assets/images/burger-menu.svg') center center no-repeat;
-      background-size: contain;
+      cursor: pointer;
+
+      &:after, &:before, div {
+        background-color: $white;
+        border-radius: 3px;
+        content: '';
+        display: block;
+        height: 4px;
+        margin: 7px 0;
+        transition: all .4s ease-in-out;
+      }
+
+      &-close {
+        &:before {
+          transform: translateY(12px) translateX(3px) rotate(135deg);
+        }
+        
+        &:after {
+          transform: translateY(-10px) translateX(3px) rotate(-135deg);
+        }
+        
+        div {
+          transform: scale(0);
+        }
+      }
     }
+  }
+
+  &--logged-out {
+    background-color: $background-3;
+    display: none;
+  }
+
+  &.no-background {
+    background: none;
   }
 }
 
 
 .account .header {
-  @include gradient-vertical-image(
+  @include gradient-horizontal-image(
     $background-account-start,
     $background-account-end,
     '../../assets/images/background.png'
   );
+  
+  &.no-background {
+    background: none;
+  }
 }
 
 .company-design .header {
-  @include gradient-vertical-image(
+  @include gradient-horizontal-image(
     $gradient-primary-1,
     $gradient-primary-2,
     '../../assets/images/background.png'
   );
+
+  &.no-background {
+    background: none;
+  }
 }
 
 .fullscreen .header {
   background: none;
+}
+
+.brochure .header {
+  &--logged-out {
+    display: block;
+  }
 }
