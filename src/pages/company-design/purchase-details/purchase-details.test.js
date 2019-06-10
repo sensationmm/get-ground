@@ -167,14 +167,14 @@ describe('purchase details', () => {
 
     test('submit purchase details success', async () => {
       spy = jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
-      PropertyService.SavePurchaseDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 201 }));
+      PropertyService.SavePurchaseDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
       const wrapperNew = setup(PurchaseDetails, defaultProps);
       
       await wrapperNew.instance().submitPurchaseDetails();
       
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
-      expect(navigate).toHaveBeenCalledWith('/company-details/solicitor-details');
+      expect(navigate).toHaveBeenCalledWith('/company-design/solicitor-details');
       expect(spy).toHaveBeenCalled();
     });
 
