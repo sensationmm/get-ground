@@ -265,7 +265,6 @@ const Advantages = () => {
             smallFeed2={taxSmallFeed2}
             feed1={taxLargeFeed1}
             feed2={taxLargeFeed2}
-            showTable={showTaxTable}
             tableName="tax"
             data-test="tax-table-slider"
           />
@@ -294,7 +293,6 @@ const Advantages = () => {
               smallFeed2={companySmallFeed2}
               feed1={companyLargeFeed1}
               feed2={companyLargeFeed2}
-              showTable={showCompanyTable}
               tableName="company"
               data-test="company-table-slider"
             />
