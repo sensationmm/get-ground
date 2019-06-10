@@ -25,6 +25,15 @@
         "upload": "Upload your signature"
       }
     },
+    "createSignature": {
+      "title": "Create digital signature",
+      "intro": "Based on your name we’ve created three signature options for you to choose from. You can edit your name if you are not happy with the options we provided.",
+      "form": {
+        "firstname": "First Name",
+        "lastname": "Last Name"
+      },
+      "selectLabel": "Select Signature"
+    },
     "drawSignature": {
       "title": "Draw your signature",
       "signaturePadLabel": "Your Signature",
@@ -44,11 +53,11 @@
     },
     "yourSignature": {
       "title": "Your signature",
-      "intro": "Your signature is saved to your profile. Now you are ready to continue and sign your company documents.",
+      "intro": "Your signature will be saved to your profile, and you can then start signing your company documents.",
       "edited": "Your new signature has been saved.",
       "buttons": {
-        "continue": "Continue",
-        "edit": "Edit"
+        "continue": "Save Signature",
+        "edit": "Edit Signature"
       }
     }
   },
