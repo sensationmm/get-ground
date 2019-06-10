@@ -119,8 +119,8 @@ class PurchaseDetails extends Component {
       PropertyService.SavePurchaseDetails(form.values).then((response) => {
         hideLoader();
         /* istanbul ignore else */
-        if (response.status === 201) {
-          navigate('/company-details/solicitor-details');
+        if (response.status === 200) {
+          navigate('/company-design/solicitor-details');
           
         } else if (response.status === 400) {
           formUtils.setFormError(t('form.correctErrors'));
