@@ -9,7 +9,7 @@ import orangeTick from 'src/assets/images/orange-tick.svg'
 import blueTick from 'src/assets/images/blue-tick.svg'
 
 import ContactUs from 'src/components/ContactUs/ContactUs'
-import Footer from 'src/components/Footer/Footer';
+import Footer from 'src/components/Footer/Footer'
 import Button from 'src/components/_buttons/Button/Button'
 import TableSlider from 'src/components/TableSlider/TableSlider'
 
@@ -267,6 +267,7 @@ const Advantages = () => {
             feed2={taxLargeFeed2}
             showTable={showTaxTable}
             tableName="tax"
+            data-test="tax-table-slider"
           />
           <p className="advantages-uk-tax-more-expanded-info">{t('advantages.warning')}</p>
           </div>
@@ -279,7 +280,7 @@ const Advantages = () => {
                 </li>
               ))}
             </ul>
-            <Button classes="advantages-btn chat" fullWidth label={t('advantages.cta')} onClick={() => toggleTaxTable(!showTaxTable)}/>
+            <Button data-test="tax-more-button" classes="advantages-btn chat" fullWidth label={t('advantages.cta')} onClick={() => toggleTaxTable(!showTaxTable)}/>
           </>
         }
         </div>
@@ -295,6 +296,7 @@ const Advantages = () => {
               feed2={companyLargeFeed2}
               showTable={showCompanyTable}
               tableName="company"
+              data-test="company-table-slider"
             />
             <p className="advantages-company-more-expanded-info">{t('advantages.warning')}</p>
           </div>
@@ -307,7 +309,7 @@ const Advantages = () => {
                 </li>
               ))}
             </ul>
-            <Button classes="advantages-btn chat" fullWidth label={t('advantages.cta')} onClick={() => toggleCompanyTable(!showCompanyTable)}/>
+            <Button data-test="company-more-button" classes="advantages-btn chat" fullWidth label={t('advantages.cta')} onClick={() => toggleCompanyTable(!showCompanyTable)}/>
           </>
         }
         </div>
