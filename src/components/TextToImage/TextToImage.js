@@ -11,7 +11,7 @@ import './text-to-image.scss';
  * @param {string} canvasId - ID for canvas element
  * @param {string} imageId - ID for image element
  * @param {string} font - font the signature image will use
- * @param {string} fontSize - font size
+ * @param {number} fontSize - font size
  * @param {function} setSignatureImg - function for setting the signature Image value
  * @param {function} onClick - function to fire on canvas wrapper click
  * @return {JSXElement} TextToImage
@@ -46,15 +46,22 @@ class TextToImage extends Component {
         <img id=${imageId} src=${img} /> 
       `;
 
-      const canvasTxt = document.getElementById(canvasId).getContext('2d');
-      canvasTxt.font = `${fontSize} ${font}`;
-      canvasTxt.fillText(`${firstname} ${lastname}`, 25, 100);
+      const canvas = document.getElementById(canvasId);
+      const context = canvas.getContext('2d');
+
+      canvas.width = canvas.height * (canvas.clientWidth / canvas.clientHeight);
+      context.font = `${fontSize}px ${font}`;
+
+      if (firstname.length + lastname.length > 25) context.font = `${fontSize - 5}px ${font}`;
+
+      context.fillText(`${firstname} ${lastname}`, 
+        (canvas.width / 2) - (context.measureText(firstname + lastname).width / 2), 90);
 
       this.setState({
-        img: canvasTxt.canvas.toDataURL()
+        img: context.canvas.toDataURL()
       });
 
-      setSignatureImg(canvasTxt.canvas.toDataURL());
+      setSignatureImg(context.canvas.toDataURL());
     }
   }
 
@@ -79,7 +86,7 @@ TextToImage.propTypes = {
   canvasId: PropTypes.string,
   imageId: PropTypes.string,
   font: PropTypes.string,
-  fontSize: PropTypes.string,
+  fontSize: PropTypes.number,
   setSignatureImg: PropTypes.func,
   onClick: PropTypes.func
 }

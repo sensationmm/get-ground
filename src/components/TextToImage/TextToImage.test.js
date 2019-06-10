@@ -9,6 +9,9 @@ HTMLCanvasElement.prototype.getContext = () => {
     canvas: {
       toDataURL: jest.fn()
     },
+    measureText: jest.fn().mockReturnValue({
+      width: 200
+    }),
     fillText: jest.fn()
   }
 };
@@ -23,7 +26,7 @@ describe('<TextToImage />', () => {
     canvasId: 'canvas-id',
     imageId: 'image-id',
     font: 'Caveat',
-    fontSize: '30px',
+    fontSize: 30,
     setSignatureImg: jest.fn(),
     onClick: onClickMock
   };

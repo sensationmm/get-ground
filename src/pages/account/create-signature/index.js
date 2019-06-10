@@ -115,7 +115,7 @@ class CreateSignature extends Component {
           firstname={values.firstname}
           lastname={values.lastname}
           font="Caveat"
-          fontSize="50px"
+          fontSize={35}
           setSignatureImg={imgPath => this.setState({signatureOneImg: imgPath })}
         />
       },
@@ -129,7 +129,7 @@ class CreateSignature extends Component {
           firstname={values.firstname}
           lastname={values.lastname}
           font="Homemade Apple"
-          fontSize="35px"
+          fontSize={25}
           setSignatureImg={imgPath => this.setState({signatureTwoImg: imgPath })}
         />
       },
@@ -143,7 +143,7 @@ class CreateSignature extends Component {
           firstname={values.firstname}
           lastname={values.lastname}
           font="Pinyon Script"
-          fontSize="50px"
+          fontSize={35}
           setSignatureImg={imgPath => this.setState({signatureThreeImg: imgPath })}
         />
       }
