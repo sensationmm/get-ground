@@ -189,7 +189,7 @@ export const renderForm = (config, arrayIndex=null) => {
         <item.component
           key={`form-item-${key}`}
           data-test={`form-item-${key}`}
-          id={`create-account-${stateKey}`}
+          id={stateKey}
           onChange={item.onChange ? item.onChange : onChange}
           {...item}
           error={error}

@@ -31,7 +31,17 @@ class PropertyService extends BaseService {
       url: 'companies/1',
       method: 'put',
       data: {
-        'placeholder': data.placeholder
+        'price': data.priceOfProperty,
+        'new_build': data.newBuild,
+        'expected_exchange': data.expectedExchange,
+        'completion_date': data.completionDate,
+        'deposit_due_date': data.depositDueDate,
+        'deposit_amount': data.depositAmount,
+        'exchange_date': data.exchangeDate,
+        'first_installment_date': data.firstInstallmentDate,
+        'first_installment': data.firstInstallmentAmount,
+        'second_installment_date': data.secondInstallmentDate,
+        'second_installment': data.secondInstallmentAmount
       }
     };
 

@@ -4,6 +4,9 @@ import store from 'src/state/store';
 import { userLogin } from 'src/state/actions/user';
 import { saveAuth } from 'src/state/actions/auth';
 
+import accountService from 'src/services/Account';
+export const AccountService = new accountService();
+
 /**
  * AuthService
  * @return {Object} AuthService
@@ -29,6 +32,8 @@ class AuthService extends BaseService {
     return this.doRequest(config, (response) => {
       store.dispatch(userLogin(response.data.user));
       store.dispatch(saveAuth(response.data.token));
+
+      AccountService.getDocuments();
     });
   };
 
@@ -64,6 +69,8 @@ class AuthService extends BaseService {
     return this.doRequest(config, (response) => {
       store.dispatch(userLogin(response.data.user));
       store.dispatch(saveAuth(response.data.token));
+
+      AccountService.getDocuments();
     });
   };
 

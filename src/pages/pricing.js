@@ -2,7 +2,6 @@ import React from 'react'
 import { useTranslation } from 'react-i18next';
 
 import Layout from 'src/components/Layout/Layout'
-import ContactUs from 'src/components/ContactUs/ContactUs'
 
 import CoinAndHand from 'src/assets/images/coins-and-hand.svg'
 import 'src/styles/pages/pricing.scss'
@@ -42,7 +41,6 @@ const Pricing = () => {
           <p data-test="services-content-first" >{t('pricing.services.firstContent')}</p>
           <p data-test="services-content-second" >{t('pricing.services.secondContent')}</p>
         </div>
-        <ContactUs data-test="pricing-contact-us"/>
       </div>
       </Layout>
   )

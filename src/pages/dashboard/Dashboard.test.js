@@ -34,7 +34,7 @@ describe('Dashboard', () => {
     button.simulate('click');
 
     expect(button.text()).toEqual('dashboard.main.profileLink');
-    expect(navigate).toHaveBeenCalledWith('/profile');
+    expect(navigate).toHaveBeenCalledWith('/account');
   });
 
   test('add company button', () => {

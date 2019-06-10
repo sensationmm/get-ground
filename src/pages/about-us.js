@@ -2,7 +2,6 @@ import React from 'react'
 import { useTranslation } from 'react-i18next';
 
 import Layout from 'src/components/Layout/Layout'
-import ContactUs from 'src/components/ContactUs/ContactUs'
 import MeetTheFounders from 'src/components/MeetTheFounders/MeetTheFounders'
 
 import Clock from 'src/assets/images/clock.svg'
@@ -24,7 +23,6 @@ const AboutUs = () => {
         <p className="about-us-content" data-test="content-fifth">{t('aboutUs.content.fifth')}</p>
         <p className="about-us-content" data-test="content-sixth">{t('aboutUs.content.sixth')}</p>
         <MeetTheFounders data-test="meet-the-founders"/>
-        <ContactUs data-test="about-us-contact-us"/>
       </div>
       </Layout>
   )

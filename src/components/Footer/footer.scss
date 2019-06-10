@@ -2,18 +2,21 @@
 @import '../../styles/modules/_variables';
 
 .footer {
-  width: 101%;
-  height: 100%;
   background-color: $border;
-  margin-left: -20px;
-  padding-right: (($padding-horizontal-unit * 2) + 0px);
-  padding-left: (($padding-horizontal-unit * 2) + 0px);
+  padding: (($padding-vertical-unit * 2) + 0px) (($padding-horizontal-unit * 2) + 0px);
   color: $placeholder-text;
 
+  &-outer {
+    background: $white;
+
+    .contact-us {
+      margin: 0 (($padding-horizontal-unit * 2) + 0px) $padding-vertical (($padding-horizontal-unit * 2) + 0px);
+    }
+  }
+
   &-logo {
-    width: 150px;
-    margin-left: -45px;
-    margin-bottom: -20px;
+    width: 80px;
+    margin-bottom: $padding-vertical;
   }
 
   &-login {
@@ -35,17 +38,24 @@
   &-navigation {
     display: flex;
     align-content: flex-start;
-    height: 250px;
-    flex-direction: column;
-    display: inline-block;
+    flex-direction: row;
     font-size: 16px;
     font-weight: 300;
     width: 100%;
+    flex-wrap: wrap;
 
     .footer-link {
       display: inline-block;
       width: 50%;
-      height: 17%;
+      padding: 10px 0;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+
+      &:nth-child(even) {
+        justify-content: flex-end;
+        text-align: right;
+      }
     }
   }
 
