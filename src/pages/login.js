@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { Link, navigate } from 'gatsby';
-import queryString from 'query-string'
+import queryString from 'query-string';
 
 import Layout from 'src/components/Layout/Layout'
 import Button from 'src/components/_buttons/Button/Button';
@@ -16,7 +16,7 @@ import InputPassword from 'src/components/_form/InputPassword/InputPassword';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 import authService from 'src/services/Auth';
-const AuthService = new authService();
+export const AuthService = new authService();
 
 import 'src/styles/pages/login.scss';
 
@@ -103,31 +103,31 @@ class Login extends Component {
     ];
 
     return (
-      <Layout>
+      <Layout loggedOutOnly>
         <div className="account-login" data-test="container-login" role="account fullscreen">
           <h1>{ t('login.title') }</h1>
 
-          {showErrorMessage && errors.form && <ErrorBox>{errors.form}</ErrorBox>}
+          {showErrorMessage && errors.form && <ErrorBox data-test="create-error-box">{errors.form}</ErrorBox>}
 
-            <Form>
-              { formUtils.renderForm(this.config) }
-            </Form>
+          <Form>
+            { formUtils.renderForm(this.config) }
+          </Form>
 
-            <Form className="account-login-actions">
-              <Button
-                data-test="login-button"
-                classes="secondary"
-                label={ t('login.ctaPrimary') }
-                fullWidth
-                onClick={() => this.onLogin()}
-              />
+          <Form className="account-login-actions">
+            <Button
+              data-test="login-button"
+              classes="secondary"
+              label={ t('login.ctaPrimary') }
+              fullWidth
+              onClick={() => this.onLogin()}
+            />
 
-              <center>
-                <Link to="/forgot-password/enter-email">
-                  <Button classes="secondary faded" label={ t('login.ctaSecondary') } small />
-                </Link>
-              </center>
-            </Form>
+            <center>
+              <Link to="/forgot-password/enter-email">
+                <Button classes="secondary faded" label={ t('login.ctaSecondary') } small />
+              </Link>
+            </center>
+          </Form>
         </div>
       </Layout>
     );

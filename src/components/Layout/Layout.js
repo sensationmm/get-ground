@@ -74,12 +74,21 @@ export class Layout extends Component {
     }
   }
 
+  loggedOutOnly = () => {
+    const { userID, loggedOutOnly } = this.props;
+
+    if(userID && loggedOutOnly) {
+      navigate('/dashboard');
+    }
+  }
+
   toggleMenu = () => {
     const { showMenu, hideMenu, menuIsOpen } = this.props;
     menuIsOpen ? hideMenu() : showMenu();  
   }
 
   render() {
+    this.loggedOutOnly();
     const { children, headerActions, isLoading, userID, t, menuIsOpen } = this.props;
 
     const menuLinks = [
@@ -171,6 +180,7 @@ Layout.propTypes = {
   redirect: PropTypes.string,
   activeCompany: PropTypes.string,
   companyID: PropTypes.bool,
+  loggedOutOnly: PropTypes.bool,
   menuIsOpen: PropTypes.bool,
   showMenu: PropTypes.func,
   hideMenu: PropTypes.func,
