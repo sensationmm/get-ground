@@ -1,0 +1,87 @@
+@import 'src/styles/modules/_variables.scss';
+@import 'src/styles/modules/_colors.scss';
+@import 'src/styles/modules/_mixins.scss';
+
+.shareholder-shares {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+  padding: $padding-vertical ($padding-horizontal-unit * 1.75 + 0px);
+  border-bottom: 1px solid $border;
+
+  &-person {
+    width: 50%;
+    width: calc(100% - (50px + #{$padding-horizontal-unit * 1.75 + 0px}) * 2); // width/margin of two checkboxes
+    margin-right: $padding-horizontal-unit * 1.75 + 0px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &-name {
+    text-transform: uppercase;
+    color: $primary;
+    font-size: 14px;
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 600;
+  }
+
+  &-email {
+    font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 5px;
+  }
+
+  .text-input {
+    width: 50px;
+    height: 50px;
+    margin-right: $padding-horizontal-unit * 1.75 + 0px;
+
+    &-required {
+      display: none;
+    }
+
+    input {
+      height: 100%;
+      text-align: center;
+    }
+  }
+
+  .checkbox {
+    width: 48px;
+    height: 48px;
+
+    &-toggle, &-layout {
+      width: 100%;
+      min-width: 100%;
+      height: 100%;
+    }
+  }
+
+  &.main-shareholder {
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px $border;
+    margin-bottom: $padding-horizontal;
+
+    .shareholder-shares {
+      &-name {
+        font-size: 18px;
+      }
+    }
+
+    .text-input input {
+      pointer-events: none;
+      border: 0;
+      @include gradient-horizontal($gradient-option-1, $gradient-option-2);
+    }
+
+    .checkbox {
+      cursor: default;
+    }
+  }
+}

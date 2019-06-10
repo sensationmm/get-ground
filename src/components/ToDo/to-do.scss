@@ -1,0 +1,13 @@
+@import 'src/styles/modules/_colors.scss';
+@import 'src/styles/modules/_mixins.scss';
+@import 'src/styles/modules/_variables.scss';
+
+.to-do {
+  font-size: 16px;
+  margin-bottom: 20px;
+  padding: $padding-vertical 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

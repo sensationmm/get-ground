@@ -21,6 +21,15 @@ describe('id-check', () => {
       t: jest.fn(),
       i18n: {
         t: jest.fn().mockReturnValue('mock-string'),
+      },
+      passport: {
+        img: ''
+      },
+      address: {
+        img: ''
+      },
+      selfie: {
+        img: ''
       }
     }
 

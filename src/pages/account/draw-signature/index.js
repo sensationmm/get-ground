@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import SignaturePad from 'react-signature-pad';
 import { Link } from 'gatsby'
 
+import signatureUtils from 'src/utils/signature';
+
 import Layout from 'src/components/Layout/Layout';
 import Button from 'src/components/_buttons/Button/Button';
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
@@ -32,41 +34,12 @@ class DrawSignature extends Component {
     this.signature = null;
   }
 
-  splitSignatureData = () => {
-    if (this.signature === null) return;
-
-    const signatureUrl = this.signature.toDataURL();
-    const contentType = signatureUrl.split(';')[0].split(':')[1];
-    const signatureData = signatureUrl.split(';')[1].split(',')[1];
-
-    this.convertFileToBlob(signatureData, contentType);
-  }
-
-  /**
-    * @param {string} signatureData - encoded signature string
-    * @param {string} contentType - content type
-    * @return {void}
-    */
-  convertFileToBlob = (signatureData, contentType) => {
-    const sliceSize = 512;
-    const byteCharacters = atob(signatureData);
-    const byteArrays = [];
-
-    contentType = contentType || '';
-
-    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-        const slice = byteCharacters.slice(offset, offset + sliceSize);
-        const byteNumbers = new Array(slice.length);
-
-        for (let i = 0; i < slice.length; i++) {
-            byteNumbers[i] = slice.charCodeAt(i);
-        }
-
-        const byteArray = new Uint8Array(byteNumbers);
-        byteArrays.push(byteArray);
+  splitSignature = () => {
+    let signatureBlob;
+    if (this.signature !== null) {
+      signatureBlob = signatureUtils.splitSignatureData(this.signature.toDataURL());
     }
-
-    this.saveSignature(new Blob(byteArrays, {type: contentType}));
+    this.saveSignature(signatureBlob);
   }
 
   /**
@@ -89,8 +62,11 @@ class DrawSignature extends Component {
   }
 
   render() {
-    const { t } = this.props;
+    const { t, location } = this.props;
     const { isSignature, savedSignature } = this.state;
+
+    const isEditMode = location.search === '?edit';
+
     return (
       <Layout secure>
         <div className="draw-signature" data-test="container-draw-signature">
@@ -119,26 +95,33 @@ class DrawSignature extends Component {
                 classes="primary"
                 data-test="button-save"
                 label={t('account.drawSignature.buttons.save')}
-                onClick={this.splitSignatureData}
+                onClick={this.splitSignature}
               />
             </div>
           </Fragment>
         }
         { savedSignature !== '' && 
           <Fragment>
-            <h1>{t('account.drawSignature.title2')}</h1>
-            <IntroBox data-test="intro-box">{t('account.drawSignature.yourSignatureIntro')}</IntroBox>
-            <img className="draw-signature--saved-image" src={savedSignature} />
+            <h1>{t('account.yourSignature.title')}</h1>
+
+            <IntroBox data-test="intro-box">
+            { isEditMode
+              ? t('account.yourSignature.edited')
+              : t('account.yourSignature.intro')
+            }
+            </IntroBox>
+
+            <img className="your-signature--saved-image" src={savedSignature} />
             <Button 
               data-test="button-edit"
               classes="secondary full edit"
-              label={t('account.drawSignature.buttons.edit')}
+              label={t('account.yourSignature.buttons.edit')}
               onClick={() => this.setState({ savedSignature: '', isSignature: false })}
             />
-            <Link to="/documents">
+            <Link to={isEditMode ? '/account' : '/documents'}>
               <Button 
                 classes="primary full"
-                label={t('account.drawSignature.buttons.continue')} 
+                label={t('account.yourSignature.buttons.continue')} 
               />
             </Link>
           </Fragment>
@@ -153,6 +136,7 @@ DrawSignature.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   t: PropTypes.func.isRequired,
+  location: PropTypes.object
 };
 
 const actions = { showLoader, hideLoader };

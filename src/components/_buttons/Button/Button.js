@@ -29,7 +29,8 @@ const Button = props => {
     opaque,
     small,
     hidden,
-    icon
+    icon,
+    liveChat
   } = props;
 
   return (
@@ -44,7 +45,8 @@ const Button = props => {
         {'full': fullWidth},
         {'opaque': opaque},
         {'small': small},
-        {'icon': icon}
+        {'icon': icon},
+        {'chat': liveChat}
       )}
       onClick={onClick}
     >
@@ -65,7 +67,8 @@ Button.propTypes = {
   opaque: PropTypes.bool,
   small: PropTypes.bool,
   hidden: PropTypes.bool,
-  icon: PropTypes.any
+  icon: PropTypes.any,
+  liveChat: PropTypes.bool
 };
 
 Button.defaultProps = {

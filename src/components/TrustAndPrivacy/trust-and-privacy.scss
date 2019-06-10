@@ -1,0 +1,70 @@
+@import '../../styles/modules/_colors';
+@import '../../styles/modules/_variables';
+
+.trustAndPrivacy {
+  height: 420px;
+  margin-right: -(($padding-horizontal-unit * 2) + 0px);
+  margin-bottom: 54px;
+  margin-left: -(($padding-horizontal-unit * 2) + 0px);
+  padding-top: 15px;
+  padding-right: (($padding-horizontal-unit * 2) + 0px);
+  padding-left: (($padding-horizontal-unit * 2) + 0px);
+  background-color: $background-info;
+
+  &.read-more {
+    height: 1949px;
+  }
+
+  &-title {
+    font-size: 22px;
+    font-weight: 400;
+    color: $text;
+  }
+
+  &-subTitle {
+    font-size: 16px;
+    font-weight: 300;
+  }
+
+  &-read-more {
+    margin: 0 auto;
+    margin-top: 46px;
+  }
+
+  &-livechat, .chat {
+    width: 169px;
+  }
+
+  &-info {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    &-title {
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+  }
+
+  &-logos {
+    margin-top: 67px;
+    width: 100%;
+    img {
+      margin-left: 5px;
+    }
+    img:nth-child(1) {
+      width: 97px
+    }
+    img:nth-child(2) {
+      margin-left: 61px;
+      margin-bottom: 4px;
+    }
+    img:nth-child(3) {
+      width: 109px;
+      margin-top: 22px;
+    }
+    img:nth-child(4) {
+      width: 75px;
+      margin-left: 52px;
+    }
+  }
+}

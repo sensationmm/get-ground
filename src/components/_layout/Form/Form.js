@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './form.css';
+import './form.scss';
 import { isArray } from 'util';
 
 /**
@@ -15,7 +15,6 @@ import { isArray } from 'util';
 
 const Form = props => {
   const { children, spacing } = props;
-
   return (
     <div data-test="component-form" className="form">
       {children.map((child, key) => {

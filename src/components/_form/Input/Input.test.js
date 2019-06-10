@@ -35,7 +35,7 @@ describe('<Input />', () => {
         target: { value: inputMock }
       });
 
-      expect(changeMock).toHaveBeenCalledWith(inputMock, validateMock);
+      expect(changeMock).toHaveBeenCalledWith(inputMock);
     });
 
     test('onFocus callback fires on focus', () => {

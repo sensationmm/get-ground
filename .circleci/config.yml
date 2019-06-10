@@ -95,7 +95,7 @@ jobs:
      - run: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
      - run: gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
      - run: gcloud app deploy
-     
+
   deploy_qa:
     docker:
       - image: getground/customer-frontend-pwa:2.0.1
@@ -135,16 +135,9 @@ workflows:
           filters:
             branches:
               only: develop
-      - hold:
-          requires:
-            - build
-            - test
-          filters:
-            branches:
-              only: qa
       - deploy_qa:
           requires:
-            - hold
+            - build
           filters:
             branches:
               only: qa

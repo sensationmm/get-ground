@@ -1,0 +1,28 @@
+.shareholder-choice {
+
+  &-icon {
+    display: block;
+    margin: 40px auto;
+  }
+
+  &-add-btn {
+    margin-top: 58px;
+  }
+
+  &-no-btn {
+    margin-top: 20px;
+  }
+
+  &-title {
+    font-size: 34px;
+    font-weight: 300;
+    margin-top: 30px;
+  }
+
+  &-question {
+    margin-top: 40px;
+    font-size: 19px;
+    font-weight: 300;
+    line-height: 1.26;
+  }
+}

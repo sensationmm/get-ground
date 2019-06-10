@@ -41,22 +41,6 @@ class OnboardingPersonalDetailsContainer extends Component {
     super(props);
 
     this.state = {
-      ...formUtils.initFormState({
-        firstName: '',
-        middleName: '',
-        lastName: '',
-        dateOfBirth: '',
-        nationality: '',
-        cityOfBirth: '',
-        jobTitle: '',
-        country: '',
-        street: '',
-        city: '',
-        unitNumber: '',
-        postcode: '',
-        previousNames: '',
-        phone: ''
-      }),
       formattedDate: '',
       isAddressValid: true,
       isManualAddress: false,
@@ -65,13 +49,29 @@ class OnboardingPersonalDetailsContainer extends Component {
       isTextAreaHidden: true
     };
 
-    this.config = [];
+    this.config = null;
   }
 
-  /* istanbul ignore next */
   componentDidMount() {
+    formUtils.initFormState({
+      firstName: '',
+      middleName: '',
+      lastName: '',
+      dateOfBirth: '',
+      nationality: '',
+      cityOfBirth: '',
+      jobTitle: '',
+      country: '',
+      street: '',
+      city: '',
+      unitNumber: '',
+      postcode: '',
+      previousNames: '',
+      phone: ''
+    });
+    
     const script = document.createElement('script');
-
+    
     script.onload = () => {
       window.addressNow.listen('load', (control) =>  {
         control.listen('populate', (address) => {
@@ -88,21 +88,24 @@ class OnboardingPersonalDetailsContainer extends Component {
             isAddressValid: true,
             isTextAreaHidden: false
           }));
-
+          
         });
       });
     }
-
+    
     script.src = addressNow
     script.async = true;
     document.body.appendChild(script);
   }
   
+  componentWillUnmount() {
+    formUtils.clearFormState();
+  }
+
   toggleManualAddress = () => this.setState({ isManualAddress: !this.state.isManualAddress });
 
   initFormValidation = () => {
-    const { showLoader, hideLoader, t, userID } = this.props;
-
+    const { showLoader, hideLoader, t, userID, form } = this.props;
     const { 
       values: {
         firstName,
@@ -118,14 +121,14 @@ class OnboardingPersonalDetailsContainer extends Component {
         postcode,
         previousNames,
         phone
-      }, 
-      formattedDate 
-    } = this.state;
+      }
+    } = form;
+    const { formattedDate } = this.state;
 
     /* istanbul ignore else */
-    if (formUtils.validateForm(this)) {
-      const countryName = country.split('] ').pop();
-      const nationalityName = nationality.split('] ').pop();
+    if (formUtils.validateForm(this.config)) {
+      const countryName = country ? country.split('] ').pop() : '';
+      const nationalityName = nationality ? nationality.split('] ').pop() : '';
       showLoader();
 
       AccountService.savePersonalDetails({
@@ -150,13 +153,7 @@ class OnboardingPersonalDetailsContainer extends Component {
         if (response.status === 200) {
           navigate('/onboarding/id-check');
         } else if (response.status === 400) {
-          this.setState({
-            ...this.state,
-            errors: {
-              form: t('form.correctErrors'),
-            },
-            showErrorMessage: true
-          });
+          formUtils.setFormError(t('form.correctErrors'));
         }
       });
     }
@@ -199,15 +196,13 @@ class OnboardingPersonalDetailsContainer extends Component {
   }
 
   render() {
-    const { t } = this.props;
+    const { t, form } = this.props;
+    const { values, errors, showErrorMessage } = form;
     const { 
       isManualAddress, 
       isAddressValid, 
-      values, 
       isDatepickerOpen,
       showPreviousNames,
-      errors, 
-      showErrorMessage,
       isTextAreaHidden
     } = this.state;
   
@@ -372,7 +367,7 @@ class OnboardingPersonalDetailsContainer extends Component {
 
     return (
       <>
-      <Layout>
+      <Layout secure>
         <div className="onboarding-details" data-test="container-onboarding-details" role="account">
           <h1>{t('onBoarding.personalDetails.heading')}</h1>
 
@@ -388,7 +383,7 @@ class OnboardingPersonalDetailsContainer extends Component {
             }
 
           <Form>
-            {formUtils.renderForm(this)}
+            {formUtils.renderForm(this.config)}
 
             <Button
               label={t('onBoarding.personalDetails.form.nextButton')}
@@ -411,10 +406,12 @@ OnboardingPersonalDetailsContainer.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   userID: PropTypes.number,
+  form: PropTypes.object
 };
 
 const mapStateToProps = (state) => ({
-  userID: state.user.id
+  userID: state.user.id,
+  form: state.form
 });
 
 const actions = { showLoader, hideLoader };

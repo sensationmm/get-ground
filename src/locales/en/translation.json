@@ -1,25 +1,63 @@
 {
+  "aboutUs": {
+    "title": {
+      "first": "About us",
+      "second": "We want to change that. "
+    },
+    "content": {
+      "first": "Our mission is to create a more productive and fairer world.",
+      "second": "Trillions of dollars of real assets (e.g., houses, ships, machinery) are stuck in illiquid non-transparent markets.  If we can’t understand the real assets that drive the world’s economy it is likely they are not fully productive. If many cannot access real asset ownership it is likely we create greater inequality.",
+      "third": "We believe we can do it by holding a single asset in a single company. Each company gives its asset an identity through which we can better understand it, a framework of governance to own and operate it and through shares, the ability to effectively change ownership.",
+      "fourth": "The issue with companies is that they are expensive and difficult to manage. And on their own, they do not necessarily create trust. This is what we are solving. Make companies cheap and easy to use. Create a platform that builds trust.",
+      "fifth": "We are starting with the residential buy-to-let sector in the UK. There is £1.3 trillion of stock in this market. A huge business. But ironically nearly all of it is in personal rather than company ownership.",
+      "sixth": "Come join us create a more productive and fairer world."
+    }
+  },
   "account": {
     "signature": {
       "title": "Set up your signature",
       "intro": "First you must setup your signature.",
       "heading2": "Choose option",
+      "edit": "Edit your signature",
       "buttons": {
         "draw": "Draw your signature",
         "create": "Create digital signature",
         "upload": "Upload your signature"
       }
     },
+    "createSignature": {
+      "title": "Create digital signature",
+      "intro": "Based on your name we’ve created three signature options for you to choose from. You can edit your name if you are not happy with the options we provided.",
+      "form": {
+        "firstname": "First Name",
+        "lastname": "Last Name"
+      },
+      "selectLabel": "Select Signature"
+    },
     "drawSignature": {
       "title": "Draw your signature",
-      "title2": "Your signature",
-      "yourSignatureIntro": "Your signature is saved to your profile. Now you are ready to continue and sign your company documents.",
       "signaturePadLabel": "Your Signature",
       "buttons": {
-        "continue": "Continue",
         "redo": "Redo",
-        "save": "Save",
-        "edit": "edit"
+        "save": "Save"
+      }
+    },
+    "uploadSignature": {
+      "title": "Upload your signature",
+      "intro": "Tap below to upload your signature. You can only upload .jpeg and .png files",
+      "buttons": {
+        "upload": "Upload signature",
+        "save": "Save signature",
+        "reupload": "Re-upload"
+      }
+    },
+    "yourSignature": {
+      "title": "Your signature",
+      "intro": "Your signature will be saved to your profile, and you can then start signing your company documents.",
+      "edited": "Your new signature has been saved.",
+      "buttons": {
+        "continue": "Save Signature",
+        "edit": "Edit Signature"
       }
     }
   },
@@ -28,6 +66,33 @@
     "text": "With a magic link to the email address you provided. Please click the button on the email to verify your account.",
     "introBox": "If you didn‘t receive an email please check your spam folder and if it isn‘t there contact us.",
     "contactLink": "Contact us"
+  },
+  "actionBox": {
+    "title": "What's Next?",
+    "noActions": "Great! Everything is up to date.",
+    "dismiss": "Remind later",
+    "actions": {
+      "add_company": {
+        "label": "Create your first company",
+        "labelShort": "Add Company",
+        "cta": "Add Company"
+      },
+      "directors_insurance": {
+        "label": "Your Director's Insurance is due",
+        "labelShort": "Director's Insurance",
+        "cta": "Pay now"
+      },
+      "documents_ready": {
+        "label": "Your company documents are ready",
+        "labelShort": "Documents to sign",
+        "cta": "Sign now"
+      },
+      "prompt_shareholders": {
+        "label": "There are outstanding shareholder documents to be signed",
+        "labelShort": "Prompt Shareholders",
+        "cta": "More"
+      }
+    }
   },
   "additionalServices": {
     "title": "Additional services",
@@ -43,8 +108,8 @@
     "companyComplete": {
       "title": "Well done!",
       "copy": "We have all the details we need to set up your company.",
-      "info":  "Your shareholders will receive an email now so they can begin setting up their account on getGround. In order to speed up your company setup perhaps you would like to encourage them to do so ASAP.",
-      "button": "next"
+      "info":  "Your shareholders will receive an email now so they can begin setting up their account on GetGround. In order to speed up your company setup perhaps you would like to encourage them to do so ASAP.",
+      "button": "Next"
     },
     "progressTracker": {
       "inProgressTitle": "Design your company in 5 steps",
@@ -53,7 +118,7 @@
       "sections": {
         "step1": {
           "title": "Property Address",
-          "copy": "Property your company will hold",
+          "copy": "Please provide the address of the property your company will hold",
           "imageAltText": "Property"
         },
         "step2": {
@@ -105,7 +170,7 @@
         "priceOfPropertyLabel": "*Price of property",
         "priceOfPropertyNote": "*excludes all costs and stamp duty",
         "newBuildLabel": "Is your property a new build",
-        "completionDateLabel": "When is the completion date?",
+        "completionDateLabel": "When is the expected completion date?",
         "depositDueLabel": "What date is your deposit due?",
         "depositAmountLabel": "Deposit Amount",
         "firstInstallmentDateLabel": "First installment date?",
@@ -113,7 +178,7 @@
         "secondInstallmentDateLabel": "Second installment date?",
         "secondInstallmentLabel": "Second installment amount",
         "expectedExchangeLabel": "Do you have an expected exchange date",
-        "expectedExchangeDateLabel": "Please provide your exchange date",
+        "expectedExchangeDateLabel": "Please provide your expected exchange date",
         "addButton": "Another payment date",
         "nextButton": "Next",
         "backButton": "Back"
@@ -134,7 +199,7 @@
       },
       "add": {
         "title": "Shareholder's details",
-        "text": "You can have a maximum of 8 shareholders (including you). All shareholders need to be people not companies.\n\nPlease note that each of your shareholders will need to create an account on getGround. They must also be over 18.",
+        "text": "You can have a maximum of 8 shareholders (including you). All shareholders need to be people not companies.\n\nPlease note that each of your shareholders will need to create an account on GetGround. They must also be over 18.",
         "new": {
           "title": "Add a Shareholder",
           "form": {
@@ -144,6 +209,20 @@
           },
           "cta": "Another shareholder"
         }
+      },
+      "shares": {
+        "title": "Shareholder's details",
+        "text": "Now it is time to divide company shares between your shareholders and specify which shareholders are directors.",
+        "you": "You",
+        "sharesLabel": "%shares",
+        "directorLabel": "Director",
+        "error": "Please review the highlighted errors below. It is mandatory to assign shares to all your shareholders, and all the shares allocated need to add up to 100%."
+      },
+      "confirm": {
+        "title": "Shareholder's details",
+        "text": "Please confirm all the details below are correct",
+        "ctaPrimary": "Yes I confirm",
+        "ctaSecondary": "Make changes"
       }
     },
     "solicitorDetails": {
@@ -168,14 +247,179 @@
       }
     }
   },
-  "contactUs": "Contact us",
+  "contactUs": {
+    "title": "Contact us",
+    "phone": "Phone: 0208 123 1234",
+    "email": "Email: info@getground.com",
+    "liveChat": "Live Chat"
+  },
+  "dashboard": {
+    "company": {
+      "bankAccount": {
+        "sortCode": "Sort Code",
+        "accountNumber": "Account Number",
+        "address": "Address",
+        "iban": "BIC/IBAN",
+        "back": "Back to overview",
+        "available": "Available funds"
+      },
+      "manage": {
+        "title": "Manage my company",
+        "text": "Please let us know what you want to do, we are here to help.",
+        "select": "Select an item below:",
+        "options": {
+          "buyShares": "Make an offer to buy shares",
+          "lendMoney": "Lend money to the company",
+          "withdrawDividend": "Take money out of the company (as a dividend)",
+          "loanRepayment": "Take money out of the company (as a director loan repayment)",
+          "allotShares": "Allot new shares",
+          "appointDirector": "Appoint a director",
+          "removeDirector": "Remove a director",
+          "delist": "Delist from the GetGround platform",
+          "dissolveCompany": "Dissolve the company"
+        }
+      },
+      "overview": {
+        "sections": {
+          "company": "Company name",
+          "address": "Full address",
+          "shareholders": "Shareholders",
+          "directors": "Directors",
+          "documents": "Documents"
+        },
+        "ctaPrimary": "Manage my company",
+        "ctaSecondary": "See my bank account"
+      }
+    },
+    "main": {
+      "portfolioHeader": "My Portfolio",
+      "profileLink": "My Profile",
+      "todoHeader": "To do",
+      "addCompanyButton": "Add new company"
+    }
+  },
+  "footer": {
+    "navigation": {
+      "link0": {
+        "title": "Why GetGround"
+      },
+      "link1": {
+        "title": "About us"
+      },
+      "link2": {
+        "title": "GetGround Advantages"
+      },
+      "link3": {
+        "title": "Partnerships"
+      },
+      "link4": {
+        "title": "How it works"
+      },
+      "link5": {
+        "title": "FAQs"
+      },
+      "link6": {
+        "title": "Pricing"
+      },
+      "link7": {
+        "title": "Contact us"
+      },
+      "link8": {
+        "title": "Terms and Conditions"
+      },
+      "link9": {
+        "title": "Privacy Policy"
+      }
+    },
+    "login": "Register / Login",
+    "location": "Terranova.network Limited (t/a getGround) is registered in England with Company No. 11273793 and VAT registered. VAT No. 313087625. Registered office: 5 Theale Lakes Business Park, Reading, RG7 4GB.",
+    "legal": "Terranova.network Limited (t/a getGround) is authorised and regulated by the Financial Conduct Authority (firm reference number 829031) as an AR of Resolution Compliance (firm reference number 574048). Terranova.network Limited (t/a getGround) is registered with the Information Commissioner’s Office under registration number ZA481725 for the purposes of the protection of data."
+  },
+  "forgotPassword": {
+    "title": "Forgot password",
+    "cta": "Reset Password",
+    "goBack": "Back",
+    "reset": {
+      "title": "Set your new Password",
+      "confirmPassword": "Confirm your password",
+      "setPasswordButton": "Set password",
+      "form" : {
+        "errors": {
+          "formFail": "Sorry we cannot set your new password right now, please try again later"
+        }
+      }
+    },
+    "emailPending": "With a magic link to the email address you provided. Please click the button on the email to change your password"
+  },
   "form": {
     "correctErrors": "Please correct all errors to proceed",
     "radioConfirm": {
       "true": "Yes",
       "false": "No"
     },
+    "ctaPrimary": "Next",
+    "ctaSecondary": "Back",
     "skipStep": "Skip this step for now"
+  },
+  "findOutMore": {
+    "label": "Find out more",
+    "title": "More information",
+    "moreInfo": {
+      "info1": "GetGround services are for investors of residential property that will be rented out. The property must be in England and Wales.",
+      "info2": "All GetGround companies are UK Limited companies.",
+      "info3": "Each GetGround company only ever holds one property. This means:",
+      "info4": "You are better protected as each asset’s liability is contained in a separate company.",
+      "info5": "You can easily buy or sell a property just by changing ownership in the shares of the company holding it.",
+      "info6": "It can take as little as 20 minutes to own a GetGround company. You just need to sign-up to our platform and we will ask some details about you, your property and who you want to own your company with.",
+      "info7": "It is easy to manage your company through the GetGround website. Everything you need in one place.",
+      "info8": "You should engage GetGround before exchange of your property contracts."
+    }
+  },
+  "header": {
+    "buttons": {
+      "register": "Register",
+      "login": "Log In"
+    }
+  },
+  "howItWorks": {
+    "title": "How it works",
+    "sections": {
+      "step1": {
+        "title": "Step 1",
+        "copy": "GetGround will set up a UK Limited company and bank account for you",
+        "imageAltText": "Property"
+      },
+      "step2": {
+        "title": "Step 2",
+        "copy": "GetGround can connect you to mortgages, insurance, property management and solicitors (optional service)",
+        "imageAltText": "Purchase"
+      },
+      "step3": {
+        "title": "Step 3",
+        "copy": "GetGround will coordinate with your lawyers to purchase your property through your company",
+        "imageAltText": "Solicitor Details"
+      },
+      "step4": {
+        "title": "Step 4",
+        "copy": "GetGround will manage on an on-going basis all your company requirements including accounting, tax, legal documents, filings and secretarial work",
+        "imageAltText": "Shareholder details"
+      },
+      "step5": {
+        "title": "Step 5",
+        "copy": "GetGround can connect you to other investors on the platform to buy and sell shares in companies holding property (optional service)",
+        "imageAltText": "Services"
+      }
+    }
+  },
+  "landing": {
+    "title": "GetGround for smarter property purchasing.",
+    "secondaryTitle": "Protect your wealth and be tax efficient.",
+    "firstParagraph": "GetGround makes it easy and affordable to purchase investment property the smarter way – through a company.",
+    "secondParagraph": "By using our platform you better protect your personal wealth, drive tax efficiency and create more flexibility in how you buy, manage and sell your property. ",
+    "thirdParagraph": "GetGround sets up your company that purchases your investment property. We manage all your company’s on-going needs under one roof. "
+  },
+  "liveChat": {
+    "button": "Live chat"
   },
   "login": {
     "title": "Sign in",
@@ -187,6 +431,43 @@
         "password": "Password"
       },
       "error": "Invalid login - please try again"
+    }
+  },
+  "meetTheFounders": {
+    "title": "Meet the founders",
+    "cta": "Read more",
+    "moubin": {
+      "nameLong": "Moubin Faizullah Khan",
+      "nameShort": "Moubin",
+      "content": {
+        "first": "Moubin has experience in investing, commercial strategy, tax and structuring. He was an investment professional at Apax Partners, one of the world’s leading private equity houses.",
+        "second": "There he was involved in numerous key transaction in the retail, consumer and IT services sectors. Previously Moubin was at McKinsey & Company and is trained as a medical doctor at Imperial College where he graduated with distinctions."
+      }
+    },
+    "misrab": {
+      "nameLong": "Misrab Faizullah Khan",
+      "nameShort": "Misrab",
+      "content": {
+        "first": "Misrab is a computer scientist. He set up the data science team and Singapore office at Go-Jek, Indonesia’s first technology ‘unicorn’.",
+        "second": "There he was involved in numerous key transaction in the retail, consumer and IT services sectors. Previously Moubin was at McKinsey & Company and is trained as a medical doctor at Imperial College where he graduated with distinctions.",
+        "third": "Misrab is a Stanford University graduate with Bachelor’s and Master’s degrees focused around computer science, economics and mathematics."
+      }
+    },
+    "joinUs": {
+      "title": "Join us",
+      "content": "Our team is rapidly growing. If you believe in our mission and would like to contribute to our growth, please get in touch."
+    }
+  },
+  "menu": {
+    "links": {
+      "first": "What we do",
+      "second": "GetGround Advantages",
+      "third": "How it works",
+      "fourth": "Pricing",
+      "fifth": "About us",
+      "sixth": "Partnerships",
+      "seventh": "FAQs",
+      "eigth": "Logout"
     }
   },
   "modal": {
@@ -225,6 +506,18 @@
         "title": "Board Resolution to Exchange Contracts",
         "imageAltText": "Board Resolution to Exchange Contracts"
       }
+    },
+    "confirmation": {
+      "heading": "Well done",
+      "imageAltText": "confirmation image",
+      "copy": "<p class='fs-large'>All your documents are signed.</p><p class='fs-large'>Please remind your shareholders to sign their documents.</p>",
+      "buttonText": "View your dashboard"
+    },
+    "prompt": {
+      "heading": "Nudge your shareholders",
+      "text": "Your shareholders will need to create an account on GetGround and accept their roles so they can proceed to sign their documents.",
+      "text2": "Until then, we won’t be able to finalise your company set up. Give them a gentle nudge so we can speed up the process.",
+      "cta": "Back to Dashboard"
     }
   },
   "onBoarding": {
@@ -314,7 +607,7 @@
       "buttonDone": "Finished",
       "notSuitable": {
         "title": "We are sorry!",
-        "text": "This is a buy to let service, please contact us if you’re not sure getGround is right for you",
+        "text": "This is a buy to let service, please contact us if you’re not sure GetGround is right for you",
         "button": "Talk to us on LiveChat"
       },
       "failureMessage": "Sorry! You have not passed the quiz. Please try again."
@@ -332,15 +625,15 @@
           "email": "Email",
           "password": "Password",
           "passwordConfirm": "Confirm Password",
-          "optIn": "I would like to receive marketing emails and offers from GetGround",
+          "optIn": "I would like to receive news and updates from GetGround",
           "privacyOne": "Creating an account means you accept our ",
-          "privacyTermsLink": "terms of service",
+          "privacyTermsLink": "Terms of Service",
           "privacyTwo": " and ",
           "privacyPolicyLink": "Privacy Policy"
         },
         "note": {
           "email": "This will be your username",
-          "password": "Your password must be at least 6 characters long"
+          "password": "Minimum six characters"
         },
         "errors": {
           "duplicateEmail": "Email address already exists"
@@ -356,22 +649,22 @@
       "slides": [
         {
           "title": "Get started",
-          "copy": "<p class='fs-large'>In 5 Simple steps you will have created an account and profile.</p><p class='fs-large'>It's then easy to set up and manage your Get Ground company.</p>",
+          "copy": "<p class='fs-large'>You’ll create your account in 3 simple steps.</p><p class='fs-large'>You’ll need your passport and a proof of address at hand.</p><p class='fs-large'>You can then access your dashboard and start creating companies.</p>",
           "imageAltText": "Arm chair"
         },
         {
           "title": "Save money",
-          "copy": "<p class='fs-large'>Owning UK residential investment property in a company can save you money.</p><p class='fs-large'>With Get Ground it has never been cheaper to own and run companies.</p>",
+          "copy": "<p class='fs-large'>Owning UK residential investment property in a company can save you money.</p><p class='fs-large'>With GetGround it has never been cheaper to own and run companies.</p>",
           "imageAltText": "Arm chair"
         },
         {
-          "title": "Fast and efficient",
-          "copy": "<p class='fs-large'>Setting up and managing a company has never been easier. We use technology to take away the pain and hassle.</p>",
+          "title": "Save time",
+          "copy": "<p class='fs-large'>We use technology to make setting up and managing a company painless and hassle free.</p>",
           "imageAltText": "Arm chair"
         },
         {
-          "title": "All under one roof",
-          "copy": "<p class='fs-large'>Everything your company needs right here at getGround. Seamless access to other services, such as mortgage and insurance product. Get started now.</p>",
+          "title": "All in one place",
+          "copy": "<p class='fs-large'>Everything your company needs right here at GetGround. Seamless access to other services, such as mortgage and insurance product. Get started now.</p>",
           "imageAltText": "Arm chair"
         }
       ],
@@ -391,29 +684,33 @@
     },
     "idCheck": {
       "title": "ID Check",
-      "text": "In order to prove your identity we need you to take a picture of your passport, proof of address and then finally to take a selfie.",
+      "text": "To prove your identity we need you to take a picture of your passport, proof of address and take a picture of yourself.",
       "buttonNext": "Next",
       "buttonBack": "Back",
       "buttonSkip": "Skip for now",
-      "link": "If you already have it saved Upload",
+      "link": "If you already have it saved, upload instead",
+      "loading": "...loading camera",
       "image": {
         "capture": "Capture photo",
         "happy": "Yes, I'm happy",
         "retake": "Retake"
       },
       "passport": {
-        "title": "Add passport picture",
-        "content": "In order to prove your identity we need you to take a picture of your passport, proof of address and then finally to take a selfie.",
+        "name": "Passport",
+        "title": "Add a picture of your passport",
+        "content": "Please make sure you take a picture of the page of your passport that contains your picture and your details. The full page should be visible on the picture.",
         "retakeImageContent": "Are you happy with this picture? Please make sure it is well-lit and that you can read the information clearly."
       },
       "address": {
+        "name": "Proof of Address",
         "title": "Add proof of address",
-        "content": "Now we need a picture of a utility bill, a bank statement or any government letter (e.g. HMRC). Please make sure the document is recent (inside the past 3 months) and the address is clearly visible.",
-        "retakeImageContent": "Are you happy with this picture? Please make sure both your full name and address is clearly visible."
+        "content": "Now we need a picture of a utility bill, bank statement or any government letter (e.g. HMRC). Please make sure the document is recent (inside the past 3 months) and the address and your name are clearly visible.",
+        "retakeImageContent": "Are you happy with this picture? Please make sure the date, your full name and address are clearly visible."
       },
       "selfie": {
-        "title": "Take a selfie",
-        "content": "Tips for taking a good selfie. Hold the camera in front. Position the camera. Ensure the light is right.",
+        "name": "Selfie",
+        "title": "Take a picture of yourself",
+        "content": "We need this picture so we can match it with the one in your passport. This is to make sure no one is trying to create a false account using your documents.",
         "retakeImageContent": "Are you happy with this picture? Please make sure the picture is well-lit and not blurred."
       }
     },
@@ -431,7 +728,8 @@
         "cardLabel": "Card details",
         "error": "There was an issue with your payment",
         "retakePaymentError": "Your payment has failed. Please update your payment details so we can finalise your application"
-      }
+      },
+      "stripeError": "Enter card details"
     },
     "personalDetails": {
       "heading": "Personal details",
@@ -446,10 +744,10 @@
         "lastNameLabel": "Last name",
         "previousNamesLabel": "Previous names",
         "dateOfBirthLabel": "Date of Birth",
-        "dateOfBirthNote": "You need to be 18 or over to use getGround",
+        "dateOfBirthNote": "You need to be 18 or over to use GetGround",
         "nationalityLabel": "Nationality",
         "cityOfBirthLabel": "City of birth",
-        "jobTitleLabel": "Job title",
+        "jobTitleLabel": "Profession",
         "countryLabel": "Country of residence",
         "addressFinderLabel": "Address Finder",
         "unitNumberLabel": "Unit Number",
@@ -468,9 +766,9 @@
       }
     },
     "progressTracker": {
-      "inProgressTitle": "Get Started in 5 simple steps",
+      "inProgressTitle": "Get Started in 3 simple steps",
       "complete": "complete",
-      "completeTitle": "All 5 steps complete",
+      "completeTitle": "All 3 steps complete",
       "confirmComplete": "I am happy with all my details and confirm they are all correct.",
       "sections": {
         "step1": {
@@ -485,7 +783,7 @@
         },
         "step3": {
           "title": "ID Check",
-          "copy": "Tax and regulatory details",
+          "copy": "Document verification",
           "imageAltText": "ID card"
         },
         "step4": {
@@ -501,12 +799,117 @@
       }
     }
   },
+  "partnerships": {
+    "cta": "Submit",
+    "input": {
+      "title": "Your Email"
+    },
+    "form": {
+      "success": "Thanks! Your email has been submitted",
+      "error": "Sorry we cannot subscribe you to our list right now, please try again later"
+    }
+  },
+  "pricing": {
+    "title": "Pricing",
+    "vat": "(+VAT)",
+    "property": {
+      "title": "PRICING PER PROPERTY",
+      "oneTime": {
+        "price": "£500",
+        "caption": "One-time sign up fee"
+      },
+      "monthly": {
+        "price": "£20",
+        "caption": "Monthly subscription"
+      },
+      "annual": {
+        "price": "£200-300*",
+        "caption": "Annual directors and officers insurance",
+        "smallCaption": "*Actual pricing depends on the value of your property"
+      }
+    },
+    "services": {
+      "title": "OPTIONAL SERVICES PRICING",
+      "firstContent": "Our partners may charge a fee if you decide to use their mortgage, insurance, solicitor or property management services.",
+      "secondContent": "We charge 0.2% of the property’s sale value if you buy or sell shares in companies holding property on the GetGround platform. You do not have to sell through us, this is an optional service."
+    }
+  },
+  "profile": {
+    "sections": {
+      "name": "Full name",
+      "previousNames": "Previous name(s)",
+      "dob": "Date of birth",
+      "birthCity": "City of birth",
+      "occupation": "Occupation",
+      "phone": "Phone number",
+      "email": "Email address",
+      "homeAddress": "Home address",
+      "payment": "Payment methods",
+      "passport": "Passport documents",
+      "proofAddress": "Proof of address",
+      "signature": "Signature"
+    },
+    "edit": "Edit",
+    "save": "Save"
+  },
+  "trustAndPrivacy" : {
+    "title": "Trust and Privacy",
+    "subTitle": "At GetGround, we take the trust our customers place in us very seriously.",
+    "cta": "Read more",
+    "sections": {
+      "info0": {
+        "title": "You own and control your company",
+        "copy": "GetGround is a service provider and does not have any directorship or ownershipin your company. We cannot perform any activities on your company without your explicit consent."
+      },
+     "info1": {
+        "title": "You can leave us at any time",
+        "copy": "You are free to leave our services at any time without penalty."
+      },
+      "info2": {
+        "title": "We work with your lawyers",
+        "copy": "When you purchase your property through GetGround you continue to use your conveyancing lawyer as per normal. You send your funds to purchase the property directly to your conveyancing lawyer’s client account. As a result, the underlying checks and procedures operating in the market are maintained."
+      },
+      "info3": {
+        "title": "Funded by the UK Government",
+        "copy": "We are funded in part by the Government through HM Land Registry’s Geovation program as well as being funded by other prestigious private investors."
+      },
+      "info4": {
+        "title": "FCA regulated",
+        "copy": "We are regulated by the UK Financial Conduct Authority and abide to high standards with regard to compliance. We are subject to regular supervision to ensure we meet these standards and treat our customers fairly."
+      },
+      "info5": {
+        "title": "Compliance",
+        "copy": "All GetGround customers need to pass UK approved Know-Your-Customer (KYC) and Anti-Money Laundering (AML) checks. GetGround is registered with the Information Commissioner’s Office and adheres to UK General Data Protection Regulation (GDPR)."
+      },
+      "info6": {
+        "title": "Transparency",
+        "copy": "We believe transparency is key in establishing trust. All GetGround companies are UK limited companies and as such their details are recorded at Companies House in the UK. This is a public register that anyone is able to check and includes company details, owner and director information and copies of key company documents."
+      },
+      "info7": {
+        "title": "We work with industry leaders",
+        "copy": "GetGround works with the best in the industry. All legal documents for GetGround companies are produced by CMS Cameron McKenna Nabarro OlswangLLP. GetGround is proud to partner with One Global Property Service, RPI Complete, Paradigm Land and numerous others in the residential buy-to-let property sector."
+      }
+    }
+  },
   "validation": {
     "validateEmail": "Invalid email",
     "validateRequired": "Required",
     "validateMatching": "No match",
     "validatePhone": "Invalid phone",
     "validateNumeric": "Number only",
-    "validateNoOfCompanies": "No more than 20"
+    "validateNoOfCompanies": "No more than 20",
+    "validateLettersOnly": "Invalid characters",
+    "validateTotal": "Max {{max}}"
+  },
+  "whatWeDo": {
+    "title": "What we do",
+    "content": {
+      "first": "Through technology GetGround makes it easier and cheaper than ever to own property in a company. We provide all the services your company needs under one roof.",
+      "second": "Our simple website means you no longer have to spend time on the phone or email chasing your company lawyers, accountants, secretaries or banks.",
+      "third": "We’ve have crafted the optimal company structure for UK investment property. Using it means you are likely to pay less tax.",
+      "fourth": "Through our partners we can provide seamless access to the best services for all your property needs; including mortgages, insurance, property management and solicitors.",
+      "fifth": "GetGround customers also have access to the GetGround marketplace making buying and selling shares in companies holding property fast and cost effective."
+    }
+
   }
 }

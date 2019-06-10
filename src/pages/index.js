@@ -1,26 +1,27 @@
 import React, { Fragment } from 'react';
-import { Link } from 'gatsby';
-import LiveChat from 'react-livechat';
+import { useTranslation } from 'react-i18next';
+import ImageFull from 'src/components/ImageFull/ImageFull'
 
+import house from 'src/assets/images/house-landing.svg'
 import Layout from 'src/components/Layout/Layout'
 
+import 'src/styles/pages/landing.scss'
+
 const IndexPage = () => {
-  const yahh = [{
-    name: 'change',
-    value: 'passport'
-  }]
+  const [t] = useTranslation();
 
   return (
     <Fragment>
       <Layout>
-        <div data-test="container-home" className="home" role="homepage">
-          <Link to="/onboarding">Onboarding</Link>
-          <Link to="/company-design">Company Design</Link>
-          <LiveChat
-            license={10911047}
-           />
-          <button onClick={() => window.LC_API.open_chat_window()}>PRESS NEE</button>
-          <button onClick={() => window.LC_API.set_custom_variables(yahh)}>set vars</button>
+        <div data-test="container-landing" className="landing" role="company-design brochure">
+          <h1 data-test="landing-title" >{t('landing.title')}</h1>
+          <h1 data-test="landing-secondary-title" >{t('landing.secondaryTitle')}</h1>
+          <ImageFull src={house} alt="house" data-test="landing-img" />
+          <div className="landing-content">
+            <p data-test="landing-content-first" >{t('landing.firstParagraph')}</p>
+            <p data-test="landing-content-second" >{t('landing.secondParagraph')}</p>
+            <p data-test="landing-content-third" >{t('landing.thirdParagraph')}</p>
+          </div>
         </div>
       </Layout>
     </Fragment>

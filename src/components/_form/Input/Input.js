@@ -6,7 +6,7 @@ import classNames from 'classnames';
 
 import Note from '../../_layout/Note/Note';
 
-import './input.css';
+import './input.scss';
 
 /**
  * Input
@@ -29,14 +29,15 @@ import './input.css';
  */
 const Input = (props) => {
 
-  const { 
-    id, 
-    type, 
-    label, 
-    onChange, 
-    value, 
-    validate, 
-    onFocus, 
+  const {
+    id,
+    type,
+    label,
+    onChange,
+    onKeyPress,
+    value,
+    validate,
+    onFocus,
     readOnly,
     note,
     error,
@@ -47,14 +48,16 @@ const Input = (props) => {
   } = props;
 
   return (
-    <div 
+    <div
       className={classNames('text-input', wrapperClass)}
       data-test="component-input"
       style={ hidden !== undefined ? { display: hidden ? 'none' : 'block'} : {}}
     >
-      <div className="text-input-label">
-        {label}
-      </div>
+      {label &&
+        <div className="text-input-label">
+          {label}
+        </div>
+      }
 
       {error &&
         <div data-test="text-input-error" className="text-input-required">{error}</div>
@@ -69,7 +72,8 @@ const Input = (props) => {
           if (onFocus) onFocus(e);
         }}
         onBlur={(e) => validate ? validate() : null}
-        onChange={(e) => onChange(e.target.value, validate)}
+        onChange={(e) => onChange(e.target.value)}
+        onKeyPress={onKeyPress}
         value={value}
         readOnly={readOnly}
         className={classNames([
@@ -91,6 +95,7 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
+  onKeyPress: PropTypes.func,
   readOnly: PropTypes.bool,
   value: PropTypes.string,
   validate: PropTypes.func,

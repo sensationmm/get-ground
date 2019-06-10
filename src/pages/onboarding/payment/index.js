@@ -36,9 +36,6 @@ class Payment extends Component {
     this.vatValue = (this.baseSetupValue + this.baseMonthlySubValue) / 100 * 20; 
 
     this.state = {
-      ...formUtils.initFormState({
-        numberOfCompanies: '1'
-      }),
       stripe: null,
       isStripeValid: true,
       accountSetupValue: this.baseSetupValue,
@@ -46,18 +43,20 @@ class Payment extends Component {
       vatValue: this.vatValue,
       totalValue: this.baseSetupValue + this.baseMonthlySubValue + this.vatValue,
       stripeToken: '',
-      showErrorMessage: false,
-      errors: {}
     };
 
     this.config = [];
   }
-
+  
   componentDidMount() {
+    formUtils.initFormState({
+      numberOfCompanies: '1'
+    });
+
     const { t, location: { search } } = this.props;
-
+    
     this.setState({ stripe: window.Stripe(stripeKey) });
-
+    
     if (search.indexOf('retakePayment=true')>=0) {
       this.setState({
         errors: {
@@ -69,12 +68,17 @@ class Payment extends Component {
     }
   }
 
+  componentWillUnmount() {
+    formUtils.clearFormState();
+  }
+
   validateForm = () => {
-    const { showLoader, hideLoader, t } = this.props;
-    const { stripeToken, isStripeValid, values: { numberOfCompanies } } = this.state;
+    const { showLoader, hideLoader, t, form } = this.props;
+    const { stripeToken, isStripeValid, } = this.state;
+    const { values: { numberOfCompanies } } = form;
 
     /* istanbul ignore else */
-    if (formUtils.validateForm(this) && isStripeValid) {
+    if (formUtils.validateForm(this.config) && isStripeValid) {
       showLoader();
       return PaymentService.makePayment(stripeToken, numberOfCompanies).then((response) => {
         hideLoader();
@@ -122,17 +126,16 @@ class Payment extends Component {
   areCardDetailsValid = valid => this.setState({ isStripeValid: valid });
 
   render() {
-    const { t } = this.props;
+    const { t, form } = this.props;
     const { 
-      values, 
       isStripeValid,
       accountSetupValue,
       monthlySubscriptionValue,
       vatValue,
       totalValue,
-      errors,
-      showErrorMessage
     } = this.state;
+    const { values, errors, showErrorMessage } = form;
+
     
     this.config = [
       {
@@ -149,12 +152,12 @@ class Payment extends Component {
         component: Stripe,
         isStripeValid: isStripeValid,
         setIsStripeValid: () => this.setState({ isStripeValid: false }),
-        stripeError: 'error',
+        stripeError: t('onBoarding.payment.stripeError'),
         setStripeToken: token => this.setState({ stripeToken: token }),
         validateForm: () => this.validateForm(),
         cardFieldLabel: t('onBoarding.payment.form.cardLabel'),
-        nextButtonLabel: t('createAccount.ctaPrimary'),
-        backButtonLabel: t('createAccount.ctaSecondary'),
+        nextButtonLabel: t('onBoarding.createAccount.ctaPrimary'),
+        backButtonLabel: t('onBoarding.createAccount.ctaSecondary'),
         handleChange: (e) => this.areCardDetailsValid(e.complete)
       },
     ];
@@ -190,7 +193,7 @@ class Payment extends Component {
           <StripeProvider stripe={this.state.stripe}>
             <Elements>
               <Form>
-                {formUtils.renderForm(this)}
+                {formUtils.renderForm(this.config)}
               </Form>
             </Elements>
           </StripeProvider>
@@ -204,11 +207,16 @@ Payment.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   t: PropTypes.func.isRequired,
-  location: PropTypes.object
+  location: PropTypes.object,
+  form: PropTypes.object
 };
+
+const mapStateToProps = state => ({
+  form: state.form
+});
 
 const actions = { showLoader, hideLoader };
 
 export const RawComponent = Payment;
 
-export default connect(null, actions)(withTranslation()(Payment));
+export default connect(mapStateToProps, actions)(withTranslation()(Payment));

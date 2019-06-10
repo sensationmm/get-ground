@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { Link, navigate } from 'gatsby';
-import queryString from 'query-string'
+import queryString from 'query-string';
 
 import Layout from 'src/components/Layout/Layout'
 import Button from 'src/components/_buttons/Button/Button';
@@ -16,7 +16,7 @@ import InputPassword from 'src/components/_form/InputPassword/InputPassword';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 import authService from 'src/services/Auth';
-const AuthService = new authService();
+export const AuthService = new authService();
 
 import 'src/styles/pages/login.scss';
 
@@ -29,22 +29,25 @@ class Login extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      ...formUtils.initFormState({
-        email: '',
-        password: ''
-      })
-    };
+    this.config = null;
+  }
 
-    this.config = [];
+  componentDidMount = () => {
+    formUtils.initFormState({
+      email: '',
+      password: ''
+    });
+  }
+
+  componentWillUnmount() {
+    formUtils.clearFormState();
   }
 
   onLogin = async () => {
-    const { email, password } = this.state.values;
-    const { showLoader, hideLoader, t, location: { search } } = this.props;
-    const self = this;
+    const { showLoader, hideLoader, t, location: { search }, form} = this.props;
+    const { values: { email, password }} = form;
 
-    if(formUtils.validateForm(this)) {
+    if(formUtils.validateForm(this.config)) {
       showLoader();
 
       return AuthService.login(email, password)
@@ -56,26 +59,29 @@ class Login extends Component {
           if (queryStringValues.redirect) {
             navigate(queryStringValues.redirect);
           } else {
-            navigate('/onboarding/intro');
+            navigate('/onboarding');
           }
 
         } else {
-          self.setState({
-            ...self.state,
-            errors: {
-              ...self.state.errors,
-              form: t('login.form.error')
-            },
-            showErrorMessage: true
-          });
+          formUtils.setFormError(t('login.form.error'));
         }
       });
     }
   }
 
+  /**
+   * enterSubmit
+   * @param {event} e - event object
+   * @return {void}
+   */
+  enterSubmit = (e) => {
+    if(e.key === 'Enter') {
+      this.onLogin();
+    }
+  }
+
   render() {
-    const { t } = this.props;
-    const { values, errors } = this.state;
+    const { form: { values, errors, showErrorMessage }, t } = this.props;
 
     this.config = [
       {
@@ -83,43 +89,45 @@ class Login extends Component {
         component: InputText,
         label: t('login.form.label.email'),
         value: values.email,
-        validationFunction: 'validateEmail'
+        validationFunction: 'validateEmail',
+        onKeyPress: this.enterSubmit
       },
       {
         stateKey: 'password',
         component: InputPassword,
         label: t('login.form.label.password'),
         value: values.password,
-        validationFunction: 'validateRequired'
+        validationFunction: 'validateRequired',
+        onKeyPress: this.enterSubmit
       }
     ];
 
     return (
-      <Layout>
+      <Layout loggedOutOnly>
         <div className="account-login" data-test="container-login" role="account fullscreen">
           <h1>{ t('login.title') }</h1>
 
-          {errors.form && <ErrorBox>{errors.form}</ErrorBox>}
+          {showErrorMessage && errors.form && <ErrorBox data-test="create-error-box">{errors.form}</ErrorBox>}
 
-            <Form>
-              { formUtils.renderForm(this) }
-            </Form>
+          <Form>
+            { formUtils.renderForm(this.config) }
+          </Form>
 
-            <Form className="account-login-actions">
-              <Button
-                data-test="login-button"
-                classes="secondary"
-                label={ t('login.ctaPrimary') }
-                fullWidth
-                onClick={this.onLogin}
-              />
+          <Form className="account-login-actions">
+            <Button
+              data-test="login-button"
+              classes="secondary"
+              label={ t('login.ctaPrimary') }
+              fullWidth
+              onClick={() => this.onLogin()}
+            />
 
-              <center>
-                <Link to="/forgot-password">
-                  <Button classes="secondary faded" label={ t('login.ctaSecondary') } small />
-                </Link>
-              </center>
-            </Form>
+            <center>
+              <Link to="/forgot-password/enter-email">
+                <Button classes="secondary faded" label={ t('login.ctaSecondary') } small />
+              </Link>
+            </center>
+          </Form>
         </div>
       </Layout>
     );
@@ -130,11 +138,16 @@ Login.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   t: PropTypes.func.isRequired,
-  location: PropTypes.object
+  location: PropTypes.object,
+  form: PropTypes.object
 };
+
+const mapStateToProps = state => ({
+  form: state.form
+});
 
 export const RawComponent = Login;
 
 const actions = { showLoader, hideLoader };
 
-export default connect(null, actions)(withTranslation()(Login));
+export default connect(mapStateToProps, actions)(withTranslation()(Login));

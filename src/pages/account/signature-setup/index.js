@@ -22,25 +22,19 @@ export class SignatureSetup extends Component {
     this.state = {}
   }
 
-  uploadSignature = () => {
-    /* TODO: add upload functionality - isn't in sprint yet... */
-  }
-
   render() {
     const { t } = this.props;
 
     return (
       <Layout secure>
-        <div className="signature-setup">
+        <div data-test="container-signature-setup" className="signature-setup">
           <h1 className="signature-setup--title">{t('account.signature.title')}</h1>
           <IntroBox data-test="intro-box">{t('account.signature.intro')}</IntroBox>
           <h2 className="signature-setup--heading2">{t('account.signature.heading2')}</h2>
 
-          <Button 
-            classes="full signature" 
-            onClick={this.uploadSignature}
-            label={t('account.signature.buttons.upload')}
-          />
+          <Link to="/account/upload-signature">
+            <Button classes="full signature" label={t('account.signature.buttons.upload')}/>
+          </Link>
 
           <Link to="/account/create-signature">
             <Button classes="full signature" label={t('account.signature.buttons.create')} />

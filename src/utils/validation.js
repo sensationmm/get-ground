@@ -48,10 +48,10 @@ validationMessages.validateRequired = i18n.t('validation.validateRequired');
  * @return {boolean} whether string passes validation
  */
 export const validatePhone = (input) => {
-  const inputVal = input.substr(input.indexOf(')') + 1);
+  const inputVal = input ? input.substr(input.indexOf(')') + 1) : '';
 
   if (inputVal === '') return false;
-  return !isNaN(inputVal);
+  return !isNaN(inputVal) || (inputVal.length >= 7 && inputVal <= 15);
 };
 validationMessages.validatePhone = i18n.t('validation.validatePhone');
 
@@ -80,9 +80,22 @@ validationMessages.validateNoOfCompanies = i18n.t('validation.validateNoOfCompan
  * @return {boolean} whether value is entered
  */
 export const validateLettersOnly = (input) => {
-  return !/[^a-zA-Z]/.test(input) && !!input;
+  return !/[^a-zA-Z\s]/.test(input) && !!input;
 };
-validationMessages.validateLettersOnly = 'Required';
+validationMessages.validateLettersOnly = i18n.t('validation.validateLettersOnly');
+
+/**
+ * validateTotal
+ * validates based on given cumulative total
+ * @param {string} input - value to be validated
+ * @param {number} total - cumulative total to check
+ * @param {number} maxValue - maximum value to validate against
+ * @return {boolean} whether value is entered
+ */
+export const validateTotal = (input, { total, maxValue }) => {
+  validationMessages.validateTotal = i18n.t('validation.validateTotal', { max: maxValue });
+  return total <= maxValue;
+};
 
 const validation = {
   validateEmail,
@@ -92,6 +105,7 @@ const validation = {
   validateNumeric,
   validateNoOfCompanies,
   validateLettersOnly,
+  validateTotal,
   messages: validationMessages,
 };
 

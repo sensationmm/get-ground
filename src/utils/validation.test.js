@@ -81,6 +81,13 @@ describe('validateLettersOnly()', () => {
     const isValid = validation.validateLettersOnly(string);
     expect(isValid).toBe(false);
   });
+  
+  test('allows spaces', () => {
+    const string = 'something else';
+    const isValid = validation.validateLettersOnly(string);
+
+    expect(isValid).toBe(true);
+  });
 });
 
 describe('validatePhone()', () => {
@@ -98,6 +105,40 @@ describe('validatePhone()', () => {
   test('returns false if value is an empty string', () => {
     const string = '';
     const isValid = validation.validatePhone(string);
+    expect(isValid).toBe(false);
+  });
+});
+
+describe('validateTotal', () => {
+  test('returns true if less', () => {
+    const isValid = validation.validateTotal(null, { total: 21, maxValue: 30 });
+    expect(isValid).toBe(true);
+  });
+
+  test('returns true if equal', () => {
+    const isValid = validation.validateTotal(null, { total: 30, maxValue: 30 });
+    expect(isValid).toBe(true);
+  });
+
+  test('returns false if more', () => {
+    const isValid = validation.validateTotal(null, { total: 31, maxValue: 30 });
+    expect(isValid).toBe(false);
+  });
+});
+
+describe('validateNumeric', () => {
+  test('returns true for numbers', () => {
+    const isValid = validation.validateNumeric('21');
+    expect(isValid).toBe(true);
+  });
+
+  test('returns false for strings', () => {
+    const isValid = validation.validateNumeric('abc');
+    expect(isValid).toBe(false);
+  });
+
+  test('returns false if empty', () => {
+    const isValid = validation.validateNumeric('');
     expect(isValid).toBe(false);
   });
 });

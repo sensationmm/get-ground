@@ -1,0 +1,21 @@
+.landing {
+  h1 {
+    font-size: 44px;
+    font-weight: 600;
+    line-height: 1.16
+  }
+  .image-full {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  &-content {
+    p {
+      margin-bottom: 10px;
+      font-size: 20px;
+      font-weight: 300;
+      &:last-child {
+        margin-bottom: 50px;
+      }
+    }
+  }
+}

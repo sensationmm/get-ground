@@ -26,22 +26,20 @@ const services = new additionalServices();
 export class AdditionalServices extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      ...formUtils.initFormState({
-        find_mortgage: null,
-        find_property_insurance: null,
-        find_property_management: null,
-      }),
-    };
-
-    this.config = [];
   }
 
+  componentDidMount() {
+    formUtils.initFormState({
+      find_mortgage: null,
+      find_property_insurance: null,
+      find_property_management: null,
+    });
+  }
 
   componentWillUnmount() {
-    const { values } = this.state;
-    const {find_mortgage, find_property_insurance,  find_property_management} = values;
+    formUtils.clearFormState();
+
+    const { form: { values: { find_mortgage, find_property_insurance,  find_property_management }}} = this.props;
 
     this.props.setAdditionalServices({
       mortgage: find_mortgage === 'yes',
@@ -53,9 +51,10 @@ export class AdditionalServices extends Component {
   }
 
   render() {
-    const { t } = this.props
-    const { values } = this.state;
-    this.config = [
+    const { t, form } = this.props
+    const { values } = form;
+    
+    const config = [
       {
         stateKey: 'find_mortgage',
         component: RadioGroup,
@@ -121,7 +120,7 @@ export class AdditionalServices extends Component {
         <h1 className="add-services-title">{t('additionalServices.title')}</h1>
         <IntroBox>{t('additionalServices.introBox')}</IntroBox>
           <Form className="add-services-form">
-            {formUtils.renderForm(this)}
+            {formUtils.renderForm(config)}
           </Form>
         </div>
       </Layout>
@@ -131,11 +130,16 @@ export class AdditionalServices extends Component {
 
 AdditionalServices.propTypes = {
   setAdditionalServices: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired,
+  form: PropTypes.object
 };
+
+const mapStateToProps = state => ({
+  form: state.form
+});
 
 const actions = {
   setAdditionalServices
 }
 
-export default connect(null, actions)(withTranslation()(AdditionalServices))
+export default connect(mapStateToProps, actions)(withTranslation()(AdditionalServices))

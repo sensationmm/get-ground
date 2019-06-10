@@ -2,12 +2,16 @@ import React, { Component } from 'react'
 import { withTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 import Dropzone from 'react-dropzone'
-import Webcam from 'react-webcam'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 
+import Camera from 'src/components/Camera/Camera'
+import IntroBox from 'src/components/_layout/IntroBox/IntroBox'
 import Button from 'src/components/_buttons/Button/Button'
-import { setImg, setActive, resetActive } from 'src/state/actions/idCheck'
+import CameraIcon from 'src/assets/images/camera-icon.svg'
+import Rectangle from 'src/assets/images/rectangle.svg'
+
+import { setActive, resetActive, setRetake, setImg } from 'src/state/actions/idCheck'
 
 import './add-proof.scss'
 /**
@@ -22,20 +26,20 @@ export class AddProof extends Component {
     super(props);
     this.inputOpenFileRef = React.createRef()
     this.state = {
-      retakePicture: false,
-      takePicture: false,
-      imageSrc: null,
-      webcam: null
+      takePicture: false
     }
   }
 
 
   initialLanding = () => {
-    const { initialImg, section } = this.props;
+    const { initialImg, section, t } = this.props;
 
     return (
-      <div data-test="initial-img" onClick={() => this.handleActiveSection({takePicture: true})}>
-        <img src={initialImg} alt={`add-proof-${section}`}/>
+      <div className={`add-proof-initial`} data-test="initial-img" onClick={() => this.handleActiveSection({takePicture: true})}>
+        <img src={Rectangle} />
+        <img src={initialImg} alt={`add-proof-${section}`} className={`add-proof-initial-img ${section}`}/>
+        <img src={CameraIcon} className={`add-proof-initial-camera-icon ${section}`} />
+        <p className={`add-proof-initial-name ${section}`}>{t(`onBoarding.idCheck.${section}.name`)}</p>
       </div>
     )
   }
@@ -50,56 +54,56 @@ export class AddProof extends Component {
     this.setState(newState)
   }
 
-  /**
-   * @param {ReactComponent} webcam - React component to start webcam
-   * @return {void}
-   */
-  setWebcam = webcam => {
-    this.setState({webcam})
-  };
-
-  capture = () => {
-    const imageSrc = this.state.webcam.getScreenshot();
-    this.setState({
-      imageSrc,
-      retakePicture: true
-    })
-  };
-
-  startCamera = (t, videoConstraints) => {
+  startCamera = (t) => {
+    const { section } = this.props;
     return (
-      <div>
-        <Webcam
-          data-test="webcam"
-          audio={false}
-          height={350}
-          ref={this.setWebcam}
-          screenshotFormat="image/jpeg"
-          width={335}
-          videoConstraints={videoConstraints}
-        />
-        <p className="add-proof-loading">...loading camera</p>
-        <Button style={`display: inline;`} data-test="capture-button" classes="primary capture" fullWidth label={t('onBoarding.idCheck.image.capture')} onClick={() => this.capture()}/>
+      <div className="add-proof-start-camera">
+        <Camera section={section} active={this.props.active} data-test="camera"/>
+        <img className={`add-proof-overlay ${section}`} src={this.props.overlay} />
+        <p className="add-proof-loading">{t('onBoarding.idCheck.loading')}</p>
       </div>
     )
   }
 
-  imgConfirmation(t) {
+  retakePicture = () => {
+    if (this.props.active === this.props.section) {
+      this.props.setImg(this.props.section, null)
+      this.props.setRetake(this.props.section, true)
+      this.setState({ takePicture: true})
+    }
+  }
+
+  handleHappy = () => {
+    this.props.setRetake(this.props.section, false)
+    this.setState({ takePicture: false })
+  }
+
+  imgConfirmation(t, imagesrc) {
     return (
       <>
-        <img src={this.state.imageSrc}/>
-        <Button data-test="happy-button" classes="primary confirm-happy" fullWidth label={t('onBoarding.idCheck.image.happy')} onClick={() => this.setState({ retakePicture: false})}/>
-        <Button data-test="retake-button" classes="secondary" fullWidth label={t('onBoarding.idCheck.image.retake')} onClick={() => this.setState({imageSrc: null, retakePicture: true})}/>
+        <img data-test="confirm-img" src={imagesrc}/>
+        <Button data-test="happy-button" classes="primary confirm-happy" fullWidth label={t('onBoarding.idCheck.image.happy')} onClick={() => this.handleHappy()}/>
+        <Button data-test="retake-button" classes="secondary" fullWidth label={t('onBoarding.idCheck.image.retake')} onClick={() => this.retakePicture()}/>
       </>
     )
   }
 
-  showFinalImg = () => {
+  handleResetFinalImg() {
+    const { section } = this.props
+    this.props.setActive(section)
+    this.props.setImg(this.props.section, null)
+  }
+
+  /**
+   * @param {string} imagesrc - image
+   * @return {void}
+   */
+  showFinalImg = (imagesrc) => {
     if (this.props.active === this.props.section) {
-      this.props.setImg(this.props.section, this.state.imageSrc)
       this.props.resetActive()
     }
-    return <img src={this.state.imageSrc} onClick={() => this.handleActiveSection({ retakePicture: true })}/>
+
+    return <img  data-test="add-proof-final-img" src={imagesrc} onClick={() => this.handleResetFinalImg({ takePicture: true })}/>
   }
 
   /**
@@ -110,7 +114,7 @@ export class AddProof extends Component {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      this.setState({imageSrc: reader.result});
+      this.props.setImg(this.props.section, reader.result)
     };
     reader.onerror = (error) => {
       // TODO: handle errors
@@ -133,20 +137,17 @@ export class AddProof extends Component {
 
   handleProof = (t) => {
     const { section } = this.props
+    const imagesrc = this.props.idCheck[section].img
 
-    const videoConstraints = {
-      width: 1280,
-      height: 720,
-      facingMode: section === 'selfie' ? 'user' : 'environment'
-    };
+    const retake = this.props.idCheck[section].retake
 
-    if (this.state.imageSrc && !this.state.retakePicture) return this.showFinalImg()
+    if (imagesrc && !retake) return this.showFinalImg(imagesrc)
 
-    if (!this.state.takePicture) return this.initialLanding()
+    if (imagesrc === '' && !this.state.takePicture) return this.initialLanding()
 
-    if (this.state.imageSrc ) return this.imgConfirmation(t)
+    if (imagesrc) return this.imgConfirmation(t, imagesrc)
 
-    if (!this.state.imageSrc || this.state.retakePicture) return this.startCamera(t, videoConstraints)
+    if (!imagesrc || retake || this.state.takePicture) return this.startCamera(t)
   }
 
   uploadImg = (t) => {
@@ -179,8 +180,8 @@ export class AddProof extends Component {
 
     return (
       <div data-test="component-add-proof" className={classNames(['add-proof', {'disabled': this.props.active && this.props.active !== section  }])} role="account">
-        <h2 data-test="intro-box">{ t(`onBoarding.idCheck.${section}.title`) }</h2>
-        <p className="add-proof-content">{ !this.state.takePicture || !this.state.retakePicture ? t(`onBoarding.idCheck.${section}.content`) : t(`onBoarding.idCheck.${section}.retakeImageContent`)}</p>
+        <IntroBox data-test="intro-box">{ t(`onBoarding.idCheck.${section}.title`) }</IntroBox>
+        <p className="add-proof-content">{ !this.state.takePicture ? t(`onBoarding.idCheck.${section}.content`) : t(`onBoarding.idCheck.${section}.retakeImageContent`)}</p>
         <div className="add-proof-img">{this.handleProof(t)}</div>
         {section !== 'selfie' && <div className="add-proof-upload-file">{this.uploadImg(t)}</div>}
       </div>
@@ -195,16 +196,21 @@ AddProof.propTypes = {
   setImg: PropTypes.func.isRequired,
   setActive: PropTypes.func.isRequired,
   resetActive: PropTypes.func.isRequired,
-  active: PropTypes.string.isRequired
+  setRetake: PropTypes.func.isRequired,
+  active: PropTypes.string.isRequired,
+  overlay: PropTypes.string,
+  idCheck: PropTypes.object,
 }
-const mapStataToProps = (state) => ({
-  active: state.idCheck.active
+const mapStateToProps = (state) => ({
+  active: state.idCheck.active,
+  idCheck: state.idCheck
 })
 
 const actions = {
-  setImg,
   setActive,
-  resetActive
+  resetActive,
+  setImg,
+  setRetake
 }
 
-export default connect(mapStataToProps, actions)(withTranslation()(AddProof));
+export default connect(mapStateToProps, actions)(withTranslation()(AddProof));

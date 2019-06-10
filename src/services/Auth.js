@@ -4,6 +4,9 @@ import store from 'src/state/store';
 import { userLogin } from 'src/state/actions/user';
 import { saveAuth } from 'src/state/actions/auth';
 
+import accountService from 'src/services/Account';
+export const AccountService = new accountService();
+
 /**
  * AuthService
  * @return {Object} AuthService
@@ -29,7 +32,27 @@ class AuthService extends BaseService {
     return this.doRequest(config, (response) => {
       store.dispatch(userLogin(response.data.user));
       store.dispatch(saveAuth(response.data.token));
+
+      AccountService.getDocuments();
     });
+  };
+
+  /**
+   * reset password
+   * Authenticates user via api and stores auth token and user object
+   * @param {string} email - email address for login
+   * @return {Promise} reset password response
+   */
+  requestResetPassword = (email) => {
+    const config = {
+      url: '/auth/request_reset_password',
+      method: 'post',
+      data: {
+        'email': email
+      }
+    };
+
+    return this.doRequest(config);
   };
 
   /**
@@ -46,7 +69,30 @@ class AuthService extends BaseService {
     return this.doRequest(config, (response) => {
       store.dispatch(userLogin(response.data.user));
       store.dispatch(saveAuth(response.data.token));
+
+      AccountService.getDocuments();
     });
+  };
+
+  /**
+   * setNewPassword
+   * sets new password for user
+   * @param {string} password - new password
+   * @param {string} token - token passed from reset email
+   * @return {Promise} set new password
+   */
+  setNewPassword = (password, token) => {
+    const config = {
+      url: 'auth/new_password',
+      method: 'post',
+      data: {
+        'password': password,
+        'token': token
+      }
+    };
+
+    return this.doRequest(config);
+
   };
 
   verifyEmail = () => {

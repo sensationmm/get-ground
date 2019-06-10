@@ -1,74 +1,122 @@
 import React from 'react';
 import validation from './validation';
 import functions from './functions';
+import store from 'src/state/store';
+import { initForm, clearForm, updateForm, setErrors, setFormErrors } from 'src/state/actions/form';
+import { isArray } from 'util';
 
 /**
  * initFormState
  * Output default values/error state required by form setup
  * @param {object} fieldsInit - form field initial values
- * @return {object} state initial object
+ * @return {void}
  */
 export const initFormState = (fieldsInit) => {
-  return {
-    values: fieldsInit,
-    errors: {},
-    showErrorMessage: false
-  };
+  const fields = !isArray(fieldsInit) ? fieldsInit : new Array(...fieldsInit);
+  const errors = !isArray(fieldsInit) ? {} : { fields: fieldsInit.map(i => new Object()) };
+
+  return store.dispatch(
+    initForm({
+      values: fields,
+      errors: errors,
+      showErrorMessage: false
+    })
+  );
+};
+
+/**
+ * clearFormState
+ * @return {void}
+ */
+export const clearFormState = () => {
+  store.dispatch(clearForm());
+};
+
+/**
+ * setFormError
+ * @param {string} error - error to set
+ * @return {void}
+ */
+export const setFormError = (error) => {
+  store.dispatch(setFormErrors(error));
 };
 
 /**
  * updateValue
  * Helper function to update state.values item
- * @param {object} scope - 'this' of current component/container
  * @param {string} stateKey - id of value to update
  * @param {any} value - value to update
- * @param {function} validate - function passed to validate the field
  * @param {function} callback - function to fire after the generic onChange
+ * @param {boolean} [arrayUpdate] - whether value to be update is in an array
  * @return {void}
  */
-export const updateValue = (scope, stateKey, value, validate, callback) => {
-  
-  scope.setState({
-    ...scope.state,
-    values: {
-      ...scope.state.values,
-      [stateKey]: value
-    }
-  }, () => {
-    validate ? validate() : null;
-    callback ? callback(value) : null;
-  });
+export const updateValue = (stateKey, value, callback, arrayUpdate = false) => {
+  store.dispatch(updateForm(stateKey, value, arrayUpdate));
+
+  if(callback) {
+    callback(value);
+  }
 };
 
 /**
  * validateField
  * Validates every field defined in the this.config object that has a validationFunction prop defined
  * Sets state.error value for field if validation fails
- * @param {object} scope - 'this of current component/container
+ * @param {object} config - form config object
  * @param {string} stateID - id of state.values to validate
+ * @param {integer} [arrayIndex] - used if form.values is an array
  * @return {void}
  */
-export const validateField = (scope, stateID) => {
-  const { values, errors } = scope.state;
-  const errorsList = errors;
+export const validateField = (config, stateID, arrayIndex=null) => {
+  const { values, errors } = store.getState().form;
+  const errorsList = !errors.fields ? errors : errors.fields;
 
-  const configItem = functions.getByValue(scope.config, 'stateKey', stateID);
+  const configItem = functions.getByValue(config, 'stateKey', stateID);
 
-  if(configItem && configItem.validationFunction && !configItem.hidden) {
-    const isValid = (configItem.validationParam !== undefined) 
-      ? validation[configItem.validationFunction](values[stateID], configItem.validationParam)
-      : validation[configItem.validationFunction](values[stateID]);
+  const valueToCheck = arrayIndex === null ? values[stateID] : values[arrayIndex][stateID];
+
+  const validationList = isArray(configItem.validationFunction)
+    ? configItem.validationFunction
+    : configItem.validationFunction ? new Array(configItem.validationFunction) : undefined;
+
+  const validationParamList = isArray(configItem.validationParam)
+    ? configItem.validationParam
+    : new Array(configItem.validationParam);
+
+  if(configItem && validationList && !configItem.hidden) {
+
+    let isValid = true;
+    let failFunc = null;
+
+    for(let i=0; i<validationList.length; i++) {
+      isValid = (validationParamList[i] !== undefined && validationParamList[i] !== null) 
+        ? validation[validationList[i]](valueToCheck, validationParamList[i])
+        : validation[validationList[i]](valueToCheck);
+
+      if(!isValid) {
+        failFunc = validationList[i];
+        break;
+      }
+    }
+    
 
     if(!isValid) {
-      errorsList[stateID] = validation.messages[configItem.validationFunction];
+      if(arrayIndex !== null) {
+        errorsList[arrayIndex][stateID] = validation.messages[failFunc];
+      } else {
+        errorsList[stateID] = validation.messages[failFunc];
+      }
     } else {
-      delete errorsList[stateID];
+      if(arrayIndex !== null) {
+        delete errorsList[arrayIndex][stateID];
+      } else {
+        delete errorsList[stateID];
+      }
     }
 
-    scope.setState({
-      ...scope.state,
-      errors: errorsList
-    });
+    const newErrors = !errors.fields ? errorsList : { ...errors, fields: errorsList };
+
+    store.dispatch(setErrors(newErrors));
   }
 };
 
@@ -76,28 +124,24 @@ export const validateField = (scope, stateID) => {
  * validateForm
  * Validates every field defined in the this.config parent object that has a validationFunction prop defined
  * Shows 'correct errors' message if any failures
- * @param {object} scope - 'this' of current component/container
- * @return {void} whether form validates successfully
+ * @param {object} config - form config object
+ * @param {integer} [arrayIndex] - used form.values is an array
+ * @return {boolean} whether form validates successfully
  */
-export const validateForm = (scope) => {
-  scope.config.forEach(configItem => {
+export const validateForm = (config, arrayIndex=null) => {
+  config.forEach(configItem => {
     if(configItem.stateKey && configItem.validationFunction) {
-      formUtils.validateField(scope, configItem.stateKey);
+      formUtils.validateField(config, configItem.stateKey, arrayIndex);
     }
   });
 
-  const errors = scope.state.errors;
+  const errors = store.getState().form.errors;
   delete errors.form;
 
-  if(Object.keys(errors).length > 0) {
-    scope.setState({
-      ...scope.state,
-      errors: {
-        ...scope.state.errors,
-        form: null
-      },
-      showErrorMessage: true
-    });
+  const checkErrors = arrayIndex === null ? errors : errors.fields[arrayIndex]
+
+  if(Object.keys(checkErrors).length > 0) {
+    store.dispatch(setErrors(errors, true));
 
     return false;
   } else {
@@ -108,14 +152,15 @@ export const validateForm = (scope) => {
 /**
  * renderForm
  * Renders form defined in this.config of parent
- * @param {object} scope - 'this' of current component/container
+ * @param {object} config - form config object
+ * @param {integer} [arrayIndex] - used form.values is an array
  * @return {JSXElement[]} - array of form elements
  */
-export const renderForm = (scope) => {
-  const { errors } = scope.state;
+export const renderForm = (config, arrayIndex=null) => {
+  const { errors } = store.getState().form;
 
   return (
-    scope.config.map((item, key) => {
+    config.map((item, key) => {
       const { stateKey, validationFunction, hidden, callback } = item;
 
       if(hidden) {
@@ -123,17 +168,29 @@ export const renderForm = (scope) => {
       }
 
       // istanbul ignore next - bug in arrow function coverage
-      const onChange = stateKey ? (val, validate) => formUtils.updateValue(scope, stateKey, val, validate, callback) : undefined;
+      const onChange = stateKey ? val => formUtils.updateValue(stateKey, val, callback) : undefined;
       // istanbul ignore next - bug in arrow function coverage
-      const validate = validationFunction && !hidden ? () => formUtils.validateField(scope, stateKey) : undefined;
-      const error = functions.objectKeyExists(stateKey, errors) && !hidden ? errors[stateKey] : undefined;
+      const validate = validationFunction ? () => formUtils.validateField(config, stateKey, arrayIndex) : undefined;
+
+      let error = undefined;
+      if(!errors.fields) {
+        if(functions.objectKeyExists(stateKey, errors)) {
+          error = errors[stateKey];
+        }
+      } else {
+        if(arrayIndex !== null) {
+          if(functions.objectKeyExists(stateKey, errors.fields[arrayIndex])) {
+            error = errors.fields[arrayIndex][stateKey];
+          }
+        }
+      }
 
       return (
         <item.component
           key={`form-item-${key}`}
           data-test={`form-item-${key}`}
-          id={`create-account-${stateKey}`}
-          onChange={onChange}
+          id={stateKey}
+          onChange={item.onChange ? item.onChange : onChange}
           {...item}
           error={error}
           validate={validate}
@@ -164,6 +221,8 @@ export const setNativeValue = /* istanbul ignore next */ (element, value) => {
 
 const formUtils = {
   initFormState,
+  setFormError,
+  clearFormState,
   updateValue,
   validateField,
   validateForm,

@@ -44,3 +44,16 @@
     outline: 0;
   }
 }
+
+.signatures .radio {
+  width: 100%;
+  height: auto;
+  border: 0;
+  margin-bottom: 15px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+  input {
+    z-index: 2;
+  }
+}

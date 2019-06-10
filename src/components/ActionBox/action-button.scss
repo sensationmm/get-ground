@@ -1,0 +1,13 @@
+@import 'src/styles/modules/_colors.scss';
+@import 'src/styles/modules/_mixins.scss';
+@import 'src/styles/modules/_variables.scss';
+
+.action-button {
+  display: inline;
+  @include gradient-horizontal($background-account-start, $background-account-end);
+  border-radius: 10px;
+  color: $white;
+  font-size: 11px;
+  padding: ($padding-vertical-unit / 2 + 0px) $padding-horizontal;
+  text-align: center;
+}

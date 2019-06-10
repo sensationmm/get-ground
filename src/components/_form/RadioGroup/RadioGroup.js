@@ -12,15 +12,26 @@ import './radio-group.scss';
  * @param {func} onChange - onChange function
  * @param {string} selectedValue - the vlaue of the selected radio
  * @param {string} groupLabel - label for the radio group
+ * @param {string} classes - string of additional class names
  * @return {JSXElement} RadioGroup
  */
-const RadioGroup = ({ items, name, onChange, value, groupLabel, hidden, isAdditionalServices }) => {
+const RadioGroup = ({ 
+  items, 
+  name, 
+  onChange, 
+  value, 
+  groupLabel, 
+  hidden, 
+  isAdditionalServices,
+  classes
+}) => {
   const radioValue = value;
 
   return (
     <div
       className={classNames([
         'radio-group',
+        classes,
         {'additional-services': isAdditionalServices}
       ])}
       data-test="component-radio-group"
@@ -30,7 +41,7 @@ const RadioGroup = ({ items, name, onChange, value, groupLabel, hidden, isAdditi
       <div className='radio-group--radio-wrapper'>
         { items &&
           items.map((item, i) => {
-            const { label, value, description } = item;
+            const { label, value, description, children } = item;
             const id = `${name}-${i}`;
 
             return (
@@ -43,7 +54,9 @@ const RadioGroup = ({ items, name, onChange, value, groupLabel, hidden, isAdditi
                 isChecked={value === radioValue ? true : null}
                 onChange={(e) => {onChange(e.target.value)}}
                 description={description}
-              />
+              >
+                {children}
+              </Radio>
             );
           })
         }
@@ -59,7 +72,8 @@ RadioGroup.propTypes = {
   value: PropTypes.string,
   groupLabel: PropTypes.string,
   hidden: PropTypes.bool,
-  isAdditionalServices: PropTypes.bool
+  isAdditionalServices: PropTypes.bool,
+  classes: PropTypes.string
 };
 
 export default RadioGroup;

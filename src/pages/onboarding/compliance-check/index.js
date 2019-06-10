@@ -21,7 +21,7 @@ import ModalContent from 'src/components/Modal/ModalContent';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 import { showModal, hideModal } from 'src/state/actions/modal';
-import FormUtils from 'src/utils/form';
+import formUtils from 'src/utils/form';
 import { inArray } from 'src/utils/functions';
 
 import complianceService from 'src/services/Compliance';
@@ -50,11 +50,8 @@ const initialState = {
 class ComplianceCheck extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
-      ...FormUtils.initFormState(
-        initialState
-      ),
       highNetWorthMarkdown: '',
       selfCertifiedMarkdown: '',
       modalMarkdown: '',
@@ -62,7 +59,15 @@ class ComplianceCheck extends Component {
       certificationComplete: false
     };
   }
-  
+
+  componentDidMount() {
+    formUtils.initFormState(initialState);
+  }
+
+  componentWillUnmount() {
+    formUtils.clearFormState();
+  }
+
   /**
    * @param {string} step - step to jump to
    * @return {void}
@@ -76,20 +81,15 @@ class ComplianceCheck extends Component {
    * @return {void}
    */
   checkResponses = (restricted = false) => {
-    const { t, navigate, showLoader, hideLoader } = this.props;
-    const { values } = this.state;
+    const { t, navigate, showLoader, hideLoader, form } = this.props;
+    const { values } = form;
 
     if(restricted && (values.restricted_quiz.length > 2 ||
       !inArray('propertyvalues', values.restricted_quiz) ||
       !inArray('investmentreturns', values.restricted_quiz))
     ) {
-      this.setState({
-        ...this.state,
-        errors: {
-          form: t('onBoarding.compliance.failureMessage')
-        },
-        showErrorMessage: true
-        }, animateScroll.scrollToTop());
+      formUtils.setFormError(t('onBoarding.compliance.failureMessage'));
+      animateScroll.scrollToTop();
     } else {
       showLoader();
       return ComplianceService.saveComplianceQuiz({
@@ -111,8 +111,8 @@ class ComplianceCheck extends Component {
     const { highNetWorthMarkdown, selfCertifiedMarkdown } = this.state;
     const { showModal } = this.props;
 
-    
-    if ((val === 'highnetworth' && highNetWorthMarkdown === '') || 
+
+    if ((val === 'highnetworth' && highNetWorthMarkdown === '') ||
       val === 'selfcertified' && selfCertifiedMarkdown === '') {
       this.getModalContent(val)
     } else {
@@ -130,7 +130,7 @@ class ComplianceCheck extends Component {
   getModalContent = val => {
     const { showLoader, hideLoader, showModal } = this.props;
 
-    const markdown = val === 'highnetworth' 
+    const markdown = val === 'highnetworth'
       ? 'Investor Statement - High Net Worth'
       : 'Investor Statement - Sophisticated';
 
@@ -138,11 +138,11 @@ class ComplianceCheck extends Component {
     ModalService.fetchModalContent(markdown).then(response => {
       const stateKey = val === 'highnetworth' ? 'highNetWorthMarkdown' : 'selfCertifiedMarkdown';
 
-      this.setState({ 
+      this.setState({
         modalMarkdown: response.data.markdown_text,
         [stateKey]: response.data.markdown_text
       });
-      
+
       hideLoader();
       showModal();
     });
@@ -162,15 +162,13 @@ class ComplianceCheck extends Component {
   }
 
   render() {
-    const { t, modalIsOpen } = this.props;
-    const { 
-      values, 
-      errors, 
-      showErrorMessage, 
+    const { t, modalIsOpen, form } = this.props;
+    const {
       certificationComplete,
       modalMarkdown,
       modalCheckBoxChecked
     } = this.state;
+    const { values, errors, showErrorMessage } = form;
     const {
       tax_bracket,
       large_enterprise,
@@ -208,12 +206,12 @@ class ComplianceCheck extends Component {
               <QuizQ1
                 numQuestions={numQuestions}
                 selected={tax_bracket}
-                onChange={(val) => { FormUtils.updateValue(this, 'tax_bracket', val); this.goToStep('q2'); }}
+                onChange={(val) => { formUtils.updateValue('tax_bracket', val); this.goToStep('q2'); }}
               />
             </Element>
 
             <Element name="q2">
-              {showQ2 && 
+              {showQ2 &&
                 <QuizQ2
                   numQuestions={numQuestions}
                   selected={large_enterprise}
@@ -221,20 +219,20 @@ class ComplianceCheck extends Component {
                     if(val.indexOf('none') >= 0) {
                       val.splice(val.indexOf('none'), 1);
                     }
-                    FormUtils.updateValue(this, 'large_enterprise', val);
+                    formUtils.updateValue('large_enterprise', val);
                   }}
-                  onClickNone={() => FormUtils.updateValue(this, 'large_enterprise', ['none'])}
-                  onClickNext={() => { FormUtils.updateValue(this, 'large_enterprise_done', true); this.goToStep('q3'); }}
-                  onDeselectAll={() => FormUtils.updateValue(this, 'large_enterprise_done', false)}
+                  onClickNone={() => formUtils.updateValue('large_enterprise', ['none'])}
+                  onClickNext={() => { formUtils.updateValue('large_enterprise_done', true); this.goToStep('q3'); }}
+                  onDeselectAll={() => formUtils.updateValue('large_enterprise_done', false)}
                 />
               }
             </Element>
 
             <Element id="q3">
-              {showQ3 && 
+              {showQ3 &&
                 <QuizQ3
                   numQuestions={numQuestions}
-                  onClick={() => { FormUtils.updateValue(this, 'investment_confirmation', true); this.goToStep('q4'); }}
+                  onClick={() => { formUtils.updateValue('investment_confirmation', true); this.goToStep('q4'); }}
                 />
               }
             </Element>
@@ -244,14 +242,14 @@ class ComplianceCheck extends Component {
                 <QuizQ4
                   numQuestions={numQuestions}
                   selected={self_certification}
-                  onChange={(val) => { 
-                    FormUtils.updateValue(this, 'self_certification', val); 
+                  onChange={(val) => {
+                    formUtils.updateValue('self_certification', val);
 
                     if (val === 'highnetworth' || val === 'selfcertified') {
                       this.initModal(val);
                     } else {
                       this.setState({ certificationComplete: true })
-                      this.goToStep('q5'); 
+                      this.goToStep('q5');
                     }
                   }}
                 />
@@ -263,12 +261,12 @@ class ComplianceCheck extends Component {
                 <QuizQ5
                   numQuestions={numQuestions}
                   selected={restricted_quiz}
-                  onChange={(val) => { FormUtils.updateValue(this, 'restricted_quiz', val); this.goToStep('done'); }}
-                  onDeselectAll={() => FormUtils.updateValue(this, 'restricted_quiz_done', false)}
+                  onChange={(val) => { formUtils.updateValue('restricted_quiz', val); this.goToStep('done'); }}
+                  onDeselectAll={() => formUtils.updateValue('restricted_quiz_done', false)}
                 />
               }
             </Element>
-            
+
             <Element id="done">
             {showDone &&
               <Button
@@ -288,10 +286,10 @@ class ComplianceCheck extends Component {
               unmountOnExit
             >
               <Modal>
-                <ModalContent 
+                <ModalContent
                   heading={t('onBoarding.compliance.modalHeading')}
                   content={modalMarkdown}
-                  closeModal={this.closeModal} 
+                  closeModal={this.closeModal}
                   downloadButtonLabel={t('onBoarding.compliance.modalDownloadButtonText')}
                   closeIconAltText={t('onBoarding.compliance.modalCloseAltText')}
                   modalImage={investorStatementImage}
@@ -315,14 +313,16 @@ ComplianceCheck.propTypes = {
   hideModal: PropTypes.func,
   t: PropTypes.func.isRequired,
   navigate: PropTypes.func,
-  modalIsOpen: PropTypes.bool
+  modalIsOpen: PropTypes.bool,
+  form: PropTypes.object
 };
 
 const mapStateToProps = state => ({
-  modalIsOpen: state.modal.isOpen
+  modalIsOpen: state.modal.isOpen,
+  form: state.form
 });
 
-const actions = { 
+const actions = {
   showLoader,
   hideLoader,
   showModal,

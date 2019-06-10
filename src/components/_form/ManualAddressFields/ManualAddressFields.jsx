@@ -26,25 +26,25 @@ const ManualAddressFields = props => {
 
   return (
     <div data-test="component-manual-address-fields">
-      <InputText 
+      <InputText
         id="unitNumber"
         label={t('onBoarding.personalDetails.form.unitNumberLabel')}
         onChange={(value, id) => {onInputChange(value, id)}}
         value={unitNumber}
       />
-      <InputText 
+      <InputText
         id="street"
         label={t('onBoarding.personalDetails.form.streetLabel')}
         onChange={(value, id) => { onInputChange(value, id)}}
         value={street}
       />
-      <InputText 
+      <InputText
         id="city"
         label={t('onBoarding.personalDetails.form.cityLabel')}
         onChange={(value, id) => {onInputChange(value, id)}}
         value={city}
       />
-      <InputText 
+      <InputText
         id="postcode"
         label={t('onBoarding.personalDetails.form.postcodeLabel')}
         onChange={(value, id) => {onInputChange(value, id)}}

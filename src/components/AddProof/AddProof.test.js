@@ -26,6 +26,22 @@ describe('<AddProof />', () => {
 
   beforeEach(() => {
     props = {
+      idCheck: {
+        passport: {
+          img: '',
+          retake: false
+        },
+        address: {
+          img: '',
+          retake: false
+        },
+        selfie: {
+          img: '',
+          retake: false
+        }
+      },
+      setRetake: jest.fn(),
+      retakePicture: jest.fn(),
       section: 'passport',
       initialImg: '/img',
       setImg: jest.fn(),
@@ -50,11 +66,11 @@ describe('<AddProof />', () => {
 
     expect(wrapper.length).toEqual(1)
     expect(wrapper.find('[data-test="intro-box"]').length).toEqual(1)
-    expect(wrapper.find('p').length).toEqual(1)
+    expect(wrapper.find('p').length).toEqual(2)
     expect(props.t).toHaveBeenCalledWith('onBoarding.idCheck.passport.title')
     expect(props.t).toHaveBeenCalledWith('onBoarding.idCheck.passport.content')
-    expect(wrapper.find('img').length).toEqual(1)
-    expect(wrapper.find('[data-test="webcam"]').length).toEqual(0)
+    expect(wrapper.find('img').length).toEqual(3)
+    expect(wrapper.find('[data-test="camera"]').length).toEqual(0)
     expect(wrapper.find('[data-test="dropzone"]').length).toEqual(1)
   })
 
@@ -67,94 +83,101 @@ describe('<AddProof />', () => {
     expect(wrapper.state().takePicture).toEqual(true)
     expect(wrapper.length).toEqual(1)
     expect(wrapper.find('[data-test="intro-box"]').length).toEqual(1)
+    expect(wrapper.find('.add-proof-overlay').length).toEqual(1)
     expect(wrapper.find('.add-proof-loading').length).toEqual(1)
     expect(wrapper.find('.add-proof-content').length).toEqual(1)
     expect(props.t).toHaveBeenCalledWith('onBoarding.idCheck.passport.content')
-    expect(wrapper.find('[data-test="webcam"]').length).toEqual(1)
-    expect(wrapper.find('[data-test="capture-button"]').length).toEqual(1)
-    expect(props.t).toHaveBeenCalledWith('onBoarding.idCheck.image.capture')
+    expect(wrapper.find('[data-test="camera"]').length).toEqual(1)
     expect(wrapper.find('[data-test="dropzone"]').length).toEqual(1)
   })
 
-  it('take picture', () => {
-
-    wrapper = shallow(<AddProof {...props} />);
-
-    expect(props.t).not.toHaveBeenCalledWith('onBoarding.idCheck.image.capture')
-
-    wrapper.setState({
-      takePicture: true,
-      webcam: {
-        getScreenshot: jest.fn().mockReturnValue('base-img')
-      }
-    });
-
-    expect(wrapper.length).toEqual(1)
-    expect(wrapper.find('[data-test="intro-box"]').length).toEqual(1)
-    expect(wrapper.find('.add-proof-loading').length).toEqual(1)
-    expect(wrapper.find('.add-proof-content').length).toEqual(1)
-    expect(wrapper.find('[data-test="webcam"]').length).toEqual(1)
-    expect(wrapper.find('[data-test="capture-button"]').length).toEqual(1)
-    expect(props.t).toHaveBeenCalledWith('onBoarding.idCheck.image.capture')
-    wrapper.find('[data-test="capture-button"]').simulate('click')
-    expect(wrapper.state().webcam.getScreenshot).toHaveBeenCalledWith()
-    expect(wrapper.state().retakePicture).toEqual(true)
-    expect(wrapper.state().imageSrc).toEqual('base-img')
-  })
-
   it('yes im happy', () => {
+    const customProps = {
+      ...props,
+      idCheck: {
+        passport: {
+          img: 'test-image',
+          retake: true
+        },
+        address: {
+          img: '',
+          retake: false
+        },
+        selfie: {
+          img: '',
+          retake: false
+        }
+      },
+      active: 'passport'
+    }
 
-    wrapper = shallow(<AddProof {...props} />);
+    wrapper = shallow(<AddProof {...customProps} />);
 
     expect(props.t).not.toHaveBeenCalledWith('onBoarding.idCheck.image.capture')
 
     wrapper.setState({
-      takePicture: true,
-      retakePicture: true,
-      imageSrc: 'base-img',
-      webcam: {
-        getScreenshot: jest.fn().mockReturnValue('base-img')
-      }
+      takePicture: true
     });
 
     expect(wrapper.length).toEqual(1)
     expect(wrapper.find('[data-test="intro-box"]').length).toEqual(1)
-    expect(wrapper.find('p').length).toEqual(1)
-    expect(wrapper.find('[data-test="webcam"]').length).toEqual(0)
+    expect(wrapper.find('[data-test="camera"]').length).toEqual(0)
     expect(wrapper.find('[data-test="happy-button"]').length).toEqual(1)
     expect(wrapper.find('[data-test="retake-button"]').length).toEqual(1)
     expect(props.t).toHaveBeenCalledWith('onBoarding.idCheck.passport.retakeImageContent')
+    expect(wrapper.find('[data-test="confirm-img"]').props().src).toEqual('test-image')
     wrapper.find('[data-test="happy-button"]').simulate('click')
-    expect(wrapper.state().retakePicture).toEqual(false)
-    expect(wrapper.find('img').props().src).toEqual('base-img')
+    expect(wrapper.state().takePicture).toEqual(false)
   })
 
   it('retake', () => {
 
-    wrapper = shallow(<AddProof {...props} />);
+    const customProps = {
+      ...props,
+      idCheck: {
+        passport: {
+          img: 'test-image',
+          retake: true
+        },
+        address: {
+          img: '',
+          retake: false
+        },
+        selfie: {
+          img: '',
+          retake: false
+        }
+      },
+      active: 'passport'
+    }
+
+    wrapper = shallow(<AddProof {...customProps} />);
 
     expect(props.t).not.toHaveBeenCalledWith('onBoarding.idCheck.image.capture')
 
     wrapper.setState({
-      takePicture: true,
-      retakePicture: true,
-      imageSrc: 'base-img',
-      webcam: {
-        getScreenshot: jest.fn().mockReturnValue('base-img')
-      }
+      takePicture: true
     });
 
     expect(wrapper.length).toEqual(1)
     expect(wrapper.find('[data-test="intro-box"]').length).toEqual(1)
-    expect(wrapper.find('p').length).toEqual(1)
-    expect(wrapper.find('[data-test="webcam"]').length).toEqual(0)
+    expect(wrapper.find('[data-test="camera"]').length).toEqual(0)
     expect(wrapper.find('[data-test="happy-button"]').length).toEqual(1)
     expect(wrapper.find('[data-test="retake-button"]').length).toEqual(1)
     expect(props.t).toHaveBeenCalledWith('onBoarding.idCheck.passport.retakeImageContent')
     wrapper.find('[data-test="retake-button"]').simulate('click')
-    expect(wrapper.state().retakePicture).toEqual(true)
-    expect(wrapper.find('[data-test="webcam"]').length).toEqual(1)
-    expect(wrapper.find('[data-test="capture-button"]').length).toEqual(1)
+    expect(props.setRetake).toHaveBeenCalledWith('passport', true)
+    expect(props.setImg).toHaveBeenCalledWith('passport', null)
+    expect(wrapper.state().takePicture).toEqual(true)
+    wrapper.setProps({
+      idCheck: {
+        passport: {
+          img: '',
+          retake: true
+        },
+      },
+    })
+    expect(wrapper.find('[data-test="camera"]').length).toEqual(1)
   })
 
   it('dropzone', () => {
@@ -170,29 +193,6 @@ describe('<AddProof />', () => {
     expect(wrapper.state().uploadedFile).toEqual({ mockFile: 'mock-uploaded-file' })
   })
 
-  it('change video constraints when section is selfie', () => {
-    const customProps = {
-      ...props,
-      section: 'selfie'
-    }
-
-    wrapper = shallow(<AddProof {...customProps} />);
-
-    wrapper.setState({
-      takePicture: true,
-      webcam: {
-        getScreenshot: jest.fn().mockReturnValue('base-img')
-      }
-    });
-
-    expect(wrapper.find('[data-test="webcam"]').length).toEqual(1)
-    expect(wrapper.find('[data-test="webcam"]').props().videoConstraints).toEqual({
-      width: 1280,
-      height: 720,
-      facingMode: 'user'
-    })
-  })
-
   it('changes content when passed different section prop', () => {
     const customProps = {
       ...props,
@@ -202,9 +202,10 @@ describe('<AddProof />', () => {
     wrapper = shallow(<AddProof {...customProps} />);
 
     expect(wrapper.find('[data-test="intro-box"]').length).toEqual(1)
-    expect(wrapper.find('p').length).toEqual(1)
+    expect(wrapper.find('p').length).toEqual(2)
     expect(props.t).toHaveBeenCalledWith('onBoarding.idCheck.address.title')
     expect(props.t).toHaveBeenCalledWith('onBoarding.idCheck.address.content')
+    expect(props.t).toHaveBeenCalledWith('onBoarding.idCheck.address.name')
   })
 
   it('adds disable classname to section when prop active is equal to a different section', () => {
@@ -234,24 +235,27 @@ describe('<AddProof />', () => {
   it('on final img, fire actions to setImg and resetActive when prop active === section', () => {
     const customProps = {
       ...props,
-      active: 'passport'
+      active: 'passport',
+      idCheck: {
+        passport: {
+          img: 'test-image',
+          retake: false
+        },
+      },
     }
 
     wrapper = shallow(<AddProof {...customProps} />);
 
     wrapper.setState({
-      takePicture: true,
-      retakePicture: false,
-      imageSrc: 'base-img',
-      webcam: {
-        getScreenshot: jest.fn().mockReturnValue('base-img')
-      }
+      takePicture: true
     });
 
     expect(wrapper.find('[data-test="intro-box"]').length).toEqual(1)
-    expect(wrapper.find('img').props().src).toEqual('base-img')
     expect(props.resetActive).toHaveBeenCalled()
-    expect(props.setImg).toHaveBeenCalledWith('passport', 'base-img')
+    expect(wrapper.find('[data-test="add-proof-final-img"]').length).toEqual(1)
+    wrapper.find('[data-test="add-proof-final-img"]').simulate('click')
+    expect(props.setActive).toHaveBeenCalled()
+    expect(props.setImg).toHaveBeenCalled()
   })
 
   it('does not show upload link if section is selfie', () => {

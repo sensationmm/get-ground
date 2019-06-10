@@ -1,16 +1,32 @@
-import { setupRTL } from '../../test-utils/test-utils'
+import React from 'react'
+import { shallow } from 'enzyme'
 
 import ContactUs from './ContactUs'
 
 describe('<ContactUs />', () => {
-  it('renders and has contactUs text', () => {
-    const props = {
-      location: {
-        pathname: '/test-url',
-        replace: jest.fn(),
-      }
-    }
-    const component = setupRTL(ContactUs, {...props}, 'component-contact-us')
-    expect(component).toHaveTextContent('contactUs')
+  let wrapper;
+
+  beforeEach(()=>{
+   wrapper = shallow(<ContactUs />)
+  })
+
+  it('title', () => {
+    expect(wrapper.find('[data-test="contact-title"]').text()).toEqual('contactUs.title')
+  })
+
+  it('phone-title', () => {
+    expect(wrapper.find('[data-test="phone-title"]').text()).toEqual('contactUs.phone')
+  })
+
+  it('email-title', () => {
+    expect(wrapper.find('[data-test="email-title"]').text()).toEqual('contactUs.email')
+  })
+
+  it('divider', () => {
+    expect(wrapper.find('[data-test="contact-divider"]').length).toEqual(1)
+  })
+
+  it('live chat button', () => {
+    expect(wrapper.find('[data-test="livechat-button"]').length).toEqual(1)
   })
 })

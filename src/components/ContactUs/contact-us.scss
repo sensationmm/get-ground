@@ -1,11 +1,41 @@
 @import 'src/styles/modules/_colors.scss';
+@import 'src/styles/modules/_variables.scss';
 
 .contact-us {
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 2.14;
-  letter-spacing: 0.9px;
-  color: $primary;
-  text-decoration: underline;
-  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.15);
+  margin-bottom: 30px;
+  padding: $padding-vertical ($padding-horizontal-unit * 2 + 0px);
+  display: flex;
+  flex-direction: column;
+
+  &-title {
+    font-size: 20px;
+    font-weight: 300;
+  }
+
+  &-phone, &-email {
+    margin-bottom: 15px;
+    img {
+      width: 16px;
+      display: inline-block;
+      margin-left: 5px;
+      margin-right: 20px;
+    }
+
+    p {
+      font-size: 16px;
+      display: inline-block;
+      font-weight: 300;
+      margin-bottom: 0;
+    }
+  }
+  &-divider {
+    border: solid 1px $divider-color;
+  }
+
+  &-livechat {
+    margin-top: 15px;
+    align-self: flex-end;
+  }
 }
