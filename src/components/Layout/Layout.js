@@ -6,6 +6,7 @@ import jwtDecode from 'jwt-decode';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import { withTranslation } from 'react-i18next';
+import LiveChat from 'react-livechat';
 
 import SEO from 'src/components/seo';
 import Header from 'src/components/Header/Header';
@@ -165,6 +166,7 @@ export class Layout extends Component {
             />
           </Modal>
         </CSSTransition>
+        <LiveChat license={10911047} />
       </div>
     )
   }

@@ -6,6 +6,7 @@ import Button from 'src/components/_buttons/Button/Button'
 
 import Email from 'src/assets/images/email-contact-us.svg'
 import Phone from 'src/assets/images/phone-contact-us.svg'
+
 import './contact-us.scss'
 
 /**
@@ -17,6 +18,10 @@ import './contact-us.scss'
 
 const ContactUs = () => {
   const [t] = useTranslation();
+
+ const openChat = () => {
+  window.LC_API.open_chat_window()
+}
 
   return (
     <div className="contact-us" data-test="component-contact-us">
@@ -32,7 +37,7 @@ const ContactUs = () => {
         <p data-test="email-title">{t('contactUs.email')}</p>
      </div>
      <div className="contact-us-divider" data-test="contact-divider"></div>
-     <Button classes="contact-us-livechat" data-test="livechat-button" liveChat label={t('liveChat.button')} />
+     <Button classes="contact-us-livechat" data-test="livechat-button" liveChat label={t('liveChat.button')} onClick={() => openChat()} />
     </div>
   )
 }
