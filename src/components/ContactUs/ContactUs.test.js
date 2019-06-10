@@ -4,10 +4,15 @@ import { shallow } from 'enzyme'
 import ContactUs from './ContactUs'
 
 describe('<ContactUs />', () => {
+  global.LC_API = {
+    open_chat_window: jest.fn()
+  }
+
   let wrapper;
 
   beforeEach(()=>{
    wrapper = shallow(<ContactUs />)
+
   })
 
   it('title', () => {
@@ -28,5 +33,7 @@ describe('<ContactUs />', () => {
 
   it('live chat button', () => {
     expect(wrapper.find('[data-test="livechat-button"]').length).toEqual(1)
+    wrapper.find('[data-test="livechat-button"]').props().onClick()
+    expect(global.LC_API.open_chat_window).toHaveBeenCalled()
   })
 })
