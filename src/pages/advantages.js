@@ -1,25 +1,27 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Layout from 'src/components/Layout/Layout'
 import { useTranslation } from 'react-i18next'
 
 import Piggy from 'src/assets/images/piggy.svg'
 import whiteTick from 'src/assets/images/white-tick.svg'
 import orangeCross from 'src/assets/images/orange-cross.svg'
-import classNames from 'classnames';
+import orangeTick from 'src/assets/images/orange-tick.svg'
+import blueTick from 'src/assets/images/blue-tick.svg'
 
 import ContactUs from 'src/components/ContactUs/ContactUs'
 import Footer from 'src/components/Footer/Footer';
 import Button from 'src/components/_buttons/Button/Button'
-import Table from 'src/components/Table/Table'
+import TableSlider from 'src/components/TableSlider/TableSlider'
 
 import 'src/styles/pages/advantages.scss'
 
 const Advantages = () => {
   const [t, i18n] = useTranslation()
-  const [taxTableIndex, toggleTableIndex] = useState(0)
   const [showTaxTable, toggleTaxTable] = useState(false);
-  // const [showCompanyTable, toggleCompanyTable] = useState(false);
+  const [showCompanyTable, toggleCompanyTable] = useState(false);
+
   const ukTaxObj = i18n.t('advantages.tax', { returnObjects: true });
+  const companyObj = i18n.t('advantages.company', { returnObjects: true });
 
   const uKTaxAdvantages = [
     ukTaxObj['info1'],
@@ -29,7 +31,6 @@ const Advantages = () => {
     ukTaxObj['info5']
   ]
 
-  const companyObj = i18n.t('advantages.company', { returnObjects: true });
 
   const companyAdvantages = [
     companyObj['info1'],
@@ -37,30 +38,30 @@ const Advantages = () => {
     companyObj['info3']
   ]
 
-  const sections = [
+  const taxSections = [
     {
-      copy: 'Same taxes on property purchase',
+      copy: ukTaxObj.table.left['info1'],
       img: ''
     },
     {
-      copy: 'Deduct mortgage interest from your UK tax bill',
+      copy: ukTaxObj.table.left['info2'],
       img: ''
     },
     {
-      copy: 'Lower capital gains tax (CGT)',
+      copy: ukTaxObj.table.left['info3'],
       img: ''
     },
     {
-      copy: 'Save on stamp duty and land tax (SDLT) when you sell',
+      copy: ukTaxObj.table.left['info4'],
       img: ''
     },
     {
-      copy: 'Efficiently take income from your property',
+      copy: ukTaxObj.table.left['info5'],
       img: ''
     }
   ]
 
-  const smallFeed = [
+  const taxSmallFeed1 = [
     {
       copy: '',
       img: ''
@@ -83,7 +84,7 @@ const Advantages = () => {
     }
   ]
 
-  const smallFeed2 = [
+  const taxSmallFeed2 = [
     {
       copy: '',
       img: ''
@@ -106,118 +107,147 @@ const Advantages = () => {
     }
   ]
 
-  const feed1 = [
+  const taxLargeFeed1 = [
     {
-      copy: '',
+      copy: ukTaxObj.table.right.large.feed1['info1'],
       img: ''
     },
     {
-      copy: 'Replaced with a basic rate credit',
+      copy: ukTaxObj.table.right.large.feed1['info2'],
       img: orangeCross
     },
     {
-      copy: '18% or 28% CGT tax',
+      copy: ukTaxObj.table.right.large.feed1['info3'],
       img: orangeCross
     },
     {
-      copy: '',
+      copy: ukTaxObj.table.right.large.feed1['info4'],
       img: orangeCross
     },
     {
-      copy: 'Either income tax or capital gains tax',
+      copy: ukTaxObj.table.right.large.feed1['info5'],
       img: orangeCross
     }
   ]
 
-  const feed2 = [
+  const taxLargeFeed2 = [
     {
-      copy: 'same taxes (e.g SDLT) as personal ownership if you rent out your property to 3rd parties',
+      copy: ukTaxObj.table.right.large.feed2['info1'],
       img: ''
+    },
+    {
+      copy: ukTaxObj.table.right.large.feed2['info2'],
+      img: whiteTick
+    },
+    {
+      copy: ukTaxObj.table.right.large.feed2['info3'],
+      img: whiteTick
+    },
+    {
+      copy: ukTaxObj.table.right.large.feed2['info4'],
+      img: whiteTick
+    },
+    {
+      copy: ukTaxObj.table.right.large.feed2['info5'],
+      img: whiteTick
+    }
+  ]
+
+
+  const companySections = [
+    {
+      copy: companyObj.table.left['info1'],
+      img: ''
+    },
+    {
+      copy: companyObj.table.left['info2'],
+      img: ''
+    },
+    {
+      copy: companyObj.table.left['info3'],
+      img: ''
+    },
+    {
+      copy: companyObj.table.left['info4'],
+      img: ''
+    },
+  ]
+
+  const companySmallFeed1 = [
+    {
+      copy: '',
+      img: blueTick
+    },
+    {
+      copy: '',
+      img: orangeCross
+    },
+    {
+      copy: '',
+      img: orangeCross
+    },
+    {
+      copy: '',
+      img: orangeCross
+    }
+  ]
+
+  const companySmallFeed2 = [
+    {
+      copy: '',
+      img: whiteTick
     },
     {
       copy: '',
       img: whiteTick
     },
     {
-      copy: '10% or 20% CGT tax for sale of shares',
+      copy: '',
       img: whiteTick
     },
     {
-      copy: 'No SDLT when buying shares',
-      img: whiteTick
-    },
-    {
-      copy: 'Choose between capital repayments or dividends',
+      copy: '',
       img: whiteTick
     }
   ]
 
-  const showTable = (index) => {
-    if(index === 0) {
-      return (
-        <div className="answers tax">
-          <Table header="Personal ownership" classes="right" sections={smallFeed} images small/>
-          <Table header="Company ownership" classes="right blue" sections={smallFeed2} images small />
-        </div>
-      )
-    }
+  const companyLargeFeed1 = [
+    {
+      copy: companyObj.table.right.large.feed1['info1'],
+      img: orangeTick
+    },
+    {
+      copy: companyObj.table.right.large.feed1['info2'],
+      img: orangeCross
+    },
+    {
+      copy: companyObj.table.right.large.feed1['info3'],
+      img: orangeCross
+    },
+    {
+      copy: companyObj.table.right.large.feed1['info4'],
+      img: orangeCross
+    },
+  ]
 
-    if (index === 1) {
-      return (
-        <Table header="Personal ownership" classes="answers right tax" sections={feed1} />
-      )
-    }
-
-    if (index === 2) {
-      return (
-        <Table header="Company ownership" classes="answers right blue tax" sections={feed2} />
-      )
-    }
-  }
-
-  useEffect(() => {
-    if (showTaxTable) {
-      const _T = document.querySelector('.answers.tax');
-      let ts = 0;
-      _T.addEventListener('touchstart', function(e) {
-        ts = e.changedTouches[0].clientX
-      })
-
-      _T.addEventListener('touchend', function(e) {
-        const te = e.changedTouches[0].clientX
-        if (ts < te ) {
-          const idx = taxTableIndex === 0 ? 2 : taxTableIndex - 1
-          toggleTableIndex(idx)
-        } else {
-          const idx = taxTableIndex === 2 ? 0 : taxTableIndex + 1
-          toggleTableIndex(idx)
-        }
-      })
-    }
-  })
-
-  const expandedTax = () => (
-    <div className="advantages-uk-tax-more-expanded">
-      <Table sections={sections} />
-        {showTable(taxTableIndex)}
-      <div className="advantages-uk-tax-more-expanded-bullet">
-        <span
-          className={classNames({ 'active' : taxTableIndex === 0 })}
-          onClick={() => toggleTableIndex(0)}
-        />
-        <span
-          className={classNames({ 'active' : taxTableIndex === 1 })}
-          onClick={() => toggleTableIndex(1)}
-        />
-        <span
-          className={classNames({ 'active' : taxTableIndex === 2 })}
-          onClick={() => toggleTableIndex(2)}
-        />
-      </div>
-      <p className="advantages-uk-tax-more-expanded-info">None of the information contained here, nor anywhere in this presentation contributes advice</p>
-    </div>
-  )
-
+  const companyLargeFeed2 = [
+    {
+      copy: companyObj.table.right.large.feed2['info1'],
+      img: whiteTick
+    },
+    {
+      copy: companyObj.table.right.large.feed2['info2'],
+      img: whiteTick
+    },
+    {
+      copy: companyObj.table.right.large.feed2['info3'],
+      img: whiteTick
+    },
+    {
+      copy: companyObj.table.right.large.feed2['info4'],
+      img: whiteTick
+    },
+  ]
 
 
   return (
@@ -228,7 +258,18 @@ const Advantages = () => {
         <div className="advantages-uk-tax">
         <h3 className="advantages-uk-tax-title">{t('advantages.tax.title')}</h3>
         {showTaxTable ?
-          expandedTax()
+          <div className="advantages-uk-tax-more-expanded">
+          <TableSlider
+            leftHandFeed={taxSections}
+            smallFeed1={taxSmallFeed1}
+            smallFeed2={taxSmallFeed2}
+            feed1={taxLargeFeed1}
+            feed2={taxLargeFeed2}
+            showTable={showTaxTable}
+            tableName="tax"
+          />
+          <p className="advantages-uk-tax-more-expanded-info">{t('advantages.warning')}</p>
+          </div>
           :
           <>
             <ul>
@@ -244,14 +285,31 @@ const Advantages = () => {
         </div>
         <div className="advantages-company">
         <h3 className="advantages-company-title">{t('advantages.company.title')}</h3>
-          <ul>
-            {companyAdvantages.map((info, idx) => (
-              <li key={`${info} + ${idx}`}>
-                <p className="advantages-company-info" >{info}</p>
-              </li>
-            ))}
-          </ul>
-          <Button classes="advantages-btn chat" fullWidth label={t('advantages.cta')}/>
+        {showCompanyTable ?
+          <div className="advantages-company-more-expanded">
+            <TableSlider
+              leftHandFeed={companySections}
+              smallFeed1={companySmallFeed1}
+              smallFeed2={companySmallFeed2}
+              feed1={companyLargeFeed1}
+              feed2={companyLargeFeed2}
+              showTable={showCompanyTable}
+              tableName="company"
+            />
+            <p className="advantages-company-more-expanded-info">{t('advantages.warning')}</p>
+          </div>
+          :
+          <>
+            <ul>
+              {companyAdvantages.map((info, idx) => (
+                <li key={`${info} + ${idx}`}>
+                  <p className="advantages-company-info" >{info}</p>
+                </li>
+              ))}
+            </ul>
+            <Button classes="advantages-btn chat" fullWidth label={t('advantages.cta')} onClick={() => toggleCompanyTable(!showCompanyTable)}/>
+          </>
+        }
         </div>
         <ContactUs />
         <Footer />

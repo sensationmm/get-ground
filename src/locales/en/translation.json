@@ -96,19 +96,74 @@
   "advantages": {
     "title": "GetGround Advantages",
     "cta": "Find out more",
+    "warning": "None of the information contained here, nor anywhere in this presentation contributes advice",
+    "companyHeader": "Company ownership",
+    "personalHeader": "Personal ownership",
     "tax": {
       "title": "UK TAX ADVANTAGES",
       "info1": "When you buy investment property that you rent out, there is no difference in stamp duty and land tax (SDLT) versus personal ownership.",
       "info2": "There is no SDLT when you buy shares, rather than property. Benefit from this if you sell or buy shares of property holding companies on the GetGround marketplace.",
       "info3": "Deduct mortgage interest from your tax bill. Under personal ownership this is being phased out and replaced with a basic rate credit.",
       "info4": "There is lower capital gains tax on a sale of shares, rather than property.",
-      "info5": "Choose multiple ways to take money from your company e.g., capital repayments or dividends (utilise your tax-free dividend allowance; non-UK residents do not pay dividend tax)."
+      "info5": "Choose multiple ways to take money from your company e.g., capital repayments or dividends (utilise your tax-free dividend allowance; non-UK residents do not pay dividend tax).",
+      "table": {
+        "left": {
+          "info1": "Same taxes on property purchase",
+          "info2": "Deduct mortgage interest from your UK tax bill",
+          "info3": "Lower capital gains tax (CGT)",
+          "info4": "Save on stamp duty and land tax (SDLT) when you sell",
+          "info5": "Efficiently take income from your property"
+        },
+        "right": {
+          "large": {
+            "feed1": {
+              "info1": "",
+              "info2": "Replaced with a basic rate credit",
+              "info3": "18% or 28% CGT tax",
+              "info4": "",
+              "info5": "Either income tax or capital gains tax"
+            },
+            "feed2": {
+              "info1": "same taxes (e.g SDLT) as personal ownership if you rent out your property to 3rd parties",
+              "info2": "",
+              "info3": "10% or 20% CGT tax for sale of shares",
+              "info4": "No SDLT when buying shares",
+              "info5": "Choose between capital repayments or dividends"
+            }
+          }
+        }
+      }
     },
     "company": {
       "title": "ADDITIONAL COMPANY ADVANTAGES",
       "info1": "Purchase easily with friends, family and business partners.",
       "info2": "Contain your liabilities in the company. If your investment goes wrong your personal wealth is safer.",
-      "info3": "Using a company could mean you get a bigger mortgage. It could also mean banks have lower income requirements for you."
+      "info3": "Using a company could mean you get a bigger mortgage. It could also mean banks have lower income requirements for you.",
+      "table": {
+        "left": {
+          "info1": "Purchase easily with other people",
+          "info2": "Protect your personal wealth",
+          "info3": "Help get a bigger mortgage",
+          "info4": "Reduce your income requirements from mortgage lenders"
+        },
+        "right": {
+          "large": {
+            "feed1": {
+              "info1": "Max 4 people on a title deed & no governance agreements",
+              "info2": "",
+              "info3": "",
+              "info4": "",
+              "info5": ""
+            },
+            "feed2": {
+              "info1": "Unlimited owners protected by goevrnance agreements",
+              "info2": "Contain your liabilities in the company as a seperate legal entity",
+              "info3": "Potentially easier bank tests (rental income vs. interest expense)",
+              "info4": "Typically banks require a combined shareholder income of £25k p.a."
+            }
+          }
+        }
+      }
     }
   },
   "companyDesign": {

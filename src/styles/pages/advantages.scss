@@ -5,7 +5,8 @@
   &-img {
     margin: (($padding-vertical-unit * 2) + 0px) (- ($padding-horizontal-unit * 2) + 0px);
   }
-  &-uk-tax {
+  &-uk-tax, &-company {
+    margin-bottom: 120px;
     &-title {
       font-size: 13px;
       font-weight: bold;
@@ -19,45 +20,7 @@
     &-more {
       width: 100%;
       &-expanded {
-        .table {
-          float: right;
-          &:first-child {
-            width: 40%;
-            float: left;
-          }
-
-          &.small {
-            width: 18%;
-            margin-left: 10px;
-            .table-section-line {
-              width: 22px;
-            }
-          }
-        }
-        &-bullet {
-          display: flex;
-          flex-direction: row;
-          width: 100%;
-          justify-content: flex-end;
-          span {
-            height: 10px;
-            width: 10px;
-            background-color: #bbb;
-            border-radius: 50%;
-            z-index: 2;
-            margin-top: 25px;
-            margin-left: 10px;
-            float: right;
-
-            &:last-child {
-              margin-right: 19%;
-            }
-
-            &.active {
-              background-color: #8a8a8a;
-            }
-          }
-        }
+        position: relative;
         &-info {
           float: right;
           font-size: 10px;
@@ -66,17 +29,6 @@
           margin-top: 28px;
         }
       }
-    }
-  }
-  &-company {
-    &-title {
-      font-size: 13px;
-      font-weight: bold;
-      line-height: 2.15;
-    }
-
-    &-info {
-      line-height: 1.75;
     }
   }
 
