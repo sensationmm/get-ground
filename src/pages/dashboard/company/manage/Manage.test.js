@@ -18,6 +18,11 @@ describe('Manage', () => {
     companies: [ companyMock ]
   };
 
+  global.LC_API = {
+    open_chat_window: jest.fn(),
+    set_custom_variables: jest.fn()
+  }
+
   beforeEach(() => {
     wrapper = setup(Manage, defaultProps);
   });
@@ -46,10 +51,16 @@ describe('Manage', () => {
   });
 
   test('live chat button', () => {
+    wrapper.instance().setTopic('boo');
     const button = findByTestAttr(wrapper, 'live-chat-button');
     button.simulate('click');
 
-    // expect(navigate).toHaveBeenCalledWith('/dashboard/company');
+    expect(global.LC_API.open_chat_window).toHaveBeenCalled();
+    expect(global.LC_API.set_custom_variables).toHaveBeenCalledWith(
+      [
+        { name: 'manage my company topic', value: 'boo' },
+      ]
+    );
   });
 
   test('translations', () => {
