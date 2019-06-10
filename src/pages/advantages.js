@@ -2,16 +2,14 @@ import React, { useState } from 'react'
 import Layout from 'src/components/Layout/Layout'
 import { useTranslation } from 'react-i18next'
 
+import Button from 'src/components/_buttons/Button/Button'
+import TableSlider from 'src/components/TableSlider/TableSlider'
+
 import Piggy from 'src/assets/images/piggy.svg'
 import whiteTick from 'src/assets/images/white-tick.svg'
 import orangeCross from 'src/assets/images/orange-cross.svg'
 import orangeTick from 'src/assets/images/orange-tick.svg'
 import blueTick from 'src/assets/images/blue-tick.svg'
-
-import ContactUs from 'src/components/ContactUs/ContactUs'
-import Footer from 'src/components/Footer/Footer'
-import Button from 'src/components/_buttons/Button/Button'
-import TableSlider from 'src/components/TableSlider/TableSlider'
 
 import 'src/styles/pages/advantages.scss'
 
@@ -311,8 +309,6 @@ const Advantages = () => {
           </>
         }
         </div>
-        <ContactUs />
-        <Footer />
       </div>
     </Layout>
   )
