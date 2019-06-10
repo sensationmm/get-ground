@@ -315,7 +315,12 @@ class PurchaseDetails extends Component {
               />
             }
 
-            <Button classes="secondary" label={t('companyDesign.purchaseDetails.form.backButton')} fullWidth />
+            <Button 
+              classes="secondary" 
+              label={t('companyDesign.purchaseDetails.form.backButton')} 
+              fullWidth 
+              onClick={() => navigate('/company-design/property-address')}
+            />
           </Form>
         </div>
       </Layout>

@@ -246,7 +246,12 @@ class PropertyAddress extends Component {
               classes="primary"
             />
 
-            <Button classes="secondary" label={t('companyDesign.propertyAddress.form.backButton')} fullWidth />
+            <Button 
+              classes="secondary" 
+              label={t('companyDesign.propertyAddress.form.backButton')} 
+              fullWidth 
+              onClick={() => navigate('/company-design/')}
+            />
           </Form>
         </div>
       </Layout>
