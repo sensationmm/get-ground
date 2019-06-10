@@ -163,7 +163,7 @@ class CreateAccount extends Component {
     ];
 
     return (
-      <Layout>
+      <Layout loggedOutOnly>
         <div data-test="container-create-account" className="create-account" role="account">
           <h1>{ t('onBoarding.createAccount.title') }</h1>
 

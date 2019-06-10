@@ -5,6 +5,9 @@
 @import '../../styles/address-now.css';
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600');
+@import url('https://fonts.googleapis.com/css?family=Caveat&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Homemade+Apple&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Pinyon+Script&display=swap');
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -49,7 +52,7 @@ body {
 
 .app {
   padding: $padding-vertical (($padding-horizontal-unit * 2) + 0px);
-  height: calc(100vh - #{$header-height + ($padding-vertical-unit * 4) + 0px});
+  min-height: calc(100vh - #{$header-height + ($padding-vertical-unit * 4) + 0px});
   padding-top: calc((#{$header-height + ($padding-vertical-unit * 2) + 0px + $padding-vertical}));
   background: $white;
 
@@ -125,4 +128,8 @@ b {
 
 .has-hero-button {
   padding-bottom: 60px;
+}
+
+.brochure .app.extra-top-padding {
+  padding-top: calc((#{$header-height + ($padding-vertical-unit * 5) + 0px + $padding-vertical}));
 }

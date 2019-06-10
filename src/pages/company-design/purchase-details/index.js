@@ -110,17 +110,17 @@ class PurchaseDetails extends Component {
   }
 
   submitPurchaseDetails = () => {
-    const { showLoader, hideLoader, t } = this.props;
+    const { showLoader, hideLoader, t, form } = this.props;
 
     /* istanbul ignore else */
     if (formUtils.validateForm(this.config)) {
       showLoader();
 
-      PropertyService.SavePurchaseDetails({ 'placeholder': 'bla' }).then((response) => {
+      PropertyService.SavePurchaseDetails(form.values).then((response) => {
         hideLoader();
         /* istanbul ignore else */
-        if (response.status === 201) {
-          navigate('/company-details/solicitor-details');
+        if (response.status === 200) {
+          navigate('/company-design/solicitor-details');
           
         } else if (response.status === 400) {
           formUtils.setFormError(t('form.correctErrors'));
@@ -315,7 +315,12 @@ class PurchaseDetails extends Component {
               />
             }
 
-            <Button classes="secondary" label={t('companyDesign.purchaseDetails.form.backButton')} fullWidth />
+            <Button 
+              classes="secondary" 
+              label={t('companyDesign.purchaseDetails.form.backButton')} 
+              fullWidth 
+              onClick={() => navigate('/company-design/property-address')}
+            />
           </Form>
         </div>
       </Layout>

@@ -28,7 +28,8 @@ const InputPhone = (props) => {
     validate, 
     readOnly,
     note,
-    error
+    error,
+    onKeyPress
   } = props;
 
   let country = '+44';
@@ -73,6 +74,7 @@ const InputPhone = (props) => {
           className={classNames([
             {'error': error }
           ])}
+          onKeyPress={onKeyPress}
         />
       </div>
 
@@ -88,6 +90,7 @@ InputPhone.propTypes = {
   readOnly: PropTypes.bool,
   value: PropTypes.string,
   validate: PropTypes.func,
+  onKeyPress: PropTypes.func,
   note: PropTypes.string,
   error: PropTypes.string
 };

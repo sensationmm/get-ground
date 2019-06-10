@@ -5,6 +5,7 @@ import Advantages from './advantages'
 
 jest.mock('react-i18next', () => ({
   initReactI18next: jest.fn(),
+  withTranslation: () => Component => props => <Component t={k => k} {...props} />,
   useTranslation: () => ([
     jest.fn(),
     {t: jest.fn().mockReturnValue({

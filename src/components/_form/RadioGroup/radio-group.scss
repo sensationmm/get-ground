@@ -6,6 +6,14 @@
     display: flex;
   }
 
+  &.signatures {
+    margin-top: 40px;
+    
+    .radio-group--radio-wrapper {
+      display: block;
+    }
+  }
+
   &--label {
     @extend .text-input-label;
   }

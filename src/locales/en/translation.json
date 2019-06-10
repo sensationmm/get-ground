@@ -18,11 +18,21 @@
       "title": "Set up your signature",
       "intro": "First you must setup your signature.",
       "heading2": "Choose option",
+      "edit": "Edit your signature",
       "buttons": {
         "draw": "Draw your signature",
         "create": "Create digital signature",
         "upload": "Upload your signature"
       }
+    },
+    "createSignature": {
+      "title": "Create digital signature",
+      "intro": "Based on your name we’ve created three signature options for you to choose from. You can edit your name if you are not happy with the options we provided.",
+      "form": {
+        "firstname": "First Name",
+        "lastname": "Last Name"
+      },
+      "selectLabel": "Select Signature"
     },
     "drawSignature": {
       "title": "Draw your signature",
@@ -43,10 +53,11 @@
     },
     "yourSignature": {
       "title": "Your signature",
-      "intro": "Your signature is saved to your profile. Now you are ready to continue and sign your company documents.",
+      "intro": "Your signature will be saved to your profile, and you can then start signing your company documents.",
+      "edited": "Your new signature has been saved.",
       "buttons": {
-        "continue": "Continue",
-        "edit": "edit"
+        "continue": "Save Signature",
+        "edit": "Edit Signature"
       }
     }
   },
@@ -423,6 +434,56 @@
     "ctaSecondary": "Back",
     "skipStep": "Skip this step for now"
   },
+  "findOutMore": {
+    "label": "Find out more",
+    "title": "More information",
+    "moreInfo": {
+      "info1": "GetGround services are for investors of residential property that will be rented out. The property must be in England and Wales.",
+      "info2": "All GetGround companies are UK Limited companies.",
+      "info3": "Each GetGround company only ever holds one property. This means:",
+      "info4": "You are better protected as each asset’s liability is contained in a separate company.",
+      "info5": "You can easily buy or sell a property just by changing ownership in the shares of the company holding it.",
+      "info6": "It can take as little as 20 minutes to own a GetGround company. You just need to sign-up to our platform and we will ask some details about you, your property and who you want to own your company with.",
+      "info7": "It is easy to manage your company through the GetGround website. Everything you need in one place.",
+      "info8": "You should engage GetGround before exchange of your property contracts."
+    }
+  },
+  "header": {
+    "buttons": {
+      "register": "Register",
+      "login": "Log In"
+    }
+  },
+  "howItWorks": {
+    "title": "How it works",
+    "sections": {
+      "step1": {
+        "title": "Step 1",
+        "copy": "GetGround will set up a UK Limited company and bank account for you",
+        "imageAltText": "Property"
+      },
+      "step2": {
+        "title": "Step 2",
+        "copy": "GetGround can connect you to mortgages, insurance, property management and solicitors (optional service)",
+        "imageAltText": "Purchase"
+      },
+      "step3": {
+        "title": "Step 3",
+        "copy": "GetGround will coordinate with your lawyers to purchase your property through your company",
+        "imageAltText": "Solicitor Details"
+      },
+      "step4": {
+        "title": "Step 4",
+        "copy": "GetGround will manage on an on-going basis all your company requirements including accounting, tax, legal documents, filings and secretarial work",
+        "imageAltText": "Shareholder details"
+      },
+      "step5": {
+        "title": "Step 5",
+        "copy": "GetGround can connect you to other investors on the platform to buy and sell shares in companies holding property (optional service)",
+        "imageAltText": "Services"
+      }
+    }
+  },
   "landing": {
     "title": "GetGround for smarter property purchasing.",
     "secondaryTitle": "Protect your wealth and be tax efficient.",
@@ -468,6 +529,18 @@
     "joinUs": {
       "title": "Join us",
       "content": "Our team is rapidly growing. If you believe in our mission and would like to contribute to our growth, please get in touch."
+    }
+  },
+  "menu": {
+    "links": {
+      "first": "What we do",
+      "second": "GetGround Advantages",
+      "third": "How it works",
+      "fourth": "Pricing",
+      "fifth": "About us",
+      "sixth": "Partnerships",
+      "seventh": "FAQs",
+      "eigth": "Logout"
     }
   },
   "modal": {
@@ -833,6 +906,24 @@
       "firstContent": "Our partners may charge a fee if you decide to use their mortgage, insurance, solicitor or property management services.",
       "secondContent": "We charge 0.2% of the property’s sale value if you buy or sell shares in companies holding property on the GetGround platform. You do not have to sell through us, this is an optional service."
     }
+  },
+  "profile": {
+    "sections": {
+      "name": "Full name",
+      "previousNames": "Previous name(s)",
+      "dob": "Date of birth",
+      "birthCity": "City of birth",
+      "occupation": "Occupation",
+      "phone": "Phone number",
+      "email": "Email address",
+      "homeAddress": "Home address",
+      "payment": "Payment methods",
+      "passport": "Passport documents",
+      "proofAddress": "Proof of address",
+      "signature": "Signature"
+    },
+    "edit": "Edit",
+    "save": "Save"
   },
   "trustAndPrivacy" : {
     "title": "Trust and Privacy",

@@ -10,6 +10,8 @@ import { actions } from './actions';
 import { companies } from './companies';
 import { activeCompany } from './activeCompany';
 import { additionalServices } from './additionalServices';
+import { menu } from './menu';
+import { documents } from './documents';
 
 export default combineReducers({
   actions,
@@ -17,10 +19,12 @@ export default combineReducers({
   additionalServices,
   auth,
   companies,
+  documents,
   form,
   idCheck,
   layout,
   loader,
   modal,
-  user
+  user,
+  menu
 });

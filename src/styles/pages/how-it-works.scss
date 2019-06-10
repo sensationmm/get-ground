@@ -1,0 +1,58 @@
+@import 'src/styles/modules/_variables.scss';
+@import '../../styles/modules/_colors';
+
+
+.how-it-works {
+
+  &-img {
+    margin: (($padding-vertical-unit * 2) + 0px) (- ($padding-horizontal-unit * 2) + 0px);
+    margin-top: 104px;
+  }
+
+  ul {
+    list-style: discs;
+    margin-bottom: 30%;
+    margin-top: 57px;
+    padding: 0;
+    position: relative;
+    width: 354px;
+    height: 850px;
+
+    .how-it-works-step-verticalLine {
+      position: absolute;
+      width: 1px;
+      border-left: solid 0.5px $text-secondary;
+      left: 14%;
+      top: 1.5%;
+    }
+  }
+
+  &-steps {
+    z-index: 0;
+  }
+
+  &-step {
+    display: flex;
+    padding-right: 10px;
+    img {
+      width: 28px;
+      height: 28px;
+    }
+
+    &-li {
+      margin-left: 11%;
+    }
+
+    &-title {
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 2.15;
+    }
+
+    &-copy {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.75;
+    }
+  }
+}

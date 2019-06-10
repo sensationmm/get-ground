@@ -49,8 +49,4 @@ describe('about us page', () => {
   test('meet-the-founders', () => {
     expect(wrapper.find('[data-test="meet-the-founders"]').length).toEqual(1)
   })
-
-  test('contact us', () => {
-    expect(wrapper.find('[data-test="about-us-contact-us"]').length).toEqual(1)
-  })
 })

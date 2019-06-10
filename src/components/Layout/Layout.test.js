@@ -5,17 +5,23 @@ import { shallow } from 'enzyme';
 import { Layout, AuthService } from './Layout';
 import { setup } from 'src/test-utils/test-utils';
 
+import Header from 'src/components/Header/Header';
+
 jest.mock('gatsby', () => ({
   navigate: jest.fn()
 }));
 
 jest.mock('jwt-decode', () => jest.fn().mockReturnValue({ exp: (Date.now().valueOf() / 1000) + 100 }));
-jest.spyOn(AuthService, 'reauthenticate');
+const showMenuMock = jest.fn();
+const hideMenuMock = jest.fn();
+const hideLoaderMock = jest.fn();
+jest.spyOn(AuthService, 'reauthenticate').mockReturnValue(Promise.resolve({ token: 'asdfnsdlm' }));
 jest.spyOn(window, 'addEventListener');
 jest.spyOn(JSON, 'parse');
 jest.spyOn(Storage.prototype, 'removeItem');
 const setWidthMock = jest.fn();
 const saveAuthMock = jest.fn();
+const tMock = jest.fn().mockReturnValue('string');
 
 describe('<Layout />', () => {
   const props = {
@@ -26,7 +32,11 @@ describe('<Layout />', () => {
       }
     },
     setWidth: setWidthMock,
-    saveAuth: saveAuthMock
+    saveAuth: saveAuthMock,
+    t: tMock,
+    showMenu: showMenuMock,
+    hideMenu: hideMenuMock,
+    hideLoader: hideLoaderMock
   };
 
   test('onmount should call setWidth with innerWidth', () => {
@@ -53,6 +63,24 @@ describe('<Layout />', () => {
     setup(Layout, { ...props, companyID:true, activeCompany: null });
 
     expect(navigate).toHaveBeenCalledWith('/dashboard');
+  });
+
+  test('loggedOutOnly', () => {
+    setup(Layout, { ...props, userID:1, loggedOutOnly: true });
+
+    expect(navigate).toHaveBeenCalledWith('/dashboard');
+  });
+
+  test('toggleMenu opens the menu', () => {
+    const wrapper = setup(Layout, { ...props, menuIsOpen: false });
+    wrapper.find(Header).props().onClick();
+    expect(showMenuMock).toHaveBeenCalledTimes(1);
+  });
+
+  test('toggleMenu shuts the menu', () => {
+    const wrapper = setup(Layout, { ...props, menuIsOpen: true });
+    wrapper.find(Header).props().onClick();
+    expect(hideMenuMock).toHaveBeenCalledTimes(1);
   });
   
   describe('auth detection', () => {
@@ -98,6 +126,9 @@ describe('<Layout />', () => {
 
   afterEach(() => {
     jest.clearAllMocks();
+    showMenuMock.mockClear();
+    hideMenuMock.mockClear();
+    hideLoaderMock.mockClear();
     localStorage.removeItem('gg-auth');
     Storage.prototype.removeItem.mockClear();
   });
