@@ -65,6 +65,12 @@ describe('<Layout />', () => {
     expect(navigate).toHaveBeenCalledWith('/dashboard');
   });
 
+  test('loggedOutOnly', () => {
+    setup(Layout, { ...props, userID:1, loggedOutOnly: true });
+
+    expect(navigate).toHaveBeenCalledWith('/dashboard');
+  });
+
   test('toggleMenu opens the menu', () => {
     const wrapper = setup(Layout, { ...props, menuIsOpen: false });
     wrapper.find(Header).props().onClick();
