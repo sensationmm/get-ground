@@ -142,3 +142,20 @@ describe('validateNumeric', () => {
     expect(isValid).toBe(false);
   });
 });
+
+describe('validateMinimum', () => {
+  test('returns true if more', () => {
+    const isValid = validation.validateMinimum('password1', 6);
+    expect(isValid).toBe(true);
+  });
+
+  test('returns true if equal', () => {
+    const isValid = validation.validateMinimum('passwo', 6);
+    expect(isValid).toBe(true);
+  });
+
+  test('returns false if less', () => {
+    const isValid = validation.validateMinimum('pass', 6);
+    expect(isValid).toBe(false);
+  });
+});
