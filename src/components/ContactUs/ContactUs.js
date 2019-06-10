@@ -20,7 +20,7 @@ const ContactUs = () => {
   const [t] = useTranslation();
 
  const openChat = () => {
-  window.LC_API.open_chat_window()
+  window && window.LC_API.open_chat_window()
 }
 
   return (

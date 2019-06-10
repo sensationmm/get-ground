@@ -43,9 +43,10 @@ class Manage extends Component {
     const custom_variables = [
       { name: 'manage my company topic', value: liveChatTopic },
     ];
-
-    window.LC_API.set_custom_variables(custom_variables);
-    window.LC_API.open_chat_window()
+    if(window) {
+      window.LC_API.set_custom_variables(custom_variables);
+      window.LC_API.open_chat_window()
+    }
   }
 
   render() {
