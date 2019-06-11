@@ -151,8 +151,8 @@ class Account extends Component {
 
     return (
       <Layout secure>
-        <div className="company-overview account" data-test="container-profile">
-          <div className="company-header profile">{ `${user.first_name} ${user.last_name}` }</div>
+        <div className="company-overview account profile" data-test="container-profile">
+          <div className="company-header">{ `${user.first_name} ${user.last_name}` }</div>
 
           <div className="company-overview-section">
             <Form spacing="30px">

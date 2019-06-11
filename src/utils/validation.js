@@ -97,6 +97,18 @@ export const validateTotal = (input, { total, maxValue }) => {
   return total <= maxValue;
 };
 
+/**
+ * validateMinimum
+ * validates on a minimum character length
+ * @param {string} value - value to be validated
+ * @param {number} min - minimum character length allowed
+ * @return {boolean} whether value is more than or equal to the minimum
+ */
+export const validateMinimum = (value, min) => {
+  validationMessages.validateMinimum = i18n.t('validation.validateMinimum', { min: min });
+  return value.length >= min;
+};
+
 const validation = {
   validateEmail,
   validatePhone,
@@ -106,6 +118,7 @@ const validation = {
   validateNoOfCompanies,
   validateLettersOnly,
   validateTotal,
+  validateMinimum,
   messages: validationMessages,
 };
 

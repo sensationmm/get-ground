@@ -972,7 +972,8 @@
     "validateNumeric": "Number only",
     "validateNoOfCompanies": "No more than 20",
     "validateLettersOnly": "Invalid characters",
-    "validateTotal": "Max {{max}}"
+    "validateTotal": "Max {{max}}",
+    "validateMinimum": "Min {{min}}"
   },
   "whatWeDo": {
     "title": "What we do",

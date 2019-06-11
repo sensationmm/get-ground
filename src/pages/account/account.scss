@@ -19,9 +19,11 @@
     padding-left: 45px;
   }
 
-  .text-input-required, .input-phone-required {
-    bottom: -20px;
-    top: auto;
+  &.profile {
+    .text-input-required, .input-phone-required {
+      bottom: -20px;
+      top: auto;
+    }
   }
 
   &-proof-edit {
