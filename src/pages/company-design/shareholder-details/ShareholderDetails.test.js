@@ -73,11 +73,6 @@ describe('<ShareholderDetails />', () => {
     test('addDetailsBack()', () => {
       wrapper.instance().addDetailsBack();
       expect(wrapper.state().stage).toBe('add');
-
-      wrapper.instance().validateShareholderShares = jest.fn().mockReturnValue(false);
-      wrapper.instance().addDetailsBack();
-      expect(formUtils.setFormError).toHaveBeenCalledWith('companyDesign.shareholderDetails.shares.error');
-      wrapper.instance().validateShareholderShares.mockRestore();
     });
 
     test('addShareholder()', () => {

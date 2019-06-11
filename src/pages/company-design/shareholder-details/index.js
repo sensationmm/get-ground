@@ -196,17 +196,7 @@ class ShareholderDetails extends Component {
     }
   }
 
-  addDetailsBack = () => {
-    const isValid = this.validateShareholderShares();
-
-    if(isValid) {
-      this.setState({
-        stage: 'add'
-      });
-    } else {
-      formUtils.setFormError(this.props.t('companyDesign.shareholderDetails.shares.error'));
-    }
-  }
+  addDetailsBack = () => this.setState({ stage: 'add' });
 
   /**
    * renderShareholders
