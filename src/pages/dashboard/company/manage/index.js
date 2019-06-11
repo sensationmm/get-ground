@@ -71,15 +71,12 @@ class Manage extends Component {
 
           <OptionSelect
             options={[
-              { id: 'buyShares', title: t('dashboard.company.manage.options.buyShares') },
-              { id: 'lendMoney', title: t('dashboard.company.manage.options.lendMoney') },
-              { id: 'withdrawDividend', title: t('dashboard.company.manage.options.withdrawDividend') },
-              { id: 'loanRepayment', title: t('dashboard.company.manage.options.loanRepayment') },
-              { id: 'allotShares', title: t('dashboard.company.manage.options.allotShares') },
-              { id: 'appointDirector', title: t('dashboard.company.manage.options.appointDirector') },
-              { id: 'removeDirector', title: t('dashboard.company.manage.options.removeDirector') },
+              { id: 'withdrawMoney', title: t('dashboard.company.manage.options.withdrawMoney') },
+              { id: 'sendMoney', title: t('dashboard.company.manage.options.sendMoney') },
+              { id: 'manageDirector', title: t('dashboard.company.manage.options.manageDirector') },
+              { id: 'manageShares', title: t('dashboard.company.manage.options.manageShares') },
               { id: 'delist', title: t('dashboard.company.manage.options.delist') },
-              { id: 'dissolveCompany', title: t('dashboard.company.manage.options.dissolveCompany') },
+              { id: 'reportIssue', title: t('dashboard.company.manage.options.reportIssue') },
             ]}
             onChange={this.setTopic}
             selected={liveChatTopic}

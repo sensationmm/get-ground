@@ -67,15 +67,12 @@ describe('Manage', () => {
     expect(wrapper.find('h1').text()).toBe('dashboard.company.manage.title');
     expect(wrapper.find('p').at(0).text()).toBe('dashboard.company.manage.text');
     expect(wrapper.find('p').at(1).text()).toBe('dashboard.company.manage.select');
-    expect(wrapper.find(OptionSelect).props().options[0].title).toBe('dashboard.company.manage.options.buyShares');
-    expect(wrapper.find(OptionSelect).props().options[1].title).toBe('dashboard.company.manage.options.lendMoney');
-    expect(wrapper.find(OptionSelect).props().options[2].title).toBe('dashboard.company.manage.options.withdrawDividend');
-    expect(wrapper.find(OptionSelect).props().options[3].title).toBe('dashboard.company.manage.options.loanRepayment');
-    expect(wrapper.find(OptionSelect).props().options[4].title).toBe('dashboard.company.manage.options.allotShares');
-    expect(wrapper.find(OptionSelect).props().options[5].title).toBe('dashboard.company.manage.options.appointDirector');
-    expect(wrapper.find(OptionSelect).props().options[6].title).toBe('dashboard.company.manage.options.removeDirector');
-    expect(wrapper.find(OptionSelect).props().options[7].title).toBe('dashboard.company.manage.options.delist');
-    expect(wrapper.find(OptionSelect).props().options[8].title).toBe('dashboard.company.manage.options.dissolveCompany');
+    expect(wrapper.find(OptionSelect).props().options[0].title).toBe('dashboard.company.manage.options.withdrawMoney');
+    expect(wrapper.find(OptionSelect).props().options[1].title).toBe('dashboard.company.manage.options.sendMoney');
+    expect(wrapper.find(OptionSelect).props().options[2].title).toBe('dashboard.company.manage.options.manageDirector');
+    expect(wrapper.find(OptionSelect).props().options[3].title).toBe('dashboard.company.manage.options.manageShares');
+    expect(wrapper.find(OptionSelect).props().options[4].title).toBe('dashboard.company.manage.options.delist');
+    expect(wrapper.find(OptionSelect).props().options[5].title).toBe('dashboard.company.manage.options.reportIssue');
     expect(wrapper.find(Button).props().label).toBe('liveChat.button');
   });
 
