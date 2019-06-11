@@ -34,6 +34,7 @@ const defaultState = {
 /**
  * Account
  * @author Kevin Reynolds
+ * @param {string} liveChatTopic - topic to be passed to live chat
  * @param {object} props - for JSDoc
  * @return {ReactComponent} Company
  */
@@ -93,6 +94,16 @@ class Account extends Component {
       });
     } else {
       formUtils.setFormError(t('form.correctErrors'));
+    }
+  }
+
+  handleLiveChat = (liveChatTopic) => {
+    const custom_variables = [
+      { name: 'Manage my account', value: liveChatTopic },
+    ];
+    if (window) {
+      window.LC_API.set_custom_variables(custom_variables);
+      window.LC_API.open_chat_window()
     }
   }
 
@@ -228,7 +239,7 @@ class Account extends Component {
             <h2>{ t('profile.sections.passport') }</h2>
             <div className="account-proof-edit">
               {passport && <img src={`${filePath}${passport.filename}`} /> }
-              <ButtonIcon liveChat icon={IconChat} />
+              <ButtonIcon data-test="live-chat-passport" liveChat icon={IconChat} onClick={ () => this.handleLiveChat('Passport')} />
             </div>
           </div>
 
@@ -236,7 +247,7 @@ class Account extends Component {
             <h2>{ t('profile.sections.proofAddress') }</h2>
             <div className="account-proof-edit">
               {addressProof && <img src={`${filePath}${addressProof.filename}`} /> }
-              <ButtonIcon liveChat icon={IconChat} />
+              <ButtonIcon data-test="live-chat-address" liveChat icon={IconChat} onClick={ () => this.handleLiveChat('Address')} />
             </div>
           </div>
 
