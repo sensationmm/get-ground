@@ -169,9 +169,7 @@ describe('<Account />', () => {
       user: {
         ...defaultProps.user,
         previous_names: 'anon',
-        address: {
-          street: 'some street'
-        }
+        street: 'some street'
       }
     });
 

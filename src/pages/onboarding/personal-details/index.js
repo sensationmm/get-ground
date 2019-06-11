@@ -182,11 +182,9 @@ class OnboardingPersonalDetailsContainer extends Component {
 
   closeDatePicker = () => this.setState({isDatepickerOpen: false});
 
-  setDateOfBirth = date => {
+  setDateOfBirth = /* istanbul ignore next */ date => {
     const element = document.getElementById('datepicker-field');
-
-    // Element is null in unit test so blows up at this point...
-    /* istanbul ignore else */
+    
     if (!element) return;
 
     formUtils.setNativeValue(element, moment(date).format('Do MMMM YYYY'));
@@ -206,13 +204,13 @@ class OnboardingPersonalDetailsContainer extends Component {
       isTextAreaHidden
     } = this.state;
   
-    const setCountries = countryData.map((country, index) => {
+    const setCountries = (key) => countryData.map((country, index) => {
       return (
         <option 
           key={`country-${index}`} 
-          value={`[${country.alpha_2_code}] ${country.country_name}`}
+          value={`[${country.alpha_2_code}] ${country[key]}`}
         >
-          {country.country_name}
+          {country[key]}
         </option>
       );
     });
@@ -277,7 +275,7 @@ class OnboardingPersonalDetailsContainer extends Component {
         component: Select,
         label: t('onBoarding.personalDetails.form.nationalityLabel'),
         value: values.nationality,
-        options: setCountries,
+        options: setCountries('nationality'),
         validationFunction: 'validateRequired'
       },
       {
@@ -300,7 +298,7 @@ class OnboardingPersonalDetailsContainer extends Component {
         component: Select,
         label: t('onBoarding.personalDetails.form.countryLabel'),
         value: values.country,
-        options: setCountries,
+        options: setCountries('country_name'),
         classes: 'country-select',
         validationFunction: 'validateRequired', 
         callback: country => this.handleCountryChange(country)

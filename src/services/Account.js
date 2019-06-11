@@ -48,7 +48,7 @@ class AccountService extends BaseService {
         'nationality_name': data.nationalityName,
         'birth_town': data.cityOfBirth,
         'occupation': data.jobTitle,
-        'country_name': data.countryName,
+        'country': data.countryName,
         'street': data.street,
         'posttown': data.city,
         'premise': data.unitNumber,
