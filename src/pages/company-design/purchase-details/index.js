@@ -187,7 +187,8 @@ class PurchaseDetails extends Component {
         validationFunction: 'validateRequired',
         onFocus: this.openDatePicker,
         id: 'completionDate',
-        hidden: newBuild !== 'yes'
+        hidden: newBuild !== 'yes',
+        readOnly: true
       },
       {
         component: 'h1',
@@ -202,7 +203,8 @@ class PurchaseDetails extends Component {
         validationFunction: 'validateRequired',
         onFocus: this.openDatePicker,
         id: 'depositDueDate',
-        hidden: this.checkElementHidden()
+        hidden: this.checkElementHidden(),
+        readOnly: true
       },
       {
         stateKey: 'depositAmount',
@@ -221,7 +223,8 @@ class PurchaseDetails extends Component {
         validationFunction: 'validateRequired',
         onFocus: this.openDatePicker,
         id: 'firstInstallmentDate',
-        hidden: this.checkElementHidden()
+        hidden: this.checkElementHidden(),
+        readOnly: true
       },
       {
         stateKey: 'firstInstallmentAmount',
@@ -239,7 +242,8 @@ class PurchaseDetails extends Component {
         value: secondInstallmentDate,
         onFocus: this.openDatePicker,
         id: 'secondInstallmentDate',
-        wrapperClass: 'installment-date'
+        wrapperClass: 'installment-date',
+        readOnly: true
       },
       {
         stateKey: 'secondInstallmentAmount',
@@ -273,7 +277,8 @@ class PurchaseDetails extends Component {
         validationFunction: 'validateRequired',
         onFocus: this.openDatePicker,
         id: 'exchangeDate',
-        hidden: expectedExchange !== 'yes'
+        hidden: expectedExchange !== 'yes',
+        readOnly: true
       },
       {
         component: Datepicker,
