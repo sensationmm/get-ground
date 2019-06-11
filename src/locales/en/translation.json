@@ -272,7 +272,8 @@
       },
       "add": {
         "title": "Shareholder's details",
-        "text": "You can have a maximum of 8 shareholders (including you). All shareholders need to be people not companies.\n\nPlease note that each of your shareholders will need to create an account on GetGround. They must also be over 18.",
+        "textOne": "Additional shareholders will not be charged for the service, however they will need to create an account on getGround.",
+        "textTwo": "You can have a maximum of 8 shareholders (including you). All shareholders need to be people not companies, and they must be over 18.",
         "new": {
           "title": "Add a Shareholder",
           "form": {
