@@ -973,7 +973,7 @@
     "validateNoOfCompanies": "No more than 20",
     "validateLettersOnly": "Invalid characters",
     "validateTotal": "Max {{max}}",
-    "validateMinimum": "Min {{min}}"
+    "validateMinimum": "Invalid password"
   },
   "whatWeDo": {
     "title": "What we do",
