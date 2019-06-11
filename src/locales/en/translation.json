@@ -777,7 +777,7 @@
       "address": {
         "name": "Proof of Address",
         "title": "Add proof of address",
-        "content": "Now we need a picture of a utility bill, bank statement or any government letter (e.g. HMRC). Please make sure the document is recent (inside the past 3 months) and the address and your name are clearly visible.",
+        "content": "Now we need a picture of a utility bill, bank statement or any government letter (e.g. HMRC). Please make sure the document is recent (within the past 3 months) and the address and your name are clearly visible.",
         "retakeImageContent": "Are you happy with this picture? Please make sure the date, your full name and address are clearly visible."
       },
       "selfie": {

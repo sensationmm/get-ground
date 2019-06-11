@@ -111,14 +111,13 @@ class Account extends Component {
     const { user, t, form, documents } = this.props;
     const { values } = form;
     const { edit_occupation, edit_email, edit_phone_number } = this.state;
-
     /* istanbul ignore next */
-    const address = user.address && [
-      user.address.premise,
-      user.address.street,
-      user.address.thoroughfare,
-      user.address.posttown,
-      user.address.postcode
+    const address = [
+      user.premise,
+      user.street,
+      user.thoroughfare,
+      user.posttown,
+      user.postcode
     ].filter(content => !!content);
 
     this.config = {

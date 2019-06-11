@@ -25,6 +25,8 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
     hideLoader: hideLoaderMock,
     form: ReduxFormMock
   };
+  jest.spyOn(formUtils, 'initFormState');
+  jest.spyOn(formUtils, 'clearFormState');
 
   global.addressNow = {
     setCountry: setCountryMock,
@@ -38,6 +40,12 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
   test('renders without error', () => {
     const component = findByTestAttr(wrapper, 'container-onboarding-details');
     expect(component.length).toBe(1);
+    expect(formUtils.initFormState).toHaveBeenCalledTimes(1);
+  });
+
+  test('form cleared on unmount', () => {
+    wrapper.unmount();
+    expect(formUtils.clearFormState).toHaveBeenCalledTimes(1);
   });
 
   test('expect handleCountryChange to be called on select change', () => {
