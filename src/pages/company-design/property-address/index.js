@@ -15,11 +15,13 @@ import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import Select from 'src/components/_form/Select/Select';
 import Button from 'src/components/_buttons/Button/Button';
+import Checkbox from 'src/components/_form/Checkbox/Checkbox';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
 import { addressNow } from 'src/config/endpoints';
-import 'src/styles/pages/onboarding-details.scss';
+
+import './property-address.scss';
 
 import propertyService from 'src/services/Property';
 const PropertyService = new propertyService();
@@ -50,7 +52,8 @@ class PropertyAddress extends Component {
       street: '',
       city: '',
       unitNumber: '',
-      postcode: ''
+      postcode: '',
+      toRentConfirmation: false
     });
 
     const script = document.createElement('script');
@@ -217,6 +220,13 @@ class PropertyAddress extends Component {
         hidden: !isManualAddress,
         classes: 'link small',
       },
+      {
+        stateKey: 'toRentConfirmation',
+        component: Checkbox,
+        label: t('companyDesign.propertyAddress.form.toRentConfirmationLabel'),
+        checked: values.toRentConfirmation,
+        validationFunction: 'validateRequired'
+      }
     ];
 
     return (
