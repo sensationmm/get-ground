@@ -1,6 +1,11 @@
 
 @import '../_buttons/Button/button.scss';
 
+.datepicker-modal {
+  position: fixed;
+  background: none;
+}
+
 .datepicker {
   position: fixed;
 
