@@ -255,6 +255,13 @@ const Advantages = () => {
         <h1>{t('advantages.title')}</h1>
         <div className="advantages-uk-tax">
         <h3 className="advantages-uk-tax-title">{t('advantages.tax.title')}</h3>
+        <ul>
+          {uKTaxAdvantages.map((info, idx) => (
+            <li key={`${info} + ${idx}`}>
+              <p className="advantages-uk-tax-info" >{info}</p>
+            </li>
+          ))}
+        </ul>
         {showTaxTable ?
           <div className="advantages-uk-tax-more-expanded">
           <TableSlider
@@ -269,20 +276,18 @@ const Advantages = () => {
           <p className="advantages-uk-tax-more-expanded-info">{t('advantages.warning')}</p>
           </div>
           :
-          <>
-            <ul>
-              {uKTaxAdvantages.map((info, idx) => (
-                <li key={`${info} + ${idx}`}>
-                  <p className="advantages-uk-tax-info" >{info}</p>
-                </li>
-              ))}
-            </ul>
-            <Button data-test="tax-more-button" classes="advantages-btn chat" fullWidth label={t('advantages.cta')} onClick={() => toggleTaxTable(!showTaxTable)}/>
-          </>
+          <Button data-test="tax-more-button" classes="advantages-btn chat" fullWidth label={t('advantages.cta')} onClick={() => toggleTaxTable(!showTaxTable)}/>
         }
         </div>
         <div className="advantages-company">
         <h3 className="advantages-company-title">{t('advantages.company.title')}</h3>
+        <ul>
+          {companyAdvantages.map((info, idx) => (
+            <li key={`${info} + ${idx}`}>
+              <p className="advantages-company-info" >{info}</p>
+            </li>
+          ))}
+        </ul>
         {showCompanyTable ?
           <div className="advantages-company-more-expanded">
             <TableSlider
@@ -297,16 +302,7 @@ const Advantages = () => {
             <p className="advantages-company-more-expanded-info">{t('advantages.warning')}</p>
           </div>
           :
-          <>
-            <ul>
-              {companyAdvantages.map((info, idx) => (
-                <li key={`${info} + ${idx}`}>
-                  <p className="advantages-company-info" >{info}</p>
-                </li>
-              ))}
-            </ul>
-            <Button data-test="company-more-button" classes="advantages-btn chat" fullWidth label={t('advantages.cta')} onClick={() => toggleCompanyTable(!showCompanyTable)}/>
-          </>
+          <Button data-test="company-more-button" classes="advantages-btn chat" fullWidth label={t('advantages.cta')} onClick={() => toggleCompanyTable(!showCompanyTable)}/>
         }
         </div>
       </div>
