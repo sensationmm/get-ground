@@ -166,7 +166,7 @@ export class Layout extends Component {
             />
           </Modal>
         </CSSTransition>
-        <LiveChat license={10911047} />
+        {window && <LiveChat license={10911047} />}
       </div>
     )
   }
