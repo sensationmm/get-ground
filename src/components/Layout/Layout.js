@@ -83,10 +83,6 @@ export class Layout extends Component {
     }
   }
 
-  setupLivechat() {
-
-  }
-
   loggedOutOnly = () => {
     const { userID, loggedOutOnly } = this.props;
 
