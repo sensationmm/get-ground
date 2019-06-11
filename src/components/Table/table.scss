@@ -1,0 +1,118 @@
+@import '../../styles/modules/_colors';
+.table {
+  height: 448px;
+  width: 155px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.15);
+  padding: 10px;
+  margin-top: 50px;
+  float: right;
+
+
+  &-header {
+    font-size: 16px;
+    text-align: center;
+    width: 60%;
+    position: absolute;
+    left: 44%;
+    &.small {
+      font-size: 14px;
+      width: 10%;
+      left: 51%;
+      &:first-child {
+        left: 78%;
+      }
+    }
+  }
+
+  &.blue {
+    background-image: linear-gradient(to bottom, #559bab, #8ad9d0);
+    color: $white;
+    .table-section-line {
+      border-color: $white;
+    }
+  }
+  .table-section:last-child {
+    .table-section-line {
+      display: none;
+    }
+  }
+
+  &-section {
+    position: relative;
+    height: 20%;
+    &-img {
+      position: absolute;
+      top: 32%;
+      left: 10%;
+    }
+    &-copy {
+      padding-top: 8px;
+      margin: 0;
+      width: 90%;
+      position: absolute;
+      left: 10%;
+    }
+
+    &-line {
+      width: 122.4px;
+      height: 1px;
+      border: solid 0.5px $line;
+      position: absolute;
+      left: 10%;
+      bottom: 0%;
+    }
+  }
+
+  &.small {
+    width: 18%;
+    margin-left: 10px;
+
+    .table-section-line {
+      left: 30%;
+      width: 22px;
+    }
+  }
+
+  &.right {
+    .table-section-copy {
+      font-size: 11px;
+      width: 70%;
+      position: absolute;
+      top: 10%;
+      left: 32%;
+      padding-top: 15px;
+
+      &:first-child {
+        width: 90%;
+        top: 0%;
+        left: 10%;
+        padding-top: 8px;
+      }
+    }
+  }
+
+  &.images {
+    .table-section-img {
+      position: absolute;
+      top: 35%;
+      left: 30%;
+    }
+  }
+
+  &.company {
+    height: 348px;
+    .table-section {
+      height: 24%;
+    }
+    &.right {
+      .table-section {
+        &-copy {
+          font-size: 11px;
+          top: 0%;
+          padding-top: 7px;
+        }
+      }
+    }
+  }
+}
