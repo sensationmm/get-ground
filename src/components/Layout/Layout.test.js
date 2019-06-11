@@ -123,7 +123,7 @@ describe('<Layout />', () => {
       expect(Storage.prototype.removeItem).toHaveBeenCalledTimes(1);
     });
 
-    test('livecha is true when mounts', () => {
+    test('livechat is true when mounts', () => {
       const wrapper = shallow(<Layout {...props} />)
       expect(wrapper.state().livechat).toEqual(true)
     });
