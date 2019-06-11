@@ -73,6 +73,11 @@ export class Layout extends Component {
     }
 
     this.validateCompanyID();
+    // const login_variables = [
+    //   { name: 'Name', value:  },
+    //   { name: 'Email', value: }
+    // ];
+    // window.LC_API.set_custom_variables(login_variables);
   }
 
   validateCompanyID = () => {
