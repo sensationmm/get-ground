@@ -31,9 +31,17 @@ import { navigate } from 'gatsby';
 
 export class Layout extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      livechat: false
+    };
+  }
+
   componentDidMount() {
     const { userID, secure, redirect, hideLoader } = this.props;
-
+    this.setState({ livechat: true })
     store.dispatch(hideMenu());
 
     this.props.setWidth(window.innerWidth);
@@ -73,6 +81,10 @@ export class Layout extends Component {
     if(companyID && activeCompany === null) {
       navigate('/dashboard');
     }
+  }
+
+  setupLivechat() {
+
   }
 
   loggedOutOnly = () => {
@@ -166,7 +178,7 @@ export class Layout extends Component {
             />
           </Modal>
         </CSSTransition>
-        {window && <LiveChat license={10911047} />}
+        {this.state.livechat && <LiveChat license={10911047} />}
       </div>
     )
   }
