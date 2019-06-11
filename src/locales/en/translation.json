@@ -814,6 +814,7 @@
       "form": {
         "firstNameLabel": "First name",
         "middleNameLabel": "Middle name(s)",
+        "middleNameNote": "If you don’t have any middle names leave blank.",
         "lastNameLabel": "Last name",
         "previousNamesLabel": "Previous names",
         "dateOfBirthLabel": "Date of Birth",
@@ -821,6 +822,7 @@
         "nationalityLabel": "Nationality",
         "cityOfBirthLabel": "City of birth",
         "jobTitleLabel": "Profession",
+        "jobTitleNote": "We will need this for the registration with Companies House",
         "countryLabel": "Country of residence",
         "addressFinderLabel": "Address Finder",
         "unitNumberLabel": "Unit Number",
