@@ -82,7 +82,7 @@ describe('<Layout />', () => {
     wrapper.find(Header).props().onClick();
     expect(hideMenuMock).toHaveBeenCalledTimes(1);
   });
-  
+
   describe('auth detection', () => {
 
     test('has userID', () => {
@@ -90,7 +90,7 @@ describe('<Layout />', () => {
       expect(AuthService.reauthenticate).toHaveBeenCalledTimes(0);
       expect(navigate).toHaveBeenCalledTimes(0);
     });
-    
+
     test('does not have userID', () => {
       localStorage.setItem('gg-auth', JSON.stringify({ token: 'testauth' }));
 
@@ -121,6 +121,11 @@ describe('<Layout />', () => {
       setup(Layout, { ...props, secure: true, redirect: '/dummy-path2' });
       expect(navigate).toHaveBeenCalledWith('/login?redirect=/dummy-path2');
       expect(Storage.prototype.removeItem).toHaveBeenCalledTimes(1);
+    });
+
+    test('livechat is true when mounts', () => {
+      const wrapper = shallow(<Layout {...props} />)
+      expect(wrapper.state().livechat).toEqual(true)
     });
   });
 

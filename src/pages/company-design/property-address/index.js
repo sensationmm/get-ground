@@ -58,7 +58,7 @@ class PropertyAddress extends Component {
     script.onload = () => {
       window.addressNow.listen('load', (control) =>  {
         control.listen('populate', (address) => {
-          
+
           this.setState((prevState) => ({
             ...this.state,
             values: {
@@ -96,7 +96,7 @@ class PropertyAddress extends Component {
 
   initFormValidation = /* istanbul ignore next */ () => {
     const { showLoader, hideLoader, t, form } = this.props;
-    const { 
+    const {
       values: {
         street,
         city,
@@ -143,18 +143,18 @@ class PropertyAddress extends Component {
 
   render() {
     const { t, form } = this.props;
-    const { 
-      isManualAddress, 
-      isAddressValid, 
+    const {
+      isManualAddress,
+      isAddressValid,
       isTextAreaHidden
     } = this.state;
     const { values, errors, showErrorMessage } = form;
-  
+
     const setCountries = [
       <option key='country-0' value='England'>England</option>,
       <option key='country-1' value='Wales'>Wales</option>
     ];
-        
+
     this.config = [
       {
         stateKey: 'country',
@@ -163,7 +163,7 @@ class PropertyAddress extends Component {
         value: values.country,
         options: setCountries,
         classes: 'country-select',
-        validationFunction: 'validateRequired', 
+        validationFunction: 'validateRequired',
         callback: country => this.handleCountryChange(country)
       },
       {
@@ -227,9 +227,9 @@ class PropertyAddress extends Component {
 
           <IntroBox>{t('companyDesign.propertyAddress.intro')}</IntroBox>
 
-          {showErrorMessage && 
+          {showErrorMessage &&
               <ErrorBox>
-              { errors.form 
+              { errors.form
                 ? errors.form
                 : t('companyDesign.propertyAddress.form.error')
               }
@@ -246,10 +246,10 @@ class PropertyAddress extends Component {
               classes="primary"
             />
 
-            <Button 
-              classes="secondary" 
-              label={t('companyDesign.propertyAddress.form.backButton')} 
-              fullWidth 
+            <Button
+              classes="secondary"
+              label={t('companyDesign.propertyAddress.form.backButton')}
+              fullWidth
               onClick={() => navigate('/company-design/')}
             />
           </Form>

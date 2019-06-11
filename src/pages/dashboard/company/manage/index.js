@@ -16,6 +16,7 @@ import '../company-overview.scss';
 /**
  * Manage
  * @author Kevin Reynolds
+ * @param {string} liveChatTopic - topic to be passed to live chat
  * @param {object} props - for JSDoc
  * @return {ReactComponent} BankAccount
  */
@@ -38,6 +39,16 @@ class Manage extends Component {
     this.setState({ liveChatTopic: topic });
   }
 
+  handleLiveChat = (liveChatTopic) => {
+    const custom_variables = [
+      { name: 'manage my company topic', value: liveChatTopic },
+    ];
+    if(window) {
+      window.LC_API.set_custom_variables(custom_variables);
+      window.LC_API.open_chat_window()
+    }
+  }
+
   render() {
     const { t, companies, activeCompany } = this.props;
     const { liveChatTopic } = this.state;
@@ -57,7 +68,7 @@ class Manage extends Component {
           <br />
 
           <p><b>{ t('dashboard.company.manage.select') }</b></p>
-      
+
           <OptionSelect
             options={[
               { id: 'buyShares', title: t('dashboard.company.manage.options.buyShares') },
@@ -81,7 +92,7 @@ class Manage extends Component {
               data-test="live-chat-button"
               classes="chat"
               label={ t('liveChat.button') }
-              onClick={() => {}}
+              onClick={() => this.handleLiveChat(liveChatTopic)}
               disabled={!liveChatTopic}
             />
           </div>

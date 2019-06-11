@@ -6,6 +6,7 @@ import jwtDecode from 'jwt-decode';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import { withTranslation } from 'react-i18next';
+import LiveChat from 'react-livechat';
 
 import SEO from 'src/components/seo';
 import Header from 'src/components/Header/Header';
@@ -30,9 +31,17 @@ import { navigate } from 'gatsby';
 
 export class Layout extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      livechat: false
+    };
+  }
+
   componentDidMount() {
     const { userID, secure, redirect, hideLoader } = this.props;
-
+    this.setState({ livechat: true })
     store.dispatch(hideMenu());
 
     this.props.setWidth(window.innerWidth);
@@ -84,7 +93,7 @@ export class Layout extends Component {
 
   toggleMenu = () => {
     const { showMenu, hideMenu, menuIsOpen } = this.props;
-    menuIsOpen ? hideMenu() : showMenu();  
+    menuIsOpen ? hideMenu() : showMenu();
   }
 
   render() {
@@ -131,6 +140,7 @@ export class Layout extends Component {
     ];
 
     return (
+
       <div className={classNames('wrapper', `${children.props && children.props.role}`)}>
         <SEO title="GetGround" keywords={[`gatsby`, `application`, `react`]} />
 
@@ -158,12 +168,13 @@ export class Layout extends Component {
           unmountOnExit
         >
           <Modal>
-            <Menu 
+            <Menu
               menuLinks={menuLinks}
               menuIsOpen={menuIsOpen}
             />
           </Modal>
         </CSSTransition>
+        {this.state.livechat && <LiveChat license={10911047} />}
       </div>
     )
   }
