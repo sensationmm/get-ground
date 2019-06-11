@@ -48,10 +48,6 @@ describe('How it works page', () => {
     expect(wrapper.find('.how-it-works-step').length).toEqual(5)
   })
 
-  test('contact us', () => {
-    expect(wrapper.find('[data-test="how-it-works-contact-us"]').length).toEqual(1)
-  })
-
   test('info rendered', () => {
     expect(wrapper.find('[data-test="how-it-works-more-information"]').length).toEqual(1)
   })

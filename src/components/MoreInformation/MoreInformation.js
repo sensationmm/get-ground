@@ -8,7 +8,7 @@ const MoreInformation = () => {
   const [show, toggleShow] = useState(false)
   const [t, i18n] = useTranslation()
 
-  const moreInformation = i18n.t('howItWorks.findOutMore.moreInfo', { returnObjects: true });
+  const moreInformation = i18n.t('findOutMore.moreInfo', { returnObjects: true });
 
   const infos = [
     {
@@ -42,7 +42,7 @@ const MoreInformation = () => {
       {show
           ?
           <div className="more-information-expanded">
-            <h1 className="more-information-expanded-title">{t('howItWorks.findOutMore.title')}</h1>
+            <h1 className="more-information-expanded-title">{t('findOutMore.title')}</h1>
               {infos.map((info, idx) => (
                 <div key={`${idx} + ${info}`} className="more-information-expanded-info" data-test="more-information-info">
                   <p>{info.title}</p>
@@ -50,7 +50,7 @@ const MoreInformation = () => {
               ))}
           </div>
           :
-          <Button data-test="more-information-button" onClick={() => toggleShow(!show)} classes="full chat more-information-cta" label={t('howItWorks.findOutMore.label')} fullWidth/>
+          <Button data-test="more-information-button" onClick={() => toggleShow(!show)} classes="full chat more-information-cta" label={t('findOutMore.label')} fullWidth/>
         }
     </div>
   )

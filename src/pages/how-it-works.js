@@ -4,7 +4,6 @@ import Bounce from 'react-reveal/Bounce'
 import useWindowScroll from 'react-use/lib/useWindowScroll';
 
 import Layout from 'src/components/Layout/Layout'
-import ContactUs from 'src/components/ContactUs/ContactUs'
 import MoreInformation from 'src/components/MoreInformation/MoreInformation';
 
 import Roof from 'src/assets/images/roof.svg'
@@ -81,7 +80,6 @@ const HowItWorks = () => {
           <div className="how-it-works-step-verticalLine" style={{height: lineHeight > 78 ? `78%` : `${lineHeight}%`}} data-test="how-it-works-vertical-line"></div>
         </ul>
         <MoreInformation data-test="how-it-works-more-information" />
-        <ContactUs data-test="how-it-works-contact-us"/>
       </div>
       </Layout>
   )
