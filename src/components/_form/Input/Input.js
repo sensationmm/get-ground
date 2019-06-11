@@ -71,7 +71,10 @@ const Input = (props) => {
           /* istanbul ignore else */
           if (onFocus) onFocus(e);
         }}
-        onBlur={(e) => validate ? validate() : null}
+        onBlur={(e) => {
+          if (readOnly) return;
+          validate ? validate() : null
+        }}
         onChange={(e) => onChange(e.target.value)}
         onKeyPress={onKeyPress}
         value={value}
