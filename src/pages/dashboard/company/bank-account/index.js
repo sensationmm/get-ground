@@ -42,7 +42,7 @@ const BankAccount = (props) => {
         </div>
 
         <div className="bank-header" onClick={() => navigate('/dashboard/company/bank-account/details')}>
-          <div className="bank-header-company">{ company.name }</div>
+          <div className="bank-header-company">{t('dashboard.company.bankAccount.sortCodeAndAccountNumber')}</div>
           <div className="bank-header-account">{ company.bank_account.sort_code } { company.bank_account.account_number }</div>
           
           <div className="bank-header-balance">
