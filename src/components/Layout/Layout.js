@@ -207,11 +207,7 @@ const mapStateToProps = (state) => ({
   isLoading: state.loader.isLoading,
   userID: state.user.id,
   activeCompany: state.activeCompany,
-  menuIsOpen: state.menu.isOpen,
-  firstName: state.user.first_name,
-  middleName: state.user.middle_name,
-  lastName: state.user.last_name,
-  email: state.user.email
+  menuIsOpen: state.menu.isOpen
 });
 
 const actions = {
