@@ -218,7 +218,7 @@
     },
     "propertyAddress": {
       "heading": "Property Address",
-      "intro": "Let's start with your property address.",
+      "intro": "Please provide the address of the property your company will hold.",
       "form": {
         "addressFinderLabel": "Address Finder",
         "countryLabel": "Country",
@@ -232,7 +232,8 @@
         "nextButton": "Next",
         "backButton": "Back",
         "fieldErrorText": "Required",
-        "error": "Please fix your errors to proceed"
+        "error": "Please fix your errors to proceed",
+        "toRentConfirmationLabel": "I confirm that I want to buy this property as an investment to rent out to tenants and that no related party of mine will use the property."
       }
     },
     "purchaseDetails": {
