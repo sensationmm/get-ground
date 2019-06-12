@@ -44,7 +44,7 @@ class Login extends Component {
   }
 
   onLogin = async () => {
-    const { showLoader, hideLoader, t, location: { search }, form} = this.props;
+    const { showLoader, hideLoader, t, location: { search }, form } = this.props;
     const { values: { email, password }} = form;
 
     if(formUtils.validateForm(this.config)) {

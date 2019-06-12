@@ -207,7 +207,7 @@ const mapStateToProps = (state) => ({
   isLoading: state.loader.isLoading,
   userID: state.user.id,
   activeCompany: state.activeCompany,
-  menuIsOpen: state.menu.isOpen,
+  menuIsOpen: state.menu.isOpen
 });
 
 const actions = {

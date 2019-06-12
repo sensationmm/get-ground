@@ -32,6 +32,16 @@ class AuthService extends BaseService {
     return this.doRequest(config, (response) => {
       store.dispatch(userLogin(response.data.user));
       store.dispatch(saveAuth(response.data.token));
+      const { first_name, middle_name, last_name, email } = response.data.user
+
+      const login_variables = [
+        { name: 'First Name', value: first_name },
+        { name: 'Middle Name', value: middle_name },
+        { name: 'Last Name', value: last_name },
+        { name: 'Email', value: email }
+      ];
+
+      window.LC_API.set_custom_variables(login_variables);
 
       AccountService.getDocuments();
     });
@@ -111,6 +121,18 @@ class AuthService extends BaseService {
     return this.doRequest(config, (response) => {
       store.dispatch(userLogin(response.data.user));
       store.dispatch(saveAuth(response.data.token));
+
+      const { first_name, middle_name, last_name, email } = response.data.user
+
+      const login_variables = [
+        { name: 'First Name', value: first_name },
+        { name: 'Middle Name', value: middle_name },
+        { name: 'Last Name', value: last_name },
+        { name: 'Email', value: email }
+      ];
+
+      window.LC_API.set_custom_variables(login_variables);
+
     });
   };
 }
