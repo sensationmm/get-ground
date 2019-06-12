@@ -95,6 +95,18 @@ describe('Login', () => {
       expect(formUtils.setFormError).toHaveBeenCalledWith('login.form.error');
     });
     
+    test('verify failure', async () => {
+      jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
+      AuthService.login = jest.fn().mockReturnValue(Promise.resolve({ status: 401 }));
+      
+      await wrapper.instance().onLogin();
+      
+      expect(showLoaderMock).toHaveBeenCalled();
+      expect(hideLoaderMock).toHaveBeenCalled();
+      expect(navigate).toHaveBeenCalledTimes(0);
+      expect(formUtils.setFormError).toHaveBeenCalledWith('login.form.errorVerify');
+    });
+    
     test('success with redirect', async () => {
       wrapper = setup(Login, { ...defaultProps, location: { search: '?redirect=/company-design' }});
       jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);

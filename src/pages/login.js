@@ -62,6 +62,8 @@ class Login extends Component {
             navigate('/onboarding');
           }
 
+        } else if(res.status === 401) {
+          formUtils.setFormError(t('login.form.errorVerify'));
         } else {
           formUtils.setFormError(t('login.form.error'));
         }
@@ -112,6 +114,8 @@ class Login extends Component {
           <Form>
             { formUtils.renderForm(this.config) }
           </Form>
+
+          <br />
 
           <Form className="account-login-actions">
             <Button
