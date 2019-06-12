@@ -139,17 +139,11 @@ Login.propTypes = {
   hideLoader: PropTypes.func,
   t: PropTypes.func.isRequired,
   location: PropTypes.object,
-  form: PropTypes.object,
-  firstName: PropTypes.string,
-  middleName: PropTypes.string,
-  lastName: PropTypes.string,
+  form: PropTypes.object
 };
 
 const mapStateToProps = state => ({
-  form: state.form,
-  firstName: state.user.first_name,
-  middleName: state.user.middle_name,
-  lastName: state.user.last_name,
+  form: state.form
 });
 
 export const RawComponent = Login;
