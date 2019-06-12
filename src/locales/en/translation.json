@@ -182,8 +182,8 @@
     "companyComplete": {
       "title": "Well done!",
       "copy": "We have all the details we need to set up your company.",
-      "info":  "Your shareholders will receive an email now so they can begin setting up their account on GetGround. In order to speed up your company setup perhaps you would like to encourage them to do so ASAP.",
-      "button": "Next"
+      "info":  "Your shareholders will receive an email to set up their account on GetGround. We will have to wait for them to sign up before being able to draft your company’s documents. In order to speed up the process you might want to encourage them to sign up as soon as possible.",
+      "button": "View dashboard"
     },
     "progressTracker": {
       "inProgressTitle": "Design your company in 5 steps",
