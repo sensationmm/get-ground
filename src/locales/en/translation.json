@@ -306,8 +306,7 @@
       "intro": "We need your solicitor details so we can get all the legal documents in order for your property purchase.",
       "form": {
         "label": {
-          "haveSolicitor": "Do you have a solicitor?",
-          "needSolicitor": "Would you like us to help find a solicitor for you?",
+          "haveSolicitor": "Would you like us to help find a solicitor for you?",
           "firstName": "First name",
           "lastName": "Last name",
           "email": "Email",
