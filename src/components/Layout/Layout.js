@@ -73,11 +73,6 @@ export class Layout extends Component {
     }
 
     this.validateCompanyID();
-    // const login_variables = [
-    //   { name: 'Name', value:  },
-    //   { name: 'Email', value: }
-    // ];
-    // window.LC_API.set_custom_variables(login_variables);
   }
 
   validateCompanyID = () => {
@@ -213,6 +208,10 @@ const mapStateToProps = (state) => ({
   userID: state.user.id,
   activeCompany: state.activeCompany,
   menuIsOpen: state.menu.isOpen,
+  firstName: state.user.first_name,
+  middleName: state.user.middle_name,
+  lastName: state.user.last_name,
+  email: state.user.email
 });
 
 const actions = {
