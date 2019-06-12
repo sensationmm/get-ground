@@ -16,10 +16,9 @@ export const AuthService = new authService();
 const AccountPending = ({ location }) => {
   const [t] = useTranslation();
   const isPasswordReset = location.state && location.state.passwordReset;
+  const verificationCode = queryString.parse(location.search).email_verification_code;
 
-  if (!isPasswordReset) {
-    const verificationCode = queryString.parse(location.search).email_verification_code;
-    
+  if (!isPasswordReset && verificationCode) {
     AuthService.verifyEmail(verificationCode).then((response => {
       if(response.status === 200) {
         navigate('/onboarding/email-verified')
