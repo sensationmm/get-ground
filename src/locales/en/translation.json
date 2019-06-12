@@ -342,15 +342,12 @@
         "text": "Please let us know what you want to do, we are here to help.",
         "select": "Select an item below:",
         "options": {
-          "buyShares": "Make an offer to buy shares",
-          "lendMoney": "Lend money to the company",
-          "withdrawDividend": "Take money out of the company (as a dividend)",
-          "loanRepayment": "Take money out of the company (as a director loan repayment)",
-          "allotShares": "Allot new shares",
-          "appointDirector": "Appoint a director",
-          "removeDirector": "Remove a director",
+          "withdrawMoney": "Take money out of your company",
+          "sendMoney": "Send money to your company",
+          "manageDirector": "Appoint or remove a director",
+          "manageShares": "Buy or sell shares in a GetGround company",
           "delist": "Delist from the GetGround platform",
-          "dissolveCompany": "Dissolve the company"
+          "reportIssue": "Report an issue"
         }
       },
       "overview": {
