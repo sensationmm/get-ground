@@ -101,7 +101,7 @@ class Stripe extends Component {
           {formUtils.renderForm(this.config)}
         </Form>
 
-        <p className="reminder">
+        <p className="reminder" data-test="director-reminder">
           {t('onBoarding.payment.directorReminder')}
         </p>
 

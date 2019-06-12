@@ -45,5 +45,4 @@ describe('<Stripe />', () => {
 
     expect(errorElement.length).toBe(1);
   });
-
 });
