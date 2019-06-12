@@ -50,7 +50,6 @@ class SolicitorDetails extends Component {
 
     formUtils.initFormState({
       have_solicitor: null,
-      need_solicitor: null,
       first_name: '',
       last_name: '',
       email: '',
@@ -72,9 +71,7 @@ class SolicitorDetails extends Component {
 
       const solicitor = values;
 
-      if(solicitor.have_solicitor === 'yes') {
-        solicitor.need_solicitor = null;
-      } else {
+      if(solicitor.have_solicitor !== 'yes') {
         solicitor.first_name = '';
         solicitor.last_name = '';
         solicitor.email = '';
@@ -98,7 +95,7 @@ class SolicitorDetails extends Component {
 
     ModalService.fetchModalContent('getGround Terms and Conditions').then(response => {
       self.setState({ termsMarkdown: response.data.markdown_text });
-      
+
       hideLoader();
       showModal();
     });
@@ -121,19 +118,6 @@ class SolicitorDetails extends Component {
         ],
         value: values.have_solicitor,
         validationFunction: 'validateRequired'
-      },
-      {
-        stateKey: 'need_solicitor',
-        component: RadioGroup,
-        groupLabel: t('companyDesign.solicitorDetails.form.label.needSolicitor'),
-        name: 'need_solicitor',
-        items: [
-          { value: 'no', label: t('form.radioConfirm.false') },
-          { value: 'yes', label: t('form.radioConfirm.true') }
-        ],
-        value: values.need_solicitor,
-        validationFunction: 'validateRequired',
-        hidden: !values.have_solicitor || values.have_solicitor === 'yes'
       },
       {
         stateKey: 'first_name',
@@ -175,7 +159,7 @@ class SolicitorDetails extends Component {
         component: Checkbox,
         label: <div>
           {t('companyDesign.solicitorDetails.form.label.authority')}&nbsp;
-          <a onClick={(e) => { 
+          <a onClick={(e) => {
             e.stopPropagation();
             if (termsMarkdown === '') {
               this.getModalContent(e)
@@ -191,7 +175,7 @@ class SolicitorDetails extends Component {
     ];
 
     const showDone = (
-      (values.have_solicitor === 'no' && values.need_solicitor !== null) ||
+      (values.have_solicitor === 'no') ||
       (
         values.have_solicitor === 'yes' &&
         values.first_name &&
@@ -236,7 +220,7 @@ class SolicitorDetails extends Component {
             {/* <Button classes="secondary" label={ t('companyDesign.solicitorDetails.ctaSecondary') } fullWidth /> */}
 
             <br />
-            
+
             <center>
               <Button
                 data-test="button-skip-step"
@@ -254,10 +238,10 @@ class SolicitorDetails extends Component {
             unmountOnExit
           >
             <Modal>
-              <ModalContent 
+              <ModalContent
                 heading={t('companyDesign.solicitorDetails.modal.heading')}
                 content={termsMarkdown}
-                closeModal={hideModal} 
+                closeModal={hideModal}
                 downloadButtonLabel={t('modal.downloadButtonLabel')}
                 closeIconAltText={t('modal.closeIconAltText')}
                 modalImage={termsImage}
@@ -289,8 +273,8 @@ const mapStateToProps = state => ({
   form: state.form
 });
 
-const actions = { 
-  showLoader, 
+const actions = {
+  showLoader,
   hideLoader ,
   showModal,
   hideModal

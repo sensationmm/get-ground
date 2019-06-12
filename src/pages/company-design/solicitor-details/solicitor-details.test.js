@@ -27,8 +27,7 @@ jest.mock('gatsby', () => ({
     showModal: showModalMock,
     form: {
       ...ReduxFormMock,
-      values: { 
-        need_solicitor: 'no',
+      values: {
         have_solicitor: 'no'
       }
     },
@@ -43,16 +42,15 @@ describe('<SolicitorDetails />', () => {
 
   beforeEach(() => {
     wrapper = setup(SolicitorDetails, {
-      ...defaultProps, 
-      form: { 
+      ...defaultProps,
+      form: {
         ...defaultProps.form,
-        values: { 
-          need_solicitor: 'no',
+        values: {
           have_solicitor: 'no'
         }}
     });
   });
-  
+
   test('renders without error', () => {
     const component = findByTestAttr(wrapper, 'container-solicitor-details');
     expect(component.length).toBe(1);
@@ -61,9 +59,9 @@ describe('<SolicitorDetails />', () => {
 
   test('renders error message if errors present', () => {
     const wrapperNew = setup(SolicitorDetails, {
-      ...defaultProps, 
-      form: { 
-        ...defaultProps.form, 
+      ...defaultProps,
+      form: {
+        ...defaultProps.form,
         showErrorMessage: true
       }
     });
@@ -72,9 +70,9 @@ describe('<SolicitorDetails />', () => {
 
   test('renders error message if custom error present', () => {
     const wrapperNew = setup(SolicitorDetails, {
-      ...defaultProps, 
-      form: { 
-        ...defaultProps.form, 
+      ...defaultProps,
+      form: {
+        ...defaultProps.form,
         showErrorMessage: true,
         errors: {
           form: 'string'
@@ -99,7 +97,7 @@ describe('<SolicitorDetails />', () => {
       spy = jest.spyOn(formUtils, 'validateForm').mockReturnValue(false);
       const button = findByTestAttr(wrapper, 'save-details-button');
       button.simulate('click');
-      
+
       expect(spy).toHaveBeenCalled();
       expect(showLoaderMock).toHaveBeenCalledTimes(0);
     });
@@ -108,7 +106,7 @@ describe('<SolicitorDetails />', () => {
       spy = jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
       const button = findByTestAttr(wrapper, 'save-details-button');
       button.simulate('click');
-      
+
       expect(spy).toHaveBeenCalled();
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
     });
@@ -120,8 +118,7 @@ describe('<SolicitorDetails />', () => {
         form: {
           ...defaultProps.form,
           values: {
-            have_solicitor: 'yes',
-            need_solicitor: 'yes',
+            have_solicitor: 'no',
             first_name: 'Spongebob',
             last_name: 'Squarepants'
           }
@@ -133,7 +130,7 @@ describe('<SolicitorDetails />', () => {
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(CompanyService.saveSolicitor).toHaveBeenCalledWith(
         expect.objectContaining({
-          need_solicitor: null
+          have_solicitor: 'no'
         })
       );
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
@@ -148,7 +145,6 @@ describe('<SolicitorDetails />', () => {
           ...defaultProps.form,
           values: {
             have_solicitor: 'no',
-            need_solicitor: 'yes',
             first_name: 'Spongebob',
             last_name: 'Squarepants'
           }
@@ -177,32 +173,29 @@ describe('<SolicitorDetails />', () => {
     test('no solicitor yet', () => {
       const wrapperNew = setup(SolicitorDetails, defaultProps, {
         values: {
-          have_solicitor: 'no',
-          need_solicitor: 'no'
+          have_solicitor: 'no'
         }
       });
-      
+
       const button = findByTestAttr(wrapperNew, 'save-details-button');
       expect(button.length).toBe(1);
     });
-    
+
     test('solicitor needed', () => {
       const wrapperNew = setup(SolicitorDetails, defaultProps, {
         values: {
-          have_solicitor: 'no',
-          need_solicitor: 'yes'
+          have_solicitor: 'no'
         }
       });
-      
+
       const button = findByTestAttr(wrapperNew, 'save-details-button');
       expect(button.length).toBe(1);
     });
-    
+
     test('solicitor given', () => {
       const wrapperNew = setup(SolicitorDetails, defaultProps, {
         values: {
           have_solicitor: 'yes',
-          need_solicitor: null,
           first_name: 'qwe',
           last_name: 'qwe',
           email: 'qwe',
@@ -210,7 +203,7 @@ describe('<SolicitorDetails />', () => {
           authority: true
         }
       });
-      
+
       const button = findByTestAttr(wrapperNew, 'save-details-button');
       expect(button.length).toBe(1);
     });
@@ -219,7 +212,7 @@ describe('<SolicitorDetails />', () => {
   test('skip step', () => {
     const button = findByTestAttr(wrapper, 'button-skip-step');
     button.simulate('click');
-    
+
     expect(navigate).toHaveBeenCalledWith('/company-design/shareholder-details');
   });
 
