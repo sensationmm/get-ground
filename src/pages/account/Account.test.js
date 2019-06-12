@@ -35,6 +35,11 @@ describe('<Account />', () => {
   };
   jest.spyOn(formUtils, 'initFormState');
 
+  global.LC_API = {
+    open_chat_window: jest.fn(),
+    set_custom_variables: jest.fn()
+  }
+
   beforeEach(() => {
     wrapper = setup(Account, defaultProps);
     jest.spyOn(formUtils, 'clearFormState');
@@ -53,6 +58,30 @@ describe('<Account />', () => {
     wrapper.unmount();
     expect(formUtils.clearFormState).toHaveBeenCalledTimes(1);
   });
+
+  test('open live chat for passport', () => {
+    wrapper = setup(Account, defaultProps);
+    const component = findByTestAttr(wrapper, 'live-chat-passport');
+    component.props().onClick()
+    expect(global.LC_API.open_chat_window).toHaveBeenCalled()
+    expect(global.LC_API.set_custom_variables).toHaveBeenCalledWith(
+      [
+        { name: 'Manage my account', value: 'Passport' },
+      ]
+    )
+  })
+
+  test('open live chat for address', () => {
+    wrapper = setup(Account, defaultProps);
+    const component = findByTestAttr(wrapper, 'live-chat-address');
+    component.props().onClick()
+    expect(global.LC_API.open_chat_window).toHaveBeenCalled()
+    expect(global.LC_API.set_custom_variables).toHaveBeenCalledWith(
+      [
+        { name: 'Manage my account', value: 'Address' },
+      ]
+    )
+  })
 
   describe('enterSubmit', () => {
     test('enter key', () => {
@@ -164,8 +193,8 @@ describe('<Account />', () => {
   });
 
   test('content variations', () => {
-    wrapper = setup(Account, { 
-      ...defaultProps, 
+    wrapper = setup(Account, {
+      ...defaultProps,
       user: {
         ...defaultProps.user,
         previous_names: 'anon',
