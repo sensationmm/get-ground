@@ -44,7 +44,7 @@ class Login extends Component {
   }
 
   onLogin = async () => {
-    const { showLoader, hideLoader, t, location: { search }, form, firstName, middleName, lastName } = this.props;
+    const { showLoader, hideLoader, t, location: { search }, form } = this.props;
     const { values: { email, password }} = form;
 
     if(formUtils.validateForm(this.config)) {
@@ -55,15 +55,6 @@ class Login extends Component {
         hideLoader();
         if(res.status === 200) {
           const queryStringValues = queryString.parse(search)
-
-          const login_variables = [
-            { name: 'First Name', value: firstName },
-            { name: 'Middle Name', value: middleName },
-            { name: 'Last Name', value: lastName },
-            { name: 'Email', value: email }
-          ];
-
-          window.LC_API.set_custom_variables(login_variables);
 
           if (queryStringValues.redirect) {
             navigate(queryStringValues.redirect);
