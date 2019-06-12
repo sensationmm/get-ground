@@ -83,9 +83,21 @@ describe('Login', () => {
       expect(navigate).toHaveBeenCalledWith('/onboarding');
     });
     
-    test('failure', async () => {
+    test('user failure', async () => {
       jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
-      AuthService.login = jest.fn().mockReturnValue(Promise.resolve({ status: 404 }));
+      AuthService.login = jest.fn().mockReturnValue(Promise.resolve({ status: 404, data: { error: 'User not found' }}));
+      
+      await wrapper.instance().onLogin();
+      
+      expect(showLoaderMock).toHaveBeenCalled();
+      expect(hideLoaderMock).toHaveBeenCalled();
+      expect(navigate).toHaveBeenCalledTimes(0);
+      expect(formUtils.setFormError).toHaveBeenCalledWith('login.form.error');
+    });
+    
+    test('password failure', async () => {
+      jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
+      AuthService.login = jest.fn().mockReturnValue(Promise.resolve({ status: 404, data: { error: 'Invalid password' }}));
       
       await wrapper.instance().onLogin();
       
@@ -97,7 +109,7 @@ describe('Login', () => {
     
     test('verify failure', async () => {
       jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
-      AuthService.login = jest.fn().mockReturnValue(Promise.resolve({ status: 401 }));
+      AuthService.login = jest.fn().mockReturnValue(Promise.resolve({ status: 401, data: { error: 'Please verify your email.' }}));
       
       await wrapper.instance().onLogin();
       

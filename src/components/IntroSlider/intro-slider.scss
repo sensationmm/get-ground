@@ -1,7 +1,6 @@
-/* TODO: Will come back and refactor where needed when the initial theming is done */
+@import 'src/styles/modules/_colors.scss';
 
 /* TODO: If more pages use this colour I'll move it out into colours and make the name more generic... */
-$slider-image-background-color: #c9dacc;
 
 .slick-slider {
   overflow: hidden;
@@ -55,9 +54,9 @@ $slider-image-background-color: #c9dacc;
 }
 
 .slick-slide--image-wrapper {
-  width: 210px;
   height: 210px;
-  background: $slider-image-background-color;
+  background: url(../../assets/images/oval.svg) center center no-repeat;
+  background-size: contain;
   margin: 0 auto;
-  border-radius: 105px;
+  text-align: center;
 }
