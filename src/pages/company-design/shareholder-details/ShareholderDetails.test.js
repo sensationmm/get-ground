@@ -170,7 +170,7 @@ describe('<ShareholderDetails />', () => {
     
     test('translations', () => {
       expect(wrapper.find('h1').text()).toEqual('companyDesign.shareholderDetails.add.title');
-      expect(wrapper.find(IntroBox).dive().text()).toEqual('companyDesign.shareholderDetails.add.text');
+      expect(wrapper.find(IntroBox).dive().text()).toEqual('companyDesign.shareholderDetails.add.textOnecompanyDesign.shareholderDetails.add.textTwo');
     });
   });
 

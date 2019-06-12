@@ -290,7 +290,10 @@ class ShareholderDetails extends Component {
             <div>
               <h1>{t('companyDesign.shareholderDetails.add.title')}</h1>
 
-              <IntroBox>{ t('companyDesign.shareholderDetails.add.text') }</IntroBox>
+              <IntroBox>
+                <p>{t('companyDesign.shareholderDetails.add.textOne') }</p>
+                <p>{t('companyDesign.shareholderDetails.add.textTwo') }</p>
+              </IntroBox>
 
               {form.showErrorMessage &&
                 <ErrorBox data-test="create-error-box">
