@@ -227,7 +227,8 @@ class OnboardingPersonalDetailsContainer extends Component {
         stateKey: 'middleName',
         component: InputText,
         label: t('onBoarding.personalDetails.form.middleNameLabel'),
-        value: values.middleName
+        value: values.middleName,
+        note: t('onBoarding.personalDetails.form.middleNameNote')
       },
       {
         stateKey: 'lastName',
@@ -291,7 +292,8 @@ class OnboardingPersonalDetailsContainer extends Component {
         label: t('onBoarding.personalDetails.form.jobTitleLabel'),
         value: values.jobTitle,
         validationFunction: 'validateRequired',
-        wrapperClass: 'job-title-wrapper'
+        wrapperClass: 'job-title-wrapper',
+        note: t('onBoarding.personalDetails.form.jobTitleNote'),
       },
       {
         stateKey: 'country',
