@@ -29,6 +29,7 @@ export const CompanyService = new companyService();
 
 import termsImage from 'src/assets/images/terms-image.svg';
 
+import './solicitor-details.scss'
 /**
  * SolicitorDetails
  * @param {object} e - event passed on openModal (for JSdoc)
@@ -188,11 +189,18 @@ class SolicitorDetails extends Component {
 
     return (
       <Layout secure>
-        <div data-test="container-solicitor-details" className="create-account" role="account">
+        <div data-test="container-solicitor-details" className="solicitor-details" role="account">
           <h1>{ t('companyDesign.solicitorDetails.title') }</h1>
 
           <IntroBox>{ t('companyDesign.solicitorDetails.intro') }</IntroBox>
-
+          <center>
+              <Button
+                data-test="button-skip-step"
+                onClick={() => navigate('/company-design/shareholder-details')}
+                classes="small link"
+                label={t('form.skipStep')}
+              />
+            </center>
           {showErrorMessage &&
             <ErrorBox>
             { errors.form
@@ -217,18 +225,7 @@ class SolicitorDetails extends Component {
               />
             }
 
-            {/* <Button classes="secondary" label={ t('companyDesign.solicitorDetails.ctaSecondary') } fullWidth /> */}
-
             <br />
-
-            <center>
-              <Button
-                data-test="button-skip-step"
-                onClick={() => navigate('/company-design/shareholder-details')}
-                classes="small link"
-                label={t('form.skipStep')}
-              />
-            </center>
           </Form>
 
           <CSSTransition
