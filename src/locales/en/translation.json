@@ -781,7 +781,7 @@
         "retakeImageContent": "Are you happy with this picture? Please make sure the date, your full name and address are clearly visible."
       },
       "selfie": {
-        "name": "Selfie",
+        "name": "Your picture",
         "title": "Take a picture of yourself",
         "content": "We need this picture so we can match it with the one in your passport. This is to make sure no one is trying to create a false account using your documents.",
         "retakeImageContent": "Are you happy with this picture? Please make sure the picture is well-lit and not blurred."
