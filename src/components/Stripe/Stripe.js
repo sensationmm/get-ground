@@ -4,13 +4,19 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
+import { CSSTransition } from 'react-transition-group';
 
 import Button from 'src/components/_buttons/Button/Button';
 import Checkbox from 'src/components/_form/Checkbox/Checkbox';
 import Form from 'src/components/_layout/Form/Form';
 import formUtils from 'src/utils/form';
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
+import Modal from 'src/components/Modal/Modal';
+import ModalContent from 'src/components/Modal/ModalContent';
 
+import { showModal, hideModal } from 'src/state/actions/modal';
+
+import termsImage from 'src/assets/images/terms-image.svg';
 import './stripe.scss';
 
 /**
@@ -30,6 +36,10 @@ import './stripe.scss';
 class Stripe extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      termsMarkdown: ''
+    }
   }
 
   validateStripe = () => {
@@ -60,7 +70,10 @@ class Stripe extends Component {
       handleChange,
       cardFieldLabel,
       form,
-      t
+      t,
+      modalIsOpen,
+      showModal,
+      hideModal
     } = this.props;
 
     const { values } = form;
@@ -101,6 +114,26 @@ class Stripe extends Component {
           {formUtils.renderForm(this.config)}
         </Form>
 
+        <Button classes="link small" label={t('onBoarding.payment.termsAndCond')} fullWidth onClick={() => showModal() }/>
+
+        <CSSTransition
+            in={modalIsOpen}
+            timeout={600}
+            classNames="modal"
+            unmountOnExit
+          >
+            <Modal>
+              <ModalContent
+                heading={t('onBoarding.createAccount.termsModalHeading')}
+                content={this.state.termsMarkdown}
+                closeModal={hideModal}
+                downloadButtonLabel={t('onBoarding.createAccount.termsModalDownloadButtonLabel')}
+                closeIconAltText={t('onBoarding.createAccount.termsModalCloseIconAltText')}
+                modalImage={termsImage}
+              />
+            </Modal>
+          </CSSTransition>
+
         <p className="reminder" data-test="director-reminder">
           {t('onBoarding.payment.directorReminder')}
         </p>
@@ -135,10 +168,16 @@ Stripe.propTypes = {
 };
 
 export const RawComponent = Stripe
-// export default injectStripe(Stripe);
+
 const mapStateToProps = state => ({
-  form: state.form
+  form: state.form,
+  modalIsOpen: state.modal.isOpen
 });
 
-const connectedComponent = connect(mapStateToProps, null)(RawComponent)
+const actions = {
+  showModal,
+  hideModal
+}
+
+const connectedComponent = connect(mapStateToProps, actions)(RawComponent)
 export default (withTranslation()(injectStripe(connectedComponent)));

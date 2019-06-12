@@ -790,6 +790,7 @@
     "payment": {
       "title": "Payment details",
       "box": "We would like to save your card details so we can debit the subscription value in the future.",
+      "termsAndCond": "See terms and conditions",
       "paymentInfo": {
         "accountSetupLabel": "Account setup",
         "monthlySubscriptionLabel": "Monthly subscription",
