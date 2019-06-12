@@ -50,10 +50,24 @@ export class AdditionalServices extends Component {
     services.addServices(find_mortgage, find_property_insurance, find_property_management )
   }
 
+  handleLiveChat = () => {
+    const { form: { values: { find_mortgage, find_property_insurance,  find_property_management }}} = this.props;
+    const custom_variables = [
+      { name: 'add services mortgage', value: find_mortgage },
+      { name: 'add services insurance', value: find_property_insurance },
+      { name: 'add services property management', value: find_property_management },
+    ];
+
+    if(window) {
+      window.LC_API.set_custom_variables(custom_variables);
+      window.LC_API.open_chat_window()
+    }
+  }
+
   render() {
     const { t, form } = this.props
     const { values } = form;
-    
+
     const config = [
       {
         stateKey: 'find_mortgage',
@@ -96,8 +110,8 @@ export class AdditionalServices extends Component {
       },
       {
         component: Button,
-        onClick: () => navigate('/company-design'),
-        label: t('additionalServices.nextButton'),
+        onClick: () => this.handleLiveChat(),
+        label: t('additionalServices.talkToUs'),
         classes: 'primary full',
       },
       {
