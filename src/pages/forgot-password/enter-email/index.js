@@ -51,7 +51,7 @@ class EnterEmail extends Component {
       return AuthService.requestResetPassword(email).then((res) => {
         hideLoader();
         if(res.status === 200) {
-          navigate('/onboarding/account-pending', {
+          navigate('/onboarding/verify_email', {
             state: {
               passwordReset: true,
             }

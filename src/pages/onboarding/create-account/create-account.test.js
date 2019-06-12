@@ -98,7 +98,7 @@ describe('<CreateAccount />', () => {
 
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
-      expect(navigate).toHaveBeenCalledWith('/onboarding/account-pending', {'state': {'passwordReset': false}});
+      expect(navigate).toHaveBeenCalledWith('/onboarding/verify_email', {'state': {'passwordReset': false}});
     });
 
     test('duplicate email failure', async () => {
