@@ -51,7 +51,7 @@ describe('process-tracker', () => {
   })
 
   test('renders ProcessSection', () => {
-    expect(wrapper.find('ProcessSection')).toHaveLength(5);
+    expect(wrapper.find('ProcessSection')).toHaveLength(4);
   })
 
   test('renders Checkbox', () => {
