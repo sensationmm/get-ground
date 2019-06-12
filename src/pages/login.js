@@ -62,10 +62,17 @@ class Login extends Component {
             navigate('/onboarding');
           }
 
-        } else if(res.status === 401) {
-          formUtils.setFormError(t('login.form.errorVerify'));
         } else {
-          formUtils.setFormError(t('login.form.error'));
+          switch(res.data.error) {
+            case 'Please verify your email.':
+              formUtils.setFormError(t('login.form.errorVerify'));
+              break;
+            case 'Invalid password':
+            case 'User not found':
+            default:
+              formUtils.setFormError(t('login.form.error'));
+              break;
+          }
         }
       });
     }
