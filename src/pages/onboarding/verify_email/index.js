@@ -3,6 +3,7 @@ import React from 'react'
 import { navigate } from 'gatsby'
 import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types';
+import queryString from 'query-string';
 
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox'
 import Layout from 'src/components/Layout/Layout'
@@ -13,13 +14,12 @@ import authService from 'src/services/Auth';
 export const AuthService = new authService();
 
 const AccountPending = ({ location }) => {
-
   const [t] = useTranslation();
-
   const isPasswordReset = location.state && location.state.passwordReset;
+  const verificationCode = queryString.parse(location.search).email_verification_code;
 
-  if (!isPasswordReset) {
-    AuthService.verifyEmail().then((response => {
+  if (!isPasswordReset && verificationCode) {
+    AuthService.verifyEmail(verificationCode).then((response => {
       if(response.status === 200) {
         navigate('/onboarding/email-verified')
       }

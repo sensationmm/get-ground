@@ -95,11 +95,17 @@ class AuthService extends BaseService {
 
   };
 
-  verifyEmail = () => {
+  /**
+   * verifyEmail
+   * Verifies email
+   * @param {string} verificationCode - verification code
+   * @return {Promise} verify email response
+   */
+  verifyEmail = (verificationCode) => {
     const config = {
       url: 'users/verify_email',
       method: 'post',
-      data: JSON.stringify({'email_verification_code': 'string'})
+      data: JSON.stringify({'email_verification_code': verificationCode})
     };
 
     return this.doRequest(config, (response) => {

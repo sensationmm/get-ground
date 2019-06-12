@@ -46,7 +46,7 @@ describe('<EnterEmail />', () => {
     expect(props.showLoader).toHaveBeenCalled();
     expect(props.hideLoader).toHaveBeenCalled();
     expect(AuthService.requestResetPassword).toHaveBeenCalledWith('fancy-email@email.com')
-    expect(navigate).toHaveBeenCalledWith('/onboarding/account-pending', {
+    expect(navigate).toHaveBeenCalledWith('/onboarding/verify_email', {
       state: {
         passwordReset: true,
       }

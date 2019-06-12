@@ -18,7 +18,8 @@ describe('<AccountPending />', () => {
       location: {
         state: {
           passwordReset: false
-        }
+        },
+        search: '?email_verification_code=code'
       }
     }
   })
