@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { useTranslation } from 'react-i18next'
 
-import confirmationImage from 'src/assets/images/intro-slide-image.png'
+import confirmationImage from 'src/assets/images/fullhousepure.svg'
 import Button from 'src/components/_buttons/Button/Button'
 import Layout from 'src/components/Layout/Layout'
 
@@ -12,7 +12,7 @@ const OnboardingConfirmation = () => {
   const [t] = useTranslation();
 
   return (
-    <Layout>
+    <Layout secure>
       <div className="confirmation" role="fullscreen account">
         <div className="confirmation--image-wrapper">
           <img src={confirmationImage} alt={t('onBoarding.confirmation.imageAltText')} />
