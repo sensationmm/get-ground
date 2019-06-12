@@ -108,6 +108,12 @@ b {
   }
 }
 
+.account {
+  h1, h2 {
+    color: $white;
+  }
+}
+
 .back {
   font-size: 16px;
   background: url('../../assets/images/chevron-left.svg') left center no-repeat;

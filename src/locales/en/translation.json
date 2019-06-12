@@ -750,10 +750,8 @@
     "confirmation": {
       "heading": "Well done",
       "imageAltText": "confirmation image",
-      "copy": "<p class='fs-large'>Your details have been submitted. You will shortly receive an email with the result of your application.</p><p class='fs-large'>This typically takes 10 mins but it can take up to a day, so please be patient.</p>",
-      "buttonText": "View your dashboard",
-      "contactUsText": "If this is taking longer than expected please contact us.",
-      "contactUsLinkText": "Contact us"
+      "copy": "<p class='fs-large'>Your details have been submitted.</p><p class='fs-large'>You can now go into your dashboard and start creating your first company.</p>",
+      "buttonText": "View your dashboard"
     },
     "idCheck": {
       "title": "ID Check",
