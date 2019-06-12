@@ -14,6 +14,7 @@
     background: url('../../../assets/images/house.svg') left center no-repeat;
     background-size:  25px;
     margin-bottom: ($padding-vertical-unit * 2) + 0px;
+    border-bottom: 1px solid $grey;
     
     &.link {
       padding: $padding-vertical $padding-horizontal $padding-vertical (($padding-vertical-unit * 4) + 0px);
@@ -38,21 +39,23 @@
     cursor: pointer;
 
     &-company {
-      text-transform: uppercase;
+      font-size: 13px;
       margin-bottom: 5px;
     }
 
     &-account {
-      font-size: 13px;
       margin-bottom: 20px;
       letter-spacing: 2px;
+      font-weight: bold;
     }
 
     &-balance {
+      font-weight: bold;
       p {
         font-size: 13px;
         margin: 0 0 5px 0;
         letter-spacing: 1px;
+        font-weight: normal;
       }
 
       letter-spacing: 2px;

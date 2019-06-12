@@ -336,7 +336,8 @@
         "address": "Address",
         "iban": "BIC/IBAN",
         "back": "Back to overview",
-        "available": "Available funds"
+        "available": "Available funds",
+        "sortCodeAndAccountNumber": "Sort Code & Account Number"
       },
       "manage": {
         "title": "Manage my company",

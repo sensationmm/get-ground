@@ -10,12 +10,11 @@ import './company-link.scss';
 *
 * @param {object} company - company information, comprising:
 *   @param {string} id - ID of company data object
-*   @param {string} name - name of company
 *   @param {object} address - company address info
 */
 
 const CompanyLink = props => {
-  const { company: { id, name, address }, setActiveCompany } = props;
+  const { company: { id, address }, setActiveCompany } = props;
 
 
   return (
@@ -24,7 +23,6 @@ const CompanyLink = props => {
       className="company-link"
       onClick={() => { setActiveCompany(id); navigate('/dashboard/company'); }}
     >
-      <h4>{name}</h4>
       {address.premise}, {address.postcode}
     </div>
   );
@@ -33,7 +31,6 @@ const CompanyLink = props => {
 CompanyLink.propTypes = {
   company: PropTypes.shape({
     id: PropTypes.string,
-    name: PropTypes.string,
     address: PropTypes.object
   }),
   setActiveCompany: PropTypes.func
