@@ -11,7 +11,7 @@ jest.mock('gatsby', () => ({
 describe('<AccountPending />', () => {
   let props;
 
-  AuthService.verifyEmail = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
+  AuthService.verifyEmail = jest.fn().mockReturnValue(Promise.resolve({ status: 200, data: {} }));
 
   beforeEach(() => {
     props = {
@@ -55,9 +55,15 @@ describe('<AccountPending />', () => {
   });
 
   describe('verifyEmail()', () => {
-    test('success', () => {
-      setup(AccountPending, props);
+    test('success', async () => {
+      await setup(AccountPending, props);
       expect(navigate).toHaveBeenCalledWith('/onboarding/email-verified');
+    });
+
+    test('already verified', async () => {
+      AuthService.verifyEmail = jest.fn().mockReturnValue(Promise.resolve({ status: 200, data: { error: 'sasd' } }));
+      await setup(AccountPending, props);
+      expect(navigate).toHaveBeenCalledWith('/login');
     });
 
     test('failure', () => {
