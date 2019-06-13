@@ -12,7 +12,6 @@ import Button from 'src/components/_buttons/Button/Button';
 import Layout from 'src/components/Layout/Layout';
 
 import 'src/styles/pages/intro.scss';
-import 'src/styles/pages/onboarding-intro.scss';
 
 const OnboardingIntroContainer = () => {
   const [t, i18n] = useTranslation();
