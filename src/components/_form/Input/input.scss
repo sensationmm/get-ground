@@ -86,3 +86,13 @@
     }
   }
 }
+
+.company-design-purchase-details {
+  .text-input {
+
+    &-label:not(.radio-group--label) {
+      width: 70%;
+    }
+
+  }
+}

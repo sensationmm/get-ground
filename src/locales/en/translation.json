@@ -244,7 +244,7 @@
       "form": {
         "priceOfPropertyLabel": "*Price of property",
         "priceOfPropertyNote": "*excludes all costs and stamp duty",
-        "newBuildLabel": "Is your property a new build",
+        "newBuildLabel": "Is your property a new build?",
         "completionDateLabel": "When is the expected completion date?",
         "depositDueLabel": "What date is your deposit due?",
         "depositAmountLabel": "Deposit Amount",
@@ -253,10 +253,11 @@
         "secondInstallmentDateLabel": "Second installment date?",
         "secondInstallmentLabel": "Second installment amount",
         "expectedExchangeLabel": "Do you have an expected exchange date",
-        "expectedExchangeDateLabel": "Please provide your expected exchange date",
+        "expectedExchangeDateLabel": "Please provide your expected exchange date?",
         "addButton": "Another payment date",
         "nextButton": "Next",
-        "backButton": "Back"
+        "backButton": "Back",
+        "skipButton": "I don't know the answers yet"
       },
       "datepicker": {
         "button1": "cancel",
