@@ -260,7 +260,7 @@ class PropertyAddress extends Component {
               classes="secondary"
               label={t('companyDesign.propertyAddress.form.backButton')}
               fullWidth
-              onClick={() => navigate('/company-design/')}
+              onClick={() => navigate('/company-design/add-services')}
             />
           </Form>
         </div>
