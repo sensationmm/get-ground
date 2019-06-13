@@ -17,7 +17,8 @@ describe('<AccountPending />', () => {
     props = {
       location: {
         state: {
-          passwordReset: false
+          passwordReset: false,
+          email: 'test-email@getground.co.uk'
         },
         search: '?email_verification_code=code'
       }
@@ -51,7 +52,7 @@ describe('<AccountPending />', () => {
     const component = findByTestAttr(wrapper, 'container-account-pending');
     const content = component.find('[data-test="account-pending-content"]')
 
-    expect(content.text()).toEqual('onBoarding.accountPending.text')
+    expect(content.text()).toEqual('onBoarding.accountPending.initialText test-email@getground.co.uk. onBoarding.accountPending.text')
   });
 
   describe('verifyEmail()', () => {

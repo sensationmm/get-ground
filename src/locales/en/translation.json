@@ -596,7 +596,8 @@
   "onBoarding": {
     "accountPending": {
       "title": "We‘ve sent you an email",
-      "text": "With a magic link to the email address you provided. Please click the button on the email to verify your account.",
+      "initialText": "With a magic link to",
+      "text": "Please click the button on the email to verify your account.",
       "introBox": "If you didn‘t receive an email please check your spam folder and if it isn‘t there contact us.",
       "contactLink": "Contact us"
     },
