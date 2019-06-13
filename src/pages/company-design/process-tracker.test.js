@@ -38,6 +38,11 @@ describe('process-tracker', () => {
       title: 'Add Services',
       copy: 'Additional services you will need',
       imageAltText: 'Services'
+    },
+    step6: {
+      title: 'Tax Questions',
+      copy: 'To better understand your needs',
+      imageAltText: 'Tax Questions'
     }
   }
 
@@ -55,7 +60,7 @@ describe('process-tracker', () => {
   })
 
   test('renders ProcessSection', () => {
-    expect(wrapper.find('ProcessSection')).toHaveLength(5);
+    expect(wrapper.find('ProcessSection')).toHaveLength(6);
   })
 
   test('renders Button', () => {

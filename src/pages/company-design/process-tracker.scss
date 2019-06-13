@@ -2,4 +2,7 @@
 
 .process-tracker {
   @extend .process-tracker;
+  .process-section-copy {
+    font-size: 13px;
+  }
 }

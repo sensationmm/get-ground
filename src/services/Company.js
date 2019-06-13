@@ -51,6 +51,31 @@ class CompanyService extends BaseService {
 
     return this.doRequest(config);
   }
+
+  /**
+   * saveTaxAnswers
+   * @param {object} solicitor - data object passed to the service, containing:
+      * @param {string|null} ownership - ownership of 25% or more response
+      * @param {string|null} employ - fewer than 50 employees response
+      * @param {string|null} assets - assets of 10 million or less response
+      * @param {string|null} turnover - turnover of 10 million or less response
+      * @return {Promise} CompanyService.saveTaxAnswers
+   */
+  saveTaxAnswers = ({ownership, employ, assets, turnover}) => {
+    const config = {
+      url: `companies/${store.getState().activeCompany}`,
+      method: 'put',
+      data: {
+        ownership,
+        employ,
+        assets,
+        turnover
+      }
+    };
+
+    return this.doRequest(config);
+  }
+
 }
 
 export default CompanyService;
