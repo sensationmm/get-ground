@@ -117,7 +117,24 @@ class AccountService extends BaseService {
       url: `documents`,
       method: 'get'
     };
-  
+
+    return this.doRequest(config, (response) => {
+      store.dispatch(saveDocuments(response.data.filter(item => item.creator === store.getState().user.id)));
+    });
+  };
+
+  /**
+   * retrieveInvestedUser
+   * Gets User and property info
+   * @param {string} token - token passed from email
+   * @return {Promise} retrieveInvestedUser response
+   */
+  retrieveInvestedUser = (token) => {
+    const config = {
+      url: `property_purchases/retrieve_invested_user${token}`,
+      method: 'get'
+    };
+
     return this.doRequest(config, (response) => {
       store.dispatch(saveDocuments(response.data.filter(item => item.creator === store.getState().user.id)));
     });

@@ -1,0 +1,45 @@
+@import 'src/styles/modules/_colors';
+
+.acceptance-of-role {
+  .list {
+    background-color: $white;
+    height: 469px;
+    width: 274px;
+    &-row {
+      h3 {
+        font-size: 16px;
+        letter-spacing: 2.2px;
+        color: $heading;
+        padding-top: 30px;
+      }
+      &:first-child {
+        height: 198px;
+      }
+      &:nth-child(2) {
+        height: 135px;
+      }
+    }
+  }
+  .radio-group {
+    &--radio-wrapper {
+      display: flex;
+      justify-content: center;
+      .radio {
+        width: 111px;
+        height: 47px;
+        border: 1px solid #2f5472;
+        border-radius: 5px;
+        &:last-child {
+          margin-left: 14px;
+        }
+      }
+    }
+    &--label {
+      font-size: 19px;
+      font-weight: 300;
+      line-height: 1.37;
+      margin: 35px auto;
+      text-transform: none;
+    }
+  }
+}
