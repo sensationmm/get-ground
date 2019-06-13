@@ -188,6 +188,14 @@
       "info":  "Your shareholders will receive an email to set up their account on GetGround. We will have to wait for them to sign up before being able to draft your company’s documents. In order to speed up the process you might want to encourage them to sign up as soon as possible.",
       "button": "View dashboard"
     },
+    "intro": {
+      "title": "Your company",
+      "para1": "When creating a company you should already have chosen the property you want to buy.",
+      "para2": "This is a six step process and it can take you as little as 20 minutes.",
+      "para3": "If you need a solicitor, a mortgage, insurance or property management services, GetGround can refer you to them.",
+      "button1": "Yes, please",
+      "button2": "No, thanks"
+    },
     "progressTracker": {
       "inProgressTitle": "Design your company in 5 steps",
       "complete": "complete",

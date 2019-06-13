@@ -1,6 +1,5 @@
 @import 'src/styles/modules/_colors.scss';
-
-/* TODO: If more pages use this colour I'll move it out into colours and make the name more generic... */
+@import 'src/styles/pages/intro.scss';
 
 .slick-slider {
   overflow: hidden;
@@ -14,7 +13,14 @@
         outline: none;
       }
 
+      &--image {
+        @extend .intro--hero-image;
+        display: block;
+        height: 280px;
+      }
+
       h2 {
+        font-size: 36px;
         margin: 0;
         padding: 20px 0;
       }
