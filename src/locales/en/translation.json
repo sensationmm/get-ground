@@ -96,14 +96,17 @@
   },
   "additionalServices": {
     "title": "Additional services",
-    "introBox": "If you require help with any of the following services below, we will find options for you, which you can choose to explore further or not.",
+    "introBox": "Through our partners we can provide seamless access to the best services for all your property needs. Select below which ones you’d like help with.",
+    "findSolicitorQuestion": "Would you like us to help find a solicitor for you?",
     "mortgageOptionsQuestion": "Can we help find mortgage options for you?",
     "propertyInsuranceQuestion": "Can we help find property insurance for you?",
     "property_managementQuestion": "Can we help find property management options for you?",
     "nextButton": "Next",
     "talkToUs": "Talk to us",
     "backButton": "Back",
-    "skipButton": "Skip for now"
+    "skipButton": "Skip for now",
+    "modalContent": "Will add this ticket when the modal ticket had been created",
+    "modalContentButton": "next"
   },
   "advantages": {
     "title": "GetGround Advantages",

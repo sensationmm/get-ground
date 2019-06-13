@@ -1,3 +1,4 @@
+import React from 'react';
 import { setupWithStore, findByTestAttr } from 'src/test-utils/test-utils';
 
 import { RawComponent as ModalContent, ModalService } from './ModalContent';
@@ -14,7 +15,10 @@ describe('<ModalContent />', () => {
     showLoader: showLoaderMock,
     hideLoader: hideLoaderMock,
     signatureUrl: 'dummysignatureurl',
-    handleOnSign: handleOnSignMock
+    handleOnSign: handleOnSignMock,
+    content: 'some content',
+    heading: 'heading',
+    downloadButtonLabel: 'label'
   };
 
   global.URL = {
@@ -40,13 +44,26 @@ describe('<ModalContent />', () => {
       hideLoader: hideLoaderMock,
       hasCheckbox: true,
       checkboxLabel: 'checkbox',
-      handleCheckboxChange: jest.fn()
+      handleCheckboxChange: jest.fn(),
+      htmlContent: <p>some modal content</p>
     });
     const modalFooter = wrapper.find('.modal--footer');
     expect(modalFooter.length).toBe(1);
   });
 
-  test('renders modal signature when theres a signature', () => {
+  test('renders modal signature content with a signed signature theres a signature', () => {
+    wrapper = setupWithStore(ModalContent, {
+      t: tMock,
+      showLoader: showLoaderMock,
+      hideLoader: hideLoaderMock,
+      hasSignature: true,
+      isDocumentSigned: true
+    });
+    const modalSignature = wrapper.find('.modal--signature-wrapper');
+    expect(modalSignature.length).toBe(1);
+  });
+
+  test('renders modal signature content with an empty signature box', () => {
     wrapper = setupWithStore(ModalContent, {
       t: tMock,
       showLoader: showLoaderMock,

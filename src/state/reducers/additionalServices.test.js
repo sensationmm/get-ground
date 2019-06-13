@@ -10,13 +10,15 @@ describe('Additional Services', () => {
       payload: {
         mortgage: true,
         insurance: false,
-        management: true
+        management: true,
+        solicitor: false
       }
     }
     const expectedState = {
       mortgage: true,
       insurance: false,
       management: true,
+      solicitor: false
     }
 
     const newState = additionalServices(initialState, action)

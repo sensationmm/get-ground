@@ -88,6 +88,7 @@ class ModalContent extends Component {
     const {
       closeModal,
       content,
+      htmlContent,
       heading,
       hasCheckbox,
       handleCheckboxChange,
@@ -108,10 +109,12 @@ class ModalContent extends Component {
     return (
       <div className="modal">
         <div data-test="modal-content" ref={this.modalHeader} className="modal--header">
-          <Button
-            label={downloadButtonLabel}
-            onClick={this.getBlobForDownload}
-          />
+          {downloadButtonLabel &&
+            <Button
+              label={downloadButtonLabel}
+              onClick={this.getBlobForDownload}
+            />
+          }
           <img
             className="modal--close-icon"
             src={closeIcon}
@@ -126,13 +129,22 @@ class ModalContent extends Component {
           style={{ height: markdownContainerHeight }}
           onScroll={e => hasCheckbox ? this.handleScroll(e) : null }
         >
-          <h2 className="modal--title">{heading}</h2>
+          {heading &&
+            <h2 className="modal--title">{heading}</h2>
+          }
 
           <img src={modalImage} />
 
-          <div className="modal--markdown">
-            <ReactMarkdown escapeHtml={false} source={content} />
-          </div>
+          { content && 
+            <div className="modal--markdown">
+              <ReactMarkdown escapeHtml={false} source={content} />
+            </div>
+          }
+
+          { htmlContent && 
+            htmlContent
+          }
+
 
           {hasSignature &&
           <div className="modal--signature-wrapper">
@@ -174,6 +186,7 @@ ModalContent.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   content: PropTypes.string,
+  htmlContent: PropTypes.element,
   heading: PropTypes.string,
   hasCheckbox: PropTypes.bool,
   handleCheckboxChange: PropTypes.func,

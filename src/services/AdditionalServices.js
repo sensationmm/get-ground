@@ -6,10 +6,11 @@ import store from 'src/state/store';
  * @param {Boolean} mortgage - need mortgage
  * @param {Boolean} insurance - need insurance
  * @param {Boolean} management - need management
+ * @param {Boolean} solicitor - need solicitor
  * @return {Function} AdditionalServices
  */
 class AdditionalServices extends BaseService {
-  addServices = (mortgage, insurance, management) => {
+  addServices = (mortgage, insurance, management, solicitor) => {
     const config = {
       url: `companies/${store.getState().user.id}/services`,
       method: 'put',
@@ -17,7 +18,8 @@ class AdditionalServices extends BaseService {
         services: {
           mortgage,
           insurance,
-          management
+          management,
+          solicitor
         }
       }
     };

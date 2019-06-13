@@ -11,11 +11,6 @@ describe('', () => {
   jest.spyOn(formUtils, 'initFormState');
   jest.spyOn(formUtils, 'clearFormState');
 
-  global.LC_API = {
-    open_chat_window: jest.fn(),
-    set_custom_variables: jest.fn()
-  }
-
   beforeEach(() => {
     props = {
       setAdditionalServices: jest.fn(),
@@ -48,7 +43,8 @@ describe('', () => {
         values: {
           find_mortgage: 'yes',
           find_property_insurance: 'no',
-          find_property_management: 'yes'
+          find_property_management: 'yes',
+          find_solicitor: 'yes'
         }
       }
     };
@@ -60,33 +56,9 @@ describe('', () => {
     expect(props.setAdditionalServices).toHaveBeenCalledWith({
       mortgage: true,
       insurance: false,
-      management: true
+      management: true,
+      solicitor: true
     })
-  })
-
-  test('talk to us opens live chat with correct variables', () => {
-    const newProps = {
-      ...props,
-      form: {
-        values: {
-          find_mortgage: 'yes',
-          find_property_insurance: 'no',
-          find_property_management: 'yes'
-        }
-      }
-    };
-
-    wrapper = shallow(<AdditionalServices {...newProps} />)
-
-    wrapper.instance().handleLiveChat()
-    expect(global.LC_API.open_chat_window).toHaveBeenCalled();
-    expect(global.LC_API.set_custom_variables).toHaveBeenCalledWith(
-      [
-      { name: 'add services mortgage', value: 'yes' },
-      { name: 'add services insurance', value: 'no' },
-      { name: 'add services property management', value: 'yes' },
-      ]
-    );
   })
 
   afterEach(() => {
