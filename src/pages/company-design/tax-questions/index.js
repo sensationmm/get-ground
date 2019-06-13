@@ -137,18 +137,18 @@ export class TaxQuestions extends Component {
 
     return (
       <Layout secure>
-        <div className="add-services" role="company-design">
-        <h1 className="add-services-title">{t('taxQuestions.title')}</h1>
+        <div className="tax-questions" role="company-design">
+        <h1 className="tax-questions-title">{t('taxQuestions.title')}</h1>
         <IntroBox>{t('taxQuestions.introBox')}</IntroBox>
         {showErrorMessage &&
-              <ErrorBox>
+              <ErrorBox data-test="error-box">
               { errors.form
                 ? errors.form
                 : t('form.correctErrors')
               }
               </ErrorBox>
             }
-          <Form className="add-services-form">
+          <Form className="tax-questions-form">
             {formUtils.renderForm(config)}
           </Form>
         </div>
@@ -158,7 +158,6 @@ export class TaxQuestions extends Component {
 }
 
 TaxQuestions.propTypes = {
-  settaxQuestions: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   form: PropTypes.object,
   showLoader: PropTypes.func,

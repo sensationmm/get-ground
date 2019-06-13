@@ -66,5 +66,4 @@ describe('process-tracker', () => {
   test('renders Button', () => {
     expect(wrapper.find('Button')).toHaveLength(1);
   })
-
 })
