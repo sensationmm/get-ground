@@ -1,5 +1,6 @@
 import {
-  SAVE_AUTH
+  SAVE_AUTH,
+  DELETE_AUTH
 } from 'src/config/constants';
 
 const initialState = {
@@ -9,7 +10,9 @@ const initialState = {
 export const auth = (state = initialState, action) => {
   switch (action.type) {
     case SAVE_AUTH:
-      return { token: action.token };
+      return { ...state, token: action.token };
+    case DELETE_AUTH:
+      return { token: null };
 
     default:
       return state;
