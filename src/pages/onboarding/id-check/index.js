@@ -31,7 +31,7 @@ export class IdCheck extends Component {
 
   render() {
     const { t } = this.props
-    const headerActions = <Link to="/onboarding"><ButtonHeader label="Exit" /></Link>;
+    const headerActions = <Link to="/onboarding"><ButtonHeader label={t('header.buttons.saveAndExit')} /></Link>;
 
     return (
       <Layout headerActions={headerActions} secure>
