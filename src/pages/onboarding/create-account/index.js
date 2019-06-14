@@ -72,6 +72,7 @@ class CreateAccount extends Component {
           navigate('/onboarding/verify_email', {
             state: {
               passwordReset: false,
+              email
             }
           });
         } else if(response.status === 500) {
