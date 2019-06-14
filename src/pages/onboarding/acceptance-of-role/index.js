@@ -85,12 +85,13 @@ export class AcceptanceOfRole extends React.Component {
 
   submitAnswers = () => {
     const { t, location, form: { values: { shareholder, director }}} = this.props;
+
     if ( shareholder === 'no' || director === 'no' ) {
       navigate('/onboarding/acceptance-of-role/decline')
     }
 
     if (!this.state.isExistingUser ) {
-      navigate('/forget-password', {
+      navigate('/forgot-password/reset', {
         state: {
           acceptRoleToken: location.search
         }

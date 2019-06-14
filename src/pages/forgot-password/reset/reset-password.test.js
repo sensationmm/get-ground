@@ -24,7 +24,10 @@ describe('ResetPassword', () => {
       hideLoader: jest.fn(),
       form: ReduxFormMock,
       location: {
-        search: ''
+        search: '',
+        state: {
+          acceptRoleToken: ''
+        }
       }
     }
     wrapper = shallow(<ResetPassword {...props}/>)
@@ -52,7 +55,7 @@ describe('ResetPassword', () => {
     expect(form.length).toEqual(2);
     expect(props.showLoader).toHaveBeenCalled();
     expect(props.hideLoader).toHaveBeenCalled();
-    expect(navigate).toHaveBeenCalledWith('/login')
+    expect(navigate).toHaveBeenCalledWith('/dashboard')
   })
 
   test('error state', async () => {

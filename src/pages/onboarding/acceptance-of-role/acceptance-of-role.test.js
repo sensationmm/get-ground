@@ -81,7 +81,7 @@ describe('acceptance-of-role', () => {
       isExistingUser: false
     })
     wrapper.instance().submitAnswers()
-    expect(navigate).toHaveBeenCalledWith('/forget-password', {
+    expect(navigate).toHaveBeenCalledWith('/forgot-password/reset', {
       state: {
         acceptRoleToken: '?token=12345'
       }
