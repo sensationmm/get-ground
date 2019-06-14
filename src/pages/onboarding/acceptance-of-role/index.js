@@ -30,14 +30,14 @@ export class AcceptanceOfRole extends React.Component {
 
     this.state = {
       companyAddress: {
-        lineOfAddress: '93  Dunmow Road',
-        town: 'Lanstephan',
-        city: 'Launceston',
-        postCode: 'PL15 8JN'
+        lineOfAddress: '',
+        town: '',
+        city: '',
+        postCode: ''
       },
-      propertyPrice: 14000000,
-      shares: 32,
-      inviteeName: 'John Smith',
+      propertyPrice: 0,
+      shares: 0,
+      inviteeName: '',
       isDirector: null,
       isExistingUser: null
     };
