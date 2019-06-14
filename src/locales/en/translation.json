@@ -105,8 +105,11 @@
     "talkToUs": "Talk to us",
     "backButton": "Back",
     "skipButton": "Skip for now",
-    "modalContent": "Will add this ticket when the modal ticket had been created",
-    "modalContentButton": "next"
+    "modalHeading": "We'll be in touch",
+    "modalPara1": "We’ll contact you shortly regarding the items you selected.",
+    "modalPara2": "Our office is open from 9am to 6pm London time, Monday to Friday, and we usually respond within the hour.",
+    "modalPara3": "However, out of working hours it might take us longer to get back to you, but we’ll always do so as soon as possible, please bare with us.",
+    "modalContentButton": "Dismiss"
   },
   "advantages": {
     "title": "GetGround Advantages",

@@ -143,12 +143,15 @@ export class AdditionalServices extends Component {
           >
             <Modal>
               <ModalContent
+                heading={t('additionalServices.modalHeading')}
                 htmlContent={
                   <>
-                  <p>{t('additionalServices.modalContent')}</p>
+                  <p>{t('additionalServices.modalPara1')}</p>
+                  <p>{t('additionalServices.modalPara2')}</p>
+                  <p>{t('additionalServices.modalPara3')}</p>
                   <Button
                     label={t('additionalServices.modalContentButton')}
-                    onClick={() => navigate('/company-design/property-address')}
+                    onClick={() => navigate('/company-design')}
                     classes="primary"
                     fullWidth
                   />
