@@ -22,22 +22,28 @@ class Datepicker extends Component {
   handleSelect = date => this.props.setDateFieldValue(date);
 
   render() {
-    const { 
-      isDatepickerOpen, 
-      closeDatepicker, 
-      confirmButtonText, 
+    const {
+      isDatepickerOpen,
+      closeDatepicker,
+      confirmButtonText,
       cancelButtonText,
+      birthDate
     } = this.props;
 
+    const newDate = new Date()
+    newDate.setFullYear(newDate.getFullYear() + -18)
+
+    const maxDate = birthDate ? newDate : undefined;
     return (
       <div data-test="datepicker">
         <MobileDatePicker
           isOpen={isDatepickerOpen}
           onSelect={this.handleSelect}
-          onCancel={closeDatepicker} 
+          onCancel={closeDatepicker}
           confirmText={confirmButtonText}
           cancelText={cancelButtonText}
           showHeader={false}
+          max={maxDate}
         />
       </div>
     );
@@ -49,7 +55,8 @@ Datepicker.propTypes = {
   setDateFieldValue: PropTypes.func,
   closeDatepicker: PropTypes.func,
   confirmButtonText: PropTypes.string,
-  cancelButtonText: PropTypes.string
+  cancelButtonText: PropTypes.string,
+  birthDate: PropTypes.bool
 };
 
 export default Datepicker;

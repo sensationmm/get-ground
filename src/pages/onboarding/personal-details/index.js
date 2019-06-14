@@ -69,7 +69,7 @@ class OnboardingPersonalDetailsContainer extends Component {
       previousNames: '',
       phone: ''
     });
-    
+
     const script = document.createElement('script');
 
     script.onload = () => {
@@ -80,7 +80,7 @@ class OnboardingPersonalDetailsContainer extends Component {
           formUtils.updateValue('city', address.City);
           formUtils.updateValue('unitNumber', address.BuildingNumber);
           formUtils.updateValue('postcode', address.PostalCode);
-          
+
           this.setState(() => ({
             ...this.state,
             isAddressValid: true,
@@ -91,12 +91,12 @@ class OnboardingPersonalDetailsContainer extends Component {
       }, 1000);
 
     }
-    
+
     script.src = addressNow
     script.async = true;
     document.body.appendChild(script);
   }
-  
+
   componentWillUnmount() {
     formUtils.clearFormState();
   }
@@ -105,7 +105,7 @@ class OnboardingPersonalDetailsContainer extends Component {
 
   initFormValidation = () => {
     const { showLoader, hideLoader, t, userID, form } = this.props;
-    const { 
+    const {
       values: {
         firstName,
         middleName,
@@ -183,7 +183,7 @@ class OnboardingPersonalDetailsContainer extends Component {
 
   setDateOfBirth = /* istanbul ignore next */ date => {
     const element = document.getElementById('datepicker-field');
-    
+
     if (!element) return;
 
     formUtils.setNativeValue(element, moment(date).format('Do MMMM YYYY'));
@@ -195,18 +195,18 @@ class OnboardingPersonalDetailsContainer extends Component {
   render() {
     const { t, form } = this.props;
     const { values, errors, showErrorMessage } = form;
-    const { 
-      isManualAddress, 
-      isAddressValid, 
+    const {
+      isManualAddress,
+      isAddressValid,
       isDatepickerOpen,
       showPreviousNames,
       isTextAreaHidden
     } = this.state;
-  
+
     const setCountries = (key) => countryData.map((country, index) => {
       return (
-        <option 
-          key={`country-${index}`} 
+        <option
+          key={`country-${index}`}
           value={`[${country.alpha_2_code}] ${country[key]}`}
         >
           {country[key]}
@@ -268,7 +268,8 @@ class OnboardingPersonalDetailsContainer extends Component {
         closeDatepicker: () => this.closeDatePicker(),
         setDateFieldValue: date => this.setDateOfBirth(date),
         confirmButtonText: t('onBoarding.personalDetails.datepicker.button2'),
-        cancelButtonText: t('onBoarding.personalDetails.datepicker.button1')
+        cancelButtonText: t('onBoarding.personalDetails.datepicker.button1'),
+        birthDate: true
       },
       {
         stateKey: 'nationality',
@@ -301,7 +302,7 @@ class OnboardingPersonalDetailsContainer extends Component {
         value: values.country,
         options: setCountries('country_name'),
         classes: 'country-select',
-        validationFunction: 'validateRequired', 
+        validationFunction: 'validateRequired',
         callback: country => this.handleCountryChange(country)
       },
       {
@@ -372,9 +373,9 @@ class OnboardingPersonalDetailsContainer extends Component {
 
           <IntroBox>{t('onBoarding.personalDetails.intro')}</IntroBox>
 
-          {showErrorMessage && 
+          {showErrorMessage &&
               <ErrorBox>
-              { errors.form 
+              { errors.form
                 ? errors.form
                 : 'Please fix your errors to proceed'
               }
