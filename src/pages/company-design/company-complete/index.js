@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import Button from 'src/components/_buttons/Button/Button';
 import Layout from 'src/components/Layout/Layout';
-import successImg from 'src/assets/images/star.svg';
+import successImg from 'src/assets/images/company-complete.svg';
 
 import './company-complete.scss'
 
@@ -15,7 +15,7 @@ const CompanyComplete = () => {
   return (
     <Layout>
       <div data-test="container-company-complete" className="company-complete" role="fullscreen">
-      <img className="company-complete--image" src={successImg} />
+        <div className="intro--hero-image"><img className="company-complete--image" src={successImg} /></div>
         <h1 className="company-complete--heading">{t('companyDesign.companyComplete.title')}</h1>
         <p className="company-complete--copy">{t('companyDesign.companyComplete.copy')}</p>
         <p className="company-complete--copy">{ t('companyDesign.companyComplete.info') }</p>

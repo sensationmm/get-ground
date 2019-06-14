@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import Button from 'src/components/_buttons/Button/Button'
-import icon from 'src/assets/images/100-icon.svg'
+import icon from 'src/assets/images/shareholders-choice.svg'
 
 import './shareholder-choice.scss'
 

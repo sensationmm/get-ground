@@ -6,7 +6,7 @@ import useWindowScroll from 'react-use/lib/useWindowScroll';
 import Layout from 'src/components/Layout/Layout'
 import MoreInformation from 'src/components/MoreInformation/MoreInformation';
 
-import Roof from 'src/assets/images/roof.svg'
+import Image from 'src/assets/images/how-it-works.svg'
 import Step1 from 'src/assets/images/howItWorks-step1.svg'
 import Step2 from 'src/assets/images/howItWorks-step2.svg'
 import Step3 from 'src/assets/images/howItWorks-step3.svg'
@@ -60,8 +60,8 @@ const HowItWorks = () => {
 
   return (
     <Layout>
-      <div className="how-it-works">
-        <img className="how-it-works-img" src={Roof} alt="roof of house" data-test="how-it-works-img" />
+      <div className="how-it-works" role="brochure">
+        <img className="hero-image" src={Image} alt="roof of house" data-test="how-it-works-img" />
         <h1 className="how-it-works-title">{t('howItWorks.title')}</h1>
           <ul>
           {stepConfig.steps.map((step, idx) => (

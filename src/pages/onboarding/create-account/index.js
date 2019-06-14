@@ -27,7 +27,7 @@ export const AccountService = new accountService();
 import modalService from 'src/services/Modal';
 export const ModalService = new modalService();
 
-import termsImage from 'src/assets/images/terms-image.svg';
+import termsImage from 'src/assets/images/documents-modal.svg';
 
 /**
  * CreateAccount

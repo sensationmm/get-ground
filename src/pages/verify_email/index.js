@@ -8,7 +8,7 @@ import queryString from 'query-string';
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox'
 import Layout from 'src/components/Layout/Layout'
 import ImageFull from 'src/components/ImageFull/ImageFull'
-import EmailSent from 'src/assets/images/email-sent.svg'
+import Image from 'src/assets/images/verify-email.svg'
 
 import authService from 'src/services/Auth';
 export const AuthService = new authService();
@@ -34,7 +34,7 @@ const AccountPending = ({ location }) => {
         <h1>{ t('onBoarding.accountPending.title') }</h1>
         <p data-test="account-pending-content">{ isPasswordReset ? t('forgotPassword.emailPending') :  t('onBoarding.accountPending.text') }</p>
 
-        <ImageFull src={EmailSent} />
+        <ImageFull src={Image} />
 
         <IntroBox>{ t('onBoarding.accountPending.introBox') }</IntroBox>
 
