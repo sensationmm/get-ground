@@ -19,6 +19,7 @@
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
     "react-html5-camera-photo": "^1.4.1",
+    "react-idle-timer": "^4.2.5",
     "react-markdown": "^4.0.8",
     "react-mobile-datepicker": "^4.0.1",
     "react-redux": "^v7.1.0-rc.1",

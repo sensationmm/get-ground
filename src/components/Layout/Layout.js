@@ -7,11 +7,13 @@ import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import { withTranslation } from 'react-i18next';
 import LiveChat from 'react-livechat';
+import IdleTimer from 'react-idle-timer';
 
 import SEO from 'src/components/seo';
 import Header from 'src/components/Header/Header';
 import Loader from 'src/components/Loader/Loader';
 import Modal from 'src/components/Modal/Modal';
+import ModalContent from 'src/components/Modal/ModalContent';
 import Menu from 'src/components/Menu/Menu';
 import Footer from 'src/components/Footer/Footer';
 
@@ -36,8 +38,12 @@ export class Layout extends Component {
 
     this.state = {
       livechat: false,
-      logout: false
+      logout: false,
+      isLoggingOut: false
     };
+
+    this.idleTimer = null;
+    this.onIdle = this._onIdle.bind(this);
   }
 
   componentDidMount() {
@@ -108,9 +114,18 @@ export class Layout extends Component {
     menuIsOpen ? hideMenu() : showMenu();
   }
 
+  _onIdle(e) {
+    this.setState({ isLoggingOut: true }, () => {
+      setTimeout(() => {
+        if (this.state.isLoggingOut) this.setState({ logout: true });
+      }, 10000);
+    });
+  }
+
   render() {
     this.loggedOutOnly();
     const { children, headerActions, isLoading, userID, t, menuIsOpen } = this.props;
+    const { isLoggingOut } = this.state;
 
     const menuLinks = [
       {
@@ -153,6 +168,17 @@ export class Layout extends Component {
     return (
 
       <div className={classNames('wrapper', `${children.props && children.props.role}`)}>
+
+        { userID && 
+          <IdleTimer
+            ref={ref => { this.idleTimer = ref }}
+            element={document}
+            onIdle={this.onIdle}
+            debounce={250}
+            timeout={1800000} // 30 mins
+          />
+        }
+
         <SEO title="GetGround" keywords={[`gatsby`, `application`, `react`]} />
 
         {isLoading && <Loader />}
@@ -185,6 +211,23 @@ export class Layout extends Component {
             />
           </Modal>
         </CSSTransition>
+
+        <CSSTransition
+          in={isLoggingOut}
+          timeout={600}
+          classNames="modal"
+          unmountOnExit
+        >
+          <Modal>
+            <ModalContent
+              heading={t('modal.loggingOutHeading')}
+              htmlContent={<p>{t('modal.loggingOutCopy')}</p>}
+              closeModal={() => { this.setState({ isLoggingOut: false }) }}
+              closeIconAltText={t('modal.closeIconAltText')}
+            />
+          </Modal>
+        </CSSTransition>
+
         {this.state.livechat && <LiveChat license={10911047} />}
       </div>
     )

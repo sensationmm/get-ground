@@ -562,7 +562,9 @@
   },
   "modal": {
     "closeIconAltText": "Close",
-    "downloadButtonLabel": "Download"
+    "downloadButtonLabel": "Download",
+    "loggingOutHeading": "Want to stay logged in?",
+    "loggingOutCopy": "You will be logged out shortly if this modal isn't closed."
   },
   "myDocuments": {
     "title": "My Documents",
