@@ -36,26 +36,20 @@ class AccountService extends BaseService {
    * @param {object} data - data object for post
    * @return {Promise} savePersonalDetails response
    */
-  savePersonalDetails = data => {
-    const config = {
-      url: `users/${data.userID}`,
-      method: 'put',
-      data: {
-        'first_name': data.firstName,
-        'middle_name': data.middleName,
-        'last_name': data.lastName,
-        'date_of_birth': data.formattedDate,
-        'nationality_name': data.nationalityName,
-        'birth_town': data.cityOfBirth,
-        'occupation': data.jobTitle,
-        'country': data.countryName,
-        'street': data.street,
-        'posttown': data.city,
-        'premise': data.unitNumber,
-        'postcode': data.postcode,
-        'previous_names': data.previousNames,
-        'phone_number': data.phone
+  savePersonalDetails = (data) => {
+    const userID = data.userID;
+    delete data.userID;
+
+    Object.keys(data).forEach((key) => {
+      if(data[key] === '') {
+        delete data[key];
       }
+    });
+
+    const config = {
+      url: `users/${userID}`,
+      method: 'put',
+      data
     };
 
     return this.doRequest(config, () => {
