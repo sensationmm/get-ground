@@ -42,9 +42,7 @@ const IntroSlider = props => {
         {slides.map((slide, index) => {
           return (
             <div className="slick-slide--container" data-testid="slick-slide--container" key={`slide-${index}`}>
-              <div className="slick-slide--image-wrapper">
-                <img src={slide.image} alt={slide.imageAltText} />
-              </div>
+              <img className="slick-slide--image" src={slide.image} alt={slide.imageAltText} />
               <h2>{slide.title}</h2>
               <div className="slick-slide--copy" dangerouslySetInnerHTML={{ __html: slide.copy }} />
             </div>
