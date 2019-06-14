@@ -23,7 +23,7 @@ export const AccountService = new accountService()
 import authService from 'src/services/Auth'
 export const AuthService = new authService()
 
-class AcceptanceOfRole extends React.Component {
+export class AcceptanceOfRole extends React.Component {
 
   constructor(props) {
     super(props);
@@ -42,14 +42,14 @@ class AcceptanceOfRole extends React.Component {
       isExistingUser: null
     };
   }
+
   componentDidMount() {
     formUtils.initFormState({
       shareholder: null,
       director: null
     });
 
-    const { location, t } = this.props;
-
+    const { location, t, showLoader, hideLoader } = this.props;
     showLoader();
     AccountService.retrieveInvestedUser(location.search).then((response) => {
       hideLoader();
@@ -59,7 +59,7 @@ class AcceptanceOfRole extends React.Component {
             lineOfAddress: response.property.first_line_of_address,
             town: response.property.town,
             city: response.property.city,
-            postCode: response.property.postCode
+            postCode: response.property.post_code
           },
           propertyPrice: response.price_of_property.amount_in_cents,
           shares: response.num_shares,
@@ -85,12 +85,11 @@ class AcceptanceOfRole extends React.Component {
 
   submitAnswers = () => {
     const { t, location, form: { values: { shareholder, director }}} = this.props;
-
     if ( shareholder === 'no' || director === 'no' ) {
       navigate('/onboarding/acceptance-of-role/decline')
     }
 
-    if ((shareholder === 'yes' || director === 'yes') && !this.state.isExistingUser ) {
+    if (!this.state.isExistingUser ) {
       navigate('/forget-password', {
         state: {
           acceptRoleToken: location.search
@@ -98,7 +97,8 @@ class AcceptanceOfRole extends React.Component {
       })
     }
 
-    if ((shareholder === 'yes' || director === 'yes') && this.state.isExistingUser ) {
+
+    if (this.state.isExistingUser ) {
       showLoader();
       AuthService.acceptRoleLogin(location.search).then((response) => {
         hideLoader();
@@ -201,7 +201,9 @@ class AcceptanceOfRole extends React.Component {
 AcceptanceOfRole.propTypes = {
   t: PropTypes.func,
   form: PropTypes.object,
-  location: PropTypes.object
+  location: PropTypes.object,
+  showLoader: PropTypes.func,
+  hideLoader: PropTypes.func
 }
 
 const mapStateToProps = state => ({

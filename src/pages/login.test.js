@@ -29,7 +29,7 @@ describe('Login', () => {
       search: null
     }
   };
-  
+
   beforeEach(() => {
     wrapper = setup(Login, defaultProps);
     loginSpy = jest.spyOn(wrapper.instance(), 'onLogin');
@@ -50,19 +50,19 @@ describe('Login', () => {
   describe('enterSubmit()', () => {
     test('logs in on enter', () =>{
       const keyPress = { key: 'Enter' };
-  
+
       wrapper.instance().enterSubmit(keyPress);
       expect(loginSpy).toHaveBeenCalled();
     });
 
     test('else nothing', () => {
       const keyPress = { key: 'Space' };
-  
+
       wrapper.instance().enterSubmit(keyPress);
       expect(loginSpy).toHaveBeenCalledTimes(0);
     });
   });
-  
+
   test('login button', () => {
     const button = findByTestAttr(wrapper, 'login-button');
     button.simulate('click');
@@ -75,57 +75,57 @@ describe('Login', () => {
     test('success', async () => {
       jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
       AuthService.login = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
-      
+
       await wrapper.instance().onLogin();
-      
+
       expect(showLoaderMock).toHaveBeenCalled();
       expect(hideLoaderMock).toHaveBeenCalled();
       expect(navigate).toHaveBeenCalledWith('/onboarding');
     });
-    
+
     test('user failure', async () => {
       jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
       AuthService.login = jest.fn().mockReturnValue(Promise.resolve({ status: 404, data: { error: 'User not found' }}));
-      
+
       await wrapper.instance().onLogin();
-      
+
       expect(showLoaderMock).toHaveBeenCalled();
       expect(hideLoaderMock).toHaveBeenCalled();
       expect(navigate).toHaveBeenCalledTimes(0);
       expect(formUtils.setFormError).toHaveBeenCalledWith('login.form.error');
     });
-    
+
     test('password failure', async () => {
       jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
       AuthService.login = jest.fn().mockReturnValue(Promise.resolve({ status: 404, data: { error: 'Invalid password' }}));
-      
+
       await wrapper.instance().onLogin();
-      
+
       expect(showLoaderMock).toHaveBeenCalled();
       expect(hideLoaderMock).toHaveBeenCalled();
       expect(navigate).toHaveBeenCalledTimes(0);
       expect(formUtils.setFormError).toHaveBeenCalledWith('login.form.error');
     });
-    
+
     test('verify failure', async () => {
       jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
       AuthService.login = jest.fn().mockReturnValue(Promise.resolve({ status: 401, data: { error: 'Please verify your email.' }}));
-      
+
       await wrapper.instance().onLogin();
-      
+
       expect(showLoaderMock).toHaveBeenCalled();
       expect(hideLoaderMock).toHaveBeenCalled();
       expect(navigate).toHaveBeenCalledTimes(0);
       expect(formUtils.setFormError).toHaveBeenCalledWith('login.form.errorVerify');
     });
-    
+
     test('success with redirect', async () => {
       wrapper = setup(Login, { ...defaultProps, location: { search: '?redirect=/company-design' }});
       jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
       AuthService.login = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
-      
+
       await wrapper.instance().onLogin();
-      
+
       expect(showLoaderMock).toHaveBeenCalled();
       expect(hideLoaderMock).toHaveBeenCalled();
       expect(navigate).toHaveBeenCalledWith('/company-design');
