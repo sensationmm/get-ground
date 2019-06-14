@@ -1,6 +1,19 @@
 @import 'src/styles/modules/_colors';
 
 .acceptance-of-role {
+
+  &-content {
+    margin-bottom: 40px;
+  }
+
+  &-property-address {
+    p {
+      margin-bottom: 0;
+      font-size: 16px;
+      letter-spacing: 0.2px;
+    }
+  }
+
   .list {
     background-color: $white;
     height: 469px;

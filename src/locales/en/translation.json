@@ -15,8 +15,8 @@
   },
   "acceptanceOfRole": {
     "title": "Acceptance of Role",
-    "content": "John Smith has invited you to be a partner in his company, see below for more details.",
-    "company": {
+    "content": "has invited you to be a partner in his company, see below for more details.",
+    "property": {
       "address": "Address of property being purchased",
       "price": "Price of property",
       "shares": "Your ownership"

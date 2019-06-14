@@ -135,9 +135,7 @@ class AccountService extends BaseService {
       method: 'get'
     };
 
-    return this.doRequest(config, (response) => {
-      store.dispatch(saveDocuments(response.data.filter(item => item.creator === store.getState().user.id)));
-    });
+    return this.doRequest(config);
   };
 }
 
