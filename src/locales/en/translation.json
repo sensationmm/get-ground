@@ -200,7 +200,7 @@
       "button2": "No, thanks"
     },
     "progressTracker": {
-      "inProgressTitle": "Design your company in 5 steps",
+      "inProgressTitle": "Design your company in 6 steps",
       "complete": "complete",
       "completeTitle": "All 5 steps complete",
       "sections": {
@@ -228,6 +228,11 @@
           "title": "Add Services",
           "copy": "Additional services you will need",
           "imageAltText": "Services"
+        },
+        "step6": {
+          "title": "Tax Questions",
+          "copy": "To better understand your needs",
+          "imageAltText": "Tax Questions"
         }
       }
     },
@@ -941,6 +946,16 @@
     },
     "edit": "Edit",
     "save": "Save"
+  },
+  "taxQuestions": {
+    "title": "Tax questions",
+    "introBox": "The money you provide to purchase your property is lent by you to your company. We create a loan note between yourself and your company for this. This question determines the interest rate we should apply to your loan to the company",
+    "ownership": "Do you have ownership or voting rights of 25% or more in any companies, partnerships or other enterprises?",
+    "employ": "Do they employ fewer than 50 employees combined?",
+    "assets": "Do they have assets of 10m€ or less combined?",
+    "turnover": "Do they have a turnover of 10m€ or less combined?",
+    "nextBtn": "Next",
+    "backBtn": "Back"
   },
   "trustAndPrivacy" : {
     "title": "Trust and Privacy",

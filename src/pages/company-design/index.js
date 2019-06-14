@@ -11,6 +11,7 @@ import PurchaseImage from 'src/assets/images/purchase.svg'
 import SolicitorImage from 'src/assets/images/solicitor.svg'
 import ShareholderImage from 'src/assets/images/shareholder.svg'
 import ServicesImage from 'src/assets/images/services.svg'
+import TaxQuestion from 'src/assets/images/tax-question.svg'
 
 import './process-tracker.scss'
 
@@ -70,6 +71,14 @@ export class ProcessTracker extends React.Component {
           'path': '/company-design/add-services',
           'status': 'to_do',
           'image': ServicesImage,
+        },
+        {
+          'title': sectionsContent['step6'].title,
+          'imageAltText': sectionsContent['step6'].imageAltText,
+          'copy': sectionsContent['step6'].copy,
+          'path': '/company-design/tax-questions',
+          'status': 'to_do',
+          'image': TaxQuestion,
         }
       ]
     };

@@ -90,7 +90,7 @@ class ShareholderDetails extends Component {
     let totalShares = 0;
     formUtils.updateValue(id, shareholder, () => {
         if(key === 'shares') {
-        this.props.form.values.forEach(item => { 
+        this.props.form.values.forEach(item => {
           if(item.shares) {
             totalShares = totalShares + parseInt(item.shares);
           }
@@ -108,7 +108,7 @@ class ShareholderDetails extends Component {
   }
 
   validateShareholders = /* istanbul ignore next */() => {
-    
+
     const shareholder0Valid = !this.shareholder0 || (this.shareholder0 && this.shareholder0.validate());
     const shareholder1Valid = !this.shareholder1 || (this.shareholder1 && this.shareholder1.validate());
     const shareholder2Valid = !this.shareholder2 || (this.shareholder2 && this.shareholder2.validate());
@@ -121,7 +121,7 @@ class ShareholderDetails extends Component {
     const isValid = shareholder0Valid &&
       shareholder1Valid &&
       shareholder2Valid &&
-      shareholder3Valid && 
+      shareholder3Valid &&
       shareholder4Valid &&
       shareholder5Valid &&
       shareholder6Valid &&
@@ -131,7 +131,7 @@ class ShareholderDetails extends Component {
   }
 
   validateShareholderShares = /* istanbul ignore next */() => {
-    
+
     const shareholder0Valid = !this.shareholderShares0 || (this.shareholderShares0 && this.shareholderShares0.validate());
     const shareholder1Valid = !this.shareholderShares1 || (this.shareholderShares1 && this.shareholderShares1.validate());
     const shareholder2Valid = !this.shareholderShares2 || (this.shareholderShares2 && this.shareholderShares2.validate());
@@ -144,7 +144,7 @@ class ShareholderDetails extends Component {
     const isValid = shareholder0Valid &&
       shareholder1Valid &&
       shareholder2Valid &&
-      shareholder3Valid && 
+      shareholder3Valid &&
       shareholder4Valid &&
       shareholder5Valid &&
       shareholder6Valid &&
@@ -155,7 +155,7 @@ class ShareholderDetails extends Component {
 
   addShareholder = () => {
     const shareholders = this.state.shareholders;
-    
+
     const isValid = this.validateShareholders();
 
     if(isValid) {
@@ -275,11 +275,11 @@ class ShareholderDetails extends Component {
     const { hasShareholders, shareholders, stage, totalShares } = this.state;
 
     const mainShareholder = (100 - totalShares >= 0) ? 100 - totalShares : NaN;
-    
+
     return (
       <Layout secure>
         <div data-test="container-shareholder-details" className="shareholder" role="company-design">
-          {!hasShareholders && 
+          {!hasShareholders &&
             <ShareholderChoice
               addShareholders={this.toggleShareholders}
               noShareholders={this.setNoShareholders}
@@ -306,7 +306,7 @@ class ShareholderDetails extends Component {
 
               {this.renderShareholders(shareholders)}
 
-              {shareholders < 7 && 
+              {shareholders < 7 &&
                 <Button
                   onClick={this.addShareholder}
                   label={t('companyDesign.shareholderDetails.add.new.cta')}
@@ -352,7 +352,7 @@ class ShareholderDetails extends Component {
                 <div>{t('companyDesign.shareholderDetails.shares.sharesLabel')}</div>
                 <div>{t('companyDesign.shareholderDetails.shares.directorLabel')}</div>
               </div>
-              
+
               <ShareholderShares
                 shareholderID={null}
                 name={i18n.t('companyDesign.shareholderDetails.shares.you')}
@@ -394,7 +394,7 @@ class ShareholderDetails extends Component {
               <div>{t('companyDesign.shareholderDetails.shares.sharesLabel')}</div>
               <div>{t('companyDesign.shareholderDetails.shares.directorLabel')}</div>
             </div>
-            
+
             <ShareholderShares
               shareholderID={null}
               name={i18n.t('companyDesign.shareholderDetails.shares.you')}
