@@ -4,8 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Layout from 'src/components/Layout/Layout'
 import MeetTheFounders from 'src/components/MeetTheFounders/MeetTheFounders'
 
-import Clock from 'src/assets/images/clock.svg'
-import 'src/styles/pages/about-us.scss'
+import Image from 'src/assets/images/about-us.svg'
 
 const AboutUs = () => {
   const [t] = useTranslation();
@@ -13,7 +12,7 @@ const AboutUs = () => {
   return (
     <Layout>
       <div role="brochure">
-        <img className="about-us-img" src={Clock} alt="clock" data-test="about-us-img" />
+        <img className="hero-image" src={Image} alt="clock" data-test="about-us-img" />
         <h1 className="about-us-title">{t('aboutUs.title.first')}</h1>
         <p className="about-us-content" data-test="content-first">{t('aboutUs.content.first')}</p>
         <p className="about-us-content" data-test="content-second">{t('aboutUs.content.second')}</p>

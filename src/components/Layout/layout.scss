@@ -147,6 +147,16 @@ b {
   padding-bottom: 60px;
 }
 
-.brochure .app.extra-top-padding {
-  padding-top: calc((#{$header-height + ($padding-vertical-unit * 5) + 0px + $padding-vertical}));
+.brochure {
+  .app.extra-top-padding {
+    padding-top: calc((#{$header-height + ($padding-vertical-unit * 5) + 0px + $padding-vertical}));
+  }
+
+  img.hero-image {
+    width: 100%;
+    height: 300px;
+    max-height: 330px;
+    margin: 0 auto;
+    display: block;
+  }
 }

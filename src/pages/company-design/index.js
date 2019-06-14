@@ -6,12 +6,12 @@ import PropTypes from 'prop-types';
 import { ProcessSection } from 'src/components/ProcessSection/ProcessSection'
 import Layout from 'src/components/Layout/Layout'
 import Button from 'src/components/_buttons/Button/Button'
-import PropertyImage from 'src/assets/images/property.svg'
-import PurchaseImage from 'src/assets/images/purchase.svg'
-import SolicitorImage from 'src/assets/images/solicitor.svg'
-import ShareholderImage from 'src/assets/images/shareholder.svg'
-import ServicesImage from 'src/assets/images/services.svg'
-import TaxQuestion from 'src/assets/images/tax-question.svg'
+import PropertyImage from 'src/assets/images/company-property-details.svg'
+import PurchaseImage from 'src/assets/images/company-purchase-details.svg'
+import SolicitorImage from 'src/assets/images/company-solicitor-details.svg'
+import ShareholderImage from 'src/assets/images/company-shareholder-details.svg'
+import ServicesImage from 'src/assets/images/company-add-services.svg'
+import TaxQuestion from 'src/assets/images/company-tax-question.svg'
 
 import './process-tracker.scss'
 

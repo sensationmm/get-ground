@@ -15,7 +15,7 @@ import Form from 'src/components/_layout/Form/Form';
 import partners from 'src/services/Partners';
 export const PartnerService = new partners();
 
-import ShakingHands from 'src/assets/images/shaking-hands.svg'
+import Image from 'src/assets/images/partnerships.svg'
 
 import 'src/styles/pages/partnerships.scss'
 
@@ -100,7 +100,7 @@ class Partnerships extends Component {
     return (
       <Layout>
         <div className="partnerships" role="brochure">
-          <img className="partnerships-img" src={ShakingHands} alt="shaking-hands" data-test="partnerships-img" />
+          <img className="hero-image" src={Image} alt="shaking-hands" data-test="partnerships-img" />
           <h1 className="partnerships-title">Partnerships</h1>
           <p className="partnerships-content">Interested in selling GetGround and earning a commission? We work with partners such as estate agents, mortgage brokers and property developers. If you’d like to know more, enter your email and we’ll be in touch.</p>
           <p className="partnerships-content">If you’d like to know more, enter your email and we’ll be in touch.</p>
