@@ -454,7 +454,9 @@
   "header": {
     "buttons": {
       "register": "Register",
-      "login": "Log In"
+      "login": "Log In",
+      "saveAndExit": "Save and Exit",
+      "exit": "Exit"
     }
   },
   "howItWorks": {
