@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import validation from './validation';
 import functions from './functions';
 import store from 'src/state/store';
@@ -9,11 +10,31 @@ import { isArray } from 'util';
  * initFormState
  * Output default values/error state required by form setup
  * @param {object} fieldsInit - form field initial values
+ * @param {object} fieldsValues - redux state default values container
  * @return {void}
  */
 export const initFormState = (fieldsInit) => {
   const fields = !isArray(fieldsInit) ? fieldsInit : new Array(...fieldsInit);
   const errors = !isArray(fieldsInit) ? {} : { fields: fieldsInit.map(i => new Object()) };
+
+  const fieldsKeys = Object.keys(fields);
+
+  if(fieldsValues) {
+    fieldsKeys.forEach(key => {
+      if(fieldsValues[key]) {
+        // @TODO diiiirty
+        if(key === 'country') {
+          fields[key] = `[${fieldsValues['address_country_alpha_3_code']}] ${fieldsValues[key]}`;
+        } else if(key === 'nationality') {
+          fields[key] = `[${fieldsValues['nationality_alpha_3_code']}] ${fieldsValues['nationality_name']}`;
+        } else if(key === 'date_of_birth') {
+          fields[key] = moment(fieldsValues[key]).format('Do MMMM YYYY');
+        } else {
+          fields[key] = fieldsValues[key]; // @TODO ideally only this line should be necessary...
+        }
+      }
+    });
+  }
 
   return store.dispatch(
     initForm({

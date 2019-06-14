@@ -171,8 +171,8 @@
               "info5": ""
             },
             "feed2": {
-              "info1": "Unlimited owners protected by goevrnance agreements",
-              "info2": "Contain your liabilities in the company as a seperate legal entity",
+              "info1": "Unlimited owners protected by governance agreements",
+              "info2": "Contain your liabilities in the company as a separate legal entity",
               "info3": "Potentially easier bank tests (rental income vs. interest expense)",
               "info4": "Typically banks require a combined shareholder income of £25k p.a."
             }
@@ -189,13 +189,13 @@
       "button": "View dashboard"
     },
     "progressTracker": {
-      "inProgressTitle": "Design your company in 5 steps",
+      "inProgressTitle": "Design your company in 6 steps",
       "complete": "complete",
       "completeTitle": "All 5 steps complete",
       "sections": {
         "step1": {
-          "title": "Property Address",
-          "copy": "Please provide the address of the property your company will hold",
+          "title": "Property address",
+          "copy": "Provide the address of the property your company will hold",
           "imageAltText": "Property"
         },
         "step2": {
@@ -204,8 +204,8 @@
           "imageAltText": "Purchase"
         },
         "step3": {
-          "title": "Solicitor Details",
-          "copy": "Add Solicitor",
+          "title": "Solicitor details",
+          "copy": "Add your solicitor details",
           "imageAltText": "Solicitor Details"
         },
         "step4": {
@@ -214,8 +214,8 @@
           "imageAltText": "Shareholder details"
         },
         "step5": {
-          "title": "Add Services",
-          "copy": "Additional services you will need",
+          "title": "Add services",
+          "copy": "Additional services you might need",
           "imageAltText": "Services"
         }
       }
@@ -255,7 +255,7 @@
         "firstInstallmentLabel": "First installment amount",
         "secondInstallmentDateLabel": "Second installment date?",
         "secondInstallmentLabel": "Second installment amount",
-        "expectedExchangeLabel": "Do you have an expected exchange date",
+        "expectedExchangeLabel": "Do you have an expected exchange date?",
         "expectedExchangeDateLabel": "Please provide your expected exchange date",
         "addButton": "Another payment date",
         "nextButton": "Next",
@@ -408,8 +408,8 @@
       }
     },
     "login": "Register / Login",
-    "location": "Terranova.network Limited (t/a getGround) is registered in England with Company No. 11273793 and VAT registered. VAT No. 313087625. Registered office: 5 Theale Lakes Business Park, Reading, RG7 4GB.",
-    "legal": "Terranova.network Limited (t/a getGround) is authorised and regulated by the Financial Conduct Authority (firm reference number 829031) as an AR of Resolution Compliance (firm reference number 574048). Terranova.network Limited (t/a getGround) is registered with the Information Commissioner’s Office under registration number ZA481725 for the purposes of the protection of data."
+    "location": "Terranova.network Limited (t/a GetGround) is registered in England with Company No. 11273793 and VAT registered. VAT No. 313087625. Registered office: 5 Theale Lakes Business Park, Reading, RG7 4GB.",
+    "legal": "Terranova.network Limited (t/a GetGround) is authorised and regulated by the Financial Conduct Authority (firm reference number 829031) as an AR of Resolution Compliance (firm reference number 574048). Terranova.network Limited (t/a GetGround) is registered with the Information Commissioner’s Office under registration number ZA481725 for the purposes of the protection of data."
   },
   "forgotPassword": {
     "title": "Forgot password",
@@ -506,7 +506,8 @@
         "email": "Email Address",
         "password": "Password"
       },
-      "error": "Invalid login - please try again"
+      "error": "Invalid login - please try again",
+      "errorVerify": "Please verify your email address"
     }
   },
   "meetTheFounders": {
@@ -848,28 +849,28 @@
       "confirmComplete": "I am happy with all my details and confirm they are all correct.",
       "sections": {
         "step1": {
-          "title": "Account Details",
+          "title": "Account details",
           "copy": "Create your account",
           "imageAltText": "Person"
         },
        "step2": {
-          "title": "Personal Details",
+          "title": "Personal details",
           "copy": "Details to create your profile",
           "imageAltText": "Person"
         },
         "step3": {
-          "title": "ID Check",
+          "title": "ID check",
           "copy": "Document verification",
           "imageAltText": "ID card"
         },
         "step4": {
-          "title": "Compliance Check",
+          "title": "Compliance check",
           "copy": "Verify your risk health",
           "imageAltText": "Warning sign"
         },
         "step5": {
           "title": "Payment",
-          "copy": "Pay for service",
+          "copy": "Pay for the service",
           "imageAltText": "Warning sign"
         }
       }
@@ -928,6 +929,15 @@
     "edit": "Edit",
     "save": "Save"
   },
+  "progressTracker": {
+    "labels": {
+      "complete": "Complete",
+      "todo": "To do",
+      "inProgress": "Incomplete",
+      "Signed": "Signed",
+      "todoSigned": "To be signed"
+    }
+  },
   "trustAndPrivacy" : {
     "title": "Trust and Privacy",
     "subTitle": "At GetGround, we take the trust our customers place in us very seriously.",
@@ -935,7 +945,7 @@
     "sections": {
       "info0": {
         "title": "You own and control your company",
-        "copy": "GetGround is a service provider and does not have any directorship or ownershipin your company. We cannot perform any activities on your company without your explicit consent."
+        "copy": "GetGround is a service provider and does not have any directorship or ownership in your company. We cannot perform any activities on your company without your explicit consent."
       },
      "info1": {
         "title": "You can leave us at any time",

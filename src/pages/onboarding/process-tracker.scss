@@ -3,16 +3,26 @@
 .process-tracker {
   &--title {
     color: $white;
-}
+  }
   &-sections {
-    margin-top: 20px;
-    cursor: pointer;
+    margin-top: 40px;
   }
   .checkbox {
     margin-top: 37px;
   }
 
+  .process-section {
+    cursor: pointer;
+  }
+
   button {
     margin-top: 31px;
+  }
+
+  &.onboarding {
+    .process-section:first-child {
+      pointer-events: none;
+      cursor: not-allowed;
+    }
   }
 }

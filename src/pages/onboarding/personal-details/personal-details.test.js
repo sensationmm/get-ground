@@ -5,6 +5,7 @@ import { navigate } from 'gatsby';
 import { RawComponent as PersonalDetails, AccountService } from './index';
 import Select from 'src/components/_form/Select/Select';
 import Button from 'src/components/_buttons/Button/Button';
+import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import Datepicker from 'src/components/Datepicker/Datepicker';
 import { initialState as ReduxFormMock } from 'src/state/reducers/form';
 
@@ -27,6 +28,7 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
   };
   jest.spyOn(formUtils, 'initFormState');
   jest.spyOn(formUtils, 'clearFormState');
+  jest.spyOn(formUtils, 'updateValue');
 
   global.addressNow = {
     setCountry: setCountryMock,
@@ -41,6 +43,34 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
     const component = findByTestAttr(wrapper, 'container-onboarding-details');
     expect(component.length).toBe(1);
     expect(formUtils.initFormState).toHaveBeenCalledTimes(1);
+  });
+
+  describe('error message', () => {
+    test('default message', () => {
+      wrapper = setup(PersonalDetails, {
+        ...defaultProps,
+        form: {
+          ...defaultProps.form,
+          showErrorMessage: true
+        }
+      });
+      expect(wrapper.find(ErrorBox).dive().text()).toEqual('form.correctErrors');
+    });
+
+    test('custom message', () => {
+      wrapper = setup(PersonalDetails, {
+        ...defaultProps,
+        form: {
+          ...defaultProps.form,
+          errors: {
+            form: 'custom error',
+          },
+          showErrorMessage: true
+        }
+      });
+
+      expect(wrapper.find(ErrorBox).dive().text()).toEqual('custom error');
+    })
   });
 
   test('form cleared on unmount', () => {
@@ -135,6 +165,28 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
       expect(spy).toHaveBeenCalled();
     });
 
+    test('country variants', async () => {
+      wrapper = setup(PersonalDetails, {
+        ...defaultProps,
+        form: {
+          values: {
+            first_name: 'Sponge',
+            middle_name: 'Bob',
+            last_name: 'Squarepants',
+            country: '[GB] United Kindgom',
+            nationality: '[GB] British'
+          },
+          errors: {
+            middle_name: 'No'
+          }
+        }
+      });
+
+      AccountService.savePersonalDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
+      await wrapper.instance().initFormValidation();
+      expect(navigate).toHaveBeenCalledWith('/onboarding/id-check');
+    });
+
     afterEach(() => {
       spy.mockClear();
     });
@@ -161,9 +213,74 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
     expect(wrapper.state().isManualAddress).toEqual(true);
   });
 
-  afterEach(() => {
-    showLoaderMock.mockClear();
-    hideLoaderMock.mockClear();
+  describe('saveAndExit()', () => {
+    let wrapperPartial;
+
+    beforeEach(() => {
+      wrapperPartial = setup(PersonalDetails, {
+        ...defaultProps,
+        form: {
+          values: {
+            first_name: 'Sponge',
+            middle_name: 'Bob',
+            last_name: 'Squarepants'
+          },
+          errors: {
+            middle_name: 'No'
+          }
+        }
+      });
+    });
+
+    test('success', async () => {
+      AccountService.savePersonalDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
+      await wrapperPartial.instance().saveAndExit();
+      
+      expect(formUtils.validateForm).toHaveBeenCalledTimes(1);
+      expect(formUtils.updateValue).toHaveBeenCalledTimes(1);
+      expect(formUtils.updateValue).toHaveBeenCalledWith('middle_name', '');
+      expect(showLoaderMock).toHaveBeenCalledTimes(1);
+      expect(hideLoaderMock).toHaveBeenCalledTimes(1);
+      expect(navigate).toHaveBeenCalledWith('/onboarding');
+
+    });
+
+    test('failure', async () => {
+      AccountService.savePersonalDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 404 }));
+      await wrapperPartial.instance().saveAndExit();
+      
+      expect(formUtils.validateForm).toHaveBeenCalledTimes(1);
+      expect(formUtils.updateValue).toHaveBeenCalledTimes(1);
+      expect(formUtils.updateValue).toHaveBeenCalledWith('middle_name', '');
+      expect(showLoaderMock).toHaveBeenCalledTimes(1);
+      expect(hideLoaderMock).toHaveBeenCalledTimes(1);
+      expect(navigate).toHaveBeenCalledTimes(0);
+    });
+
+    test('country variants', async () => {
+      wrapper = setup(PersonalDetails, {
+        ...defaultProps,
+        form: {
+          values: {
+            first_name: 'Sponge',
+            middle_name: 'Bob',
+            last_name: 'Squarepants',
+            country: '[GB] United Kindgom',
+            nationality: '[GB] British'
+          },
+          errors: {
+            middle_name: 'No'
+          }
+        }
+      });
+
+      AccountService.savePersonalDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
+      await wrapper.instance().saveAndExit();
+      expect(navigate).toHaveBeenCalledWith('/onboarding');
+    });
   });
   
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 });
