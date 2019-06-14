@@ -1,6 +1,7 @@
 import {
   USER_LOGIN,
-  USER_UPDATE
+  USER_UPDATE,
+  DELETE_USER
 } from 'src/config/constants';
 
 export const initialState = {
@@ -17,6 +18,9 @@ export const user = (state = initialState, action = {}) => {
         ...state,
         [action.key]: action.value
       }
+
+    case DELETE_USER:
+      return { id: null }
 
     default:
       return state;

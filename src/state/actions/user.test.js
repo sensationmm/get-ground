@@ -1,7 +1,7 @@
 import { mockStore } from '../../test-utils/test-utils';
 
-import { USER_LOGIN, USER_UPDATE } from '../../config/constants';
-import { userLogin, userUpdate } from './user'
+import { USER_LOGIN, USER_UPDATE, DELETE_USER } from '../../config/constants';
+import { userLogin, userUpdate, deleteUser } from './user'
 
 describe('User actions', () => {
   let store;
@@ -20,5 +20,10 @@ describe('User actions', () => {
     const name = 'Spongebob';
     store.dispatch(userUpdate('name', name));
     expect(store.getActions()).toEqual([{ type: USER_UPDATE, key: 'name', value: name }]);
+  });
+
+  test('deleteUser', () => {
+    store.dispatch(deleteUser());
+    expect(store.getActions()).toEqual([{ type: DELETE_USER }]);
   });
 });

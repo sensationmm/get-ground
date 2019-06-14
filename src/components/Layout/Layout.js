@@ -17,8 +17,8 @@ import Footer from 'src/components/Footer/Footer';
 
 import store from 'src/state/store';
 import { setWidth } from 'src/state/actions/layout';
-import { userLogin } from 'src/state/actions/user';
-import { saveAuth } from 'src/state/actions/auth';
+import { userLogin, deleteUser } from 'src/state/actions/user';
+import { saveAuth, deleteAuth } from 'src/state/actions/auth';
 import { showMenu, hideMenu } from 'src/state/actions/menu';
 import { hideLoader } from 'src/state/actions/loader';
 
@@ -35,7 +35,8 @@ export class Layout extends Component {
     super(props);
 
     this.state = {
-      livechat: false
+      livechat: false,
+      logout: false
     };
   }
 
@@ -73,6 +74,17 @@ export class Layout extends Component {
     }
 
     this.validateCompanyID();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { deleteAuth, deleteUser } = this.props;
+
+    if (prevState.logout !== this.state.logout) {
+      localStorage.removeItem('gg-auth');
+      deleteAuth();
+      deleteUser();
+      navigate('/login');
+    }
   }
 
   validateCompanyID = () => {
@@ -132,9 +144,8 @@ export class Layout extends Component {
       {
         text: t('menu.links.eigth'),
         function: (e) => {
-          e.preventDefault('wambam');
-          localStorage.removeItem('gg-auth');
-          navigate('/login');
+          e.preventDefault();
+          this.setState({ logout: true });
         }
       }
     ];
@@ -186,6 +197,7 @@ Layout.propTypes = {
   isLoading: PropTypes.bool,
   headerActions: PropTypes.element,
   saveAuth: PropTypes.func,
+  deleteAuth: PropTypes.func,
   userID: PropTypes.number,
   secure: PropTypes.bool,
   redirect: PropTypes.string,
@@ -197,6 +209,7 @@ Layout.propTypes = {
   hideMenu: PropTypes.func,
   t: PropTypes.func.isRequired,
   hideLoader: PropTypes.func,
+  deleteUser: PropTypes.func
 }
 
 Layout.defaultProps = {
@@ -213,7 +226,9 @@ const mapStateToProps = (state) => ({
 const actions = {
   setWidth,
   userLogin,
+  deleteUser,
   saveAuth,
+  deleteAuth,
   showMenu,
   hideMenu,
   hideLoader

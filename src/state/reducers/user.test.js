@@ -1,7 +1,8 @@
 import { user, initialState } from './user'
 import {
   USER_LOGIN,
-  USER_UPDATE
+  USER_UPDATE,
+  DELETE_USER
 } from '../../config/constants';
 
 describe('user reducer', () => {
@@ -35,5 +36,18 @@ describe('user reducer', () => {
 
     const newState = user(initialState, action);
     expect(newState).toEqual(expect.objectContaining(expectedState));
+  });
+
+  it('DELETE_USER removes user object', () => {
+    const action = {
+      type: DELETE_USER
+    };
+
+    const expectedState = {
+      id: null
+    }
+
+    const newState = user(initialState, action);
+    expect(newState).toEqual(expectedState);
   });
 });
