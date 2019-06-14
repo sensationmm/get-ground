@@ -62,15 +62,13 @@ class PropertyAddress extends Component {
       window.addressNow.listen('load', (control) =>  {
         control.listen('populate', (address) => {
 
-          this.setState((prevState) => ({
+          formUtils.updateValue('street', address.Street);
+          formUtils.updateValue('city', address.City);
+          formUtils.updateValue('unitNumber', address.BuildingNumber);
+          formUtils.updateValue('postcode', address.PostalCode);
+
+          this.setState(() => ({
             ...this.state,
-            values: {
-              ...prevState.values,
-              street: address.Street,
-              city: address.City,
-              unitNumber: address.BuildingNumber,
-              postcode: address.PostalCode,
-            },
             isAddressValid: true,
             isTextAreaHidden: false
           }));
