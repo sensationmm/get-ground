@@ -58,7 +58,17 @@ class AccountService extends BaseService {
       }
     };
 
-    return this.doRequest(config);
+    return this.doRequest(config, () => {
+
+      const login_variables = [
+        { name: 'First Name', value: data.firstName },
+        { name: 'Middle Name', value: data.middleName },
+        { name: 'Last Name', value: data.lastName },
+      ];
+
+      window.LC_API.set_custom_variables(login_variables);
+
+    });
   };
 
   /**
