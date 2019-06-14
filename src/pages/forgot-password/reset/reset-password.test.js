@@ -16,6 +16,7 @@ describe('ResetPassword', () => {
 
   beforeEach(() => {
     AuthService.setNewPassword = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
+    AuthService.acceptRoleSetPassword = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
     jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
 
     props = {
@@ -56,6 +57,38 @@ describe('ResetPassword', () => {
     expect(props.showLoader).toHaveBeenCalled();
     expect(props.hideLoader).toHaveBeenCalled();
     expect(navigate).toHaveBeenCalledWith('/dashboard')
+  })
+
+  test('makes call to set new password for accept role', async () => {
+    wrapper.setProps({
+      form: {
+        ...props.form,
+        values: {
+          password: 'test1',
+          passwordConfirm: 'test1',
+          optin: false,
+          privacy: false
+        }
+      },
+      location: {
+        search: '',
+        state: {
+          acceptRoleToken: '?token=12345'
+        }
+      }
+    })
+
+    const form = wrapper.find('[data-test="reset-password-form"]')
+    const button = wrapper.find('[data-test="reset-password-button"]')
+    await button.props().onClick()
+    expect(form.length).toEqual(2);
+    expect(props.showLoader).toHaveBeenCalled();
+    expect(props.hideLoader).toHaveBeenCalled();
+    expect(navigate).toHaveBeenCalledWith('/dashboard', {
+      state: {
+        acceptRoleToken: ''
+      }
+    })
   })
 
   test('error state', async () => {
