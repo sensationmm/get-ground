@@ -97,7 +97,7 @@ class CreateAccount extends Component {
     let target;
     switch(content) {
       case 'privacy':
-        target = 'getGround Privacy Policy';
+        target = 'Privacy Policy';
         break;
       case 'terms':
       default:

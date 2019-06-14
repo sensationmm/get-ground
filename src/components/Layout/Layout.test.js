@@ -21,6 +21,8 @@ jest.spyOn(JSON, 'parse');
 jest.spyOn(Storage.prototype, 'removeItem');
 const setWidthMock = jest.fn();
 const saveAuthMock = jest.fn();
+const deleteAuthMock = jest.fn();
+const deleteUserMock = jest.fn();
 const tMock = jest.fn().mockReturnValue('string');
 
 describe('<Layout />', () => {
@@ -33,6 +35,8 @@ describe('<Layout />', () => {
     },
     setWidth: setWidthMock,
     saveAuth: saveAuthMock,
+    deleteAuth: deleteAuthMock,
+    deleteUser: deleteUserMock,
     t: tMock,
     showMenu: showMenuMock,
     hideMenu: hideMenuMock,
@@ -126,6 +130,16 @@ describe('<Layout />', () => {
     test('livechat is true when mounts', () => {
       const wrapper = shallow(<Layout {...props} />)
       expect(wrapper.state().livechat).toEqual(true)
+    });
+
+    test('the user is logged out', () => {
+      const wrapper = setup(Layout, { ...props }, { logout: false });
+      
+      wrapper.setState({ logout: true });
+
+      expect(deleteAuthMock).toHaveBeenCalled();
+      expect(deleteUserMock).toHaveBeenCalled();
+      expect(navigate).toHaveBeenCalledWith('/login');
     });
   });
 

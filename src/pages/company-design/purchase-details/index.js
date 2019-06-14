@@ -49,7 +49,6 @@ class PurchaseDetails extends Component {
     formUtils.initFormState({
       priceOfProperty: '',
       newBuild: '',
-      expectedExchange: '',
       completionDate: '',
       depositDueDate: '',
       depositAmount: '',
@@ -110,7 +109,7 @@ class PurchaseDetails extends Component {
   }
 
   submitPurchaseDetails = () => {
-    const { showLoader, hideLoader, t, form } = this.props;
+    const { showLoader, hideLoader, t, form, additionalServices } = this.props;
 
     /* istanbul ignore else */
     if (formUtils.validateForm(this.config)) {
@@ -120,7 +119,12 @@ class PurchaseDetails extends Component {
         hideLoader();
         /* istanbul ignore else */
         if (response.status === 200) {
-          navigate('/company-design/solicitor-details');
+
+          if (additionalServices.solicitor === true) {
+            navigate('/company-design/shareholder-details')
+          } else {
+            navigate('/company-design/solicitor-details');
+          }
           
         } else if (response.status === 400) {
           formUtils.setFormError(t('form.correctErrors'));
@@ -131,7 +135,7 @@ class PurchaseDetails extends Component {
   }
 
   render() {
-    const { t, form } = this.props;
+    const { t, form, additionalServices } = this.props;
     const { isDatepickerOpen } = this.state;
     const {
       values: {
@@ -144,7 +148,6 @@ class PurchaseDetails extends Component {
         firstInstallmentAmount,
         secondInstallmentDate,
         secondInstallmentAmount,
-        expectedExchange,
         exchangeDate
       },
       showErrorMessage,
@@ -180,6 +183,17 @@ class PurchaseDetails extends Component {
         value: newBuild
       },
       {
+        stateKey: 'exchangeDate',
+        component: InputText,
+        label: t('companyDesign.purchaseDetails.form.expectedExchangeDateLabel'),
+        value: exchangeDate,
+        validationFunction: 'validateRequired',
+        onFocus: this.openDatePicker,
+        id: 'exchangeDate',
+        hidden: newBuild == '',
+        readOnly: true
+      },
+      {
         stateKey: 'completionDate',
         component: InputText,
         label: t('companyDesign.purchaseDetails.form.completionDateLabel'),
@@ -187,7 +201,7 @@ class PurchaseDetails extends Component {
         validationFunction: 'validateRequired',
         onFocus: this.openDatePicker,
         id: 'completionDate',
-        hidden: newBuild !== 'yes',
+        hidden: newBuild === '',
         readOnly: true
       },
       {
@@ -261,26 +275,6 @@ class PurchaseDetails extends Component {
         hidden: this.checkElementHidden()
       },
       {
-        stateKey: 'expectedExchange',
-        component: RadioGroup,
-        groupLabel: t('companyDesign.purchaseDetails.form.expectedExchangeLabel'),
-        value: expectedExchange,
-        name: 'exchangeDateRadios',
-        items: this.radioConfig,
-        hidden: newBuild === ''
-      },
-      {
-        stateKey: 'exchangeDate',
-        component: InputText,
-        label: t('companyDesign.purchaseDetails.form.expectedExchangeDateLabel'),
-        value: exchangeDate,
-        validationFunction: 'validateRequired',
-        onFocus: this.openDatePicker,
-        id: 'exchangeDate',
-        hidden: expectedExchange !== 'yes',
-        readOnly: true
-      },
-      {
         component: Datepicker,
         isDatepickerOpen: isDatepickerOpen,
         closeDatepicker: () => this.closeDatePicker(),
@@ -310,15 +304,28 @@ class PurchaseDetails extends Component {
           <Form>
             {formUtils.renderForm(this.config)}
 
-            { expectedExchange !== '' &&
+            <center>
               <Button
-                data-test="submit-button"
-                label={t('companyDesign.purchaseDetails.form.nextButton')}
-                fullWidth
-                onClick={() => this.submitPurchaseDetails()}
-                classes="primary"
+                data-test="skip-button"
+                label={t('companyDesign.purchaseDetails.form.skipButton')}
+                onClick={() => {
+                  if (additionalServices.solicitor === true) {
+                    navigate('/company-design/shareholder-details')
+                  } else {
+                    navigate('/company-design/solicitor-details');
+                  }
+                }}
+                classes="link small"
               />
-            }
+            </center>
+
+            <Button
+              data-test="submit-button"
+              label={t('companyDesign.purchaseDetails.form.nextButton')}
+              fullWidth
+              onClick={() => this.submitPurchaseDetails()}
+              classes="primary"
+            />
 
             <Button 
               classes="secondary" 
@@ -338,11 +345,13 @@ PurchaseDetails.propTypes = {
   t: PropTypes.func.isRequired,
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
-  form: PropTypes.object
+  form: PropTypes.object,
+  additionalServices: PropTypes.object
 };
 
 const mapStateToProps = state => ({
-  form: state.form
+  form: state.form,
+  additionalServices: state.additionalServices
 });
 
 const actions = { showLoader, hideLoader };

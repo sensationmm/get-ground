@@ -162,13 +162,60 @@ describe('purchase details', () => {
     expect(wrapper.instance().setDateFieldValue).toHaveBeenCalled();
   });
 
+  test(`expect navigate to go to /company-design/shareholder-details when solicitor 
+    has been selected on additional services (when skip button is clicked)`, () => {
+    wrapper = setup(PurchaseDetails, { ...defaultProps,
+      additionalServices: {
+        solicitor: true
+      }
+    });
+    const button = findByTestAttr(wrapper, 'skip-button');
+
+    button.props().onClick();
+    expect(navigate).toHaveBeenCalledWith('/company-design/shareholder-details');
+  });
+
+  test(`expect navigate to go to /company-design/solicitor-details when solicitor 
+    has NOT been selected on additional services (when skip button is clicked)`, () => {
+    wrapper = setup(PurchaseDetails, { ...defaultProps,
+      additionalServices: {
+        solicitor: false
+      }
+    });
+    const button = findByTestAttr(wrapper, 'skip-button');
+
+    button.props().onClick();
+    expect(navigate).toHaveBeenCalledWith('/company-design/solicitor-details');
+  });
+
   describe('createAccount()', () => {
     let spy;
 
-    test('submit purchase details success', async () => {
+    test('submit purchase details success and solicitor was selected on additional services', async () => {
       spy = jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
       PropertyService.SavePurchaseDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
-      const wrapperNew = setup(PurchaseDetails, defaultProps);
+      const wrapperNew = setup(PurchaseDetails, { ...defaultProps,
+        additionalServices: {
+          solicitor: true
+        }
+      });
+      
+      await wrapperNew.instance().submitPurchaseDetails();
+      
+      expect(showLoaderMock).toHaveBeenCalledTimes(1);
+      expect(hideLoaderMock).toHaveBeenCalledTimes(1);
+      expect(navigate).toHaveBeenCalledWith('/company-design/shareholder-details');
+      expect(spy).toHaveBeenCalled();
+    });
+
+    test('submit purchase details success and solicitor was NOT selected on additional services', async () => {
+      spy = jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
+      PropertyService.SavePurchaseDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
+      const wrapperNew = setup(PurchaseDetails, { ...defaultProps,
+        additionalServices: {
+          solicitor: false
+        }
+      });
       
       await wrapperNew.instance().submitPurchaseDetails();
       

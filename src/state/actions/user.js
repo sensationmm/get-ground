@@ -1,6 +1,7 @@
 import {
   USER_LOGIN,
-  USER_UPDATE
+  USER_UPDATE,
+  DELETE_USER
 } from 'src/config/constants';
 
 export const userLogin = (user) => (dispatch) => {
@@ -10,4 +11,8 @@ export const userLogin = (user) => (dispatch) => {
 
 export const userUpdate = (key, value) => (dispatch) => {
   dispatch({ type: USER_UPDATE, key, value });
+};
+
+export const deleteUser = () => (dispatch) => {
+  dispatch({ type: DELETE_USER });
 };

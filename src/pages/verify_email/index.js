@@ -21,8 +21,10 @@ const AccountPending = ({ location }) => {
 
   if (!isPasswordReset && verificationCode) {
     AuthService.verifyEmail(verificationCode).then((response => {
-      if(response.status === 200) {
-        navigate('/onboarding/email-verified')
+      if(!response.data.error) {
+        navigate('/onboarding/email-verified');
+      } else {
+        navigate('/login');
       }
     }));
   }
