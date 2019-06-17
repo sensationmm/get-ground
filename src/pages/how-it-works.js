@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next';
-import Bounce from 'react-reveal/Bounce'
+import Reveal from 'react-reveal/Reveal';
 import useWindowScroll from 'react-use/lib/useWindowScroll';
 
 import Layout from 'src/components/Layout/Layout'
@@ -66,7 +66,7 @@ const HowItWorks = () => {
           <ul>
           {stepConfig.steps.map((step, idx) => (
             <div key={`${idx} + ${step.title}`} className="how-it-works-steps">
-              <Bounce fraction={0.8} >
+              <Reveal duration={450} effect="bounceIn">
                 <div className="how-it-works-step">
                   <img src={step.image}/>
                   <li className="how-it-works-step-li">
@@ -74,7 +74,7 @@ const HowItWorks = () => {
                     <p className="how-it-works-step-copy">{step.copy}</p>
                   </li>
                 </div>
-              </Bounce>
+              </Reveal>
             </div>
           ))}
           <div className="how-it-works-step-verticalLine" style={{height: lineHeight > 78 ? `78%` : `${lineHeight}%`}} data-test="how-it-works-vertical-line"></div>
