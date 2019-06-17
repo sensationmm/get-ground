@@ -1,6 +1,6 @@
 @import 'src/styles/modules/_variables.scss';
-@import '../../styles/modules/_colors';
-
+@import 'src/styles/modules/_colors';
+@import 'src/styles/modules/_animations';
 
 .how-it-works {
 
@@ -54,5 +54,10 @@
       font-weight: 300;
       line-height: 1.75;
     }
+
+    &.bounceIn {
+      animation-name: bounceIn;
+    }
   }
 }
+
