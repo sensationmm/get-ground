@@ -141,6 +141,20 @@ describe('<Layout />', () => {
       expect(deleteUserMock).toHaveBeenCalled();
       expect(navigate).toHaveBeenCalledWith('/login');
     });
+
+    test('_onIdle sets isLoggingOut to true and then logout to true after 10 seconds', (done) => {
+      const wrapper = setup(Layout, { ...props }, { logout: false, isLoggingOut: false });
+      
+      wrapper.instance()._onIdle();
+      jest.setTimeout(15000);
+
+      setTimeout(() => {
+        expect(wrapper.state().logout).toBe(true);
+        done();
+      }, 10000);
+
+      expect(wrapper.state().isLoggingOut).toBe(true);
+    });
   });
 
   afterEach(() => {
