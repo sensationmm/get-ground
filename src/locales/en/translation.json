@@ -576,7 +576,8 @@
       "fifth": "About us",
       "sixth": "Partnerships",
       "seventh": "FAQs",
-      "eigth": "Logout"
+      "eigth": "Login",
+      "ninth": "Logout"
     }
   },
   "modal": {
