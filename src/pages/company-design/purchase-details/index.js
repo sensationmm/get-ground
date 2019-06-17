@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { navigate } from 'gatsby';
+import { navigate, Link } from 'gatsby';
 
 import Layout from 'src/components/Layout/Layout'
 import formUtils from 'src/utils/form';
@@ -17,6 +17,7 @@ import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import Button from 'src/components/_buttons/Button/Button';
 import RadioGroup from 'src/components/_form/RadioGroup/RadioGroup';
 import Datepicker from 'src/components/Datepicker/Datepicker';
+import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
@@ -284,9 +285,11 @@ class PurchaseDetails extends Component {
       },
     ];
 
+    const headerActions = <Link to="/company-design"><ButtonHeader label={t('header.buttons.saveAndExit')} /></Link>;
+
     return (
       <>
-      <Layout secure>
+      <Layout headerActions={headerActions} secure>
         <div className="company-design-purchase-details" data-test="container-company-design-purchase-details">
           <h1>{t('companyDesign.purchaseDetails.heading')}</h1>
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { Elements, StripeProvider } from 'react-stripe-elements';
-import { navigate } from 'gatsby';
+import { navigate, Link } from 'gatsby';
 
 import formUtils from 'src/utils/form';
 
@@ -14,6 +14,7 @@ import PaymentInfo from 'src/components/PaymentInfo/PaymentInfo';
 import Form from 'src/components/_layout/Form/Form';
 import InputNumber from 'src/components/_form/InputNumber/InputNumber';
 import Stripe from 'src/components/Stripe/Stripe';
+import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 
 import { stripeKey } from 'src/config/endpoints';
 
@@ -162,9 +163,11 @@ class Payment extends Component {
       },
     ];
 
+    const headerActions = <Link to="/company-design"><ButtonHeader label={t('header.buttons.saveAndExit')} /></Link>;
+
     return (
       
-      <Layout secure>
+      <Layout headerActions={headerActions} secure>
         <div data-test="container-payment" className="payment" role="account">
           <h1>{ t('onBoarding.payment.title') }</h1>
 

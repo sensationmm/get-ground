@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import { navigate } from 'gatsby';
+import { navigate, Link } from 'gatsby';
 
 import Layout from 'src/components/Layout/Layout'
 import formUtils from 'src/utils/form';
@@ -17,6 +17,7 @@ import RadioGroup from 'src/components/_form/RadioGroup/RadioGroup';
 import Button from 'src/components/_buttons/Button/Button';
 import ModalWrapper from 'src/components/Modal/ModalWrapper';
 import ModalContent from 'src/components/Modal/ModalContent';
+import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 import { showModal, hideModal } from 'src/state/actions/modal';
@@ -186,8 +187,10 @@ class SolicitorDetails extends Component {
       )
     );
 
+    const headerActions = <Link to="/company-design"><ButtonHeader label={t('header.buttons.saveAndExit')} /></Link>;
+
     return (
-      <Layout secure>
+      <Layout headerActions={headerActions} secure>
         <div data-test="container-solicitor-details" className="solicitor-details" role="account">
           <h1>{ t('companyDesign.solicitorDetails.title') }</h1>
 

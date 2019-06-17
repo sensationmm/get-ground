@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
-import { navigate } from 'gatsby';
+import { navigate, Link } from 'gatsby';
 import PropTypes from 'prop-types'
 
 import formUtils from 'src/utils/form'
@@ -12,6 +12,7 @@ import Layout from 'src/components/Layout/Layout'
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox'
 import ModalContent from 'src/components/Modal/ModalContent';
 import ModalWrapper from 'src/components/Modal/ModalWrapper';
+import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 
 import { setAdditionalServices } from 'src/state/actions/additionalServices'
 import { showModal, hideModal } from 'src/state/actions/modal';
@@ -127,8 +128,10 @@ export class AdditionalServices extends Component {
       }
     ];
 
+    const headerActions = <Link to="/company-design"><ButtonHeader label={t('header.buttons.saveAndExit')} /></Link>;
+
     return (
-      <Layout>
+      <Layout headerActions={headerActions} secure>
         <div className="add-services" role="company-design">
           <h1 className="add-services-title">{t('additionalServices.title')}</h1>
           <IntroBox>{t('additionalServices.introBox')}</IntroBox>

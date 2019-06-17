@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { navigate } from 'gatsby';
+import { navigate, Link } from 'gatsby';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux'
 
@@ -13,6 +13,7 @@ import Button from 'src/components/_buttons/Button/Button';
 import ShareholderChoice from './fragments/ShareholderChoice';
 import AddShareholder from './fragments/AddShareholder';
 import ShareholderShares from './fragments/ShareholderShares';
+import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 import companyService from 'src/services/Company';
@@ -270,14 +271,17 @@ class ShareholderDetails extends Component {
     });
   }
 
+  
+
   render() {
     const { t, form } = this.props;
     const { hasShareholders, shareholders, stage, totalShares } = this.state;
 
     const mainShareholder = (100 - totalShares >= 0) ? 100 - totalShares : NaN;
+    const headerActions = <Link to="/company-design"><ButtonHeader label={t('header.buttons.saveAndExit')} /></Link>;
 
     return (
-      <Layout secure>
+      <Layout headerActions={headerActions} secure>
         <div data-test="container-shareholder-details" className="shareholder" role="company-design">
           {!hasShareholders &&
             <ShareholderChoice

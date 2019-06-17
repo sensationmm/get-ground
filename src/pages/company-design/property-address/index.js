@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import { navigate } from 'gatsby'
+import { navigate, Link } from 'gatsby'
 
 import Layout from 'src/components/Layout/Layout'
 import formUtils from 'src/utils/form';
@@ -16,6 +16,7 @@ import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import Select from 'src/components/_form/Select/Select';
 import Button from 'src/components/_buttons/Button/Button';
 import Checkbox from 'src/components/_form/Checkbox/Checkbox';
+import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
@@ -227,9 +228,11 @@ class PropertyAddress extends Component {
       }
     ];
 
+    const headerActions = <Link to="/company-design"><ButtonHeader label={t('header.buttons.saveAndExit')} /></Link>;
+
     return (
       <>
-      <Layout>
+      <Layout headerActions={headerActions} secure>
         <div className="company-design-property-address" data-test="container-company-design-property-address">
           <h1>{t('companyDesign.propertyAddress.heading')}</h1>
 

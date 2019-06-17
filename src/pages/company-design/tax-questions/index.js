@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
-import { navigate } from 'gatsby';
+import { navigate, Link } from 'gatsby';
 import PropTypes from 'prop-types'
 
 import formUtils from 'src/utils/form'
@@ -11,6 +11,7 @@ import Button from 'src/components/_buttons/Button/Button'
 import Layout from 'src/components/Layout/Layout'
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox'
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
+import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
@@ -136,9 +137,10 @@ export class TaxQuestions extends Component {
     ];
 
     const { showErrorMessage, errors } = form;
+    const headerActions = <Link to="/company-design"><ButtonHeader label={t('header.buttons.saveAndExit')} /></Link>;
 
     return (
-      <Layout secure>
+      <Layout headerActions={headerActions} secure>
         <div className="tax-questions" role="company-design">
         <h1 className="tax-questions-title">{t('taxQuestions.title')}</h1>
         <IntroBox>{t('taxQuestions.introBox')}</IntroBox>
