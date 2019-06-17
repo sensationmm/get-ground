@@ -16,6 +16,14 @@
   "acceptanceOfRole": {
     "title": "Acceptance of Role",
     "content": "has invited you to be a partner in his company, see below for more details.",
+    "decline": {
+      "title": "Sorry to hear that…",
+      "content": {
+        "firstIntro": "Please get in touch with",
+        "firstContinue": "who has made the invitation to let them know you’ve declined the role, or if do not agree with the details provided.",
+        "second": "Alternatively you can contact us for more information or to remove your data from our system."
+      }
+    },
     "property": {
       "address": "Address of property being purchased",
       "price": "Price of property",
