@@ -8,6 +8,7 @@ import { CSSTransition } from 'react-transition-group';
 import { withTranslation } from 'react-i18next';
 import LiveChat from 'react-livechat';
 
+import { inArray } from 'src/utils/functions';
 import SEO from 'src/components/seo';
 import Header from 'src/components/Header/Header';
 import Loader from 'src/components/Loader/Loader';
@@ -139,9 +140,11 @@ export class Layout extends Component {
       }
     ];
 
+    const roles = children.props && children.props.role && children.props.role.split(' ');
+
     return (
 
-      <div className={classNames('wrapper', `${children.props && children.props.role}`)}>
+      <div className={classNames('wrapper', `${roles && roles.join(' ')}`)}>
         <SEO title="GetGround" keywords={[`gatsby`, `application`, `react`]} />
 
         {isLoading && <Loader />}
@@ -160,7 +163,7 @@ export class Layout extends Component {
           <main className="main">{children}</main>
         </div>
         <div id="modal-root"></div>
-        <Footer />
+        {!inArray('fullscreen', roles) && <Footer />}
         <CSSTransition
           in={menuIsOpen}
           timeout={400}

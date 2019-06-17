@@ -2,6 +2,7 @@ import BaseService from './BaseService';
 import store from 'src/state/store';
 
 import { saveDocuments } from 'src/state/actions/documents';
+import { saveUser } from 'src/state/actions/user';
 
 /**
  * AccountService
@@ -31,6 +32,23 @@ class AccountService extends BaseService {
   };
 
   /**
+   * getUser
+   * fetches a single user based on id
+   * @param {integer} userID - id of user to fetch
+   * @return {Promise} getUser response
+   */
+  getUser = (userID) => {
+    const config = {
+      url: `users/${userID}`,
+      method: 'get'
+    };
+
+    return this.doRequest(config, (response) => {
+      store.dispatch(saveUser(response.data));
+    });
+  }
+
+  /**
    * savePersonalDetails
    * saves users personal details
    * @param {object} data - data object for post
@@ -52,7 +70,9 @@ class AccountService extends BaseService {
       data
     };
 
-    return this.doRequest(config);
+    return this.doRequest(config, (response) => {
+      store.dispatch(saveUser(response.data));
+    });
   };
 
   /**
@@ -114,6 +134,27 @@ class AccountService extends BaseService {
   
     return this.doRequest(config, (response) => {
       store.dispatch(saveDocuments(response.data.filter(item => item.creator === store.getState().user.id)));
+    });
+  };
+
+  /**
+   * completeOnboarding
+   * Marks onboarding process as complete
+   * @return {Promise} completeOnboarding response
+   */
+  completeOnboarding = () => {
+    const userID = store.getState().user.id.toString();
+
+    const config = {
+      url: `users/${userID}`,
+      method: 'put',
+      data: {
+        last_page_visited: 'dashboard'
+      }
+    };
+
+    return this.doRequest(config, (response) => {
+      store.dispatch(saveUser(response.data));
     });
   };
 }

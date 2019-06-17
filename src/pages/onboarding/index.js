@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, Component } from 'react'
 import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
@@ -15,18 +15,58 @@ import IconIDCheck from 'src/assets/images/onboarding-id-check.svg'
 
 import './process-tracker.scss'
 
+import { showLoader, hideLoader } from 'src/state/actions/loader';
+
+import accountService from 'src/services/Account';
+export const AccountService = new accountService();
+
 /**
  * ProcessTracker
  * @author Ravin Patel
  * @class
  * @return {ReactComponent} ProcessTracker
  */
-export class ProcessTracker extends React.Component {
+export class ProcessTracker extends Component {
   constructor(props) {
     super(props)
     this.state = {
       checkbox: false
     }
+  }
+
+  componentDidMount() {
+    this.getProgress();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { isLoading } = this.props;
+
+    if(!isLoading && isLoading !== prevProps.isLoading) {
+      this.getProgress();
+    }
+  }
+
+  getProgress = () => {
+    const { userID, showLoader, hideLoader } = this.props;
+
+    showLoader();
+
+    if(userID) {
+      AccountService.getUser(userID).then(() => {
+        hideLoader();
+      });
+    }
+  }
+
+  completeOnboarding = () => {
+    const { showLoader, hideLoader } = this.props;
+
+    showLoader();
+
+    AccountService.completeOnboarding().then(() => {
+      hideLoader();
+      navigate('/onboarding/confirmation')
+    });
   }
 
   render() {
@@ -89,7 +129,7 @@ export class ProcessTracker extends React.Component {
                   <Button
                     classes="primary"
                     fullWidth
-                    onClick={() => navigate('/onboarding/confirmation')}
+                    onClick={this.completeOnboarding}
                     disabled={!this.state.checkbox}
                   />
                 </div>
@@ -103,15 +143,22 @@ export class ProcessTracker extends React.Component {
 
 const mapStateToProps = (state) => ({
   isLoading: state.loader,
+  userID: state.user.id,
   progress: state.user.progress
 });
+
+const actions = { showLoader, hideLoader };
 
 ProcessTracker.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   t: PropTypes.func.isRequired,
   i18n: PropTypes.object.isRequired,
-  progress: PropTypes.object
+  progress: PropTypes.object,
+  isLoading: PropTypes.bool,
+  userID: PropTypes.number
 };
 
-export default connect(mapStateToProps, null)(withTranslation()(ProcessTracker))
+export const RawComponent = ProcessTracker;
+
+export default connect(mapStateToProps, actions)(withTranslation()(ProcessTracker))
