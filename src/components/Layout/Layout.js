@@ -168,7 +168,7 @@ export class Layout extends Component {
 
       <div className={classNames('wrapper', `${children.props && children.props.role}`)}>
 
-        { userID && 
+        { userID &&
           <IdleTimer
             ref={ref => { this.idleTimer = ref }}
             element={document}
@@ -198,7 +198,7 @@ export class Layout extends Component {
         <div id="modal-root"></div>
         <Footer />
 
-        <ModalWrapper 
+        <ModalWrapper
           transitionBool={menuIsOpen}
           transitionTime={400}
           classes="menu"
@@ -206,7 +206,7 @@ export class Layout extends Component {
           <Menu menuLinks={menuLinks} />
         </ModalWrapper>
 
-        <ModalWrapper 
+        <ModalWrapper
           transitionBool={isLoggingOut}
           transitionTime={600}
           classes="modal"

@@ -12,6 +12,7 @@ import List from 'src/components/_layout/List/List'
 import RadioGroup from 'src/components/_form/RadioGroup/RadioGroup'
 import Button from 'src/components/_buttons/Button/Button'
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox'
+import Modal from './modal/index'
 
 import { showLoader, hideLoader } from 'src/state/actions/loader'
 
@@ -136,6 +137,11 @@ export class AcceptanceOfRole extends React.Component {
         ],
         value: values.shareholder,
         validationFunction: 'validateRequired',
+      },
+      {
+        component: Modal,
+        name: 'shareholder Modal',
+        value: values.shareholder,
       },
       {
         stateKey: 'director',

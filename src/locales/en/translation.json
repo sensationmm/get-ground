@@ -25,7 +25,15 @@
       "shareholder": "Do you accept to be a shareholder in this company?",
       "director": "Do you accept to be a director in this company?"
     },
-    "confirmBtn": "Confirm"
+    "confirmBtn": "Confirm",
+    "modal": {
+      "shareholder": {
+        "heading": "Being a shareholder"
+      },
+      "director": {
+        "heading": "Being a director"
+      }
+    }
   },
   "account": {
     "signature": {
