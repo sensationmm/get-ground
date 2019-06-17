@@ -16,7 +16,7 @@ const Decline = ({ location }) => {
       <div data-test="container-acceptance-of-role" className="acceptance-of-role-decline" role="account fullscreen no-background-image">
       <img className="acceptance-of-role--img" src={house} />
         <h1 className="acceptance-of-role--title">{t('acceptanceOfRole.decline.title')}</h1>
-        <p className="acceptance-of-role--copy-intro">{`${t('acceptanceOfRole.decline.content.firstIntro')} ${location.state.inviteeName} ${t('acceptanceOfRole.decline.content.firstContinue')}`}</p>
+        <p className="acceptance-of-role--copy-intro">{`${t('acceptanceOfRole.decline.content.firstIntro')} ${location.state && location.state.inviteeName} ${t('acceptanceOfRole.decline.content.firstContinue')}`}</p>
         <p className="acceptance-of-role--copy">{t('acceptanceOfRole.decline.content.second')}</p>
       </div>
     </Layout>
