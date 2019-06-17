@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { navigate } from 'gatsby';
 
 import Button from 'src/components/_buttons/Button/Button';
 
 import './stripe.scss';
+
 
 /**
  * Stripe
@@ -76,7 +78,12 @@ class Stripe extends Component {
           onClick={this.validateStripe}
         />
 
-        <Button classes="secondary" label={backButtonLabel} fullWidth />
+        <Button 
+          classes="secondary" 
+          label={backButtonLabel} 
+          fullWidth 
+          onClick={() => navigate('/company-design/tax-questions')}
+        />
       </div>
     )
   }

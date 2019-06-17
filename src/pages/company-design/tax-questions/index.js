@@ -24,6 +24,8 @@ export const CompanyService = new companyService();
 export class TaxQuestions extends Component {
   constructor(props) {
     super(props);
+
+    this.config = []
   }
 
   componentDidMount() {

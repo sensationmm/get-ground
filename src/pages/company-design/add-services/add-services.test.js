@@ -41,6 +41,7 @@ describe('', () => {
       ...props,
       form: {
         values: {
+          hasUsedAdditionalServices: true,
           find_mortgage: 'yes',
           find_property_insurance: 'no',
           find_property_management: 'yes',
@@ -54,6 +55,7 @@ describe('', () => {
     wrapper.unmount()
 
     expect(props.setAdditionalServices).toHaveBeenCalledWith({
+      hasUsedAdditionalServices: true,
       mortgage: true,
       insurance: false,
       management: true,

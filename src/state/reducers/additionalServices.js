@@ -3,6 +3,7 @@ import {
 } from 'src/config/constants';
 
 export const initialState = {
+  hasUsedAdditionalServices: false,
   mortgage: false,
   insurance: false,
   management: false,

@@ -4,7 +4,7 @@ import Layout from 'src/components/Layout/Layout'
 
 const RetakePayment = () => {
   return (
-    <Layout secure redirect='onboarding/payment?retakePayment=true'>
+    <Layout secure redirect='company-design/payment?retakePayment=true'>
       <div></div>
     </Layout>
   );

@@ -1,6 +1,6 @@
 import { setup, findByTestAttr } from 'src/test-utils/test-utils';
 
-import { RawComponent } from 'src/pages/onboarding/payment';
+import { RawComponent } from 'src/pages/company-design/payment';
 import InputNumber from 'src/components/_form/InputNumber/InputNumber';
 import Stripe from 'src/components/Stripe/Stripe';
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';

@@ -46,6 +46,7 @@ export class AdditionalServices extends Component {
     const { form: { values: { find_mortgage, find_property_insurance,  find_property_management, find_solicitor }}} = this.props;
 
     this.props.setAdditionalServices({
+      hasUsedAdditionalServices: true,
       mortgage: find_mortgage === 'yes',
       insurance: find_property_insurance === 'yes',
       management: find_property_management === 'yes',

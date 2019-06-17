@@ -43,7 +43,7 @@ describe('<ShareholderDetails />', () => {
       await wrapper.instance().saveShareholders();
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
-      expect(navigate).toHaveBeenCalledWith('/company-design/company-complete');
+      expect(navigate).toHaveBeenCalledWith('/company-design/tax-questions');
 
       showLoaderMock.mockClear();
       hideLoaderMock.mockClear();
@@ -159,7 +159,7 @@ describe('<ShareholderDetails />', () => {
 
     test('setNoShareholders()', () => {
       wrapper.instance().setNoShareholders();
-      expect(navigate).toHaveBeenCalledWith('/company-design');
+      expect(navigate).toHaveBeenCalledWith('/company-design/tax-questions');
     });
   });
 

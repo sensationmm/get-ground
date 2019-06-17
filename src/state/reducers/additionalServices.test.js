@@ -8,6 +8,7 @@ describe('Additional Services', () => {
     const action = {
       type: SET_ADDITIONAL_SERVICES,
       payload: {
+        hasUsedAdditionalServices: true,
         mortgage: true,
         insurance: false,
         management: true,
@@ -15,6 +16,7 @@ describe('Additional Services', () => {
       }
     }
     const expectedState = {
+      hasUsedAdditionalServices: true,
       mortgage: true,
       insurance: false,
       management: true,

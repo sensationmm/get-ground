@@ -24,16 +24,6 @@ describe('process-tracker', () => {
       title: 'ID Check',
       copy: 'Tax and regulatory details',
       'imageAltText': 'ID card'
-    },
-    step4: {
-      'title': 'Compliance Check',
-      'copy': 'Verify your risk health',
-      'imageAltText': 'Warning sign'
-    },
-    step5: {
-      'title': 'Payment',
-      'copy': 'Pay for service',
-      'imageAltText': 'Warning sign'
     }
   }
 
@@ -51,7 +41,7 @@ describe('process-tracker', () => {
   })
 
   test('renders ProcessSection', () => {
-    expect(wrapper.find('ProcessSection')).toHaveLength(4);
+    expect(wrapper.find('ProcessSection')).toHaveLength(3);
   })
 
   test('renders Checkbox', () => {

@@ -171,7 +171,7 @@ class ShareholderDetails extends Component {
   }
 
   setNoShareholders = () => {
-    navigate('/company-design');
+    navigate('/company-design/tax-questions');
   }
 
   addDetails = () => {
@@ -265,7 +265,7 @@ class ShareholderDetails extends Component {
     CompanyService.saveShareholders(shareholders).then(response => {
       hideLoader();
       if(response.status === 404) {
-        navigate('/company-design/company-complete');
+        navigate('/company-design/tax-questions');
       }
     });
   }
