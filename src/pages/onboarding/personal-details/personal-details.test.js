@@ -36,7 +36,7 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
   beforeEach(() => {
     wrapper = setup(PersonalDetails, defaultProps);
   });
-  
+
   test('renders without error', () => {
     const component = findByTestAttr(wrapper, 'container-onboarding-details');
     expect(component.length).toBe(1);
@@ -50,7 +50,7 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
 
   test('expect handleCountryChange to be called on select change', () => {
     const component = findByTestAttr(wrapper, 'container-onboarding-details');
-    
+
     jest.spyOn(wrapper.instance(), 'handleCountryChange');
 
     component.find(Select).last().props().callback('spain');
@@ -68,9 +68,9 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
 
   test('expect closeDatePicker to be called when the Datepicker is closed', () => {
     const wrapper = setup(PersonalDetails, {
-      ...defaultProps, 
+      ...defaultProps,
       form: {
-      ...defaultProps.form, 
+      ...defaultProps.form,
       showErrorMessage: true
       }
     });
@@ -112,9 +112,9 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
       spy = jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
       AccountService.savePersonalDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
       const wrapperNew = setup(PersonalDetails, defaultProps);
-      
+
       await wrapperNew.instance().initFormValidation();
-      
+
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
       expect(navigate).toHaveBeenCalledWith('/onboarding/id-check');
@@ -126,9 +126,9 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
       const errorsSpy = jest.spyOn(formUtils, 'setFormError');
       AccountService.savePersonalDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 400 }));
       const wrapperNew = setup(PersonalDetails, defaultProps);
-      
+
       await wrapperNew.instance().initFormValidation();
-      
+
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
       expect(errorsSpy).toHaveBeenCalledWith('form.correctErrors');
@@ -165,5 +165,5 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
     showLoaderMock.mockClear();
     hideLoaderMock.mockClear();
   });
-  
+
 });
