@@ -9,7 +9,8 @@ import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
 
 jest.mock('gatsby', () => ({
-  navigate: jest.fn()
+  navigate: jest.fn(),
+  Link: 'link'
 }));
 
 describe('<ShareholderDetails />', () => {

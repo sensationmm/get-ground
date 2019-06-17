@@ -11,7 +11,8 @@ import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import { initialState as ReduxFormMock } from 'src/state/reducers/form';
 
 jest.mock('gatsby', () => ({
-  navigate: jest.fn()
+  navigate: jest.fn(),
+  Link: 'link'
 }));
 
 describe('purchase details', () => {
