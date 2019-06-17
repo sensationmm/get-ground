@@ -123,7 +123,7 @@ export class Layout extends Component {
 
   render() {
     this.loggedOutOnly();
-    const { children, headerActions, isLoading, userID, t, menuIsOpen } = this.props;
+    const { children, headerActions, isLoading, userID, t, menuIsOpen, isLoggedIn } = this.props;
     const { isLoggingOut } = this.state;
 
     const menuLinks = [
@@ -156,7 +156,7 @@ export class Layout extends Component {
         link: '/faqs'
       },
       {
-        text: t('menu.links.eigth'),
+        text: isLoggedIn ? t('menu.links.ninth') : t('menu.links.eigth'),
         function: (e) => {
           e.preventDefault();
           this.setState({ logout: true });
@@ -168,7 +168,7 @@ export class Layout extends Component {
 
       <div className={classNames('wrapper', `${children.props && children.props.role}`)}>
 
-        { userID && 
+        { userID &&
           <IdleTimer
             ref={ref => { this.idleTimer = ref }}
             element={document}
@@ -198,7 +198,7 @@ export class Layout extends Component {
         <div id="modal-root"></div>
         <Footer />
 
-        <ModalWrapper 
+        <ModalWrapper
           transitionBool={menuIsOpen}
           transitionTime={400}
           classes="menu"
@@ -206,7 +206,7 @@ export class Layout extends Component {
           <Menu menuLinks={menuLinks} />
         </ModalWrapper>
 
-        <ModalWrapper 
+        <ModalWrapper
           transitionBool={isLoggingOut}
           transitionTime={600}
           classes="modal"
@@ -243,7 +243,8 @@ Layout.propTypes = {
   hideMenu: PropTypes.func,
   t: PropTypes.func.isRequired,
   hideLoader: PropTypes.func,
-  deleteUser: PropTypes.func
+  deleteUser: PropTypes.func,
+  isLoggedIn: PropTypes.bool
 }
 
 Layout.defaultProps = {
@@ -254,7 +255,8 @@ const mapStateToProps = (state) => ({
   isLoading: state.loader.isLoading,
   userID: state.user.id,
   activeCompany: state.activeCompany,
-  menuIsOpen: state.menu.isOpen
+  menuIsOpen: state.menu.isOpen,
+  isLoggedIn: state.user.email
 });
 
 const actions = {
