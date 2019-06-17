@@ -3,7 +3,6 @@ import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import { navigate } from 'gatsby';
 import PropTypes from 'prop-types'
-import { CSSTransition } from 'react-transition-group';
 
 import formUtils from 'src/utils/form'
 import Form from 'src/components/_layout/Form/Form'
@@ -11,8 +10,8 @@ import RadioGroup from 'src/components/_form/RadioGroup/RadioGroup'
 import Button from 'src/components/_buttons/Button/Button'
 import Layout from 'src/components/Layout/Layout'
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox'
-import Modal from 'src/components/Modal/Modal';
 import ModalContent from 'src/components/Modal/ModalContent';
+import ModalWrapper from 'src/components/Modal/ModalWrapper';
 
 import { setAdditionalServices } from 'src/state/actions/additionalServices'
 import { showModal, hideModal } from 'src/state/actions/modal';
@@ -135,33 +134,31 @@ export class AdditionalServices extends Component {
           <Form className="add-services-form">
             {formUtils.renderForm(config)}
           </Form>
-          <CSSTransition
-            in={modalIsOpen}
-            timeout={600}
-            classNames="modal"
-            unmountOnExit
+
+          <ModalWrapper 
+            transitionBool={modalIsOpen}
+            transitionTime={600}
+            classes="modal"
           >
-            <Modal>
-              <ModalContent
-                heading={t('additionalServices.modalHeading')}
-                htmlContent={
-                  <>
-                  <p>{t('additionalServices.modalPara1')}</p>
-                  <p>{t('additionalServices.modalPara2')}</p>
-                  <p>{t('additionalServices.modalPara3')}</p>
-                  <Button
-                    label={t('additionalServices.modalContentButton')}
-                    onClick={() => navigate('/company-design')}
-                    classes="primary"
-                    fullWidth
-                  />
-                  </>
-                }
-                closeModal={hideModal}
-                closeIconAltText={t('onBoarding.createAccount.termsModalCloseIconAltText')}
-              />
-            </Modal>
-          </CSSTransition>
+            <ModalContent
+              heading={t('additionalServices.modalHeading')}
+              htmlContent={
+                <>
+                <p>{t('additionalServices.modalPara1')}</p>
+                <p>{t('additionalServices.modalPara2')}</p>
+                <p>{t('additionalServices.modalPara3')}</p>
+                <Button
+                  label={t('additionalServices.modalContentButton')}
+                  onClick={() => navigate('/company-design')}
+                  classes="primary"
+                  fullWidth
+                />
+                </>
+              }
+              closeModal={hideModal}
+              closeIconAltText={t('onBoarding.createAccount.termsModalCloseIconAltText')}
+            />
+          </ModalWrapper>
         </div>
       </Layout>
     )

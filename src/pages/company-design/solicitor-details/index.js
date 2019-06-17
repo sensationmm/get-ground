@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import { CSSTransition } from 'react-transition-group';
 import { navigate } from 'gatsby';
 
 import Layout from 'src/components/Layout/Layout'
@@ -16,7 +15,7 @@ import InputPhone from 'src/components/_form/InputPhone/InputPhone';
 import Checkbox from 'src/components/_form/Checkbox/Checkbox';
 import RadioGroup from 'src/components/_form/RadioGroup/RadioGroup';
 import Button from 'src/components/_buttons/Button/Button';
-import Modal from 'src/components/Modal/Modal';
+import ModalWrapper from 'src/components/Modal/ModalWrapper';
 import ModalContent from 'src/components/Modal/ModalContent';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
@@ -228,23 +227,21 @@ class SolicitorDetails extends Component {
             <br />
           </Form>
 
-          <CSSTransition
-            in={modalIsOpen}
-            timeout={600}
-            classNames="modal"
-            unmountOnExit
+          <ModalWrapper 
+            transitionBool={modalIsOpen}
+            transitionTime={600}
+            classes="modal"
           >
-            <Modal>
-              <ModalContent
-                heading={t('companyDesign.solicitorDetails.modal.heading')}
-                content={termsMarkdown}
-                closeModal={hideModal}
-                downloadButtonLabel={t('modal.downloadButtonLabel')}
-                closeIconAltText={t('modal.closeIconAltText')}
-                modalImage={termsImage}
-              />
-            </Modal>
-          </CSSTransition>
+            <ModalContent
+              heading={t('companyDesign.solicitorDetails.modal.heading')}
+              content={termsMarkdown}
+              closeModal={hideModal}
+              downloadButtonLabel={t('modal.downloadButtonLabel')}
+              closeIconAltText={t('modal.closeIconAltText')}
+              modalImage={termsImage}
+            />
+          </ModalWrapper>
+
         </div>
       </Layout>
     );

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { Element, animateScroll, scroller } from 'react-scroll';
 import { Link } from 'gatsby';
-import { CSSTransition } from 'react-transition-group';
 import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 
 import Layout from 'src/components/Layout/Layout';
@@ -16,7 +15,7 @@ import QuizQ2 from './fragments/QuizQ2';
 import QuizQ3 from './fragments/QuizQ3';
 import QuizQ4 from './fragments/QuizQ4';
 import QuizQ5 from './fragments/QuizQ5';
-import Modal from 'src/components/Modal/Modal';
+import ModalWrapper from 'src/components/Modal/ModalWrapper';
 import ModalContent from 'src/components/Modal/ModalContent';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
@@ -279,27 +278,24 @@ class ComplianceCheck extends Component {
             </Element>
           </Form>
 
-          <CSSTransition
-              in={modalIsOpen}
-              timeout={600}
-              classNames="modal"
-              unmountOnExit
-            >
-              <Modal>
-                <ModalContent
-                  heading={t('onBoarding.compliance.modalHeading')}
-                  content={modalMarkdown}
-                  closeModal={this.closeModal}
-                  downloadButtonLabel={t('onBoarding.compliance.modalDownloadButtonText')}
-                  closeIconAltText={t('onBoarding.compliance.modalCloseAltText')}
-                  modalImage={investorStatementImage}
-                  checkboxLabel={t('onBoarding.compliance.modalCheckboxLabel')}
-                  hasCheckbox={true}
-                  checkBoxChecked={modalCheckBoxChecked}
-                  handleCheckboxChange={() => this.setState({ modalCheckBoxChecked: !modalCheckBoxChecked})}
-                />
-              </Modal>
-            </CSSTransition>
+          <ModalWrapper 
+            transitionBool={modalIsOpen}
+            transitionTime={600}
+            classes="modal"
+          >
+            <ModalContent
+              heading={t('onBoarding.compliance.modalHeading')}
+              content={modalMarkdown}
+              closeModal={this.closeModal}
+              downloadButtonLabel={t('onBoarding.compliance.modalDownloadButtonText')}
+              closeIconAltText={t('onBoarding.compliance.modalCloseAltText')}
+              modalImage={investorStatementImage}
+              checkboxLabel={t('onBoarding.compliance.modalCheckboxLabel')}
+              hasCheckbox={true}
+              checkBoxChecked={modalCheckBoxChecked}
+              handleCheckboxChange={() => this.setState({ modalCheckBoxChecked: !modalCheckBoxChecked})}
+            />
+          </ModalWrapper>
         </div>
       </Layout>
     );

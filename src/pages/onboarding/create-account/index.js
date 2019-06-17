@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import { CSSTransition } from 'react-transition-group';
 import { navigate } from 'gatsby';
 
 import Layout from 'src/components/Layout/Layout'
@@ -16,7 +15,7 @@ import InputPassword from 'src/components/_form/InputPassword/InputPassword';
 import Checkbox from 'src/components/_form/Checkbox/Checkbox';
 import Button from 'src/components/_buttons/Button/Button';
 import StrengthMeter from 'src/components/StrengthMeter/StrengthMeter';
-import Modal from 'src/components/Modal/Modal';
+import ModalWrapper from 'src/components/Modal/ModalWrapper';
 import ModalContent from 'src/components/Modal/ModalContent';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
@@ -210,23 +209,21 @@ class CreateAccount extends Component {
 
             <Button classes="secondary" label={ t('onBoarding.createAccount.ctaSecondary') } fullWidth />
           </Form>
-          <CSSTransition
-            in={modalIsOpen}
-            timeout={600}
-            classNames="modal"
-            unmountOnExit
+          
+          <ModalWrapper 
+            transitionBool={modalIsOpen}
+            transitionTime={600}
+            classes="modal"
           >
-            <Modal>
-              <ModalContent
-                heading={modalTitle}
-                content={modalMarkdown}
-                closeModal={hideModal}
-                downloadButtonLabel={t('onBoarding.createAccount.termsModalDownloadButtonLabel')}
-                closeIconAltText={t('onBoarding.createAccount.termsModalCloseIconAltText')}
-                modalImage={termsImage}
-              />
-            </Modal>
-          </CSSTransition>
+            <ModalContent
+              heading={modalTitle}
+              content={modalMarkdown}
+              closeModal={hideModal}
+              downloadButtonLabel={t('onBoarding.createAccount.termsModalDownloadButtonLabel')}
+              closeIconAltText={t('onBoarding.createAccount.termsModalCloseIconAltText')}
+              modalImage={termsImage}
+            />
+          </ModalWrapper>
         </div>
       </Layout>
     );
