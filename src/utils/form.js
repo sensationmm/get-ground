@@ -13,7 +13,7 @@ import { isArray } from 'util';
  * @param {object} fieldsValues - redux state default values container
  * @return {void}
  */
-export const initFormState = (fieldsInit) => {
+export const initFormState = (fieldsInit, fieldsValues) => {
   const fields = !isArray(fieldsInit) ? fieldsInit : new Array(...fieldsInit);
   const errors = !isArray(fieldsInit) ? {} : { fields: fieldsInit.map(i => new Object()) };
 
