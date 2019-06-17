@@ -6,11 +6,12 @@ import PropTypes from 'prop-types';
 import { ProcessSection } from 'src/components/ProcessSection/ProcessSection'
 import Layout from 'src/components/Layout/Layout'
 import Button from 'src/components/_buttons/Button/Button'
-import PropertyImage from 'src/assets/images/property.svg'
-import PurchaseImage from 'src/assets/images/purchase.svg'
-import SolicitorImage from 'src/assets/images/solicitor.svg'
-import ShareholderImage from 'src/assets/images/shareholder.svg'
-import ServicesImage from 'src/assets/images/services.svg'
+import PropertyImage from 'src/assets/images/company-property-details.svg'
+import PurchaseImage from 'src/assets/images/company-purchase-details.svg'
+import SolicitorImage from 'src/assets/images/company-solicitor-details.svg'
+import ShareholderImage from 'src/assets/images/company-shareholder-details.svg'
+import ServicesImage from 'src/assets/images/company-add-services.svg'
+import TaxQuestion from 'src/assets/images/company-tax-question.svg'
 
 import './process-tracker.scss'
 
@@ -70,6 +71,14 @@ export class ProcessTracker extends React.Component {
           'path': '/company-design/add-services',
           'status': 'to_do',
           'image': ServicesImage,
+        },
+        {
+          'title': sectionsContent['step6'].title,
+          'imageAltText': sectionsContent['step6'].imageAltText,
+          'copy': sectionsContent['step6'].copy,
+          'path': '/company-design/tax-questions',
+          'status': 'to_do',
+          'image': TaxQuestion,
         }
       ]
     };

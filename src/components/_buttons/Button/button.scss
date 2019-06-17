@@ -79,6 +79,19 @@
     }
   }
 
+  &.white {
+    min-width: 100px;
+    background: $white;
+    color: $text;
+    border: 2px solid $white;
+    padding: 10px 15px;
+
+    &.small {
+      padding: 5px 15px;
+      font-size: 13px;
+    }
+  }
+
   &.link {
     color: $primary;
     text-decoration: underline;

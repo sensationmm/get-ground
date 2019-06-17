@@ -13,6 +13,20 @@
       "sixth": "Come join us create a more productive and fairer world."
     }
   },
+  "acceptanceOfRole": {
+    "title": "Acceptance of Role",
+    "content": "has invited you to be a partner in his company, see below for more details.",
+    "property": {
+      "address": "Address of property being purchased",
+      "price": "Price of property",
+      "shares": "Your ownership"
+    },
+    "question": {
+      "shareholder": "Do you accept to be a shareholder in this company?",
+      "director": "Do you accept to be a director in this company?"
+    },
+    "confirmBtn": "Confirm"
+  },
   "account": {
     "signature": {
       "title": "Set up your signature",
@@ -200,7 +214,7 @@
       "button2": "No, thanks"
     },
     "progressTracker": {
-      "inProgressTitle": "Design your company in 5 steps",
+      "inProgressTitle": "Design your company in 6 steps",
       "complete": "complete",
       "completeTitle": "All 5 steps complete",
       "sections": {
@@ -228,6 +242,11 @@
           "title": "Add Services",
           "copy": "Additional services you will need",
           "imageAltText": "Services"
+        },
+        "step6": {
+          "title": "Tax Questions",
+          "copy": "To better understand your needs",
+          "imageAltText": "Tax Questions"
         }
       }
     },
@@ -615,7 +634,8 @@
   "onBoarding": {
     "accountPending": {
       "title": "We‘ve sent you an email",
-      "text": "With a magic link to the email address you provided. Please click the button on the email to verify your account.",
+      "initialText": "With a magic link to",
+      "text": "Please click the button on the email to verify your account.",
       "introBox": "If you didn‘t receive an email please check your spam folder and if it isn‘t there contact us.",
       "contactLink": "Contact us"
     },
@@ -943,6 +963,16 @@
     },
     "edit": "Edit",
     "save": "Save"
+  },
+  "taxQuestions": {
+    "title": "Tax questions",
+    "introBox": "The money you provide to purchase your property is lent by you to your company. We create a loan note between yourself and your company for this. This question determines the interest rate we should apply to your loan to the company",
+    "ownership": "Do you have ownership or voting rights of 25% or more in any companies, partnerships or other enterprises?",
+    "employ": "Do they employ fewer than 50 employees combined?",
+    "assets": "Do they have assets of 10m€ or less combined?",
+    "turnover": "Do they have a turnover of 10m€ or less combined?",
+    "nextBtn": "Next",
+    "backBtn": "Back"
   },
   "trustAndPrivacy" : {
     "title": "Trust and Privacy",

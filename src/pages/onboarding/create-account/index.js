@@ -26,7 +26,7 @@ export const AccountService = new accountService();
 import modalService from 'src/services/Modal';
 export const ModalService = new modalService();
 
-import termsImage from 'src/assets/images/terms-image.svg';
+import termsImage from 'src/assets/images/documents-modal.svg';
 
 /**
  * CreateAccount
@@ -71,6 +71,7 @@ class CreateAccount extends Component {
           navigate('/onboarding/verify_email', {
             state: {
               passwordReset: false,
+              email
             }
           });
         } else if(response.status === 500) {

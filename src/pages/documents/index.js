@@ -26,7 +26,7 @@ import CompanyArticlesSignedImage from 'src/assets/images/company-articles-signe
 import DirectorsLoanSignedImage from 'src/assets/images/directors-loan-signed.svg';
 import ConsentToActSignedImage from 'src/assets/images/consent-to-act-signed.svg';
 import BoardResolutionSignedImage from 'src/assets/images/board-resolution-signed.svg';
-import investorStatementImage from 'src/assets/images/investor-statement-image.svg';
+import documentsModal from 'src/assets/images/documents-modal.svg';
 
 import './my-documents.scss';
 
@@ -274,7 +274,7 @@ export class MyDocuments extends Component {
                 closeModal={this.closeModal}
                 downloadButtonLabel={t('myDocuments.modalDownloadButtonText')}
                 closeIconAltText={t('myDocuments.modalCloseAltText')}
-                modalImage={investorStatementImage}
+                modalImage={documentsModal}
                 modalErrorText={t('myDocuments.modalDownloadError')}
                 hasSignature={true}
                 isDocumentSigned={this.state[modalDocumentKey]}
