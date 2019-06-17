@@ -210,8 +210,8 @@ class CreateAccount extends Component {
 
             <Button classes="secondary" label={ t('onBoarding.createAccount.ctaSecondary') } fullWidth />
           </Form>
-          
-          <ModalWrapper 
+
+          <ModalWrapper
             transitionBool={modalIsOpen}
             transitionTime={600}
             classes="modal"
