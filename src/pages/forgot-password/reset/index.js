@@ -46,16 +46,31 @@ class ResetPassword extends Component {
   }
 
   onSetNewPassword = async () => {
-    const { showLoader, hideLoader, t, location: { search }, form } = this.props;
+    const { showLoader, hideLoader, t, location: { search, state }, form } = this.props;
     const { values: { password } } = form;
 
     if(formUtils.validateForm(this.config)) {
       showLoader();
 
+      if(state.acceptRoleToken) {
+        AuthService.acceptRoleSetPassword(password, state.acceptRoleToken).then((res) => {
+          hideLoader();
+          if(res.status === 200) {
+              navigate('/dashboard', {
+                state: {
+                  acceptRoleToken: ''
+                }
+              });
+          } else {
+            formUtils.setFormError(t('forgotPassword.reset.form.errors.formFail'));
+          }
+        })
+      }
+
       AuthService.setNewPassword(password, search).then((res) => {
         hideLoader();
         if(res.status === 200) {
-            navigate('/login');
+            navigate('/dashboard');
         } else {
           formUtils.setFormError(t('forgotPassword.reset.form.errors.formFail'));
         }

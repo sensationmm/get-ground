@@ -47,7 +47,7 @@ const Dashboard = (props) => {
         </div>
 
         <ActionBox actions={addCompany ? [addCompany] : actions} />
-        
+
         {hasCompanies &&
           <div>
             <h3>{ t('dashboard.main.portfolioHeader') }</h3>

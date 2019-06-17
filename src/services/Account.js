@@ -58,7 +58,17 @@ class AccountService extends BaseService {
       }
     };
 
-    return this.doRequest(config);
+    return this.doRequest(config, () => {
+
+      const login_variables = [
+        { name: 'First Name', value: data.firstName },
+        { name: 'Middle Name', value: data.middleName },
+        { name: 'Last Name', value: data.lastName },
+      ];
+
+      window.LC_API.set_custom_variables(login_variables);
+
+    });
   };
 
   /**
@@ -117,10 +127,25 @@ class AccountService extends BaseService {
       url: `documents`,
       method: 'get'
     };
-  
+
     return this.doRequest(config, (response) => {
       store.dispatch(saveDocuments(response.data.filter(item => item.creator === store.getState().user.id)));
     });
+  };
+
+  /**
+   * retrieveInvestedUser
+   * Gets User and property info
+   * @param {string} token - token passed from email
+   * @return {Promise} retrieveInvestedUser response
+   */
+  retrieveInvestedUser = (token) => {
+    const config = {
+      url: `property_purchases/retrieve_invested_user${token}`,
+      method: 'get'
+    };
+
+    return this.doRequest(config);
   };
 }
 

@@ -13,6 +13,20 @@
       "sixth": "Come join us create a more productive and fairer world."
     }
   },
+  "acceptanceOfRole": {
+    "title": "Acceptance of Role",
+    "content": "has invited you to be a partner in his company, see below for more details.",
+    "property": {
+      "address": "Address of property being purchased",
+      "price": "Price of property",
+      "shares": "Your ownership"
+    },
+    "question": {
+      "shareholder": "Do you accept to be a shareholder in this company?",
+      "director": "Do you accept to be a director in this company?"
+    },
+    "confirmBtn": "Confirm"
+  },
   "account": {
     "signature": {
       "title": "Set up your signature",
