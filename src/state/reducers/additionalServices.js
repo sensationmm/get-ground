@@ -5,7 +5,8 @@ import {
 export const initialState = {
   mortgage: false,
   insurance: false,
-  management: false
+  management: false,
+  solicitor: false
 };
 
 export const additionalServices = (state = initialState, action) => {

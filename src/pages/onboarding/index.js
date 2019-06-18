@@ -56,14 +56,6 @@ export class ProcessTracker extends React.Component {
           'image': Image,
         },
         {
-          'title': sectionsContent['step4'].title,
-          'imageAltText': sectionsContent['step4'].imageAltText,
-          'copy': sectionsContent['step4'].copy,
-          'path': '/onboarding/compliance-check',
-          'status': 'to_do',
-          'image': Image,
-        },
-        {
           'title': sectionsContent['step5'].title,
           'imageAltText': sectionsContent['step5'].imageAltText,
           'copy': sectionsContent['step5'].copy,

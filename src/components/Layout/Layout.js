@@ -4,21 +4,22 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import jwtDecode from 'jwt-decode';
 import PropTypes from 'prop-types';
-import { CSSTransition } from 'react-transition-group';
 import { withTranslation } from 'react-i18next';
 import LiveChat from 'react-livechat';
+import IdleTimer from 'react-idle-timer';
 
 import SEO from 'src/components/seo';
 import Header from 'src/components/Header/Header';
 import Loader from 'src/components/Loader/Loader';
-import Modal from 'src/components/Modal/Modal';
+import ModalWrapper from 'src/components/Modal/ModalWrapper';
+import ModalContent from 'src/components/Modal/ModalContent';
 import Menu from 'src/components/Menu/Menu';
 import Footer from 'src/components/Footer/Footer';
 
 import store from 'src/state/store';
 import { setWidth } from 'src/state/actions/layout';
-import { userLogin } from 'src/state/actions/user';
-import { saveAuth } from 'src/state/actions/auth';
+import { userLogin, deleteUser } from 'src/state/actions/user';
+import { saveAuth, deleteAuth } from 'src/state/actions/auth';
 import { showMenu, hideMenu } from 'src/state/actions/menu';
 import { hideLoader } from 'src/state/actions/loader';
 
@@ -35,8 +36,13 @@ export class Layout extends Component {
     super(props);
 
     this.state = {
-      livechat: false
+      livechat: false,
+      logout: false,
+      isLoggingOut: false
     };
+
+    this.idleTimer = null;
+    this.onIdle = this._onIdle.bind(this);
   }
 
   componentDidMount() {
@@ -75,6 +81,17 @@ export class Layout extends Component {
     this.validateCompanyID();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const { deleteAuth, deleteUser } = this.props;
+
+    if (prevState.logout !== this.state.logout) {
+      localStorage.removeItem('gg-auth');
+      deleteAuth();
+      deleteUser();
+      navigate('/login');
+    }
+  }
+
   validateCompanyID = () => {
     const { companyID, activeCompany } = this.props;
 
@@ -96,9 +113,18 @@ export class Layout extends Component {
     menuIsOpen ? hideMenu() : showMenu();
   }
 
+  _onIdle(e) {
+    this.setState({ isLoggingOut: true }, () => {
+      setTimeout(() => {
+        if (this.state.isLoggingOut) this.setState({ logout: true });
+      }, 10000);
+    });
+  }
+
   render() {
     this.loggedOutOnly();
-    const { children, headerActions, isLoading, userID, t, menuIsOpen } = this.props;
+    const { children, headerActions, isLoading, userID, t, menuIsOpen, isLoggedIn } = this.props;
+    const { isLoggingOut } = this.state;
 
     const menuLinks = [
       {
@@ -130,11 +156,10 @@ export class Layout extends Component {
         link: '/faqs'
       },
       {
-        text: t('menu.links.eigth'),
+        text: isLoggedIn ? t('menu.links.ninth') : t('menu.links.eigth'),
         function: (e) => {
-          e.preventDefault('wambam');
-          localStorage.removeItem('gg-auth');
-          navigate('/login');
+          e.preventDefault();
+          this.setState({ logout: true });
         }
       }
     ];
@@ -142,6 +167,17 @@ export class Layout extends Component {
     return (
 
       <div className={classNames('wrapper', `${children.props && children.props.role}`)}>
+
+        { userID &&
+          <IdleTimer
+            ref={ref => { this.idleTimer = ref }}
+            element={document}
+            onIdle={this.onIdle}
+            debounce={250}
+            timeout={1800000} // 30 mins
+          />
+        }
+
         <SEO title="GetGround" keywords={[`gatsby`, `application`, `react`]} />
 
         {isLoading && <Loader />}
@@ -161,19 +197,28 @@ export class Layout extends Component {
         </div>
         <div id="modal-root"></div>
         <Footer />
-        <CSSTransition
-          in={menuIsOpen}
-          timeout={400}
-          classNames="menu"
-          unmountOnExit
+
+        <ModalWrapper
+          transitionBool={menuIsOpen}
+          transitionTime={400}
+          classes="menu"
         >
-          <Modal>
-            <Menu
-              menuLinks={menuLinks}
-              menuIsOpen={menuIsOpen}
-            />
-          </Modal>
-        </CSSTransition>
+          <Menu menuLinks={menuLinks} />
+        </ModalWrapper>
+
+        <ModalWrapper
+          transitionBool={isLoggingOut}
+          transitionTime={600}
+          classes="modal"
+        >
+          <ModalContent
+            heading={t('modal.loggingOutHeading')}
+            htmlContent={<p>{t('modal.loggingOutCopy')}</p>}
+            closeModal={() => { this.setState({ isLoggingOut: false }) }}
+            closeIconAltText={t('modal.closeIconAltText')}
+          />
+        </ModalWrapper>
+
         {this.state.livechat && <LiveChat license={10911047} />}
       </div>
     )
@@ -186,6 +231,7 @@ Layout.propTypes = {
   isLoading: PropTypes.bool,
   headerActions: PropTypes.element,
   saveAuth: PropTypes.func,
+  deleteAuth: PropTypes.func,
   userID: PropTypes.number,
   secure: PropTypes.bool,
   redirect: PropTypes.string,
@@ -197,6 +243,8 @@ Layout.propTypes = {
   hideMenu: PropTypes.func,
   t: PropTypes.func.isRequired,
   hideLoader: PropTypes.func,
+  deleteUser: PropTypes.func,
+  isLoggedIn: PropTypes.bool
 }
 
 Layout.defaultProps = {
@@ -208,12 +256,15 @@ const mapStateToProps = (state) => ({
   userID: state.user.id,
   activeCompany: state.activeCompany,
   menuIsOpen: state.menu.isOpen,
+  isLoggedIn: state.user.email
 });
 
 const actions = {
   setWidth,
   userLogin,
+  deleteUser,
   saveAuth,
+  deleteAuth,
   showMenu,
   hideMenu,
   hideLoader

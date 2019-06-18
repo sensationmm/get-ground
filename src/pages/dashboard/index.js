@@ -47,7 +47,7 @@ const Dashboard = (props) => {
         </div>
 
         <ActionBox actions={addCompany ? [addCompany] : actions} />
-        
+
         {hasCompanies &&
           <div>
             <h3>{ t('dashboard.main.portfolioHeader') }</h3>
@@ -55,7 +55,7 @@ const Dashboard = (props) => {
               { companies.map((company, count) => (
                 <CompanyLink
                   key={`company-${count}`}
-                  company={(({ id, name, address }) => ({ id, name, address }))(company)}
+                  company={(({ id, address }) => ({ id, address }))(company)}
                   setActiveCompany={setActiveCompany}
                 />
               ))}
@@ -73,7 +73,7 @@ const Dashboard = (props) => {
                 <ToDo
                   key={`todo-${count}`}
                   action={action}
-                  company={(({ id, name, address }) => ({ id, name, address }))(company)}
+                  company={(({ id, address }) => ({ id, address }))(company)}
                   setActiveCompany={setActiveCompany}
                 />
               )

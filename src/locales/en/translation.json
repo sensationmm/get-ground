@@ -13,6 +13,20 @@
       "sixth": "Come join us create a more productive and fairer world."
     }
   },
+  "acceptanceOfRole": {
+    "title": "Acceptance of Role",
+    "content": "has invited you to be a partner in his company, see below for more details.",
+    "property": {
+      "address": "Address of property being purchased",
+      "price": "Price of property",
+      "shares": "Your ownership"
+    },
+    "question": {
+      "shareholder": "Do you accept to be a shareholder in this company?",
+      "director": "Do you accept to be a director in this company?"
+    },
+    "confirmBtn": "Confirm"
+  },
   "account": {
     "signature": {
       "title": "Set up your signature",
@@ -96,14 +110,20 @@
   },
   "additionalServices": {
     "title": "Additional services",
-    "introBox": "If you require help with any of the following services below, we will find options for you, which you can choose to explore further or not.",
+    "introBox": "Through our partners we can provide seamless access to the best services for all your property needs. Select below which ones you’d like help with.",
+    "findSolicitorQuestion": "Would you like us to help find a solicitor for you?",
     "mortgageOptionsQuestion": "Can we help find mortgage options for you?",
     "propertyInsuranceQuestion": "Can we help find property insurance for you?",
     "property_managementQuestion": "Can we help find property management options for you?",
     "nextButton": "Next",
     "talkToUs": "Talk to us",
     "backButton": "Back",
-    "skipButton": "Skip for now"
+    "skipButton": "Skip for now",
+    "modalHeading": "We'll be in touch",
+    "modalPara1": "We’ll contact you shortly regarding the items you selected.",
+    "modalPara2": "Our office is open from 9am to 6pm London time, Monday to Friday, and we usually respond within the hour.",
+    "modalPara3": "However, out of working hours it might take us longer to get back to you, but we’ll always do so as soon as possible, please bare with us.",
+    "modalContentButton": "Dismiss"
   },
   "advantages": {
     "title": "GetGround Advantages",
@@ -182,11 +202,19 @@
     "companyComplete": {
       "title": "Well done!",
       "copy": "We have all the details we need to set up your company.",
-      "info":  "Your shareholders will receive an email now so they can begin setting up their account on GetGround. In order to speed up your company setup perhaps you would like to encourage them to do so ASAP.",
-      "button": "Next"
+      "info":  "Your shareholders will receive an email to set up their account on GetGround. We will have to wait for them to sign up before being able to draft your company’s documents. In order to speed up the process you might want to encourage them to sign up as soon as possible.",
+      "button": "View dashboard"
+    },
+    "intro": {
+      "title": "Your company",
+      "para1": "When creating a company you should already have chosen the property you want to buy.",
+      "para2": "This is a six step process and it can take you as little as 20 minutes.",
+      "para3": "If you need a solicitor, a mortgage, insurance or property management services, GetGround can refer you to them.",
+      "button1": "Yes, please",
+      "button2": "No, thanks"
     },
     "progressTracker": {
-      "inProgressTitle": "Design your company in 5 steps",
+      "inProgressTitle": "Design your company in 6 steps",
       "complete": "complete",
       "completeTitle": "All 5 steps complete",
       "sections": {
@@ -214,6 +242,11 @@
           "title": "Add Services",
           "copy": "Additional services you will need",
           "imageAltText": "Services"
+        },
+        "step6": {
+          "title": "Tax Questions",
+          "copy": "To better understand your needs",
+          "imageAltText": "Tax Questions"
         }
       }
     },
@@ -244,7 +277,7 @@
       "form": {
         "priceOfPropertyLabel": "*Price of property",
         "priceOfPropertyNote": "*excludes all costs and stamp duty",
-        "newBuildLabel": "Is your property a new build",
+        "newBuildLabel": "Is your property a new build?",
         "completionDateLabel": "When is the expected completion date?",
         "depositDueLabel": "What date is your deposit due?",
         "depositAmountLabel": "Deposit Amount",
@@ -253,10 +286,11 @@
         "secondInstallmentDateLabel": "Second installment date?",
         "secondInstallmentLabel": "Second installment amount",
         "expectedExchangeLabel": "Do you have an expected exchange date",
-        "expectedExchangeDateLabel": "Please provide your expected exchange date",
+        "expectedExchangeDateLabel": "Please provide your expected exchange date?",
         "addButton": "Another payment date",
         "nextButton": "Next",
-        "backButton": "Back"
+        "backButton": "Back",
+        "skipButton": "I don't know the answers yet"
       },
       "datepicker": {
         "button1": "cancel",
@@ -306,8 +340,7 @@
       "intro": "We need your solicitor details so we can get all the legal documents in order for your property purchase.",
       "form": {
         "label": {
-          "haveSolicitor": "Do you have a solicitor?",
-          "needSolicitor": "Would you like us to help find a solicitor for you?",
+          "haveSolicitor": "Would you like us to help find a solicitor for you?",
           "firstName": "First name",
           "lastName": "Last name",
           "email": "Email",
@@ -325,7 +358,7 @@
   },
   "contactUs": {
     "title": "Contact us",
-    "phone": "Phone: 0208 123 1234",
+    "phone": "Phone: +44 (0) 20 8050 1912",
     "email": "Email: info@getground.com",
     "liveChat": "Live Chat"
   },
@@ -337,7 +370,8 @@
         "address": "Address",
         "iban": "BIC/IBAN",
         "back": "Back to overview",
-        "available": "Available funds"
+        "available": "Available funds",
+        "sortCodeAndAccountNumber": "Sort Code & Account Number"
       },
       "manage": {
         "title": "Manage my company",
@@ -451,7 +485,9 @@
   "header": {
     "buttons": {
       "register": "Register",
-      "login": "Log In"
+      "login": "Log In",
+      "saveAndExit": "Save and Exit",
+      "exit": "Exit"
     }
   },
   "howItWorks": {
@@ -540,12 +576,15 @@
       "fifth": "About us",
       "sixth": "Partnerships",
       "seventh": "FAQs",
-      "eigth": "Logout"
+      "eigth": "Login",
+      "ninth": "Logout"
     }
   },
   "modal": {
     "closeIconAltText": "Close",
-    "downloadButtonLabel": "Download"
+    "downloadButtonLabel": "Download",
+    "loggingOutHeading": "Want to stay logged in?",
+    "loggingOutCopy": "You will be logged out shortly if this modal isn't closed."
   },
   "myDocuments": {
     "title": "My Documents",
@@ -596,7 +635,8 @@
   "onBoarding": {
     "accountPending": {
       "title": "We‘ve sent you an email",
-      "text": "With a magic link to the email address you provided. Please click the button on the email to verify your account.",
+      "initialText": "With a magic link to",
+      "text": "Please click the button on the email to verify your account.",
       "introBox": "If you didn‘t receive an email please check your spam folder and if it isn‘t there contact us.",
       "contactLink": "Contact us"
     },
@@ -750,10 +790,8 @@
     "confirmation": {
       "heading": "Well done",
       "imageAltText": "confirmation image",
-      "copy": "<p class='fs-large'>Your details have been submitted. You will shortly receive an email with the result of your application.</p><p class='fs-large'>This typically takes 10 mins but it can take up to a day, so please be patient.</p>",
-      "buttonText": "View your dashboard",
-      "contactUsText": "If this is taking longer than expected please contact us.",
-      "contactUsLinkText": "Contact us"
+      "copy": "<p class='fs-large'>Your details have been submitted.</p><p class='fs-large'>You can now go into your dashboard and start creating your first company.</p>",
+      "buttonText": "View your dashboard"
     },
     "idCheck": {
       "title": "ID Check",
@@ -781,7 +819,7 @@
         "retakeImageContent": "Are you happy with this picture? Please make sure the date, your full name and address are clearly visible."
       },
       "selfie": {
-        "name": "Selfie",
+        "name": "Your picture",
         "title": "Take a picture of yourself",
         "content": "We need this picture so we can match it with the one in your passport. This is to make sure no one is trying to create a false account using your documents.",
         "retakeImageContent": "Are you happy with this picture? Please make sure the picture is well-lit and not blurred."
@@ -933,6 +971,16 @@
     },
     "edit": "Edit",
     "save": "Save"
+  },
+  "taxQuestions": {
+    "title": "Tax questions",
+    "introBox": "The money you provide to purchase your property is lent by you to your company. We create a loan note between yourself and your company for this. This question determines the interest rate we should apply to your loan to the company",
+    "ownership": "Do you have ownership or voting rights of 25% or more in any companies, partnerships or other enterprises?",
+    "employ": "Do they employ fewer than 50 employees combined?",
+    "assets": "Do they have assets of 10m€ or less combined?",
+    "turnover": "Do they have a turnover of 10m€ or less combined?",
+    "nextBtn": "Next",
+    "backBtn": "Back"
   },
   "trustAndPrivacy" : {
     "title": "Trust and Privacy",

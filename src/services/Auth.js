@@ -32,6 +32,16 @@ class AuthService extends BaseService {
     return this.doRequest(config, (response) => {
       store.dispatch(userLogin(response.data.user));
       store.dispatch(saveAuth(response.data.token));
+      const { first_name, middle_name, last_name, email } = response.data.user
+
+      const login_variables = [
+        { name: 'First Name', value: first_name },
+        { name: 'Middle Name', value: middle_name },
+        { name: 'Last Name', value: last_name },
+        { name: 'Email', value: email }
+      ];
+
+      window.LC_API.set_custom_variables(login_variables);
 
       AccountService.getDocuments();
     });
@@ -95,17 +105,82 @@ class AuthService extends BaseService {
 
   };
 
-  verifyEmail = () => {
+  /**
+   * verifyEmail
+   * Verifies email
+   * @param {string} verificationCode - verification code
+   * @return {Promise} verify email response
+   */
+  verifyEmail = (verificationCode) => {
     const config = {
       url: 'users/verify_email',
       method: 'post',
-      data: JSON.stringify({'email_verification_code': 'string'})
+      data: JSON.stringify({'email_verification_code': verificationCode})
     };
 
     return this.doRequest(config, (response) => {
       store.dispatch(userLogin(response.data.user));
       store.dispatch(saveAuth(response.data.token));
+
+      const { first_name, middle_name, last_name, email } = response.data.user
+
+      const login_variables = [
+        { name: 'First Name', value: first_name },
+        { name: 'Middle Name', value: middle_name },
+        { name: 'Last Name', value: last_name },
+        { name: 'Email', value: email }
+      ];
+
+      window.LC_API.set_custom_variables(login_variables);
+
     });
+  };
+
+  /**
+   * acceptRoleLogin
+   * Login for accept role
+   * @param {string} token - accept role token
+   * @return {Promise} verify email response
+   */
+  acceptRoleLogin = (token) => {
+    const config = {
+      url: 'accept-role/login',
+      method: 'post',
+      data: JSON.stringify({'token': token})
+    };
+
+    return this.doRequest(config, (response) => {
+      store.dispatch(userLogin(response.data.user));
+      store.dispatch(saveAuth(response.data.token));
+
+      const { first_name, middle_name, last_name, email } = response.data.user
+
+      const login_variables = [
+        { name: 'First Name', value: first_name },
+        { name: 'Middle Name', value: middle_name },
+        { name: 'Last Name', value: last_name },
+        { name: 'Email', value: email }
+      ];
+
+      window.LC_API.set_custom_variables(login_variables);
+
+    });
+  };
+
+  /**
+   * acceptSetPassword
+   * Login for accept role
+   * @param {string} token - accept role token
+   * @return {Promise} verify email response
+   */
+  acceptRoleSetPassword = (token) => {
+    const config = {
+      url: 'accept-role/set_password',
+      method: 'post',
+      data: JSON.stringify({'token': token})
+    };
+
+    return this.doRequest(config);
   };
 }
 

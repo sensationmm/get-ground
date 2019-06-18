@@ -44,7 +44,7 @@ class Login extends Component {
   }
 
   onLogin = async () => {
-    const { showLoader, hideLoader, t, location: { search }, form} = this.props;
+    const { showLoader, hideLoader, t, location: { search }, form } = this.props;
     const { values: { email, password }} = form;
 
     if(formUtils.validateForm(this.config)) {
@@ -63,7 +63,16 @@ class Login extends Component {
           }
 
         } else {
-          formUtils.setFormError(t('login.form.error'));
+          switch(res.data.error) {
+            case 'Please verify your email.':
+              formUtils.setFormError(t('login.form.errorVerify'));
+              break;
+            case 'Invalid password':
+            case 'User not found':
+            default:
+              formUtils.setFormError(t('login.form.error'));
+              break;
+          }
         }
       });
     }
@@ -112,6 +121,8 @@ class Login extends Component {
           <Form>
             { formUtils.renderForm(this.config) }
           </Form>
+
+          <br />
 
           <Form className="account-login-actions">
             <Button

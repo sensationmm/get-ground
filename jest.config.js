@@ -14,18 +14,18 @@ module.exports = {
   },
   setupFiles: [`<rootDir>/loadershim.js`],
   setupFilesAfterEnv: ['<rootDir>/src/test-utils/setup-test-env.js'],
-  "collectCoverageFrom": [
-    "**/*.{js,jsx}",
-    "!coverage/**/*.{js,jsx}",
-    "!src/test-utils/**/*.{js,jsx}",
-    "!src/config/**/*.{js,jsx}",
-    "!**/**config.{js,jsx}",
-    "!src/store.js",
-    "!src/index.js",
-    "!src/containers/StyleGuide/*.{js,jsx}",
-    "!src/utils/mockComponent.{js,jsx}",
-    "!**/**gatsby**.{js,jsx}",
-    "!src/services/BaseService.{js,jsx}",
-    "!cypress/**/**.{js,jsx}"
+  'collectCoverageFrom': [
+    '**/*.{js,jsx}',
+    '!coverage/**/*.{js,jsx}',
+    '!src/test-utils/**/*.{js,jsx}',
+    '!src/config/**/*.{js,jsx}',
+    '!**/**config.{js,jsx}',
+    '!src/store.js',
+    '!src/index.js',
+    '!src/containers/StyleGuide/*.{js,jsx}',
+    '!src/utils/mockComponent.{js,jsx}',
+    '!**/**gatsby**.{js,jsx}',
+    '!src/services/BaseService.{js,jsx}',
+    '!cypress/**/**.{js,jsx}'
   ]
 }

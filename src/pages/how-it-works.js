@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next';
-import Bounce from 'react-reveal/Bounce'
+import Reveal from 'react-reveal/Reveal';
 import useWindowScroll from 'react-use/lib/useWindowScroll';
 
 import Layout from 'src/components/Layout/Layout'
 import MoreInformation from 'src/components/MoreInformation/MoreInformation';
 
-import Roof from 'src/assets/images/roof.svg'
+import Image from 'src/assets/images/how-it-works.svg'
 import Step1 from 'src/assets/images/howItWorks-step1.svg'
 import Step2 from 'src/assets/images/howItWorks-step2.svg'
 import Step3 from 'src/assets/images/howItWorks-step3.svg'
@@ -60,13 +60,13 @@ const HowItWorks = () => {
 
   return (
     <Layout>
-      <div className="how-it-works">
-        <img className="how-it-works-img" src={Roof} alt="roof of house" data-test="how-it-works-img" />
+      <div className="how-it-works" role="brochure">
+        <img className="hero-image" src={Image} alt="roof of house" data-test="how-it-works-img" />
         <h1 className="how-it-works-title">{t('howItWorks.title')}</h1>
           <ul>
           {stepConfig.steps.map((step, idx) => (
             <div key={`${idx} + ${step.title}`} className="how-it-works-steps">
-              <Bounce fraction={0.8} >
+              <Reveal duration={450} effect="bounceIn">
                 <div className="how-it-works-step">
                   <img src={step.image}/>
                   <li className="how-it-works-step-li">
@@ -74,7 +74,7 @@ const HowItWorks = () => {
                     <p className="how-it-works-step-copy">{step.copy}</p>
                   </li>
                 </div>
-              </Bounce>
+              </Reveal>
             </div>
           ))}
           <div className="how-it-works-step-verticalLine" style={{height: lineHeight > 78 ? `78%` : `${lineHeight}%`}} data-test="how-it-works-vertical-line"></div>

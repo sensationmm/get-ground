@@ -11,14 +11,16 @@ jest.mock('gatsby', () => ({
 describe('<AccountPending />', () => {
   let props;
 
-  AuthService.verifyEmail = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
+  AuthService.verifyEmail = jest.fn().mockReturnValue(Promise.resolve({ status: 200, data: {} }));
 
   beforeEach(() => {
     props = {
       location: {
         state: {
-          passwordReset: false
-        }
+          passwordReset: false,
+          email: 'test-email@getground.co.uk'
+        },
+        search: '?email_verification_code=code'
       }
     }
   })
@@ -50,13 +52,19 @@ describe('<AccountPending />', () => {
     const component = findByTestAttr(wrapper, 'container-account-pending');
     const content = component.find('[data-test="account-pending-content"]')
 
-    expect(content.text()).toEqual('onBoarding.accountPending.text')
+    expect(content.text()).toEqual('onBoarding.accountPending.initialText test-email@getground.co.uk. onBoarding.accountPending.text')
   });
 
   describe('verifyEmail()', () => {
-    test('success', () => {
-      setup(AccountPending, props);
+    test('success', async () => {
+      await setup(AccountPending, props);
       expect(navigate).toHaveBeenCalledWith('/onboarding/email-verified');
+    });
+
+    test('already verified', async () => {
+      AuthService.verifyEmail = jest.fn().mockReturnValue(Promise.resolve({ status: 200, data: { error: 'sasd' } }));
+      await setup(AccountPending, props);
+      expect(navigate).toHaveBeenCalledWith('/login');
     });
 
     test('failure', () => {

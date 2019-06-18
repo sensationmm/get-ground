@@ -12,7 +12,9 @@ export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 
 export const USER_LOGIN = 'USER_LOGIN';
+export const DELETE_USER = 'DELETE_USER';
 export const SAVE_AUTH = 'SAVE_AUTH';
+export const DELETE_AUTH = 'DELETE_AUTH';
 
 export const SET_WIDTH = 'SET_WIDTH';
 

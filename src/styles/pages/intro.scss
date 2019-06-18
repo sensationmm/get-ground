@@ -1,0 +1,25 @@
+.intro {
+
+  &--hero-image {
+    background: url('../../assets/images/oval.svg') no-repeat;
+    background-position: 40% 0%;
+    background-size: 80% 85%;
+    width: 100%;
+    text-align: center;
+  }
+
+  &--buttons-container {
+    margin-top: 30px;
+
+    .button.small.opaque {
+      width: 70%;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      margin: 30px auto 0;
+    }
+  }
+
+  p {
+    font-size: 18px;
+  }
+}

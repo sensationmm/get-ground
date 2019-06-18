@@ -1,7 +1,5 @@
-/* TODO: Will come back and refactor where needed when the initial theming is done */
-
-/* TODO: If more pages use this colour I'll move it out into colours and make the name more generic... */
-$slider-image-background-color: #c9dacc;
+@import 'src/styles/modules/_colors.scss';
+@import 'src/styles/pages/intro.scss';
 
 .slick-slider {
   overflow: hidden;
@@ -15,7 +13,14 @@ $slider-image-background-color: #c9dacc;
         outline: none;
       }
 
+      &--image {
+        @extend .intro--hero-image;
+        display: block;
+        height: 280px;
+      }
+
       h2 {
+        font-size: 36px;
         margin: 0;
         padding: 20px 0;
       }
@@ -55,9 +60,9 @@ $slider-image-background-color: #c9dacc;
 }
 
 .slick-slide--image-wrapper {
-  width: 210px;
   height: 210px;
-  background: $slider-image-background-color;
+  background: url(../../assets/images/oval.svg) center center no-repeat;
+  background-size: contain;
   margin: 0 auto;
-  border-radius: 105px;
+  text-align: center;
 }

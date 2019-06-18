@@ -31,7 +31,7 @@ export class IdCheck extends Component {
 
   render() {
     const { t } = this.props
-    const headerActions = <Link to="/onboarding"><ButtonHeader label="Exit" /></Link>;
+    const headerActions = <Link to="/onboarding"><ButtonHeader label={t('header.buttons.saveAndExit')} /></Link>;
 
     return (
       <Layout headerActions={headerActions} secure>
@@ -40,14 +40,11 @@ export class IdCheck extends Component {
         <AddProof section="passport" initialImg={Passport} overlay={CameraCrosshair} />
         <AddProof section="address" initialImg={Address} overlay={CameraCrosshair} />
         <AddProof section="selfie" initialImg= {Selfie} overlay={AlienHead} />
-        <Link to="/onboarding/compliance-check">
+        <Link to="/onboarding">
           <Button classes="primary id-check-next" label={ t('onBoarding.idCheck.buttonNext') } fullWidth />
         </Link>
         <Link to="/onboarding/personal-details">
           <Button classes="secondary id-check-back" label={ t('onBoarding.idCheck.buttonBack') } fullWidth />
-        </Link>
-        <Link to="/onboarding/compliance-check">
-          <Button classes="link small id-check-skip" label={ t('onBoarding.idCheck.buttonSkip') } fullWidth />
         </Link>
       </div>
     </Layout>

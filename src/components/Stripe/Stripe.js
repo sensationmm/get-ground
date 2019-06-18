@@ -164,7 +164,10 @@ Stripe.propTypes = {
   setStripeToken: PropTypes.func,
   validateForm: PropTypes.func,
   form: PropTypes.object,
-  t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired,
+  modalIsOpen: PropTypes.bool,
+  showModal: PropTypes.func,
+  hideModal: PropTypes.func
 };
 
 export const RawComponent = Stripe

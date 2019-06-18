@@ -74,7 +74,21 @@ describe('<CreateAccount />', () => {
     test('gets content and shows modal', async () => {
       await wrapper.instance().getModalContent({ preventDefault: jest.fn() });
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
-      expect(wrapper.state().termsMarkdown).toEqual('<h1>HI</h1>');
+      expect(wrapper.state().modalMarkdown).toEqual('<h1>HI</h1>');
+      expect(hideLoaderMock).toHaveBeenCalledTimes(1);
+    });
+
+    test('gets content and shows modal for terms', async () => {
+      await wrapper.instance().getModalContent({ preventDefault: jest.fn() }, 'terms');
+      expect(showLoaderMock).toHaveBeenCalledTimes(1);
+      expect(wrapper.state().modalMarkdown).toEqual('<h1>HI</h1>');
+      expect(hideLoaderMock).toHaveBeenCalledTimes(1);
+    });
+
+    test('gets content and shows modal for privacy', async () => {
+      await wrapper.instance().getModalContent({ preventDefault: jest.fn() }, 'privacy');
+      expect(showLoaderMock).toHaveBeenCalledTimes(1);
+      expect(wrapper.state().modalMarkdown).toEqual('<h1>HI</h1>');
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
     });
   });
@@ -98,7 +112,7 @@ describe('<CreateAccount />', () => {
 
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
-      expect(navigate).toHaveBeenCalledWith('/onboarding/account-pending', {'state': {'passwordReset': false}});
+      expect(navigate).toHaveBeenCalledWith('/onboarding/verify_email', {'state': {'passwordReset': false, 'email': undefined}});
     });
 
     test('duplicate email failure', async () => {

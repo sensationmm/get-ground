@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import { CSSTransition } from 'react-transition-group';
 import { navigate } from 'gatsby';
 
 import Layout from 'src/components/Layout/Layout'
@@ -16,7 +15,7 @@ import InputPassword from 'src/components/_form/InputPassword/InputPassword';
 import Checkbox from 'src/components/_form/Checkbox/Checkbox';
 import Button from 'src/components/_buttons/Button/Button';
 import StrengthMeter from 'src/components/StrengthMeter/StrengthMeter';
-import Modal from 'src/components/Modal/Modal';
+import ModalWrapper from 'src/components/Modal/ModalWrapper';
 import ModalContent from 'src/components/Modal/ModalContent';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
@@ -27,11 +26,10 @@ export const AccountService = new accountService();
 import modalService from 'src/services/Modal';
 export const ModalService = new modalService();
 
-import termsImage from 'src/assets/images/terms-image.svg';
+import termsImage from 'src/assets/images/documents-modal.svg';
 
 /**
  * CreateAccount
- * @param {object} e - event passed on openModal (for JSdoc)
  * @return {JSXElement} CreateAccount
  */
 class CreateAccount extends Component {
@@ -39,7 +37,8 @@ class CreateAccount extends Component {
     super(props);
 
     this.state = {
-      termsMarkdown: ''
+      modalTitle: '',
+      modalMarkdown: ''
     };
 
     this.config = null;
@@ -69,9 +68,10 @@ class CreateAccount extends Component {
       AccountService.createAccount(email, password, optin).then(response => {
         hideLoader();
         if(response.status === 201) {
-          navigate('/onboarding/account-pending', {
+          navigate('/onboarding/verify_email', {
             state: {
               passwordReset: false,
+              email
             }
           });
         } else if(response.status === 500) {
@@ -81,15 +81,31 @@ class CreateAccount extends Component {
     }
   }
 
-  getModalContent = (e) => {
+  /**
+   * @param {object} e - event passed on openModal (for JSdoc)
+   * @param {string} content - modal content to fetch
+   * @return {void}
+   */
+  getModalContent = (e, content) => {
     const { showLoader, hideLoader, showModal } = this.props;
     const self = this;
     e.preventDefault();
 
     showLoader();
 
-    ModalService.fetchModalContent('getGround Terms and Conditions').then(response => {
-      self.setState({ termsMarkdown: response.data.markdown_text });
+    let target;
+    switch(content) {
+      case 'privacy':
+        target = 'Privacy Policy';
+        break;
+      case 'terms':
+      default:
+        target = 'getGround Terms and Conditions';
+        break;
+    }
+
+    ModalService.fetchModalContent(target).then(response => {
+      self.setState({ modalTitle: response.data.title, modalMarkdown: response.data.markdown_text });
 
       hideLoader();
       showModal();
@@ -97,8 +113,8 @@ class CreateAccount extends Component {
   }
 
   render() {
-    const { termsMarkdown } = this.state;
-    const { t, modalIsOpen, showModal, hideModal, form } = this.props;
+    const { modalTitle, modalMarkdown } = this.state;
+    const { t, modalIsOpen, hideModal, form } = this.props;
     const { values, errors, showErrorMessage } = form;
 
     /* istanbul ignore next */
@@ -148,15 +164,15 @@ class CreateAccount extends Component {
           {t('onBoarding.createAccount.form.label.privacyOne')}
           <a onClick={(e) => {
             e.stopPropagation();
-            if (termsMarkdown === '') {
-              this.getModalContent(e)
-            } else {
-              showModal();
-            }
+            this.getModalContent(e, 'terms');
           }}>
           {t('onBoarding.createAccount.form.label.privacyTermsLink')}</a>
           {t('onBoarding.createAccount.form.label.privacyTwo')}
-          {t('onBoarding.createAccount.form.label.privacyPolicyLink')}
+          <a onClick={(e) => {
+            e.stopPropagation();
+            this.getModalContent(e, 'privacy');
+          }}>
+          {t('onBoarding.createAccount.form.label.privacyPolicyLink')}</a>
         </div>,
         checked: values.privacy,
         validationFunction: 'validateRequired'
@@ -194,23 +210,21 @@ class CreateAccount extends Component {
 
             <Button classes="secondary" label={ t('onBoarding.createAccount.ctaSecondary') } fullWidth />
           </Form>
-          <CSSTransition
-            in={modalIsOpen}
-            timeout={600}
-            classNames="modal"
-            unmountOnExit
+
+          <ModalWrapper
+            transitionBool={modalIsOpen}
+            transitionTime={600}
+            classes="modal"
           >
-            <Modal>
-              <ModalContent
-                heading={t('onBoarding.createAccount.termsModalHeading')}
-                content={termsMarkdown}
-                closeModal={hideModal}
-                downloadButtonLabel={t('onBoarding.createAccount.termsModalDownloadButtonLabel')}
-                closeIconAltText={t('onBoarding.createAccount.termsModalCloseIconAltText')}
-                modalImage={termsImage}
-              />
-            </Modal>
-          </CSSTransition>
+            <ModalContent
+              heading={modalTitle}
+              content={modalMarkdown}
+              closeModal={hideModal}
+              downloadButtonLabel={t('onBoarding.createAccount.termsModalDownloadButtonLabel')}
+              closeIconAltText={t('onBoarding.createAccount.termsModalCloseIconAltText')}
+              modalImage={termsImage}
+            />
+          </ModalWrapper>
         </div>
       </Layout>
     );

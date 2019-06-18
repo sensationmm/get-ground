@@ -37,15 +37,26 @@ body {
     width: 100%;
     min-height: 100vh;
     background: $background-main-start;
-    @include gradient-vertical-image($background-main-start, $background-main-end, '../../assets/images/background.png');
     background-attachment: fixed;
 
-    &.account {
-      @include gradient-vertical-image($background-account-start, $background-account-end, '../../assets/images/background.png');
+    &:not(.no-background-image) {
+      @include gradient-vertical-image($background-main-start, $background-main-end, '../../assets/images/background.png');
+
+      &.account {
+        @include gradient-vertical-image($background-account-start, $background-account-end, '../../assets/images/background.png');
+      }
+  
+      &.company-design, &.documents {
+        @include gradient-vertical-image($gradient-primary-1, $gradient-primary-2, '../../assets/images/background.png');
+      }
     }
 
-    &.company-design, &.documents {
-      @include gradient-vertical-image($gradient-primary-1, $gradient-primary-2, '../../assets/images/background.png');
+    &.no-background-image {
+      @include gradient-vertical($background-main-start, $background-main-end);
+
+      &.account {
+        @include gradient-vertical($background-account-start, $background-account-end);
+      }
     }
   }
 }
@@ -108,6 +119,12 @@ b {
   }
 }
 
+.account.fullscreen {
+  h1, h2 {
+    color: $white;
+  }
+}
+
 .back {
   font-size: 16px;
   background: url('../../assets/images/chevron-left.svg') left center no-repeat;
@@ -130,6 +147,16 @@ b {
   padding-bottom: 60px;
 }
 
-.brochure .app.extra-top-padding {
-  padding-top: calc((#{$header-height + ($padding-vertical-unit * 5) + 0px + $padding-vertical}));
+.brochure {
+  .app.extra-top-padding {
+    padding-top: calc((#{$header-height + ($padding-vertical-unit * 5) + 0px + $padding-vertical}));
+  }
+
+  img.hero-image {
+    width: 100%;
+    height: 300px;
+    max-height: 330px;
+    margin: 0 auto;
+    display: block;
+  }
 }

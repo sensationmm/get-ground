@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import Layout from 'src/components/Layout/Layout'
 
-import CoinAndHand from 'src/assets/images/coins-and-hand.svg'
+import Image from 'src/assets/images/pricing.svg'
 import 'src/styles/pages/pricing.scss'
 
 const Pricing = () => {
@@ -12,7 +12,7 @@ const Pricing = () => {
   return (
     <Layout>
       <div role="brochure">
-        <img className="pricing-img" src={CoinAndHand} alt="coins in a jar" data-test="pricing-img" />
+        <img className="hero-image" src={Image} alt="coins in a jar" data-test="pricing-img" />
         <h1 className="pricing-title">{t('pricing.title')}</h1>
         <div className="pricing-property">
           <h3 className="pricing-property-title">{t('pricing.property.title')}</h3>

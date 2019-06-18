@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import Button from 'src/components/_buttons/Button/Button'
 import TableSlider from 'src/components/TableSlider/TableSlider'
 
-import Piggy from 'src/assets/images/piggy.svg'
+import Image from 'src/assets/images/advantages.svg'
 import whiteTick from 'src/assets/images/white-tick.svg'
 import orangeCross from 'src/assets/images/orange-cross.svg'
 import orangeTick from 'src/assets/images/orange-tick.svg'
@@ -250,8 +250,8 @@ const Advantages = () => {
 
   return (
     <Layout>
-      <div className="advantages">
-        <img className="advantages-img" src={Piggy} alt="Piggy bank"/>
+      <div className="advantages" role="brochure">
+        <img className="hero-image" src={Image} alt="Piggy bank"/>
         <h1>{t('advantages.title')}</h1>
         <div className="advantages-uk-tax">
         <h3 className="advantages-uk-tax-title">{t('advantages.tax.title')}</h3>

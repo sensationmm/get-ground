@@ -21,6 +21,8 @@ jest.spyOn(JSON, 'parse');
 jest.spyOn(Storage.prototype, 'removeItem');
 const setWidthMock = jest.fn();
 const saveAuthMock = jest.fn();
+const deleteAuthMock = jest.fn();
+const deleteUserMock = jest.fn();
 const tMock = jest.fn().mockReturnValue('string');
 
 describe('<Layout />', () => {
@@ -33,6 +35,8 @@ describe('<Layout />', () => {
     },
     setWidth: setWidthMock,
     saveAuth: saveAuthMock,
+    deleteAuth: deleteAuthMock,
+    deleteUser: deleteUserMock,
     t: tMock,
     showMenu: showMenuMock,
     hideMenu: hideMenuMock,
@@ -83,6 +87,16 @@ describe('<Layout />', () => {
     expect(hideMenuMock).toHaveBeenCalledTimes(1);
   });
 
+  test('logged out t should be called with menu.links.eigth', () => {
+    setup(Layout, { ...props, menuIsOpen: true });
+    expect(props.t).toHaveBeenCalledWith('menu.links.eigth')
+  })
+
+  test('logged in t should be called with menu.links.ninth', () => {
+    setup(Layout, { ...props, menuIsOpen: true, isLoggedIn: true });
+    expect(props.t).toHaveBeenCalledWith('menu.links.ninth')
+  })
+
   describe('auth detection', () => {
 
     test('has userID', () => {
@@ -126,6 +140,30 @@ describe('<Layout />', () => {
     test('livechat is true when mounts', () => {
       const wrapper = shallow(<Layout {...props} />)
       expect(wrapper.state().livechat).toEqual(true)
+    });
+
+    test('the user is logged out', () => {
+      const wrapper = setup(Layout, { ...props }, { logout: false });
+
+      wrapper.setState({ logout: true });
+
+      expect(deleteAuthMock).toHaveBeenCalled();
+      expect(deleteUserMock).toHaveBeenCalled();
+      expect(navigate).toHaveBeenCalledWith('/login');
+    });
+
+    test('_onIdle sets isLoggingOut to true and then logout to true after 10 seconds', (done) => {
+      const wrapper = setup(Layout, { ...props }, { logout: false, isLoggingOut: false });
+
+      wrapper.instance()._onIdle();
+      jest.setTimeout(15000);
+
+      setTimeout(() => {
+        expect(wrapper.state().logout).toBe(true);
+        done();
+      }, 10000);
+
+      expect(wrapper.state().isLoggingOut).toBe(true);
     });
   });
 

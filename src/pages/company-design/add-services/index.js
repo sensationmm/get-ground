@@ -10,8 +10,11 @@ import RadioGroup from 'src/components/_form/RadioGroup/RadioGroup'
 import Button from 'src/components/_buttons/Button/Button'
 import Layout from 'src/components/Layout/Layout'
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox'
+import ModalContent from 'src/components/Modal/ModalContent';
+import ModalWrapper from 'src/components/Modal/ModalWrapper';
 
 import { setAdditionalServices } from 'src/state/actions/additionalServices'
+import { showModal, hideModal } from 'src/state/actions/modal';
 
 import './add-services.scss'
 
@@ -33,42 +36,43 @@ export class AdditionalServices extends Component {
       find_mortgage: null,
       find_property_insurance: null,
       find_property_management: null,
+      find_solicitor: null
     });
   }
 
   componentWillUnmount() {
     formUtils.clearFormState();
 
-    const { form: { values: { find_mortgage, find_property_insurance,  find_property_management }}} = this.props;
+    const { form: { values: { find_mortgage, find_property_insurance,  find_property_management, find_solicitor }}} = this.props;
 
     this.props.setAdditionalServices({
       mortgage: find_mortgage === 'yes',
       insurance: find_property_insurance === 'yes',
-      management: find_property_management === 'yes'
+      management: find_property_management === 'yes',
+      solicitor: find_solicitor === 'yes'
     })
 
-    services.addServices(find_mortgage, find_property_insurance, find_property_management )
-  }
-
-  handleLiveChat = () => {
-    const { form: { values: { find_mortgage, find_property_insurance,  find_property_management }}} = this.props;
-    const custom_variables = [
-      { name: 'add services mortgage', value: find_mortgage },
-      { name: 'add services insurance', value: find_property_insurance },
-      { name: 'add services property management', value: find_property_management },
-    ];
-
-    if(window) {
-      window.LC_API.set_custom_variables(custom_variables);
-      window.LC_API.open_chat_window()
-    }
+    services.addServices(find_mortgage, find_property_insurance, find_property_management, find_solicitor)
   }
 
   render() {
-    const { t, form } = this.props
+    const { t, form, modalIsOpen, showModal, hideModal } = this.props
     const { values } = form;
 
     const config = [
+      {
+        stateKey: 'find_solicitor',
+        component: RadioGroup,
+        groupLabel: t('additionalServices.findSolicitorQuestion'),
+        name: 'find_solicitor',
+        items: [
+          { value: 'no', label: t('form.radioConfirm.false') },
+          { value: 'yes', label: t('form.radioConfirm.true') }
+        ],
+        value: values.find_solicitor,
+        validationFunction: 'validateRequired',
+        isAdditionalServices: true
+      },
       {
         stateKey: 'find_mortgage',
         component: RadioGroup,
@@ -110,32 +114,51 @@ export class AdditionalServices extends Component {
       },
       {
         component: Button,
-        onClick: () => this.handleLiveChat(),
-        label: t('additionalServices.talkToUs'),
+        onClick: () => showModal(),
+        label: t('additionalServices.nextButton'),
         classes: 'primary full',
       },
       {
         component: Button,
-        onClick: () => navigate('/company-design/shareholder-details'),
+        onClick: () => navigate('/company-design'),
         label: t('additionalServices.backButton'),
         classes: 'secondary full',
-      },
-      {
-        component: Button,
-        onClick: () => navigate('/company-design'),
-        label: t('additionalServices.skipButton'),
-        classes: 'link small full',
-      },
+      }
     ];
 
     return (
       <Layout>
         <div className="add-services" role="company-design">
-        <h1 className="add-services-title">{t('additionalServices.title')}</h1>
-        <IntroBox>{t('additionalServices.introBox')}</IntroBox>
+          <h1 className="add-services-title">{t('additionalServices.title')}</h1>
+          <IntroBox>{t('additionalServices.introBox')}</IntroBox>
           <Form className="add-services-form">
             {formUtils.renderForm(config)}
           </Form>
+
+          <ModalWrapper 
+            transitionBool={modalIsOpen}
+            transitionTime={600}
+            classes="modal"
+          >
+            <ModalContent
+              heading={t('additionalServices.modalHeading')}
+              htmlContent={
+                <>
+                <p>{t('additionalServices.modalPara1')}</p>
+                <p>{t('additionalServices.modalPara2')}</p>
+                <p>{t('additionalServices.modalPara3')}</p>
+                <Button
+                  label={t('additionalServices.modalContentButton')}
+                  onClick={() => navigate('/company-design')}
+                  classes="primary"
+                  fullWidth
+                />
+                </>
+              }
+              closeModal={hideModal}
+              closeIconAltText={t('onBoarding.createAccount.termsModalCloseIconAltText')}
+            />
+          </ModalWrapper>
         </div>
       </Layout>
     )
@@ -145,15 +168,21 @@ export class AdditionalServices extends Component {
 AdditionalServices.propTypes = {
   setAdditionalServices: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
-  form: PropTypes.object
+  form: PropTypes.object,
+  modalIsOpen: PropTypes.bool,
+  showModal: PropTypes.func,
+  hideModal: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
+  modalIsOpen: state.modal.isOpen,
   form: state.form
 });
 
 const actions = {
-  setAdditionalServices
+  setAdditionalServices,
+  showModal,
+  hideModal
 }
 
 export default connect(mapStateToProps, actions)(withTranslation()(AdditionalServices))
