@@ -10,8 +10,6 @@ import Checkbox from 'src/components/_form/Checkbox/Checkbox';
 import Form from 'src/components/_layout/Form/Form';
 import formUtils from 'src/utils/form';
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
-import ModalWrapper from 'src/components/Modal/ModalWrapper';
-import ModalContent from 'src/components/Modal/ModalContent';
 
 import modalService from 'src/services/Modal';
 export const ModalService = new modalService();
@@ -19,7 +17,6 @@ export const ModalService = new modalService();
 import { showModal, hideModal } from 'src/state/actions/modal';
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
-import termsImage from 'src/assets/images/terms-image.svg';
 import './stripe.scss';
 
 /**
@@ -60,27 +57,6 @@ class Stripe extends Component {
     })
   }
 
-  /**
-   * @param {object} e - event passed on openModal (for JSdoc)
-   * @param {string} content - modal content to fetch
-   * @return {void}
-   */
-  getModalContent = (e) => {
-    const { showLoader, hideLoader, showModal } = this.props;
-    const self = this;
-    e.preventDefault();
-
-    showLoader();
-
-    ModalService.fetchModalContent('getGround Terms and Conditions').then(response => {
-      self.setState({ modalTitle: response.data.title, modalMarkdown: response.data.markdown_text });
-
-      hideLoader();
-      showModal();
-    });
-  }
-
-
   componentWillUnmount() {
     formUtils.clearFormState();
   }
@@ -94,13 +70,9 @@ class Stripe extends Component {
       handleChange,
       cardFieldLabel,
       form,
-      t,
-      modalIsOpen,
-      showModal,
-      hideModal
+      t
     } = this.props;
 
-    const { modalTitle, modalMarkdown } = this.state;
 
     const { values } = form;
 
@@ -139,25 +111,6 @@ class Stripe extends Component {
         <Form>
           {formUtils.renderForm(this.config)}
         </Form>
-
-        <Button classes="link small" label={t('onBoarding.payment.termsAndCond')} fullWidth onClick={() => showModal() }/>
-
-          <ModalWrapper
-            transitionBool={modalIsOpen}
-            transitionTime={600}
-            classes="modal"
-            data-test="modal"
-          >
-            <ModalContent
-              heading={modalTitle}
-              content={modalMarkdown}
-              closeModal={hideModal}
-              downloadButtonLabel={t('onBoarding.createAccount.termsModalDownloadButtonLabel')}
-              closeIconAltText={t('onBoarding.createAccount.termsModalCloseIconAltText')}
-              modalImage={termsImage}
-            />
-          </ModalWrapper>
-
 
         <p className="reminder" data-test="director-reminder">
           {t('onBoarding.payment.directorReminder')}

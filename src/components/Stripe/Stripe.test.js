@@ -53,12 +53,4 @@ describe('<Stripe />', () => {
 
     expect(errorElement.length).toBe(1);
   });
-
-  test('getModalContent', () => {
-    const e = { preventDefault: jest.fn() };
-    wrapper.instance().getModalContent(e)
-    expect(mockShowLoader).toHaveBeenCalled()
-    expect(e.preventDefault).toHaveBeenCalled()
-    expect(ModalService.fetchModalContent).toHaveBeenCalled()
-  });
 });
