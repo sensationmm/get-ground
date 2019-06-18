@@ -139,7 +139,7 @@ export class Layout extends Component {
       },
       {
         text: t('menu.links.second'),
-        link: '/get-ground-advantages'
+        link: '/advantages'
       },
       {
         text: t('menu.links.third'),
