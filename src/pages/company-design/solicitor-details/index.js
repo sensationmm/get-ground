@@ -212,8 +212,6 @@ class SolicitorDetails extends Component {
           <Form>
             {formUtils.renderForm(this.config)}
 
-            <br />
-
             {showDone &&
               <Button
                 data-test="save-details-button"
