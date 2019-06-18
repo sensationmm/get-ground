@@ -1,7 +1,7 @@
 import { setup, findByTestAttr } from 'src/test-utils/test-utils';
 import { initialState as ReduxFormMock } from 'src/state/reducers/form';
 
-import { RawComponent } from './Stripe';
+import { RawComponent, ModalService } from './Stripe';
 
 describe('<Stripe />', () => {
   let wrapper;
@@ -11,6 +11,11 @@ describe('<Stripe />', () => {
   const mockStripe = {
     createToken: () => Promise.resolve({ json: () => [] })
   }
+
+  const mockShowLoader = jest.fn()
+  const mockHideLoader = jest.fn()
+  const mockShowModal = jest.fn()
+  ModalService.fetchModalContent = jest.fn('val').mockReturnValue(Promise.resolve({ data: { markdown_text: '<h1>HI</h1>' } }));
 
   beforeEach(() => {
     wrapper = setup(RawComponent, {
@@ -26,6 +31,9 @@ describe('<Stripe />', () => {
       cardFieldLabel: 'Card details',
       form: ReduxFormMock,
       t: jest.fn(),
+      showLoader: mockShowLoader,
+      hideLoader: mockHideLoader,
+      showModal: mockShowModal
     });
   });
 
@@ -44,5 +52,13 @@ describe('<Stripe />', () => {
     const errorElement = findByTestAttr(wrapper, 'stripe-error');
 
     expect(errorElement.length).toBe(1);
+  });
+
+  test('getModalContent', () => {
+    const e = { preventDefault: jest.fn() };
+    wrapper.instance().getModalContent(e)
+    expect(mockShowLoader).toHaveBeenCalled()
+    expect(e.preventDefault).toHaveBeenCalled()
+    expect(ModalService.fetchModalContent).toHaveBeenCalled()
   });
 });

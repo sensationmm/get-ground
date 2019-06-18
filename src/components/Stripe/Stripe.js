@@ -146,6 +146,7 @@ class Stripe extends Component {
             transitionBool={modalIsOpen}
             transitionTime={600}
             classes="modal"
+            data-test="modal"
           >
             <ModalContent
               heading={modalTitle}
