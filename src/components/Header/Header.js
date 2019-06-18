@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 import { useTranslation } from 'react-i18next';
 
 import Button from 'src/components/_buttons/Button/Button';
@@ -23,10 +23,10 @@ const Header = (props) => {
   const [t] = useTranslation();
 
   return (
-    <header 
-      data-test="component-header" 
-      className={classNames('header', 
-        props.classNames, 
+    <header
+      data-test="component-header"
+      className={classNames('header',
+        props.classNames,
         {'no-background': menuIsOpen}
       )}
     >
@@ -37,11 +37,16 @@ const Header = (props) => {
             <img src={Logo} alt="GetGround logo" />
           </Link>
         </div>
+        {userID &&
+          <div data-test="dashboard" className="header-dashboard" onClick={() => navigate('/dashboard')}>
+            <p>{t('header.dashboard')}</p>
+          </div>
+        }
 
         {children
           ? children
-          : <div 
-              className={classNames('header-menu-toggle', 
+          : <div
+              className={classNames('header-menu-toggle',
                 {'header-menu-toggle-close': menuIsOpen }
               )}
               onClick={onClick}
