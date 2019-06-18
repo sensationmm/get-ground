@@ -43,7 +43,9 @@ class AuthService extends BaseService {
 
       window.LC_API.set_custom_variables(login_variables);
 
-      AccountService.getDocuments();
+      setTimeout(function() {
+        AccountService.getDocuments();
+      }, 750);
     });
   };
 

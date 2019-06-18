@@ -7,7 +7,9 @@ import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import LiveChat from 'react-livechat';
 import IdleTimer from 'react-idle-timer';
+import { CSSTransition } from 'react-transition-group';
 
+import { inArray } from 'src/utils/functions';
 import SEO from 'src/components/seo';
 import Header from 'src/components/Header/Header';
 import Loader from 'src/components/Loader/Loader';
@@ -46,7 +48,7 @@ export class Layout extends Component {
   }
 
   componentDidMount() {
-    const { userID, secure, redirect, hideLoader } = this.props;
+    const { userID, secure, redirect, hideLoader, deleteUser } = this.props;
     this.setState({ livechat: true })
     store.dispatch(hideMenu());
 
@@ -64,7 +66,11 @@ export class Layout extends Component {
 
       if(auth && authed) {
         this.props.saveAuth(auth.token);
-        AuthService.reauthenticate().then(() => {
+        AuthService.reauthenticate().then((resp) => {
+          if(resp.status === 401) {
+            deleteUser();
+            navigate('/login');
+          }
           hideLoader();
         });
 
@@ -164,9 +170,11 @@ export class Layout extends Component {
       }
     ];
 
+    const roles = children.props && children.props.role && children.props.role.split(' ');
+
     return (
 
-      <div className={classNames('wrapper', `${children.props && children.props.role}`)}>
+      <div className={classNames('wrapper', `${roles && roles.join(' ')}`)}>
 
         { userID &&
           <IdleTimer
@@ -196,14 +204,21 @@ export class Layout extends Component {
           <main className="main">{children}</main>
         </div>
         <div id="modal-root"></div>
-        <Footer />
+        {!inArray('fullscreen', roles) && <Footer />}
 
         <ModalWrapper
           transitionBool={menuIsOpen}
           transitionTime={400}
           classes="menu"
         >
-          <Menu menuLinks={menuLinks} />
+          <CSSTransition
+            in={menuIsOpen}
+            timeout={400}
+            classNames="menu"
+            unmountOnExit
+          >
+            <Menu menuLinks={menuLinks} />
+          </CSSTransition>
         </ModalWrapper>
 
         <ModalWrapper

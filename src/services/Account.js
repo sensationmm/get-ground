@@ -2,6 +2,7 @@ import BaseService from './BaseService';
 import store from 'src/state/store';
 
 import { saveDocuments } from 'src/state/actions/documents';
+import { saveUser } from 'src/state/actions/user';
 
 /**
  * AccountService
@@ -31,34 +32,45 @@ class AccountService extends BaseService {
   };
 
   /**
+   * getUser
+   * fetches a single user based on id
+   * @param {integer} userID - id of user to fetch
+   * @return {Promise} getUser response
+   */
+  getUser = (userID) => {
+    const config = {
+      url: `users/${userID}`,
+      method: 'get'
+    };
+
+    return this.doRequest(config, (response) => {
+      store.dispatch(saveUser(response.data));
+    });
+  }
+
+  /**
    * savePersonalDetails
    * saves users personal details
    * @param {object} data - data object for post
    * @return {Promise} savePersonalDetails response
    */
-  savePersonalDetails = data => {
-    const config = {
-      url: `users/${data.userID}`,
-      method: 'put',
-      data: {
-        'first_name': data.firstName,
-        'middle_name': data.middleName,
-        'last_name': data.lastName,
-        'date_of_birth': data.formattedDate,
-        'nationality_name': data.nationalityName,
-        'birth_town': data.cityOfBirth,
-        'occupation': data.jobTitle,
-        'country': data.countryName,
-        'street': data.street,
-        'posttown': data.city,
-        'premise': data.unitNumber,
-        'postcode': data.postcode,
-        'previous_names': data.previousNames,
-        'phone_number': data.phone
+  savePersonalDetails = (data) => {
+    const userID = data.userID;
+    delete data.userID;
+
+    Object.keys(data).forEach((key) => {
+      if(data[key] === '') {
+        delete data[key];
       }
+    });
+
+    const config = {
+      url: `users/${userID}`,
+      method: 'put',
+      data
     };
 
-    return this.doRequest(config, () => {
+    return this.doRequest(config, (response) => {
 
       const login_variables = [
         { name: 'First Name', value: data.firstName },
@@ -67,7 +79,8 @@ class AccountService extends BaseService {
       ];
 
       window.LC_API.set_custom_variables(login_variables);
-
+      
+      store.dispatch(saveUser(response.data));
     });
   };
 
@@ -146,6 +159,27 @@ class AccountService extends BaseService {
     };
 
     return this.doRequest(config);
+  };
+
+  /**
+   * completeOnboarding
+   * Marks onboarding process as complete
+   * @return {Promise} completeOnboarding response
+   */
+  completeOnboarding = () => {
+    const userID = store.getState().user.id.toString();
+
+    const config = {
+      url: `users/${userID}`,
+      method: 'put',
+      data: {
+        last_page_visited: 'dashboard'
+      }
+    };
+
+    return this.doRequest(config, (response) => {
+      store.dispatch(saveUser(response.data));
+    });
   };
 }
 

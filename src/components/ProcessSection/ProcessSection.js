@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { navigate } from 'gatsby'
+import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
 
 import './process-section.scss'
@@ -29,17 +30,19 @@ export const ProcessSection = ({
   onClick 
 }) => {
 
+  const [ t ] = useTranslation();
+
   const progress = (status) => {
-    if (status === 'complete') {
-      return <p className="process-section-complete">100% complete</p>
-    } else if(status === 'to_do') {
-      return  <div className="process-section-todo"><p>To do</p></div>
+    if (status === 'COMPLETE') {
+      return <p className="process-section-complete">{ t('progressTracker.labels.complete') }</p>
+    } else if(status === 'NOT_STARTED') {
+      return  <p className="process-section-todo">{ t('progressTracker.labels.todo') }</p>
     } else if (status === 'signed') {
-      return <p className="process-section-signed">Signed</p>
+      return <p className="process-section-signed">{ t('progressTracker.labels.signed') }</p>
     } else if (status === 'not_signed') {
-      return <p className="process-section-not-signed">To be signed</p>
+      return <p className="process-section-not-signed">{ t('progressTracker.labels.todoSigned') }</p>
     }
-    return <div className="process-section-incomplete"><p>Incomplete</p></div>
+    return <p className="process-section-incomplete">{ t('progressTracker.labels.inProgress') }</p>
   }
 
   return (

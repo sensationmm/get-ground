@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
@@ -18,6 +17,7 @@ import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import Select from 'src/components/_form/Select/Select';
 import Button from 'src/components/_buttons/Button/Button';
+import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
@@ -43,9 +43,9 @@ class OnboardingPersonalDetailsContainer extends Component {
     this.state = {
       formattedDate: '',
       isAddressValid: true,
-      isManualAddress: false,
+      isManualAddress: this.props.form.values.premise !== '' && this.props.form.values.premise !== null,
       isDatepickerOpen: false,
-      showPreviousNames: false,
+      showPreviousNames: this.props.form.values.previous_names !== '' &&  this.props.form.values.previous_names !== null,
       isTextAreaHidden: true
     };
 
@@ -56,21 +56,21 @@ class OnboardingPersonalDetailsContainer extends Component {
     const script = document.createElement('script');
 
     formUtils.initFormState({
-      firstName: '',
-      middleName: '',
-      lastName: '',
-      dateOfBirth: '',
+      first_name: '',
+      middle_name: '',
+      last_name: '',
+      date_of_birth: '',
       nationality: '',
-      cityOfBirth: '',
-      jobTitle: '',
+      birth_town: '',
+      occupation: '',
       country: '',
       street: '',
-      city: '',
-      unitNumber: '',
+      posttown: '',
+      premise: '',
       postcode: '',
-      previousNames: '',
-      phone: ''
-    });
+      previous_names: '',
+      phone_number: ''
+    }, this.props.user);
 
     script.onload = () => {
 
@@ -79,8 +79,8 @@ class OnboardingPersonalDetailsContainer extends Component {
 
           window.addressNow.controls[0].listen('populate', (address) => {
             formUtils.updateValue('street', address.Street);
-            formUtils.updateValue('city', address.City);
-            formUtils.updateValue('unitNumber', address.BuildingNumber);
+            formUtils.updateValue('posttown', address.City);
+            formUtils.updateValue('premise', address.BuildingNumber);
             formUtils.updateValue('postcode', address.PostalCode);
     
             this.setState(() => ({
@@ -109,47 +109,23 @@ class OnboardingPersonalDetailsContainer extends Component {
 
   initFormValidation = () => {
     const { showLoader, hideLoader, t, userID, form } = this.props;
-    const {
-      values: {
-        firstName,
-        middleName,
-        lastName,
-        nationality,
-        cityOfBirth,
-        jobTitle,
-        country,
-        street,
-        city,
-        unitNumber,
-        postcode,
-        previousNames,
-        phone
-      }
-    } = form;
     const { formattedDate } = this.state;
 
     /* istanbul ignore else */
     if (formUtils.validateForm(this.config)) {
-      const countryName = country ? country.split('] ').pop() : '';
-      const nationalityName = nationality ? nationality.split('] ').pop() : '';
+      const countryName = form.values.country ? form.values.country.split('] ').pop() : '';
+      const nationalityName = form.values.nationality ? form.values.nationality.split('] ').pop() : '';
       showLoader();
+
+      const payload = this.props.form.values;
+      delete payload.nationality;
 
       AccountService.savePersonalDetails({
         userID,
-        firstName,
-        middleName,
-        lastName,
-        formattedDate,
-        nationalityName,
-        cityOfBirth,
-        jobTitle,
-        countryName,
-        street,
-        city,
-        unitNumber,
-        postcode,
-        previousNames,
-        phone
+        ...payload,
+        date_of_birth: formattedDate,
+        nationality_name: nationalityName,
+        country: countryName
       }).then((response) => {
         hideLoader();
         /* istanbul ignore else */
@@ -160,6 +136,38 @@ class OnboardingPersonalDetailsContainer extends Component {
         }
       });
     }
+  }
+
+  saveAndExit = async () => {
+    const { showLoader, hideLoader, userID, form } = this.props;
+    const { values, errors } = form;
+    const { formattedDate } = this.state;
+
+    formUtils.validateForm(this.config);
+
+    await Object.keys(errors).forEach(async (key) => {
+      await formUtils.updateValue(key, '');
+    });
+
+    const countryName = values.country ? values.country.split('] ').pop() : '';
+    const nationalityName = values.nationality ? values.nationality.split('] ').pop() : '';
+    showLoader();
+
+    const payload = this.props.form.values;
+    delete payload.nationality;
+
+    AccountService.savePersonalDetails({
+      userID,
+      ...payload,
+      date_of_birth: formattedDate,
+      nationality_name: nationalityName,
+      country: countryName
+    }).then((response) => {
+      hideLoader();
+      if (response.status === 200) {
+        navigate('/onboarding');
+      }
+    });
   }
 
   submitPersonalDetails =   /* istanbul ignore next */ () => {
@@ -209,42 +217,44 @@ class OnboardingPersonalDetailsContainer extends Component {
 
     const setCountries = (key) => countryData.map((country, index) => {
       return (
-        <option
-          key={`country-${index}`}
-          value={`[${country.alpha_2_code}] ${country[key]}`}
+        <option 
+          key={`country-${index}`} 
+          value={`[${country.alpha_3_code}] ${country[key]}`}
         >
           {country[key]}
         </option>
       );
     });
 
+    /* istanbul ignore next */
     this.config = [
       {
-        stateKey: 'firstName',
+        stateKey: 'first_name',
         component: InputText,
         label: t('onBoarding.personalDetails.form.firstNameLabel'),
-        value: values.firstName,
+        value: values.first_name,
         validationFunction: 'validateLettersOnly'
       },
       {
-        stateKey: 'middleName',
+        stateKey: 'middle_name',
         component: InputText,
         label: t('onBoarding.personalDetails.form.middleNameLabel'),
-        value: values.middleName,
-        note: t('onBoarding.personalDetails.form.middleNameNote')
-      },
-      {
-        stateKey: 'lastName',
-        component: InputText,
-        label: t('onBoarding.personalDetails.form.lastNameLabel'),
-        value: values.lastName,
+        value: values.middle_name,
+        note: t('onBoarding.personalDetails.form.middleNameNote'),
         validationFunction: 'validateLettersOnly'
       },
       {
-        stateKey: 'previousNames',
+        stateKey: 'last_name',
+        component: InputText,
+        label: t('onBoarding.personalDetails.form.lastNameLabel'),
+        value: values.last_name,
+        validationFunction: 'validateLettersOnly'
+      },
+      {
+        stateKey: 'previous_names',
         component: InputText,
         label: t('onBoarding.personalDetails.form.previousNamesLabel'),
-        value: values.previousNames,
+        value: values.previous_names,
         validationFunction: 'validateLettersOnly',
         hidden: !showPreviousNames
       },
@@ -254,12 +264,13 @@ class OnboardingPersonalDetailsContainer extends Component {
         icon: addIcon,
         small: true,
         label: t('onBoarding.personalDetails.form.addNamesButton'),
+        hidden: showPreviousNames
       },
       {
-        stateKey: 'dateOfBirth',
+        stateKey: 'date_of_birth',
         component: InputText,
         label: t('onBoarding.personalDetails.form.dateOfBirthLabel'),
-        value: values.dateOfBirth,
+        value: values.date_of_birth,
         validationFunction: 'validateRequired',
         onFocus: this.openDatePicker,
         id: 'datepicker-field',
@@ -284,17 +295,17 @@ class OnboardingPersonalDetailsContainer extends Component {
         validationFunction: 'validateRequired'
       },
       {
-        stateKey: 'cityOfBirth',
+        stateKey: 'birth_town',
         component: InputText,
         label: t('onBoarding.personalDetails.form.cityOfBirthLabel'),
-        value: values.cityOfBirth,
+        value: values.birth_town,
         validationFunction: 'validateLettersOnly'
       },
       {
-        stateKey: 'jobTitle',
+        stateKey: 'occupation',
         component: InputText,
         label: t('onBoarding.personalDetails.form.jobTitleLabel'),
-        value: values.jobTitle,
+        value: values.occupation,
         validationFunction: 'validateRequired',
         wrapperClass: 'job-title-wrapper',
         note: t('onBoarding.personalDetails.form.jobTitleNote'),
@@ -322,10 +333,10 @@ class OnboardingPersonalDetailsContainer extends Component {
         fieldErrorText: t('onBoarding.personalDetails.form.fieldErrorText'),
       },
       {
-        stateKey: 'unitNumber',
+        stateKey: 'premise',
         component: InputText,
         label: t('onBoarding.personalDetails.form.unitNumberLabel'),
-        value: values.unitNumber,
+        value: values.premise,
         validationFunction: 'validateRequired',
         hidden: !isManualAddress
       },
@@ -338,10 +349,10 @@ class OnboardingPersonalDetailsContainer extends Component {
         hidden: !isManualAddress
       },
       {
-        stateKey: 'city',
+        stateKey: 'posttown',
         component: InputText,
         label: t('onBoarding.personalDetails.form.cityLabel'),
-        value: values.city,
+        value: values.posttown,
         validationFunction: 'validateRequired',
         hidden: !isManualAddress
       },
@@ -361,30 +372,29 @@ class OnboardingPersonalDetailsContainer extends Component {
         classes: 'link small',
       },
       {
-        stateKey: 'phone',
+        stateKey: 'phone_number',
         component: InputPhone,
         label: t('onBoarding.personalDetails.form.phoneLabel'),
-        value: values.phone,
+        value: values.phone_number,
         validationFunction: 'validatePhone'
       }
     ];
 
+    const headerActions = <ButtonHeader onClick={this.saveAndExit} label={t('header.buttons.saveAndExit')} />;
+
     return (
       <>
-      <Layout secure>
+      <Layout secure headerActions={headerActions}>
         <div className="onboarding-details" data-test="container-onboarding-details" role="account">
           <h1>{t('onBoarding.personalDetails.heading')}</h1>
 
           <IntroBox>{t('onBoarding.personalDetails.intro')}</IntroBox>
 
-          {showErrorMessage &&
-              <ErrorBox>
-              { errors.form
-                ? errors.form
-                : 'Please fix your errors to proceed'
-              }
-              </ErrorBox>
-            }
+          {showErrorMessage && 
+            <ErrorBox>
+            { errors.form ? errors.form : t('form.correctErrors') }
+            </ErrorBox>
+          }
 
           <Form>
             {formUtils.renderForm(this.config)}
@@ -410,11 +420,13 @@ OnboardingPersonalDetailsContainer.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   userID: PropTypes.number,
+  user: PropTypes.object,
   form: PropTypes.object
 };
 
 const mapStateToProps = (state) => ({
   userID: state.user.id,
+  user: state.user,
   form: state.form
 });
 
