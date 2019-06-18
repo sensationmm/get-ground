@@ -1,4 +1,5 @@
 import BaseService from './BaseService';
+import { API } from 'src/config/endpoints';
 
 /**
  * ModalService
@@ -23,17 +24,19 @@ class ModalService extends BaseService {
     * @param {string} content - markdown to transform into PDF
     * @return {Promise} markdownToPDF response
     */
-  markdownToPDF = async content => {
-
-    const config = {
-      unauthed: true,
-      url: `md2pdf`,
+   markdownToPDF = async content => (
+    await fetch(`${API}/md2pdf`, {
       method: 'post',
-      data: JSON.stringify({ 'markdown_text': content })
-    };
-
-    return this.doRequest(config);
-  };
+      headers: {
+        'Authorization': 'avb068cbk2os5ujhodmt'
+      },
+      body: JSON.stringify({ 'markdown_text': content }),
+    })
+    .then(response => response.status === 400 ? response : response.blob())
+    .then(data => {
+      return data;
+    })
+  );
 }
 
 export default ModalService;  
