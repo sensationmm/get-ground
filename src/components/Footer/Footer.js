@@ -24,11 +24,11 @@ const Footer = () => {
       },
       {
         title: links['link2'].title,
-        link: '/get-ground-advantages'
+        link: '/advantages'
       },
       {
         title: links['link5'].title,
-        link: '/faqs'
+        link: '/frequently-asked-questions'
       },
       {
         title: links['link4'].title,
