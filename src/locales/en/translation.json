@@ -483,6 +483,7 @@
     }
   },
   "header": {
+    "dashboard": "My Dashboard",
     "buttons": {
       "register": "Register",
       "login": "Log In",
