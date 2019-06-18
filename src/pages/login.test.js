@@ -83,6 +83,18 @@ describe('Login', () => {
       expect(navigate).toHaveBeenCalledWith('/onboarding');
     });
 
+    test('success and user is directed to dashboard', async () => {
+      wrapper = setup(Login, { ...defaultProps, last_page_visited: 'dashboard' });
+      jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
+      AuthService.login = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
+
+      await wrapper.instance().onLogin();
+
+      expect(showLoaderMock).toHaveBeenCalled();
+      expect(hideLoaderMock).toHaveBeenCalled();
+      expect(navigate).toHaveBeenCalledWith('/dashboard');
+    });
+
     test('user failure', async () => {
       jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
       AuthService.login = jest.fn().mockReturnValue(Promise.resolve({ status: 404, data: { error: 'User not found' }}));
