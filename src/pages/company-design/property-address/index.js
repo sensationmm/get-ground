@@ -47,6 +47,8 @@ class PropertyAddress extends Component {
 
   /* istanbul ignore next */
   componentDidMount() {
+    const script = document.createElement('script');
+
     formUtils.initFormState({
       country: '',
       street: '',
@@ -56,25 +58,28 @@ class PropertyAddress extends Component {
       toRentConfirmation: false
     });
 
-    const script = document.createElement('script');
-
     script.onload = () => {
-      window.addressNow.listen('load', (control) =>  {
-        control.listen('populate', (address) => {
 
-          formUtils.updateValue('street', address.Street);
-          formUtils.updateValue('city', address.City);
-          formUtils.updateValue('unitNumber', address.BuildingNumber);
-          formUtils.updateValue('postcode', address.PostalCode);
+      const timerId = setInterval(() => {
+        if(window.addressNow.controls[0]){
 
-          this.setState(() => ({
-            ...this.state,
-            isAddressValid: true,
-            isTextAreaHidden: false
-          }));
-
-        });
-      });
+          window.addressNow.controls[0].listen('populate', (address) => {
+            formUtils.updateValue('street', address.Street);
+            formUtils.updateValue('city', address.City);
+            formUtils.updateValue('unitNumber', address.BuildingNumber);
+            formUtils.updateValue('postcode', address.PostalCode);
+    
+            this.setState(() => ({
+              ...this.state,
+              isAddressValid: true,
+              isTextAreaHidden: false
+            }));
+    
+          });
+          clearInterval(timerId);
+        }
+      }, 500);
+      
     }
 
     script.src = addressNow

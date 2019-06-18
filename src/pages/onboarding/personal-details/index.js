@@ -53,6 +53,8 @@ class OnboardingPersonalDetailsContainer extends Component {
   }
 
   componentDidMount() {
+    const script = document.createElement('script');
+
     formUtils.initFormState({
       first_name: '',
       middle_name: '',
@@ -70,26 +72,28 @@ class OnboardingPersonalDetailsContainer extends Component {
       phone_number: ''
     }, this.props.user);
 
-    const script = document.createElement('script');
-
     script.onload = () => {
-      /* TODO: NEED TO GET THIS WORKING WITHOUT A TIMEOUT - THE SCRIPT COULD TAKE LONGER THAN A SECOND TO LOAD */
-      setTimeout(() => {
-        window.addressNow.controls[0].listen('populate', (address) => {
-          formUtils.updateValue('street', address.Street);
-          formUtils.updateValue('posttown', address.City);
-          formUtils.updateValue('premise', address.BuildingNumber);
-          formUtils.updateValue('postcode', address.PostalCode);
 
-          this.setState(() => ({
-            ...this.state,
-            isAddressValid: true,
-            isTextAreaHidden: false
-          }));
+      const timerId = setInterval(() => {
+        if(window.addressNow.controls[0]){
 
-        });
-      }, 2000);
-
+          window.addressNow.controls[0].listen('populate', (address) => {
+            formUtils.updateValue('street', address.Street);
+            formUtils.updateValue('posttown', address.City);
+            formUtils.updateValue('premise', address.BuildingNumber);
+            formUtils.updateValue('postcode', address.PostalCode);
+    
+            this.setState(() => ({
+              ...this.state,
+              isAddressValid: true,
+              isTextAreaHidden: false
+            }));
+    
+          });
+          clearInterval(timerId);
+        }
+      }, 500);
+      
     }
 
     script.src = addressNow
