@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
@@ -89,7 +88,7 @@ class OnboardingPersonalDetailsContainer extends Component {
           }));
 
         });
-      }, 1000);
+      }, 2000);
 
     }
 
@@ -377,7 +376,7 @@ class OnboardingPersonalDetailsContainer extends Component {
       }
     ];
 
-    const headerActions = <ButtonHeader onClick={this.saveAndExit} label="Save &amp; Exit" />;
+    const headerActions = <ButtonHeader onClick={this.saveAndExit} label={t('header.buttons.saveAndExit')} />;
 
     return (
       <>
