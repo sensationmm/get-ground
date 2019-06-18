@@ -314,6 +314,8 @@ class ShareholderDetails extends Component {
                   small
                 />
               }
+              
+              <br /><br />
 
               <Form>
                 <Button

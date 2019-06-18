@@ -399,6 +399,8 @@ class OnboardingPersonalDetailsContainer extends Component {
           <Form>
             {formUtils.renderForm(this.config)}
 
+            <br />
+
             <Button
               label={t('onBoarding.personalDetails.form.nextButton')}
               fullWidth

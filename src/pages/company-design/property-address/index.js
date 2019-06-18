@@ -224,6 +224,9 @@ class PropertyAddress extends Component {
         classes: 'link small',
       },
       {
+        component: 'br'
+      },
+      {
         stateKey: 'toRentConfirmation',
         component: Checkbox,
         label: t('companyDesign.propertyAddress.form.toRentConfirmationLabel'),
@@ -251,6 +254,8 @@ class PropertyAddress extends Component {
 
           <Form>
             {formUtils.renderForm(this.config)}
+
+            <br />
 
             <Button
               label={t('companyDesign.propertyAddress.form.nextButton')}
