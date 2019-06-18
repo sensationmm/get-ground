@@ -44,7 +44,7 @@ class Login extends Component {
   }
 
   onLogin = async () => {
-    const { showLoader, hideLoader, t, location: { search }, form } = this.props;
+    const { showLoader, hideLoader, t, location: { search }, form, last_page_visited } = this.props;
     const { values: { email, password }} = form;
 
     if(formUtils.validateForm(this.config)) {
@@ -59,7 +59,11 @@ class Login extends Component {
           if (queryStringValues.redirect) {
             navigate(queryStringValues.redirect);
           } else {
-            navigate('/onboarding');
+            if (last_page_visited === 'dashboard') {
+              navigate('/dashboard');
+            } else {
+              navigate('/onboarding');
+            }
           }
 
         } else {
@@ -150,11 +154,13 @@ Login.propTypes = {
   hideLoader: PropTypes.func,
   t: PropTypes.func.isRequired,
   location: PropTypes.object,
-  form: PropTypes.object
+  form: PropTypes.object,
+  last_page_visited: PropTypes.string
 };
 
 const mapStateToProps = state => ({
-  form: state.form
+  form: state.form,
+  last_page_visited: state.user.last_page_visited
 });
 
 export const RawComponent = Login;
