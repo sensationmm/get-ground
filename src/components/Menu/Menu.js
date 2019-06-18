@@ -32,7 +32,7 @@ class Menu extends Component {
     const { fadeInLinks } = this.state;
     return(
       <div className="menu" data-test="component-menu">
-        <ul className={classNames('menu--list', 
+        <ul className={classNames('menu--list',
             { 'fade-in': fadeInLinks }
           )}>
           {menuLinks.map((menuLink, i) => {

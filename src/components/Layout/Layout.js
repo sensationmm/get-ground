@@ -159,7 +159,7 @@ export class Layout extends Component {
       },
       {
         text: t('menu.links.seventh'),
-        link: '/faqs'
+        link: '/frequently-asked-questions'
       },
       {
         text: isLoggedIn ? t('menu.links.ninth') : t('menu.links.eigth'),

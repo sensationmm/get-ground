@@ -28,7 +28,7 @@ const Footer = () => {
       },
       {
         title: links['link5'].title,
-        link: '/faqs'
+        link: '/frequently-asked-questions'
       },
       {
         title: links['link4'].title,
