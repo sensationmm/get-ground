@@ -1,11 +1,16 @@
 
 import React from 'react'
+import { navigate } from 'gatsby';
 import { shallow } from 'enzyme'
 import { RawComponent as ProcessTracker, AccountService } from './index'
 
 import Checkbox from 'src/components/_form/Checkbox/Checkbox';
 
 jest.mock('src/assets/images/person.svg', () => '');
+
+jest.mock('gatsby', () => ({
+  navigate: jest.fn()
+}));
 
 describe('process-tracker', () => {
   let wrapper;
@@ -108,6 +113,17 @@ describe('process-tracker', () => {
 
       expect(AccountService.completeOnboarding).toHaveBeenCalled();
     });
+  });
+
+  test('redirect after completion', () => {
+    const newProps = {
+      ...props,
+      last_page_visited: 'dashboard'
+    }
+
+    wrapper = shallow(<ProcessTracker {...newProps}/>);
+
+    expect(navigate).toHaveBeenCalledWith('/dashboard');
   });
 
   afterEach(() => {
