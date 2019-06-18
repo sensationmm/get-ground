@@ -24,7 +24,7 @@ const Footer = () => {
       },
       {
         title: links['link2'].title,
-        link: '/advantages'
+        link: '/get-ground-advantages'
       },
       {
         title: links['link5'].title,
@@ -44,7 +44,7 @@ const Footer = () => {
       },
       {
         title: links['link9'].title,
-        link: '/privacypolicy'
+        link: '/privacy-policy'
       },
       {
         title: links['link1'].title,

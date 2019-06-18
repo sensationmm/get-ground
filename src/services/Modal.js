@@ -1,5 +1,8 @@
 import BaseService from './BaseService';
 
+import { API } from 'src/config/endpoints';
+import store from 'src/state/store';
+
 /**
  * ModalService
  * @return {Object} ModalService
@@ -11,7 +14,6 @@ class ModalService extends BaseService {
     */
   fetchModalContent = (title) => {
     const config = {
-      unauthed: true,
       url: `markdown_templates/title/${title}`,
       method: 'get'
     };
@@ -23,17 +25,19 @@ class ModalService extends BaseService {
     * @param {string} content - markdown to transform into PDF
     * @return {Promise} markdownToPDF response
     */
-  markdownToPDF = async content => {
-
-    const config = {
-      unauthed: true,
-      url: `md2pdf`,
+  markdownToPDF = async content => (
+    await fetch(`${API}/md2pdf`, {
       method: 'post',
-      data: JSON.stringify({ 'markdown_text': content })
-    };
-
-    return this.doRequest(config);
-  };
+      headers: {
+        'Authorization': `Bearer ${store.getState().auth.token}`
+      },
+      body: JSON.stringify({ 'markdown_text': content }),
+    })
+    .then(response => response.status === 400 ? response : response.blob())
+    .then(data => {
+      return data;
+    })
+  );
 }
 
 export default ModalService;  

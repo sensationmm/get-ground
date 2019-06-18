@@ -15,11 +15,11 @@ class BaseService {
     this.getConfig();
   }
 
-  getConfig(unauthed) {
+  getConfig() {
     const auth = store.getState().auth;
     let token = null;
 
-    if (auth.token && unauthed !== true) {
+    if (auth.token) {
       token = `Bearer ${auth.token}`;
     } else {
       token = 'avb068cbk2os5ujhodmt';
@@ -41,7 +41,7 @@ class BaseService {
    * @return {Promise} call response
    */
   doRequest = async (config, callback = null) => {
-    this.getConfig(config.unauthed);
+    this.getConfig();
 
     const configData = {
       ...this.config,
