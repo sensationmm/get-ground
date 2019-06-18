@@ -248,7 +248,7 @@ const mapStateToProps = state => ({
 
 const actions = {
   showLoader,
-  hideLoader ,
+  hideLoader,
   showModal,
   hideModal
 };
