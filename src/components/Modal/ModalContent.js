@@ -135,13 +135,13 @@ class ModalContent extends Component {
 
           <img src={modalImage} />
 
-          { content && 
+          { content &&
             <div className="modal--markdown">
               <ReactMarkdown escapeHtml={false} source={content} />
             </div>
           }
 
-          { htmlContent && 
+          { htmlContent &&
             htmlContent
           }
 
