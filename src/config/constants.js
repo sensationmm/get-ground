@@ -43,5 +43,6 @@ export const ADD_COMPANY = 'ADD_COMPANY';
 export const SHOW_MENU = 'SHOW_MENU';
 export const HIDE_MENU = 'HIDE_MENU';
 export const USER_UPDATE = 'USER_UPDATE';
+export const SAVE_USER = 'SAVE_USER';
 
 export const SAVE_DOCUMENTS = 'SAVE_DOCUMENTS';

@@ -87,6 +87,16 @@ describe('<Layout />', () => {
     expect(hideMenuMock).toHaveBeenCalledTimes(1);
   });
 
+  test('logged out t should be called with menu.links.eigth', () => {
+    setup(Layout, { ...props, menuIsOpen: true });
+    expect(props.t).toHaveBeenCalledWith('menu.links.eigth')
+  })
+
+  test('logged in t should be called with menu.links.ninth', () => {
+    setup(Layout, { ...props, menuIsOpen: true, isLoggedIn: true });
+    expect(props.t).toHaveBeenCalledWith('menu.links.ninth')
+  })
+
   describe('auth detection', () => {
 
     test('has userID', () => {
@@ -134,7 +144,7 @@ describe('<Layout />', () => {
 
     test('the user is logged out', () => {
       const wrapper = setup(Layout, { ...props }, { logout: false });
-      
+
       wrapper.setState({ logout: true });
 
       expect(deleteAuthMock).toHaveBeenCalled();
@@ -144,7 +154,7 @@ describe('<Layout />', () => {
 
     test('_onIdle sets isLoggingOut to true and then logout to true after 10 seconds', (done) => {
       const wrapper = setup(Layout, { ...props }, { logout: false, isLoggingOut: false });
-      
+
       wrapper.instance()._onIdle();
       jest.setTimeout(15000);
 

@@ -307,6 +307,8 @@ class PurchaseDetails extends Component {
           <Form>
             {formUtils.renderForm(this.config)}
 
+            <br />
+
             <center>
               <Button
                 data-test="skip-button"

@@ -123,6 +123,9 @@ export class TaxQuestions extends Component {
         hidden: !values.ownership || values.ownership === 'no'
       },
       {
+        component: 'br'
+      },
+      {
         component: Button,
         onClick: () => this.submitTaxAnswers(),
         label: t('taxQuestions.nextBtn'),

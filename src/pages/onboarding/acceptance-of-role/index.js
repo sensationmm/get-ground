@@ -85,14 +85,19 @@ export class AcceptanceOfRole extends React.Component {
 
   submitAnswers = () => {
     const { t, location, form: { values: { shareholder, director }}} = this.props;
+    const { inviteeName, isExistingUser } = this.state;
     const token = location.search.split('=')[1];
 
     if ( shareholder === 'no' || director === 'no' ) {
-      navigate('/onboarding/acceptance-of-role/decline')
+      return navigate('/onboarding/acceptance-of-role/decline', {
+        state: {
+          inviteeName: inviteeName
+        }
+      })
     }
 
-    if (!this.state.isExistingUser ) {
-      navigate('/forgot-password/reset', {
+    if (!isExistingUser ) {
+      return navigate('/forgot-password/reset', {
         state: {
           acceptRoleToken: token
         }
@@ -100,7 +105,7 @@ export class AcceptanceOfRole extends React.Component {
     }
 
 
-    if (this.state.isExistingUser ) {
+    if (isExistingUser ) {
       showLoader();
       AuthService.acceptRoleLogin(token).then((response) => {
         hideLoader();

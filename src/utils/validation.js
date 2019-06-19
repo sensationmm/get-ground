@@ -51,7 +51,7 @@ export const validatePhone = (input) => {
   const inputVal = input ? input.substr(input.indexOf(')') + 1) : '';
 
   if (inputVal === '') return false;
-  return !isNaN(inputVal) || (inputVal.length >= 7 && inputVal <= 15);
+  return !isNaN(inputVal) && inputVal.length >= 7 && inputVal.length <= 15;
 };
 validationMessages.validatePhone = i18n.t('validation.validatePhone');
 
@@ -80,7 +80,7 @@ validationMessages.validateNoOfCompanies = i18n.t('validation.validateNoOfCompan
  * @return {boolean} whether value is entered
  */
 export const validateLettersOnly = (input) => {
-  return !/[^a-zA-Z\s]/.test(input) && !!input;
+  return !/[^a-zA-Z\s]/.test(input);
 };
 validationMessages.validateLettersOnly = i18n.t('validation.validateLettersOnly');
 

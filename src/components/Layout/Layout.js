@@ -7,7 +7,9 @@ import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import LiveChat from 'react-livechat';
 import IdleTimer from 'react-idle-timer';
+import { CSSTransition } from 'react-transition-group';
 
+import { inArray } from 'src/utils/functions';
 import SEO from 'src/components/seo';
 import Header from 'src/components/Header/Header';
 import Loader from 'src/components/Loader/Loader';
@@ -46,7 +48,7 @@ export class Layout extends Component {
   }
 
   componentDidMount() {
-    const { userID, secure, redirect, hideLoader } = this.props;
+    const { userID, secure, redirect, hideLoader, deleteUser } = this.props;
     this.setState({ livechat: true })
     store.dispatch(hideMenu());
 
@@ -64,7 +66,11 @@ export class Layout extends Component {
 
       if(auth && authed) {
         this.props.saveAuth(auth.token);
-        AuthService.reauthenticate().then(() => {
+        AuthService.reauthenticate().then((resp) => {
+          if(resp.status === 401) {
+            deleteUser();
+            navigate('/login');
+          }
           hideLoader();
         });
 
@@ -123,7 +129,7 @@ export class Layout extends Component {
 
   render() {
     this.loggedOutOnly();
-    const { children, headerActions, isLoading, userID, t, menuIsOpen } = this.props;
+    const { children, headerActions, isLoading, userID, t, menuIsOpen, isLoggedIn } = this.props;
     const { isLoggingOut } = this.state;
 
     const menuLinks = [
@@ -133,7 +139,7 @@ export class Layout extends Component {
       },
       {
         text: t('menu.links.second'),
-        link: '/get-ground-advantages'
+        link: '/advantages'
       },
       {
         text: t('menu.links.third'),
@@ -153,10 +159,10 @@ export class Layout extends Component {
       },
       {
         text: t('menu.links.seventh'),
-        link: '/faqs'
+        link: '/frequently-asked-questions'
       },
       {
-        text: t('menu.links.eigth'),
+        text: isLoggedIn ? t('menu.links.ninth') : t('menu.links.eigth'),
         function: (e) => {
           e.preventDefault();
           this.setState({ logout: true });
@@ -164,11 +170,13 @@ export class Layout extends Component {
       }
     ];
 
+    const roles = children.props && children.props.role && children.props.role.split(' ');
+
     return (
 
-      <div className={classNames('wrapper', `${children.props && children.props.role}`)}>
+      <div className={classNames('wrapper', `${roles && roles.join(' ')}`)}>
 
-        { userID && 
+        { userID &&
           <IdleTimer
             ref={ref => { this.idleTimer = ref }}
             element={document}
@@ -196,17 +204,24 @@ export class Layout extends Component {
           <main className="main">{children}</main>
         </div>
         <div id="modal-root"></div>
-        <Footer />
+        {!inArray('fullscreen', roles) && <Footer />}
 
-        <ModalWrapper 
+        <ModalWrapper
           transitionBool={menuIsOpen}
           transitionTime={400}
           classes="menu"
         >
-          <Menu menuLinks={menuLinks} />
+          <CSSTransition
+            in={menuIsOpen}
+            timeout={400}
+            classNames="menu"
+            unmountOnExit
+          >
+            <Menu menuLinks={menuLinks} />
+          </CSSTransition>
         </ModalWrapper>
 
-        <ModalWrapper 
+        <ModalWrapper
           transitionBool={isLoggingOut}
           transitionTime={600}
           classes="modal"
@@ -243,7 +258,8 @@ Layout.propTypes = {
   hideMenu: PropTypes.func,
   t: PropTypes.func.isRequired,
   hideLoader: PropTypes.func,
-  deleteUser: PropTypes.func
+  deleteUser: PropTypes.func,
+  isLoggedIn: PropTypes.bool
 }
 
 Layout.defaultProps = {
@@ -254,7 +270,8 @@ const mapStateToProps = (state) => ({
   isLoading: state.loader.isLoading,
   userID: state.user.id,
   activeCompany: state.activeCompany,
-  menuIsOpen: state.menu.isOpen
+  menuIsOpen: state.menu.isOpen,
+  isLoggedIn: state.user.email
 });
 
 const actions = {

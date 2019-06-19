@@ -123,6 +123,9 @@ export class AdditionalServices extends Component {
         isAdditionalServices: true
       },
       {
+        component: 'br'
+      },
+      {
         component: Button,
         onClick: () => showModal(),
         label: t('additionalServices.nextButton'),

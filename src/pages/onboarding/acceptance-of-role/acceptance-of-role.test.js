@@ -101,11 +101,16 @@ describe('acceptance-of-role', () => {
     }
     wrapper = shallow(<AcceptanceOfRole {...customProps}/>)
     wrapper.setState({
-      isExistingUser: false
+      isExistingUser: false,
+      inviteeName: 'Tom Sawyer',
     })
     wrapper.instance().submitAnswers()
 
-    expect(navigate).toHaveBeenCalledWith('/onboarding/acceptance-of-role/decline')
+    expect(navigate).toHaveBeenCalledWith('/onboarding/acceptance-of-role/decline', {
+      state: {
+        inviteeName: 'Tom Sawyer'
+      }
+    })
   })
 
   test('call submitAnswers should call login if user exists and answers yes then redirect to dashboard', async () => {

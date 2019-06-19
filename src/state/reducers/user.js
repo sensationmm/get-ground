@@ -1,4 +1,5 @@
 import {
+  SAVE_USER,
   USER_LOGIN,
   USER_UPDATE,
   DELETE_USER
@@ -10,6 +11,7 @@ export const initialState = {
 
 export const user = (state = initialState, action = {}) => {
   switch (action.type) {
+    case SAVE_USER:
     case USER_LOGIN:
       return action.user;
 
