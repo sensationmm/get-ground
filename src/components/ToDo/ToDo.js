@@ -27,9 +27,8 @@ const ToDo = props => {
       className="to-do"
       onClick={() => setActiveCompany(id)}
     >
-      <div className="to-do--address">
-        {address.premise}, {address.postcode}
-      </div>
+      <div className="to-do-address">{ address.premise }</div>
+      <div className="to-do-postcode">{ address.postcode }</div>
 
       <ActionButton alert={action} />
     </div>

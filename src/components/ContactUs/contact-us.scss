@@ -4,7 +4,6 @@
 .contact-us {
   border-radius: 8px;
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.15);
-  margin-bottom: 30px;
   padding: $padding-vertical ($padding-horizontal-unit * 2 + 0px);
   display: flex;
   flex-direction: column;
@@ -35,7 +34,26 @@
   }
 
   &-livechat {
-    margin-top: 15px;
-    align-self: flex-end;
+    margin: 15px auto 0 auto;
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .contact-us {
+    &-details {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-content: center;
+      align-items: center;
+
+      > * {
+        margin: 0;
+      }
+    }
+
+    &-divider {
+      display: none;
+    }
   }
 }

@@ -42,7 +42,7 @@ describe('Dashboard', () => {
     button.simulate('click');
 
     expect(button.dive().text()).toEqual('dashboard.main.addCompanyButton');
-    expect(navigate).toHaveBeenCalledWith('/company-design');
+    expect(navigate).toHaveBeenCalledWith('/company-design/intro');
   });
 
   test('no companies', () => {
@@ -53,16 +53,6 @@ describe('Dashboard', () => {
     wrapper = setup(Dashboard, { ...defaultProps, actions: actionsMock });
 
     expect(getByValueSpy).toHaveBeenCalledWith(defaultProps.companies, 'id', '1')
-  });
-
-  test('translations', () => {
-    // expect(wrapper.find('h2').at(0).text()).toBe('dashboard.company.overview.sections.company');
-    // expect(wrapper.find('h2').at(1).text()).toBe('dashboard.company.overview.sections.address');
-    // expect(wrapper.find('h2').at(2).text()).toBe('dashboard.company.overview.sections.shareholders');
-    // expect(wrapper.find('h2').at(3).text()).toBe('dashboard.company.overview.sections.directors');
-    // expect(wrapper.find('h2').at(4).text()).toBe('dashboard.company.overview.sections.documents');
-    // expect(wrapper.find(Button).at(0).props().label).toBe('dashboard.company.overview.ctaPrimary');
-    // expect(wrapper.find(Button).at(1).props().label).toBe('dashboard.company.overview.ctaSecondary');
   });
 
   afterEach(() => {

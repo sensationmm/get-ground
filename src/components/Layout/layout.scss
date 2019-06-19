@@ -11,7 +11,7 @@
 
 body {
   font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   color: $text;
   line-height: 1.3;
   letter-spacing: 1px;
@@ -63,7 +63,7 @@ body {
 
 .app {
   padding: $padding-vertical (($padding-horizontal-unit * 2) + 0px);
-  min-height: calc(100vh - #{$header-height + ($padding-vertical-unit * 4) + 0px});
+  // min-height: calc(100vh - #{$header-height + ($padding-vertical-unit * 4) + 0px});
   padding-top: calc((#{$header-height + ($padding-vertical-unit * 2) + 0px + $padding-vertical}));
   background: $white;
 
@@ -86,7 +86,7 @@ div.fullscreen {
 
 h1, h2 {
   font-family: inherit;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 24px;
 }
 
@@ -96,7 +96,7 @@ h1 {
 
 h3 {
   font-family: inherit;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 18px;
 }
 
@@ -158,5 +158,12 @@ b {
     max-height: 330px;
     margin: 0 auto;
     display: block;
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  h1 {
+    margin: 0 0 $padding-vertical 0;
+    padding: $padding-vertical 0;
   }
 }

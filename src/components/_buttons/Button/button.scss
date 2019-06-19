@@ -12,6 +12,7 @@
   box-sizing: border-box;
   border-radius: 30px;
   letter-spacing: 1px;
+  white-space: nowrap;
 
   &.full {
     width: 100%;
@@ -63,14 +64,14 @@
 
   &.chat {
     @include gradient-horizontal($gradient-option-1, $gradient-option-2);
-    color: $white;
+    color: $text;
   }
 
   &.tertiary {
     min-width: 100px;
     background: none;
-    color: $white;
-    border: 2px solid $white;
+    color: $text;
+    border: 2px solid $text;
     padding: 10px 15px;
 
     &.small {
