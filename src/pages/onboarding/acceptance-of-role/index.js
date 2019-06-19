@@ -141,7 +141,8 @@ export class AcceptanceOfRole extends React.Component {
       {
         component: Modal,
         name: 'shareholder Modal',
-        value: values.shareholder,
+        content: 'being a shareholder',
+        isShareholder: true
       },
       {
         stateKey: 'director',
@@ -155,6 +156,13 @@ export class AcceptanceOfRole extends React.Component {
         value: values.director,
         hidden: !this.state.isDirector,
         validationFunction: 'validateRequired'
+      },
+      {
+        component: Modal,
+        name: 'director Modal',
+        content: 'being a director',
+        isShareholder: false,
+        hidden: !this.state.isDirector,
       },
       {
         component: Button,

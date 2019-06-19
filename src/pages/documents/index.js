@@ -262,7 +262,7 @@ export class MyDocuments extends Component {
               onClick={this.getAllMarkdown}
             />
 
-            <ModalWrapper 
+            <ModalWrapper
               transitionBool={modalIsOpen}
               transitionTime={600}
               classes="modal"
