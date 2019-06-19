@@ -98,6 +98,10 @@
       margin-top: 6px;
     }
   }
+  &-children.disabled {
+    opacity: 0.4;
+    pointer-events: none
+  }
 }
 
 

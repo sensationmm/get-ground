@@ -19,7 +19,7 @@ import './header.scss';
  */
 
 const Header = (props) => {
-  const { menuIsOpen, children, isLoading, userID, onClick } = props;
+  const { menuIsOpen, children, isLoading, userID, onClick, childrenDisabled } = props;
   const [t] = useTranslation();
 
   return (
@@ -44,7 +44,9 @@ const Header = (props) => {
         }
 
         {children
-          ? children
+          ? <div data-test="children" className={classNames('header-children', {
+            'disabled': childrenDisabled
+          })}>{children}</div>
           : <div
               className={classNames('header-menu-toggle',
                 {'header-menu-toggle-close': menuIsOpen }
@@ -84,7 +86,8 @@ Header.propTypes = {
   menuIsOpen: PropTypes.bool,
   isLoading: PropTypes.bool,
   userID: PropTypes.number,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  childrenDisabled: PropTypes.bool
 }
 
 export default Header;
