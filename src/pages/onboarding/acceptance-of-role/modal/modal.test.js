@@ -11,7 +11,8 @@ describe('acceptance of role modal', () => {
     props = {
       content: 'being a director',
       t: jest.fn(),
-      showLoader: jest.fn()
+      showLoader: jest.fn(),
+      isShareholder: false
     }
     wrapper = shallow(<AcceptanceOfRoleModal {...props} />)
   })
