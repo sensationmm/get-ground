@@ -9,14 +9,14 @@ import { form } from './form';
 import { actions } from './actions';
 import { companies } from './companies';
 import { activeCompany } from './activeCompany';
-import { additionalServices } from './additionalServices';
+// import { additionalServices } from './additionalServices';
 import { menu } from './menu';
 import { documents } from './documents';
 
 export default combineReducers({
   actions,
   activeCompany,
-  additionalServices,
+  // additionalServices,
   auth,
   companies,
   documents,

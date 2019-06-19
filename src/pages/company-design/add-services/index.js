@@ -14,7 +14,8 @@ import ModalContent from 'src/components/Modal/ModalContent';
 import ModalWrapper from 'src/components/Modal/ModalWrapper';
 import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 
-import { setAdditionalServices } from 'src/state/actions/additionalServices'
+//import { setAdditionalServices } from 'src/state/actions/additionalServices'
+import { companyUpdate } from 'src/state/actions/activeCompany';
 import { showModal, hideModal } from 'src/state/actions/modal';
 
 import './add-services.scss'
@@ -46,8 +47,15 @@ export class AdditionalServices extends Component {
 
     const { form: { values: { find_mortgage, find_property_insurance,  find_property_management, find_solicitor }}} = this.props;
 
-    this.props.setAdditionalServices({
-      hasUsedAdditionalServices: true,
+    // this.props.setAdditionalServices({
+    //   hasUsedAdditionalServices: true,
+    //   mortgage: find_mortgage === 'yes',
+    //   insurance: find_property_insurance === 'yes',
+    //   management: find_property_management === 'yes',
+    //   solicitor: find_solicitor === 'yes'
+    // })
+
+    this.props.companyUpdate('1', 'additionalServices', {
       mortgage: find_mortgage === 'yes',
       insurance: find_property_insurance === 'yes',
       management: find_property_management === 'yes',
@@ -170,7 +178,8 @@ export class AdditionalServices extends Component {
 }
 
 AdditionalServices.propTypes = {
-  setAdditionalServices: PropTypes.func.isRequired,
+  // setAdditionalServices: PropTypes.func.isRequired,
+  companyUpdate: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   form: PropTypes.object,
   modalIsOpen: PropTypes.bool,
@@ -184,7 +193,8 @@ const mapStateToProps = state => ({
 });
 
 const actions = {
-  setAdditionalServices,
+  // setAdditionalServices,
+  companyUpdate,
   showModal,
   hideModal
 }

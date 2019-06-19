@@ -13,9 +13,9 @@ describe('', () => {
 
   beforeEach(() => {
     props = {
-      setAdditionalServices: jest.fn(),
       t: jest.fn(),
-      form: ReduxFormMock
+      form: ReduxFormMock,
+      companyUpdate: jest.fn()
     }
     wrapper = shallow(<AdditionalServices {...props} />)
   })
@@ -54,8 +54,7 @@ describe('', () => {
 
     wrapper.unmount()
 
-    expect(props.setAdditionalServices).toHaveBeenCalledWith({
-      hasUsedAdditionalServices: true,
+    expect(props.companyUpdate).toHaveBeenCalledWith('1', 'additionalServices', {
       mortgage: true,
       insurance: false,
       management: true,

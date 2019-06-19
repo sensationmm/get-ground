@@ -88,7 +88,7 @@ const Dashboard = (props) => {
               data-test="add-company-button"
               icon={AddIcon}
               label={ t('dashboard.main.addCompanyButton') }
-              onClick={() => navigate('/company-design')}
+              onClick={() => navigate('/company-design/intro')}
             />
           </center>
         </List>

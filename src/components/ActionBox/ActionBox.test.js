@@ -64,7 +64,7 @@ describe('<ActionBox />', () => {
       expect(buttonAction.props().label).toEqual('actionBox.actions.add_company.cta');
       buttonAction.simulate('click');
       expect(setActiveCompanyMock).toHaveBeenCalledTimes(0);
-      expect(navigate).toHaveBeenCalledWith('/company-design');
+      expect(navigate).toHaveBeenCalledWith('/company-design/intro');
     });
 
     test('documents_ready', () => {

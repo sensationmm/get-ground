@@ -30,8 +30,6 @@ export const ACTIVE_ADDRESS = 'ACTIVE_ADDRESS';
 export const ACTIVE_SELFIE = 'ACTIVE_SELFIE';
 export const ACTIVE_RESET = 'ACTIVE_RESET';
 
-export const SET_ADDITIONAL_SERVICES = 'SET_ADDITIONAL_SERVICES';
-
 export const INIT_FORM = 'INIT_FORM';
 export const CLEAR_FORM = 'CLEAR_FORM';
 export const UPDATE_FORM = 'UPDATE_FORM';
@@ -39,6 +37,8 @@ export const SET_ERRORS = 'SET_ERRORS';
 export const SET_FORM_ERRORS = 'SET_FORM_ERRORS';
 
 export const SET_ACTIVE_COMPANY = 'SET_ACTIVE_COMPANY';
+export const COMPANY_UPDATE = 'COMPANY_UPDATE';
+export const ADD_COMPANY = 'ADD_COMPANY';
 
 export const SHOW_MENU = 'SHOW_MENU';
 export const HIDE_MENU = 'HIDE_MENU';

@@ -42,7 +42,7 @@ describe('Dashboard', () => {
     button.simulate('click');
 
     expect(button.dive().text()).toEqual('dashboard.main.addCompanyButton');
-    expect(navigate).toHaveBeenCalledWith('/company-design');
+    expect(navigate).toHaveBeenCalledWith('/company-design/intro');
   });
 
   test('no companies', () => {

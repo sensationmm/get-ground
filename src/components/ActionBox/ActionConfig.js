@@ -47,7 +47,7 @@ const ActionConfig = (alert) => {
       labelShort = 'actionBox.actions.add_company.labelShort';
       cta = 'actionBox.actions.add_company.cta';
       action = () => {
-        navigate('/company-design');
+        navigate('/company-design/intro');
       };
       break;
   }

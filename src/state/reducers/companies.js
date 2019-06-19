@@ -1,3 +1,8 @@
+import {
+  COMPANY_UPDATE,
+  ADD_COMPANY
+} from 'src/config/constants';
+
 export const companyModel = {
   name: '',
   address: { premise: '', street: '', posttown: '', postcode: '' },
@@ -152,9 +157,27 @@ export const initialState = [
   }
 ];
 
-export const companies = (state = initialState, action) => {
+
+
+export const companies = (state = initialState, action = {}) => {
   switch (action.type) {
+    case ADD_COMPANY: 
+      return action.company
+      
+    case COMPANY_UPDATE:
+      return state.map(company => {
+        if (company.id === action.companyID) {
+          return {
+            ...company,
+            [action.key]: action.value
+          }
+        }
+
+        return company;
+      });
+
     default:
       return state;
   }
 };
+

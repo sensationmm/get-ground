@@ -76,6 +76,23 @@ class CompanyService extends BaseService {
     return this.doRequest(config);
   }
 
+  /**
+   * addCompany
+      * @param {boolean} isAddServices - whether the user is adding services or not
+      * @return {Promise} CompanyService.addCompany
+   */
+  addCompany = (isAddServices) => {
+    const config = {
+      url: `companies`,
+      method: 'post',
+      data: {
+        // isAddServices: isAddServices
+      }
+    };
+
+    return this.doRequest(config);
+  }
+
 }
 
 export default CompanyService;
