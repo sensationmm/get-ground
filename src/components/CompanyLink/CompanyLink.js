@@ -16,7 +16,6 @@ import './company-link.scss';
 const CompanyLink = props => {
   const { company: { id, address }, setActiveCompany } = props;
 
-
   return (
     <div 
       data-test="component-company-link" 

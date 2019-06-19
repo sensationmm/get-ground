@@ -28,16 +28,18 @@ const ContactUs = () => {
       <p className="contact-us-title" data-test="contact-title">
         {t('contactUs.title')}
       </p>
-      <div className="contact-us-phone">
-        <img src={Phone} data-test="phone-img"/>
-        <p data-test="phone-title">{t('contactUs.phone')}</p>
-     </div>
-      <div className="contact-us-email">
-        <img src={Email} data-test="email-img"/>
-        <p data-test="email-title">{t('contactUs.email')}</p>
-     </div>
-     <div className="contact-us-divider" data-test="contact-divider"></div>
-     <Button classes="contact-us-livechat" data-test="livechat-button" liveChat label={t('liveChat.button')} onClick={() => openChat()} />
+      <div className="contact-us-details">
+        <div className="contact-us-email">
+          <img src={Email} data-test="email-img"/>
+          <p data-test="email-title">{t('contactUs.email')}</p>
+        </div>
+        <div className="contact-us-phone">
+          <img src={Phone} data-test="phone-img"/>
+          <p data-test="phone-title">{t('contactUs.phone')}</p>
+        </div>
+        <div className="contact-us-divider" data-test="contact-divider"></div>
+        <Button classes="contact-us-livechat" data-test="livechat-button" liveChat label={t('liveChat.button')} onClick={() => openChat()} />
+      </div>
     </div>
   )
 }

@@ -374,8 +374,8 @@
   },
   "contactUs": {
     "title": "Contact us",
-    "phone": "Phone: +44 (0) 20 8050 1912",
-    "email": "Email: info@getground.com",
+    "phone": "+44 (0) 20 8050 1912",
+    "email": "info@getground.com",
     "liveChat": "Live Chat"
   },
   "dashboard": {
@@ -418,7 +418,9 @@
       "portfolioHeader": "My Portfolio",
       "profileLink": "My Profile",
       "todoHeader": "To do",
-      "addCompanyButton": "Add new company"
+      "addCompanyButton": "Add property",
+      "noProperties": "Your first property will show here",
+      "noActions": "You currently don't have anything in your to do list"
     }
   },
   "footer": {
@@ -1062,5 +1064,6 @@
       "fifth": "GetGround customers also have access to the GetGround marketplace making buying and selling shares in companies holding property fast and cost effective."
     }
 
-  }
+  },
+  "showAll": "Show all"
 }

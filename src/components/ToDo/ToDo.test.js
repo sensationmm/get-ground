@@ -1,5 +1,5 @@
 import { setup, findByTestAttr } from 'src/test-utils/test-utils';
-import { initialState as companies } from 'src/state/reducers/companies';
+import { companiesMock } from 'src/components/CompanyLink/CompanyLink.test';
 
 import ToDo from './ToDo';
 
@@ -12,7 +12,7 @@ describe('<ToDo />', () => {
     wrapper = setup(
       ToDo,
       {
-        company: companies[0],
+        company: companiesMock[0],
         setActiveCompany: setActiveCompanyMock,
       }
     );

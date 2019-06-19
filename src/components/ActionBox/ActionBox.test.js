@@ -37,7 +37,7 @@ describe('<ActionBox />', () => {
     const component = findByTestAttr(wrapper, 'component-action-box');
     expect(component.length).toBe(1);
 
-    expect(wrapper.find('h1').at(0).text()).toBe('actionBox.title');
+    expect(wrapper.find('.action-box-header').at(0).text()).toBe('actionBox.title');
     
     const buttonDismiss = wrapper.find(ButtonHeader).at(0);
     expect(buttonDismiss.props().label).toEqual('actionBox.dismiss');

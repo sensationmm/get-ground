@@ -12,11 +12,9 @@ import List from 'src/components/_layout/List/List';
 import Button from 'src/components/_buttons/Button/Button';
 import { setActiveCompany } from 'src/state/actions/activeCompany';
 
-import AddIcon from 'src/assets/images/add-icon.svg';
-
 import functions from 'src/utils/functions';
 
-// import './company-overview.scss';
+import './dashboard.scss';
 
 /**
  * Dashboard
@@ -41,33 +39,39 @@ const Dashboard = (props) => {
 
   return (
     <Layout secure>
-      <div data-test="component-dashboard" className="company-overview">
+      <div data-test="component-dashboard" className="dashboard company-overview">
+        <h1>Dashboard</h1>
         <div className="company-header link profile" data-test="profile-button" onClick={() => navigate('/account')}>
           { t('dashboard.main.profileLink') }
         </div>
 
         <ActionBox actions={addCompany ? [addCompany] : actions} />
 
-        {hasCompanies &&
+        <div className="dashboard-columns">
           <div>
             <h3>{ t('dashboard.main.portfolioHeader') }</h3>
-            <List>
-              { companies.map((company, count) => (
-                <CompanyLink
-                  key={`company-${count}`}
-                  company={(({ id, address }) => ({ id, address }))(company)}
-                  setActiveCompany={setActiveCompany}
-                />
-              ))}
-            </List>
-          </div>
-        }
+            <Button
+              classes="primary small add-company"
+              data-test="add-company-button"
+              label={ t('dashboard.main.addCompanyButton') }
+              onClick={() => navigate('/company-design/intro')}
+            />
 
-        {hasCompanies && hasActions &&
+            { hasCompanies && companies.map((company, count) => (
+              <CompanyLink
+                key={`company-${count}`}
+                company={(({ id, address }) => ({ id, address }))(company)}
+                setActiveCompany={setActiveCompany}
+              />
+            ))}
+
+            {!hasCompanies && <div className="no-properties">{ t('dashboard.main.noProperties') }</div>}
+          </div>
+          
           <div>
+            <List numToShow={4}>
             <h3>{ t('dashboard.main.todoHeader') }</h3>
-            <List>
-            { actions.map((action, count) => {
+            { hasCompanies && hasActions && actions.map((action, count) => {
               const company = functions.getByValue(companies, 'id', action.companyID);
               return (
                 <ToDo
@@ -78,20 +82,10 @@ const Dashboard = (props) => {
                 />
               )
             })}
+            {(!hasCompanies || !hasActions) && <p>{ t('dashboard.main.noActions') }</p>}
             </List>
           </div>
-        }
-
-        <List>
-          <center>
-            <Button
-              data-test="add-company-button"
-              icon={AddIcon}
-              label={ t('dashboard.main.addCompanyButton') }
-              onClick={() => navigate('/company-design')}
-            />
-          </center>
-        </List>
+        </div>
       </div>
     </Layout>
   );

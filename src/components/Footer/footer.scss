@@ -8,10 +8,10 @@
 
   &-outer {
     background: $white;
-    padding-top: 60px;
+    padding-top: 30px;
 
     .contact-us {
-      margin: 0 (($padding-horizontal-unit * 2) + 0px) $padding-vertical (($padding-horizontal-unit * 2) + 0px);
+      margin: 0 (($padding-horizontal-unit * 2) + 0px) ($padding-vertical-unit * 2 + 0px) (($padding-horizontal-unit * 2) + 0px);
     }
   }
 
@@ -60,4 +60,29 @@
     }
   }
 
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .footer {
+    &-links {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+
+      > * {
+        margin-right: 50px;
+      }
+    }
+
+    &-navigation {
+      flex-wrap: wrap;
+      width: 50%;
+      top: -10px;
+
+      .footer-link {
+        width: 50%;
+        justify-content: flex-start !important;
+      }
+    }
+  }
 }
