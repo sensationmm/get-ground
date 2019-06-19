@@ -44,5 +44,9 @@ describe('<Header />', () => {
     expect(findByTestAttr(wrapper, 'dashboard').length).toEqual(1);
     findByTestAttr(wrapper, 'dashboard').props().onClick()
     expect(navigate).toHaveBeenCalledWith('/dashboard')
+    wrapper.setProps({
+      children: <Button />
+    })
+    expect(findByTestAttr(wrapper, 'dashboard').length).toEqual(0);
   });
 });

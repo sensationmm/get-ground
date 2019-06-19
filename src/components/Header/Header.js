@@ -37,7 +37,8 @@ const Header = (props) => {
             <img src={Logo} alt="GetGround logo" />
           </Link>
         </div>
-        {userID &&
+
+        {userID && !children &&
           <div data-test="dashboard" className="header-dashboard" onClick={() => navigate('/dashboard')}>
             <p>{t('header.dashboard')}</p>
           </div>
