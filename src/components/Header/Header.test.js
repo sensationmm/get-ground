@@ -45,4 +45,10 @@ describe('<Header />', () => {
     findByTestAttr(wrapper, 'dashboard').props().onClick()
     expect(navigate).toHaveBeenCalledWith('/dashboard')
   });
+
+  test('disable classname to children', () => {
+    wrapper = setup(Header, { onClick: onClickMock, childrenDisabled: true, children: <Button label="str" /> });
+
+    expect(findByTestAttr(wrapper, 'children').props().className).toEqual('header-children disabled');
+  });
 });
