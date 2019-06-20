@@ -38,25 +38,27 @@ const Header = (props) => {
           </Link>
         </div>
 
-        {userID && !children &&
-          <div data-test="dashboard" className="header-dashboard" onClick={() => navigate('/dashboard')}>
-            <p>{t('header.dashboard')}</p>
-          </div>
-        }
-
-        {children
-          ? <div data-test="children" className={classNames('header-children', {
-            'disabled': childrenDisabled
-          })}>{children}</div>
-          : <div
-              className={classNames('header-menu-toggle',
-                {'header-menu-toggle-close': menuIsOpen }
-              )}
-              onClick={onClick}
-            >
-              <div></div>
+        <div className="header-buttons">
+          {userID && !children &&
+            <div data-test="dashboard" className="header-dashboard" onClick={() => navigate('/dashboard')}>
+              <p>{t('header.dashboard')}</p>
             </div>
-        }
+          }
+
+          {children
+            ? <div data-test="children" className={classNames('header-children', {
+              'disabled': childrenDisabled
+            })}>{children}</div>
+            : <div
+                className={classNames('header-menu-toggle',
+                  {'header-menu-toggle-close': menuIsOpen }
+                )}
+                onClick={onClick}
+              >
+                <div></div>
+              </div>
+          }
+        </div>
       </div>
       {!isLoading && !userID && !menuIsOpen &&
         <div className='header--logged-out'>

@@ -38,15 +38,8 @@ describe('BankAccount', () => {
     expect(navigate).toHaveBeenCalledWith('/dashboard/company');
   });
 
-  test('bank details link', () => {
-    const button = wrapper.find('.bank-header');
-    button.simulate('click');
-
-    expect(navigate).toHaveBeenCalledWith('/dashboard/company/bank-account/details');
-  });
-
   test('translations', () => {
-    expect(wrapper.find('.bank-header-balance').at(0).find('p').text()).toBe('dashboard.company.bankAccount.available');
+    expect(wrapper.find('.bank-header-balance').at(0).find('.bank-header-label').text()).toBe('dashboard.company.bankAccount.available');
   });
 
   afterEach(() => {

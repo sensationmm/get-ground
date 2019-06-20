@@ -27,7 +27,9 @@ const Company = (props) => {
 
   return (
     <Layout secure companyID>
-      <div className="company-overview" data-test="component-company">
+      <div className="company-overview my-property" data-test="component-company">
+        <h1>{ t('dashboard.company.title') }</h1>
+
         <div className="company-header">{ company.address.premise }, { company.address.postcode }</div>
 
         <div className="company-overview-section">
@@ -37,38 +39,33 @@ const Company = (props) => {
 
         <div className="company-overview-section">
           <h2>{ t('dashboard.company.overview.sections.address') }</h2>
-          <p>{ company.address.premise }</p>
-          <p>{ company.address.street }</p>
-          <p>{ company.address.posttown }</p>
-          <p>{ company.address.postcode }</p>
+          <p>{ company.address.premise }<br />
+          { company.address.street }<br />
+          { company.address.posttown }<br />
+          { company.address.postcode }</p>
         </div>
 
         <div className="company-overview-section">
           <h2>{ t('dashboard.company.overview.sections.shareholders') }</h2>
-          {
-            company.shareholders.map((shareholder, count) => {
-              return <p key={`shareholder-${count}`}>{ shareholder }</p>
-            })
+          {company.shareholders.map((shareholder, count) => {
+            return <p key={`shareholder-${count}`}>{ shareholder }</p>
+          })
           }
         </div>
 
         <div className="company-overview-section">
           <h2>{ t('dashboard.company.overview.sections.directors') }</h2>
-          {
-            company.directors.map((director, count) => {
-              return <p key={`director-${count}`}>{ director }</p>
-            })
-          }
+          {company.directors.map((director, count) => {
+            return <p key={`director-${count}`}>{ director }</p>
+          })}
         </div>
 
         <div className="company-overview-section">
           <h2>{ t('dashboard.company.overview.sections.documents') }</h2>
           <ul>
-          {
-            company.documents.map((document, count) => {
-              return <li key={`document-${count}`}>{ document.name }</li>
-            })
-          }
+          {company.documents.map((document, count) => {
+            return <li key={`document-${count}`}>{ document.name }</li>
+          })}
           </ul>
         </div>
         
@@ -83,7 +80,7 @@ const Company = (props) => {
 
           <Button
             data-test="bank-account-button"
-            classes="account"
+            classes="primary"
             label={ t('dashboard.company.overview.ctaSecondary') }
             fullWidth
             onClick={() => navigate('/dashboard/company/bank-account')}

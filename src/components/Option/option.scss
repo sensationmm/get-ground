@@ -50,7 +50,7 @@
   }
 
   &.selected {
-    color: $white;
+    font-weight: 600;
     border-color: $gradient-option-1;
     @include gradient-horizontal($gradient-option-1, $gradient-option-2);
 

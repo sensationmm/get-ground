@@ -380,11 +380,19 @@
   },
   "dashboard": {
     "company": {
+      "title": "My property",
+      "address": "Property address",
+      "back": "Back to my property",
+      "showMore": "More details",
+      "showLess": "Fewer details",
       "bankAccount": {
+        "title": "My bank account",
         "sortCode": "Sort Code",
         "accountNumber": "Account Number",
+        "accountName": "Account Number",
         "address": "Address",
         "iban": "BIC/IBAN",
+        "branchAddress": "Branch address",
         "back": "Back to overview",
         "available": "Available funds",
         "sortCodeAndAccountNumber": "Sort Code & Account Number"
@@ -392,7 +400,8 @@
       "manage": {
         "title": "Manage my company",
         "text": "Please let us know what you want to do, we are here to help.",
-        "select": "Select an item below:",
+        "select": "Select an item below to be connected to one of our team:",
+        "chatButton": "Talk to an expert",
         "options": {
           "withdrawMoney": "Take money out of your company",
           "sendMoney": "Send money to your company",
@@ -968,6 +977,7 @@
     }
   },
   "profile": {
+    "title": "My Profile",
     "sections": {
       "name": "Full name",
       "previousNames": "Previous name(s)",
