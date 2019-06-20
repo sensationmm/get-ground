@@ -1,5 +1,5 @@
-
-@import '../_buttons/Button/button.scss';
+@import 'src/styles/modules/_colors.scss';
+@import 'src/styles/modules/_mixins.scss';
 
 .datepicker-modal {
   position: fixed;
@@ -15,18 +15,30 @@
     padding: 20px;
 
     &-btn {
-      @extend .button;
+      position: relative;
+      padding: 12px 35px;
+      text-align: center;
+      font-size: 18px;
+      color: $text;
+      background: $white;
+      transition: all 0.3s;
+      box-sizing: border-box;
+      border-radius: 30px;
+      letter-spacing: 1px;
+      white-space: nowrap;
       height: auto;
       line-height: initial;
       text-decoration: none;
 
       &:first-child {
-        @extend .primary;
+        @include gradient-horizontal($gradient-primary-1, $gradient-primary-2);
+        color: $white;
+        box-shadow: 0px 3px 5px $shadow;
         order: 2;
       }
 
       &:last-child {
-        @extend .secondary;
+        background: $grey;
         order: 1;
         margin-right: 30px;
       }

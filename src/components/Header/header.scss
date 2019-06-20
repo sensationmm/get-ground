@@ -89,6 +89,7 @@
     border-radius: 17px;
     border: solid 2px $white;
     text-align: center;
+    cursor: pointer;
 
     p {
       color: $white;
@@ -98,9 +99,21 @@
       margin-top: 6px;
     }
   }
+
   &-children.disabled {
     opacity: 0.4;
     pointer-events: none
+  }
+
+  &-buttons {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+
+    > * {
+      margin-left: 20px;
+    }
   }
 }
 
