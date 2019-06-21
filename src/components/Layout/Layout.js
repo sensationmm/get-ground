@@ -205,7 +205,7 @@ export class Layout extends Component {
           <main className="main">{children}</main>
         </div>
         <div id="modal-root"></div>
-        {!inArray('fullscreen', roles) && <Footer />}
+        {(!inArray('fullscreen', roles) || inArray('hasFooter', roles)) && <Footer hideContact={inArray('fullscreen', roles)} />}
 
         <ModalWrapper
           transitionBool={menuIsOpen}

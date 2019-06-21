@@ -2,17 +2,19 @@
 @import '../../styles/modules/_variables';
 
 .footer {
-  background-color: $border;
+  max-width: $max-width;
+  margin-left: auto;
+  margin-right: auto;
   padding: (($padding-vertical-unit * 2) + 0px) (($padding-horizontal-unit * 2) + 0px);
   color: $placeholder-text;
 
   &-outer {
-    background: $white;
-    padding-top: 30px;
+    background-color: $border;
+  }
 
-    .contact-us {
-      margin: 0 (($padding-horizontal-unit * 2) + 0px) ($padding-vertical-unit * 2 + 0px) (($padding-horizontal-unit * 2) + 0px);
-    }
+  &-mask {
+    background: $white;
+    padding-bottom: $padding-vertical-unit * 2 + 0px;
   }
 
   &-logo {

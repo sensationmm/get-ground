@@ -1,4 +1,5 @@
 @import '../../styles/modules/_colors';
+@import '../../styles/modules/_variables';
 
 .partnerships {
   &-img {
@@ -18,5 +19,14 @@
     font-weight: 300;
     line-height: 1.75;
     color: $heading;
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .partnerships {
+    .form {
+      max-width: 300px;
+      margin: 0 auto;
+    }
   }
 }

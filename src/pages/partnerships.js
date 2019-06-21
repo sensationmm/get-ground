@@ -107,7 +107,7 @@ class Partnerships extends Component {
           {this.formResponseBox(showErrorMessage, errors, this.state.sentEmail, t)}
           <Form data-test="partnership-form">
             { formUtils.renderForm(this.config) }
-          </Form>
+          </Form><br />
 
           <Form className="enter-email-actions" data-test="partnership-form">
           <Button
