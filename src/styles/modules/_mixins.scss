@@ -6,6 +6,7 @@
 
 @mixin gradient-horizontal-image($from, $to, $img) {
   background-image: url($img), linear-gradient(to right, $from, $to);
+  background-position: center center;
 }
 
 @mixin gradient-vertical($from, $to) {
@@ -14,4 +15,5 @@
 
 @mixin gradient-vertical-image($from, $to, $img) {
   background-image: url($img), linear-gradient(to bottom, $from, $to);
+  background-position: center center;
 }

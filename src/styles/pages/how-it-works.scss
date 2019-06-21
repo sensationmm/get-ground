@@ -11,19 +11,17 @@
 
   ul {
     list-style: discs;
-    margin-bottom: 30%;
+    margin-bottom: 30px;
     margin-top: 57px;
     padding: 0;
     position: relative;
-    width: 354px;
-    height: 850px;
 
     .how-it-works-step-verticalLine {
       position: absolute;
       width: 1px;
       border-left: solid 0.5px $text-secondary;
-      left: 14%;
-      top: 1.5%;
+      left: 49px;
+      top: 15px;
     }
   }
 
@@ -37,10 +35,11 @@
     img {
       width: 28px;
       height: 28px;
+      position: absolute;
     }
 
     &-li {
-      margin-left: 11%;
+      margin-left: 65px;
     }
 
     &-title {
@@ -61,3 +60,24 @@
   }
 }
 
+@media screen and (min-width: $breakpoint-desktop) {
+  .how-it-works {
+  
+    ul {
+      .how-it-works-step-verticalLine {
+        left: 83px;
+      }
+    }
+    
+    &-step {  
+      img {
+        width: 40px;
+        height: 40px;
+      }
+
+      &-li {
+        margin-left: 100px;
+      }
+    }
+  }
+}

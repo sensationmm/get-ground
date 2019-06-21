@@ -1,5 +1,5 @@
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Link } from 'gatsby';
 import { useTranslation } from 'react-i18next';
 
@@ -10,6 +10,7 @@ import sliderImg4 from 'src/assets/images/roof.svg';
 import IntroSlider from 'src/components/IntroSlider/IntroSlider';
 import Button from 'src/components/_buttons/Button/Button';
 import Layout from 'src/components/Layout/Layout';
+import CanvasCurve from 'src/components/_layout/CanvasCurve';
 
 import 'src/styles/pages/intro.scss';
 
@@ -47,32 +48,32 @@ const OnboardingIntroContainer = () => {
   };
 
   return (
-    <Fragment>
-      {slidesContent.length &&
-        <Layout>
-          <div data-test="container-onboarding-intro" className="intro" role="fullscreen no-background-image account">
-            <IntroSlider
-              slides={slidesConfig.slides}
+    <Layout>
+      <div data-test="container-onboarding-intro" className="intro" role="fullscreen account hasFooter">
+        {slidesContent.length &&
+          <IntroSlider slides={slidesConfig.slides} />
+        }
+        <div className="intro--buttons-container">
+          <Link to="/onboarding/create-account">
+            <Button
+              fullWidth
+              big
+              label={t('onBoarding.intro.button1')}
             />
-            <div className="intro--buttons-container">
-              <Link to="/onboarding/create-account">
-                <Button
-                  fullWidth
-                  label={t('onBoarding.intro.button1')}
-                />
-              </Link>
-              <Link to="/login">
-                <Button
-                  opaque
-                  small
-                  label={t('onBoarding.intro.button2')}
-                />
-              </Link>
-            </div>
-          </div>
-        </Layout>
-      }
-      </Fragment>
+          </Link>
+          <Link to="/login">
+            <Button
+              fullWidth
+              opaque
+              small
+              label={t('onBoarding.intro.button2')}
+            />
+          </Link>
+        </div>
+
+        <CanvasCurve />
+      </div>
+    </Layout>
   );
 }
 

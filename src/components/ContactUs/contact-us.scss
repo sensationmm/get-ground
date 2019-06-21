@@ -7,6 +7,8 @@
   padding: $padding-vertical ($padding-horizontal-unit * 2 + 0px);
   display: flex;
   flex-direction: column;
+  margin-left: $padding-horizontal-unit * 2 + 0px;
+  margin-right: $padding-horizontal-unit * 2 + 0px;
 
   &-title {
     font-size: 20px;
@@ -40,6 +42,10 @@
 
 @media screen and (min-width: $breakpoint-desktop) {
   .contact-us {
+    max-width: calc(#{$max-width} - #{$padding-horizontal-unit * 6 + 0px});
+    margin-left: auto;
+    margin-right: auto;
+
     &-details {
       display: flex;
       flex-direction: row;
