@@ -856,7 +856,8 @@
     },
     "payment": {
       "title": "Payment details",
-      "intro": "Please note that payment will not be taken and your subscription fee will not be charged until you pass the compliance check.",
+      "box": "We would like to save your card details so we can debit the subscription value in the future.",
+      "termsAndCond": "See terms and conditions",
       "paymentInfo": {
         "accountSetupLabel": "Account setup",
         "monthlySubscriptionLabel": "Monthly subscription",
@@ -869,7 +870,13 @@
         "error": "There was an issue with your payment",
         "retakePaymentError": "Your payment has failed. Please update your payment details so we can finalise your application"
       },
-      "stripeError": "Enter card details"
+      "content": {
+        "first": "Plus in 30 days we will start charging your:",
+        "second": "Monthly subscription: £24 (inc. VAT) This covers your company's ongoing management costs."
+      },
+      "stripeError": "Enter card details",
+      "stripeCheckbox": "I authorise GetGround to deduct my monthly subscription from my card.",
+      "directorReminder": "Once you exchange contracts you will have to pay for Directors and Officers insurance. We will remind you of this when the time comes."
     },
     "personalDetails": {
       "heading": "Personal details",

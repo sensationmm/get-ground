@@ -8,7 +8,6 @@ import { navigate } from 'gatsby';
 import formUtils from 'src/utils/form';
 
 import Layout from 'src/components/Layout/Layout'
-import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import PaymentInfo from 'src/components/PaymentInfo/PaymentInfo';
 import Form from 'src/components/_layout/Form/Form';
@@ -27,13 +26,13 @@ const PaymentService = new paymentService();
  * @param {object} valid - boolean to check if card details are complete (for JSdoc)
  * @return {JSXElement} Payment
  */
-class Payment extends Component {
+export class Payment extends Component {
   constructor(props) {
     super(props);
 
     this.baseSetupValue = 500;
     this.baseMonthlySubValue = 20;
-    this.vatValue = (this.baseSetupValue + this.baseMonthlySubValue) / 100 * 20; 
+    this.vatValue = (this.baseSetupValue + this.baseMonthlySubValue) / 100 * 20;
 
     this.state = {
       stripe: null,
@@ -47,16 +46,16 @@ class Payment extends Component {
 
     this.config = [];
   }
-  
+
   componentDidMount() {
     formUtils.initFormState({
       numberOfCompanies: '1'
     });
 
     const { t, location: { search } } = this.props;
-    
+
     this.setState({ stripe: window.Stripe(stripeKey) });
-    
+
     if (search.indexOf('retakePayment=true')>=0) {
       this.setState({
         errors: {
@@ -127,7 +126,7 @@ class Payment extends Component {
 
   render() {
     const { t, form } = this.props;
-    const { 
+    const {
       isStripeValid,
       accountSetupValue,
       monthlySubscriptionValue,
@@ -136,7 +135,7 @@ class Payment extends Component {
     } = this.state;
     const { values, errors, showErrorMessage } = form;
 
-    
+
     this.config = [
       {
         stateKey: 'numberOfCompanies',
@@ -163,12 +162,9 @@ class Payment extends Component {
     ];
 
     return (
-      
       <Layout secure>
         <div data-test="container-payment" className="payment" role="account">
           <h1>{ t('onBoarding.payment.title') }</h1>
-
-          <IntroBox>{ t('onBoarding.payment.intro') }</IntroBox>
 
           {showErrorMessage &&
             <ErrorBox>
@@ -179,7 +175,7 @@ class Payment extends Component {
             </ErrorBox>
           }
 
-          <PaymentInfo 
+          <PaymentInfo
             accountSetupLabel={t('onBoarding.payment.paymentInfo.accountSetupLabel')}
             monthlySubscriptionLabel={t('onBoarding.payment.paymentInfo.monthlySubscriptionLabel')}
             vatLabel={t('onBoarding.payment.paymentInfo.vatLabel')}
@@ -189,6 +185,9 @@ class Payment extends Component {
             vatValue={vatValue}
             totalValue={totalValue}
           />
+
+          <p>{t('onBoarding.payment.content.first')}</p>
+          <p>{t('onBoarding.payment.content.second')}</p>
 
           <StripeProvider stripe={this.state.stripe}>
             <Elements>
