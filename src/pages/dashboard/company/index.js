@@ -132,8 +132,7 @@ Company.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   companies: PropTypes.array,
-  activeCompany: PropTypes.number,
-  userID: PropTypes.numbers
+  activeCompany: PropTypes.number
 };
 
 export const RawComponent = Company;

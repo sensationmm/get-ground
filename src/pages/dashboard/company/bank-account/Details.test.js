@@ -12,7 +12,7 @@ describe('Details', () => {
   let wrapper;
   const defaultProps = {
     t: jest.fn().mockImplementation((id) => id ),
-    activeCompany: '1',
+    activeCompany: 1,
     companies: [ companyMock ]
   };
 
