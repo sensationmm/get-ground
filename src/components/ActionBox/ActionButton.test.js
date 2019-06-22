@@ -8,7 +8,7 @@ describe('<ActionButton />', () => {
   const setActiveCompanyMock = jest.fn();
   const defaultProps = {
     t: jest.fn().mockImplementation(id => id),
-    alert: { type: 'documents_ready', companyID: '1' },
+    alert: { type: 'documents_ready', companyID: 1 },
     setActiveCompany: setActiveCompanyMock
   }
 

@@ -29,11 +29,21 @@ jest.mock('gatsby', () => ({
     form: {
       ...ReduxFormMock,
       values: {
-        have_solicitor: 'no'
+        first_name: 'bob',
+        last_name: 'stuff'
       }
     },
     companies: [],
-    activeCompany: 0
+    activeCompany: 0,
+    company: {
+      solicitor_details: {
+        first_name: 'bob',
+        last_name: 'stuff',
+        email: 'asdf@sdf.com',
+        phone: '07732343567',
+        authority: false
+      }
+    }
   };
   jest.spyOn(formUtils, 'initFormState');
   jest.spyOn(formUtils, 'clearFormState');
@@ -47,7 +57,6 @@ describe('<SolicitorDetails />', () => {
       form: {
         ...defaultProps.form,
         values: {
-          have_solicitor: 'no'
         }}
     });
   });
@@ -114,14 +123,14 @@ describe('<SolicitorDetails />', () => {
 
     test('clears conflicting responses -> have & need', async () => {
       spy = jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
+      CompanyService.updateCompany = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
       const wrapperNew = setup(SolicitorDetails, {
         ...defaultProps,
         form: {
           ...defaultProps.form,
           values: {
-            have_solicitor: 'no',
-            first_name: 'Spongebob',
-            last_name: 'Squarepants'
+            first_name: 'bob',
+            last_name: 'stuff'
           }
         }
       });
@@ -129,38 +138,26 @@ describe('<SolicitorDetails />', () => {
       await wrapperNew.instance().saveDetails();
 
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
-      expect(CompanyService.saveSolicitor).toHaveBeenCalledWith(
-        expect.objectContaining({
-          have_solicitor: 'no'
-        })
-      );
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
       expect(navigate).toHaveBeenCalledWith('/company-design/shareholder-details');
     });
 
     test('clears conflicting responses -> dont have but given', async () => {
       spy = jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
+      CompanyService.updateCompany = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
       const wrapperNew = setup(SolicitorDetails, {
         ...defaultProps,
         form: {
           ...defaultProps.form,
           values: {
-            have_solicitor: 'no',
-            first_name: 'Spongebob',
-            last_name: 'Squarepants'
+            first_name: 'bob',
+            last_name: 'stuff'
           }
         }
       });
 
       await wrapperNew.instance().saveDetails();
 
-      // expect(showLoaderMock).toHaveBeenCalledTimes(1);
-      expect(CompanyService.saveSolicitor).toHaveBeenCalledWith(
-        expect.objectContaining({
-          first_name: '',
-          last_name: ''
-        })
-      );
       expect(navigate).toHaveBeenCalledWith('/company-design/shareholder-details');
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
     });

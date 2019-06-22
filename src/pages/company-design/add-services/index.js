@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
-import { navigate, Link } from 'gatsby';
+import { navigate } from 'gatsby';
 import PropTypes from 'prop-types'
 
 import formUtils from 'src/utils/form'
@@ -17,12 +17,12 @@ import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 //import { setAdditionalServices } from 'src/state/actions/additionalServices'
 import { companyUpdate } from 'src/state/actions/activeCompany';
 import { showModal, hideModal } from 'src/state/actions/modal';
+import { showLoader, hideLoader } from 'src/state/actions/loader';
 
 import './add-services.scss'
 
-import additionalServices from 'src/services/AdditionalServices'
-
-const services = new additionalServices();
+import companyService from 'src/services/Company';
+const CompanyService = new companyService();
 
 /**
  * AdditionalServices
@@ -35,34 +35,28 @@ export class AdditionalServices extends Component {
 
   componentDidMount() {
     formUtils.initFormState({
-      find_mortgage: null,
-      find_property_insurance: null,
-      find_property_management: null,
-      find_solicitor: null
+      mortgage: null,
+      insurance: null,
+      management: null,
+      solicitor: null
+    }, this.props.company.additional_services);
+  }
+
+  submitAdditionalServices = () => {
+    const { form: { values }, showLoader, hideLoader } = this.props;
+
+    showLoader();
+
+    CompanyService.updateCompany(values, 'additional_services', 1).then((response) => {
+      hideLoader();
+      if (response.status === 200) {
+        navigate('/company-design');
+      }
     });
   }
 
   componentWillUnmount() {
     formUtils.clearFormState();
-
-    const { form: { values: { find_mortgage, find_property_insurance,  find_property_management, find_solicitor }}} = this.props;
-
-    // this.props.setAdditionalServices({
-    //   hasUsedAdditionalServices: true,
-    //   mortgage: find_mortgage === 'yes',
-    //   insurance: find_property_insurance === 'yes',
-    //   management: find_property_management === 'yes',
-    //   solicitor: find_solicitor === 'yes'
-    // })
-
-    this.props.companyUpdate('1', 'additionalServices', {
-      mortgage: find_mortgage === 'yes',
-      insurance: find_property_insurance === 'yes',
-      management: find_property_management === 'yes',
-      solicitor: find_solicitor === 'yes'
-    })
-
-    services.addServices(find_mortgage, find_property_insurance, find_property_management, find_solicitor)
   }
 
   render() {
@@ -71,54 +65,54 @@ export class AdditionalServices extends Component {
 
     const config = [
       {
-        stateKey: 'find_solicitor',
+        stateKey: 'solicitor',
         component: RadioGroup,
         groupLabel: t('additionalServices.findSolicitorQuestion'),
-        name: 'find_solicitor',
+        name: 'solicitor',
         items: [
           { value: 'no', label: t('form.radioConfirm.false') },
           { value: 'yes', label: t('form.radioConfirm.true') }
         ],
-        value: values.find_solicitor,
+        value: values.solicitor,
         validationFunction: 'validateRequired',
         isAdditionalServices: true
       },
       {
-        stateKey: 'find_mortgage',
+        stateKey: 'mortgage',
         component: RadioGroup,
         groupLabel: t('additionalServices.mortgageOptionsQuestion'),
-        name: 'find_mortgage',
+        name: 'mortgage',
         items: [
           { value: 'no', label: t('form.radioConfirm.false') },
           { value: 'yes', label: t('form.radioConfirm.true') }
         ],
-        value: values.find_mortgage,
+        value: values.mortgage,
         validationFunction: 'validateRequired',
         isAdditionalServices: true
       },
       {
-        stateKey: 'find_property_insurance',
+        stateKey: 'insurance',
         component: RadioGroup,
         groupLabel: t('additionalServices.propertyInsuranceQuestion'),
-        name: 'find_property_insurance',
+        name: 'insurance',
         items: [
           { value: 'no', label: t('form.radioConfirm.false') },
           { value: 'yes', label: t('form.radioConfirm.true') }
         ],
-        value: values.find_property_insurance,
+        value: values.insurance,
         validationFunction: 'validateRequired',
         isAdditionalServices: true
       },
       {
-        stateKey: 'find_property_management',
+        stateKey: 'management',
         component: RadioGroup,
         groupLabel: t('additionalServices.property_managementQuestion'),
-        name: 'find_property_management',
+        name: 'management',
         items: [
           { value: 'no', label: t('form.radioConfirm.false') },
           { value: 'yes', label: t('form.radioConfirm.true') }
         ],
-        value: values.find_property_management,
+        value: values.management,
         validationFunction: 'validateRequired',
         isAdditionalServices: true
       },
@@ -139,7 +133,7 @@ export class AdditionalServices extends Component {
       }
     ];
 
-    const headerActions = <Link to="/company-design"><ButtonHeader label={t('header.buttons.saveAndExit')} /></Link>;
+    const headerActions = <ButtonHeader onClick={this.submitAdditionalServices} label={t('header.buttons.saveAndExit')} />
 
     return (
       <Layout headerActions={headerActions} secure>
@@ -164,7 +158,7 @@ export class AdditionalServices extends Component {
                 <p>{t('additionalServices.modalPara3')}</p>
                 <Button
                   label={t('additionalServices.modalContentButton')}
-                  onClick={() => navigate('/company-design')}
+                  onClick={this.submitAdditionalServices}
                   classes="primary"
                   fullWidth
                 />
@@ -181,25 +175,29 @@ export class AdditionalServices extends Component {
 }
 
 AdditionalServices.propTypes = {
-  // setAdditionalServices: PropTypes.func.isRequired,
+  company: PropTypes.object,
   companyUpdate: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   form: PropTypes.object,
   modalIsOpen: PropTypes.bool,
   showModal: PropTypes.func,
   hideModal: PropTypes.func,
+  showLoader: PropTypes.func,
+  hideLoader: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
   modalIsOpen: state.modal.isOpen,
-  form: state.form
+  form: state.form,
+  company: state.companies.find(company => company.id === 1)
 });
 
 const actions = {
-  // setAdditionalServices,
   companyUpdate,
   showModal,
-  hideModal
+  hideModal,
+  showLoader,
+  hideLoader
 }
 
 export default connect(mapStateToProps, actions)(withTranslation()(AdditionalServices))

@@ -29,11 +29,10 @@ export class ProcessTracker extends React.Component {
   }
 
   render() {
-    const { t, i18n } = this.props;
+    const { t, i18n, company } = this.props;
     const sectionsContent = i18n.t('companyDesign.progressTracker.sections', { returnObjects: true });
     const sectionsConfig = {
       sections: [
-
         {
           'title': sectionsContent['step2'].title,
           'imageAltText': sectionsContent['step2'].imageAltText,
@@ -86,7 +85,7 @@ export class ProcessTracker extends React.Component {
       ]
     };
 
-    // if (additionalServices.hasUsedAdditionalServices) {
+    if (company.additional_services_required) {
       sectionsConfig.sections.unshift({
         'title': sectionsContent['step1'].title,
         'imageAltText': sectionsContent['step1'].imageAltText,
@@ -95,15 +94,15 @@ export class ProcessTracker extends React.Component {
         'status': 'to_do',
         'image': ServicesImage,
       });
-    // }
+    }
 
-    // if (additionalServices.solicitor) {
+    if (company.additional_services && company.additional_services.solicitor) {
       sectionsConfig.sections.map((section, i) => {
         if (section.id === 'solicitor') {
           sectionsConfig.sections.splice(i, 1);
         }
       });
-    // }
+    }
 
     return (
       <Fragment>
@@ -123,7 +122,8 @@ export class ProcessTracker extends React.Component {
 
 const mapStateToProps = (state) => ({
   isLoading: state.loader,
-  //additionalServices: state.additionalServices
+  // company: state.companies.find(company => company.id === state.activeCompany)
+  company: state.companies.find(company => company.id === 1)
 });
 
 ProcessTracker.propTypes = {
@@ -131,7 +131,7 @@ ProcessTracker.propTypes = {
   hideLoader: PropTypes.func,
   t: PropTypes.func.isRequired,
   i18n: PropTypes.object.isRequired,
-  //additionalServices: PropTypes.object,
+  company: PropTypes.object
 };
 
 export default connect(mapStateToProps, null)(withTranslation()(ProcessTracker))

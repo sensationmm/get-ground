@@ -10,12 +10,14 @@ jest.mock('gatsby', () => ({
 const showLoaderMock = jest.fn();
 const hideLoaderMock = jest.fn();
 const addCompanyMock = jest.fn();
+const setActiveCompanyMock = jest.fn();
 const tMock = jest.fn().mockImplementation(id => id);
 const defaultProps = {
   t: tMock,
   showLoader: showLoaderMock,
   hideLoader: hideLoaderMock,
-  addCompany: addCompanyMock
+  addCompany: addCompanyMock,
+  setActiveCompany: setActiveCompanyMock
 };
 
 describe('<OnboardingIntroContainer />', () => {
@@ -56,20 +58,13 @@ describe('<OnboardingIntroContainer />', () => {
     expect(wrapper.instance().createCompany).toHaveBeenCalledWith('someUrl', true);
   });
 
-  // test('createCompany calls handleCreateCompanyResponse with navigate Url and a response', async () => {
-  //   wrapper.instance().handleCreateCompanyResponse = jest.fn();
-  //   CompanyService.addCompany = jest.fn().mockReturnValue(Promise.resolve({ status: 201 }));
-  //   await wrapper.instance().createCompany('test url', true);
-
-  //   expect(wrapper.instance().handleCreateCompanyResponse).toHaveBeenCalledWith('test url', { status: 201 });
-  // })
-
   test('handleCreateCompanyResponse calls navigate and addCompany', () => {
-    wrapper.instance().handleCreateCompanyResponse('someUrl', { status: 201 });
+    wrapper.instance().handleCreateCompanyResponse('someUrl', { status: 201, data: { id: 1 } });
 
     expect(hideLoaderMock).toHaveBeenCalled();
-    expect(addCompanyMock).toHaveBeenCalledWith({ status: 201 });
+    expect(addCompanyMock).toHaveBeenCalledWith({ id: 1 });
     expect(navigate).toHaveBeenCalledWith('someUrl');
+    expect(setActiveCompanyMock).toHaveBeenCalledWith(1);
   });
 
   test('handleCreateCompanyResponse calls navigate and addCompany', () => {

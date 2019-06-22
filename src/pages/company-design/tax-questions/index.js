@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { withTranslation } from 'react-i18next'
-import { connect } from 'react-redux'
-import { navigate, Link } from 'gatsby';
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
+import { withTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
+import { navigate } from 'gatsby';
+import PropTypes from 'prop-types';
 
 import formUtils from 'src/utils/form'
 import Form from 'src/components/_layout/Form/Form'
@@ -31,11 +31,11 @@ export class TaxQuestions extends Component {
 
   componentDidMount() {
     formUtils.initFormState({
-      ownership: null,
-      employ: null,
+      is_owner_of_other_companies: null,
+      more_than_50_employees: null,
       assets: null,
       turnover: null
-    });
+    }, this.props.company.tax_questions);
   }
 
   componentWillUnmount() {
@@ -43,13 +43,13 @@ export class TaxQuestions extends Component {
   }
 
   submitTaxAnswers = () => {
-    const { showLoader, hideLoader, t, form } = this.props;
+    const { showLoader, hideLoader, t, form: { values } } = this.props;
 
     /* istanbul ignore else */
     if (formUtils.validateForm(this.config)) {
       showLoader();
 
-      CompanyService.saveTaxAnswers(form.values).then((response) => {
+      CompanyService.updateCompany(values, 'tax_questions', 1).then((response) => {
         hideLoader();
         /* istanbul ignore else */
         if (response.status === 200) {
@@ -62,37 +62,54 @@ export class TaxQuestions extends Component {
     }
   }
 
+  saveAndExit = async () => {
+    const { showLoader, hideLoader, form: { errors, values } } = this.props;
+
+    await Object.keys(errors).forEach(async (key) => {
+      await formUtils.updateValue(key, '');
+    });
+
+    showLoader();
+    CompanyService.updateCompany(values, 'tax_questions', 1).then((response) => {
+      hideLoader();
+      if (response.status === 200) {
+        navigate('/company-design');
+      }
+    });
+
+  }
+
   render() {
     const { t, form } = this.props
     const { values } = form;
 
     const config = [
       {
-        stateKey: 'ownership',
+        stateKey: 'is_owner_of_other_companies',
         component: RadioGroup,
         groupLabel: t('taxQuestions.ownership'),
-        name: 'ownership',
+        name: 'is_owner_of_other_companies',
         items: [
           { value: 'no', label: t('form.radioConfirm.false') },
           { value: 'yes', label: t('form.radioConfirm.true') }
         ],
-        value: values.ownership,
+        value: values.is_owner_of_other_companies,
         validationFunction: 'validateRequired',
         istaxQuestions: true
       },
       {
-        stateKey: 'employ',
+        stateKey: 'more_than_50_employees',
         component: RadioGroup,
         groupLabel: t('taxQuestions.employ'),
-        name: 'employ',
+        name: 'more_than_50_employees',
         items: [
           { value: 'no', label: t('form.radioConfirm.false') },
           { value: 'yes', label: t('form.radioConfirm.true') }
         ],
-        value: values.employ,
+        value: values.more_than_50_employees,
         validationFunction: 'validateRequired',
         istaxQuestions: true,
-        hidden: !values.ownership || values.ownership === 'no'
+        hidden: !values.is_owner_of_other_companies || values.is_owner_of_other_companies === 'no'
       },
       {
         stateKey: 'assets',
@@ -106,7 +123,7 @@ export class TaxQuestions extends Component {
         value: values.assets,
         validationFunction: 'validateRequired',
         istaxQuestions: true,
-        hidden: !values.ownership || values.ownership === 'no'
+        hidden: !values.is_owner_of_other_companies || values.is_owner_of_other_companies === 'no'
       },
       {
         stateKey: 'turnover',
@@ -120,7 +137,7 @@ export class TaxQuestions extends Component {
         value: values.turnover,
         validationFunction: 'validateRequired',
         istaxQuestions: true,
-        hidden: !values.ownership || values.ownership === 'no'
+        hidden: !values.is_owner_of_other_companies || values.is_owner_of_other_companies === 'no'
       },
       {
         component: 'br'
@@ -140,7 +157,7 @@ export class TaxQuestions extends Component {
     ];
 
     const { showErrorMessage, errors } = form;
-    const headerActions = <Link to="/company-design"><ButtonHeader label={t('header.buttons.saveAndExit')} /></Link>;
+    const headerActions = <ButtonHeader onClick={this.saveAndExit} label={t('header.buttons.saveAndExit')} />
 
     return (
       <Layout headerActions={headerActions} secure>
@@ -165,6 +182,7 @@ export class TaxQuestions extends Component {
 }
 
 TaxQuestions.propTypes = {
+  company: PropTypes.object,
   t: PropTypes.func.isRequired,
   form: PropTypes.object,
   showLoader: PropTypes.func,
@@ -172,7 +190,8 @@ TaxQuestions.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  form: state.form
+  form: state.form,
+  company: state.companies.find(company => company.id === 1)
 });
 
 const actions = {

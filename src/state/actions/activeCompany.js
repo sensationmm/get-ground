@@ -1,17 +1,19 @@
 import {
   SET_ACTIVE_COMPANY,
   COMPANY_UPDATE,
-  ADD_COMPANY
+  ADD_COMPANY,
+  SET_COMPANIES
 } from 'src/config/constants';
 
-export const setActiveCompany = (companyID) => ({
+export const setActiveCompany = (companyID) => {
+  return {
   type: SET_ACTIVE_COMPANY,
   companyID
-});
+}};
 
-export const addCompany = (response) => ({
+export const addCompany = (company) => ({
   type: ADD_COMPANY,
-  response
+  company
 });
 
 export const companyUpdate = (companyID, key, value) => {
@@ -22,3 +24,8 @@ export const companyUpdate = (companyID, key, value) => {
     value
   }
 };
+
+export const setCompanies = (company) => ({
+  type: SET_COMPANIES,
+  company
+});

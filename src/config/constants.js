@@ -39,6 +39,7 @@ export const SET_FORM_ERRORS = 'SET_FORM_ERRORS';
 export const SET_ACTIVE_COMPANY = 'SET_ACTIVE_COMPANY';
 export const COMPANY_UPDATE = 'COMPANY_UPDATE';
 export const ADD_COMPANY = 'ADD_COMPANY';
+export const SET_COMPANIES = 'SET_COMPANIES';
 
 export const SHOW_MENU = 'SHOW_MENU';
 export const HIDE_MENU = 'HIDE_MENU';

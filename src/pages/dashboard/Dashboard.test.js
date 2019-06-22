@@ -15,7 +15,7 @@ describe('Dashboard', () => {
   const getByValueSpy = jest.spyOn(functions, 'getByValue');
   const defaultProps = {
     t: jest.fn().mockImplementation((id) => id ),
-    activeCompany: '1',
+    activeCompany: 1,
     companies: [companyMock],
     actions: []
   };
@@ -52,7 +52,7 @@ describe('Dashboard', () => {
   test('actions', () => {
     wrapper = setup(Dashboard, { ...defaultProps, actions: actionsMock });
 
-    expect(getByValueSpy).toHaveBeenCalledWith(defaultProps.companies, 'id', '1')
+    expect(getByValueSpy).toHaveBeenCalledWith(defaultProps.companies, 'id', 1)
   });
 
   test('translations', () => {

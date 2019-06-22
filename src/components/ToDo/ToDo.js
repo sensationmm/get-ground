@@ -11,7 +11,7 @@ import './to-do.scss';
 *
 * @param {object} company - company information, comprising:
 *   @param {string} id - ID of company data object
-*   @param {object} address - company address info
+*   @param {object} property_address - company address info
 * @param {object} action - action object, comprising:
 *   @param {string} type - type of action
 *   @param {string} companyID - company action relates to
@@ -19,7 +19,7 @@ import './to-do.scss';
 */
 
 const ToDo = props => {
-  const { action, company: { id, address }, setActiveCompany } = props;
+  const { action, company: { id, property_address }, setActiveCompany } = props;
 
   return (
     <div 
@@ -28,7 +28,7 @@ const ToDo = props => {
       onClick={() => setActiveCompany(id)}
     >
       <div className="to-do--address">
-        {address.premise}, {address.postcode}
+        {property_address.address.premise}, {property_address.address.postcode}
       </div>
 
       <ActionButton alert={action} />
@@ -38,13 +38,13 @@ const ToDo = props => {
 
 ToDo.propTypes = {
   company: PropTypes.shape({
-    id: PropTypes.string,
-    address: PropTypes.object
+    id: PropTypes.number,
+    property_address: PropTypes.object
   }),
   setActiveCompany: PropTypes.func,
   action: PropTypes.shape({
     type: PropTypes.string.isRequired,
-    companyID: PropTypes.string
+    companyID: PropTypes.number
   })
 };
 

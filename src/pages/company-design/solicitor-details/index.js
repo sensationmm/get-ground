@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import { navigate, Link } from 'gatsby';
+import { navigate } from 'gatsby';
 
 import Layout from 'src/components/Layout/Layout'
 import formUtils from 'src/utils/form';
@@ -13,7 +13,6 @@ import Form from 'src/components/_layout/Form/Form';
 import InputText from 'src/components/_form/InputText/InputText';
 import InputPhone from 'src/components/_form/InputPhone/InputPhone';
 import Checkbox from 'src/components/_form/Checkbox/Checkbox';
-import RadioGroup from 'src/components/_form/RadioGroup/RadioGroup';
 import Button from 'src/components/_buttons/Button/Button';
 import ModalWrapper from 'src/components/Modal/ModalWrapper';
 import ModalContent from 'src/components/Modal/ModalContent';
@@ -47,16 +46,15 @@ class SolicitorDetails extends Component {
   }
 
   componentDidMount = () => {
-    const { activeCompany, companies } = this.props;
+    const { company } = this.props;
 
     formUtils.initFormState({
-      have_solicitor: null,
       first_name: '',
       last_name: '',
       email: '',
       phone: '',
       authority: false
-    }, companies[activeCompany], 'solicitor');
+    }, company.solicitor_details );
   }
 
   componentWillUnmount() {
@@ -70,21 +68,28 @@ class SolicitorDetails extends Component {
     if(formUtils.validateForm(this.config)) {
       showLoader();
 
-      const solicitor = values;
-
-      if(solicitor.have_solicitor !== 'yes') {
-        solicitor.first_name = '';
-        solicitor.last_name = '';
-        solicitor.email = '';
-        solicitor.phone = '';
-        solicitor.authority = false;
-      }
-
-      CompanyService.saveSolicitor(solicitor).then(response => {
+      CompanyService.updateCompany(values, 'solicitor_details', 1).then((response) => {
         hideLoader();
         navigate('/company-design/shareholder-details');
       });
     }
+  }
+
+  saveAndExit = async () => {
+    const { showLoader, hideLoader, form: { errors, values } } = this.props;
+
+    await Object.keys(errors).forEach(async (key) => {
+      await formUtils.updateValue(key, '');
+    });
+
+    showLoader();
+
+    CompanyService.updateCompany(values, 'solicitor_details', 1).then((response) => {
+      hideLoader();
+      if (response.status === 200) {
+        navigate('/company-design');
+      }
+    });
   }
 
   getModalContent = e => {
@@ -109,48 +114,32 @@ class SolicitorDetails extends Component {
     /* istanbul ignore next */
     this.config = [
       {
-        stateKey: 'have_solicitor',
-        component: RadioGroup,
-        groupLabel: t('companyDesign.solicitorDetails.form.label.haveSolicitor'),
-        name: 'have_solicitor',
-        items: [
-          { value: 'no', label: t('form.radioConfirm.false') },
-          { value: 'yes', label: t('form.radioConfirm.true') }
-        ],
-        value: values.have_solicitor,
-        validationFunction: 'validateRequired'
-      },
-      {
         stateKey: 'first_name',
         component: InputText,
         label: t('companyDesign.solicitorDetails.form.label.firstName'),
         value: values.first_name,
-        validationFunction: 'validateRequired',
-        hidden: !values.have_solicitor || values.have_solicitor === 'no'
+        validationFunction: 'validateRequired'
       },
       {
         stateKey: 'last_name',
         component: InputText,
         label: t('companyDesign.solicitorDetails.form.label.lastName'),
         value: values.last_name,
-        validationFunction: 'validateRequired',
-        hidden: !values.have_solicitor || values.have_solicitor === 'no'
+        validationFunction: 'validateRequired'
       },
       {
         stateKey: 'email',
         component: InputText,
         label: t('companyDesign.solicitorDetails.form.label.email'),
         value: values.email,
-        validationFunction: 'validateEmail',
-        hidden: !values.have_solicitor || values.have_solicitor === 'no'
+        validationFunction: 'validateEmail'
       },
       {
         stateKey: 'phone',
         component: InputPhone,
         label: t('companyDesign.solicitorDetails.form.label.phone'),
         value: values.phone,
-        validationFunction: 'validatePhone',
-        hidden: !values.have_solicitor || values.have_solicitor === 'no'
+        validationFunction: 'validatePhone'
       },
       {
         component: 'br'
@@ -170,24 +159,11 @@ class SolicitorDetails extends Component {
           }}>{t('companyDesign.solicitorDetails.form.label.authorityLink')}</a>
         </div>,
         checked: values.authority,
-        validationFunction: 'validateRequired',
-        hidden: !values.have_solicitor || values.have_solicitor === 'no'
+        validationFunction: 'validateRequired'
       }
     ];
 
-    const showDone = (
-      (values.have_solicitor === 'no') ||
-      (
-        values.have_solicitor === 'yes' &&
-        values.first_name &&
-        values.last_name &&
-        values.email &&
-        values.phone &&
-        values.authority
-      )
-    );
-
-    const headerActions = <Link to="/company-design"><ButtonHeader label={t('header.buttons.saveAndExit')} /></Link>;
+    const headerActions = <ButtonHeader onClick={this.saveAndExit} label={t('header.buttons.saveAndExit')} />;
 
     return (
       <Layout headerActions={headerActions} secure>
@@ -215,15 +191,13 @@ class SolicitorDetails extends Component {
           <Form>
             {formUtils.renderForm(this.config)}
 
-            {showDone &&
-              <Button
-                data-test="save-details-button"
-                classes="primary"
-                label={ t('companyDesign.solicitorDetails.ctaPrimary') }
-                fullWidth
-                onClick={this.saveDetails}
-              />
-            }
+            <Button
+              data-test="save-details-button"
+              classes="primary"
+              label={ t('companyDesign.solicitorDetails.ctaPrimary') }
+              fullWidth
+              onClick={this.saveDetails}
+            />
 
             <br />
           </Form>
@@ -257,14 +231,14 @@ SolicitorDetails.propTypes = {
   t: PropTypes.func.isRequired,
   modalIsOpen: PropTypes.bool,
   form: PropTypes.object,
-  companies: PropTypes.array,
+  company: PropTypes.object,
   activeCompany: PropTypes.number
 };
 
 const mapStateToProps = state => ({
   modalIsOpen: state.modal.isOpen,
   activeCompany: state.activeCompany,
-  companies: state.companies,
+  company: state.companies.find(company => company.id === 1),
   form: state.form
 });
 

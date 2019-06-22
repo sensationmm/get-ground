@@ -1,5 +1,5 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { Component } from 'react';
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { navigate } from 'gatsby';
@@ -14,6 +14,11 @@ import { setActiveCompany } from 'src/state/actions/activeCompany';
 
 import AddIcon from 'src/assets/images/add-icon.svg';
 
+import { showLoader, hideLoader } from 'src/state/actions/loader';
+
+import companyService from 'src/services/company';
+export const CompanyService = new companyService();
+
 import functions from 'src/utils/functions';
 
 // import './company-overview.scss';
@@ -24,95 +29,135 @@ import functions from 'src/utils/functions';
  * @param {object} props - for JSDoc
  * @return {ReactComponent} Dashboard
  */
-const Dashboard = (props) => {
-  const [ t ] = useTranslation();
-  const { actions, companies, setActiveCompany } = props;
+class Dashboard extends Component {
+  constructor(props) {
+    super(props);
 
-  const hasCompanies = (companies.length > 0);
-  const hasActions = (actions.length > 0);
-  let addCompany;
-  if(!hasCompanies) {
-    addCompany = {
-      type: 'add_company',
-      companyID: null,
-      dismissable: false
-    }
+    this.state = {
+      liveChatTopic: null
+    };
   }
 
-  return (
-    <Layout secure>
-      <div data-test="component-dashboard" className="company-overview">
-        <div className="company-header link profile" data-test="profile-button" onClick={() => navigate('/account')}>
-          { t('dashboard.main.profileLink') }
+  componentDidUpdate(prevProps) {
+    const { userID, showLoader } = this.props;
+    if (prevProps.userID !== userID) {
+      showLoader();
+      setTimeout(() => {
+        this.handleGetCompanies();
+      }, 750);
+    } 
+  }
+
+  handleGetCompanies = () => {
+    const { hideLoader } = this.props;
+    CompanyService.getCompanies()
+    .then((response) => {
+      hideLoader();
+      // if (response.status === 200) {
+
+      // } else {
+      //  // Do nothing
+      // }
+    });
+  }
+  
+  render() {
+    const { actions, companies, setActiveCompany, t } = this.props;
+    const hasCompanies = (companies.length > 0);
+    const hasActions = (actions.length > 0);
+    let addCompany;
+    if(!hasCompanies) {
+      addCompany = {
+        type: 'add_company',
+        companyID: null,
+        dismissable: false
+      }
+    }
+
+    return (
+      <Layout secure>
+        <div data-test="component-dashboard" className="company-overview">
+          <div className="company-header link profile" data-test="profile-button" onClick={() => navigate('/account')}>
+            { t('dashboard.main.profileLink') }
+          </div>
+
+          <ActionBox actions={addCompany ? [addCompany] : actions} />
+
+          {hasCompanies &&
+            <div>
+              <h3>{ t('dashboard.main.portfolioHeader') }</h3>
+              <List>
+                { companies.map((company, count) => (
+                  <CompanyLink
+                    key={`company-${count}`}
+                    company={(({ id, property_address }) => ({ id, property_address }))(company)}
+                    setActiveCompany={setActiveCompany}
+                  />
+                ))}
+              </List>
+            </div>
+          }
+
+          {hasCompanies && hasActions &&
+            <div>
+              <h3>{ t('dashboard.main.todoHeader') }</h3>
+              <List>
+                { actions.map((action, count) => {
+                  const company = functions.getByValue(companies, 'id', action.companyID);
+                  return (
+                    <ToDo
+                      key={`todo-${count}`}
+                      action={action}
+                      company={(({ id, property_address }) => ({ id, property_address }))(company)}
+                      setActiveCompany={setActiveCompany}
+                    />
+                  )
+                })}
+              </List>
+            </div>
+          }
+
+          <List>
+            <center>
+              <Button
+                data-test="add-company-button"
+                icon={AddIcon}
+                label={ t('dashboard.main.addCompanyButton') }
+                onClick={() => navigate('/company-design/intro')}
+              />
+            </center>
+          </List>
         </div>
-
-        <ActionBox actions={addCompany ? [addCompany] : actions} />
-
-        {hasCompanies &&
-          <div>
-            <h3>{ t('dashboard.main.portfolioHeader') }</h3>
-            <List>
-              { companies.map((company, count) => (
-                <CompanyLink
-                  key={`company-${count}`}
-                  company={(({ id, address }) => ({ id, address }))(company)}
-                  setActiveCompany={setActiveCompany}
-                />
-              ))}
-            </List>
-          </div>
-        }
-
-        {hasCompanies && hasActions &&
-          <div>
-            <h3>{ t('dashboard.main.todoHeader') }</h3>
-            <List>
-            { actions.map((action, count) => {
-              const company = functions.getByValue(companies, 'id', action.companyID);
-              return (
-                <ToDo
-                  key={`todo-${count}`}
-                  action={action}
-                  company={(({ id, address }) => ({ id, address }))(company)}
-                  setActiveCompany={setActiveCompany}
-                />
-              )
-            })}
-            </List>
-          </div>
-        }
-
-        <List>
-          <center>
-            <Button
-              data-test="add-company-button"
-              icon={AddIcon}
-              label={ t('dashboard.main.addCompanyButton') }
-              onClick={() => navigate('/company-design/intro')}
-            />
-          </center>
-        </List>
-      </div>
-    </Layout>
-  );
+      </Layout>
+    );
+  }
 }
 
 const mapStateToProps = (state) => ({
   isLoading: state.loader.isLoading,
   activeCompany: state.activeCompany,
   companies: state.companies,
-  actions: state.actions
+  actions: state.actions,
+  userID: state.user.id
 });
 
-const actions = { setActiveCompany };
+const actions = { 
+  setActiveCompany,
+  showLoader,
+  hideLoader
+};
 
 Dashboard.propTypes = {
+  t: PropTypes.func.isRequired,
   companies: PropTypes.array,
   setActiveCompany: PropTypes.func,
+  userID: PropTypes.number,
+  showLoader: PropTypes.func,
+  hideLoader: PropTypes.func,
   actions: PropTypes.arrayOf(
     PropTypes.shape({
       type: PropTypes.string.isRequired,
-      companyID: PropTypes.string,
+      companyID: PropTypes.number,
       dismissable: PropTypes.bool
     })
   )
@@ -120,4 +165,4 @@ Dashboard.propTypes = {
 
 export const RawComponent = Dashboard;
 
-export default connect(mapStateToProps, actions)(Dashboard);
+export default connect(mapStateToProps, actions)(withTranslation()(Dashboard));

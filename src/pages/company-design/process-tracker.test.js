@@ -60,6 +60,9 @@ describe('process-tracker', () => {
       },
       additionalServices: {
         hasUsedAdditionalServices: false,
+      },
+      company: {
+        additional_services_required: false
       }
     }
     wrapper = shallow(<ProcessTracker {...props}/>);

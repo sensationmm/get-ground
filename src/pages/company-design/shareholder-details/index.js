@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { navigate, Link } from 'gatsby';
+import { navigate } from 'gatsby';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux'
 
@@ -28,7 +28,7 @@ export const shareholder = {
   first_name: '',
   last_name: '',
   email: '',
-  shares: '',
+  allocated_shares: '',
   is_director: false
 }
 
@@ -67,10 +67,17 @@ class ShareholderDetails extends Component {
   }
 
   componentDidMount() {
+    const { company: { shareholder_details }} = this.props;
+
     formUtils.initFormState([
       {...shareholder},{...shareholder},{...shareholder},{...shareholder},
       {...shareholder},{...shareholder},{...shareholder},{...shareholder}
-    ]);
+    ], shareholder_details.collection);
+
+    if (shareholder_details.collection.length > 1) {
+      this.setState({ shareholders: shareholder_details.collection.length})
+    }
+    
   }
 
   componentWillUnmount() {
@@ -90,10 +97,10 @@ class ShareholderDetails extends Component {
 
     let totalShares = 0;
     formUtils.updateValue(id, shareholder, () => {
-        if(key === 'shares') {
+        if(key === 'allocated_shares') {
         this.props.form.values.forEach(item => {
-          if(item.shares) {
-            totalShares = totalShares + parseInt(item.shares);
+          if(item.allocated_shares) {
+            totalShares = totalShares + parseInt(item.allocated_shares);
           }
         });
 
@@ -103,7 +110,7 @@ class ShareholderDetails extends Component {
       }
     }, true);
 
-    if(key === 'shares') {
+    if(key === 'allocated_shares') {
       this.validateShareholderShares();
     }
   }
@@ -244,7 +251,7 @@ class ShareholderDetails extends Component {
           key={`shareholderShares${i}`}
           name={`${form.values[i].first_name} ${form.values[i].last_name}`}
           email={form.values[i].email}
-          shares={form.values[i].shares}
+          shares={form.values[i].allocated_shares}
           is_director={form.values[i].is_director}
           onChange={this.updateShareholder}
           totalShares={this.state.totalShares}
@@ -256,29 +263,47 @@ class ShareholderDetails extends Component {
     return render;
   }
 
-  saveShareholders = () => {
+  /**
+   * saveShareholders
+   * @param {boolean} isSaveAndExit - whether the save and exit button has fired this or not
+   * @return {void} saveShareholders
+   */
+  saveShareholders = async (isSaveAndExit) => {
     const { form, showLoader, hideLoader } = this.props;
-    const { values } = form;
+    const { values, errors } = form;
+    const shareholders = values;
 
-    const shareholders = values.filter(item => { return item.first_name !== ''; });
+    for (let i = shareholders.length - 1; i >= 0; i--) {
+      if (shareholders[i].first_name === '' && shareholders[i].last_name === '' && shareholders[i].email === '') {
+          shareholders.splice(i, 1);
+      }
+    }
+
+    if (isSaveAndExit) {
+      await Object.keys(errors).forEach(async (key) => {
+        await formUtils.updateValue(key, '');
+      });
+    }
+
+    const payload = {
+      collection: shareholders
+    }
 
     showLoader();
-    CompanyService.saveShareholders(shareholders).then(response => {
+    CompanyService.updateCompany(payload, 'shareholder_details', 1).then((response) => {
       hideLoader();
-      if(response.status === 404) {
-        navigate('/company-design/tax-questions');
+      if (response.status === 200) {
+        navigate('/company-design');
       }
     });
   }
-
-  
 
   render() {
     const { t, form } = this.props;
     const { hasShareholders, shareholders, stage, totalShares } = this.state;
 
     const mainShareholder = (100 - totalShares >= 0) ? 100 - totalShares : NaN;
-    const headerActions = <Link to="/company-design"><ButtonHeader label={t('header.buttons.saveAndExit')} /></Link>;
+    const headerActions = <ButtonHeader onClick={() => {this.saveShareholders(true)}} label={t('header.buttons.saveAndExit')} />
 
     return (
       <Layout headerActions={headerActions} secure>
@@ -442,12 +467,14 @@ ShareholderDetails.propTypes = {
   t: PropTypes.func.isRequired,
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
-  form: PropTypes.object
+  form: PropTypes.object,
+  company: PropTypes.object
 };
 
 const mapStateToProps = (state) => ({
   form: state.form,
-  user: state.user
+  user: state.user,
+  company: state.companies.find(company => company.id === 1)
 });
 
 const actions = {

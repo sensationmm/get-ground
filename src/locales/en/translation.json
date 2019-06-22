@@ -979,7 +979,7 @@
     "title": "Tax questions",
     "introBox": "The money you provide to purchase your property is lent by you to your company. We create a loan note between yourself and your company for this. This question determines the interest rate we should apply to your loan to the company",
     "ownership": "Do you have ownership or voting rights of 25% or more in any companies, partnerships or other enterprises?",
-    "employ": "Do they employ fewer than 50 employees combined?",
+    "employ": "Do they employ more than 50 employees combined?",
     "assets": "Do they have assets of 10m€ or less combined?",
     "turnover": "Do they have a turnover of 10m€ or less combined?",
     "nextBtn": "Next",

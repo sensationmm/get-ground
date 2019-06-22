@@ -4,12 +4,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { navigate } from 'gatsby';
 
-import { getByValue } from 'src/utils/functions';
+import functions from 'src/utils/functions';
 
 import Layout from 'src/components/Layout/Layout';
 import Button from 'src/components/_buttons/Button/Button';
 import OptionSelect from 'src/components/OptionSelect/OptionSelect';
-import { companyModel } from 'src/state/reducers/companies';
 
 import '../company-overview.scss';
 
@@ -25,7 +24,9 @@ class Manage extends Component {
     super(props);
 
     this.state = {
-      liveChatTopic: null
+      liveChatTopic: null,
+      hasLoaded: false,
+      address: ''
     };
   }
 
@@ -51,49 +52,57 @@ class Manage extends Component {
 
   render() {
     const { t, companies, activeCompany } = this.props;
-    const { liveChatTopic } = this.state;
+    const { liveChatTopic, hasLoaded, address } = this.state;
 
-    const company = activeCompany !== null ? getByValue(companies, 'id', activeCompany) : companyModel;
+    if ( activeCompany && !hasLoaded ) {
+      const companyData = functions.getByValue(companies, 'id', activeCompany);
+      this.setState({
+        hasLoaded: true,
+        address: companyData.property_address.address
+      })
+    }
 
     return (
       <Layout secure companyID>
-        <div className="company-overview has-hero-button" data-test="component-manage-company">
-          <div className="company-header link" onClick={() => navigate('/dashboard/company')}>
-            { company.address.premise }, { company.address.postcode }
-          </div>
+        { hasLoaded &&
+          <div className="company-overview has-hero-button" data-test="component-manage-company">
+            <div className="company-header link" onClick={() => navigate('/dashboard/company')}>
+              { address.premise }, { address.postcode }
+            </div>
 
-          <h1>{ t('dashboard.company.manage.title') }</h1>
-          <p>{ t('dashboard.company.manage.text') }</p>
+            <h1>{ t('dashboard.company.manage.title') }</h1>
+            <p>{ t('dashboard.company.manage.text') }</p>
 
-          <br />
+            <br />
 
-          <p><b>{ t('dashboard.company.manage.select') }</b></p>
+            <p><b>{ t('dashboard.company.manage.select') }</b></p>
 
-          <OptionSelect
-            options={[
-              { id: 'withdrawMoney', title: t('dashboard.company.manage.options.withdrawMoney') },
-              { id: 'sendMoney', title: t('dashboard.company.manage.options.sendMoney') },
-              { id: 'manageDirector', title: t('dashboard.company.manage.options.manageDirector') },
-              { id: 'manageShares', title: t('dashboard.company.manage.options.manageShares') },
-              { id: 'delist', title: t('dashboard.company.manage.options.delist') },
-              { id: 'reportIssue', title: t('dashboard.company.manage.options.reportIssue') },
-            ]}
-            onChange={this.setTopic}
-            selected={liveChatTopic}
-            small
-            center
-          />
-
-          <div className="hero-button">
-            <Button
-              data-test="live-chat-button"
-              classes="chat"
-              label={ t('liveChat.button') }
-              onClick={() => this.handleLiveChat(liveChatTopic)}
-              disabled={!liveChatTopic}
+            <OptionSelect
+              options={[
+                { id: 'withdrawMoney', title: t('dashboard.company.manage.options.withdrawMoney') },
+                { id: 'sendMoney', title: t('dashboard.company.manage.options.sendMoney') },
+                { id: 'manageDirector', title: t('dashboard.company.manage.options.manageDirector') },
+                { id: 'manageShares', title: t('dashboard.company.manage.options.manageShares') },
+                { id: 'delist', title: t('dashboard.company.manage.options.delist') },
+                { id: 'reportIssue', title: t('dashboard.company.manage.options.reportIssue') },
+              ]}
+              onChange={this.setTopic}
+              selected={liveChatTopic}
+              small
+              center
             />
+
+            <div className="hero-button">
+              <Button
+                data-test="live-chat-button"
+                classes="chat"
+                label={ t('liveChat.button') }
+                onClick={() => this.handleLiveChat(liveChatTopic)}
+                disabled={!liveChatTopic}
+              />
+            </div>
           </div>
-        </div>
+        }
       </Layout>
     );
   }
@@ -109,7 +118,7 @@ Manage.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   companies: PropTypes.array,
-  activeCompany: PropTypes.string,
+  activeCompany: PropTypes.number,
   t: PropTypes.func.isRequired
 };
 

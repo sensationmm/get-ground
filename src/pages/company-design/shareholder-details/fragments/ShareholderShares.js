@@ -42,12 +42,12 @@ class ShareholderShares extends Component {
 
     this.config = [
       {
-        stateKey: 'shares',
+        stateKey: 'allocated_shares',
         component: InputNumber,
         value: shares,
         validationFunction: ['validateRequired','validateTotal'],
         validationParam: [null, { total: totalShares, maxValue: 100 }],
-        onChange: /* istanbul ignore next */(val) => onChange(shareholderID, 'shares', val),
+        onChange: /* istanbul ignore next */(val) => onChange(shareholderID, 'allocated_shares', val),
         readOnly: disabled
       },
       {
@@ -76,8 +76,8 @@ ShareholderShares.propTypes = {
   shareholderID: PropTypes.number,
   name: PropTypes.string,
   email: PropTypes.string,
-  shares: PropTypes.string,
-  totalShares: PropTypes.string,
+  shares: PropTypes.number,
+  totalShares: PropTypes.number,
   is_director: PropTypes.bool,
   mainShareholder: PropTypes.bool,
   onRef: PropTypes.func,

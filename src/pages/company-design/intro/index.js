@@ -9,7 +9,7 @@ import Button from 'src/components/_buttons/Button/Button';
 import Layout from 'src/components/Layout/Layout';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
-import { addCompany } from 'src/state/actions/activeCompany';
+import { addCompany, setActiveCompany } from 'src/state/actions/activeCompany';
 import companyService from 'src/services/Company';
 export const CompanyService = new companyService();
 
@@ -48,10 +48,9 @@ class OnboardingIntroContainer extends Component {
   */
   createCompany = (navigateUrl, isAddServices) => {
     navigate(navigateUrl);
-    hideLoader();
-    // CompanyService.addCompany(isAddServices).then(response => {
-    //   this.handleCreateCompanyResponse(navigateUrl, response);
-    // });
+    CompanyService.addCompany(isAddServices).then(response => {
+      this.handleCreateCompanyResponse(navigateUrl, response);
+    });
   };
 
 /**
@@ -61,11 +60,12 @@ class OnboardingIntroContainer extends Component {
   * @return {void}
   */
   handleCreateCompanyResponse = (navigateUrl, response) => {
-    const { hideLoader, addCompany } = this.props;
+    const { hideLoader, addCompany, setActiveCompany } = this.props;
     hideLoader();
     if (response.status === 201) {
       navigate(navigateUrl);
-      addCompany(response);
+      addCompany(response.data);
+      setActiveCompany(response.data.id);
     } else {
       // Do Something
     }
@@ -107,13 +107,15 @@ OnboardingIntroContainer.propTypes = {
   t: PropTypes.func,
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
-  addCompany: PropTypes.func
+  addCompany: PropTypes.func,
+  setActiveCompany: PropTypes.func
 };
 
 const actions = {
   showLoader,
   hideLoader,
-  addCompany
+  addCompany,
+  setActiveCompany
 };
 
 export const RawComponent = OnboardingIntroContainer;

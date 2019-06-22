@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { navigate, Link } from 'gatsby';
+import { navigate } from 'gatsby';
 
 import Layout from 'src/components/Layout/Layout'
 import formUtils from 'src/utils/form';
@@ -21,8 +21,8 @@ import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
-import propertyService from 'src/services/Property';
-export const PropertyService = new propertyService();
+import companyService from 'src/services/Company';
+export const CompanyService = new companyService();
 
 import addIcon from 'src/assets/images/add-icon.svg';
 import 'src/styles/pages/purchase-details.scss';
@@ -47,18 +47,26 @@ class PurchaseDetails extends Component {
   }
   
   componentDidMount() {
+    const { company: { purchase_details }} = this.props;
+    const reduxFields = {
+      amount_in_cents: purchase_details.price.amount_in_cents,
+      is_new_build: purchase_details.is_new_build,
+      expected_exchange_date: purchase_details.expected_exchange_date,
+      completion_date: purchase_details.completion_date
+    }
+    
     formUtils.initFormState({
-      priceOfProperty: '',
-      newBuild: '',
-      completionDate: '',
+      amount_in_cents: '',
+      is_new_build: '',
+      completion_date: '',
       depositDueDate: '',
       depositAmount: '',
-      exchangeDate: '',
+      expected_exchange_date: '',
       firstInstallmentDate: '',
       firstInstallmentAmount: '',
       secondInstallmentDate: '',
       secondInstallmentAmount: ''
-    });
+    }, reduxFields);
   }
 
   componentWillUnmount() {
@@ -88,12 +96,12 @@ class PurchaseDetails extends Component {
     formUtils.setNativeValue(element, moment(date).format('Do MMMM YYYY'));
     element.dispatchEvent(new Event('input', { bubbles: true }));
 
-    this.setState({ [focusedDateField]: moment(date).format('L'), isDatepickerOpen: false });
+    this.setState({ [focusedDateField]: moment(date).format('YYYY-MM-DDTHH:mm:ss+00:00'), isDatepickerOpen: false });
   }
 
   checkElementHidden = () => {
-    const { form: { values: { newBuild } } } = this.props;
-    return newBuild === '' || newBuild === 'no';
+    const { form: { values: { is_new_build } } } = this.props;
+    return is_new_build === '' || is_new_build === 'no';
   }
 
   showNextInstallment = /* istanbul ignore next */ () => {
@@ -110,18 +118,27 @@ class PurchaseDetails extends Component {
   }
 
   submitPurchaseDetails = () => {
-    const { showLoader, hideLoader, t, form, additionalServices } = this.props;
+    const { showLoader, hideLoader, t, form: { values }, company } = this.props;
 
     /* istanbul ignore else */
     if (formUtils.validateForm(this.config)) {
       showLoader();
 
-      PropertyService.SavePurchaseDetails(form.values).then((response) => {
+      const payload = {
+        price: {
+          amount_in_cents: values.amount_in_cents,
+        },
+        is_new_build: values.is_new_build,
+        completion_date: this.state.completionDate ? this.state.completionDate : company.purchase_details.completion_date,
+        expected_exchange_date: this.state.exchangeDate ? this.state.exchangeDate : company.purchase_details.expected_exchange_date
+      };
+
+      CompanyService.updateCompany(payload, 'purchase_details', 1).then((response) => {
         hideLoader();
         /* istanbul ignore else */
         if (response.status === 200) {
 
-          if (additionalServices.solicitor === true) {
+          if (company.additional_services.solicitor === true) {
             navigate('/company-design/shareholder-details')
           } else {
             navigate('/company-design/solicitor-details');
@@ -135,21 +152,49 @@ class PurchaseDetails extends Component {
 
   }
 
+  saveAndExit = async () => {
+    const { showLoader, hideLoader, form: { values, errors}, company } = this.props;
+
+    formUtils.validateForm(this.config);
+
+    await Object.keys(errors).forEach(async (key) => {
+      await formUtils.updateValue(key, '');
+    });
+
+    showLoader();
+
+    const payload = {
+      price: {
+        amount_in_cents: values.amount_in_cents,
+      },
+      is_new_build: values.is_new_build,
+      completion_date: this.state.completionDate ? this.state.completionDate : company.purchase_details.completion_date,
+      expected_exchange_date: this.state.exchangeDate ? this.state.exchangeDate : company.purchase_details.expected_exchange_date
+    };
+
+    CompanyService.updateCompany(payload, 'purchase_details', 1).then((response) => {
+      hideLoader();
+      if (response.status === 200) {
+        navigate('/company-design');
+      }
+    });
+  }
+
   render() {
-    const { t, form, additionalServices } = this.props;
+    const { t, form, company } = this.props;
     const { isDatepickerOpen } = this.state;
     const {
       values: {
-        priceOfProperty,
-        newBuild,
-        completionDate,
+        amount_in_cents,
+        is_new_build,
+        completion_date,
         depositDueDate,
         depositAmount,
         firstInstallmentDate,
         firstInstallmentAmount,
         secondInstallmentDate,
         secondInstallmentAmount,
-        exchangeDate
+        expected_exchange_date
       },
       showErrorMessage,
       errors
@@ -168,41 +213,41 @@ class PurchaseDetails extends Component {
         
     this.config = [
       {
-        stateKey: 'priceOfProperty',
+        stateKey: 'amount_in_cents',
         component: InputNumber,
         label: t('companyDesign.purchaseDetails.form.priceOfPropertyLabel'),
-        value: priceOfProperty,
+        value: amount_in_cents,
         validationFunction: 'validateRequired',
         note: t('companyDesign.purchaseDetails.form.priceOfPropertyNote'),
       },
       {
-        stateKey: 'newBuild',
+        stateKey: 'is_new_build',
         component: RadioGroup,
         groupLabel: t('companyDesign.purchaseDetails.form.newBuildLabel'),
         name: 'newBuildRadio',
         items: this.radioConfig,
-        value: newBuild
+        value: is_new_build
       },
       {
-        stateKey: 'exchangeDate',
+        stateKey: 'expected_exchange_date',
         component: InputText,
         label: t('companyDesign.purchaseDetails.form.expectedExchangeDateLabel'),
-        value: exchangeDate,
+        value: expected_exchange_date,
         validationFunction: 'validateRequired',
         onFocus: this.openDatePicker,
         id: 'exchangeDate',
-        hidden: newBuild == '',
+        hidden: is_new_build == '',
         readOnly: true
       },
       {
-        stateKey: 'completionDate',
+        stateKey: 'completion_date',
         component: InputText,
         label: t('companyDesign.purchaseDetails.form.completionDateLabel'),
-        value: completionDate,
+        value: completion_date,
         validationFunction: 'validateRequired',
         onFocus: this.openDatePicker,
         id: 'completionDate',
-        hidden: newBuild === '',
+        hidden: is_new_build === '',
         readOnly: true
       },
       {
@@ -285,7 +330,7 @@ class PurchaseDetails extends Component {
       },
     ];
 
-    const headerActions = <Link to="/company-design"><ButtonHeader label={t('header.buttons.saveAndExit')} /></Link>;
+    const headerActions = <ButtonHeader onClick={this.saveAndExit} label={t('header.buttons.saveAndExit')} />
 
     return (
       <>
@@ -314,7 +359,7 @@ class PurchaseDetails extends Component {
                 data-test="skip-button"
                 label={t('companyDesign.purchaseDetails.form.skipButton')}
                 onClick={() => {
-                  if (additionalServices.solicitor === true) {
+                  if (company.additional_services.solicitor === true) {
                     navigate('/company-design/shareholder-details')
                   } else {
                     navigate('/company-design/solicitor-details');
@@ -351,12 +396,12 @@ PurchaseDetails.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   form: PropTypes.object,
-  additionalServices: PropTypes.object
+  company: PropTypes.object
 };
 
 const mapStateToProps = state => ({
   form: state.form,
-  additionalServices: state.additionalServices
+  company: state.companies.find(company => company.id === 1)
 });
 
 const actions = { showLoader, hideLoader };

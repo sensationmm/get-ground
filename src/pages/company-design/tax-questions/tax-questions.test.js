@@ -16,6 +16,14 @@ describe('Tax Questions page', () => {
     props = {
       t: jest.fn(),
       form: ReduxFormMock,
+      company: {
+        tax_questions:{
+          is_owner_of_other_companies: null,
+          more_than_50_employees: null,
+          assets: null,
+          turnover: null
+        },
+      }
     }
     wrapper = shallow(<TaxQuestions {...props} />)
   })

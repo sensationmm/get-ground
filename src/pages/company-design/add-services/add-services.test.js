@@ -15,7 +15,15 @@ describe('', () => {
     props = {
       t: jest.fn(),
       form: ReduxFormMock,
-      companyUpdate: jest.fn()
+      companyUpdate: jest.fn(),
+      company: {
+        additional_services:{
+          mortgage: null,
+          insurance: null,
+          management: null,
+          solicitor: null
+        },
+      }
     }
     wrapper = shallow(<AdditionalServices {...props} />)
   })
@@ -35,32 +43,6 @@ describe('', () => {
     wrapper.unmount();
     expect(formUtils.clearFormState).toHaveBeenCalledTimes(1);
   });
-
-  test('unmount calls action to send answers to redux state', () => {
-    const newProps = {
-      ...props,
-      form: {
-        values: {
-          hasUsedAdditionalServices: true,
-          find_mortgage: 'yes',
-          find_property_insurance: 'no',
-          find_property_management: 'yes',
-          find_solicitor: 'yes'
-        }
-      }
-    };
-
-    wrapper = shallow(<AdditionalServices {...newProps} />)
-
-    wrapper.unmount()
-
-    expect(props.companyUpdate).toHaveBeenCalledWith('1', 'additionalServices', {
-      mortgage: true,
-      insurance: false,
-      management: true,
-      solicitor: true
-    })
-  })
 
   afterEach(() => {
     jest.resetAllMocks();

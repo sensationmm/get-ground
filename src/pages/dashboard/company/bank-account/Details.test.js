@@ -17,16 +17,10 @@ describe('Details', () => {
   };
 
   beforeEach(() => {
-    wrapper = setup(Details, defaultProps);
+    wrapper = setup(Details, defaultProps, { hasLoaded: true, company: companyMock });
   });
 
   test('renders without error', () => {
-    const component = findByTestAttr(wrapper, 'component-bank-details');
-    expect(component.length).toBe(1);
-  });
-
-  test('renders without error when activeCompany not set', () => {
-    wrapper = setup(Details, { ...defaultProps, activeCompany: null });
     const component = findByTestAttr(wrapper, 'component-bank-details');
     expect(component.length).toBe(1);
   });

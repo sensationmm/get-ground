@@ -31,7 +31,7 @@ describe('<CompanyLink />', () => {
   test('onClick()', () => {
     component.simulate('click');
 
-    expect(setActiveCompanyMock).toHaveBeenCalledWith('1');
+    expect(setActiveCompanyMock).toHaveBeenCalledWith(1);
     expect(navigate).toHaveBeenCalledWith('/dashboard/company');
   });
 });

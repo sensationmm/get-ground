@@ -1,15 +1,14 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { Component } from 'react';
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { navigate } from 'gatsby';
 
-import { getByValue } from 'src/utils/functions';
+import functions from 'src/utils/functions';
 
 import Layout from 'src/components/Layout/Layout';
 import Form from 'src/components/_layout/Form/Form';
 import Button from 'src/components/_buttons/Button/Button';
-import { companyModel } from 'src/state/reducers/companies';
 
 import './company-overview.scss';
 
@@ -19,79 +18,107 @@ import './company-overview.scss';
  * @param {object} props - for JSDoc
  * @return {ReactComponent} Company
  */
-const Company = (props) => {
-  const [ t ] = useTranslation();
-  const { companies, activeCompany } = props;
+class Company extends Component {
+  constructor(props) {
+    super(props);
 
-  const company = activeCompany !== null ? getByValue(companies, 'id', activeCompany) : companyModel;
+    this.state = {
+      hasLoaded: false,
+      address: '',
+      company: null
+    };
+  }
 
-  return (
-    <Layout secure companyID>
-      <div className="company-overview" data-test="component-company">
-        <div className="company-header">{ company.address.premise }, { company.address.postcode }</div>
+  render() {
+    const { companies, activeCompany, t } = this.props;
+    const { hasLoaded, address, company } = this.state;
 
-        <div className="company-overview-section">
-          <h2>{ t('dashboard.company.overview.sections.company') }</h2>
-          <p>{ company.name }</p>
-        </div>
+    if ( activeCompany && !hasLoaded ) {
+      const companyData = functions.getByValue(companies, 'id', activeCompany);
 
-        <div className="company-overview-section">
-          <h2>{ t('dashboard.company.overview.sections.address') }</h2>
-          <p>{ company.address.premise }</p>
-          <p>{ company.address.street }</p>
-          <p>{ company.address.posttown }</p>
-          <p>{ company.address.postcode }</p>
-        </div>
+      this.setState({
+        ...this.state,
+        company: companyData,
+        address: companyData.property_address.address,
+        hasLoaded: true
+      });
+    }
 
-        <div className="company-overview-section">
-          <h2>{ t('dashboard.company.overview.sections.shareholders') }</h2>
-          {
-            company.shareholders.map((shareholder, count) => {
-              return <p key={`shareholder-${count}`}>{ shareholder }</p>
-            })
-          }
-        </div>
+    return (
+      <Layout secure companyID>
+        { hasLoaded ?
+          <div className="company-overview" data-test="component-company">
+            <div className="company-header">{ address.premise }, { address.postcode }</div>
 
-        <div className="company-overview-section">
-          <h2>{ t('dashboard.company.overview.sections.directors') }</h2>
-          {
-            company.directors.map((director, count) => {
-              return <p key={`director-${count}`}>{ director }</p>
-            })
-          }
-        </div>
+            <div className="company-overview-section">
+              <h2>{ t('dashboard.company.overview.sections.company') }</h2>
+              {/* <p>{ company.name }</p> */}
+            </div>
 
-        <div className="company-overview-section">
-          <h2>{ t('dashboard.company.overview.sections.documents') }</h2>
-          <ul>
-          {
-            company.documents.map((document, count) => {
-              return <li key={`document-${count}`}>{ document.name }</li>
-            })
-          }
-          </ul>
-        </div>
-        
-        <Form>
-          <Button
-            data-test="manage-company-button"
-            classes="primary"
-            label={ t('dashboard.company.overview.ctaPrimary') }
-            fullWidth
-            onClick={() => navigate('/dashboard/company/manage')}
-          />
+            <div className="company-overview-section">
+              <h2>{ t('dashboard.company.overview.sections.address') }</h2>
+              <p>{ address.premise }</p>
+              <p>{ address.street }</p>
+              <p>{ address.posttown }</p>
+              <p>{ address.postcode }</p>
+            </div>
 
-          <Button
-            data-test="bank-account-button"
-            classes="account"
-            label={ t('dashboard.company.overview.ctaSecondary') }
-            fullWidth
-            onClick={() => navigate('/dashboard/company/bank-account')}
-          />
-        </Form>
-      </div>
-    </Layout>
-  );
+            <div className="company-overview-section">
+              <h2>{ t('dashboard.company.overview.sections.shareholders') }</h2>
+              {
+                company.shareholder_details.collection.map((shareholder, count) => {
+                  return <p key={`shareholder-${count}`}>{`${shareholder.first_name} ${shareholder.last_name}`}</p>
+                })
+              }
+            </div>
+
+            <div className="company-overview-section">
+              <h2>{ t('dashboard.company.overview.sections.directors') }</h2>
+              {
+                company.shareholder_details.collection.map((shareholder, count) => {
+                  if ( shareholder.is_director ) {
+                    return <p key={`director-${count}`}>{`${shareholder.first_name} ${shareholder.last_name}`}</p>
+                  }
+                })
+              }
+            </div>
+
+            <div className="company-overview-section">
+              <h2>{ t('dashboard.company.overview.sections.documents') }</h2>
+              NOT GETTING THIS YET
+              {/* <ul>
+              {
+                company.documents.map((document, count) => {
+                  return <li key={`document-${count}`}>{ document.name }</li>
+                })
+              }
+              </ul> */}
+            </div>
+            
+            <Form>
+              <Button
+                data-test="manage-company-button"
+                classes="primary"
+                label={ t('dashboard.company.overview.ctaPrimary') }
+                fullWidth
+                onClick={() => navigate('/dashboard/company/manage')}
+              />
+
+              <Button
+                data-test="bank-account-button"
+                classes="account"
+                label={ t('dashboard.company.overview.ctaSecondary') }
+                fullWidth
+                onClick={() => navigate('/dashboard/company/bank-account')}
+              />
+            </Form>
+          </div> 
+        :
+          <div></div>
+        }
+      </Layout>
+    );
+  }
 }
 
 const mapStateToProps = (state) => ({
@@ -101,12 +128,14 @@ const mapStateToProps = (state) => ({
 });
 
 Company.propTypes = {
+  t: PropTypes.func.isRequired,
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   companies: PropTypes.array,
-  activeCompany: PropTypes.string
+  activeCompany: PropTypes.number,
+  userID: PropTypes.numbers
 };
 
 export const RawComponent = Company;
 
-export default connect(mapStateToProps, null)(Company);
+export default connect(mapStateToProps, null)(withTranslation()(Company));

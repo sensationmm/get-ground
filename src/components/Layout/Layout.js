@@ -250,7 +250,7 @@ Layout.propTypes = {
   userID: PropTypes.number,
   secure: PropTypes.bool,
   redirect: PropTypes.string,
-  activeCompany: PropTypes.string,
+  activeCompany: PropTypes.number,
   companyID: PropTypes.bool,
   loggedOutOnly: PropTypes.bool,
   menuIsOpen: PropTypes.bool,
