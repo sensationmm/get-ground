@@ -33,7 +33,15 @@
       "shareholder": "Do you accept to be a shareholder in this company?",
       "director": "Do you accept to be a director in this company?"
     },
-    "confirmBtn": "Confirm"
+    "confirmBtn": "Confirm",
+    "modal": {
+      "shareholder": {
+        "heading": "Being a shareholder"
+      },
+      "director": {
+        "heading": "Being a director"
+      }
+    }
   },
   "account": {
     "signature": {
@@ -371,17 +379,25 @@
   },
   "contactUs": {
     "title": "Contact us",
-    "phone": "Phone: +44 (0) 20 8050 1912",
-    "email": "Email: info@getground.com",
+    "phone": "+44 (0) 20 8050 1912",
+    "email": "info@getground.com",
     "liveChat": "Live Chat"
   },
   "dashboard": {
     "company": {
+      "title": "My property",
+      "address": "Property address",
+      "back": "Back to my property",
+      "showMore": "More details",
+      "showLess": "Fewer details",
       "bankAccount": {
+        "title": "My bank account",
         "sortCode": "Sort Code",
         "accountNumber": "Account Number",
+        "accountName": "Account Number",
         "address": "Address",
         "iban": "BIC/IBAN",
+        "branchAddress": "Branch address",
         "back": "Back to overview",
         "available": "Available funds",
         "sortCodeAndAccountNumber": "Sort Code & Account Number"
@@ -389,7 +405,8 @@
       "manage": {
         "title": "Manage my company",
         "text": "Please let us know what you want to do, we are here to help.",
-        "select": "Select an item below:",
+        "select": "Select an item below to be connected to one of our team:",
+        "chatButton": "Talk to an expert",
         "options": {
           "withdrawMoney": "Take money out of your company",
           "sendMoney": "Send money to your company",
@@ -415,7 +432,9 @@
       "portfolioHeader": "My Portfolio",
       "profileLink": "My Profile",
       "todoHeader": "To do",
-      "addCompanyButton": "Add new company"
+      "addCompanyButton": "Add property",
+      "noProperties": "Your first property will show here",
+      "noActions": "You currently don't have anything in your to do list"
     }
   },
   "footer": {
@@ -842,7 +861,8 @@
     },
     "payment": {
       "title": "Payment details",
-      "intro": "Please note that payment will not be taken and your subscription fee will not be charged until you pass the compliance check.",
+      "box": "We would like to save your card details so we can debit the subscription value in the future.",
+      "termsAndCond": "See terms and conditions",
       "paymentInfo": {
         "accountSetupLabel": "Account setup",
         "monthlySubscriptionLabel": "Monthly subscription",
@@ -855,7 +875,13 @@
         "error": "There was an issue with your payment",
         "retakePaymentError": "Your payment has failed. Please update your payment details so we can finalise your application"
       },
-      "stripeError": "Enter card details"
+      "content": {
+        "first": "Plus in 30 days we will start charging your:",
+        "second": "Monthly subscription: £24 (inc. VAT) This covers your company's ongoing management costs."
+      },
+      "stripeError": "Enter card details",
+      "stripeCheckbox": "I authorise GetGround to deduct my monthly subscription from my card.",
+      "directorReminder": "Once you exchange contracts you will have to pay for Directors and Officers insurance. We will remind you of this when the time comes."
     },
     "personalDetails": {
       "heading": "Personal details",
@@ -958,6 +984,7 @@
     }
   },
   "profile": {
+    "title": "My Profile",
     "sections": {
       "name": "Full name",
       "previousNames": "Previous name(s)",
@@ -1054,5 +1081,6 @@
       "fifth": "GetGround customers also have access to the GetGround marketplace making buying and selling shares in companies holding property fast and cost effective."
     }
 
-  }
+  },
+  "showAll": "Show all"
 }

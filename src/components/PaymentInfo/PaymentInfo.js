@@ -19,11 +19,9 @@ import './payment-info.scss';
 const PaymentInfo = props => {
   const {
     accountSetupLabel,
-    monthlySubscriptionLabel,
     vatLabel,
     TotalLabel,
     accountSetupValue,
-    monthlySubscriptionValue,
     vatValue,
     totalValue
   } = props;
@@ -31,16 +29,13 @@ const PaymentInfo = props => {
   return (
     <div className="payment-info" data-test="component-payment-info">
       <div className="payment-info--row">
-        <span>{accountSetupLabel}</span><span className="payment-info--value">£{accountSetupValue}</span>
+        <span data-test="account-label">{accountSetupLabel}</span><span data-test="account-value" className="payment-info--value">£{accountSetupValue}</span>
       </div>
       <div className="payment-info--row">
-        <span>{monthlySubscriptionLabel}</span><span className="payment-info--value">£{monthlySubscriptionValue}</span>
-      </div>
-      <div className="payment-info--row">
-        <span>{vatLabel}</span><span className="payment-info--value">£{vatValue}</span>
+        <span data-test="vat-label">{vatLabel}</span><span data-test="vat-value" className="payment-info--value">£{vatValue}</span>
       </div>
       <div className="payment-info--row payment-info--total">
-        <span>{TotalLabel}</span><span className="payment-info--value">£{totalValue}</span>
+        <span data-test="total-label">{TotalLabel}</span><span data-test="total-value" className="payment-info--value">£{totalValue}</span>
       </div>
     </div>
   );

@@ -12,12 +12,10 @@ import Form from 'src/components/_layout/Form/Form';
 import InputText from 'src/components/_form/InputText/InputText';
 import InputPhone from 'src/components/_form/InputPhone/InputPhone';
 import Button from 'src/components/_buttons/Button/Button';
-import ButtonIcon from 'src/components/_buttons/ButtonIcon/ButtonIcon';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 import { userUpdate } from 'src/state/actions/user';
 
-import IconChat from 'src/assets/images/chat.svg';
 import { filePath } from 'src/config/endpoints';
 
 import accountService from 'src/services/Account';
@@ -162,92 +160,119 @@ class Account extends Component {
     return (
       <Layout secure>
         <div className="company-overview account profile" data-test="container-profile">
-          <div className="company-header">{ `${user.first_name} ${user.last_name}` }</div>
+          <h1>{ t('profile.title') }</h1>
 
-          <div className="company-overview-section">
-            <Form spacing="30px">
-              <div>
-                <h2>{ t('profile.sections.name') }</h2>
-                <p>{ `${user.first_name} ${user.middle_name} ${user.last_name}`}</p>
+          <div className="dashboard-columns">
+            <div>
+              <div className="company-overview-section">
+                <Form spacing="30px">
+                  <div>
+                    <h2>{ t('profile.sections.name') }</h2>
+                    <p>{ `${user.first_name} ${user.middle_name} ${user.last_name}`}</p>
+                  </div>
+
+                  <div>
+                    <h2>{ t('profile.sections.previousNames') }</h2>
+                    <p>{user.previous_names ? user.previous_names : '-'}</p>
+                  </div>
+
+                  <div>
+                    <h2>{ t('profile.sections.dob') }</h2>
+                    <p>{moment(user.date_of_birth).format('DD/MM/YYYY')}</p>
+                  </div>
+
+                  <div>
+                    <h2>{ t('profile.sections.birthCity') }</h2>
+                    <p>{user.birth_town}</p>
+                  </div>
+                </Form>
+              </div>
+            </div>
+            
+            <div>
+              <div className="company-overview-section" data-test="section-occupation">
+                <h2>{ t('profile.sections.occupation') }</h2>
+                {!edit_occupation
+                  ? <p>{user.occupation}</p>
+                  : formUtils.renderForm(this.config.occupation)
+                }
+                <div className="account-edit">
+                {!edit_occupation
+                  ? <Button
+                    classes="inline"
+                    label={ t('profile.edit') }
+                    onClick={() => this.toggleEdit('occupation')}
+                  />
+                  : <Button
+                    classes="inline save"
+                    label={ t('profile.save') }
+                    onClick={() => this.updateProfile('occupation')}
+                  />
+                }
+                </div>
               </div>
 
-              <div>
-                <h2>{ t('profile.sections.previousNames') }</h2>
-                <p>{user.previous_names ? user.previous_names : '-'}</p>
+              <div className="company-overview-section" data-test="section-phone">
+                <h2>{ t('profile.sections.phone') }</h2>
+                {!edit_phone_number
+                  ? <p>{user.phone_number}</p>
+                  : formUtils.renderForm(this.config.phone_number)
+                }
+                <div className="account-edit">
+                {!edit_phone_number
+                  ? <Button classes="inline" label={ t('profile.edit') } onClick={() => this.toggleEdit('phone_number')} />
+                  : <Button classes="inline save" label={ t('profile.save') } onClick={() => this.updateProfile('phone_number')} />
+                }
+                </div>
               </div>
 
-              <div>
-                <h2>{ t('profile.sections.dob') }</h2>
-                <p>{moment(user.date_of_birth).format('DD/MM/YYYY')}</p>
+              <div className="company-overview-section" data-test="section-email">
+                <h2>{ t('profile.sections.email') }</h2>
+                {!edit_email
+                  ? <p>{user.email}</p>
+                  : formUtils.renderForm(this.config.email)
+                }
+                <div className="account-edit">
+                {!edit_email
+                  ? <Button classes="inline" label={ t('profile.edit') } onClick={() => this.toggleEdit('email')} />
+                  : <Button classes="inline save" label={ t('profile.save') } onClick={() => this.updateProfile('email')} />
+                }
+                </div>
               </div>
 
-              <div>
-                <h2>{ t('profile.sections.birthCity') }</h2>
-                <p>{user.birth_town}</p>
+              <div className="company-overview-section">
+                <h2>{ t('profile.sections.homeAddress') }</h2>
+                <p>{address && address.join(', ')}</p>
               </div>
-            </Form>
-          </div>
-
-          <div className="company-overview-section" data-test="section-occupation">
-            <h2>{ t('profile.sections.occupation') }</h2>
-            {!edit_occupation
-              ? <p>{user.occupation}</p>
-              : formUtils.renderForm(this.config.occupation)
-            }
-            <div className="account-edit">
-            {!edit_occupation
-              ? <Button classes="inline" label={ t('profile.edit') } onClick={() => this.toggleEdit('occupation')} />
-              : <Button classes="inline primary" label={ t('profile.save') } onClick={() => this.updateProfile('occupation')} />
-            }
             </div>
           </div>
+          
 
-          <div className="company-overview-section" data-test="section-phone">
-            <h2>{ t('profile.sections.phone') }</h2>
-            {!edit_phone_number
-              ? <p>{user.phone_number}</p>
-              : formUtils.renderForm(this.config.phone_number)
-            }
-            <div className="account-edit">
-            {!edit_phone_number
-              ? <Button classes="inline" label={ t('profile.edit') } onClick={() => this.toggleEdit('phone_number')} />
-              : <Button classes="inline primary" label={ t('profile.save') } onClick={() => this.updateProfile('phone_number')} />
-            }
+          <div className="dashboard-columns">
+            <div className="company-overview-section">
+              <h2>{ t('profile.sections.passport') }</h2>
+              <div className="account-edit">
+                {passport && <img src={`${filePath}${passport.filename}`} /> }
+                <Button
+                  classes="inline chat"
+                  data-test="live-chat-passport"
+                  label={ t('profile.edit') }
+                  onClick={() => this.handleLiveChat('Passport')}
+                />
+              </div>
             </div>
-          </div>
 
-          <div className="company-overview-section" data-test="section-email">
-            <h2>{ t('profile.sections.email') }</h2>
-            {!edit_email
-              ? <p>{user.email}</p>
-              : formUtils.renderForm(this.config.email)
-            }
-            <div className="account-edit">
-            {!edit_email
-              ? <Button classes="inline" label={ t('profile.edit') } onClick={() => this.toggleEdit('email')} />
-              : <Button classes="inline primary" label={ t('profile.save') } onClick={() => this.updateProfile('email')} />
-            }
-            </div>
-          </div>
-
-          <div className="company-overview-section">
-            <h2>{ t('profile.sections.homeAddress') }</h2>
-            <p>{address && address.join(', ')}</p>
-          </div>
-
-          <div className="company-overview-section">
-            <h2>{ t('profile.sections.passport') }</h2>
-            <div className="account-proof-edit">
-              {passport && <img src={`${filePath}${passport.filename}`} /> }
-              <ButtonIcon data-test="live-chat-passport" liveChat icon={IconChat} onClick={ () => this.handleLiveChat('Passport')} />
-            </div>
-          </div>
-
-          <div className="company-overview-section">
-            <h2>{ t('profile.sections.proofAddress') }</h2>
-            <div className="account-proof-edit">
-              {addressProof && <img src={`${filePath}${addressProof.filename}`} /> }
-              <ButtonIcon data-test="live-chat-address" liveChat icon={IconChat} onClick={ () => this.handleLiveChat('Address')} />
+            <div className="company-overview-section">
+              <h2>{ t('profile.sections.proofAddress') }</h2>
+              <div className="account-edit">
+                {addressProof && <img src={`${filePath}${addressProof.filename}`} /> }
+                <Button
+                  classes="inline chat"
+                  data-test="live-chat-address"
+                  label={ t('profile.edit') }
+                  onClick={() => this.handleLiveChat('Address')}
+                />
+              </div>
             </div>
           </div>
 

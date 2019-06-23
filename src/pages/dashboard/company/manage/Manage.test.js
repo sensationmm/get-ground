@@ -57,6 +57,7 @@ describe('Manage', () => {
     expect(global.LC_API.set_custom_variables).toHaveBeenCalledWith(
       [
         { name: 'manage my company topic', value: 'boo' },
+        { name: 'company ID', value: 1 },
       ]
     );
   });
@@ -71,7 +72,7 @@ describe('Manage', () => {
     expect(wrapper.find(OptionSelect).props().options[3].title).toBe('dashboard.company.manage.options.manageShares');
     expect(wrapper.find(OptionSelect).props().options[4].title).toBe('dashboard.company.manage.options.delist');
     expect(wrapper.find(OptionSelect).props().options[5].title).toBe('dashboard.company.manage.options.reportIssue');
-    expect(wrapper.find(Button).props().label).toBe('liveChat.button');
+    expect(wrapper.find(Button).props().label).toBe('dashboard.company.manage.chatButton');
   });
 
   afterEach(() => {

@@ -1,7 +1,16 @@
 import React from 'react';
 import { setup, findByTestAttr } from '../../../test-utils/test-utils';
 
-import List from './List';
+import { RawComponent as List } from './List';
+
+Array.prototype.flat = () => {
+  return [
+    <div key='child-1'>Child1</div>,
+    <div key='child-2'>Child2</div>,
+    <div key='child-3'>Child3</div>,
+    <div key='child-4'>Child4</div>
+  ]
+}
 
 describe('<List />', () => {
   let wrapper;
@@ -14,7 +23,7 @@ describe('<List />', () => {
         <div key='child-3'>Child3</div>,
         <div key='child-4'>Child4</div>
       ]
-    ] });
+    ], numToShow: 3, t: jest.fn() });
   });
   
   test('renders without error', () => {
@@ -25,7 +34,7 @@ describe('<List />', () => {
   test('renders correct number of children', () => {
     const children = wrapper.find('.list-row');
 
-    expect(children.length).toBe(4);
+    expect(children.length).toBe(3);
   });
 
   test('non array children', () => {

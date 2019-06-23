@@ -21,19 +21,8 @@ const IntroSlider = props => {
   const settings = {
     dots: true,
     arrows: false,
-    slidesToShow: 2,
-    slidesToScroll: 2,
-    responsive: [
-      {
-        breakpoint: 720,
-        settings: {
-          centerMode: true,
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          centerPadding: '0px',
-        }
-      },
-    ]
+    slidesToShow: 1,
+    slidesToScroll: 1
   }
 
   return (
@@ -43,8 +32,10 @@ const IntroSlider = props => {
           return (
             <div className="slick-slide--container" data-testid="slick-slide--container" key={`slide-${index}`}>
               <img className="slick-slide--image" src={slide.image} alt={slide.imageAltText} />
-              <h2>{slide.title}</h2>
-              <div className="slick-slide--copy" dangerouslySetInnerHTML={{ __html: slide.copy }} />
+              <div>
+                <h2>{slide.title}</h2>
+                <div className="slick-slide--copy" dangerouslySetInnerHTML={{ __html: slide.copy }} />
+              </div>
             </div>
           )
         })}

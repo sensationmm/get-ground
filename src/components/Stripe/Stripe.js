@@ -3,8 +3,20 @@ import { CardElement, injectStripe } from 'react-stripe-elements';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { navigate } from 'gatsby';
+import { connect } from 'react-redux';
+import { withTranslation } from 'react-i18next';
 
 import Button from 'src/components/_buttons/Button/Button';
+import Checkbox from 'src/components/_form/Checkbox/Checkbox';
+import Form from 'src/components/_layout/Form/Form';
+import formUtils from 'src/utils/form';
+import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
+
+import modalService from 'src/services/Modal';
+export const ModalService = new modalService();
+
+import { showModal, hideModal } from 'src/state/actions/modal';
+import { showLoader, hideLoader } from 'src/state/actions/loader';
 
 import './stripe.scss';
 
@@ -26,33 +38,59 @@ import './stripe.scss';
 class Stripe extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      termsMarkdown: ''
+    }
   }
 
   validateStripe = () => {
-    const {  
-      stripe, 
-      setIsStripeValid, 
+    const {
+      stripe,
+      setIsStripeValid,
       setStripeToken,
       validateForm
     } = this.props;
 
     stripe.createToken().then((result) => {
       result.error ? setIsStripeValid(false) : setStripeToken(result.token.id);
+      formUtils.validateForm(this.config)
       validateForm();
     })
   }
 
+  componentWillUnmount() {
+    formUtils.clearFormState();
+  }
+
   render() {
-    const { 
-      isStripeValid, 
-      stripeError, 
-      nextButtonLabel, 
+    const {
+      isStripeValid,
+      stripeError,
+      nextButtonLabel,
       backButtonLabel,
       handleChange,
-      cardFieldLabel
+      cardFieldLabel,
+      form,
+      t
     } = this.props;
+
+
+    const { values } = form;
+
+    this.config = [
+      {
+        stateKey: 'authSubscription',
+        component: Checkbox,
+        label: t('onBoarding.payment.stripeCheckbox'),
+        checked: values.authSubscription,
+        validationFunction: 'validateRequired'
+      }
+    ];
+
+
     return (
-      <div 
+      <div
         className={classNames('stripe-wrapper', [
           {'error': !isStripeValid }
         ])}
@@ -65,10 +103,20 @@ class Stripe extends Component {
 
         <label>
           {cardFieldLabel}
-          <CardElement 
+          <CardElement
             onChange={handleChange}
           />
         </label>
+        <IntroBox>
+          {t('onBoarding.payment.box')}
+        </IntroBox>
+        <Form>
+          {formUtils.renderForm(this.config)}
+        </Form>
+
+        <p className="reminder" data-test="director-reminder">
+          {t('onBoarding.payment.directorReminder')}
+        </p>
 
         <Button
           data-test="payment-button"
@@ -99,8 +147,29 @@ Stripe.propTypes = {
   stripe: PropTypes.object,
   setIsStripeValid: PropTypes.any,
   setStripeToken: PropTypes.func,
-  validateForm: PropTypes.func
+  validateForm: PropTypes.func,
+  form: PropTypes.object,
+  t: PropTypes.func.isRequired,
+  modalIsOpen: PropTypes.bool,
+  showModal: PropTypes.func,
+  hideModal: PropTypes.func,
+  showLoader: PropTypes.func,
+  hideLoader: PropTypes.func
 };
 
 export const RawComponent = Stripe
-export default injectStripe(Stripe);
+
+const mapStateToProps = state => ({
+  form: state.form,
+  modalIsOpen: state.modal.isOpen
+});
+
+const actions = {
+  showModal,
+  hideModal,
+  showLoader,
+  hideLoader
+}
+
+const connectedComponent = connect(mapStateToProps, actions)(RawComponent)
+export default (withTranslation()(injectStripe(connectedComponent)));

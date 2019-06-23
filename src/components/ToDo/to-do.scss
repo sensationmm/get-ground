@@ -5,13 +5,14 @@
 .to-do {
   font-size: 16px;
   margin-bottom: 20px;
-  padding: 40px 0;
   cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 
-  &--address {
-    margin-right: 15px;
+  &-address {
+    margin-bottom: 10px;
+  }
+
+  &-postcode {
+    font-size: 14px;
+    font-weight: 600;
   }
 }

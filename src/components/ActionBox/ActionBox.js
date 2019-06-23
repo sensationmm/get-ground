@@ -50,7 +50,7 @@ class ActionBox extends Component {
     const { label, cta, action } = ActionConfig(alert);
 
     return (
-      <div>
+      <div className="action-box-action">
         <p>{t(label)}</p>
 
         <div className={classNames('action-box-buttons', { single: alert.dismissable === false})}>
@@ -73,10 +73,15 @@ class ActionBox extends Component {
           {actions: actions && actions.length > 0 && currentAction < actions.length}
         )}
       >
-        <h1>{ t('actionBox.title') }</h1>
+        <div className="action-box-header">{ t('actionBox.title') }</div>
 
-        { (currentAction >= actions.length) && <p>{t('actionBox.noActions')}</p> }
-
+        { (currentAction >= actions.length) && 
+          <div className="action-box-action">
+            <div>{t('actionBox.noActions')}</div>
+            <div></div> 
+          </div>
+        }
+        
         {currentAction < actions.length && this.renderAction()}
       </div>
     );

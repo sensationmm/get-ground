@@ -4,14 +4,13 @@
 
 .action-box {
   font-size: 14px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   padding: $padding-vertical $padding-horizontal;
-  @include gradient-vertical($gradient-primary-1, $gradient-primary-2);
+  @include gradient-horizontal-image($gradient-primary-1, $gradient-primary-2, '../../assets/images/background.png');
   border-radius: 10px;
   text-align: center;
-  color: $white;
 
-  h1 {
+  &-header {
     font-size: 18px;
     margin: 0 0 $padding-vertical 0;
   }
@@ -21,7 +20,7 @@
   }
 
   &.actions {
-    @include gradient-horizontal($background-account-start, $background-account-end);
+    @include gradient-horizontal-image($background-account-start, $background-account-end, '../../assets/images/background.png');
   }
 
   &-buttons {
@@ -55,6 +54,57 @@
       text-transform: uppercase;
       font-weight: 300;
       font-size: 14px;
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .action-box {
+    padding: ($padding-vertical-unit * 2 + 0px) ($padding-horizontal-unit * 3 + 0px);
+
+    &-header {
+      text-align: left;
+      margin: 0;
+    }
+
+    &-buttons {
+      width: auto;
+      flex-direction: row-reverse;
+
+      > * {
+        flex-grow: 0;
+        width: auto;
+
+        &:first-child {
+          margin-right: 0;
+        }
+
+        &:last-child {
+          margin-right: $padding-horizontal;
+        }
+      }
+    }
+
+    &-action {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      align-content: center;
+
+      p {
+        text-align: left;
+        margin: 0;
+        padding-right: 30px;
+      }
+
+      .button {
+        &.tertiary {
+          min-width: 0;
+          padding: 5px 30px;
+        }
+      }
     }
   }
 }

@@ -6,22 +6,29 @@
   .company-header {
     display: flex;
     align-items: center;
-    min-height: 25px;
     font-weight: 300;
     font-size: 16px;
     color: $heading;
-    padding: $padding-vertical 0 $padding-vertical (($padding-vertical-unit * 2.5) + 0px);
+    padding: 10px 15px 10px 35px;
     background: url('../../../assets/images/house.svg') left center no-repeat;
     background-size:  25px;
     margin-bottom: ($padding-vertical-unit * 2) + 0px;
-    border-bottom: 1px solid $grey;
     
     &.link {
       padding: $padding-vertical $padding-horizontal $padding-vertical (($padding-vertical-unit * 4) + 0px);
       background-position: ($padding-horizontal-unit * 2 + 0px) center;
       border-radius: 10px;
-      box-shadow: 0px 0px 10px $shadow;
       cursor: pointer;
+      border: 2px solid $grey;
+    }
+
+    &.back {
+      background: url('../../../assets/images/chevron-left.svg') left 10px center no-repeat;
+      background-size: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-block;
+      border: 2px solid $grey;
     }
 
     &.profile {
@@ -31,46 +38,86 @@
   }
 
   .bank-header {
-    @include gradient-horizontal($gradient-option-1, $gradient-option-2);
-    padding: $padding-vertical $padding-horizontal;
+    padding: $padding-vertical ($padding-horizontal-unit * 2 + 0px) ($padding-vertical-unit + 30px);
     margin: 0 ($padding-horizontal-unit * -2 + 0px) 0 ($padding-horizontal-unit * -2 + 0px);
-    color: $white;
-    text-align: center;
-    cursor: pointer;
+    font-size: 24px;
+    border-top: 1px solid $border-offset;
 
     &-company {
       font-size: 13px;
       margin-bottom: 5px;
     }
 
+    &-label {
+      font-size: 12px;
+      margin: 0;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
     &-account {
       margin-bottom: 20px;
       letter-spacing: 2px;
-      font-weight: bold;
+      border-top: 1px solid $border-offset;
+      border-bottom: 1px solid $border-offset;
+      margin: ($padding-vertical-unit * 1.5 + 0px) 0;
+      padding: ($padding-vertical-unit * 1.5 + 0px) 0;
+
+      > div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: $padding-vertical;
+      }
+    }
+
+    &-info {
+      background: $grey;
+      padding: $padding-vertical;
+      font-size: 14px;
+      margin: ($padding-vertical-unit * 2 + 0px) 0;
+
+      .bank-header-label {
+        margin-bottom: 5px;
+      }
+    }
+
+    &-toggle {
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+
+      &:after {
+        content: '';
+        display: inline-block;
+        width: 20px;
+        height: 18px;
+        background: url(../../../assets/images/chevron-down.svg) right center no-repeat;
+        background-size: 12px;
+      }
+
+      &.open:after {
+        background-image: url(../../../assets/images/chevron-up.svg);
+      }
     }
 
     &-balance {
       font-weight: bold;
-      p {
-        font-size: 13px;
-        margin: 0 0 5px 0;
-        letter-spacing: 1px;
-        font-weight: normal;
-      }
-
       letter-spacing: 2px;
+      font-size: 30px;
     }
 
     &:after {
       content: '';
-      top: 50%;
-      transform: translateY(-50%);
-      width: 10px;
-      height: 23px;
-      background: $white;
-      mask:  url('../../../assets/images/chevron-right.svg') right center no-repeat;
       position: absolute;
-      right: $padding-horizontal-unit * 2 + 0px;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 30px;
+      @include gradient-horizontal-image($background-account-start, $background-account-end, '../../../assets/images/background.png');
+      background-position: 0 -20px;
     }
   }
 
@@ -115,10 +162,6 @@
     border-bottom: 1px solid $grey;
     margin-bottom: ($padding-vertical-unit * 2) + 0px;
 
-    &:last-of-type:not(.transaction) {
-      border: 0;
-    }
-
     h2 {
       text-transform: uppercase;
       font-weight: 300;
@@ -140,6 +183,62 @@
         list-style-type: none;
         background: url('../../../assets/images/pdf.svg') left center no-repeat;
         background-size:  15px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .company-overview {
+    .company-header {
+      &.link {
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        right: 0;
+        padding-left: $padding-vertical-unit * 3.5 + 0px;
+        background-position: $padding-horizontal center;
+      }
+
+      &.back {
+        margin-bottom: 0;
+        top: - ($padding-vertical-unit * 1.5 + 0px);
+      }
+    }
+
+    .bank-transactions {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .bank-header {
+      padding: ($padding-vertical-unit * 2 + 0px) ($padding-horizontal-unit * 4 + 0px) ($padding-vertical-unit * 2 + 30px);
+      margin: $padding-vertical $padding-horizontal;
+      border-radius: 10px;
+      box-shadow: 0 0 10px $shadow;
+      overflow: hidden;
+
+      &-account {
+        display: flex;
+        justify-content: space-between;
+
+        > div {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .company-overview.my-property {
+    .company-overview-section {
+      display: flex;
+      padding-bottom: $padding-vertical;
+      margin-bottom: $padding-vertical;
+
+      h2 {
+        width: 40%;
       }
     }
   }

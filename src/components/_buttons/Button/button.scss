@@ -1,5 +1,6 @@
 @import 'src/styles/modules/_colors.scss';
 @import 'src/styles/modules/_mixins.scss';
+@import 'src/styles/modules/_variables.scss';
 
 .button {
   position: relative;
@@ -12,6 +13,7 @@
   box-sizing: border-box;
   border-radius: 30px;
   letter-spacing: 1px;
+  white-space: nowrap;
 
   &.full {
     width: 100%;
@@ -63,14 +65,14 @@
 
   &.chat {
     @include gradient-horizontal($gradient-option-1, $gradient-option-2);
-    color: $white;
+    color: $text;
   }
 
   &.tertiary {
     min-width: 100px;
     background: none;
-    color: $white;
-    border: 2px solid $white;
+    color: $text;
+    border: 2px solid $text;
     padding: 10px 15px;
 
     &.small {
@@ -111,9 +113,27 @@
   &.inline {
     @extend .small;
     text-transform: uppercase;
-    padding: 3px 10px;
-    top: -3px;
+    padding: 7px 10px 7px 35px;
+    top: -7px;
     transition: none;
+    border: 1px solid $border-offset;
+    border-radius: 7px;
+    background: url('../../../assets/images/edit.svg') left 10px center no-repeat;
+    background-size: 15px;
+    font-weight: 600;
+    min-width: 90px;
+
+    &.save {
+      @include gradient-horizontal-image($gradient-primary-1, $gradient-primary-2, '../../../assets/images/edit.svg');
+      background-size: 15px, auto;
+      background-position: left 10px center, 0;
+      color: $white;
+      border-color: $gradient-primary-1;
+    }
+
+    &.chat {
+      background-image: url('../../../assets/images/chat.svg');
+    }
   }
 
   &.disabled {
@@ -123,7 +143,7 @@
       content: '';
       position: absolute;
       top: 0;
-      left: 0;
+      left: 0; 
       width: 100%;
       height: 100%;
       background: $white;
@@ -134,5 +154,29 @@
 
   &.faded {
     opacity: 0.7;
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .button {
+    padding: 6px 20px;
+    font-size: 14px;
+    
+    &.full {
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .intro {
+    .button {
+      padding: 12px 35px;
+      font-size: 18px;
+
+      &.full {
+        
+      }
+    }
   }
 }

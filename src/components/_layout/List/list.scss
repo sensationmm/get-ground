@@ -2,13 +2,17 @@
 @import 'src/styles/modules/_variables.scss';
 
 .list {
-  padding: 0 ($padding-horizontal-unit * 2 + 0px);
   border-radius: 10px;
-  box-shadow: 0px 0px 5px $shadow;
   margin-bottom: $padding-vertical-unit * 2 + 0px;
+  background: $grey;
 
   &-row {
     border-bottom: 1px solid $border-offset;
+    padding: 20px ($padding-horizontal-unit * 2 + 0px);
+
+    h3 {
+      margin: 0 !important;
+    }
 
     &:last-child {
       border: 0;
@@ -16,6 +20,26 @@
 
     > * {
       margin: 0;
+    }
+  }
+
+  .show-all {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    padding: $padding-vertical $padding-horizontal;
+    justify-content: center;
+
+    &:after {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 18px;
+      background: url(../../../assets/images/chevron-down.svg) right center no-repeat;
+      background-size: 12px;
     }
   }
 }

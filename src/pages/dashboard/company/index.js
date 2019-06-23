@@ -47,7 +47,9 @@ class Company extends Component {
     return (
       <Layout secure companyID>
         { hasLoaded ?
-          <div className="company-overview" data-test="component-company">
+          <div className="company-overview my-property" data-test="component-company">
+            <h1>{ t('dashboard.company.title') }</h1>
+
             <div className="company-header">{ address.premise }, { address.postcode }</div>
 
             <div className="company-overview-section">
@@ -57,18 +59,17 @@ class Company extends Component {
 
             <div className="company-overview-section">
               <h2>{ t('dashboard.company.overview.sections.address') }</h2>
-              <p>{ address.premise }</p>
-              <p>{ address.street }</p>
-              <p>{ address.posttown }</p>
-              <p>{ address.postcode }</p>
+              <p>{ address.premise }<br />
+              { address.street }<br />
+              { address.posttown }<br />
+              { address.postcode }</p>
             </div>
 
             <div className="company-overview-section">
               <h2>{ t('dashboard.company.overview.sections.shareholders') }</h2>
-              {
-                company.shareholder_details.collection.map((shareholder, count) => {
-                  return <p key={`shareholder-${count}`}>{`${shareholder.first_name} ${shareholder.last_name}`}</p>
-                })
+              {company.shareholder_details.collection.map((shareholder, count) => {
+                return <p key={`shareholder-${count}`}>{`${shareholder.first_name} ${shareholder.last_name}`}</p>
+              })
               }
             </div>
 
@@ -106,7 +107,7 @@ class Company extends Component {
 
               <Button
                 data-test="bank-account-button"
-                classes="account"
+                classes="primary"
                 label={ t('dashboard.company.overview.ctaSecondary') }
                 fullWidth
                 onClick={() => navigate('/dashboard/company/bank-account')}

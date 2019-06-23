@@ -38,3 +38,13 @@
     margin-top: 83px;
   }
 }
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .advantages {
+    &-uk-tax, &-company {
+      &-title {
+        font-size: 20px;
+      }
+    }
+  }
+}

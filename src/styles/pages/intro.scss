@@ -1,3 +1,6 @@
+@import '../../styles/modules/_variables';
+@import '../../styles/modules/_colors';
+
 .intro {
 
   &--hero-image {
@@ -21,5 +24,37 @@
 
   p {
     font-size: 18px;
+  }
+
+  canvas {
+    display: none;
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .intro {
+    padding-bottom: 200px;
+
+    div {
+      z-index: 2;
+    }
+
+    h2 {
+      color: $text !important;
+      font-weight: 300;
+    }
+
+    canvas {
+      display: block;
+      width: calc(100% + #{$padding-horizontal-unit * 4 + 0px});
+      position: absolute;
+      bottom: - $padding-vertical;
+      left: - ($padding-horizontal-unit * 2 + 0px);
+      z-index: 1;
+
+      path {
+        background: #fff;
+      }
+    }
   }
 }

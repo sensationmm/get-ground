@@ -7,6 +7,7 @@ import { navigate } from 'gatsby';
 import functions from 'src/utils/functions';
 
 import Layout from 'src/components/Layout/Layout';
+import Form from 'src/components/_layout/Form/Form';
 import Button from 'src/components/_buttons/Button/Button';
 import OptionSelect from 'src/components/OptionSelect/OptionSelect';
 
@@ -41,8 +42,11 @@ class Manage extends Component {
   }
 
   handleLiveChat = (liveChatTopic) => {
+    const { companies, activeCompany } = this.props;
+    const company = functions.getByValue(companies, 'id', activeCompany);
     const custom_variables = [
       { name: 'manage my company topic', value: liveChatTopic },
+      { name: 'company ID', value: company.id }
     ];
     if(window) {
       window.LC_API.set_custom_variables(custom_variables);
@@ -51,56 +55,56 @@ class Manage extends Component {
   }
 
   render() {
-    const { t, companies, activeCompany } = this.props;
-    const { liveChatTopic, hasLoaded, address } = this.state;
+    const { t, activeCompany } = this.props;
+    const { liveChatTopic, hasLoaded } = this.state;
 
     if ( activeCompany && !hasLoaded ) {
-      const companyData = functions.getByValue(companies, 'id', activeCompany);
-      this.setState({
-        hasLoaded: true,
-        address: companyData.property_address.address
-      })
+      this.setState({ hasLoaded: true })
     }
 
     return (
       <Layout secure companyID>
         { hasLoaded &&
           <div className="company-overview has-hero-button" data-test="component-manage-company">
-            <div className="company-header link" onClick={() => navigate('/dashboard/company')}>
-              { address.premise }, { address.postcode }
+            <h1>{ t('dashboard.company.manage.title') }</h1>
+
+            <div className="company-header back" onClick={() => navigate('/dashboard/company')}>
+            { t('dashboard.company.back') }
             </div>
 
-            <h1>{ t('dashboard.company.manage.title') }</h1>
             <p>{ t('dashboard.company.manage.text') }</p>
 
             <br />
 
             <p><b>{ t('dashboard.company.manage.select') }</b></p>
 
-            <OptionSelect
-              options={[
-                { id: 'withdrawMoney', title: t('dashboard.company.manage.options.withdrawMoney') },
-                { id: 'sendMoney', title: t('dashboard.company.manage.options.sendMoney') },
-                { id: 'manageDirector', title: t('dashboard.company.manage.options.manageDirector') },
-                { id: 'manageShares', title: t('dashboard.company.manage.options.manageShares') },
-                { id: 'delist', title: t('dashboard.company.manage.options.delist') },
-                { id: 'reportIssue', title: t('dashboard.company.manage.options.reportIssue') },
-              ]}
-              onChange={this.setTopic}
-              selected={liveChatTopic}
-              small
-              center
-            />
+            <Form>
 
-            <div className="hero-button">
-              <Button
-                data-test="live-chat-button"
-                classes="chat"
-                label={ t('liveChat.button') }
-                onClick={() => this.handleLiveChat(liveChatTopic)}
-                disabled={!liveChatTopic}
+              <OptionSelect
+                options={[
+                  { id: 'withdrawMoney', title: t('dashboard.company.manage.options.withdrawMoney') },
+                  { id: 'sendMoney', title: t('dashboard.company.manage.options.sendMoney') },
+                  { id: 'manageDirector', title: t('dashboard.company.manage.options.manageDirector') },
+                  { id: 'manageShares', title: t('dashboard.company.manage.options.manageShares') },
+                  { id: 'delist', title: t('dashboard.company.manage.options.delist') },
+                  { id: 'reportIssue', title: t('dashboard.company.manage.options.reportIssue') },
+                ]}
+                onChange={this.setTopic}
+                selected={liveChatTopic}
+                small
+                center
               />
-            </div>
+
+              <center>
+                <Button
+                  data-test="live-chat-button"
+                  classes="chat"
+                  label={ t('dashboard.company.manage.chatButton') }
+                  onClick={() => this.handleLiveChat(liveChatTopic)}
+                  disabled={!liveChatTopic}
+                />
+              </center>
+            </Form>
           </div>
         }
       </Layout>

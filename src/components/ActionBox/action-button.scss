@@ -3,11 +3,24 @@
 @import 'src/styles/modules/_variables.scss';
 
 .action-button {
-  display: inline;
-  @include gradient-horizontal($background-account-start, $background-account-end);
   border-radius: 10px;
-  color: $white;
   font-size: 11px;
   padding: ($padding-vertical-unit / 2 + 0px) $padding-horizontal;
   text-align: center;
+  border: 1px solid $border-offset;
+  text-align: left;
+  font-weight: 600;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+
+  &:after {
+    content: '';
+    display: block;
+    width: 7px;
+    height: 15px;
+    background: $background-account-start;
+    mask: url(../../assets/images/chevron-right.svg) left center no-repeat;
+    mask-size: 7px;
+  }
 }

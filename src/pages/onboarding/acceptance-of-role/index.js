@@ -12,6 +12,7 @@ import List from 'src/components/_layout/List/List'
 import RadioGroup from 'src/components/_form/RadioGroup/RadioGroup'
 import Button from 'src/components/_buttons/Button/Button'
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox'
+import Modal from './modal/index'
 
 import { showLoader, hideLoader } from 'src/state/actions/loader'
 
@@ -143,6 +144,12 @@ export class AcceptanceOfRole extends React.Component {
         validationFunction: 'validateRequired',
       },
       {
+        component: Modal,
+        name: 'shareholder Modal',
+        content: 'being a shareholder',
+        isShareholder: true
+      },
+      {
         stateKey: 'director',
         component: RadioGroup,
         groupLabel: t('acceptanceOfRole.question.director'),
@@ -154,6 +161,13 @@ export class AcceptanceOfRole extends React.Component {
         value: values.director,
         hidden: !this.state.isDirector,
         validationFunction: 'validateRequired'
+      },
+      {
+        component: Modal,
+        name: 'director Modal',
+        content: 'being a director',
+        isShareholder: false,
+        hidden: !this.state.isDirector,
       },
       {
         component: Button,

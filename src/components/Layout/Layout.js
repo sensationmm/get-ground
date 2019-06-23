@@ -129,7 +129,7 @@ export class Layout extends Component {
 
   render() {
     this.loggedOutOnly();
-    const { children, headerActions, isLoading, userID, t, menuIsOpen, isLoggedIn } = this.props;
+    const { children, headerActions, isLoading, userID, t, menuIsOpen, isLoggedIn, idCheckActive } = this.props;
     const { isLoggingOut } = this.state;
 
     const menuLinks = [
@@ -196,6 +196,7 @@ export class Layout extends Component {
           classNames={userID ? '' : 'extra-padding'}
           onClick={this.toggleMenu}
           menuIsOpen={menuIsOpen}
+          childrenDisabled={Boolean(idCheckActive)}
         >
           {headerActions}
         </Header>
@@ -204,7 +205,7 @@ export class Layout extends Component {
           <main className="main">{children}</main>
         </div>
         <div id="modal-root"></div>
-        {!inArray('fullscreen', roles) && <Footer />}
+        {(!inArray('fullscreen', roles) || inArray('hasFooter', roles)) && <Footer hideContact={inArray('fullscreen', roles)} />}
 
         <ModalWrapper
           transitionBool={menuIsOpen}
@@ -259,7 +260,8 @@ Layout.propTypes = {
   t: PropTypes.func.isRequired,
   hideLoader: PropTypes.func,
   deleteUser: PropTypes.func,
-  isLoggedIn: PropTypes.bool
+  isLoggedIn: PropTypes.bool,
+  idCheckActive: PropTypes.string
 }
 
 Layout.defaultProps = {
@@ -271,7 +273,8 @@ const mapStateToProps = (state) => ({
   userID: state.user.id,
   activeCompany: state.activeCompany,
   menuIsOpen: state.menu.isOpen,
-  isLoggedIn: state.user.email
+  isLoggedIn: state.user.email,
+  idCheckActive: state.idCheck.active,
 });
 
 const actions = {

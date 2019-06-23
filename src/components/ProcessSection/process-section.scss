@@ -1,4 +1,5 @@
 @import 'src/styles/modules/_colors';
+@import '../../styles/modules/_variables';
 
 .process-section {
   min-height: 100px;
@@ -39,5 +40,28 @@
 
   &-complete, &-todo, &-signed, &-not-signed, &-incomplete {
     font-style: italic;
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .process-section {
+    width: calc(33% - #{$padding-horizontal-unit * 4 + 0px});
+    margin: 0 $padding-horizontal $padding-vertical $padding-horizontal;
+    box-shadow: 0px 0px 10px $shadow;
+    flex-direction: column;
+    padding: $padding-vertical $padding-horizontal;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    
+    &-body {
+      padding: 0; 
+    }
+
+    &-complete, &-todo, &-signed, &-not-signed, &-incomplete {
+      padding-top: 10px;
+      color: $process-status;
+    }
   }
 }

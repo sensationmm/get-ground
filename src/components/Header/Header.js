@@ -19,7 +19,7 @@ import './header.scss';
  */
 
 const Header = (props) => {
-  const { menuIsOpen, children, isLoading, userID, onClick } = props;
+  const { menuIsOpen, children, isLoading, userID, onClick, childrenDisabled } = props;
   const [t] = useTranslation();
 
   return (
@@ -31,49 +31,56 @@ const Header = (props) => {
       )}
     >
       <div className="header-inner-wrapper">
-      <div className="header-inner">
-        <div className="header-logo">
-          <Link to="/">
-            <img src={Logo} alt="GetGround logo" />
-          </Link>
-        </div>
-        {userID &&
-          <div data-test="dashboard" className="header-dashboard" onClick={() => navigate('/dashboard')}>
-            <p>{t('header.dashboard')}</p>
+        <div className="header-inner">
+          <div className="header-logo">
+            <Link to="/">
+              <img src={Logo} alt="GetGround logo" />
+            </Link>
           </div>
-        }
 
-        {children
-          ? children
-          : <div
-              className={classNames('header-menu-toggle',
-                {'header-menu-toggle-close': menuIsOpen }
-              )}
-              onClick={onClick}
-            >
-              <div></div>
-            </div>
-        }
+          <div className="header-buttons">
+            {userID && !children &&
+              <div data-test="dashboard" className="header-dashboard" onClick={() => navigate('/dashboard')}>
+                <p>{t('header.dashboard')}</p>
+              </div>
+            }
+
+            {children
+              ? <div data-test="children" className={classNames('header-children', {
+                'disabled': childrenDisabled
+              })}>{children}</div>
+              : <div
+                  className={classNames('header-menu-toggle',
+                    {'header-menu-toggle-close': menuIsOpen }
+                  )}
+                  onClick={onClick}
+                >
+                  <div></div>
+                </div>
+            }
+          </div>
+        </div>
       </div>
       {!isLoading && !userID && !menuIsOpen &&
         <div className='header--logged-out'>
-          <div className="header-inner">
-              <Link to="/onboarding/create-account/">
-                <Button
-                  classes="tertiary small"
-                  label={t('header.buttons.register')}
-                />
-              </Link>
-              <Link to="/login">
-                <Button
-                  classes="tertiary small"
-                  label={t('header.buttons.login')}
-                />
-              </Link>
+          <div className="header-inner-wrapper">
+            <div className="header-inner">
+                <Link to="/onboarding/create-account/">
+                  <Button
+                    classes="tertiary small"
+                    label={t('header.buttons.register')}
+                  />
+                </Link>
+                <Link to="/login">
+                  <Button
+                    classes="tertiary small"
+                    label={t('header.buttons.login')}
+                  />
+                </Link>
+            </div>
           </div>
         </div>
       }
-      </div>
     </header>
   );
 }
@@ -84,7 +91,8 @@ Header.propTypes = {
   menuIsOpen: PropTypes.bool,
   isLoading: PropTypes.bool,
   userID: PropTypes.number,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  childrenDisabled: PropTypes.bool
 }
 
 export default Header;

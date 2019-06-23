@@ -4,10 +4,11 @@
 .contact-us {
   border-radius: 8px;
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.15);
-  margin-bottom: 30px;
   padding: $padding-vertical ($padding-horizontal-unit * 2 + 0px);
   display: flex;
   flex-direction: column;
+  margin-left: $padding-horizontal-unit * 2 + 0px;
+  margin-right: $padding-horizontal-unit * 2 + 0px;
 
   &-title {
     font-size: 20px;
@@ -35,7 +36,30 @@
   }
 
   &-livechat {
-    margin-top: 15px;
-    align-self: flex-end;
+    margin: 15px auto 0 auto;
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .contact-us {
+    max-width: calc(#{$max-width} - #{$padding-horizontal-unit * 6 + 0px});
+    margin-left: auto;
+    margin-right: auto;
+
+    &-details {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-content: center;
+      align-items: center;
+
+      > * {
+        margin: 0;
+      }
+    }
+
+    &-divider {
+      display: none;
+    }
   }
 }

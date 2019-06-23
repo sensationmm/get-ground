@@ -70,5 +70,59 @@
       line-height: 1.75;
     }
   }
+}
 
+@media screen and (min-width: $breakpoint-desktop) {
+  .pricing {
+    &-property, &-services {
+      &-title {
+        font-size: 20px;
+      }
+
+
+      &-sign, &-monthly, &-annual {
+        h3:first-child {
+          font-size: 32px;
+        }
+  
+        h3:nth-child(2) {
+          font-size: 24px;
+        }
+
+        &-caption {
+          width: 100%;
+          font-size: 16px;
+          font-weight: 300;
+          padding-top: 10px;
+          line-height: 1;
+        }
+      }
+    }
+
+    &-chart {
+      border: 1px solid $border-offset;
+      border-radius: 10px;
+      padding: $padding-vertical $padding-horizontal;
+
+      &-prices {
+        display: flex;
+        margin-bottom: 20px;
+
+        > div {
+          width: 0;
+          flex-grow: 1;
+          border-right: 1px solid $border-offset;
+          padding: $padding-vertical $padding-horizontal;
+
+          &:nth-child(3n) {
+            border: 0;
+          }
+
+          p {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
 }
