@@ -14,7 +14,7 @@ import { setActiveCompany } from 'src/state/actions/activeCompany';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
-import companyService from 'src/services/company';
+import companyService from 'src/services/Company';
 export const CompanyService = new companyService();
 
 import functions from 'src/utils/functions';
