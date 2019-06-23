@@ -1,6 +1,6 @@
 import { setup, findByTestAttr } from 'src/test-utils/test-utils';
 
-import { RawComponent as OnboardingIntroContainer } from './index';
+import { RawComponent as CompanyDesignIntroContainer } from './index';
 import { navigate } from 'gatsby';
 
 jest.mock('gatsby', () => ({
@@ -20,11 +20,11 @@ const defaultProps = {
   setActiveCompany: setActiveCompanyMock
 };
 
-describe('<OnboardingIntroContainer />', () => {
+describe('<CompanyDesignIntroContainer />', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = setup(OnboardingIntroContainer, defaultProps);
+    wrapper = setup(CompanyDesignIntroContainer, defaultProps);
   });
 
   test('renders without error', () => {

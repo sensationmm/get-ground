@@ -49,13 +49,8 @@ class Dashboard extends Component {
   handleGetCompanies = () => {
     const { hideLoader } = this.props;
     CompanyService.getCompanies()
-    .then((response) => {
+    .then(() => {
       hideLoader();
-      // if (response.status === 200) {
-
-      // } else {
-      //  // Do nothing
-      // }
     });
   }
   
@@ -64,6 +59,7 @@ class Dashboard extends Component {
     const hasCompanies = (companies.length > 0);
     const hasActions = (actions.length > 0);
     let addCompany;
+    
     if(!hasCompanies) {
       addCompany = {
         type: 'add_company',

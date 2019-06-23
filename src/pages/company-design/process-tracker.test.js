@@ -58,9 +58,6 @@ describe('process-tracker', () => {
       i18n: {
         t: jest.fn().mockReturnValue(mockSections),
       },
-      additionalServices: {
-        hasUsedAdditionalServices: false,
-      },
       company: {
         additional_services_required: false
       }
@@ -79,17 +76,19 @@ describe('process-tracker', () => {
     expect(wrapper.find('Button')).toHaveLength(1);
   })
 
-  // test('there are 7 steps if add services has been used & the user did NOT want help finding a solicitor', () => {
-  //   wrapper = setup(ProcessTracker, {
-  //     ...props,
-  //     additionalServices: {
-  //       hasUsedAdditionalServices: true,
-  //       solicitor: false
-  //     }
-  //   });
+  test('there are 7 steps if add services has been used & the user did NOT want help finding a solicitor', () => {
+    wrapper = setup(ProcessTracker, {
+      ...props,
+      company: {
+        additional_services_required: true,
+        additional_services: {
+          solicitor: false
+        }
+      }
+    });
 
-  //   expect(wrapper.find('ProcessSection')).toHaveLength(7);
-  // })
+    expect(wrapper.find('ProcessSection')).toHaveLength(7);
+  })
 
   test('there are 6 steps if add services has been used & the user DID want help finding a solicitor', () => {
     wrapper = setup(ProcessTracker, {

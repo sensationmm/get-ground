@@ -14,7 +14,6 @@ import ModalContent from 'src/components/Modal/ModalContent';
 import ModalWrapper from 'src/components/Modal/ModalWrapper';
 import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 
-//import { setAdditionalServices } from 'src/state/actions/additionalServices'
 import { companyUpdate } from 'src/state/actions/activeCompany';
 import { showModal, hideModal } from 'src/state/actions/modal';
 import { showLoader, hideLoader } from 'src/state/actions/loader';

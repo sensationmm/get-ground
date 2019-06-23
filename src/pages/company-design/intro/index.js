@@ -18,12 +18,11 @@ import house from 'src/assets/images/fullhousepure.svg';
 import 'src/styles/pages/intro.scss';
 
 /**
- * OnboardingIntroContainer
- * @author Kevin Reynolds
+ * CompanyDesignIntroContainer
  * @param {object} props - for JSDoc
- * @return {ReactComponent} OnboardingIntroContainer
+ * @return {ReactComponent} CompanyDesignIntroContainer
  */
-class OnboardingIntroContainer extends Component {
+class CompanyDesignIntroContainer extends Component {
   constructor(props) {
     super(props);
   }
@@ -103,7 +102,7 @@ class OnboardingIntroContainer extends Component {
   }
 }
 
-OnboardingIntroContainer.propTypes = {
+CompanyDesignIntroContainer.propTypes = {
   t: PropTypes.func,
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
@@ -118,8 +117,8 @@ const actions = {
   setActiveCompany
 };
 
-export const RawComponent = OnboardingIntroContainer;
+export const RawComponent = CompanyDesignIntroContainer;
 
-export default connect(null, actions)(withTranslation()(OnboardingIntroContainer));
+export default connect(null, actions)(withTranslation()(CompanyDesignIntroContainer));
 
 
