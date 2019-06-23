@@ -216,6 +216,9 @@ class ShareholderDetails extends Component {
     const { form } = this.props;
 
     for(let i=0; i<count; i++) {
+
+      if (form.values[i] === undefined) return;
+
       render.push(
         <AddShareholder
           shareholderID={i}
