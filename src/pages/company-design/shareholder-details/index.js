@@ -296,7 +296,11 @@ class ShareholderDetails extends Component {
     CompanyService.updateCompany(payload, 'shareholder_details', 1).then((response) => {
       hideLoader();
       if (response.status === 200) {
-        navigate('/company-design');
+        if(isSaveAndExit) {
+          navigate('/company-design');
+        } else {
+          navigate('/company-design/tax-questions');
+        }
       }
     });
   }
@@ -445,7 +449,7 @@ class ShareholderDetails extends Component {
 
             <Form>
               <Button
-                onClick={this.saveShareholders}
+                onClick={() => {this.saveShareholders(false)}}
                 label={t('companyDesign.shareholderDetails.confirm.ctaPrimary')}
                 classes="primary"
                 fullWidth
