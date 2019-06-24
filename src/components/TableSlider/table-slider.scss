@@ -1,4 +1,20 @@
+@import 'src/styles/modules/_variables.scss';
+
 .table-slider {
+  &-content {
+    display: flex;
+
+    > * {
+      width: 0;
+      flex-grow: 1;
+      margin-right: 5px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
   &-bullet {
     display: flex;
     flex-direction: row;
@@ -26,8 +42,13 @@
 }
 
 .table {
-  &:first-child {
-    width: 40%;
-    float: left;
+  &-responses {
+    display: flex;
+
+    > * {
+      width: 0;
+      flex-grow: 1;
+      margin: 0 5px;
+    }
   }
 }
