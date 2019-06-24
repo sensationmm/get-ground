@@ -24,7 +24,6 @@ describe('Table', () => {
     wrapper = shallow(<Table {...props}/>)
     expect(wrapper.find('.table-section-img').props().src).toEqual('test-img')
     expect(wrapper.find('.table-section-copy').text()).toEqual('test-copy')
-    expect(wrapper.find('.table-section-line').length).toEqual(1)
     expect(wrapper.find('.table-header').text()).toEqual('test-header')
   })
 
@@ -37,12 +36,12 @@ describe('Table', () => {
           img: 'test-img'
         }
       ],
-      images: true
+      images: true,
+      isMobile: true
     }
     wrapper = shallow(<Table {...customProps}/>)
     expect(wrapper.find('.table-section-img').props().src).toEqual('test-img')
     expect(wrapper.find('.table-section-copy').length).toEqual(0)
-    expect(wrapper.find('.table-section-line').length).toEqual(1)
   })
 
   test('copy without image', () => {
@@ -59,7 +58,6 @@ describe('Table', () => {
     expect(wrapper.find('.table-section-img').length).toEqual(0)
     expect(wrapper.find('.table-section-copy').length).toEqual(1)
     expect(wrapper.find('.table-section-copy').text()).toEqual('only-copy-test')
-    expect(wrapper.find('.table-section-line').length).toEqual(1)
   })
 
   test('multiple items in sections', () => {

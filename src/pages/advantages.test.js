@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import Advantages from './advantages'
+import { RawComponent as Advantages } from './advantages'
 
 jest.mock('react-i18next', () => ({
   initReactI18next: jest.fn(),
@@ -34,7 +34,7 @@ describe('', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<Advantages />)
+    wrapper = shallow(<Advantages isMobile={true} />)
   })
 
   test('tax', () => {

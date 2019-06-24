@@ -38,3 +38,30 @@
     margin-top: 40px;
   }
 }
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .confirmation {
+    padding-bottom: 200px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+
+    div {
+      z-index: 2;
+    }
+
+    &-content {
+      width: 55%;
+    }
+
+    .intro--hero-image {
+      width: 45%;
+    }
+
+    h1, h2 {
+      color: $text !important;
+      font-weight: 300;
+      height: auto;
+    }
+  }
+}

@@ -6,13 +6,12 @@ import './table.scss'
 
 const Table = ({ sections, classes, images, header, small }) => {
   return (
-  <>
-    {header &&
-      <div className={classNames(
-        'table-header',
-        {'small': small}
-      )}>{header}</div>
-    }
+  <div className="table-outer">
+    <div className={classNames(
+      'table-header',
+      {'small': small}
+    )}>{header}</div>
+    
     <div className={classNames(
       'table',
       {'small': small},
@@ -29,11 +28,10 @@ const Table = ({ sections, classes, images, header, small }) => {
             <p className="table-section-copy">{section.copy}</p>
           </>
           }
-          <div className="table-section-line"/>
         </div>
       ))}
     </div>
-    </>
+    </div>
   )
 }
 

@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux';
 import Layout from 'src/components/Layout/Layout'
 import { useTranslation } from 'react-i18next'
+import PropTypes from 'prop-types';
 
 import Button from 'src/components/_buttons/Button/Button'
 import TableSlider from 'src/components/TableSlider/TableSlider'
@@ -13,7 +15,8 @@ import blueTick from 'src/assets/images/blue-tick.svg'
 
 import 'src/styles/pages/advantages.scss'
 
-const Advantages = () => {
+const Advantages = (props) => {
+  const { isMobile } = props;
   const [t, i18n] = useTranslation()
   const [showTaxTable, toggleTaxTable] = useState(false);
   const [showCompanyTable, toggleCompanyTable] = useState(false);
@@ -28,7 +31,6 @@ const Advantages = () => {
     ukTaxObj['info4'],
     ukTaxObj['info5']
   ]
-
 
   const companyAdvantages = [
     companyObj['info1'],
@@ -272,11 +274,12 @@ const Advantages = () => {
             feed2={taxLargeFeed2}
             tableName="tax"
             data-test="tax-table-slider"
+            isMobile={isMobile}
           />
           <p className="advantages-uk-tax-more-expanded-info">{t('advantages.warning')}</p>
           </div>
           :
-          <Button data-test="tax-more-button" classes="advantages-btn chat" fullWidth label={t('advantages.cta')} onClick={() => toggleTaxTable(!showTaxTable)}/>
+          <Button data-test="tax-more-button" classes="advantages-btn primary" fullWidth label={t('advantages.cta')} onClick={() => toggleTaxTable(!showTaxTable)}/>
         }
         </div>
         <div className="advantages-company">
@@ -298,11 +301,12 @@ const Advantages = () => {
               feed2={companyLargeFeed2}
               tableName="company"
               data-test="company-table-slider"
+              isMobile={isMobile}
             />
             <p className="advantages-company-more-expanded-info">{t('advantages.warning')}</p>
           </div>
           :
-          <Button data-test="company-more-button" classes="advantages-btn chat" fullWidth label={t('advantages.cta')} onClick={() => toggleCompanyTable(!showCompanyTable)}/>
+          <Button data-test="company-more-button" classes="advantages-btn primary" fullWidth label={t('advantages.cta')} onClick={() => toggleCompanyTable(!showCompanyTable)}/>
         }
         </div>
       </div>
@@ -310,4 +314,14 @@ const Advantages = () => {
   )
 }
 
-export default Advantages
+Advantages.propTypes = {
+  isMobile: PropTypes.bool
+}
+
+const mapStateToProps = state => ({
+  isMobile: state.layout.isMobile
+});
+
+export const RawComponent = Advantages;
+
+export default connect(mapStateToProps)(Advantages);

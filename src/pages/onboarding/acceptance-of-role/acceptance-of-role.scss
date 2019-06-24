@@ -16,20 +16,14 @@
 
   .list {
     background-color: $white;
-    height: 469px;
-    width: 274px;
+    width: 100%;
+
     &-row {
       h3 {
         font-size: 16px;
         letter-spacing: 2.2px;
         color: $heading;
         padding-top: 30px;
-      }
-      &:first-child {
-        height: 198px;
-      }
-      &:nth-child(2) {
-        height: 135px;
       }
     }
   }
