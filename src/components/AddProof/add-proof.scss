@@ -1,4 +1,5 @@
 @import 'src/styles/modules/_colors';
+@import 'src/styles/modules/_variables';
 
 #container-circles {
   z-index: 10000;
@@ -13,6 +14,10 @@
     height: 181px;
     margin: 0 auto;
     position: relative;
+    display: flex;
+    border: 1px solid $border-offset;
+    border-radius: 5px;
+    justify-content: center;
 
     &-img {
       z-index: 3;
@@ -26,31 +31,14 @@
 
     &-camera-icon {
       z-index: 3;
-      position: absolute;
-      left: 35%;
       top: 75%;
-      -webkit-transform: translate(-0%, -70%);
-      -moz-transform: translate(-50%, -70%);
-      transform: translate(-50%, 0%);
-
-      &.selfie {
-        left: 30%;
-      }
+      display: inline-block;
     }
 
     &-name {
       z-index: 3;
-      position: absolute;
-      left: 55%;
       top: 73%;
-      -webkit-transform: translate(-0%, -70%);
-      -moz-transform: translate(-50%, -70%);
-      transform: translate(-50%, 0%);
       font-size: 18px;
-
-      &.selfie {
-        left: 55%;
-      }
     }
   }
 
@@ -115,5 +103,65 @@
 
   .dropzone {
     text-align: center;
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .add-proof {
+    height: 181px;
+    margin-bottom: 30px;
+    padding-left: 330px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    overflow: hidden;
+
+    .react-html5-camera-photo>video, .confirm-img {
+      height: 181px !important;
+      width: 310px !important;
+    }
+
+    &-img {
+      position: absolute;
+      left: 0;
+      top: 0;
+
+      .confirm-image, .final-image {
+        height: 181px !important;
+        width: 310px !important;
+      }
+
+      .confirm-buttons {
+        width: 1000%;
+        height: 100%;
+        top: 0;
+        left: 330px;
+        position: absolute;
+        background: $white;
+        text-align: left;
+
+        .button {
+          margin-left: 0;
+          margin-right: auto;
+        }
+      }
+    }
+
+    &-upload-file {
+      .button.upload-file-button.link {
+        padding: 0;
+        margin: 0;
+        line-height: 1;
+      }
+    }
+
+    .intro-box {
+      background: none;
+      text-transform: uppercase;
+      color: $primary;
+      font-weight: 600;
+      padding: 0;
+    }
   }
 }

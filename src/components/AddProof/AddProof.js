@@ -36,7 +36,6 @@ export class AddProof extends Component {
 
     return (
       <div className={`add-proof-initial`} data-test="initial-img" onClick={() => this.handleActiveSection({takePicture: true})}>
-        <img src={Rectangle} />
         <img src={initialImg} alt={`add-proof-${section}`} className={`add-proof-initial-img ${section}`}/>
         <img src={CameraIcon} className={`add-proof-initial-camera-icon ${section}`} />
         <p className={`add-proof-initial-name ${section}`}>{t(`onBoarding.idCheck.${section}.name`)}</p>
@@ -81,9 +80,11 @@ export class AddProof extends Component {
   imgConfirmation(t, imagesrc) {
     return (
       <>
-        <img data-test="confirm-img" src={imagesrc}/>
-        <Button data-test="happy-button" classes="primary confirm-happy" fullWidth label={t('onBoarding.idCheck.image.happy')} onClick={() => this.handleHappy()}/>
-        <Button data-test="retake-button" classes="secondary" fullWidth label={t('onBoarding.idCheck.image.retake')} onClick={() => this.retakePicture()}/>
+        <img className="confirm-image" data-test="confirm-img" src={imagesrc}/>
+        <div className="confirm-buttons">
+          <Button data-test="happy-button" classes="primary confirm-happy" fullWidth label={t('onBoarding.idCheck.image.happy')} onClick={() => this.handleHappy()}/>
+          <Button data-test="retake-button" classes="secondary" fullWidth label={t('onBoarding.idCheck.image.retake')} onClick={() => this.retakePicture()}/>
+        </div>
       </>
     )
   }
@@ -103,7 +104,7 @@ export class AddProof extends Component {
       this.props.resetActive()
     }
 
-    return <img  data-test="add-proof-final-img" src={imagesrc} onClick={() => this.handleResetFinalImg({ takePicture: true })}/>
+    return <img  className="final-image" data-test="add-proof-final-img" src={imagesrc} onClick={() => this.handleResetFinalImg({ takePicture: true })}/>
   }
 
   /**
