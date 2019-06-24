@@ -44,7 +44,7 @@ export const initialState = [
        is_new_build:false,
        completion_date:'2020-09-08T00:00:00Z',
        expected_exchange_date:'2020-10-12T00:00:00Z',
-       payment_schedule:[
+        payment_schedule:[
           {
              type:'deposit',
              due_date:'2019-09-06T00:00:00Z',
@@ -52,8 +52,24 @@ export const initialState = [
                 amount_in_cents:10000000,
                 currency:'GBP'
              }
+          },
+          {
+            type:'first_installment',
+            due_date:'2019-09-06T00:00:00Z',
+            amount:{
+               amount_in_cents:10000000,
+               currency:'GBP'
+            }
+          },
+          {
+            type:'second_installment',
+            due_date:'2019-09-06T00:00:00Z',
+            amount:{
+               amount_in_cents:10000000,
+               currency:'GBP'
+            }
           }
-       ]
+      ]
     },
     shareholder_details:{
        collection:[

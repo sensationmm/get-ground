@@ -25,7 +25,6 @@ import companyService from 'src/services/Company';
 export const CompanyService = new companyService();
 
 import addIcon from 'src/assets/images/add-icon.svg';
-import 'src/styles/pages/purchase-details.scss';
 
 /**
   * PurchaseDetails
@@ -52,7 +51,13 @@ class PurchaseDetails extends Component {
       amount_in_cents: purchase_details.price.amount_in_cents,
       is_new_build: purchase_details.is_new_build,
       expected_exchange_date: purchase_details.expected_exchange_date,
-      completion_date: purchase_details.completion_date
+      completion_date: purchase_details.completion_date,
+      depositDueDate: purchase_details.payment_schedule[0].due_date,
+      depositAmount: purchase_details.payment_schedule[0].amount.amount_in_cents,
+      firstInstallmentDate: purchase_details.payment_schedule[1].due_date,
+      firstInstallmentAmount: purchase_details.payment_schedule[1].amount.amount_in_cents,
+      secondInstallmentDate: purchase_details.payment_schedule[2].due_date,
+      secondInstallmentAmount: purchase_details.payment_schedule[2].amount.amount_in_cents
     }
     
     formUtils.initFormState({
@@ -117,21 +122,103 @@ class PurchaseDetails extends Component {
     installmentDateAmount[extraInstallmentFieldsShowing].style.display = 'block';
   }
 
-  submitPurchaseDetails = () => {
-    const { showLoader, hideLoader, t, form: { values }, company } = this.props;
+  /**
+   * handleSubmitPurchaseDetails
+   * @param {boolean} isSaveAndExit - whether the save and exit button has fired this or not
+   * @return {void} handleSubmitPurchaseDetails
+   */
+  handleSubmitPurchaseDetails = async (isSaveAndExit) => {
+    const { 
+      showLoader, 
+      form: { values, errors },  
+      company: { purchase_details } 
+    } = this.props;
+
+    const payload = {
+      price: {
+        amount_in_cents: values.amount_in_cents,
+      },
+      is_new_build: values.is_new_build,
+      completion_date:  this.state.completionDate ? 
+                        this.state.completionDate : 
+                        purchase_details.completion_date,
+      expected_exchange_date: this.state.exchangeDate ? this.state.exchangeDate : purchase_details.expected_exchange_date,
+      payment_schedule: [
+        {
+          type: 'deposit',
+          due_date: this.state.depositDueDate ? 
+                    this.state.depositDueDate : 
+                    purchase_details.payment_schedule[0].due_date,
+          amount: {
+              amount_in_cents: values.depositAmount,
+              currency:'GBP'
+          }
+        },
+        {
+          type: 'first_installment',
+          due_date: this.state.firstInstallmentDate ? 
+                    this.state.firstInstallmentDate : 
+                    purchase_details.payment_schedule[1].due_date,
+          amount: {
+              amount_in_cents: values.firstInstallmentAmount,
+              currency:'GBP'
+          }
+        },
+        {
+          type: 'second_installment',
+          due_date: this.state.secondInstallmentDate ? 
+                    this.state.secondInstallmentDate : 
+                    purchase_details.payment_schedule[2].due_date,
+          amount: {
+              amount_in_cents: values.secondInstallmentAmount,
+              currency:'GBP'
+          }
+        }
+      ]
+    };
+
+    if (isSaveAndExit) {
+      this.saveAndExit(payload, errors);
+      showLoader();
+    } else {
+      this.submitPurchaseDetails(payload);
+    }
+  }
+
+  /**
+   * saveAndExit
+   * @param {object} payload - request object
+   * @param {object} errors - form errors
+   * @return {void} saveAndExit
+   */
+  saveAndExit = async (payload, errors) => {
+    const { hideLoader } = this.props;
+
+    formUtils.validateForm(this.config);
+
+    await Object.keys(errors).forEach(async (key) => {
+      await formUtils.updateValue(key, '');
+    });
+
+    CompanyService.updateCompany(payload, 'purchase_details', 1).then((response) => {
+      hideLoader();
+      if (response.status === 200) {
+        navigate('/company-design');
+      }
+    });
+  }
+
+  /**
+   * submitPurchaseDetails
+   * @param {object} payload - request object
+   * @return {void} submitPurchaseDetails
+   */
+  submitPurchaseDetails = payload => {
+    const { hideLoader, showLoader, t, company } = this.props;
 
     /* istanbul ignore else */
     if (formUtils.validateForm(this.config)) {
       showLoader();
-
-      const payload = {
-        price: {
-          amount_in_cents: values.amount_in_cents,
-        },
-        is_new_build: values.is_new_build,
-        completion_date: this.state.completionDate ? this.state.completionDate : company.purchase_details.completion_date,
-        expected_exchange_date: this.state.exchangeDate ? this.state.exchangeDate : company.purchase_details.expected_exchange_date
-      };
 
       CompanyService.updateCompany(payload, 'purchase_details', 1).then((response) => {
         hideLoader();
@@ -149,35 +236,6 @@ class PurchaseDetails extends Component {
         }
       });
     }
-
-  }
-
-  saveAndExit = async () => {
-    const { showLoader, hideLoader, form: { values, errors}, company } = this.props;
-
-    formUtils.validateForm(this.config);
-
-    await Object.keys(errors).forEach(async (key) => {
-      await formUtils.updateValue(key, '');
-    });
-
-    showLoader();
-
-    const payload = {
-      price: {
-        amount_in_cents: values.amount_in_cents,
-      },
-      is_new_build: values.is_new_build,
-      completion_date: this.state.completionDate ? this.state.completionDate : company.purchase_details.completion_date,
-      expected_exchange_date: this.state.exchangeDate ? this.state.exchangeDate : company.purchase_details.expected_exchange_date
-    };
-
-    CompanyService.updateCompany(payload, 'purchase_details', 1).then((response) => {
-      hideLoader();
-      if (response.status === 200) {
-        navigate('/company-design');
-      }
-    });
   }
 
   render() {
@@ -303,7 +361,9 @@ class PurchaseDetails extends Component {
         onFocus: this.openDatePicker,
         id: 'secondInstallmentDate',
         wrapperClass: 'installment-date',
-        readOnly: true
+        readOnly: true,
+        hidden: this.checkElementHidden() || 
+                (is_new_build === 'yes' && company.purchase_details.payment_schedule[2].due_date === '')
       },
       {
         stateKey: 'secondInstallmentAmount',
@@ -311,6 +371,8 @@ class PurchaseDetails extends Component {
         label: t('companyDesign.purchaseDetails.form.secondInstallmentLabel'),
         value: secondInstallmentAmount,
         wrapperClass: 'background-gradient installment-amount',
+        hidden: this.checkElementHidden() || 
+                (is_new_build === 'yes' && company.purchase_details.payment_schedule[2].due_date === '')
       },
       {
         component: Button,
@@ -330,7 +392,7 @@ class PurchaseDetails extends Component {
       },
     ];
 
-    const headerActions = <ButtonHeader onClick={this.saveAndExit} label={t('header.buttons.saveAndExit')} />
+    const headerActions = <ButtonHeader onClick={() => this.handleSubmitPurchaseDetails(true)} label={t('header.buttons.saveAndExit')} />
 
     return (
       <>
@@ -373,7 +435,7 @@ class PurchaseDetails extends Component {
               data-test="submit-button"
               label={t('companyDesign.purchaseDetails.form.nextButton')}
               fullWidth
-              onClick={() => this.submitPurchaseDetails()}
+              onClick={() => this.handleSubmitPurchaseDetails(false)}
               classes="primary"
             />
 

@@ -48,7 +48,23 @@ describe('purchase details', () => {
                 amount_in_cents:10000000,
                 currency:'GBP'
               }
-           }
+           },
+           {
+            type:'first_installment',
+            due_date:'2019-09-06T00:00:00Z',
+            amount:{
+               amount_in_cents:10000000,
+               currency:'GBP'
+            }
+          },
+          {
+            type:'second_installment',
+            due_date:'2019-09-06T00:00:00Z',
+            amount:{
+               amount_in_cents:10000000,
+               currency:'GBP'
+            }
+          }
         ]
       },
       additional_services:{
@@ -206,7 +222,23 @@ describe('purchase details', () => {
                   amount_in_cents:10000000,
                   currency:'GBP'
                 }
-             }
+             },
+             {
+              type:'first_installment',
+              due_date:'2019-09-06T00:00:00Z',
+              amount:{
+                 amount_in_cents:10000000,
+                 currency:'GBP'
+              }
+            },
+            {
+              type:'second_installment',
+              due_date:'2019-09-06T00:00:00Z',
+              amount:{
+                 amount_in_cents:10000000,
+                 currency:'GBP'
+              }
+            }
           ]
         },
         additional_services:{
@@ -252,7 +284,23 @@ describe('purchase details', () => {
                     amount_in_cents:10000000,
                     currency:'GBP'
                   }
-               }
+               },
+               {
+                type:'first_installment',
+                due_date:'2019-09-06T00:00:00Z',
+                amount:{
+                   amount_in_cents:10000000,
+                   currency:'GBP'
+                }
+              },
+              {
+                type:'second_installment',
+                due_date:'2019-09-06T00:00:00Z',
+                amount:{
+                   amount_in_cents:10000000,
+                   currency:'GBP'
+                }
+              }
             ]
           },
           additional_services:{

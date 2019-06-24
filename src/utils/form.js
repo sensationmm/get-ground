@@ -27,7 +27,8 @@ export const initFormState = (fieldsInit, fieldsValues) => {
           fields[key] = `[${fieldsValues['address_country_alpha_3_code']}] ${fieldsValues[key]}`;
         } else if(key === 'nationality') {
           fields[key] = `[${fieldsValues['nationality_alpha_3_code']}] ${fieldsValues['nationality_name']}`;
-        } else if(key === 'date_of_birth' || key === 'expected_exchange_date' || key === 'completion_date') {
+        } else if(key === 'date_of_birth' || key === 'expected_exchange_date' || key === 'completion_date' 
+          || key === 'depositDueDate' || key === 'firstInstallmentDate' || key === 'secondInstallmentDate') {
           fields[key] = moment(fieldsValues[key]).format('Do MMMM YYYY');
         } else {
           fields[key] = fieldsValues[key]; // @TODO ideally only this line should be necessary...
