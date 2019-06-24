@@ -69,8 +69,8 @@ export class AdditionalServices extends Component {
         groupLabel: t('additionalServices.findSolicitorQuestion'),
         name: 'solicitor',
         items: [
-          { value: 'no', label: t('form.radioConfirm.false') },
-          { value: 'yes', label: t('form.radioConfirm.true') }
+          { value: false, label: t('form.radioConfirm.false') },
+          { value: true, label: t('form.radioConfirm.true') }
         ],
         value: values.solicitor,
         validationFunction: 'validateRequired',
@@ -82,8 +82,8 @@ export class AdditionalServices extends Component {
         groupLabel: t('additionalServices.mortgageOptionsQuestion'),
         name: 'mortgage',
         items: [
-          { value: 'no', label: t('form.radioConfirm.false') },
-          { value: 'yes', label: t('form.radioConfirm.true') }
+          { value: false, label: t('form.radioConfirm.false') },
+          { value: true, label: t('form.radioConfirm.true') }
         ],
         value: values.mortgage,
         validationFunction: 'validateRequired',
@@ -95,8 +95,8 @@ export class AdditionalServices extends Component {
         groupLabel: t('additionalServices.propertyInsuranceQuestion'),
         name: 'insurance',
         items: [
-          { value: 'no', label: t('form.radioConfirm.false') },
-          { value: 'yes', label: t('form.radioConfirm.true') }
+          { value: false, label: t('form.radioConfirm.false') },
+          { value: true, label: t('form.radioConfirm.true') }
         ],
         value: values.insurance,
         validationFunction: 'validateRequired',
@@ -108,8 +108,8 @@ export class AdditionalServices extends Component {
         groupLabel: t('additionalServices.property_managementQuestion'),
         name: 'management',
         items: [
-          { value: 'no', label: t('form.radioConfirm.false') },
-          { value: 'yes', label: t('form.radioConfirm.true') }
+          { value: false, label: t('form.radioConfirm.false') },
+          { value: true, label: t('form.radioConfirm.true') }
         ],
         value: values.management,
         validationFunction: 'validateRequired',

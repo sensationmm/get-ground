@@ -90,8 +90,8 @@ export class TaxQuestions extends Component {
         groupLabel: t('taxQuestions.ownership'),
         name: 'is_owner_of_other_companies',
         items: [
-          { value: 'no', label: t('form.radioConfirm.false') },
-          { value: 'yes', label: t('form.radioConfirm.true') }
+          { value: false, label: t('form.radioConfirm.false') },
+          { value: true, label: t('form.radioConfirm.true') }
         ],
         value: values.is_owner_of_other_companies,
         validationFunction: 'validateRequired',
@@ -103,13 +103,13 @@ export class TaxQuestions extends Component {
         groupLabel: t('taxQuestions.employ'),
         name: 'more_than_50_employees',
         items: [
-          { value: 'no', label: t('form.radioConfirm.false') },
-          { value: 'yes', label: t('form.radioConfirm.true') }
+          { value: false, label: t('form.radioConfirm.false') },
+          { value: true, label: t('form.radioConfirm.true') }
         ],
         value: values.more_than_50_employees,
         validationFunction: 'validateRequired',
         istaxQuestions: true,
-        hidden: !values.is_owner_of_other_companies || values.is_owner_of_other_companies === 'no'
+        hidden: !values.is_owner_of_other_companies || values.is_owner_of_other_companies === false
       },
       {
         stateKey: 'assets',
@@ -117,13 +117,13 @@ export class TaxQuestions extends Component {
         groupLabel: t('taxQuestions.assets'),
         name: 'assets',
         items: [
-          { value: 'no', label: t('form.radioConfirm.false') },
-          { value: 'yes', label: t('form.radioConfirm.true') }
+          { value: false, label: t('form.radioConfirm.false') },
+          { value: true, label: t('form.radioConfirm.true') }
         ],
         value: values.assets,
         validationFunction: 'validateRequired',
         istaxQuestions: true,
-        hidden: !values.is_owner_of_other_companies || values.is_owner_of_other_companies === 'no'
+        hidden: !values.is_owner_of_other_companies || values.is_owner_of_other_companies === false
       },
       {
         stateKey: 'turnover',
@@ -131,13 +131,13 @@ export class TaxQuestions extends Component {
         groupLabel: t('taxQuestions.turnover'),
         name: 'turnover',
         items: [
-          { value: 'no', label: t('form.radioConfirm.false') },
-          { value: 'yes', label: t('form.radioConfirm.true') }
+          { value: false, label: t('form.radioConfirm.false') },
+          { value: true, label: t('form.radioConfirm.true') }
         ],
         value: values.turnover,
         validationFunction: 'validateRequired',
         istaxQuestions: true,
-        hidden: !values.is_owner_of_other_companies || values.is_owner_of_other_companies === 'no'
+        hidden: !values.is_owner_of_other_companies || values.is_owner_of_other_companies === false
       },
       {
         component: 'br'

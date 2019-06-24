@@ -41,7 +41,7 @@ export const initialState = [
           amount_in_cents:50000000,
           currency:'GBP'
        },
-       is_new_build:false,
+       is_new_build:null,
        completion_date:'2020-09-08T00:00:00Z',
        expected_exchange_date:'2020-10-12T00:00:00Z',
         payment_schedule:[

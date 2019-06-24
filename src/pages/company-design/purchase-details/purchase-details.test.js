@@ -37,7 +37,7 @@ describe('purchase details', () => {
           amount_in_cents:50000000,
           currency:'GBP'
         },
-        is_new_build:false,
+        is_new_build:null,
         completion_date:'2020-09-08T00:00:00Z',
         expected_exchange_date:'2020-10-12T00:00:00Z',
         payment_schedule:[
@@ -108,14 +108,14 @@ describe('purchase details', () => {
     expect(wrapper.contains(<ErrorBox>string</ErrorBox>)).toBe(true);
   });
 
-  test('expect checkElementHidden to return true if is_new_build is equal to an empty string', () => {
+  test('expect checkElementHidden to return true if is_new_build is equal to null', () => {
     const wrapper = setup(PurchaseDetails, {
       ...defaultProps, 
       form: {
         ...defaultProps.form,
         values: {
           ...defaultProps.form.values,
-          is_new_build: ''
+          is_new_build: null
         }
       }
     });
@@ -124,14 +124,14 @@ describe('purchase details', () => {
     expect(hidden).toEqual(true);
   });
 
-  test('expect checkElementHidden to return true if is_new_build is equal to no', () => {
+  test('expect checkElementHidden to return true if is_new_build is equal to false', () => {
     const wrapper = setup(PurchaseDetails, {
       ...defaultProps, 
       form: {
         ...defaultProps.form,
         values: {
           ...defaultProps.form.values,
-          is_new_build: 'no'
+          is_new_build: false
         }
       }
     });
@@ -149,13 +149,13 @@ describe('purchase details', () => {
           ...defaultProps.form,
           values: {
             ...defaultProps.form.values,
-            is_new_build: 'yes'
+            is_new_build: true
           }
         }
       });
     })
 
-    test('expect checkElementHidden to return false if is_new_build is equal to yes', () => {
+    test('expect checkElementHidden to return false if is_new_build is equal to true', () => {
       const hidden = wrapper.instance().checkElementHidden();
 
       expect(hidden).toEqual(false);

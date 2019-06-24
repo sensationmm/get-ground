@@ -62,7 +62,7 @@ class PurchaseDetails extends Component {
     
     formUtils.initFormState({
       amount_in_cents: '',
-      is_new_build: '',
+      is_new_build: null,
       completion_date: '',
       depositDueDate: '',
       depositAmount: '',
@@ -106,7 +106,7 @@ class PurchaseDetails extends Component {
 
   checkElementHidden = () => {
     const { form: { values: { is_new_build } } } = this.props;
-    return is_new_build === '' || is_new_build === 'no';
+    return is_new_build === false || is_new_build === null;
   }
 
   showNextInstallment = /* istanbul ignore next */ () => {
@@ -261,11 +261,11 @@ class PurchaseDetails extends Component {
     this.radioConfig = [
       {
         label: 'no',
-        value: 'no'
+        value: false
       },
       {
         label: 'yes',
-        value: 'yes'
+        value: true
       }
     ]
         
@@ -294,7 +294,7 @@ class PurchaseDetails extends Component {
         validationFunction: 'validateRequired',
         onFocus: this.openDatePicker,
         id: 'exchangeDate',
-        hidden: is_new_build == '',
+        hidden: is_new_build == null,
         readOnly: true
       },
       {
@@ -305,7 +305,7 @@ class PurchaseDetails extends Component {
         validationFunction: 'validateRequired',
         onFocus: this.openDatePicker,
         id: 'completionDate',
-        hidden: is_new_build === '',
+        hidden: is_new_build === null,
         readOnly: true
       },
       {
@@ -363,7 +363,7 @@ class PurchaseDetails extends Component {
         wrapperClass: 'installment-date',
         readOnly: true,
         hidden: this.checkElementHidden() || 
-                (is_new_build === 'yes' && company.purchase_details.payment_schedule[2].due_date === '')
+                (is_new_build === true && company.purchase_details.payment_schedule[2].due_date === '')
       },
       {
         stateKey: 'secondInstallmentAmount',
@@ -372,7 +372,7 @@ class PurchaseDetails extends Component {
         value: secondInstallmentAmount,
         wrapperClass: 'background-gradient installment-amount',
         hidden: this.checkElementHidden() || 
-                (is_new_build === 'yes' && company.purchase_details.payment_schedule[2].due_date === '')
+                (is_new_build === true && company.purchase_details.payment_schedule[2].due_date === '')
       },
       {
         component: Button,

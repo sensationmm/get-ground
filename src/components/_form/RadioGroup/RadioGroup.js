@@ -52,7 +52,17 @@ const RadioGroup = ({
                 value={value}
                 name={name}
                 isChecked={value === radioValue ? true : null}
-                onChange={(e) => {onChange(e.target.value)}}
+                onChange={(e) => {
+                  let updatedValue = e.target.value;
+
+                  if (updatedValue === 'false') {
+                    updatedValue = false;
+                  } else if (updatedValue === 'true') {
+                    updatedValue = true;
+                  }
+
+                  onChange(updatedValue);
+                }}
                 description={description}
               >
                 {children}
