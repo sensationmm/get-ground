@@ -79,7 +79,7 @@ RadioGroup.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object),
   name: PropTypes.string,
   onChange: PropTypes.func,
-  value: PropTypes.string,
+  value: PropTypes.any,
   groupLabel: PropTypes.string,
   hidden: PropTypes.bool,
   isAdditionalServices: PropTypes.bool,

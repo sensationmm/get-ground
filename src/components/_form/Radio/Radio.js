@@ -38,7 +38,7 @@ Radio.propTypes = {
   isChecked: PropTypes.bool,
   label: PropTypes.string,
   name: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.any,
   onChange: PropTypes.func,
   children: PropTypes.element
 };
