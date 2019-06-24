@@ -78,7 +78,7 @@ describe('<ActionBox />', () => {
       expect(buttonAction.props().label).toEqual('actionBox.actions.directors_insurance.cta');
       buttonAction.simulate('click');
       expect(setActiveCompanyMock).toHaveBeenCalledWith(expect.objectContaining({ companyID: 1 }));
-      expect(navigate).toHaveBeenCalledWith('/onboarding/payment');
+      expect(navigate).toHaveBeenCalledWith('/company-design/payment');
     });
 
     test('prompt_shareholders', () => {
