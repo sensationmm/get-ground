@@ -46,7 +46,7 @@ class Company extends Component {
 
     return (
       <Layout secure companyID>
-        { hasLoaded ?
+        { hasLoaded &&
           <div className="company-overview my-property" data-test="component-company">
             <h1>{ t('dashboard.company.title') }</h1>
 
@@ -114,8 +114,6 @@ class Company extends Component {
               />
             </Form>
           </div> 
-        :
-          <div></div>
         }
       </Layout>
     );
