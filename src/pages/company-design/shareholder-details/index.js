@@ -68,16 +68,21 @@ class ShareholderDetails extends Component {
 
   componentDidMount() {
     const { company: { shareholder_details }} = this.props;
+    const shareholders = shareholder_details.collection;
+    const populatedShareholders = shareholder_details.collection.length
+
+    for (let i = shareholders.length; i < 8; i++) {
+      shareholders.push({...shareholder})
+    }
 
     formUtils.initFormState([
       {...shareholder},{...shareholder},{...shareholder},{...shareholder},
       {...shareholder},{...shareholder},{...shareholder},{...shareholder}
-    ], shareholder_details.collection);
+    ], shareholders);
 
     if (shareholder_details.collection.length > 1) {
-      this.setState({ shareholders: shareholder_details.collection.length})
+      this.setState({ shareholders: populatedShareholders });
     }
-    
   }
 
   componentWillUnmount() {
@@ -216,9 +221,6 @@ class ShareholderDetails extends Component {
     const { form } = this.props;
 
     for(let i=0; i<count; i++) {
-
-      if (form.values[i] === undefined) return;
-
       render.push(
         <AddShareholder
           shareholderID={i}
