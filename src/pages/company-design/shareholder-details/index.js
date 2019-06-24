@@ -221,15 +221,19 @@ class ShareholderDetails extends Component {
     const { form } = this.props;
 
     for(let i=0; i<count; i++) {
+      const first_name = form.values[i] === undefined ? '' : form.values[i].first_name;
+      const last_name = form.values[i] === undefined ? '' : form.values[i].last_name;
+      const email = form.values[i] === undefined ? '' : form.values[i].email;
+
       render.push(
         <AddShareholder
           shareholderID={i}
           onRef={/* istanbul ignore next */(ref) => this[`shareholder${i}`] = ref}
           key={`shareholder${i}`}
           onChange={this.updateShareholder}
-          first_name={form.values[i].first_name}
-          last_name={form.values[i].last_name}
-          email={form.values[i].email}
+          first_name={first_name}
+          last_name={last_name}
+          email={email}
           totalShares={this.state.mainShares}
         />
       )
