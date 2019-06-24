@@ -9,7 +9,6 @@ import Camera from 'src/components/Camera/Camera'
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox'
 import Button from 'src/components/_buttons/Button/Button'
 import CameraIcon from 'src/assets/images/camera-icon.svg'
-import Rectangle from 'src/assets/images/rectangle.svg'
 
 import { setActive, resetActive, setRetake, setImg } from 'src/state/actions/idCheck'
 

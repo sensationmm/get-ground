@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
 
-import ImageFull from 'src/components/ImageFull/ImageFull'
 import Button from 'src/components/_buttons/Button/Button'
 
 import MoubinLarge from 'src/assets/images/moubin-large.svg'

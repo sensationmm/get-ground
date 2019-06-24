@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import LiveChat from 'react-livechat';
 import IdleTimer from 'react-idle-timer';
-import { CSSTransition } from 'react-transition-group';
 
 import { inArray } from 'src/utils/functions';
 import SEO from 'src/components/seo';

@@ -101,4 +101,6 @@ const mapStateToProps = state => ({
   isMobile: state.layout.isMobile
 });
 
+export const RawComponent = TrustAndPrivacy;
+
 export default connect(mapStateToProps)(TrustAndPrivacy);

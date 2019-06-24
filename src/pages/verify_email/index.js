@@ -6,7 +6,6 @@ import PropTypes from 'prop-types'
 import queryString from 'query-string'
 
 import Layout from 'src/components/Layout/Layout'
-import ImageFull from 'src/components/ImageFull/ImageFull'
 import Image from 'src/assets/images/verify-email.svg'
 
 import authService from 'src/services/Auth';

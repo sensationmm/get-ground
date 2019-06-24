@@ -322,4 +322,6 @@ const mapStateToProps = state => ({
   isMobile: state.layout.isMobile
 });
 
+export const RawComponent = Advantages;
+
 export default connect(mapStateToProps)(Advantages);

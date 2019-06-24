@@ -96,7 +96,8 @@ Header.propTypes = {
   userID: PropTypes.number,
   onClick: PropTypes.func,
   childrenDisabled: PropTypes.bool,
-  isMobile: PropTypes.bool
+  isMobile: PropTypes.bool,
+  menuLinks: PropTypes.object
 }
 
 export default Header;

@@ -10,7 +10,6 @@ import sliderImg4 from 'src/assets/images/roof.svg';
 import IntroSlider from 'src/components/IntroSlider/IntroSlider';
 import Button from 'src/components/_buttons/Button/Button';
 import Layout from 'src/components/Layout/Layout';
-import CanvasCurve from 'src/components/_layout/CanvasCurve';
 
 import 'src/styles/pages/intro.scss';
 

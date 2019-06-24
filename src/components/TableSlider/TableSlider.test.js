@@ -39,7 +39,8 @@ describe('TableSlider', () => {
           img: 'feed2-img'
         }
       ],
-      tableName: 'tax'
+      tableName: 'tax',
+      isMobile: true
     }
   })
   test('initial', () => {
