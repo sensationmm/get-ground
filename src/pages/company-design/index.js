@@ -108,7 +108,9 @@ export class ProcessTracker extends React.Component {
       <Fragment>
           <Layout secure>
             <div className="process-tracker" role="fullscreen company-design">
-              <h3 className="process-tracker--title">{t('companyDesign.progressTracker.inProgressTitle')}</h3>
+              <h3 className="process-tracker--title">
+                {t('companyDesign.progressTracker.inProgressTitle', { count: sectionsConfig.sections.length })}
+              </h3>
               <div className="process-tracker-sections">
                 {sectionsConfig.sections.map((section, idx) => <ProcessSection key={`${idx} + ${section.title}`} {...section} />)}
               </div>

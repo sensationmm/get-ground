@@ -230,7 +230,7 @@
       "button2": "No, thanks"
     },
     "progressTracker": {
-      "inProgressTitle": "Design your company in 6 steps",
+      "inProgressTitle": "Design your company in {{count}} steps",
       "complete": "complete",
       "completeTitle": "All 5 steps complete",
       "sections": {
