@@ -1,3 +1,5 @@
+@import 'src/styles/modules/_variables.scss';
+
 .landing {
   h1 {
     font-size: 44px;
@@ -15,6 +17,27 @@
       &:last-child {
         margin-bottom: 50px;
       }
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .landing {
+    .heading {
+      width: 60%;
+      padding-right: 50px;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .image-full {
+      width: 40%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
     }
   }
 }

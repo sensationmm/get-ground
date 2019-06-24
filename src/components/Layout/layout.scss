@@ -167,7 +167,6 @@ b {
   .brochure {
     h1 {
       font-size: 40px;
-      display: inline;
       height: 200px;
       width: 60%;
       margin: 0 0 $padding-vertical 0;
@@ -181,10 +180,16 @@ b {
       position: absolute;
       width: 25%;
       height: 200px;
-      top: 0;
+      top: 30px;
       right: 30px;
       background: url('../../assets/images/oval-dark.svg') center center no-repeat;
       background-size: contain;
+    }
+  }
+
+  .brochure, .landing {
+    h2 {
+      text-transform: uppercase;
     }
   }
 }

@@ -8,3 +8,10 @@
     width: 100%;
   }
 }
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .image-full {
+    float: right;
+    width: 25%;
+  }
+}

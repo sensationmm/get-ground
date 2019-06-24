@@ -13,9 +13,12 @@ const IndexPage = () => {
   return (
     <Fragment>
       <Layout>
-        <div data-test="container-landing" className="landing" role="company-design brochure">
-          <h1 data-test="landing-title" >{t('landing.title')}</h1>
-          <h1 data-test="landing-secondary-title" >{t('landing.secondaryTitle')}</h1>
+        <div data-test="container-landing" className="landing" role="company-design">
+          <div className="heading">
+            <h1 data-test="landing-title" >{t('landing.title')}</h1>
+            <h2 data-test="landing-secondary-title" >{t('landing.secondaryTitle')}</h2>
+          </div>
+
           <ImageFull src={Image} alt="house" data-test="landing-img" />
           <div className="landing-content">
             <p data-test="landing-content-first" >{t('landing.firstParagraph')}</p>
