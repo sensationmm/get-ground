@@ -70,8 +70,6 @@ const OnboardingIntroContainer = () => {
             />
           </Link>
         </div>
-
-        <CanvasCurve />
       </div>
     </Layout>
   );
