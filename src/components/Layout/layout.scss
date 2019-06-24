@@ -151,7 +151,7 @@ b {
 
 .brochure {
   .app.extra-top-padding {
-    padding-top: calc((#{$header-height + ($padding-vertical-unit * 5) + 0px + $padding-vertical}));
+    padding-top: calc((#{$header-height + ($padding-vertical-unit * 6) + 0px + $padding-vertical}));
   }
 
   img.hero-image {
@@ -190,6 +190,19 @@ b {
   .brochure, .landing {
     h2 {
       text-transform: uppercase;
+    }
+
+    h3 {
+      font-size: 30px;
+      margin: 30px 0;
+    }
+  }
+
+  .modal-full {
+    p {
+      &:first-of-type, &:nth-of-type(2) {
+        padding-right: 35%;
+      }
     }
   }
 }

@@ -21,18 +21,18 @@ const MeetTheFounders = () => {
       'meet-the-founders',
       { 'read-more': show },
     )}>
-      <h1 className="meet-the-founders-title">{t('meetTheFounders.title')}</h1>
+      <center><h3 className="meet-the-founders-title">{t('meetTheFounders.title')}</h3></center>
       {show
         ?
           <div className="meet-the-founders-expanded" data-test="meet-the-founders-expanded">
             <div className="meet-the-founders-expanded-moubin">
-              <img src={MoubinLarge} className="meet-the-founders-expanded-moubin-img" alt="Moubin"/>
+              <img src={MoubinLarge} className="meet-the-founders-expanded-moubin-img" alt="Moubin Faizullah-Khan"/>
               <h3>{t('meetTheFounders.moubin.nameLong')}</h3>
               <p>{t('meetTheFounders.moubin.content.first')}</p>
               <p>{t('meetTheFounders.moubin.content.second')}</p>
             </div>
             <div className="meet-the-founders-expanded-moubin">
-              <ImageFull src={MisrabLarge} alt="Misrab"/>
+              <img src={MisrabLarge} className="meet-the-founders-expanded-moubin-img" alt="Misrab Faizullah-Khan"/>
               <h3>{t('meetTheFounders.misrab.nameLong')}</h3>
               <p>{t('meetTheFounders.misrab.content.first')}</p>
               <p>{t('meetTheFounders.misrab.content.second')}</p>
@@ -52,7 +52,7 @@ const MeetTheFounders = () => {
           <div className="meet-the-founders-closed-btn">
           <Button
             data-test="read-more-button"
-            liveChat
+            classes="primary"
             label={t('meetTheFounders.cta')}
             onClick={() => toggleShow(!show)}
           />
@@ -60,15 +60,16 @@ const MeetTheFounders = () => {
         </div>
       }
       <div className="meet-the-founders-join-us">
-        <h1>{t('meetTheFounders.joinUs.title')}</h1>
+        <h3>{t('meetTheFounders.joinUs.title')}</h3>
         <p>{t('meetTheFounders.joinUs.content')}</p>
-        <Button
-          classes="meet-the-founders-join-us-btn"
-          data-test="join-us-button"
-          liveChat
-          label={t('meetTheFounders.joinUs.title')}
-          onClick={ () => window.location.assign('mailto:info@getground.com')}
-        />
+        <center>
+          <Button
+            classes="meet-the-founders-join-us-btn primary"
+            data-test="join-us-button"
+            label={t('meetTheFounders.joinUs.title')}
+            onClick={ () => window.location.assign('mailto:info@getground.com')}
+          />
+        </center>
       </div>
     </div>
   )

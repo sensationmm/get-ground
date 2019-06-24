@@ -25,3 +25,11 @@
     }
   }
 }
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .more-information {
+    &-expanded {
+      background: none;
+    }
+  }
+}

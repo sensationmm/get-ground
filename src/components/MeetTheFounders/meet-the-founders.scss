@@ -1,4 +1,5 @@
 @import '../../styles/modules/_colors';
+@import '../../styles/modules/_variables';
 
 .meet-the-founders {
   .chat {
@@ -29,6 +30,10 @@
 
   &-join-us {
     margin-top: 30px;
+    border: 1px solid $border-offset;
+    padding: $padding-vertical $padding-horizontal;
+    border-radius: 10px;
+    text-align: center;
   }
 
   &-closed {
@@ -55,6 +60,34 @@
     img {
       width: 115px;
       height: 115px;
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .meet-the-founders {
+    &-expanded {
+      display: flex;
+      h3 {
+        text-align: left;
+      }
+
+      img {
+        margin: 0 0 30px 0;
+      }
+
+      > div {
+        margin-right: 80px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    &-join-us {
+      padding: 0px 50px 30px 50px;
+      margin-bottom: 50px;
     }
   }
 }

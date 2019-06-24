@@ -279,7 +279,7 @@ const Advantages = (props) => {
           <p className="advantages-uk-tax-more-expanded-info">{t('advantages.warning')}</p>
           </div>
           :
-          <Button data-test="tax-more-button" classes="advantages-btn chat" fullWidth label={t('advantages.cta')} onClick={() => toggleTaxTable(!showTaxTable)}/>
+          <Button data-test="tax-more-button" classes="advantages-btn primary" fullWidth label={t('advantages.cta')} onClick={() => toggleTaxTable(!showTaxTable)}/>
         }
         </div>
         <div className="advantages-company">
@@ -306,7 +306,7 @@ const Advantages = (props) => {
             <p className="advantages-company-more-expanded-info">{t('advantages.warning')}</p>
           </div>
           :
-          <Button data-test="company-more-button" classes="advantages-btn chat" fullWidth label={t('advantages.cta')} onClick={() => toggleCompanyTable(!showCompanyTable)}/>
+          <Button data-test="company-more-button" classes="advantages-btn primary" fullWidth label={t('advantages.cta')} onClick={() => toggleCompanyTable(!showCompanyTable)}/>
         }
         </div>
       </div>
