@@ -88,12 +88,14 @@
   }
 
   &-dashboard {
-    width: 131px;
+    width: auto;
     height: 31px;
     border-radius: 17px;
     border: solid 2px $white;
     text-align: center;
     cursor: pointer;
+    white-space: nowrap;
+    padding: 0 10px;
 
     p {
       color: $white;
@@ -117,6 +119,10 @@
 
     > * {
       margin-left: 20px;
+
+      &:first-child {
+        margin-left: 0;
+      }
     }
   }
 }
@@ -157,12 +163,30 @@
 }
 
 @media screen and (min-width: $breakpoint-desktop) {
-  .header--logged-out {
-    .header-inner {
-      justify-content: flex-end;
+  .header {
+    &--logged-out {
+      .header-inner {
+        justify-content: flex-end;
 
-      > * {
-        margin-left: 20px;
+        > * {
+          margin-left: 20px;
+        }
+      }
+    }
+
+    &-buttons {
+      flex-direction: row-reverse;
+    }
+  }
+
+  .fullscreen {
+    .header {
+      background: $background-main-start;
+    }
+
+    &.account {
+      .header {
+        background: $background-account-start;
       }
     }
   }

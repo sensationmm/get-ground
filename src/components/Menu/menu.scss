@@ -82,3 +82,27 @@
 .account .menu {
   @include gradient-horizontal($background-account-start,$background-account-end);
 }
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .menu, .account .menu {
+    position: relative;
+    background: none;
+    padding: 10px;
+    height: auto;
+
+    &--list {
+      display: flex;
+      justify-content: flex-start;
+      font-size: 14px;
+      margin: 0;
+
+      &-item {
+        margin: 0 0 0 15px;
+
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+}

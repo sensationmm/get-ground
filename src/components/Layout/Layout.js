@@ -129,7 +129,7 @@ export class Layout extends Component {
 
   render() {
     this.loggedOutOnly();
-    const { children, headerActions, isLoading, userID, t, menuIsOpen, isLoggedIn, idCheckActive } = this.props;
+    const { children, headerActions, isLoading, userID, t, menuIsOpen, isLoggedIn, idCheckActive, isMobile } = this.props;
     const { isLoggingOut } = this.state;
 
     const menuLinks = [
@@ -151,15 +151,18 @@ export class Layout extends Component {
       },
       {
         text: t('menu.links.fifth'),
-        link: '/about-us'
+        link: '/about-us',
+        hideDesktop: true
       },
       {
         text: t('menu.links.sixth'),
-        link: '/partnerships'
+        link: '/partnerships',
+        hideDesktop: true
       },
       {
         text: t('menu.links.seventh'),
-        link: '/frequently-asked-questions'
+        link: '/frequently-asked-questions',
+        hideDesktop: true
       },
       {
         text: isLoggedIn ? t('menu.links.ninth') : t('menu.links.eigth'),
@@ -197,6 +200,8 @@ export class Layout extends Component {
           onClick={this.toggleMenu}
           menuIsOpen={menuIsOpen}
           childrenDisabled={Boolean(idCheckActive)}
+          isMobile={isMobile}
+          menuLinks={<Menu menuLinks={menuLinks.filter(link => !link.hideDesktop)} />}
         >
           {headerActions}
         </Header>
@@ -207,20 +212,15 @@ export class Layout extends Component {
         <div id="modal-root"></div>
         {(!inArray('fullscreen', roles) || inArray('hasFooter', roles)) && <Footer hideContact={inArray('fullscreen', roles)} />}
 
-        <ModalWrapper
-          transitionBool={menuIsOpen}
-          transitionTime={400}
-          classes="menu"
-        >
-          <CSSTransition
-            in={menuIsOpen}
-            timeout={400}
-            classNames="menu"
-            unmountOnExit
+        {isMobile &&
+          <ModalWrapper
+            transitionBool={menuIsOpen}
+            transitionTime={400}
+            classes="menu"
           >
             <Menu menuLinks={menuLinks} />
-          </CSSTransition>
-        </ModalWrapper>
+          </ModalWrapper>
+        }
 
         <ModalWrapper
           transitionBool={isLoggingOut}
@@ -261,7 +261,8 @@ Layout.propTypes = {
   hideLoader: PropTypes.func,
   deleteUser: PropTypes.func,
   isLoggedIn: PropTypes.bool,
-  idCheckActive: PropTypes.string
+  idCheckActive: PropTypes.string,
+  isMobile: PropTypes.bool
 }
 
 Layout.defaultProps = {
@@ -275,6 +276,7 @@ const mapStateToProps = (state) => ({
   menuIsOpen: state.menu.isOpen,
   isLoggedIn: state.user.email,
   idCheckActive: state.idCheck.active,
+  isMobile: state.layout.isMobile
 });
 
 const actions = {

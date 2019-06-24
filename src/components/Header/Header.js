@@ -19,7 +19,7 @@ import './header.scss';
  */
 
 const Header = (props) => {
-  const { menuIsOpen, children, isLoading, userID, onClick, childrenDisabled } = props;
+  const { menuIsOpen, children, isLoading, userID, onClick, childrenDisabled, isMobile, menuLinks } = props;
   const [t] = useTranslation();
 
   return (
@@ -37,7 +37,6 @@ const Header = (props) => {
               <img src={Logo} alt="GetGround logo" />
             </Link>
           </div>
-
           <div className="header-buttons">
             {userID && !children &&
               <div data-test="dashboard" className="header-dashboard" onClick={() => navigate('/dashboard')}>
@@ -45,18 +44,22 @@ const Header = (props) => {
               </div>
             }
 
-            {children
+            {(children && isMobile)
               ? <div data-test="children" className={classNames('header-children', {
                 'disabled': childrenDisabled
               })}>{children}</div>
-              : <div
-                  className={classNames('header-menu-toggle',
-                    {'header-menu-toggle-close': menuIsOpen }
-                  )}
-                  onClick={onClick}
-                >
-                  <div></div>
-                </div>
+              : (
+                isMobile
+                ? <div
+                    className={classNames('header-menu-toggle',
+                      {'header-menu-toggle-close': menuIsOpen }
+                    )}
+                    onClick={onClick}
+                  >
+                    <div></div>
+                  </div>
+                : menuLinks
+              )
             }
           </div>
         </div>
@@ -92,7 +95,8 @@ Header.propTypes = {
   isLoading: PropTypes.bool,
   userID: PropTypes.number,
   onClick: PropTypes.func,
-  childrenDisabled: PropTypes.bool
+  childrenDisabled: PropTypes.bool,
+  isMobile: PropTypes.bool
 }
 
 export default Header;
