@@ -1,18 +1,22 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Button from 'src/components/_buttons/Button/Button'
 import FCA from 'src/assets/images/fca.png'
 import Geovation from 'src/assets/images/geovation.png'
 import LandReg from 'src/assets/images/land-reg.png'
 import ICO from 'src/assets/images/ico.png'
+import Image from 'src/assets/images/lock.svg'
 
 import './trust-and-privacy.scss'
 
-const TrustAndPrivacy = () => {
+const TrustAndPrivacy = (props) => {
   const [t, i18n] = useTranslation();
   const [show, toggleShow] = useState(false);
+  const { isMobile } = props;
 
   const infoContent = i18n.t('trustAndPrivacy.sections', { returnObjects: true });
   const infoConfig = {
@@ -57,8 +61,12 @@ const TrustAndPrivacy = () => {
       'trustAndPrivacy',
       { 'read-more': show },
     )}>
-      <h1 className="trustAndPrivacy-title">{t('trustAndPrivacy.title')}</h1>
+      <h3 className="trustAndPrivacy-title">{t('trustAndPrivacy.title')}</h3>
       <p className="trustAndPrivacy-subTitle">{t('trustAndPrivacy.subTitle')}</p>
+      {show && !isMobile &&
+        <img className="hero-image" src={Image} alt="" />
+      }
+      
       {show
         ?
           infoConfig.infos.map((info, idx) => (
@@ -69,9 +77,8 @@ const TrustAndPrivacy = () => {
           ))
         :
         <Button
-          classes="trustAndPrivacy-read-more"
+          classes="primary trustAndPrivacy-read-more"
           data-test="read-more-button"
-          liveChat
           label={t('trustAndPrivacy.cta')}
           onClick={() => toggleShow(!show)}
         />
@@ -86,4 +93,12 @@ const TrustAndPrivacy = () => {
   )
 }
 
-export default TrustAndPrivacy;
+TrustAndPrivacy.propTypes = {
+  isMobile: PropTypes.bool
+}
+
+const mapStateToProps = state => ({
+  isMobile: state.layout.isMobile
+});
+
+export default connect(mapStateToProps)(TrustAndPrivacy);
