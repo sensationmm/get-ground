@@ -18,8 +18,6 @@ import { companyUpdate } from 'src/state/actions/activeCompany';
 import { showModal, hideModal } from 'src/state/actions/modal';
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
-import './add-services.scss'
-
 import companyService from 'src/services/Company';
 const CompanyService = new companyService();
 
