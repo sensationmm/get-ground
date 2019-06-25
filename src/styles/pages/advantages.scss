@@ -6,7 +6,7 @@
     margin: (($padding-vertical-unit * 2) + 0px) (- ($padding-horizontal-unit * 2) + 0px);
   }
   &-uk-tax, &-company {
-    margin-bottom: 120px;
+    margin-bottom: 50px;
     &-title {
       font-size: 13px;
       font-weight: bold;
@@ -22,11 +22,11 @@
       &-expanded {
         position: relative;
         &-info {
-          float: right;
           font-size: 10px;
           color: $text-secondary;
-          width: 236px;
+          width: 100%;
           margin-top: 28px;
+          text-align: center;
         }
       }
     }

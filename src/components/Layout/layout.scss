@@ -64,6 +64,7 @@ body {
   padding: $padding-vertical (($padding-horizontal-unit * 2) + 0px);
   // min-height: calc(100vh - #{$header-height + ($padding-vertical-unit * 4) + 0px});
   padding-top: calc((#{$header-height + ($padding-vertical-unit * 2) + 0px + $padding-vertical}));
+  padding-bottom: 50px;
   background: $white;
 
   .main {
@@ -119,6 +120,10 @@ b {
     color: $white;
     font-size: 48px;
   }
+
+  .app {
+    padding-bottom: 50px;
+  }
 }
 
 .account.fullscreen {
@@ -151,7 +156,7 @@ b {
 
 .brochure {
   .app.extra-top-padding {
-    padding-top: calc((#{$header-height + ($padding-vertical-unit * 5) + 0px + $padding-vertical}));
+    padding-top: calc((#{$header-height + ($padding-vertical-unit * 6) + 0px + $padding-vertical}));
   }
 
   img.hero-image {
@@ -167,24 +172,69 @@ b {
   .brochure {
     h1 {
       font-size: 40px;
-      display: inline;
-      height: 200px;
+      height: 100px;
       width: 60%;
       margin: 0 0 $padding-vertical 0;
       padding: $padding-vertical 0;
       display: flex;
       align-items: center;
       align-content: center;
+      color: $text;
+    }
+
+    p {
+      text-align: left;
+      
+      &.wrap {
+        width: 60%;
+      }
     }
     
     img.hero-image {
       position: absolute;
       width: 25%;
       height: 200px;
-      top: 0;
+      top: 30px;
       right: 30px;
-      background: url('../../assets/images/oval-dark.svg') center center no-repeat;
+      background: url('../../assets/images/oval.svg') center center no-repeat;
       background-size: contain;
+    }
+
+    &.account {
+      img.hero-image {
+        background-image: url('../../assets/images/oval-dark.svg');
+      }
+    }
+
+    &.markdown {
+      img.hero-image {
+        display: none;
+      }
+    }
+  }
+
+  .account.fullscreen {
+    h1 {
+      color: $heading;
+    }
+  }
+
+  .brochure, .landing {
+    h2 {
+      text-transform: uppercase;
+    }
+
+    h3 {
+      font-size: 30px;
+      margin: 30px 0;
+    }
+  }
+
+  .modal-full {
+    p {
+      &:first-of-type, &:nth-of-type(2) {
+        padding-right: 35%;
+      }
     }
   }
 }

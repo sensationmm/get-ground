@@ -604,7 +604,7 @@
   "menu": {
     "links": {
       "first": "What we do",
-      "second": "GetGround Advantages",
+      "second": "Advantages",
       "third": "How it works",
       "fourth": "Pricing",
       "fifth": "About us",
@@ -995,6 +995,8 @@
       "email": "Email address",
       "homeAddress": "Home address",
       "payment": "Payment methods",
+      "paymentCard": "Card",
+      "paymentExp": "Expiry",
       "passport": "Passport documents",
       "proofAddress": "Proof of address",
       "signature": "Signature"
@@ -1082,5 +1084,10 @@
     }
 
   },
-  "showAll": "Show all"
+  "showAll": "Show all",
+  "404": {
+    "title": "Oops!",
+    "text": "We are sorry but that page could not be found. Click the  button below to return to the homepage, or use the menu above.",
+    "cta": "Go to Homepage"
+  }
 }

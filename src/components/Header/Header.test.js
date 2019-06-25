@@ -15,19 +15,19 @@ describe('<Header />', () => {
   const onClickMock = jest.fn();
 
   test('renders without error', () => {
-    wrapper = setup(Header);
+    wrapper = setup(Header, { isMobile: true });
     const component = findByTestAttr(wrapper, 'component-header');
     expect(component.length).toBe(1);
   });
 
   test('renders header buttons', () => {
-    wrapper = setup(Header, { children: <Button label="str" />});
+    wrapper = setup(Header, { children: <Button label="str" />, isMobile: true});
 
     expect(wrapper.find(Button).length).toBe(3);
   });
 
   test('clicking menu icon toggles the menu', () => {
-    wrapper = setup(Header, { onClick: onClickMock });
+    wrapper = setup(Header, { onClick: onClickMock, isMobile: true });
     const menuIcon = wrapper.find('.header-menu-toggle');
 
     menuIcon.props().onClick();
@@ -35,7 +35,7 @@ describe('<Header />', () => {
   });
 
   test('dashboard btn', () => {
-    wrapper = setup(Header, { onClick: onClickMock });
+    wrapper = setup(Header, { onClick: onClickMock, isMobile: true });
 
     expect(findByTestAttr(wrapper, 'dashboard').length).toEqual(0);
     wrapper.setProps({
@@ -51,7 +51,7 @@ describe('<Header />', () => {
   });
 
   test('disable classname to children', () => {
-    wrapper = setup(Header, { onClick: onClickMock, childrenDisabled: true, children: <Button label="str" /> });
+    wrapper = setup(Header, { onClick: onClickMock, childrenDisabled: true, children: <Button label="str" />, isMobile: true });
 
     expect(findByTestAttr(wrapper, 'children').props().className).toEqual('header-children disabled');
   });

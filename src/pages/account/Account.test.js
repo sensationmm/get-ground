@@ -26,7 +26,7 @@ describe('<Account />', () => {
     hideLoader: hideLoaderMock,
     userUpdate: userUpdateMock,
     form: ReduxFormMock,
-    user: UserMock,
+    user: { ...UserMock, payment_details: { brand: 'visa' } },
     documents: [
       { 'description': 'passport', filename: ''},
       { 'description': 'address', filename: ''},
@@ -215,9 +215,10 @@ describe('<Account />', () => {
     expect(wrapper.find('h2').at(5).text()).toBe('profile.sections.phone');
     expect(wrapper.find('h2').at(6).text()).toBe('profile.sections.email');
     expect(wrapper.find('h2').at(7).text()).toBe('profile.sections.homeAddress');
-    expect(wrapper.find('h2').at(8).text()).toBe('profile.sections.passport');
-    expect(wrapper.find('h2').at(9).text()).toBe('profile.sections.proofAddress');
-    expect(wrapper.find('h2').at(10).text()).toBe('profile.sections.signature');
+    expect(wrapper.find('h2').at(8).text()).toBe('profile.sections.payment');
+    expect(wrapper.find('h2').at(9).text()).toBe('profile.sections.passport');
+    expect(wrapper.find('h2').at(10).text()).toBe('profile.sections.proofAddress');
+    expect(wrapper.find('h2').at(11).text()).toBe('profile.sections.signature');
   });
 
   afterEach(() => {

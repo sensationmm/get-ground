@@ -72,7 +72,7 @@ class PrivacyPolicy extends Component {
 
     return (
       <Layout>
-        <div data-test="container-privacy" role="brochure" ref={this.modalHeader}>
+        <div className="modal-full" data-test="container-privacy" role="brochure markdown" ref={this.modalHeader}>
           <img className="hero-image" src={Image} alt="clock" data-test="about-us-img" />
           <center>
             <Button

@@ -42,7 +42,8 @@
 
 @media screen and (min-width: $breakpoint-desktop) {
   .contact-us {
-    max-width: calc(#{$max-width} - #{$padding-horizontal-unit * 6 + 0px});
+    width: calc(100% - #{$padding-horizontal-unit * 8 + 0px});
+    max-width: $max-width;
     margin-left: auto;
     margin-right: auto;
 

@@ -69,7 +69,7 @@ describe('<AddProof />', () => {
     expect(wrapper.find('p').length).toEqual(2)
     expect(props.t).toHaveBeenCalledWith('onBoarding.idCheck.passport.title')
     expect(props.t).toHaveBeenCalledWith('onBoarding.idCheck.passport.content')
-    expect(wrapper.find('img').length).toEqual(3)
+    expect(wrapper.find('img').length).toEqual(2)
     expect(wrapper.find('[data-test="camera"]').length).toEqual(0)
     expect(wrapper.find('[data-test="dropzone"]').length).toEqual(1)
   })

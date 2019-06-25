@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import TrustAndPrivacy from './TrustAndPrivacy'
+import { RawComponent as TrustAndPrivacy } from './TrustAndPrivacy'
 
 jest.mock('react-i18next', () => ({
   useTranslation: () => ([

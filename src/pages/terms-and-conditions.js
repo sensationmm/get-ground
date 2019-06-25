@@ -72,7 +72,7 @@ class TermsConditions extends Component {
 
     return (
       <Layout>
-        <div data-test="container-terms" role="brochure" ref={this.modalHeader}>
+        <div classNames="modal-full" data-test="container-terms" role="brochure markdown" ref={this.modalHeader}>
           <img className="hero-image" src={Image} alt="clock" data-test="about-us-img" />
           <center>
             <Button

@@ -18,7 +18,8 @@
 
   &-inner-wrapper {
     display: flex;
-    width: 100%;
+    width: calc(100% - #{($padding-horizontal-unit * 4) + 0px});
+    padding: $padding-vertical (($padding-horizontal-unit * 2) + 0px);
     margin: 0 auto;
     max-width: $max-width;
     flex-direction: column;
@@ -26,11 +27,10 @@
 
   &-inner {
     display: flex;
+    height: $header-height + 0px;
     justify-content: space-between;
     align-items: center;
     align-content: center;
-    width: calc(100% - #{($padding-horizontal-unit * 4) + 0px});
-    padding: $padding-vertical (($padding-horizontal-unit * 2) + 0px);
   }
 
   &-logo {
@@ -45,6 +45,7 @@
   &-menu {
     &-toggle {
       width: 32px;
+      overflow: hidden;
       cursor: pointer;
 
       &:after, &:before, div {
@@ -88,12 +89,14 @@
   }
 
   &-dashboard {
-    width: 131px;
+    width: auto;
     height: 31px;
     border-radius: 17px;
     border: solid 2px $white;
     text-align: center;
     cursor: pointer;
+    white-space: nowrap;
+    padding: 0 10px;
 
     p {
       color: $white;
@@ -117,6 +120,10 @@
 
     > * {
       margin-left: 20px;
+
+      &:first-child {
+        margin-left: 0;
+      }
     }
   }
 }
@@ -157,12 +164,30 @@
 }
 
 @media screen and (min-width: $breakpoint-desktop) {
-  .header--logged-out {
-    .header-inner {
-      justify-content: flex-end;
+  .header {
+    &--logged-out {
+      .header-inner {
+        justify-content: flex-end;
 
-      > * {
-        margin-left: 20px;
+        > * {
+          margin-left: 20px;
+        }
+      }
+    }
+
+    &-buttons {
+      flex-direction: row-reverse;
+    }
+  }
+
+  .fullscreen {
+    .header {
+      background: $background-main-start;
+    }
+
+    &.account {
+      .header {
+        background: $background-account-start;
       }
     }
   }

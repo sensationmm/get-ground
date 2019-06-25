@@ -5,9 +5,7 @@ import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
 
-import IntroBox from 'src/components/_layout/IntroBox/IntroBox'
 import Layout from 'src/components/Layout/Layout'
-import ImageFull from 'src/components/ImageFull/ImageFull'
 import Image from 'src/assets/images/verify-email.svg'
 
 import authService from 'src/services/Auth';
@@ -35,14 +33,14 @@ const AccountPending = ({ location }) => {
 
   return (
     <Layout>
-      <div data-test="container-account-pending" className="account-pending" role="account">
-        <h1>{ t('onBoarding.accountPending.title') }</h1>
-        <p data-test="account-pending-content">{ isPasswordReset ? t('forgotPassword.emailPending') :  accountPendingText() }</p>
+      <div data-test="container-account-pending" className="account-pending" role="brochure fullscreen account">
+        <img className="hero-image" src={Image} alt="clock" data-test="about-us-img" />
+        <div className="">
+          <h1>{ t('onBoarding.accountPending.title') }</h1>
+          <p data-test="account-pending-content">{ isPasswordReset ? t('forgotPassword.emailPending') :  accountPendingText() }</p>
 
-        <ImageFull src={Image} />
-
-        <IntroBox>{ t('onBoarding.accountPending.introBox') }</IntroBox>
-
+          <p>{ t('onBoarding.accountPending.introBox') }</p>
+        </div>
       </div>
     </Layout>
   );
