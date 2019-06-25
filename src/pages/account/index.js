@@ -21,6 +21,15 @@ import { filePath } from 'src/config/endpoints';
 import accountService from 'src/services/Account';
 export const AccountService = new accountService();
 
+import amex from 'src/assets/images/payment/amex.png';
+import diners from 'src/assets/images/payment/diners.png';
+import discover from 'src/assets/images/payment/discover.png';
+import jcb from 'src/assets/images/payment/jcb.png';
+import mastercard from 'src/assets/images/payment/mastercard.png';
+import unionpay from 'src/assets/images/payment/unionpay.png';
+import visa from 'src/assets/images/payment/visa.png';
+import unknown from 'src/assets/images/payment/unknown.png';
+
 import './account.scss';
 
 const defaultState = {
@@ -157,6 +166,37 @@ class Account extends Component {
     const addressProof = getByValue(documents, 'description', 'address');
     const signature = getByValue(documents, 'description', 'signature');
 
+    const paymentCard = user.payment_details ? user.payment_details : {};
+
+    let cardImage = '';
+    switch(paymentCard.brand) {
+      case 'amex':
+        cardImage = <img src={amex} />;
+        break;
+      case 'diners':
+        cardImage = <img src={diners} />;
+        break;
+      case 'discover':
+        cardImage = <img src={discover} />;
+        break;
+      case 'jcb':
+        cardImage = <img src={jcb} />;
+        break;
+      case 'mastercard':
+        cardImage = <img src={mastercard} />;
+        break;
+      case 'unionpay':
+        cardImage = <img src={unionpay} />;
+        break;
+      case 'visa':
+        cardImage = <img src={visa} />;
+        break;
+      case 'unknown':
+      default:
+        cardImage = <img src={unknown} />;
+
+    }
+
     return (
       <Layout secure>
         <div className="company-overview account profile" data-test="container-profile">
@@ -187,9 +227,7 @@ class Account extends Component {
                   </div>
                 </Form>
               </div>
-            </div>
-            
-            <div>
+
               <div className="company-overview-section" data-test="section-occupation">
                 <h2>{ t('profile.sections.occupation') }</h2>
                 {!edit_occupation
@@ -211,7 +249,9 @@ class Account extends Component {
                 }
                 </div>
               </div>
-
+            </div>
+            
+            <div>
               <div className="company-overview-section" data-test="section-phone">
                 <h2>{ t('profile.sections.phone') }</h2>
                 {!edit_phone_number
@@ -243,6 +283,26 @@ class Account extends Component {
               <div className="company-overview-section">
                 <h2>{ t('profile.sections.homeAddress') }</h2>
                 <p>{address && address.join(', ')}</p>
+              </div>
+
+              <div className="company-overview-section">
+                <h2>{ t('profile.sections.payment') }</h2>
+                <div className="payment">
+                  { cardImage }
+                  <table>
+                    <tr><th>{ t('profile.sections.paymentCard') }</th><td>{ paymentCard.last4 }</td></tr>
+                    <tr><th>{ t('profile.sections.paymentExp') }</th><td>{ paymentCard.exp_month }/{ paymentCard.exp_year }</td></tr>
+                  </table>
+                </div>
+
+                <div className="account-edit">
+                  <Button
+                    classes="inline chat"
+                    data-test="live-chat-payment"
+                    label={ t('profile.edit') }
+                    onClick={() => this.handleLiveChat('Payment')}
+                  />
+                </div>
               </div>
             </div>
           </div>
