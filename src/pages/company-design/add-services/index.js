@@ -16,8 +16,6 @@ import ModalWrapper from 'src/components/Modal/ModalWrapper';
 import { setAdditionalServices } from 'src/state/actions/additionalServices'
 import { showModal, hideModal } from 'src/state/actions/modal';
 
-import './add-services.scss'
-
 import additionalServices from 'src/services/AdditionalServices'
 
 const services = new additionalServices();
