@@ -52,8 +52,8 @@ class SolicitorDetails extends Component {
       first_name: '',
       last_name: '',
       email: '',
-      phone: '',
-      authority: false
+      phone_number: '',
+      permission: false
     }, company.solicitor_details );
   }
 
@@ -135,17 +135,17 @@ class SolicitorDetails extends Component {
         validationFunction: 'validateEmail'
       },
       {
-        stateKey: 'phone',
+        stateKey: 'phone_number',
         component: InputPhone,
         label: t('companyDesign.solicitorDetails.form.label.phone'),
-        value: values.phone,
+        value: values.phone_number,
         validationFunction: 'validatePhone'
       },
       {
         component: 'br'
       },
       {
-        stateKey: 'authority',
+        stateKey: 'permission',
         component: Checkbox,
         label: <div>
           {t('companyDesign.solicitorDetails.form.label.authority')}&nbsp;
@@ -158,7 +158,7 @@ class SolicitorDetails extends Component {
             }
           }}>{t('companyDesign.solicitorDetails.form.label.authorityLink')}</a>
         </div>,
-        checked: values.authority,
+        checked: values.permission,
         validationFunction: 'validateRequired'
       }
     ];

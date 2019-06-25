@@ -33,8 +33,8 @@ export class TaxQuestions extends Component {
     formUtils.initFormState({
       is_owner_of_other_companies: null,
       more_than_50_employees: null,
-      assets: null,
-      turnover: null
+      assets_less_than_10m: null,
+      turnover_less_than_10m: null
     }, this.props.company.tax_questions);
   }
 
@@ -112,29 +112,29 @@ export class TaxQuestions extends Component {
         hidden: !values.is_owner_of_other_companies || values.is_owner_of_other_companies === false
       },
       {
-        stateKey: 'assets',
+        stateKey: 'assets_less_than_10m',
         component: RadioGroup,
         groupLabel: t('taxQuestions.assets'),
-        name: 'assets',
+        name: 'assets_less_than_10m',
         items: [
           { value: false, label: t('form.radioConfirm.false') },
           { value: true, label: t('form.radioConfirm.true') }
         ],
-        value: values.assets,
+        value: values.assets_less_than_10m,
         validationFunction: 'validateRequired',
         istaxQuestions: true,
         hidden: !values.is_owner_of_other_companies || values.is_owner_of_other_companies === false
       },
       {
-        stateKey: 'turnover',
+        stateKey: 'turnover_less_than_10m',
         component: RadioGroup,
         groupLabel: t('taxQuestions.turnover'),
-        name: 'turnover',
+        name: 'turnover_less_than_10m',
         items: [
           { value: false, label: t('form.radioConfirm.false') },
           { value: true, label: t('form.radioConfirm.true') }
         ],
-        value: values.turnover,
+        value: values.turnover_less_than_10m,
         validationFunction: 'validateRequired',
         istaxQuestions: true,
         hidden: !values.is_owner_of_other_companies || values.is_owner_of_other_companies === false

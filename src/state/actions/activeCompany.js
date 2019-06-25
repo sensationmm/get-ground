@@ -25,7 +25,7 @@ export const companyUpdate = (companyID, key, value) => {
   }
 };
 
-export const setCompanies = (company) => ({
+export const setCompanies = (companies) => ({
   type: SET_COMPANIES,
-  company
+  companies
 });

@@ -55,11 +55,11 @@ class PurchaseDetails extends Component {
       is_new_build: purchase_details.is_new_build,
       expected_exchange_date: exchangeDate === null ? '' : moment(exchangeDate).format('Do MMMM YYYY'),
       completion_date: completionDate === null ? '' : moment(completionDate).format('Do MMMM YYYY'),
-      depositDueDate: payment === null ? '' : moment(payment[0].due_date).format('Do MMMM YYYY'),
+      depositDueDate: this.setReduxDateValues(payment, 0),
       depositAmount: payment === null ? '' : payment[0].amount.amount_in_cents,
-      firstInstallmentDate: payment === null ? '' : moment(payment[1].due_date).format('Do MMMM YYYY'),
+      firstInstallmentDate: this.setReduxDateValues(payment, 1),
       firstInstallmentAmount: payment === null ? '' : payment[1].amount.amount_in_cents,
-      secondInstallmentDate: payment === null ? '' : moment(payment[2].due_date).format('Do MMMM YYYY'),
+      secondInstallmentDate: this.setReduxDateValues(payment, 2),
       secondInstallmentAmount: payment === null ? '' : payment[2].amount.amount_in_cents
     }
     
@@ -79,6 +79,20 @@ class PurchaseDetails extends Component {
 
   componentWillUnmount() {
     formUtils.clearFormState();
+  }
+
+  /**
+   * setReduxDateValues
+   * @param {Array} payment - array of payments
+   * @param {number} index - index of payment in array
+   * @return {void} setReduxDateValues
+   */
+  setReduxDateValues = (payment, index) => {
+    if (payment === null || (payment && payment[index].due_date === null)) {
+       return '';
+    } else {
+      return moment(payment[index].due_date).format('Do MMMM YYYY');
+    }
   }
 
   /**
@@ -141,14 +155,15 @@ class PurchaseDetails extends Component {
     if (!purchase_details.payment_schedule) {
       paymentSchedule = [{
         type: 'deposit',
-        due_date: this.state.depositDueDate ? this.state.depositDueDate : '',
+        due_date: this.state.depositDueDate ? this.state.depositDueDate : null,
         amount: {
           amount_in_cents: values.depositAmount,
           currency: 'GBP'
         }
-      }, {
+      },
+      {
         type: 'first_installment',
-        due_date: this.state.firstInstallmentDate ? this.state.firstInstallmentDate : '',
+        due_date: this.state.firstInstallmentDate ? this.state.firstInstallmentDate : null,
         amount: {
           amount_in_cents: values.firstInstallmentAmount,
           currency:'GBP'
@@ -156,7 +171,7 @@ class PurchaseDetails extends Component {
       },
       {
         type: 'second_installment',
-        due_date: this.state.secondInstallmentDate ? this.state.secondInstallmentDate : '',
+        due_date: this.state.secondInstallmentDate ? this.state.secondInstallmentDate : null,
         amount: {
           amount_in_cents: values.secondInstallmentAmount,
           currency:'GBP'

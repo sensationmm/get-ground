@@ -14,13 +14,16 @@ import './company-link.scss';
 */
 
 const CompanyLink = props => {
-  const { company: { id, property_address }, setActiveCompany } = props;
+  const { company: { id, property_address, progress }, setActiveCompany } = props;
 
   return (
     <div 
       data-test="component-company-link" 
       className="company-link"
-      onClick={() => { setActiveCompany(id); navigate('/dashboard/company'); }}
+      onClick={() => { 
+        setActiveCompany(id); 
+        progress.overall_status === 'COMPLETE' ? navigate('/dashboard/company') : navigate('/company-design');
+      }}
     >
       {property_address.address.premise}, {property_address.address.postcode}
     </div>
@@ -30,7 +33,8 @@ const CompanyLink = props => {
 CompanyLink.propTypes = {
   company: PropTypes.shape({
     id: PropTypes.number,
-    property_address: PropTypes.object
+    property_address: PropTypes.object,
+    progress: PropTypes.object
   }),
   setActiveCompany: PropTypes.func
 };

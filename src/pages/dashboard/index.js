@@ -7,7 +7,7 @@ import { navigate } from 'gatsby';
 import Layout from 'src/components/Layout/Layout';
 import ActionBox from 'src/components/ActionBox/ActionBox';
 import CompanyLink from 'src/components/CompanyLink/CompanyLink';
-import ToDo from 'src/components/ToDo/ToDo';
+// import ToDo from 'src/components/ToDo/ToDo';
 import List from 'src/components/_layout/List/List';
 import Button from 'src/components/_buttons/Button/Button';
 import { setActiveCompany } from 'src/state/actions/activeCompany';
@@ -17,7 +17,7 @@ import { showLoader, hideLoader } from 'src/state/actions/loader';
 import companyService from 'src/services/Company';
 export const CompanyService = new companyService();
 
-import functions from 'src/utils/functions';
+// import functions from 'src/utils/functions';
 
 import './dashboard.scss';
 
@@ -36,15 +36,23 @@ class Dashboard extends Component {
     };
   }
 
-  componentDidUpdate(prevProps) {
-    const { userID, showLoader } = this.props;
-    if (prevProps.userID !== userID) {
-      showLoader();
-      setTimeout(() => {
-        this.handleGetCompanies();
-      }, 750);
-    } 
+  componentDidMount() {
+    const { showLoader } = this.props;
+    showLoader();
+    setTimeout(() => {
+      this.handleGetCompanies();
+    }, 750);
   }
+
+  // componentDidUpdate(prevProps) {
+  //   const { userID, showLoader } = this.props;
+  //   if (prevProps.userID !== userID) {
+  //     showLoader();
+  //     setTimeout(() => {
+  //       this.handleGetCompanies();
+  //     }, 750);
+  //   } 
+  // }
 
   handleGetCompanies = () => {
     const { hideLoader } = this.props;
@@ -91,7 +99,7 @@ class Dashboard extends Component {
               { hasCompanies && companies.map((company, count) => (
                 <CompanyLink
                   key={`company-${count}`}
-                  company={(({ id, property_address }) => ({ id, property_address }))(company)}
+                  company={(({ id, property_address, progress }) => ({ id, property_address, progress }))(company)}
                   setActiveCompany={setActiveCompany}
                 />
               ))}
@@ -100,9 +108,9 @@ class Dashboard extends Component {
             </div>
             
             <div>
-              <List numToShow={4}>
+              <List numToShow={2}>
               <h3>{ t('dashboard.main.todoHeader') }</h3>
-              { hasCompanies && hasActions && actions.map((action, count) => {
+              {/* { hasCompanies && hasActions && actions.map((action, count) => {
                 const company = functions.getByValue(companies, 'id', action.companyID);
                 return (
                   <ToDo
@@ -112,7 +120,7 @@ class Dashboard extends Component {
                     setActiveCompany={setActiveCompany}
                   />
                 )
-              })}
+              })} */}
               {(!hasCompanies || !hasActions) && <p>{ t('dashboard.main.noActions') }</p>}
               </List>
             </div>

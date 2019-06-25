@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 import { ProcessSection } from 'src/components/ProcessSection/ProcessSection'
 import Layout from 'src/components/Layout/Layout'
-import Button from 'src/components/_buttons/Button/Button'
 import PropertyImage from 'src/assets/images/company-property-details.svg'
 import PurchaseImage from 'src/assets/images/company-purchase-details.svg'
 import SolicitorImage from 'src/assets/images/company-solicitor-details.svg'
@@ -13,6 +12,11 @@ import ShareholderImage from 'src/assets/images/company-shareholder-details.svg'
 import ServicesImage from 'src/assets/images/company-add-services.svg'
 import TaxQuestion from 'src/assets/images/company-tax-question.svg'
 import PaymentImage from 'src/assets/images/company-payment.svg'
+
+import { showLoader, hideLoader } from 'src/state/actions/loader'
+
+import companyService from 'src/services/Company'
+const CompanyService = new companyService()
 
 import './process-tracker.scss'
 
@@ -28,8 +32,32 @@ export class ProcessTracker extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.getProgress();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { isLoading } = this.props;
+
+    if(!isLoading && isLoading !== prevProps.isLoading) {
+      this.getProgress();
+    }
+  }
+
+  getProgress = () => {
+    const { company: { id }, showLoader, hideLoader } = this.props;
+
+    showLoader();
+
+    if(id) {
+      CompanyService.getCompany(id).then(() => {
+        hideLoader();
+      })
+    }
+  }
+
   render() {
-    const { t, i18n, company } = this.props;
+    const { t, i18n, company, company: { progress } } = this.props;
     const sectionsContent = i18n.t('companyDesign.progressTracker.sections', { returnObjects: true });
     const sectionsConfig = {
       sections: [
@@ -38,7 +66,7 @@ export class ProcessTracker extends React.Component {
           'imageAltText': sectionsContent['step2'].imageAltText,
           'copy': sectionsContent['step2'].copy,
           'path': '/company-design/property-address',
-          'status': 'complete',
+          'status': progress && progress.property_address_status,
           'image': PropertyImage,
         },
         {
@@ -46,7 +74,7 @@ export class ProcessTracker extends React.Component {
           'imageAltText': sectionsContent['step3'].imageAltText,
           'copy': sectionsContent['step3'].copy,
           'path': '/company-design/purchase-details',
-          'status': 'incomplete',
+          'status': progress && progress.purchase_details_status,
           'image': PurchaseImage,
         },
         {
@@ -55,7 +83,7 @@ export class ProcessTracker extends React.Component {
           'imageAltText': sectionsContent['step4'].imageAltText,
           'copy': sectionsContent['step4'].copy,
           'path': '/company-design/solicitor-details',
-          'status': 'incomplete',
+          //'status': progress && progress.solicitor_details_status,
           'image': SolicitorImage,
         },
         {
@@ -63,7 +91,7 @@ export class ProcessTracker extends React.Component {
           'imageAltText': sectionsContent['step5'].imageAltText,
           'copy': sectionsContent['step5'].copy,
           'path': '/company-design/shareholder-details',
-          'status': 'to_do',
+          'status': progress && progress.shareholder_details_status,
           'image': ShareholderImage,
         },
         {
@@ -71,7 +99,7 @@ export class ProcessTracker extends React.Component {
           'imageAltText': sectionsContent['step6'].imageAltText,
           'copy': sectionsContent['step6'].copy,
           'path': '/company-design/tax-questions',
-          'status': 'to_do',
+          'status': progress && progress.tax_questions_status,
           'image': TaxQuestion,
         },
         {
@@ -79,7 +107,7 @@ export class ProcessTracker extends React.Component {
           'imageAltText': sectionsContent['step7'].imageAltText,
           'copy': sectionsContent['step7'].copy,
           'path': '/company-design/payment',
-          'status': 'to_do',
+          'status': progress && progress.payment_status,
           'image': PaymentImage,
         }
       ]
@@ -91,7 +119,7 @@ export class ProcessTracker extends React.Component {
         'imageAltText': sectionsContent['step1'].imageAltText,
         'copy': sectionsContent['step1'].copy,
         'path': '/company-design/add-services',
-        'status': 'to_do',
+        //'status': progress && progress.additional_services_status,
         'image': ServicesImage,
       });
     }
@@ -112,9 +140,13 @@ export class ProcessTracker extends React.Component {
                 {t('companyDesign.progressTracker.inProgressTitle', { count: sectionsConfig.sections.length })}
               </h3>
               <div className="process-tracker-sections">
-                {sectionsConfig.sections.map((section, idx) => <ProcessSection key={`${idx} + ${section.title}`} {...section} />)}
+                {sectionsConfig.sections.map((section, idx) => (
+                  <ProcessSection 
+                    key={`${idx} + ${section.title}`} 
+                    {...section} 
+                  />)
+                )}
               </div>
-              <Button classes="primary" fullWidth/>
             </div>
           </Layout>
         </Fragment>
@@ -127,12 +159,15 @@ const mapStateToProps = (state) => ({
   company: state.companies.find(company => company.id === state.activeCompany)
 });
 
+const actions = { showLoader, hideLoader };
+
 ProcessTracker.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   t: PropTypes.func.isRequired,
   i18n: PropTypes.object.isRequired,
-  company: PropTypes.object
+  company: PropTypes.object,
+  isLoading: PropTypes.bool
 };
 
-export default connect(mapStateToProps, null)(withTranslation()(ProcessTracker))
+export default connect(mapStateToProps, actions)(withTranslation()(ProcessTracker))

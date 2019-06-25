@@ -120,6 +120,15 @@ export const companiesMock = [
           balance: '£483,293.62'
         }
       ]
+    },
+    progress: {
+      overall_status: 'INCOMPLETE',
+      payment_status: 'INCOMPLETE',
+      property_address_status: 'NOT_STARTED',
+      purchase_details_status: 'INCOMPLETE',
+      shareholder_details_status: 'NOT_STARTED',
+      solicitor_details_status: 'NOT_STARTED',
+      tax_questions_status: 'NOT_STARTED'
     }
   },
   {
@@ -238,6 +247,15 @@ export const companiesMock = [
           balance: '£483,293.62'
         }
       ]
+    },
+    progress: {
+      overall_status: 'INCOMPLETE',
+      payment_status: 'INCOMPLETE',
+      property_address_status: 'NOT_STARTED',
+      purchase_details_status: 'INCOMPLETE',
+      shareholder_details_status: 'NOT_STARTED',
+      solicitor_details_status: 'NOT_STARTED',
+      tax_questions_status: 'NOT_STARTED'
     }
   }
 ];
@@ -270,6 +288,6 @@ describe('<CompanyLink />', () => {
     component.simulate('click');
 
     expect(setActiveCompanyMock).toHaveBeenCalledWith(1);
-    expect(navigate).toHaveBeenCalledWith('/dashboard/company');
+    expect(navigate).toHaveBeenCalledWith('/company-design');
   });
 });

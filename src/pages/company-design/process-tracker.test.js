@@ -14,6 +14,9 @@ describe('process-tracker', () => {
   let wrapper;
   let props;
 
+  const showLoaderMock = jest.fn();
+  const hideLoaderMock = jest.fn();
+
   const mockSections = {
     step1: {
       title: 'Property Address',
@@ -60,7 +63,9 @@ describe('process-tracker', () => {
       },
       company: {
         additional_services_required: false
-      }
+      },
+      showLoader: showLoaderMock,
+      hideLoader: hideLoaderMock,
     }
     wrapper = shallow(<ProcessTracker {...props}/>);
   })
@@ -70,10 +75,6 @@ describe('process-tracker', () => {
 
   test('renders ProcessSection', () => {
     expect(wrapper.find('ProcessSection')).toHaveLength(6);
-  })
-
-  test('renders Button', () => {
-    expect(wrapper.find('Button')).toHaveLength(1);
   })
 
   test('there are 7 steps if add services has been used & the user did NOT want help finding a solicitor', () => {
@@ -101,4 +102,9 @@ describe('process-tracker', () => {
 
     expect(wrapper.find('ProcessSection')).toHaveLength(6);
   })
+
+  afterEach(() => {
+    showLoaderMock.mockClear();
+    hideLoaderMock.mockClear();
+  });
 })
