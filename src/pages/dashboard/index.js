@@ -8,7 +8,7 @@ import Layout from 'src/components/Layout/Layout';
 import ActionBox from 'src/components/ActionBox/ActionBox';
 import CompanyLink from 'src/components/CompanyLink/CompanyLink';
 // import ToDo from 'src/components/ToDo/ToDo';
-import List from 'src/components/_layout/List/List';
+// import List from 'src/components/_layout/List/List';
 import Button from 'src/components/_buttons/Button/Button';
 import { setActiveCompany } from 'src/state/actions/activeCompany';
 
@@ -65,7 +65,7 @@ class Dashboard extends Component {
   render() {
     const { actions, companies, setActiveCompany, t } = this.props;
     const hasCompanies = (companies.length > 0);
-    const hasActions = (actions.length > 0);
+    // const hasActions = (actions.length > 0);
     let addCompany;
     
     if(!hasCompanies) {
@@ -108,9 +108,9 @@ class Dashboard extends Component {
             </div>
             
             <div>
-              <List numToShow={2}>
+              {/* <List numToShow={2}>
               <h3>{ t('dashboard.main.todoHeader') }</h3>
-              {/* { hasCompanies && hasActions && actions.map((action, count) => {
+              { hasCompanies && hasActions && actions.map((action, count) => {
                 const company = functions.getByValue(companies, 'id', action.companyID);
                 return (
                   <ToDo
@@ -120,9 +120,9 @@ class Dashboard extends Component {
                     setActiveCompany={setActiveCompany}
                   />
                 )
-              })} */}
+              })}
               {(!hasCompanies || !hasActions) && <p>{ t('dashboard.main.noActions') }</p>}
-              </List>
+              </List> */}
             </div>
           </div>
         </div>

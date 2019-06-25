@@ -255,7 +255,8 @@ class PurchaseDetails extends Component {
   }
 
   render() {
-    const { t, form, company, company: { purchase_details: { payment_schedule }} } = this.props;
+    const { t, form, company } = this.props;
+    const payment_schedule = company ? company.purchase_details.payment_schedule : []
     const { isDatepickerOpen } = this.state;
     const {
       values: {

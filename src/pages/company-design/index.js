@@ -57,99 +57,109 @@ export class ProcessTracker extends React.Component {
   }
 
   render() {
-    const { t, i18n, company, company: { progress } } = this.props;
+    const { t, i18n, company } = this.props;
     const sectionsContent = i18n.t('companyDesign.progressTracker.sections', { returnObjects: true });
-    const sectionsConfig = {
-      sections: [
-        {
-          'title': sectionsContent['step2'].title,
-          'imageAltText': sectionsContent['step2'].imageAltText,
-          'copy': sectionsContent['step2'].copy,
-          'path': '/company-design/property-address',
-          'status': progress && progress.property_address_status,
-          'image': PropertyImage,
-        },
-        {
-          'title': sectionsContent['step3'].title,
-          'imageAltText': sectionsContent['step3'].imageAltText,
-          'copy': sectionsContent['step3'].copy,
-          'path': '/company-design/purchase-details',
-          'status': progress && progress.purchase_details_status,
-          'image': PurchaseImage,
-        },
-        {
-          'id': 'solicitor',
-          'title': sectionsContent['step4'].title,
-          'imageAltText': sectionsContent['step4'].imageAltText,
-          'copy': sectionsContent['step4'].copy,
-          'path': '/company-design/solicitor-details',
-          //'status': progress && progress.solicitor_details_status,
-          'image': SolicitorImage,
-        },
-        {
-          'title': sectionsContent['step5'].title,
-          'imageAltText': sectionsContent['step5'].imageAltText,
-          'copy': sectionsContent['step5'].copy,
-          'path': '/company-design/shareholder-details',
-          'status': progress && progress.shareholder_details_status,
-          'image': ShareholderImage,
-        },
-        {
-          'title': sectionsContent['step6'].title,
-          'imageAltText': sectionsContent['step6'].imageAltText,
-          'copy': sectionsContent['step6'].copy,
-          'path': '/company-design/tax-questions',
-          'status': progress && progress.tax_questions_status,
-          'image': TaxQuestion,
-        },
-        {
-          'title': sectionsContent['step7'].title,
-          'imageAltText': sectionsContent['step7'].imageAltText,
-          'copy': sectionsContent['step7'].copy,
-          'path': '/company-design/payment',
-          'status': progress && progress.payment_status,
-          'image': PaymentImage,
-        }
-      ]
-    };
+    let sectionsConfig;
 
-    if (company && company.additional_services_required) {
-      sectionsConfig.sections.unshift({
-        'title': sectionsContent['step1'].title,
-        'imageAltText': sectionsContent['step1'].imageAltText,
-        'copy': sectionsContent['step1'].copy,
-        'path': '/company-design/add-services',
-        //'status': progress && progress.additional_services_status,
-        'image': ServicesImage,
-      });
-    }
+    if (company) {
+      const progress = company.progress;
+      sectionsConfig = {
+        sections: [
+          {
+            'title': sectionsContent['step2'].title,
+            'imageAltText': sectionsContent['step2'].imageAltText,
+            'copy': sectionsContent['step2'].copy,
+            'path': '/company-design/property-address',
+            'status': progress && progress.property_address_status,
+            'image': PropertyImage,
+          },
+          {
+            'title': sectionsContent['step3'].title,
+            'imageAltText': sectionsContent['step3'].imageAltText,
+            'copy': sectionsContent['step3'].copy,
+            'path': '/company-design/purchase-details',
+            'status': progress && progress.purchase_details_status,
+            'image': PurchaseImage,
+          },
+          {
+            'id': 'solicitor',
+            'title': sectionsContent['step4'].title,
+            'imageAltText': sectionsContent['step4'].imageAltText,
+            'copy': sectionsContent['step4'].copy,
+            'path': '/company-design/solicitor-details',
+            //'status': progress && progress.solicitor_details_status,
+            'image': SolicitorImage,
+          },
+          {
+            'title': sectionsContent['step5'].title,
+            'imageAltText': sectionsContent['step5'].imageAltText,
+            'copy': sectionsContent['step5'].copy,
+            'path': '/company-design/shareholder-details',
+            'status': progress && progress.shareholder_details_status,
+            'image': ShareholderImage,
+          },
+          {
+            'title': sectionsContent['step6'].title,
+            'imageAltText': sectionsContent['step6'].imageAltText,
+            'copy': sectionsContent['step6'].copy,
+            'path': '/company-design/tax-questions',
+            'status': progress && progress.tax_questions_status,
+            'image': TaxQuestion,
+          },
+          {
+            'title': sectionsContent['step7'].title,
+            'imageAltText': sectionsContent['step7'].imageAltText,
+            'copy': sectionsContent['step7'].copy,
+            'path': '/company-design/payment',
+            'status': progress && progress.payment_status,
+            'image': PaymentImage,
+          }
+        ]
+      };
 
-    if (company && company.additional_services && company.additional_services.solicitor) {
-      sectionsConfig.sections.map((section, i) => {
-        if (section.id === 'solicitor') {
-          sectionsConfig.sections.splice(i, 1);
-        }
-      });
+      if (company && company.additional_services_required) {
+        sectionsConfig.sections.unshift({
+          'title': sectionsContent['step1'].title,
+          'imageAltText': sectionsContent['step1'].imageAltText,
+          'copy': sectionsContent['step1'].copy,
+          'path': '/company-design/add-services',
+          //'status': progress && progress.additional_services_status,
+          'image': ServicesImage,
+        });
+      }
+
+      if (company && company.additional_services && company.additional_services.solicitor) {
+        sectionsConfig.sections.map((section, i) => {
+          if (section.id === 'solicitor') {
+            sectionsConfig.sections.splice(i, 1);
+          }
+        });
+      }
+
     }
 
     return (
       <Fragment>
-          <Layout secure>
-            <div className="process-tracker" role="fullscreen company-design">
-              <h3 className="process-tracker--title">
-                {t('companyDesign.progressTracker.inProgressTitle', { count: sectionsConfig.sections.length })}
-              </h3>
-              <div className="process-tracker-sections">
-                {sectionsConfig.sections.map((section, idx) => (
-                  <ProcessSection 
-                    key={`${idx} + ${section.title}`} 
-                    {...section} 
-                  />)
-                )}
-              </div>
-            </div>
-          </Layout>
-        </Fragment>
+        <Layout secure>
+          <div className="process-tracker" role="fullscreen company-design">
+            { company &&
+              <>
+                <h3 className="process-tracker--title">
+                  {t('companyDesign.progressTracker.inProgressTitle', { count: sectionsConfig.sections.length })}
+                </h3>
+                <div className="process-tracker-sections">
+                  {sectionsConfig.sections.map((section, idx) => (
+                    <ProcessSection 
+                      key={`${idx} + ${section.title}`} 
+                      {...section} 
+                    />)
+                  )}
+                </div>
+              </>
+            }
+          </div>
+        </Layout>
+      </Fragment>
     );
   }
 }
