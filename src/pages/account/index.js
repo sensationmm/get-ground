@@ -285,25 +285,27 @@ class Account extends Component {
                 <p>{address && address.join(', ')}</p>
               </div>
 
-              <div className="company-overview-section">
-                <h2>{ t('profile.sections.payment') }</h2>
-                <div className="payment">
-                  { cardImage }
-                  <table>
-                    <tr><th>{ t('profile.sections.paymentCard') }</th><td>{ paymentCard.last4 }</td></tr>
-                    <tr><th>{ t('profile.sections.paymentExp') }</th><td>{ paymentCard.exp_month }/{ paymentCard.exp_year }</td></tr>
-                  </table>
-                </div>
+              {paymentCard.brand && 
+                <div className="company-overview-section">
+                  <h2>{ t('profile.sections.payment') }</h2>
+                  <div className="payment">
+                    { cardImage }
+                    <table>
+                      <tr><th>{ t('profile.sections.paymentCard') }</th><td>{ paymentCard.last4 }</td></tr>
+                      <tr><th>{ t('profile.sections.paymentExp') }</th><td>{ paymentCard.exp_month }/{ paymentCard.exp_year }</td></tr>
+                    </table>
+                  </div>
 
-                <div className="account-edit">
-                  <Button
-                    classes="inline chat"
-                    data-test="live-chat-payment"
-                    label={ t('profile.edit') }
-                    onClick={() => this.handleLiveChat('Payment')}
-                  />
+                  <div className="account-edit">
+                    <Button
+                      classes="inline chat"
+                      data-test="live-chat-payment"
+                      label={ t('profile.edit') }
+                      onClick={() => this.handleLiveChat('Payment')}
+                    />
+                  </div>
                 </div>
-              </div>
+              }
             </div>
           </div>
           
