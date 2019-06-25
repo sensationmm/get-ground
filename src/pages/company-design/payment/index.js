@@ -83,7 +83,7 @@ export class Payment extends Component {
       return PaymentService.makePayment(stripeToken, numberOfCompanies).then((response) => {
         hideLoader();
         if(response.status === 201) {
-          navigate('/onboarding/confirmation');
+          navigate('/company-design');
         } else if(response.status === 400) {
           this.setState({
             ...this.state,

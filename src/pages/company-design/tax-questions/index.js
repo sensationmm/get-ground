@@ -43,13 +43,13 @@ export class TaxQuestions extends Component {
   }
 
   submitTaxAnswers = () => {
-    const { showLoader, hideLoader, t, form: { values } } = this.props;
+    const { showLoader, hideLoader, t, form: { values }, company } = this.props;
 
     /* istanbul ignore else */
     if (formUtils.validateForm(this.config)) {
       showLoader();
 
-      CompanyService.updateCompany(values, 'tax_questions', 1).then((response) => {
+      CompanyService.updateCompany(values, 'tax_questions', company.id).then((response) => {
         hideLoader();
         /* istanbul ignore else */
         if (response.status === 200) {
@@ -63,14 +63,14 @@ export class TaxQuestions extends Component {
   }
 
   saveAndExit = async () => {
-    const { showLoader, hideLoader, form: { errors, values } } = this.props;
+    const { showLoader, hideLoader, form: { errors, values }, company } = this.props;
 
     await Object.keys(errors).forEach(async (key) => {
       await formUtils.updateValue(key, '');
     });
 
     showLoader();
-    CompanyService.updateCompany(values, 'tax_questions', 1).then((response) => {
+    CompanyService.updateCompany(values, 'tax_questions', company.id).then((response) => {
       hideLoader();
       if (response.status === 200) {
         navigate('/company-design');
@@ -191,7 +191,7 @@ TaxQuestions.propTypes = {
 
 const mapStateToProps = state => ({
   form: state.form,
-  company: state.companies.find(company => company.id === 1)
+  company: state.companies.find(company => company.id === state.activeCompany)
 });
 
 const actions = {

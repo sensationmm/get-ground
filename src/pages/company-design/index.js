@@ -85,7 +85,7 @@ export class ProcessTracker extends React.Component {
       ]
     };
 
-    if (company.additional_services_required) {
+    if (company && company.additional_services_required) {
       sectionsConfig.sections.unshift({
         'title': sectionsContent['step1'].title,
         'imageAltText': sectionsContent['step1'].imageAltText,
@@ -96,7 +96,7 @@ export class ProcessTracker extends React.Component {
       });
     }
 
-    if (company.additional_services && company.additional_services.solicitor) {
+    if (company && company.additional_services && company.additional_services.solicitor) {
       sectionsConfig.sections.map((section, i) => {
         if (section.id === 'solicitor') {
           sectionsConfig.sections.splice(i, 1);
@@ -124,8 +124,7 @@ export class ProcessTracker extends React.Component {
 
 const mapStateToProps = (state) => ({
   isLoading: state.loader,
-  // company: state.companies.find(company => company.id === state.activeCompany)
-  company: state.companies.find(company => company.id === 1)
+  company: state.companies.find(company => company.id === state.activeCompany)
 });
 
 ProcessTracker.propTypes = {

@@ -68,8 +68,8 @@ class ShareholderDetails extends Component {
 
   componentDidMount() {
     const { company: { shareholder_details }} = this.props;
-    const shareholders = shareholder_details.collection;
-    const populatedShareholders = shareholder_details.collection.length
+    const shareholders = shareholder_details.collection === null ? [{...shareholder}] : shareholder_details.collection;
+    const populatedShareholders = shareholders.length;
 
     for (let i = shareholders.length; i < 8; i++) {
       shareholders.push({...shareholder})
@@ -80,7 +80,7 @@ class ShareholderDetails extends Component {
       {...shareholder},{...shareholder},{...shareholder},{...shareholder}
     ], shareholders);
 
-    if (shareholder_details.collection.length > 1) {
+    if (populatedShareholders > 1) {
       this.setState({ shareholders: populatedShareholders });
     }
   }
@@ -278,7 +278,7 @@ class ShareholderDetails extends Component {
    * @return {void} saveShareholders
    */
   saveShareholders = async (isSaveAndExit) => {
-    const { form, showLoader, hideLoader } = this.props;
+    const { form, showLoader, hideLoader, company } = this.props;
     const { values, errors } = form;
     const shareholders = values;
 
@@ -299,7 +299,7 @@ class ShareholderDetails extends Component {
     }
 
     showLoader();
-    CompanyService.updateCompany(payload, 'shareholder_details', 1).then((response) => {
+    CompanyService.updateCompany(payload, 'shareholder_details', company.id).then((response) => {
       hideLoader();
       if (response.status === 200) {
         if(isSaveAndExit) {
@@ -487,7 +487,7 @@ ShareholderDetails.propTypes = {
 const mapStateToProps = (state) => ({
   form: state.form,
   user: state.user,
-  company: state.companies.find(company => company.id === 1)
+  company: state.companies.find(company => company.id === state.activeCompany),
 });
 
 const actions = {

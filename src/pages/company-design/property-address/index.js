@@ -106,7 +106,7 @@ class PropertyAddress extends Component {
   };
 
   initFormValidation = /* istanbul ignore next */ () => {
-    const { showLoader, hideLoader, t, form } = this.props;
+    const { showLoader, hideLoader, t, form, company } = this.props;
     const { values: { premise, street, posttown, postcode, is_confirmed, country_name } } = form;
 
     if (formUtils.validateForm(this.config)) {
@@ -123,7 +123,7 @@ class PropertyAddress extends Component {
         is_confirmed
       }
 
-      CompanyService.updateCompany(payload, 'property_address', 1).then((response) => {
+      CompanyService.updateCompany(payload, 'property_address', company.id).then((response) => {
         hideLoader();
         if (response.status === 200) {
           navigate('/company-design/purchase-details');
@@ -157,7 +157,7 @@ class PropertyAddress extends Component {
   handleCountryChange = country => window.addressNow.setCountry(country);
 
   saveAndExit = async () => {
-    const { showLoader, hideLoader, form } = this.props;
+    const { showLoader, hideLoader, form, company } = this.props;
     const { values: { premise, street, posttown, postcode, is_confirmed, country_name }, errors } = form;
 
     formUtils.validateForm(this.config);
@@ -179,7 +179,7 @@ class PropertyAddress extends Component {
 
     showLoader();
 
-    CompanyService.updateCompany(payload, 'property_address', 1).then((response) => {
+    CompanyService.updateCompany(payload, 'property_address', company.id).then((response) => {
       hideLoader();
       if (response.status === 200) {
         navigate('/company-design');
@@ -330,7 +330,7 @@ PropertyAddress.propTypes = {
 
 const mapStateToProps = state => ({
   form: state.form,
-  company: state.companies.find(company => company.id === 1)
+  company: state.companies.find(company => company.id === state.activeCompany)
 });
 
 const actions = { showLoader, hideLoader };

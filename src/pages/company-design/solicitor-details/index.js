@@ -62,13 +62,13 @@ class SolicitorDetails extends Component {
   }
 
   saveDetails = () => {
-    const { showLoader, hideLoader, form } = this.props;
+    const { showLoader, hideLoader, form, company } = this.props;
     const { values } = form;
 
     if(formUtils.validateForm(this.config)) {
       showLoader();
 
-      CompanyService.updateCompany(values, 'solicitor_details', 1).then((response) => {
+      CompanyService.updateCompany(values, 'solicitor_details', company.id).then(() => {
         hideLoader();
         navigate('/company-design/shareholder-details');
       });
@@ -76,7 +76,7 @@ class SolicitorDetails extends Component {
   }
 
   saveAndExit = async () => {
-    const { showLoader, hideLoader, form: { errors, values } } = this.props;
+    const { showLoader, hideLoader, form: { errors, values }, company } = this.props;
 
     await Object.keys(errors).forEach(async (key) => {
       await formUtils.updateValue(key, '');
@@ -84,7 +84,7 @@ class SolicitorDetails extends Component {
 
     showLoader();
 
-    CompanyService.updateCompany(values, 'solicitor_details', 1).then((response) => {
+    CompanyService.updateCompany(values, 'solicitor_details', company.id).then((response) => {
       hideLoader();
       if (response.status === 200) {
         navigate('/company-design');
@@ -238,7 +238,7 @@ SolicitorDetails.propTypes = {
 const mapStateToProps = state => ({
   modalIsOpen: state.modal.isOpen,
   activeCompany: state.activeCompany,
-  company: state.companies.find(company => company.id === 1),
+  company: state.companies.find(company => company.id === state.activeCompany),
   form: state.form
 });
 

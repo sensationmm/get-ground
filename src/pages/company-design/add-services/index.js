@@ -33,20 +33,34 @@ export class AdditionalServices extends Component {
   }
 
   componentDidMount() {
-    formUtils.initFormState({
-      mortgage: null,
-      insurance: null,
-      management: null,
-      solicitor: null
-    }, this.props.company.additional_services);
+    if (this.props.company !== undefined) {
+      formUtils.initFormState({
+        mortgage: null,
+        insurance: null,
+        management: null,
+        solicitor: null
+      }, this.props.company.additional_services);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.company === undefined && this.props.company !== undefined) {
+      formUtils.initFormState({
+        mortgage: null,
+        insurance: null,
+        management: null,
+        solicitor: null
+      }, this.props.company.additional_services);
+    }
+
   }
 
   submitAdditionalServices = () => {
-    const { form: { values }, showLoader, hideLoader } = this.props;
+    const { form: { values }, showLoader, hideLoader, company } = this.props;
 
     showLoader();
 
-    CompanyService.updateCompany(values, 'additional_services', 1).then((response) => {
+    CompanyService.updateCompany(values, 'additional_services', company.id).then((response) => {
       hideLoader();
       if (response.status === 200) {
         navigate('/company-design');
@@ -188,7 +202,7 @@ AdditionalServices.propTypes = {
 const mapStateToProps = state => ({
   modalIsOpen: state.modal.isOpen,
   form: state.form,
-  company: state.companies.find(company => company.id === 1)
+  company: state.companies.find(company => company.id === state.activeCompany)
 });
 
 const actions = {
