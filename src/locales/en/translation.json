@@ -995,6 +995,8 @@
       "email": "Email address",
       "homeAddress": "Home address",
       "payment": "Payment methods",
+      "paymentCard": "Card",
+      "paymentExp": "Expiry",
       "passport": "Passport documents",
       "proofAddress": "Proof of address",
       "signature": "Signature"

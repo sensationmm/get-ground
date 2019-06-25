@@ -39,4 +39,26 @@
     border: 1px solid $shadow;
     padding: $padding-vertical $padding-horizontal;
   }
+
+  .payment {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    table {
+      font-size: 16px;
+
+      th {
+        font-weight: 400;
+        text-align: left;
+        padding-right: 10px;
+      }
+    }
+
+    img {
+      width: 40px;
+      height: 25px;
+      margin-right: 20px;
+    }
+  }
 }
