@@ -64,6 +64,7 @@ body {
   padding: $padding-vertical (($padding-horizontal-unit * 2) + 0px);
   // min-height: calc(100vh - #{$header-height + ($padding-vertical-unit * 4) + 0px});
   padding-top: calc((#{$header-height + ($padding-vertical-unit * 2) + 0px + $padding-vertical}));
+  padding-bottom: 50px;
   background: $white;
 
   .main {
@@ -171,7 +172,7 @@ b {
   .brochure {
     h1 {
       font-size: 40px;
-      height: 200px;
+      height: 100px;
       width: 60%;
       margin: 0 0 $padding-vertical 0;
       padding: $padding-vertical 0;
@@ -182,8 +183,11 @@ b {
     }
 
     p {
-      width: 60%;
       text-align: left;
+      
+      &.wrap {
+        width: 60%;
+      }
     }
     
     img.hero-image {
@@ -192,8 +196,20 @@ b {
       height: 200px;
       top: 30px;
       right: 30px;
-      background: url('../../assets/images/oval-dark.svg') center center no-repeat;
+      background: url('../../assets/images/oval.svg') center center no-repeat;
       background-size: contain;
+    }
+
+    &.account {
+      img.hero-image {
+        background-image: url('../../assets/images/oval-dark.svg');
+      }
+    }
+
+    &.markdown {
+      img.hero-image {
+        display: none;
+      }
     }
   }
 

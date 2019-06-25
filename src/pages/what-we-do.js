@@ -17,7 +17,7 @@ const WhatWeDo = () => {
           <img className="hero-image" src={Image} alt="Hands holding Phone" data-test="whatWeDo-img" />
           <h1 data-test="whatWeDo-title" >{t('whatWeDo.title')}</h1>
           <div className="whatWeDo-content">
-            <p data-test="whatWeDo-content-first" >{t('whatWeDo.content.first')}</p>
+            <p data-test="whatWeDo-content-first" className="wrap" >{t('whatWeDo.content.first')}</p>
             <p data-test="whatWeDo-content-second" >{t('whatWeDo.content.second')}</p>
             <p data-test="whatWeDo-content-third" >{t('whatWeDo.content.third')}</p>
             <p data-test="whatWeDo-content-fourth" >{t('whatWeDo.content.fourth')}</p>

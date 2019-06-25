@@ -1082,5 +1082,10 @@
     }
 
   },
-  "showAll": "Show all"
+  "showAll": "Show all",
+  "404": {
+    "title": "Oops!",
+    "text": "We are sorry but that page could not be found. Click the  button below to return to the homepage, or use the menu above.",
+    "cta": "Go to Homepage"
+  }
 }

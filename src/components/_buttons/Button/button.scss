@@ -165,11 +165,17 @@
 
 @media screen and (min-width: $breakpoint-desktop) {
   .button {
-    padding: 6px 20px;
-    font-size: 14px;
+    padding: 10px 20px;
+    font-size: 18px;
     
     &.full {
       max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    &.small.opaque {
+      max-width: 220px;
       margin-left: auto;
       margin-right: auto;
     }

@@ -207,8 +207,6 @@ class CreateAccount extends Component {
               fullWidth
               onClick={() => this.createAccount()}
             />
-
-            <Button classes="secondary" label={ t('onBoarding.createAccount.ctaSecondary') } fullWidth />
           </Form>
 
           <ModalWrapper
