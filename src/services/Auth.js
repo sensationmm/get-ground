@@ -43,7 +43,7 @@ class AuthService extends BaseService {
 
       window.LC_API.set_custom_variables(login_variables);
 
-      setTimeout(function() {
+      setTimeout(function() { // jwt delayed 1 sec for bots
         AccountService.getDocuments();
       }, 750);
     });
@@ -133,7 +133,8 @@ class AuthService extends BaseService {
         { name: 'Email', value: email }
       ];
 
-      window.LC_API.set_custom_variables(login_variables);
+      // TODO this fails!
+      // window.LC_API.set_custom_variables(login_variables);
 
     });
   };

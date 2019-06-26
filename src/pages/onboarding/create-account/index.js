@@ -68,7 +68,7 @@ class CreateAccount extends Component {
       AccountService.createAccount(email, password, optin).then(response => {
         hideLoader();
         if(response.status === 201) {
-          navigate('/onboarding/verify_email', {
+          navigate('/verify_email', {
             state: {
               passwordReset: false,
               email
