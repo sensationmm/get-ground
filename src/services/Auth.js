@@ -43,7 +43,7 @@ class AuthService extends BaseService {
 
       window.LC_API.set_custom_variables(login_variables);
 
-      setTimeout(function() {
+      setTimeout(function() { // jwt delayed 1 sec for bots
         AccountService.getDocuments();
       }, 750);
     });
@@ -126,14 +126,15 @@ class AuthService extends BaseService {
 
       const { first_name, middle_name, last_name, email } = response.data.user
 
-      const login_variables = [
-        { name: 'First Name', value: first_name },
-        { name: 'Middle Name', value: middle_name },
-        { name: 'Last Name', value: last_name },
-        { name: 'Email', value: email }
-      ];
+      // const login_variables = [
+      //   { name: 'First Name', value: first_name },
+      //   { name: 'Middle Name', value: middle_name },
+      //   { name: 'Last Name', value: last_name },
+      //   { name: 'Email', value: email }
+      // ];
 
-      window.LC_API.set_custom_variables(login_variables);
+      // TODO this fails!
+      // window.LC_API.set_custom_variables(login_variables);
 
     });
   };
