@@ -62,6 +62,7 @@ describe('process-tracker', () => {
         t: jest.fn().mockReturnValue(mockSections),
       },
       company: {
+        id: 1,
         additional_services_required: false
       },
       showLoader: showLoaderMock,
@@ -81,6 +82,7 @@ describe('process-tracker', () => {
     wrapper = setup(ProcessTracker, {
       ...props,
       company: {
+        id: 1,
         additional_services_required: true,
         additional_services: {
           solicitor: false
