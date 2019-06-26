@@ -19,6 +19,7 @@ import companyService from 'src/services/Company'
 const CompanyService = new companyService()
 
 import './process-tracker.scss'
+import { navigate } from 'gatsby';
 
 /**
  * ProcessTracker
@@ -45,14 +46,16 @@ export class ProcessTracker extends React.Component {
   }
 
   getProgress = () => {
-    const { company: { id }, showLoader, hideLoader } = this.props;
+    const { company, showLoader, hideLoader } = this.props;
 
     showLoader();
 
-    if(id) {
-      CompanyService.getCompany(id).then(() => {
+    if(company && company.id) {
+      CompanyService.getCompany(company.id).then(() => {
         hideLoader();
       })
+    } else {
+      navigate('/dashboard');
     }
   }
 
@@ -123,7 +126,7 @@ export class ProcessTracker extends React.Component {
           'imageAltText': sectionsContent['step1'].imageAltText,
           'copy': sectionsContent['step1'].copy,
           'path': '/company-design/add-services',
-          //'status': progress && progress.additional_services_status,
+          'status': progress && progress.additional_services_status,
           'image': ServicesImage,
         });
       }
