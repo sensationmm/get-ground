@@ -105,7 +105,7 @@ class CreateAccount extends Component {
     }
 
     ModalService.fetchModalContent(target).then(response => {
-      self.setState({ modalTitle: response.data.title, modalMarkdown: response.data.markdown_text });
+      self.setState({ modalMarkdown: response.data.markdown_text });
 
       hideLoader();
       showModal();
