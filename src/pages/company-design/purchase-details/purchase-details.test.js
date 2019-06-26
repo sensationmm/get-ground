@@ -5,7 +5,7 @@ import formUtils from 'src/utils/form';
 import { navigate } from 'gatsby';
 
 import { RawComponent as PurchaseDetails, CompanyService } from './index';
-import Button from 'src/components/_buttons/Button/Button';
+// import Button from 'src/components/_buttons/Button/Button';
 import Datepicker from 'src/components/Datepicker/Datepicker';
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import { initialState as ReduxFormMock } from 'src/state/reducers/form';
@@ -161,14 +161,14 @@ describe('purchase details', () => {
       expect(hidden).toEqual(false);
     });
 
-    test('expect showNextInstallment to be called when button is clicked', () => {
-      const component = findByTestAttr(wrapper, 'container-company-design-purchase-details');
-      wrapper.instance().showNextInstallment = jest.fn();
+    // test('expect showNextInstallment to be called when button is clicked', () => {
+    //   const component = findByTestAttr(wrapper, 'container-company-design-purchase-details');
+    //   wrapper.instance().showNextInstallment = jest.fn();
 
-      component.find(Button).at(0).props().onClick();
+    //   component.find(Button).at(0).props().onClick();
 
-      expect(wrapper.instance().showNextInstallment).toHaveBeenCalled();
-    });
+    //   expect(wrapper.instance().showNextInstallment).toHaveBeenCalled();
+    // });
 
     test('expect closeDatePicker to be called when the Datepicker is closed', () => {
       const component = findByTestAttr(wrapper, 'container-company-design-purchase-details');

@@ -87,7 +87,7 @@ export class ProcessTracker extends React.Component {
             'imageAltText': sectionsContent['step4'].imageAltText,
             'copy': sectionsContent['step4'].copy,
             'path': '/company-design/solicitor-details',
-            //'status': progress && progress.solicitor_details_status,
+            'status': progress && progress.solicitor_details_status,
             'image': SolicitorImage,
           },
           {

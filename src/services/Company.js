@@ -47,7 +47,10 @@ class CompanyService extends BaseService {
       method: 'get'
     };
     
-    return this.doRequest(config);
+    return this.doRequest(config, (response) => {
+      const { data: { id, progress }} = response;
+      store.dispatch(companyUpdate(id, 'progress', progress));
+    });
   };
 
   /**
