@@ -1,6 +1,11 @@
 @import 'src/styles/modules/_variables.scss';
 
 .landing {
+
+  .heading {
+    margin-bottom: 20px;
+  }
+
   h1 {
     font-size: 44px;
     font-weight: 600;
@@ -11,7 +16,7 @@
   }
   &-content {
     p {
-      margin-bottom: 10px;
+      margin-bottom: 30px;
       font-size: 20px;
       font-weight: 300;
       &:last-child {
@@ -26,7 +31,7 @@
     .heading {
       width: 60%;
       padding-right: 50px;
-      height: 300px;
+      min-height: 300px;
       display: flex;
       flex-direction: column;
       justify-content: center;
