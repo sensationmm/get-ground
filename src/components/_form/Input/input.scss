@@ -65,6 +65,11 @@
       background: $disabled;
       box-shadow: none;
     }
+
+    &#datepicker-field {
+      background: none;
+      border: 1px solid $border;
+    }
   }
 
   textarea {
