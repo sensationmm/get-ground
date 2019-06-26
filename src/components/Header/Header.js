@@ -44,7 +44,7 @@ const Header = (props) => {
               </div>
             }
 
-            {(children && isMobile)
+            {children
               ? <div data-test="children" className={classNames('header-children', {
                 'disabled': childrenDisabled
               })}>{children}</div>
