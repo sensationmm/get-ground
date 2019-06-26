@@ -124,7 +124,7 @@ class AuthService extends BaseService {
       store.dispatch(userLogin(response.data.user));
       store.dispatch(saveAuth(response.data.token));
 
-      const { first_name, middle_name, last_name, email } = response.data.user
+      // const { first_name, middle_name, last_name, email } = response.data.user
 
       // const login_variables = [
       //   { name: 'First Name', value: first_name },
