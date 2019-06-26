@@ -8,6 +8,10 @@
     @extend .slick-slide--image-wrapper;
   }
 
+  h1 { 
+    color: $text;
+  }
+
   .button {
     display: block;
 
@@ -29,7 +33,6 @@
 }
 
 .documents {
-  color: $white;
   .confirmation--image-wrapper {
     background: $background-2;
   }
