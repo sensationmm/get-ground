@@ -17,14 +17,14 @@ import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import Button from 'src/components/_buttons/Button/Button';
 import RadioGroup from 'src/components/_form/RadioGroup/RadioGroup';
 import Datepicker from 'src/components/Datepicker/Datepicker';
+import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
-import propertyService from 'src/services/Property';
-export const PropertyService = new propertyService();
+import companyService from 'src/services/Company';
+export const CompanyService = new companyService();
 
-import addIcon from 'src/assets/images/add-icon.svg';
-import 'src/styles/pages/purchase-details.scss';
+// import addIcon from 'src/assets/images/add-icon.svg';
 
 /**
   * PurchaseDetails
@@ -46,22 +46,54 @@ class PurchaseDetails extends Component {
   }
   
   componentDidMount() {
+    const { company: { purchase_details }} = this.props;
+    const payment = purchase_details.payment_schedule;
+    const completionDate = purchase_details.completion_date;
+    const exchangeDate = purchase_details.expected_exchange_date;
+    const reduxFields = {
+      amount_in_cents: purchase_details.price.amount_in_cents,
+      is_new_build: purchase_details.is_new_build,
+      expected_exchange_date: exchangeDate === null ? '' : moment(exchangeDate).format('Do MMMM YYYY'),
+      completion_date: completionDate === null ? '' : moment(completionDate).format('Do MMMM YYYY'),
+      depositDueDate: this.setReduxDateValues(payment, 0),
+      depositAmount: payment === null ? '' : payment[0].amount.amount_in_cents,
+      firstInstallmentDate: this.setReduxDateValues(payment, 1),
+      firstInstallmentAmount: payment === null ? '' : payment[1].amount.amount_in_cents,
+      // secondInstallmentDate: this.setReduxDateValues(payment, 2),
+      // secondInstallmentAmount: payment === null ? '' : payment[2].amount.amount_in_cents
+    }
+    
     formUtils.initFormState({
-      priceOfProperty: '',
-      newBuild: '',
-      completionDate: '',
+      amount_in_cents: '',
+      is_new_build: null,
+      completion_date: '',
       depositDueDate: '',
       depositAmount: '',
-      exchangeDate: '',
+      expected_exchange_date: '',
       firstInstallmentDate: '',
       firstInstallmentAmount: '',
-      secondInstallmentDate: '',
-      secondInstallmentAmount: ''
-    });
+      // secondInstallmentDate: '',
+      // secondInstallmentAmount: ''
+    }, reduxFields);
   }
 
   componentWillUnmount() {
     formUtils.clearFormState();
+  }
+
+  /**
+   * setReduxDateValues
+   * @param {Array} payment - array of payments
+   * @param {number} index - index of payment in array
+   * @return {void} setReduxDateValues
+   */
+  setReduxDateValues = (payment, index) => {
+    if (payment === null || (payment && payment[index].due_date === null) || 
+      (payment && payment[index].due_date === undefined)) {
+      return '';
+    } else {
+      return moment(payment[index].due_date).format('Do MMMM YYYY');
+    }
   }
 
   /**
@@ -87,12 +119,12 @@ class PurchaseDetails extends Component {
     formUtils.setNativeValue(element, moment(date).format('Do MMMM YYYY'));
     element.dispatchEvent(new Event('input', { bubbles: true }));
 
-    this.setState({ [focusedDateField]: moment(date).format('L'), isDatepickerOpen: false });
+    this.setState({ [focusedDateField]: moment(date).format('YYYY-MM-DDTHH:mm:ss+00:00'), isDatepickerOpen: false });
   }
 
   checkElementHidden = () => {
-    const { form: { values: { newBuild } } } = this.props;
-    return newBuild === '' || newBuild === 'no';
+    const { form: { values: { is_new_build } } } = this.props;
+    return is_new_build === false || is_new_build === null;
   }
 
   showNextInstallment = /* istanbul ignore next */ () => {
@@ -108,19 +140,117 @@ class PurchaseDetails extends Component {
     installmentDateAmount[extraInstallmentFieldsShowing].style.display = 'block';
   }
 
-  submitPurchaseDetails = () => {
-    const { showLoader, hideLoader, t, form, additionalServices } = this.props;
+  /**
+   * setPaymentScheduleDate
+   * @param {string} stateKeyValue - date string
+   * @param {number} index - index of payment in array
+   * @return {string} - date
+   */
+  setPaymentScheduleDate = (stateKeyValue, index) => {
+    const { company: { purchase_details }} = this.props;
+    let date;
+
+    if (!purchase_details.payment_schedule) {
+      date = stateKeyValue ? stateKeyValue : null
+    } else {
+      date = stateKeyValue ? stateKeyValue : purchase_details.payment_schedule[index].due_date;
+    }
+
+    return date;
+  }
+
+  /**
+   * handleSubmitPurchaseDetails
+   * @param {boolean} isSaveAndExit - whether the save and exit button has fired this or not
+   * @return {void} handleSubmitPurchaseDetails
+   */
+  handleSubmitPurchaseDetails = async (isSaveAndExit) => {
+    const { 
+      showLoader, 
+      form: { values, errors },  
+      company: { purchase_details } 
+    } = this.props;
+
+    const paymentSchedule = [
+      {
+        type: 'deposit',
+        due_date: this.setPaymentScheduleDate(this.state.depositDueDate, 0),
+        amount: {
+          amount_in_cents: values.depositAmount,
+          currency: 'GBP'
+        }
+      },
+      {
+        type: 'first_installment',
+        due_date: this.setPaymentScheduleDate(this.state.firstInstallmentDate, 1),
+        amount: {
+          amount_in_cents: values.firstInstallmentAmount,
+          currency:'GBP'
+        }
+      }
+    ];
+
+    const payload = {
+      price: {
+        amount_in_cents: values.amount_in_cents,
+      },
+      is_new_build: values.is_new_build,
+      completion_date:  this.state.completionDate ? 
+                        this.state.completionDate : 
+                        purchase_details.completion_date,
+      expected_exchange_date: this.state.exchangeDate ? this.state.exchangeDate : purchase_details.expected_exchange_date,
+      payment_schedule: paymentSchedule
+    };
+
+    if (isSaveAndExit) {
+      this.saveAndExit(payload, errors);
+      showLoader();
+    } else {
+      this.submitPurchaseDetails(payload);
+    }
+  }
+
+  /**
+   * saveAndExit
+   * @param {object} payload - request object
+   * @param {object} errors - form errors
+   * @return {void} saveAndExit
+   */
+  saveAndExit = async (payload, errors) => {
+    const { hideLoader, company } = this.props;
+
+    formUtils.validateForm(this.config);
+
+    await Object.keys(errors).forEach(async (key) => {
+      await formUtils.updateValue(key, '');
+    });
+
+    CompanyService.updateCompany(payload, 'purchase_details', company.id).then((response) => {
+      hideLoader();
+      if (response.status === 200) {
+        navigate('/company-design');
+      }
+    });
+  }
+
+  /**
+   * submitPurchaseDetails
+   * @param {object} payload - request object
+   * @return {void} submitPurchaseDetails
+   */
+  submitPurchaseDetails = payload => {
+    const { hideLoader, showLoader, t, company } = this.props;
 
     /* istanbul ignore else */
     if (formUtils.validateForm(this.config)) {
       showLoader();
 
-      PropertyService.SavePurchaseDetails(form.values).then((response) => {
+      CompanyService.updateCompany(payload, 'purchase_details', company.id).then((response) => {
         hideLoader();
         /* istanbul ignore else */
         if (response.status === 200) {
 
-          if (additionalServices.solicitor === true) {
+          if (company.additional_services.solicitor === true) {
             navigate('/company-design/shareholder-details')
           } else {
             navigate('/company-design/solicitor-details');
@@ -131,24 +261,24 @@ class PurchaseDetails extends Component {
         }
       });
     }
-
   }
 
   render() {
-    const { t, form, additionalServices } = this.props;
+    const { t, form, company } = this.props;
+    // const payment_schedule = company ? company.purchase_details.payment_schedule : []
     const { isDatepickerOpen } = this.state;
     const {
       values: {
-        priceOfProperty,
-        newBuild,
-        completionDate,
+        amount_in_cents,
+        is_new_build,
+        completion_date,
         depositDueDate,
         depositAmount,
         firstInstallmentDate,
         firstInstallmentAmount,
-        secondInstallmentDate,
-        secondInstallmentAmount,
-        exchangeDate
+        // secondInstallmentDate,
+        // secondInstallmentAmount,
+        expected_exchange_date
       },
       showErrorMessage,
       errors
@@ -157,51 +287,51 @@ class PurchaseDetails extends Component {
     this.radioConfig = [
       {
         label: 'no',
-        value: 'no'
+        value: false
       },
       {
         label: 'yes',
-        value: 'yes'
+        value: true
       }
     ]
         
     this.config = [
       {
-        stateKey: 'priceOfProperty',
+        stateKey: 'amount_in_cents',
         component: InputNumber,
         label: t('companyDesign.purchaseDetails.form.priceOfPropertyLabel'),
-        value: priceOfProperty,
+        value: amount_in_cents,
         validationFunction: 'validateRequired',
         note: t('companyDesign.purchaseDetails.form.priceOfPropertyNote'),
       },
       {
-        stateKey: 'newBuild',
+        stateKey: 'is_new_build',
         component: RadioGroup,
         groupLabel: t('companyDesign.purchaseDetails.form.newBuildLabel'),
         name: 'newBuildRadio',
         items: this.radioConfig,
-        value: newBuild
+        value: is_new_build
       },
       {
-        stateKey: 'exchangeDate',
+        stateKey: 'expected_exchange_date',
         component: InputText,
         label: t('companyDesign.purchaseDetails.form.expectedExchangeDateLabel'),
-        value: exchangeDate,
+        value: expected_exchange_date,
         validationFunction: 'validateRequired',
         onFocus: this.openDatePicker,
         id: 'exchangeDate',
-        hidden: newBuild == '',
+        hidden: is_new_build == null,
         readOnly: true
       },
       {
-        stateKey: 'completionDate',
+        stateKey: 'completion_date',
         component: InputText,
         label: t('companyDesign.purchaseDetails.form.completionDateLabel'),
-        value: completionDate,
+        value: completion_date,
         validationFunction: 'validateRequired',
         onFocus: this.openDatePicker,
         id: 'completionDate',
-        hidden: newBuild === '',
+        hidden: is_new_build === null,
         readOnly: true
       },
       {
@@ -249,31 +379,37 @@ class PurchaseDetails extends Component {
         wrapperClass: 'background-gradient',
         hidden: this.checkElementHidden()
       },
-      {
-        stateKey: 'secondInstallmentDate',
-        component: InputText,
-        label: t('companyDesign.purchaseDetails.form.secondInstallmentDateLabel'),
-        value: secondInstallmentDate,
-        onFocus: this.openDatePicker,
-        id: 'secondInstallmentDate',
-        wrapperClass: 'installment-date',
-        readOnly: true
-      },
-      {
-        stateKey: 'secondInstallmentAmount',
-        component: InputNumber,
-        label: t('companyDesign.purchaseDetails.form.secondInstallmentLabel'),
-        value: secondInstallmentAmount,
-        wrapperClass: 'background-gradient installment-amount',
-      },
-      {
-        component: Button,
-        onClick: () => this.showNextInstallment(),
-        icon: addIcon,
-        small: true,
-        label: t('companyDesign.purchaseDetails.form.addButton'),
-        hidden: this.checkElementHidden()
-      },
+      // {
+      //   stateKey: 'secondInstallmentDate',
+      //   component: InputText,
+      //   label: t('companyDesign.purchaseDetails.form.secondInstallmentDateLabel'),
+      //   value: secondInstallmentDate,
+      //   onFocus: this.openDatePicker,
+      //   id: 'secondInstallmentDate',
+      //   wrapperClass: 'installment-date',
+      //   readOnly: true,
+      //   hidden: this.checkElementHidden() ||
+      //           (is_new_build === true && payment_schedule === null) ||
+      //           (is_new_build === true && payment_schedule && payment_schedule[2].due_date === '')
+      // },
+      // {
+      //   stateKey: 'secondInstallmentAmount',
+      //   component: InputNumber,
+      //   label: t('companyDesign.purchaseDetails.form.secondInstallmentLabel'),
+      //   value: secondInstallmentAmount,
+      //   wrapperClass: 'background-gradient installment-amount',
+      //   hidden: this.checkElementHidden() ||
+      //           (is_new_build === true && payment_schedule === null) ||
+      //           (is_new_build === true && payment_schedule && payment_schedule[2].due_date === '')
+      // },
+      // {
+      //   component: Button,
+      //   onClick: () => this.showNextInstallment(),
+      //   icon: addIcon,
+      //   small: true,
+      //   label: t('companyDesign.purchaseDetails.form.addButton'),
+      //   hidden: this.checkElementHidden()
+      // },
       {
         component: Datepicker,
         isDatepickerOpen: isDatepickerOpen,
@@ -284,9 +420,11 @@ class PurchaseDetails extends Component {
       },
     ];
 
+    const headerActions = <ButtonHeader onClick={() => this.handleSubmitPurchaseDetails(true)} label={t('header.buttons.saveAndExit')} />
+
     return (
       <>
-      <Layout secure>
+      <Layout headerActions={headerActions} secure>
         <div className="company-design-purchase-details" data-test="container-company-design-purchase-details">
           <h1>{t('companyDesign.purchaseDetails.heading')}</h1>
 
@@ -311,7 +449,7 @@ class PurchaseDetails extends Component {
                 data-test="skip-button"
                 label={t('companyDesign.purchaseDetails.form.skipButton')}
                 onClick={() => {
-                  if (additionalServices.solicitor === true) {
+                  if (company.additional_services.solicitor === true) {
                     navigate('/company-design/shareholder-details')
                   } else {
                     navigate('/company-design/solicitor-details');
@@ -325,7 +463,7 @@ class PurchaseDetails extends Component {
               data-test="submit-button"
               label={t('companyDesign.purchaseDetails.form.nextButton')}
               fullWidth
-              onClick={() => this.submitPurchaseDetails()}
+              onClick={() => this.handleSubmitPurchaseDetails(false)}
               classes="primary"
             />
 
@@ -348,12 +486,12 @@ PurchaseDetails.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   form: PropTypes.object,
-  additionalServices: PropTypes.object
+  company: PropTypes.object
 };
 
 const mapStateToProps = state => ({
   form: state.form,
-  additionalServices: state.additionalServices
+  company: state.companies.find(company => company.id === state.activeCompany)
 });
 
 const actions = { showLoader, hideLoader };

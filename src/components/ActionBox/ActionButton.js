@@ -15,7 +15,7 @@ import './action-button.scss';
 *
 * @param {object} alert - action object, comprising:
 *   @param {string} type - type of action
-*   @param {string} companyID - company action relates to
+*   @param {number} companyID - company action relates to
 */
 
 const ActionButton = (props) => {
@@ -34,7 +34,7 @@ ActionButton.propTypes = {
   t: PropTypes.func.isRequired,
   alert: PropTypes.shape({
     type: PropTypes.string.isRequired,
-    companyID: PropTypes.string
+    companyID: PropTypes.number
   })
 };
 

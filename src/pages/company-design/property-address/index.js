@@ -16,6 +16,7 @@ import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import Select from 'src/components/_form/Select/Select';
 import Button from 'src/components/_buttons/Button/Button';
 import Checkbox from 'src/components/_form/Checkbox/Checkbox';
+import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
@@ -23,8 +24,8 @@ import { addressNow } from 'src/config/endpoints';
 
 import './property-address.scss';
 
-import propertyService from 'src/services/Property';
-const PropertyService = new propertyService();
+import companyService from 'src/services/Company';
+const CompanyService = new companyService();
 
 /**
   * PropertyAddress
@@ -38,7 +39,7 @@ class PropertyAddress extends Component {
 
     this.state = {
       isAddressValid: true,
-      isManualAddress: false,
+      isManualAddress: true,
       isTextAreaHidden: true
     };
 
@@ -47,16 +48,20 @@ class PropertyAddress extends Component {
 
   /* istanbul ignore next */
   componentDidMount() {
+    const { company: { property_address: { address, is_confirmed }}} = this.props;
     const script = document.createElement('script');
+    const reduxFields = address;
+
+    reduxFields.is_confirmed = is_confirmed;
 
     formUtils.initFormState({
-      country: '',
+      country_name: '',
       street: '',
-      city: '',
-      unitNumber: '',
+      posttown: '',
+      premise: '',
       postcode: '',
-      toRentConfirmation: false
-    });
+      is_confirmed: ''
+    }, reduxFields);
 
     script.onload = () => {
 
@@ -65,8 +70,8 @@ class PropertyAddress extends Component {
 
           window.addressNow.controls[0].listen('populate', (address) => {
             formUtils.updateValue('street', address.Street);
-            formUtils.updateValue('city', address.City);
-            formUtils.updateValue('unitNumber', address.BuildingNumber);
+            formUtils.updateValue('posttown', address.City);
+            formUtils.updateValue('premise', address.BuildingNumber);
             formUtils.updateValue('postcode', address.PostalCode);
     
             this.setState(() => ({
@@ -101,22 +106,26 @@ class PropertyAddress extends Component {
   };
 
   initFormValidation = /* istanbul ignore next */ () => {
-    const { showLoader, hideLoader, t, form } = this.props;
-    const {
-      values: {
-        street,
-        city,
-        unitNumber,
-        postcode,
-      }
-    } = form;
+    const { showLoader, hideLoader, t, form, company } = this.props;
+    const { values: { premise, street, posttown, postcode, is_confirmed, country_name } } = form;
 
     if (formUtils.validateForm(this.config)) {
       showLoader();
 
-      PropertyService.SavePropertyAddress({street, city, unitNumber, postcode}).then((response) => {
+      const payload = {
+        address: {
+          premise,
+          street,
+          posttown,
+          postcode,
+          country_name
+        },
+        is_confirmed
+      }
+
+      CompanyService.updateCompany(payload, 'property_address', company.id).then((response) => {
         hideLoader();
-        if (response.status === 201) {
+        if (response.status === 200) {
           navigate('/company-design/purchase-details');
         } else if (response.status === 400) {
           this.setState({
@@ -147,6 +156,37 @@ class PropertyAddress extends Component {
     */
   handleCountryChange = country => window.addressNow.setCountry(country);
 
+  saveAndExit = async () => {
+    const { showLoader, hideLoader, form, company } = this.props;
+    const { values: { premise, street, posttown, postcode, is_confirmed, country_name }, errors } = form;
+
+    formUtils.validateForm(this.config);
+
+    await Object.keys(errors).forEach(async (key) => {
+      await formUtils.updateValue(key, '');
+    });
+
+    const payload = {
+      address: {
+        premise,
+        street,
+        posttown,
+        postcode,
+        country_name
+      },
+      is_confirmed
+    }
+
+    showLoader();
+
+    CompanyService.updateCompany(payload, 'property_address', company.id).then((response) => {
+      hideLoader();
+      if (response.status === 200) {
+        navigate('/company-design');
+      }
+    });
+  }
+
   render() {
     const { t, form } = this.props;
     const {
@@ -163,10 +203,10 @@ class PropertyAddress extends Component {
 
     this.config = [
       {
-        stateKey: 'country',
+        stateKey: 'country_name',
         component: Select,
         label: t('companyDesign.propertyAddress.form.countryLabel'),
-        value: values.country,
+        value: values.country_name,
         options: setCountries,
         classes: 'country-select',
         validationFunction: 'validateRequired',
@@ -185,10 +225,17 @@ class PropertyAddress extends Component {
         fieldErrorText: t('companyDesign.propertyAddress.form.fieldErrorText'),
       },
       {
-        stateKey: 'unitNumber',
+        component: Button,
+        onClick: this.toggleManualAddress,
+        label: t('companyDesign.propertyAddress.form.addressFinderButtonLabel'),
+        hidden: !isManualAddress,
+        classes: 'link small',
+      },
+      {
+        stateKey: 'premise',
         component: InputText,
         label: t('companyDesign.propertyAddress.form.unitNumberLabel'),
-        value: values.unitNumber,
+        value: values.premise,
         validationFunction: 'validateRequired',
         hidden: !isManualAddress
       },
@@ -201,10 +248,10 @@ class PropertyAddress extends Component {
         hidden: !isManualAddress
       },
       {
-        stateKey: 'city',
+        stateKey: 'posttown',
         component: InputText,
         label: t('companyDesign.propertyAddress.form.cityLabel'),
-        value: values.city,
+        value: values.posttown,
         validationFunction: 'validateRequired',
         hidden: !isManualAddress
       },
@@ -217,27 +264,22 @@ class PropertyAddress extends Component {
         hidden: !isManualAddress
       },
       {
-        component: Button,
-        onClick: this.toggleManualAddress,
-        label: t('companyDesign.propertyAddress.form.addressFinderButtonLabel'),
-        hidden: !isManualAddress,
-        classes: 'link small',
-      },
-      {
         component: 'br'
       },
       {
-        stateKey: 'toRentConfirmation',
+        stateKey: 'is_confirmed',
         component: Checkbox,
         label: t('companyDesign.propertyAddress.form.toRentConfirmationLabel'),
-        checked: values.toRentConfirmation,
+        checked: values.is_confirmed,
         validationFunction: 'validateRequired'
       }
     ];
 
+    const headerActions = <ButtonHeader onClick={this.saveAndExit} label={t('header.buttons.saveAndExit')} />
+
     return (
       <>
-      <Layout>
+      <Layout headerActions={headerActions} secure>
         <div className="company-design-property-address" data-test="container-company-design-property-address">
           <h1>{t('companyDesign.propertyAddress.heading')}</h1>
 
@@ -282,11 +324,13 @@ PropertyAddress.propTypes = {
   t: PropTypes.func.isRequired,
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
-  form: PropTypes.object
+  form: PropTypes.object,
+  company: PropTypes.object
 };
 
 const mapStateToProps = state => ({
-  form: state.form
+  form: state.form,
+  company: state.companies.find(company => company.id === state.activeCompany)
 });
 
 const actions = { showLoader, hideLoader };

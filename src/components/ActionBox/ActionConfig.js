@@ -38,7 +38,7 @@ const ActionConfig = (alert) => {
       cta = 'actionBox.actions.directors_insurance.cta';
       action = () => {
         store.dispatch(setActiveCompany(alert.companyID));
-        navigate('/onboarding/payment');
+        navigate('/company-design/payment');
       };
       break;
     case 'add_company': 
@@ -47,7 +47,7 @@ const ActionConfig = (alert) => {
       labelShort = 'actionBox.actions.add_company.labelShort';
       cta = 'actionBox.actions.add_company.cta';
       action = () => {
-        navigate('/company-design');
+        navigate('/company-design/intro');
       };
       break;
   }

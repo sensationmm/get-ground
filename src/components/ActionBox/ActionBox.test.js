@@ -11,10 +11,10 @@ jest.mock('gatsby', () => ({
 }));
 
 export const actionsMock = [ 
-  { type: 'add_company', companyID: '1' },
-  { type: 'documents_ready', companyID: '1' },
-  { type: 'directors_insurance', companyID: '1' },
-  { type: 'prompt_shareholders', companyID: '1' }
+  { type: 'add_company', companyID: 1 },
+  { type: 'documents_ready', companyID: 1 },
+  { type: 'directors_insurance', companyID: 1 },
+  { type: 'prompt_shareholders', companyID: 1 }
 ];
 
 describe('<ActionBox />', () => {
@@ -64,27 +64,27 @@ describe('<ActionBox />', () => {
       expect(buttonAction.props().label).toEqual('actionBox.actions.add_company.cta');
       buttonAction.simulate('click');
       expect(setActiveCompanyMock).toHaveBeenCalledTimes(0);
-      expect(navigate).toHaveBeenCalledWith('/company-design');
+      expect(navigate).toHaveBeenCalledWith('/company-design/intro');
     });
 
     test('documents_ready', () => {
       expect(buttonAction.props().label).toEqual('actionBox.actions.documents_ready.cta');
       buttonAction.simulate('click');
-      expect(setActiveCompanyMock).toHaveBeenCalledWith(expect.objectContaining({ companyID: '1' }));
+      expect(setActiveCompanyMock).toHaveBeenCalledWith(expect.objectContaining({ companyID: 1 }));
       expect(navigate).toHaveBeenCalledWith('/documents');
     });
 
     test('directors_insurance', () => {
       expect(buttonAction.props().label).toEqual('actionBox.actions.directors_insurance.cta');
       buttonAction.simulate('click');
-      expect(setActiveCompanyMock).toHaveBeenCalledWith(expect.objectContaining({ companyID: '1' }));
-      expect(navigate).toHaveBeenCalledWith('/onboarding/payment');
+      expect(setActiveCompanyMock).toHaveBeenCalledWith(expect.objectContaining({ companyID: 1 }));
+      expect(navigate).toHaveBeenCalledWith('/company-design/payment');
     });
 
     test('prompt_shareholders', () => {
       expect(buttonAction.props().label).toEqual('actionBox.actions.prompt_shareholders.cta');
       buttonAction.simulate('click');
-      expect(setActiveCompanyMock).toHaveBeenCalledWith(expect.objectContaining({ companyID: '1' }));
+      expect(setActiveCompanyMock).toHaveBeenCalledWith(expect.objectContaining({ companyID: 1 }));
       expect(navigate).toHaveBeenCalledWith('/documents/prompt');
     });
 

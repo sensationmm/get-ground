@@ -2,6 +2,8 @@ import { RawComponent as Manage } from './index';
 import { setup, findByTestAttr } from 'src/test-utils/test-utils';
 import { navigate } from 'gatsby';
 
+import functions from 'src/utils/functions';
+
 import { companyMock } from '../CompanyOverview.test';
 import OptionSelect from 'src/components/OptionSelect/OptionSelect';
 import Button from 'src/components/_buttons/Button/Button';
@@ -14,9 +16,11 @@ describe('Manage', () => {
   let wrapper;
   const defaultProps = {
     t: jest.fn().mockImplementation((id) => id ),
-    activeCompany: '1',
+    activeCompany: 1,
     companies: [ companyMock ]
   };
+
+  jest.spyOn(functions, 'getByValue').mockReturnValue(companyMock);
 
   global.LC_API = {
     open_chat_window: jest.fn(),
@@ -24,16 +28,10 @@ describe('Manage', () => {
   }
 
   beforeEach(() => {
-    wrapper = setup(Manage, defaultProps);
+    wrapper = setup(Manage, defaultProps, { hasLoaded: true });
   });
 
   test('renders without error', () => {
-    const component = findByTestAttr(wrapper, 'component-manage-company');
-    expect(component.length).toBe(1);
-  });
-
-  test('renders without error when activeCompany not set', () => {
-    wrapper = setup(Manage, { ...defaultProps, activeCompany: null });
     const component = findByTestAttr(wrapper, 'component-manage-company');
     expect(component.length).toBe(1);
   });
@@ -59,7 +57,7 @@ describe('Manage', () => {
     expect(global.LC_API.set_custom_variables).toHaveBeenCalledWith(
       [
         { name: 'manage my company topic', value: 'boo' },
-        { name: 'company ID', value: '1' },
+        { name: 'company ID', value: 1 },
       ]
     );
   });

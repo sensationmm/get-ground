@@ -21,17 +21,15 @@ export const initFormState = (fieldsInit, fieldsValues) => {
 
   if(fieldsValues) {
     fieldsKeys.forEach(key => {
-      if(fieldsValues[key]) {
-        // @TODO diiiirty
-        if(key === 'country') {
-          fields[key] = `[${fieldsValues['address_country_alpha_3_code']}] ${fieldsValues[key]}`;
-        } else if(key === 'nationality') {
-          fields[key] = `[${fieldsValues['nationality_alpha_3_code']}] ${fieldsValues['nationality_name']}`;
-        } else if(key === 'date_of_birth') {
-          fields[key] = moment(fieldsValues[key]).format('Do MMMM YYYY');
-        } else {
-          fields[key] = fieldsValues[key]; // @TODO ideally only this line should be necessary...
-        }
+      // @TODO diiiirty
+      if(key === 'country') {
+        fields[key] = `[${fieldsValues['address_country_alpha_3_code']}] ${fieldsValues[key]}`;
+      } else if(key === 'nationality') {
+        fields[key] = `[${fieldsValues['nationality_alpha_3_code']}] ${fieldsValues['nationality_name']}`;
+      } else if(key === 'date_of_birth') {
+        fields[key] = moment(fieldsValues[key]).format('Do MMMM YYYY');
+      } else {
+        fields[key] = fieldsValues[key]; // @TODO ideally only this line should be necessary...
       }
     });
   }

@@ -2,6 +2,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { ProcessTracker } from './index'
+import { setup } from 'src/test-utils/test-utils';
 
 jest.mock('src/assets/images/property.svg', () => '');
 jest.mock('src/assets/images/purchase.svg', () => '');
@@ -12,6 +13,9 @@ jest.mock('src/assets/images/services.svg', () => '');
 describe('process-tracker', () => {
   let wrapper;
   let props;
+
+  const showLoaderMock = jest.fn();
+  const hideLoaderMock = jest.fn();
 
   const mockSections = {
     step1: {
@@ -43,6 +47,11 @@ describe('process-tracker', () => {
       title: 'Tax Questions',
       copy: 'To better understand your needs',
       imageAltText: 'Tax Questions'
+    },
+    step7: {
+      title: 'Payment',
+      copy: 'Pay for service',
+      imageAltText: 'Warning sign'
     }
   }
 
@@ -51,7 +60,12 @@ describe('process-tracker', () => {
       t: jest.fn().mockReturnValue('test-string'),
       i18n: {
         t: jest.fn().mockReturnValue(mockSections),
-      }
+      },
+      company: {
+        additional_services_required: false
+      },
+      showLoader: showLoaderMock,
+      hideLoader: hideLoaderMock,
     }
     wrapper = shallow(<ProcessTracker {...props}/>);
   })
@@ -63,7 +77,34 @@ describe('process-tracker', () => {
     expect(wrapper.find('ProcessSection')).toHaveLength(6);
   })
 
-  test('renders Button', () => {
-    expect(wrapper.find('Button')).toHaveLength(1);
+  test('there are 7 steps if add services has been used & the user did NOT want help finding a solicitor', () => {
+    wrapper = setup(ProcessTracker, {
+      ...props,
+      company: {
+        additional_services_required: true,
+        additional_services: {
+          solicitor: false
+        }
+      }
+    });
+
+    expect(wrapper.find('ProcessSection')).toHaveLength(7);
   })
+
+  test('there are 6 steps if add services has been used & the user DID want help finding a solicitor', () => {
+    wrapper = setup(ProcessTracker, {
+      ...props,
+      additionalServices: {
+        hasUsedAdditionalServices: true,
+        solicitor: true
+      }
+    });
+
+    expect(wrapper.find('ProcessSection')).toHaveLength(6);
+  })
+
+  afterEach(() => {
+    showLoaderMock.mockClear();
+    hideLoaderMock.mockClear();
+  });
 })

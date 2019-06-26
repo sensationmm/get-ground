@@ -1,5 +1,4 @@
 import { setup, findByTestAttr } from 'src/test-utils/test-utils';
-
 import { RawComponent } from './index';
 import InputNumber from 'src/components/_form/InputNumber/InputNumber';
 import Stripe from 'src/components/Stripe/Stripe';

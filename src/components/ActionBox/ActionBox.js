@@ -17,7 +17,7 @@ import './action-box.scss';
 *
 * @param {array} actions - list of current required actions, comprising:
 *   @param {string} type - type of action
-*   @param {string} companyID - company action relates to
+*   @param {number} companyID - company action relates to
 *   @param {boolean} dismissable - whether action has a dismiss button
 * @return {JSXElement} ActionBox
 */
@@ -93,7 +93,7 @@ ActionBox.propTypes = {
   actions: PropTypes.arrayOf(
     PropTypes.shape({
       type: PropTypes.string.isRequired,
-      companyID: PropTypes.string,
+      companyID: PropTypes.number,
       dismissable: PropTypes.bool
     })
   ),

@@ -3,6 +3,15 @@ import { setup, findByTestAttr } from '../../../test-utils/test-utils';
 
 import { RawComponent as List } from './List';
 
+Array.prototype.flat = () => {
+  return [
+    <div key='child-1'>Child1</div>,
+    <div key='child-2'>Child2</div>,
+    <div key='child-3'>Child3</div>,
+    <div key='child-4'>Child4</div>
+  ]
+}
+
 describe('<List />', () => {
   let wrapper;
 

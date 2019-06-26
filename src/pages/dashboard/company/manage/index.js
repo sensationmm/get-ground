@@ -4,13 +4,12 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { navigate } from 'gatsby';
 
-import { getByValue } from 'src/utils/functions';
+import functions from 'src/utils/functions';
 
 import Layout from 'src/components/Layout/Layout';
 import Form from 'src/components/_layout/Form/Form';
 import Button from 'src/components/_buttons/Button/Button';
 import OptionSelect from 'src/components/OptionSelect/OptionSelect';
-import { companyModel } from 'src/state/reducers/companies';
 
 import '../company-overview.scss';
 
@@ -26,7 +25,9 @@ class Manage extends Component {
     super(props);
 
     this.state = {
-      liveChatTopic: null
+      liveChatTopic: null,
+      hasLoaded: false,
+      address: ''
     };
   }
 
@@ -42,7 +43,7 @@ class Manage extends Component {
 
   handleLiveChat = (liveChatTopic) => {
     const { companies, activeCompany } = this.props;
-    const company = activeCompany !== null ? getByValue(companies, 'id', activeCompany) : companyModel;
+    const company = functions.getByValue(companies, 'id', activeCompany);
     const custom_variables = [
       { name: 'manage my company topic', value: liveChatTopic },
       { name: 'company ID', value: company.id }
@@ -54,52 +55,58 @@ class Manage extends Component {
   }
 
   render() {
-    const { t } = this.props;
-    const { liveChatTopic } = this.state;
+    const { t, activeCompany } = this.props;
+    const { liveChatTopic, hasLoaded } = this.state;
 
+    if ( activeCompany && !hasLoaded ) {
+      this.setState({ hasLoaded: true })
+    }
 
     return (
       <Layout secure companyID>
-        <div className="company-overview has-hero-button" data-test="component-manage-company">
-          <h1>{ t('dashboard.company.manage.title') }</h1>
+        { hasLoaded &&
+          <div className="company-overview has-hero-button" data-test="component-manage-company">
+            <h1>{ t('dashboard.company.manage.title') }</h1>
 
-          <div className="company-header back" onClick={() => navigate('/dashboard/company')}>
-          { t('dashboard.company.back') }
-          </div>
+            <div className="company-header back" onClick={() => navigate('/dashboard/company')}>
+            { t('dashboard.company.back') }
+            </div>
 
-          <p>{ t('dashboard.company.manage.text') }</p>
+            <p>{ t('dashboard.company.manage.text') }</p>
 
-          <br />
+            <br />
 
-          <p><b>{ t('dashboard.company.manage.select') }</b></p>
+            <p><b>{ t('dashboard.company.manage.select') }</b></p>
 
-          <Form>
-            <OptionSelect
-              options={[
-                { id: 'withdrawMoney', title: t('dashboard.company.manage.options.withdrawMoney') },
-                { id: 'sendMoney', title: t('dashboard.company.manage.options.sendMoney') },
-                { id: 'manageDirector', title: t('dashboard.company.manage.options.manageDirector') },
-                { id: 'manageShares', title: t('dashboard.company.manage.options.manageShares') },
-                { id: 'delist', title: t('dashboard.company.manage.options.delist') },
-                { id: 'reportIssue', title: t('dashboard.company.manage.options.reportIssue') },
-              ]}
-              onChange={this.setTopic}
-              selected={liveChatTopic}
-              small
-              center
-            />
+            <Form>
 
-            <center>
-              <Button
-                data-test="live-chat-button"
-                classes="chat"
-                label={ t('dashboard.company.manage.chatButton') }
-                onClick={() => this.handleLiveChat(liveChatTopic)}
-                disabled={!liveChatTopic}
+              <OptionSelect
+                options={[
+                  { id: 'withdrawMoney', title: t('dashboard.company.manage.options.withdrawMoney') },
+                  { id: 'sendMoney', title: t('dashboard.company.manage.options.sendMoney') },
+                  { id: 'manageDirector', title: t('dashboard.company.manage.options.manageDirector') },
+                  { id: 'manageShares', title: t('dashboard.company.manage.options.manageShares') },
+                  { id: 'delist', title: t('dashboard.company.manage.options.delist') },
+                  { id: 'reportIssue', title: t('dashboard.company.manage.options.reportIssue') },
+                ]}
+                onChange={this.setTopic}
+                selected={liveChatTopic}
+                small
+                center
               />
-            </center>
-          </Form>
-        </div>
+
+              <center>
+                <Button
+                  data-test="live-chat-button"
+                  classes="chat"
+                  label={ t('dashboard.company.manage.chatButton') }
+                  onClick={() => this.handleLiveChat(liveChatTopic)}
+                  disabled={!liveChatTopic}
+                />
+              </center>
+            </Form>
+          </div>
+        }
       </Layout>
     );
   }
@@ -115,7 +122,7 @@ Manage.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   companies: PropTypes.array,
-  activeCompany: PropTypes.string,
+  activeCompany: PropTypes.number,
   t: PropTypes.func.isRequired
 };
 

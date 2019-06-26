@@ -2,6 +2,8 @@ import { RawComponent as BankAccount } from './index';
 import { setup, findByTestAttr } from 'src/test-utils/test-utils';
 import { navigate } from 'gatsby';
 
+import functions from 'src/utils/functions';
+
 import { companyMock } from '../CompanyOverview.test';
 
 jest.mock('gatsby', () => ({
@@ -12,21 +14,32 @@ describe('BankAccount', () => {
   let wrapper;
   const defaultProps = {
     t: jest.fn().mockImplementation((id) => id ),
-    activeCompany: '1',
+    activeCompany: 1,
     companies: [ companyMock ]
   };
 
+  jest.spyOn(functions, 'getByValue').mockReturnValue(companyMock);
+
   beforeEach(() => {
-    wrapper = setup(BankAccount, defaultProps);
+    wrapper = setup(BankAccount, defaultProps, { 
+      hasLoaded: true, 
+      company: companyMock,
+      groupedTransactions: {
+        '2019-04-13': [
+          {name: 'Smith Plumbers Ltd', sum: '-£200', balance: '£483,293.62'},
+          {name: 'J Jones Rent', sum: '+£1,200', balance: '£483,293.62'}
+        ],
+        '2019-04-30': [
+          {name: 'Smith Plumbers Ltd', sum: '-£200', balance: '£483,293.62'},
+          {name: 'J Jones Rent', sum: '+£1,200', balance: '£483,293.62'},
+          {name: 'J Jones Rent', sum: '+£1,200', balance: '£483,293.62'}
+        ]
+      },
+      transactionDates: ['2019-04-30', '2019-04-13']
+    });
   });
 
   test('renders without error', () => {
-    const component = findByTestAttr(wrapper, 'component-bank-account');
-    expect(component.length).toBe(1);
-  });
-
-  test('renders without error when activeCompany not set', () => {
-    wrapper = setup(BankAccount, { ...defaultProps, activeCompany: null });
     const component = findByTestAttr(wrapper, 'component-bank-account');
     expect(component.length).toBe(1);
   });

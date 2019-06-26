@@ -13,7 +13,7 @@ describe('<ToDo />', () => {
       ToDo,
       {
         company: companiesMock[0],
-        setActiveCompany: setActiveCompanyMock,
+        setActiveCompany: setActiveCompanyMock
       }
     );
     component = findByTestAttr(wrapper, 'component-todo');
@@ -26,6 +26,6 @@ describe('<ToDo />', () => {
   test('onClick()', () => {
     component.simulate('click');
 
-    expect(setActiveCompanyMock).toHaveBeenCalledWith('1');
+    expect(setActiveCompanyMock).toHaveBeenCalledWith(1);
   });
 });

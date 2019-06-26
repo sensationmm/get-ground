@@ -4,21 +4,22 @@ import { setup, findByTestAttr } from 'src/test-utils/test-utils';
 import formUtils from 'src/utils/form';
 import { navigate } from 'gatsby';
 
-import { RawComponent as PurchaseDetails, PropertyService } from './index';
-import Button from 'src/components/_buttons/Button/Button';
+import { RawComponent as PurchaseDetails, CompanyService } from './index';
+// import Button from 'src/components/_buttons/Button/Button';
 import Datepicker from 'src/components/Datepicker/Datepicker';
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import { initialState as ReduxFormMock } from 'src/state/reducers/form';
 
 jest.mock('gatsby', () => ({
-  navigate: jest.fn()
+  navigate: jest.fn(),
+  Link: 'link'
 }));
 
 describe('purchase details', () => {
   let wrapper;
   const showLoaderMock = jest.fn();
   const hideLoaderMock = jest.fn();
-  PropertyService.SavePurchaseDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
+  CompanyService.updateCompany = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
   const mockEvent = {
     target: {
       id: 'completionDate'
@@ -29,11 +30,50 @@ describe('purchase details', () => {
     t: tMock,
     showLoader: showLoaderMock,
     hideLoader: hideLoaderMock,
-    form: ReduxFormMock
-  };
+    form: ReduxFormMock,
+    company: {
+      purchase_details:{
+        price:{
+          amount_in_cents:50000000,
+          currency:'GBP'
+        },
+        is_new_build:null,
+        completion_date:'2020-09-08T00:00:00Z',
+        expected_exchange_date:'2020-10-12T00:00:00Z',
+        payment_schedule:[
+           {
+              type:'deposit',
+              due_date:'2019-09-06T00:00:00Z',
+              amount:{
+                amount_in_cents:10000000,
+                currency:'GBP'
+              }
+           },
+           {
+            type:'first_installment',
+            due_date:'2019-09-06T00:00:00Z',
+            amount:{
+               amount_in_cents:10000000,
+               currency:'GBP'
+            }
+          },
+          {
+            type:'second_installment',
+            due_date:'2019-09-06T00:00:00Z',
+            amount:{
+               amount_in_cents:10000000,
+               currency:'GBP'
+            }
+          }
+        ]
+      },
+      additional_services:{
+        solicitor: false
+      }
+    }
+  }
   jest.spyOn(formUtils, 'initFormState');
   jest.spyOn(formUtils, 'clearFormState');
-
 
   beforeEach(() => {
     wrapper = setup(PurchaseDetails, defaultProps, {
@@ -68,14 +108,14 @@ describe('purchase details', () => {
     expect(wrapper.contains(<ErrorBox>string</ErrorBox>)).toBe(true);
   });
 
-  test('expect checkElementHidden to return true if newBuild is equal to an empty string', () => {
+  test('expect checkElementHidden to return true if is_new_build is equal to null', () => {
     const wrapper = setup(PurchaseDetails, {
       ...defaultProps, 
       form: {
         ...defaultProps.form,
         values: {
           ...defaultProps.form.values,
-          newBuild: ''
+          is_new_build: null
         }
       }
     });
@@ -84,14 +124,14 @@ describe('purchase details', () => {
     expect(hidden).toEqual(true);
   });
 
-  test('expect checkElementHidden to return true if newBuild is equal to no', () => {
+  test('expect checkElementHidden to return true if is_new_build is equal to false', () => {
     const wrapper = setup(PurchaseDetails, {
       ...defaultProps, 
       form: {
         ...defaultProps.form,
         values: {
           ...defaultProps.form.values,
-          newBuild: 'no'
+          is_new_build: false
         }
       }
     });
@@ -100,7 +140,7 @@ describe('purchase details', () => {
     expect(hidden).toEqual(true);
   });
 
-  describe('newBuild', () => {
+  describe('is_new_build', () => {
     let wrapper;
     beforeEach(() => {
       wrapper = setup(PurchaseDetails, {
@@ -109,26 +149,26 @@ describe('purchase details', () => {
           ...defaultProps.form,
           values: {
             ...defaultProps.form.values,
-            newBuild: 'yes'
+            is_new_build: true
           }
         }
       });
     })
 
-    test('expect checkElementHidden to return false if newBuild is equal to yes', () => {
+    test('expect checkElementHidden to return false if is_new_build is equal to true', () => {
       const hidden = wrapper.instance().checkElementHidden();
 
       expect(hidden).toEqual(false);
     });
 
-    test('expect showNextInstallment to be called when button is clicked', () => {
-      const component = findByTestAttr(wrapper, 'container-company-design-purchase-details');
-      wrapper.instance().showNextInstallment = jest.fn();
+    // test('expect showNextInstallment to be called when button is clicked', () => {
+    //   const component = findByTestAttr(wrapper, 'container-company-design-purchase-details');
+    //   wrapper.instance().showNextInstallment = jest.fn();
 
-      component.find(Button).at(0).props().onClick();
+    //   component.find(Button).at(0).props().onClick();
 
-      expect(wrapper.instance().showNextInstallment).toHaveBeenCalled();
-    });
+    //   expect(wrapper.instance().showNextInstallment).toHaveBeenCalled();
+    // });
 
     test('expect closeDatePicker to be called when the Datepicker is closed', () => {
       const component = findByTestAttr(wrapper, 'container-company-design-purchase-details');
@@ -165,8 +205,45 @@ describe('purchase details', () => {
   test(`expect navigate to go to /company-design/shareholder-details when solicitor 
     has been selected on additional services (when skip button is clicked)`, () => {
     wrapper = setup(PurchaseDetails, { ...defaultProps,
-      additionalServices: {
-        solicitor: true
+      company: {
+        purchase_details:{
+          price:{
+            amount_in_cents:50000000,
+            currency:'GBP'
+          },
+          is_new_build:false,
+          completion_date:'2020-09-08T00:00:00Z',
+          expected_exchange_date:'2020-10-12T00:00:00Z',
+          payment_schedule:[
+             {
+                type:'deposit',
+                due_date:'2019-09-06T00:00:00Z',
+                amount:{
+                  amount_in_cents:10000000,
+                  currency:'GBP'
+                }
+             },
+             {
+              type:'first_installment',
+              due_date:'2019-09-06T00:00:00Z',
+              amount:{
+                 amount_in_cents:10000000,
+                 currency:'GBP'
+              }
+            },
+            {
+              type:'second_installment',
+              due_date:'2019-09-06T00:00:00Z',
+              amount:{
+                 amount_in_cents:10000000,
+                 currency:'GBP'
+              }
+            }
+          ]
+        },
+        additional_services:{
+          solicitor: true
+        }
       }
     });
     const button = findByTestAttr(wrapper, 'skip-button');
@@ -177,11 +254,6 @@ describe('purchase details', () => {
 
   test(`expect navigate to go to /company-design/solicitor-details when solicitor 
     has NOT been selected on additional services (when skip button is clicked)`, () => {
-    wrapper = setup(PurchaseDetails, { ...defaultProps,
-      additionalServices: {
-        solicitor: false
-      }
-    });
     const button = findByTestAttr(wrapper, 'skip-button');
 
     button.props().onClick();
@@ -193,10 +265,47 @@ describe('purchase details', () => {
 
     test('submit purchase details success and solicitor was selected on additional services', async () => {
       spy = jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
-      PropertyService.SavePurchaseDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
+      CompanyService.updateCompany = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
       const wrapperNew = setup(PurchaseDetails, { ...defaultProps,
-        additionalServices: {
-          solicitor: true
+        company: {
+          purchase_details:{
+            price:{
+              amount_in_cents:50000000,
+              currency:'GBP'
+            },
+            is_new_build:false,
+            completion_date:'2020-09-08T00:00:00Z',
+            expected_exchange_date:'2020-10-12T00:00:00Z',
+            payment_schedule:[
+               {
+                  type:'deposit',
+                  due_date:'2019-09-06T00:00:00Z',
+                  amount:{
+                    amount_in_cents:10000000,
+                    currency:'GBP'
+                  }
+               },
+               {
+                type:'first_installment',
+                due_date:'2019-09-06T00:00:00Z',
+                amount:{
+                   amount_in_cents:10000000,
+                   currency:'GBP'
+                }
+              },
+              {
+                type:'second_installment',
+                due_date:'2019-09-06T00:00:00Z',
+                amount:{
+                   amount_in_cents:10000000,
+                   currency:'GBP'
+                }
+              }
+            ]
+          },
+          additional_services:{
+            solicitor: true
+          }
         }
       });
       
@@ -210,12 +319,8 @@ describe('purchase details', () => {
 
     test('submit purchase details success and solicitor was NOT selected on additional services', async () => {
       spy = jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
-      PropertyService.SavePurchaseDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
-      const wrapperNew = setup(PurchaseDetails, { ...defaultProps,
-        additionalServices: {
-          solicitor: false
-        }
-      });
+      CompanyService.updateCompany = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
+      const wrapperNew = setup(PurchaseDetails, { ...defaultProps });
       
       await wrapperNew.instance().submitPurchaseDetails();
       
@@ -228,7 +333,7 @@ describe('purchase details', () => {
     test('submit purchase details failure', async () => {
       spy = jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
       const errorSpy = jest.spyOn(formUtils, 'setFormError');
-      PropertyService.SavePurchaseDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 400 }));
+      CompanyService.updateCompany = jest.fn().mockReturnValue(Promise.resolve({ status: 400 }));
       const wrapperNew = setup(PurchaseDetails, defaultProps);
       
       await wrapperNew.instance().submitPurchaseDetails();

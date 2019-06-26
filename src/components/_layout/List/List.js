@@ -23,9 +23,8 @@ class List extends Component {
   render() {
     const { showAll } = this.state;
     const { children, numToShow, t } = this.props;
-
     const numItems = isArray(children) ? children.flat().length : children.length;
-    
+
     return (
       <div data-test="component-list" className="list">
         {

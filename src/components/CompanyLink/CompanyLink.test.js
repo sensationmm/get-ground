@@ -3,27 +3,79 @@ import { setup, findByTestAttr } from 'src/test-utils/test-utils';
 
 import CompanyLink from './CompanyLink';
 
-export const companiesMock = [{
-    id: '1',
-    name: 'Dunmow Ltd',
-    address: {
-      premise: '93  Dunmow Road',
-      street: 'Lanstephan',
-      posttown: 'Launceston',
-      postcode: 'PL15 8JN'
+export const companiesMock = [
+  {
+    id: 1,
+    additional_services_required: true,
+    property_address:{
+      address:{
+        premise: '37B',
+        street: 'Sandringham Road',
+        thoroughfare: null,
+        posttown: 'London',
+        postcode: 'E8 2LR',
+        country_name: 'UK'
+      },
+      is_confirmed:true
     },
-    shareholders: [
-      'Shona Longley',
-      'Patrick Richards'
-    ],
-    directors: [
-      'Grace Hecker'
-    ],
-    documents: [
-      { name: 'Shareholders agreement', file: 'http://www.google.com' },
-      { name: 'Company Articles of Association', file: 'http://www.google.com' },
-      { name: 'Directors Loan Agreement', file: 'http://www.google.com' }
-    ],
+    purchase_details:{
+      price:{
+          amount_in_cents:50000000,
+          currency:'GBP'
+      },
+      is_new_build:false,
+      completion_date:'2020-09-08T00:00:00Z',
+      expected_exchange_date:'2020-10-12T00:00:00Z',
+      payment_schedule:[
+          {
+            type:'deposit',
+            due_date:'2019-09-06T00:00:00Z',
+            amount:{
+                amount_in_cents:10000000,
+                currency:'GBP'
+            }
+          }
+      ]
+    },
+    shareholder_details:{
+      collection:[
+          {
+            first_name:'Dillion',
+            last_name:'Marriot',
+            email:'mark@gmail.com',
+            allocated_shares:100,
+            is_director:true,
+            is_existing_user:true
+          },
+          {
+            first_name:'Dillion',
+            last_name:'Marriot',
+            email:'mark@gmail.com',
+            allocated_shares:100,
+            is_director:true,
+            is_existing_user:true
+          }
+      ]
+    },
+    solicitor_details: {
+      first_name: 'bob',
+      last_name: 'stuff',
+      email: 'asdf@sdf.com',
+      phone: '07732343567',
+      authority: false
+    },
+    tax_questions:{
+      is_owner_of_other_companies: null,
+      more_than_50_employees: null,
+      assets: null,
+      turnover: null
+    },
+    additional_services:{
+      mortgage: null,
+      insurance: null,
+      management: null,
+      solicitor: null
+    },
     bank_account: {
       name: 'Daniel Hecker',
       sort_code: '10-75-99',
@@ -68,29 +120,89 @@ export const companiesMock = [{
           balance: '£483,293.62'
         }
       ]
+    },
+    progress: {
+      overall_status: 'INCOMPLETE',
+      payment_status: 'INCOMPLETE',
+      property_address_status: 'NOT_STARTED',
+      purchase_details_status: 'INCOMPLETE',
+      shareholder_details_status: 'NOT_STARTED',
+      solicitor_details_status: 'NOT_STARTED',
+      tax_questions_status: 'NOT_STARTED'
     }
   },
   {
-    id: '2',
-    name: 'Clasper Ltd',
-    address: {
-      premise: '73  Clasper Way',
-      street: 'Lanstephan',
-      posttown: 'Launceston',
-      postcode: 'TA18 6LW'
+    id: 2,
+    additional_services_required: true,
+    property_address:{
+      address:{
+        premise: '37B',
+        street: 'Sandringham Road',
+        thoroughfare: null,
+        posttown: 'London',
+        postcode: 'E8 2LR',
+        country_name: 'UK'
+      },
+      is_confirmed:true
     },
-    shareholders: [
-      'Shona Longley',
-      'Patrick Richards'
-    ],
-    directors: [
-      'Grace Hecker'
-    ],
-    documents: [
-      { name: 'Shareholders agreement', file: 'http://www.google.com' },
-      { name: 'Company Articles of Association', file: 'http://www.google.com' },
-      { name: 'Directors Loan Agreement', file: 'http://www.google.com' }
-    ],
+    purchase_details:{
+      price:{
+          amount_in_cents:50000000,
+          currency:'GBP'
+      },
+      is_new_build:false,
+      completion_date:'2020-09-08T00:00:00Z',
+      expected_exchange_date:'2020-10-12T00:00:00Z',
+      payment_schedule:[
+          {
+            type:'deposit',
+            due_date:'2019-09-06T00:00:00Z',
+            amount:{
+                amount_in_cents:10000000,
+                currency:'GBP'
+            }
+          }
+      ]
+    },
+    shareholder_details:{
+      collection:[
+          {
+            first_name:'Dillion',
+            last_name:'Marriot',
+            email:'mark@gmail.com',
+            allocated_shares:100,
+            is_director:true,
+            is_existing_user:true
+          },
+          {
+            first_name:'Dillion',
+            last_name:'Marriot',
+            email:'mark@gmail.com',
+            allocated_shares:100,
+            is_director:true,
+            is_existing_user:true
+          }
+      ]
+    },
+    solicitor_details: {
+      first_name: 'bob',
+      last_name: 'stuff',
+      email: 'asdf@sdf.com',
+      phone: '07732343567',
+      authority: false
+    },
+    tax_questions:{
+      is_owner_of_other_companies: null,
+      more_than_50_employees: null,
+      assets: null,
+      turnover: null
+    },
+    additional_services:{
+      mortgage: null,
+      insurance: null,
+      management: null,
+      solicitor: null
+    },
     bank_account: {
       name: 'Daniel Hecker',
       sort_code: '10-75-99',
@@ -135,6 +247,15 @@ export const companiesMock = [{
           balance: '£483,293.62'
         }
       ]
+    },
+    progress: {
+      overall_status: 'INCOMPLETE',
+      payment_status: 'INCOMPLETE',
+      property_address_status: 'NOT_STARTED',
+      purchase_details_status: 'INCOMPLETE',
+      shareholder_details_status: 'NOT_STARTED',
+      solicitor_details_status: 'NOT_STARTED',
+      tax_questions_status: 'NOT_STARTED'
     }
   }
 ];
@@ -153,7 +274,7 @@ describe('<CompanyLink />', () => {
       CompanyLink,
       {
         company: companiesMock[0],
-        setActiveCompany: setActiveCompanyMock,
+        setActiveCompany: setActiveCompanyMock
       }
     );
     component = findByTestAttr(wrapper, 'component-company-link');
@@ -166,7 +287,7 @@ describe('<CompanyLink />', () => {
   test('onClick()', () => {
     component.simulate('click');
 
-    expect(setActiveCompanyMock).toHaveBeenCalledWith('1');
-    expect(navigate).toHaveBeenCalledWith('/dashboard/company');
+    expect(setActiveCompanyMock).toHaveBeenCalledWith(1);
+    expect(navigate).toHaveBeenCalledWith('/company-design');
   });
 });

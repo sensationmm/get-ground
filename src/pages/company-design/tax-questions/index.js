@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { withTranslation } from 'react-i18next'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { withTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
 import { navigate } from 'gatsby';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 import formUtils from 'src/utils/form'
 import Form from 'src/components/_layout/Form/Form'
@@ -11,6 +11,7 @@ import Button from 'src/components/_buttons/Button/Button'
 import Layout from 'src/components/Layout/Layout'
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox'
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
+import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
@@ -24,15 +25,17 @@ export const CompanyService = new companyService();
 export class TaxQuestions extends Component {
   constructor(props) {
     super(props);
+
+    this.config = []
   }
 
   componentDidMount() {
     formUtils.initFormState({
-      ownership: null,
-      employ: null,
-      assets: null,
-      turnover: null
-    });
+      is_owner_of_other_companies: null,
+      more_than_50_employees: null,
+      assets_less_than_10m: null,
+      turnover_less_than_10m: null
+    }, this.props.company.tax_questions);
   }
 
   componentWillUnmount() {
@@ -40,13 +43,13 @@ export class TaxQuestions extends Component {
   }
 
   submitTaxAnswers = () => {
-    const { showLoader, hideLoader, t, form } = this.props;
+    const { showLoader, hideLoader, t, form: { values }, company } = this.props;
 
     /* istanbul ignore else */
     if (formUtils.validateForm(this.config)) {
       showLoader();
 
-      CompanyService.saveTaxAnswers(form.values).then((response) => {
+      CompanyService.updateCompany(values, 'tax_questions', company.id).then((response) => {
         hideLoader();
         /* istanbul ignore else */
         if (response.status === 200) {
@@ -59,65 +62,82 @@ export class TaxQuestions extends Component {
     }
   }
 
+  saveAndExit = async () => {
+    const { showLoader, hideLoader, form: { errors, values }, company } = this.props;
+
+    await Object.keys(errors).forEach(async (key) => {
+      await formUtils.updateValue(key, '');
+    });
+
+    showLoader();
+    CompanyService.updateCompany(values, 'tax_questions', company.id).then((response) => {
+      hideLoader();
+      if (response.status === 200) {
+        navigate('/company-design');
+      }
+    });
+
+  }
+
   render() {
     const { t, form } = this.props
     const { values } = form;
 
     const config = [
       {
-        stateKey: 'ownership',
+        stateKey: 'is_owner_of_other_companies',
         component: RadioGroup,
         groupLabel: t('taxQuestions.ownership'),
-        name: 'ownership',
+        name: 'is_owner_of_other_companies',
         items: [
-          { value: 'no', label: t('form.radioConfirm.false') },
-          { value: 'yes', label: t('form.radioConfirm.true') }
+          { value: false, label: t('form.radioConfirm.false') },
+          { value: true, label: t('form.radioConfirm.true') }
         ],
-        value: values.ownership,
+        value: values.is_owner_of_other_companies,
         validationFunction: 'validateRequired',
         istaxQuestions: true
       },
       {
-        stateKey: 'employ',
+        stateKey: 'more_than_50_employees',
         component: RadioGroup,
         groupLabel: t('taxQuestions.employ'),
-        name: 'employ',
+        name: 'more_than_50_employees',
         items: [
-          { value: 'no', label: t('form.radioConfirm.false') },
-          { value: 'yes', label: t('form.radioConfirm.true') }
+          { value: false, label: t('form.radioConfirm.false') },
+          { value: true, label: t('form.radioConfirm.true') }
         ],
-        value: values.employ,
+        value: values.more_than_50_employees,
         validationFunction: 'validateRequired',
         istaxQuestions: true,
-        hidden: !values.ownership || values.ownership === 'no'
+        hidden: !values.is_owner_of_other_companies || values.is_owner_of_other_companies === false
       },
       {
-        stateKey: 'assets',
+        stateKey: 'assets_less_than_10m',
         component: RadioGroup,
         groupLabel: t('taxQuestions.assets'),
-        name: 'assets',
+        name: 'assets_less_than_10m',
         items: [
-          { value: 'no', label: t('form.radioConfirm.false') },
-          { value: 'yes', label: t('form.radioConfirm.true') }
+          { value: false, label: t('form.radioConfirm.false') },
+          { value: true, label: t('form.radioConfirm.true') }
         ],
-        value: values.assets,
+        value: values.assets_less_than_10m,
         validationFunction: 'validateRequired',
         istaxQuestions: true,
-        hidden: !values.ownership || values.ownership === 'no'
+        hidden: !values.is_owner_of_other_companies || values.is_owner_of_other_companies === false
       },
       {
-        stateKey: 'turnover',
+        stateKey: 'turnover_less_than_10m',
         component: RadioGroup,
         groupLabel: t('taxQuestions.turnover'),
-        name: 'turnover',
+        name: 'turnover_less_than_10m',
         items: [
-          { value: 'no', label: t('form.radioConfirm.false') },
-          { value: 'yes', label: t('form.radioConfirm.true') }
+          { value: false, label: t('form.radioConfirm.false') },
+          { value: true, label: t('form.radioConfirm.true') }
         ],
-        value: values.turnover,
+        value: values.turnover_less_than_10m,
         validationFunction: 'validateRequired',
         istaxQuestions: true,
-        hidden: !values.ownership || values.ownership === 'no'
+        hidden: !values.is_owner_of_other_companies || values.is_owner_of_other_companies === false
       },
       {
         component: 'br'
@@ -137,9 +157,10 @@ export class TaxQuestions extends Component {
     ];
 
     const { showErrorMessage, errors } = form;
+    const headerActions = <ButtonHeader onClick={this.saveAndExit} label={t('header.buttons.saveAndExit')} />
 
     return (
-      <Layout secure>
+      <Layout headerActions={headerActions} secure>
         <div className="tax-questions" role="company-design">
         <h1 className="tax-questions-title">{t('taxQuestions.title')}</h1>
         <IntroBox>{t('taxQuestions.introBox')}</IntroBox>
@@ -161,6 +182,7 @@ export class TaxQuestions extends Component {
 }
 
 TaxQuestions.propTypes = {
+  company: PropTypes.object,
   t: PropTypes.func.isRequired,
   form: PropTypes.object,
   showLoader: PropTypes.func,
@@ -168,7 +190,8 @@ TaxQuestions.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  form: state.form
+  form: state.form,
+  company: state.companies.find(company => company.id === state.activeCompany)
 });
 
 const actions = {
