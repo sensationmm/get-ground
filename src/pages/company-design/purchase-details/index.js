@@ -193,6 +193,7 @@ class PurchaseDetails extends Component {
     const payload = {
       price: {
         amount_in_cents: values.amount_in_cents,
+        currency: 'GBP' 
       },
       is_new_build: values.is_new_build,
       completion_date:  this.state.completionDate ? 

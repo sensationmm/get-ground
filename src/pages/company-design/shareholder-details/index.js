@@ -184,7 +184,12 @@ class ShareholderDetails extends Component {
   }
 
   setNoShareholders = () => {
-    navigate('/company-design/tax-questions');
+    const { showLoader, hideLoader, company } = this.props;
+    showLoader();
+    CompanyService.updateCompany({collection: []}, 'shareholder_details', company.id).then((response) => {
+      hideLoader();
+      navigate('/company-design/tax-questions');
+    });
   }
 
   addDetails = () => {
@@ -280,7 +285,7 @@ class ShareholderDetails extends Component {
   saveShareholders = async (isSaveAndExit) => {
     const { form, showLoader, hideLoader, company } = this.props;
     const { values, errors } = form;
-    const shareholders = values;
+    let shareholders = values;
 
     for (let i = shareholders.length - 1; i >= 0; i--) {
       if (shareholders[i].first_name === '' && shareholders[i].last_name === '' && shareholders[i].email === '') {
@@ -292,6 +297,8 @@ class ShareholderDetails extends Component {
       await Object.keys(errors).forEach(async (key) => {
         await formUtils.updateValue(key, '');
       });
+
+      shareholders = shareholders.length === 0 ? [{}] : shareholders;
     }
 
     const payload = {
