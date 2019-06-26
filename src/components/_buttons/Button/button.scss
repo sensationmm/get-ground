@@ -71,8 +71,8 @@
   &.tertiary {
     min-width: 100px;
     background: none;
-    color: $text;
-    border: 2px solid $text;
+    color: $white;
+    border: 2px solid $white;
     padding: 10px 15px;
 
     &.small {
@@ -80,6 +80,8 @@
       font-size: 13px;
     }
   }
+
+  .account 
 
   &.white {
     min-width: 100px;
@@ -160,6 +162,13 @@
 .fullscreen {
   .button.link {
     color: $white;
+  }
+}
+
+.account {
+  .button.tertiary {
+    color: $text;
+    border-color: $text;
   }
 }
 
