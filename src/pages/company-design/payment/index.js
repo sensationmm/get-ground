@@ -73,14 +73,14 @@ export class Payment extends Component {
   }
 
   validateForm = () => {
-    const { showLoader, hideLoader, t, form } = this.props;
+    const { showLoader, hideLoader, t, form, company } = this.props;
     const { stripeToken, isStripeValid, } = this.state;
     const { values: { numberOfCompanies } } = form;
 
     /* istanbul ignore else */
     if (formUtils.validateForm(this.config) && isStripeValid) {
       showLoader();
-      return PaymentService.makePayment(stripeToken, numberOfCompanies).then((response) => {
+      return PaymentService.makePayment(stripeToken, numberOfCompanies, company.id).then((response) => {
         hideLoader();
         if(response.status === 201) {
           navigate('/company-design');
@@ -210,11 +210,13 @@ Payment.propTypes = {
   hideLoader: PropTypes.func,
   t: PropTypes.func.isRequired,
   location: PropTypes.object,
-  form: PropTypes.object
+  form: PropTypes.object,
+  company: PropTypes.object
 };
 
 const mapStateToProps = state => ({
-  form: state.form
+  form: state.form,
+  company: state.companies.find(company => company.id === state.activeCompany)
 });
 
 const actions = { showLoader, hideLoader };
