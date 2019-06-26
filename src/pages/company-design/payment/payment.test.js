@@ -22,7 +22,10 @@ describe('Payment page', () => {
       location: {
         search: '?retakePayment=true'
       },
-      form: ReduxFormMock
+      form: ReduxFormMock,
+      company: {
+        id: 1
+      }
     });
   });
 
@@ -102,6 +105,9 @@ describe('Payment page', () => {
         errors: {
           form: 'There was an issue with your payment'
         }
+      },
+      company: {
+        id: 1
       }
     });
 

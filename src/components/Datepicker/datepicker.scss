@@ -2,8 +2,8 @@
 @import 'src/styles/modules/_mixins.scss';
 
 .datepicker-modal {
-  position: fixed;
-  background: none;
+  position: fixed!important;
+  background: none!important;
 }
 
 .datepicker {
@@ -32,7 +32,7 @@
 
       &:first-child {
         @include gradient-horizontal($gradient-primary-1, $gradient-primary-2);
-        color: $white;
+        color: $white!important;
         box-shadow: 0px 3px 5px $shadow;
         order: 2;
       }
