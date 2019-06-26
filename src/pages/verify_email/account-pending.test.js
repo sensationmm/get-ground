@@ -62,7 +62,7 @@ describe('<AccountPending />', () => {
     });
 
     test('already verified', async () => {
-      AuthService.verifyEmail = jest.fn().mockReturnValue(Promise.resolve({ status: 200, data: { error: 'sasd' } }));
+      AuthService.verifyEmail = jest.fn().mockReturnValue(Promise.resolve({ status: 404, data: { error: 'sasd' } }));
       await setup(AccountPending, props);
       expect(navigate).toHaveBeenCalledWith('/login');
     });
