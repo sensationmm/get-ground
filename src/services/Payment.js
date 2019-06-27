@@ -16,7 +16,7 @@ class PaymentService extends BaseService {
       data: {
         'stripe_token': stripeToken,
         'quantity': numberOfCompanies,
-        'property_purchase_id': companyID
+        'property_purchase_id': companyID.toString()
       }
     };
 

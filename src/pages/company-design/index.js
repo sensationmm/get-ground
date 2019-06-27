@@ -54,7 +54,7 @@ export class ProcessTracker extends React.Component {
       CompanyService.getCompany(company.id).then(() => {
         hideLoader();
         
-        if (company.progress.overall_status === 'COMPLETE') {
+        if (this.props.company.progress.overall_status === 'COMPLETE') {
           navigate('/company-design/company-complete');
         }
       })
