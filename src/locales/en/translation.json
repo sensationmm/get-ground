@@ -1019,7 +1019,7 @@
       "complete": "Complete",
       "todo": "To do",
       "inProgress": "Incomplete",
-      "Signed": "Signed",
+      "signed": "Signed",
       "todoSigned": "To be signed"
     }
   },

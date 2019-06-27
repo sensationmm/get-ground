@@ -43,7 +43,7 @@ class OnboardingPersonalDetailsContainer extends Component {
     this.state = {
       formattedDate: '',
       isAddressValid: true,
-      isManualAddress: this.props.form.values.premise !== '' && this.props.form.values.premise !== null,
+      isManualAddress: this.props.form.values.premise === null,
       isDatepickerOpen: false,
       showPreviousNames: this.props.form.values.previous_names !== '' &&  this.props.form.values.previous_names !== null,
       isTextAreaHidden: true

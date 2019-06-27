@@ -44,15 +44,15 @@ class Dashboard extends Component {
     }, 750);
   }
 
-  // componentDidUpdate(prevProps) {
-  //   const { userID, showLoader } = this.props;
-  //   if (prevProps.userID !== userID) {
-  //     showLoader();
-  //     setTimeout(() => {
-  //       this.handleGetCompanies();
-  //     }, 750);
-  //   } 
-  // }
+  componentDidUpdate(prevProps) {
+    const { userID, showLoader } = this.props;
+    if (prevProps.userID !== userID) {
+      showLoader();
+      setTimeout(() => {
+        this.handleGetCompanies();
+      }, 750);
+    } 
+  }
 
   handleGetCompanies = () => {
     const { hideLoader } = this.props;
@@ -83,6 +83,8 @@ class Dashboard extends Component {
           <div className="company-header link profile" data-test="profile-button" onClick={() => navigate('/account')}>
             { t('dashboard.main.profileLink') }
           </div>
+
+          <Button onClick={() => navigate('/documents')} />
   
           <ActionBox actions={addCompany ? [addCompany] : actions} />
   
