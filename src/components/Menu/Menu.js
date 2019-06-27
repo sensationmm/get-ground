@@ -39,9 +39,9 @@ class Menu extends Component {
             return(
               <li className="menu--list-item" key={`menu-link-${i}`}>
                 {menuLink.link ?
-                  <Link to={`${menuLink.link}`}>{`${menuLink.text}`}</Link>
+                  <Link to={`${menuLink.link}`} activeClassName="active">{`${menuLink.text}`}</Link>
                   :
-                  <Link to="/" onClick={menuLink.function}>{`${menuLink.text}`}</Link>
+                  <Link to="/" onClick={menuLink.function} activeClassName="active">{`${menuLink.text}`}</Link>
                 }
               </li>
             )

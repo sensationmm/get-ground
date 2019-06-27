@@ -17,7 +17,7 @@ const NotFoundPage = () => {
         <SEO title="404: Not found" />
         <img className="hero-image" src={Image} alt="clock" data-test="about-us-img" />
         <h1>{ t('404.title') }</h1>
-        <p className="wrap">{ t('404.text') }</p>
+        <p>{ t('404.text') }</p>
 
         <Button classes="primary" onClick={() => navigate('/')} label={ t('404.cta') } />
       </div>

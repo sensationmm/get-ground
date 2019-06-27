@@ -11,10 +11,14 @@
 }
 
 @media screen and (min-width: $breakpoint-desktop) {
-  .form {
+  .form:not(.full) {
     width: 100%;
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .full .form {
+    max-width: none;
   }
 }

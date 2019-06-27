@@ -25,7 +25,7 @@ const CompanyLink = props => {
         progress.overall_status === 'COMPLETE' ? navigate('/dashboard/company') : navigate('/company-design');
       }}
     >
-      {property_address.address.premise}, {property_address.address.postcode}
+      {property_address.address.premise} {property_address.address.street}, {property_address.address.postcode}
     </div>
   );
 };

@@ -43,7 +43,7 @@ class ShareholderDetails extends Component {
 
     this.state = {
       shareholders: 1,
-      hasShareholders: null,
+      hasShareholders: this.props.company && this.props.company.shareholder_details.collection.filter(item => item.first_name !== '').length > 0,
       stage: 'add',
       totalShares: 0
     };
@@ -359,12 +359,14 @@ class ShareholderDetails extends Component {
               {this.renderShareholders(shareholders)}
 
               {shareholders < 7 &&
-                <Button
-                  onClick={this.addShareholder}
-                  label={t('companyDesign.shareholderDetails.add.new.cta')}
-                  icon={AddIcon}
-                  small
-                />
+                <div className="shareholder-detail">
+                  <Button
+                    onClick={this.addShareholder}
+                    label={t('companyDesign.shareholderDetails.add.new.cta')}
+                    icon={AddIcon}
+                    small
+                  />
+                </div>
               }
               
               <br /><br />
