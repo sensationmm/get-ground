@@ -580,16 +580,14 @@
     "title": "Meet the founders",
     "cta": "Read more",
     "moubin": {
-      "nameLong": "Moubin Faizullah Khan",
-      "nameShort": "Moubin",
+      "name": "Moubin",
       "content": {
         "first": "Moubin has experience in investing, commercial strategy, tax and structuring. He was an investment professional at Apax Partners, one of the world’s leading private equity houses.",
         "second": "There he was involved in numerous key transaction in the retail, consumer and IT services sectors. Previously Moubin was at McKinsey & Company and is trained as a medical doctor at Imperial College where he graduated with distinctions."
       }
     },
     "misrab": {
-      "nameLong": "Misrab Faizullah Khan",
-      "nameShort": "Misrab",
+      "name": "Misrab",
       "content": {
         "first": "Misrab is a computer scientist. He set up the data science team and Singapore office at Go-Jek, Indonesia’s first technology ‘unicorn’.",
         "second": "There he was involved in numerous key transaction in the retail, consumer and IT services sectors. Previously Moubin was at McKinsey & Company and is trained as a medical doctor at Imperial College where he graduated with distinctions.",
@@ -876,8 +874,8 @@
         "retakePaymentError": "Your payment has failed. Please update your payment details so we can finalise your application"
       },
       "content": {
-        "first": "Plus in 30 days we will start charging your:",
-        "second": "Monthly subscription: £24 (inc. VAT) This covers your company's ongoing management costs."
+        "first": "Plus in 30 days we will start charging your monthly subscription of £24 (inc. VAT).",
+        "second": "This covers your company's ongoing management costs."
       },
       "stripeError": "Enter card details",
       "stripeCheckbox": "I authorise GetGround to deduct my monthly subscription from my card.",

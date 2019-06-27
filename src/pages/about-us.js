@@ -14,8 +14,8 @@ const AboutUs = () => {
       <div role="brochure">
         <img className="hero-image" src={Image} alt="clock" data-test="about-us-img" />
         <h1 className="about-us-title">{t('aboutUs.title.first')}</h1>
-        <p className="about-us-content wrap" data-test="content-first">{t('aboutUs.content.first')}</p>
-        <p className="about-us-content wrap" data-test="content-second">{t('aboutUs.content.second')}</p>
+        <p className="about-us-content" data-test="content-first">{t('aboutUs.content.first')}</p>
+        <p className="about-us-content" data-test="content-second">{t('aboutUs.content.second')}</p>
         <h3 className="about-us-title-second">{t('aboutUs.title.second')}</h3>
         <p className="about-us-content" data-test="content-third">{t('aboutUs.content.third')}</p>
         <p className="about-us-content" data-test="content-fourth">{t('aboutUs.content.fourth')}</p>

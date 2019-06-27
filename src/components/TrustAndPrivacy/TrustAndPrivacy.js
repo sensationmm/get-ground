@@ -84,10 +84,10 @@ const TrustAndPrivacy = (props) => {
         />
       }
       <div className="trustAndPrivacy-logos">
-        <img src={FCA} />
-        <img src={Geovation} />
-        <img src={LandReg} />
-        <img src={ICO} />
+        <div><img src={FCA} /></div>
+        <div><img src={Geovation} /></div>
+        <div><img src={LandReg} /></div>
+        <div><img src={ICO} /></div>
       </div>
     </div>
   )

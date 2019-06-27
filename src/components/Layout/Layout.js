@@ -162,15 +162,20 @@ export class Layout extends Component {
         text: t('menu.links.seventh'),
         link: '/frequently-asked-questions',
         hideDesktop: true
-      },
-      {
-        text: isLoggedIn ? t('menu.links.ninth') : t('menu.links.eigth'),
-        function: (e) => {
-          e.preventDefault();
-          this.setState({ logout: true });
-        }
       }
     ];
+
+    if(isLoggedIn) {
+      menuLinks.push(
+        {
+          text: t('menu.links.ninth'),
+          function: (e) => {
+            e.preventDefault();
+            this.setState({ logout: true });
+          }
+        }
+      );
+    }
 
     const roles = children.props && children.props.role && children.props.role.split(' ');
 

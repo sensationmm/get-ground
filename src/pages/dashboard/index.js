@@ -83,10 +83,8 @@ class Dashboard extends Component {
           <div className="company-header link profile" data-test="profile-button" onClick={() => navigate('/account')}>
             { t('dashboard.main.profileLink') }
           </div>
-
-          <Button onClick={() => navigate('/documents')} />
   
-          <ActionBox actions={addCompany ? [addCompany] : actions} />
+          <ActionBox actions={!hasCompanies ? [addCompany] : actions} />
   
           <div className="dashboard-columns">
             <div>
