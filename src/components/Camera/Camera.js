@@ -31,9 +31,9 @@ export class ProofCamera extends Component {
   onCameraStop () {}
 
   render () {
-    const { section } = this.props
+    const { section, isMobile } = this.props
+
     return (
-      <div className="App">
         <Camera
           data-test="camera"
           onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
@@ -43,7 +43,7 @@ export class ProofCamera extends Component {
           imageType = {IMAGE_TYPES.JPG}
           imageCompression = {0.97}
           isMaxResolution = {false}
-          isImageMirror = {false}
+          isImageMirror = {!isMobile || section === 'selfie' ? true : false}
           isSilentMode = {true}
           isDisplayStartCameraError = {true}
           isFullscreen = {false}
@@ -51,7 +51,6 @@ export class ProofCamera extends Component {
           onCameraStart = { (stream) => { this.onCameraStart(stream); } }
           onCameraStop = { () => { this.onCameraStop(); } }
         />
-      </div>
     );
   }
 }
@@ -61,6 +60,7 @@ ProofCamera.propTypes = {
   setImg: PropTypes.func.isRequired,
   setRetake: PropTypes.func.isRequired,
   active: PropTypes.string.isRequired,
+  isMobile: PropTypes.bool
 }
 
 const actions = {
