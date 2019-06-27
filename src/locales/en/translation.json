@@ -859,6 +859,7 @@
     },
     "payment": {
       "title": "Payment details",
+      "subtitle": "Card details",
       "box": "We would like to save your card details so we can debit the subscription value in the future.",
       "termsAndCond": "See terms and conditions",
       "paymentInfo": {
