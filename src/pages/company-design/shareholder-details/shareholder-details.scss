@@ -1,7 +1,9 @@
 @import 'src/styles/modules/_variables.scss';
 @import 'src/styles/modules/_colors.scss';
 
-.shareholder {
+.shareholder-detail {
+  margin-bottom: 30px;
+
   .table-headers {
     padding-left: calc((100% - ((50px + #{$padding-horizontal-unit * 1.75 + 0px}) * 2)));
     display: flex;
@@ -16,5 +18,14 @@
       font-weight: 600;
       color: $text-secondary;
     }
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .shareholder-detail {
+    width: 100%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }

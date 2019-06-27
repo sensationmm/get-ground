@@ -58,7 +58,7 @@ class Dashboard extends Component {
             { t('dashboard.main.profileLink') }
           </div>
   
-          <ActionBox actions={addCompany ? [addCompany] : actions} />
+          <ActionBox actions={!hasCompanies ? [addCompany] : actions} />
   
           <div className="dashboard-columns">
             <div>

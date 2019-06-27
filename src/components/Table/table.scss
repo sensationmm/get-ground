@@ -83,12 +83,26 @@
 
 @media screen and (min-width: $breakpoint-desktop) {
   .table {
+    &-outer {
+      flex-grow: 0.33 !important;
+    }
+
+    &-responses {
+      flex-grow: 0.66 !important;
+    }
+
     &-section {
       flex-direction: row;
       justify-content: flex-start;
 
       > * {
         margin-right: 10px;
+      }
+    }
+
+    &.right {
+      .table-section-copy {
+        font-size: 13px;
       }
     }
   }

@@ -33,6 +33,15 @@ class ActionBox extends Component {
     this.dismissAction = this.dismissAction.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if(this.props.actions !== prevProps.actions) {
+      this.setState({
+        ...this.state,
+        actions: this.props.actions
+      })
+    }
+  }
+
   dismissAction() {
     const { currentAction } = this.state;
 

@@ -60,7 +60,7 @@ class AddShareholder extends Component {
     ];
 
     return (
-      <div data-test="component-add-shareholder" className="shareholder" role="company-design">
+      <div data-test="component-add-shareholder" className="shareholder-detail" role="company-design">
         <h2>{t('companyDesign.shareholderDetails.add.new.title')}</h2>
         <Form>{formUtils.renderForm(this.config, shareholderID)}</Form>
       </div>

@@ -1,6 +1,5 @@
 import { setup, findByTestAttr } from 'src/test-utils/test-utils';
 import { RawComponent } from './index';
-import InputNumber from 'src/components/_form/InputNumber/InputNumber';
 import Stripe from 'src/components/Stripe/Stripe';
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import { initialState as ReduxFormMock } from 'src/state/reducers/form';
@@ -39,20 +38,6 @@ describe('Payment page', () => {
     jest.spyOn(formUtils, 'clearFormState');
     wrapper.unmount();
     expect(formUtils.clearFormState).toHaveBeenCalledTimes(1);
-  });
-
-  test('payment values should update on input type', () => {
-    const component = findByTestAttr(wrapper, 'container-payment');
-
-    jest.spyOn(wrapper.instance(), 'updatePaymentValues');
-
-    component.find(InputNumber).props().callback(2);
-
-    expect(wrapper.instance().updatePaymentValues).toHaveBeenCalledWith(2);
-    expect(wrapper.state().accountSetupValue).toEqual(1000);
-    expect(wrapper.state().monthlySubscriptionValue).toEqual(40);
-    expect(wrapper.state().vatValue).toEqual(208);
-    expect(wrapper.state().totalValue).toEqual(1248);
   });
 
   test('stripe card details are invalid on stripe field type', () => {

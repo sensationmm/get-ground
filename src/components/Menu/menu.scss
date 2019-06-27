@@ -42,6 +42,11 @@
       
       a {
         display: block;
+
+        &.active {
+          color: $background-3;
+          font-weight: 600;
+        }
       }
     }
   }
