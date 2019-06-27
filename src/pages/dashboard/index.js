@@ -101,6 +101,7 @@ class Dashboard extends Component {
                   key={`company-${count}`}
                   company={(({ id, property_address, progress }) => ({ id, property_address, progress }))(company)}
                   setActiveCompany={setActiveCompany}
+                  propertyInProgressText={t('dashboard.main.propertyInProgressText')}
                 />
               ))}
   
