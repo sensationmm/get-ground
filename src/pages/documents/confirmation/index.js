@@ -15,14 +15,16 @@ const DocumentsConfirmation = () => {
     <Layout>
       <div className="confirmation" role="fullscreen documents">
         <div className="intro--hero-image"><img src={confirmationImage} alt={t('myDocuments.confirmation.imageAltText')} /></div>
-        <h2 className="confirmation--heading">{t('myDocuments.confirmation.heading')}</h2>
-        <div className="confirmation--copy" dangerouslySetInnerHTML={{ __html: t('myDocuments.confirmation.copy') }} />
-        <Link to="/dashboard">
-          <Button
-            classes="link"
-            label={t('myDocuments.confirmation.buttonText')}
-          />
-        </Link>
+        <div className="confirmation-content">
+          <h1 className="confirmation--heading">{t('myDocuments.confirmation.heading')}</h1>
+          <div className="confirmation--copy" dangerouslySetInnerHTML={{ __html: t('myDocuments.confirmation.copy') }} />
+          <Link to="/dashboard">
+            <Button
+              classes="secondary"
+              label={t('myDocuments.confirmation.buttonText')}
+            />
+          </Link>
+        </div>
       </div>
     </Layout>
   );

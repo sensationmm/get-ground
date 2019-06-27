@@ -19,7 +19,7 @@ const AccountPending = ({ location }) => {
 
   if (!isPasswordReset && verificationCode) {
     AuthService.verifyEmail(verificationCode).then((response => {
-      if(!response.data.error) {
+      if(response.status === 200) {
         navigate('/onboarding/email-verified');
       } else {
         navigate('/login');
@@ -33,13 +33,13 @@ const AccountPending = ({ location }) => {
 
   return (
     <Layout>
-      <div data-test="container-account-pending" className="account-pending" role="brochure fullscreen account">
+      <div data-test="container-account-pending" className="account-pending" role="fullscreen account">
         <img className="hero-image" src={Image} alt="clock" data-test="about-us-img" />
         <div className="">
           <h1>{ t('onBoarding.accountPending.title') }</h1>
-          <p data-test="account-pending-content">{ isPasswordReset ? t('forgotPassword.emailPending') :  accountPendingText() }</p>
+          <p className="wrap" data-test="account-pending-content">{ isPasswordReset ? t('forgotPassword.emailPending') :  accountPendingText() }</p>
 
-          <p>{ t('onBoarding.accountPending.introBox') }</p>
+          <p className="wrap">{ t('onBoarding.accountPending.introBox') }</p>
         </div>
       </div>
     </Layout>
