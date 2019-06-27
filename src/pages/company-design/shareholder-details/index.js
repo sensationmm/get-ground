@@ -29,7 +29,8 @@ export const shareholder = {
   last_name: '',
   email: '',
   allocated_shares: '',
-  is_director: false
+  is_director: false,
+  is_existing_user: false
 }
 
 /**
@@ -288,6 +289,8 @@ class ShareholderDetails extends Component {
     let shareholders = values;
 
     for (let i = shareholders.length - 1; i >= 0; i--) {
+      if (shareholders[i].is_director === null) shareholders[i].is_director = false;
+      if (shareholders[i].is_existing_user === null) shareholders[i].is_existing_user = false;
       if (shareholders[i].first_name === '' && shareholders[i].last_name === '' && shareholders[i].email === '') {
           shareholders.splice(i, 1);
       }

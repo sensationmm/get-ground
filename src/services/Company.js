@@ -73,6 +73,21 @@ class CompanyService extends BaseService {
       store.dispatch(companyUpdate(companyId, key, payload));
     });
   }
+
+  /**
+    * confirmCompany
+    * @param {number} companyId - id of the company
+    * @return {Promise} CompanyService.confirmCompany
+   */
+  confirmCompany = (companyId) => {
+    const config = {
+      url: `property_purchases/${companyId}/confirm`,
+      method: 'put',
+      data: {}
+    };
+
+    return this.doRequest(config);
+  }
 }
 
 export default CompanyService;
