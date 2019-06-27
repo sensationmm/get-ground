@@ -29,15 +29,20 @@ export class AddProof extends Component {
     }
   }
 
-
   initialLanding = () => {
     const { initialImg, section, t } = this.props;
 
     return (
-      <div className={`add-proof-initial`} data-test="initial-img" onClick={() => this.handleActiveSection({takePicture: true})}>
-        <img src={initialImg} alt={`add-proof-${section}`} className={`add-proof-initial-img ${section}`}/>
-        <img src={CameraIcon} className={`add-proof-initial-camera-icon ${section}`} />
-        <p className={`add-proof-initial-name ${section}`}>{t(`onBoarding.idCheck.${section}.name`)}</p>
+      <div
+        className={`add-proof-initial`}
+        data-test="initial-img"
+        onClick={() => this.handleActiveSection({takePicture: true})}
+        style={{ backgroundImage: `url(${initialImg})` }}
+      >
+        <div className="add-proof-initial-label">
+          <img src={CameraIcon} className={`add-proof-initial-camera-icon ${section}`} />
+          <p className={`add-proof-initial-name ${section}`}>{t(`onBoarding.idCheck.${section}.name`)}</p>
+        </div>
       </div>
     )
   }
@@ -53,10 +58,10 @@ export class AddProof extends Component {
   }
 
   startCamera = (t) => {
-    const { section } = this.props;
+    const { section, isMobile } = this.props;
     return (
       <div className="add-proof-start-camera">
-        <Camera section={section} active={this.props.active} data-test="camera"/>
+        <Camera section={section} active={this.props.active} isMobile={isMobile} data-test="camera"/>
         <img className={`add-proof-overlay ${section}`} src={this.props.overlay} />
         <p className="add-proof-loading">{t('onBoarding.idCheck.loading')}</p>
       </div>
@@ -76,10 +81,11 @@ export class AddProof extends Component {
     this.setState({ takePicture: false })
   }
 
-  imgConfirmation(t, imagesrc) {
+  imgConfirmation(t, imagesrc, section) {
     return (
       <>
         <img className="confirm-image" data-test="confirm-img" src={imagesrc}/>
+        <p className="happy-text">{ t(`onBoarding.idCheck.${section}.retakeImageContent`) }</p>
         <div className="confirm-buttons">
           <Button data-test="happy-button" classes="primary confirm-happy" fullWidth label={t('onBoarding.idCheck.image.happy')} onClick={() => this.handleHappy()}/>
           <Button data-test="retake-button" classes="secondary" fullWidth label={t('onBoarding.idCheck.image.retake')} onClick={() => this.retakePicture()}/>
@@ -123,9 +129,9 @@ export class AddProof extends Component {
  }
 
  /**
-   * @param {Array} files - uploaded files from dropzone
-   * @return {void}
-   */
+  * @param {Array} files - uploaded files from dropzone
+  * @return {void}
+  */
   onImageDrop = (files) => {
     this.getDataUrl(files[0])
 
@@ -145,7 +151,7 @@ export class AddProof extends Component {
 
     if (imagesrc === '' && !this.state.takePicture) return this.initialLanding()
 
-    if (imagesrc) return this.imgConfirmation(t, imagesrc)
+    if (imagesrc) return this.imgConfirmation(t, imagesrc, section)
 
     if (!imagesrc || retake || this.state.takePicture) return this.startCamera(t)
   }
@@ -179,9 +185,18 @@ export class AddProof extends Component {
     const { t, section } = this.props
 
     return (
-      <div data-test="component-add-proof" className={classNames(['add-proof', {'disabled': this.props.active && this.props.active !== section  }])} role="account">
-        <IntroBox data-test="intro-box">{ t(`onBoarding.idCheck.${section}.title`) }</IntroBox>
-        <p className="add-proof-content">{ !this.state.takePicture ? t(`onBoarding.idCheck.${section}.content`) : t(`onBoarding.idCheck.${section}.retakeImageContent`)}</p>
+      <div data-test="component-add-proof" className={
+        classNames([
+          'add-proof',
+          {'proof-active': this.props.active && this.props.active === section },
+          {'disabled': this.props.active && this.props.active !== section }
+        ])} role="account">
+        
+        <div className="add-proof-text">
+          <IntroBox data-test="intro-box">{ t(`onBoarding.idCheck.${section}.title`) }</IntroBox>
+          <p className="add-proof-content">{ t(`onBoarding.idCheck.${section}.content`) }</p>
+        </div>
+
         <div className="add-proof-img">{this.handleProof(t)}</div>
         {section !== 'selfie' && <div className="add-proof-upload-file">{this.uploadImg(t)}</div>}
       </div>
@@ -200,10 +215,12 @@ AddProof.propTypes = {
   active: PropTypes.string.isRequired,
   overlay: PropTypes.string,
   idCheck: PropTypes.object,
+  isMobile: PropTypes.bool
 }
 const mapStateToProps = (state) => ({
   active: state.idCheck.active,
-  idCheck: state.idCheck
+  idCheck: state.idCheck,
+  isMobile: state.layout.isMobile
 })
 
 const actions = {
