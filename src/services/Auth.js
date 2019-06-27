@@ -47,6 +47,7 @@ class AuthService extends BaseService {
 
       setTimeout(function() { // jwt delayed 1 sec for bots
         AccountService.getDocuments();
+        CompanyService.getCompanies();
       }, 750);
     });
   };
