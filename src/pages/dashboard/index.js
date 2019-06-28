@@ -35,32 +35,6 @@ class Dashboard extends Component {
       liveChatTopic: null
     };
   }
-
-  componentDidMount() {
-    const { showLoader } = this.props;
-    showLoader();
-    setTimeout(() => {
-      this.handleGetCompanies();
-    }, 750);
-  }
-
-  componentDidUpdate(prevProps) {
-    const { userID, showLoader } = this.props;
-    if (prevProps.userID !== userID) {
-      showLoader();
-      setTimeout(() => {
-        this.handleGetCompanies();
-      }, 750);
-    } 
-  }
-
-  handleGetCompanies = () => {
-    const { hideLoader } = this.props;
-    CompanyService.getCompanies()
-    .then(() => {
-      hideLoader();
-    });
-  }
   
   render() {
     const { actions, companies, setActiveCompany, t } = this.props;

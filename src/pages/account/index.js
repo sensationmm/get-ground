@@ -208,7 +208,7 @@ class Account extends Component {
                 <Form spacing="30px">
                   <div>
                     <h2>{ t('profile.sections.name') }</h2>
-                    <p>{ `${user.first_name}${user.middle_name ? `${user.middle_name} ` : ''} ${user.last_name}`}</p>
+                    <p>{ `${user.first_name}${user.middle_name ? ` ${user.middle_name} ` : ''} ${user.last_name}`}</p>
                   </div>
 
                   <div>
