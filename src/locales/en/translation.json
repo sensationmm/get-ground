@@ -434,7 +434,8 @@
       "todoHeader": "To do",
       "addCompanyButton": "Add property",
       "noProperties": "Your first property will show here",
-      "noActions": "You currently don't have anything in your to do list"
+      "noActions": "You currently don't have anything in your to do list",
+      "propertyInProgressText": "Your property purchase is currently in progress..."
     }
   },
   "footer": {
