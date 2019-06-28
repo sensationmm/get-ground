@@ -43,7 +43,7 @@ class ShareholderDetails extends Component {
 
     this.state = {
       shareholders: 1,
-      hasShareholders: this.props.company && this.props.company.shareholder_details.collection.filter(item => item.first_name !== '').length > 0,
+      hasShareholders: this.props.company && this.props.company.shareholder_details.collection && this.props.company.shareholder_details.collection.filter(item => item.first_name !== '').length > 0,
       stage: 'add',
       totalShares: 0
     };
