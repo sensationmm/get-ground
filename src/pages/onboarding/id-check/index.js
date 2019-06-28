@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 import { connect } from 'react-redux'
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
@@ -24,9 +24,12 @@ const KYCService = new kycService();
  * @return {Class} IdCheck
  */
 export class IdCheck extends Component {
-  componentWillUnmount() {
+
+  submitFiles = () => {
     const { passport, address, selfie } = this.props
-    KYCService.makeCheck(passport.img, address.img, selfie.img)
+    KYCService.makeCheck(passport.img, address.img, selfie.img).then(() => {
+      navigate('onboarding');
+    })
   }
 
   render() {
@@ -40,9 +43,7 @@ export class IdCheck extends Component {
         <AddProof section="passport" initialImg={Passport} overlay={CameraCrosshair} />
         <AddProof section="address" initialImg={Address} overlay={CameraCrosshair} />
         <AddProof section="selfie" initialImg= {Selfie} overlay={AlienHead} />
-        <Link to="/onboarding">
-          <Button classes="primary id-check-next" label={ t('onBoarding.idCheck.buttonNext') } fullWidth />
-        </Link>
+        <Button classes="primary id-check-next" onClick={this.submitFiles} label={ t('onBoarding.idCheck.buttonNext') } fullWidth />
         <Link to="/onboarding/personal-details">
           <Button classes="secondary id-check-back" label={ t('onBoarding.idCheck.buttonBack') } fullWidth />
         </Link>
