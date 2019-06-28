@@ -7,7 +7,7 @@
   margin-left: -(($padding-horizontal-unit * 2) + 0px);
   padding: 15px (($padding-horizontal-unit * 2) + 0px);
   background: $grey;
-  
+
 
   &-title {
     font-size: 22px;
@@ -68,8 +68,12 @@
     color: $heading;
     font-weight: 300;
 
-    &-subTitle {
-      text-align: center !important;
+    .hero-image.expanded {
+      right: 17px;
+    }
+
+    &-subTitle:not(.expanded) {
+      text-align: center;
     }
 
     &.read-more {

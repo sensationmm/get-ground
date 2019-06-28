@@ -62,11 +62,19 @@ const TrustAndPrivacy = (props) => {
       { 'read-more': show },
     )}>
       <h3 className="trustAndPrivacy-title">{t('trustAndPrivacy.title')}</h3>
-      <p className="trustAndPrivacy-subTitle">{t('trustAndPrivacy.subTitle')}</p>
+      <p className={classNames(
+      'trustAndPrivacy-subTitle',
+      { 'expanded': show },
+    )}>
+      {t('trustAndPrivacy.subTitle')}
+    </p>
       {show && !isMobile &&
-        <img className="hero-image" src={Image} alt="" />
+        <img className={classNames(
+          'hero-image',
+          { 'expanded': show },
+        )} src={Image} alt="" />
       }
-      
+
       {show
         ?
           infoConfig.infos.map((info, idx) => (
