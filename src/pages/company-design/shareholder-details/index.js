@@ -29,7 +29,8 @@ export const shareholder = {
   last_name: '',
   email: '',
   allocated_shares: '',
-  is_director: false
+  is_director: false,
+  is_existing_user: false
 }
 
 /**
@@ -42,7 +43,7 @@ class ShareholderDetails extends Component {
 
     this.state = {
       shareholders: 1,
-      hasShareholders: null,
+      hasShareholders: this.props.company && this.props.company.shareholder_details.collection && this.props.company.shareholder_details.collection.filter(item => item.first_name !== '').length > 0,
       stage: 'add',
       totalShares: 0
     };
@@ -288,6 +289,8 @@ class ShareholderDetails extends Component {
     let shareholders = values;
 
     for (let i = shareholders.length - 1; i >= 0; i--) {
+      if (shareholders[i].is_director === null) shareholders[i].is_director = false;
+      if (shareholders[i].is_existing_user === null) shareholders[i].is_existing_user = false;
       if (shareholders[i].first_name === '' && shareholders[i].last_name === '' && shareholders[i].email === '') {
           shareholders.splice(i, 1);
       }
@@ -356,12 +359,14 @@ class ShareholderDetails extends Component {
               {this.renderShareholders(shareholders)}
 
               {shareholders < 7 &&
-                <Button
-                  onClick={this.addShareholder}
-                  label={t('companyDesign.shareholderDetails.add.new.cta')}
-                  icon={AddIcon}
-                  small
-                />
+                <div className="shareholder-detail">
+                  <Button
+                    onClick={this.addShareholder}
+                    label={t('companyDesign.shareholderDetails.add.new.cta')}
+                    icon={AddIcon}
+                    small
+                  />
+                </div>
               }
               
               <br /><br />

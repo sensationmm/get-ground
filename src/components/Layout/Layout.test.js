@@ -87,16 +87,6 @@ describe('<Layout />', () => {
     expect(hideMenuMock).toHaveBeenCalledTimes(1);
   });
 
-  test('logged out t should be called with menu.links.eigth', () => {
-    setup(Layout, { ...props, menuIsOpen: true });
-    expect(props.t).toHaveBeenCalledWith('menu.links.eigth')
-  })
-
-  test('logged in t should be called with menu.links.ninth', () => {
-    setup(Layout, { ...props, menuIsOpen: true, isLoggedIn: true });
-    expect(props.t).toHaveBeenCalledWith('menu.links.ninth')
-  })
-
   describe('auth detection', () => {
 
     test('has userID', () => {

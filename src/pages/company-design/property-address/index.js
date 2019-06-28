@@ -39,7 +39,7 @@ class PropertyAddress extends Component {
 
     this.state = {
       isAddressValid: true,
-      isManualAddress: true,
+      isManualAddress: false,
       isTextAreaHidden: true
     };
 

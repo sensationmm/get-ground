@@ -11,7 +11,6 @@ import Layout from 'src/components/Layout/Layout'
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import PaymentInfo from 'src/components/PaymentInfo/PaymentInfo';
 import Form from 'src/components/_layout/Form/Form';
-import InputNumber from 'src/components/_form/InputNumber/InputNumber';
 import Stripe from 'src/components/Stripe/Stripe';
 import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 
@@ -33,7 +32,7 @@ export class Payment extends Component {
 
     this.baseSetupValue = 500;
     this.baseMonthlySubValue = 20;
-    this.vatValue = (this.baseSetupValue + this.baseMonthlySubValue) / 100 * 20;
+    this.vatValue = this.baseSetupValue / 100 * 20;
 
     this.state = {
       stripe: null,
@@ -41,7 +40,7 @@ export class Payment extends Component {
       accountSetupValue: this.baseSetupValue,
       monthlySubscriptionValue: this.baseMonthlySubValue,
       vatValue: this.vatValue,
-      totalValue: this.baseSetupValue + this.baseMonthlySubValue + this.vatValue,
+      totalValue: this.baseSetupValue + this.vatValue,
       stripeToken: '',
     };
 
@@ -111,8 +110,8 @@ export class Payment extends Component {
     if(!isNaN(input) && input < 21 && input > 0) {
       setupValue = this.baseSetupValue * input;
       subValue = this.baseMonthlySubValue * input
-      vatValue = ((this.baseSetupValue * input) + ( this.baseMonthlySubValue * input)) / 100 * 20;
-      totalValue = setupValue + subValue + vatValue;
+      vatValue = (this.baseSetupValue * input) / 100 * 20;
+      totalValue = setupValue + vatValue;
     }
 
     this.setState({
@@ -134,20 +133,10 @@ export class Payment extends Component {
       vatValue,
       totalValue,
     } = this.state;
-    const { values, errors, showErrorMessage } = form;
+    const { errors, showErrorMessage } = form;
 
 
     this.config = [
-      {
-        stateKey: 'numberOfCompanies',
-        component: InputNumber,
-        label: t('onBoarding.payment.form.numberOfCompaniesLabel'),
-        value: values.numberOfCompanies,
-        validationFunction: 'validateNoOfCompanies',
-        callback: (input) => this.updatePaymentValues(input),
-        min: 1,
-        max: 20
-      },
       {
         component: Stripe,
         isStripeValid: isStripeValid,
@@ -191,10 +180,13 @@ export class Payment extends Component {
 
           <p>{t('onBoarding.payment.content.first')}</p>
           <p>{t('onBoarding.payment.content.second')}</p>
+          <br />
+
+          <h2>{ t('onBoarding.payment.title') }</h2>
 
           <StripeProvider stripe={this.state.stripe}>
             <Elements>
-              <Form>
+              <Form desktopFullWidth>
                 {formUtils.renderForm(this.config)}
               </Form>
             </Elements>

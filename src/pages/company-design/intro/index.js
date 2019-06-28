@@ -78,9 +78,9 @@ class CompanyDesignIntroContainer extends Component {
         <div data-test="container-company-design-intro" className="intro" role="brochure fullscreen">
           <img className="hero-image" src={house} />
           <h1>{t('companyDesign.intro.title')}</h1>
-          <p className="wrap">{t('companyDesign.intro.para1')}</p>
-          <p className="wrap">{t('companyDesign.intro.para2')}</p>
-          <p className="wrap">{t('companyDesign.intro.para3')}</p>
+          <p>{t('companyDesign.intro.para1')}</p>
+          <p>{t('companyDesign.intro.para2')}</p>
+          <p>{t('companyDesign.intro.para3')}</p>
           <div className="intro--buttons-container">
             <Button
               data-test="add-services-button"

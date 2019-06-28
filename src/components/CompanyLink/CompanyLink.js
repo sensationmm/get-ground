@@ -26,7 +26,7 @@ const CompanyLink = props => {
       }}
     >
     { progress.overall_status === 'COMPLETE' ?
-      `${property_address.address.premise}, ${property_address.address.postcode}`
+      `${property_address.address.premise} {property_address.address.street}, ${property_address.address.postcode}`
       :
       propertyInProgressText
     }

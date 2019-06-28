@@ -43,7 +43,7 @@ class OnboardingPersonalDetailsContainer extends Component {
     this.state = {
       formattedDate: '',
       isAddressValid: true,
-      isManualAddress: this.props.form.values.premise !== '' && this.props.form.values.premise !== null,
+      isManualAddress: this.props.form.values.premise === null,
       isDatepickerOpen: false,
       showPreviousNames: this.props.form.values.previous_names !== '' &&  this.props.form.values.previous_names !== null,
       isTextAreaHidden: true
@@ -173,7 +173,7 @@ class OnboardingPersonalDetailsContainer extends Component {
   submitPersonalDetails =   /* istanbul ignore next */ () => {
     const { isManualAddress } = this.state;
 
-    if (!isManualAddress && document.getElementById('addressArea').value === '') {
+    if (!isManualAddress && (document.getElementById('addressArea') && document.getElementById('addressArea').value === '')) {
       this.setState({ isAddressValid: false }, this.initFormValidation());
     } else {
       this.setState({ isAddressValid: true }, this.initFormValidation());

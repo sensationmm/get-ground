@@ -50,9 +50,13 @@ export class ProcessTracker extends React.Component {
 
     showLoader();
 
-    if(company && company.id) {
+    if (company && company.id) {
       CompanyService.getCompany(company.id).then(() => {
         hideLoader();
+        
+        if (this.props.company.progress.overall_status === 'COMPLETE') {
+          navigate('/company-design/company-complete');
+        }
       })
     } else {
       navigate('/dashboard');
@@ -143,7 +147,7 @@ export class ProcessTracker extends React.Component {
 
     return (
       <Fragment>
-        <Layout secure>
+        <Layout secure companyID>
           <div className="process-tracker" role="fullscreen company-design">
             { company &&
               <>
