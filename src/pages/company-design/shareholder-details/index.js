@@ -442,6 +442,7 @@ class ShareholderDetails extends Component {
 
               <Form>
                 <Button
+                  data-test="button-add"
                   onClick={this.confirmShares}
                   label={t('form.ctaPrimary')}
                   classes="primary"
