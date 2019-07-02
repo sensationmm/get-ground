@@ -16,6 +16,7 @@ import ModalWrapper from 'src/components/Modal/ModalWrapper';
 import ModalContent from 'src/components/Modal/ModalContent';
 import Menu from 'src/components/Menu/Menu';
 import Footer from 'src/components/Footer/Footer';
+import CanvasCurve from 'src/components/_layout/CanvasCurve'
 
 import store from 'src/state/store';
 import { setWidth } from 'src/state/actions/layout';
@@ -180,7 +181,6 @@ export class Layout extends Component {
     const roles = children.props && children.props.role && children.props.role.split(' ');
 
     return (
-
       <div className={classNames('wrapper', `${roles && roles.join(' ')}`)}>
 
         { userID &&
@@ -212,9 +212,13 @@ export class Layout extends Component {
 
         <div className={classNames('app', { 'extra-top-padding': !userID })}>
           <main className="main">{children}</main>
+
+
+          {inArray('hasCurve', roles) && <CanvasCurve />}
         </div>
         <div id="modal-root"></div>
-        {(!inArray('fullscreen', roles) || inArray('hasFooter', roles)) && <Footer hideContact={inArray('fullscreen', roles)} />}
+        
+        <Footer hideContact={inArray('fullscreen', roles)} />
 
         {isMobile &&
           <ModalWrapper

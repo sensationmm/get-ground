@@ -21,36 +21,36 @@ const Footer = (props) => {
         link: '/what-we-do'
       },
       {
-        title: links['link3'].title,
-        link: '/partnerships'
-      },
-      {
-        title: links['link2'].title,
-        link: '/advantages'
+        title: links['link6'].title,
+        link: '/pricing'
       },
       {
         title: links['link5'].title,
         link: '/frequently-asked-questions'
       },
       {
-        title: links['link4'].title,
-        link: '/how-it-works'
+        title: links['link2'].title,
+        link: '/advantages'
+      },
+      {
+        title: links['link1'].title,
+        link: '/about-us'
       },
       {
         title: links['link8'].title,
         link: '/terms-and-conditions'
       },
       {
-        title: links['link6'].title,
-        link: '/pricing'
+        title: links['link4'].title,
+        link: '/how-it-works'
+      },
+      {
+        title: links['link3'].title,
+        link: '/partnerships'
       },
       {
         title: links['link9'].title,
         link: '/privacypolicy'
-      },
-      {
-        title: links['link1'].title,
-        link: '/about-us'
       },
     ]
   };

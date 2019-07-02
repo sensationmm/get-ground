@@ -110,7 +110,7 @@ export class ProcessTracker extends Component {
       <Fragment>
         <Layout secure>
           <div className="process-tracker onboarding" role="fullscreen account">
-            <h3 className="process-tracker--title">{t('onBoarding.progressTracker.inProgressTitle')}</h3>
+            <h1 className="process-tracker--title">{t('onBoarding.progressTracker.inProgressTitle')}</h1>
             <div className="process-tracker-sections">
               {sectionsConfig.sections.map((section, idx) => {
                 return (

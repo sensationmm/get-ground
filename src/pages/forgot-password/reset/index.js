@@ -107,7 +107,7 @@ class ResetPassword extends Component {
 
     return (
       <Layout>
-        <div className="reset-password" data-test="container-reset-password" role="account fullscreen">
+        <div className="reset-password" data-test="container-reset-password" role="account fullscreen hasCurve">
           <h1 className="reset-password-title">{ t('forgotPassword.reset.title') }</h1>
 
           {showErrorMessage &&

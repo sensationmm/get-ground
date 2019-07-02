@@ -5,6 +5,7 @@ import { Link, navigate } from 'gatsby';
 import { useTranslation } from 'react-i18next';
 
 import Button from 'src/components/_buttons/Button/Button';
+import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 
 import Logo from 'src/assets/images/logo-white.svg';
 import './header.scss';
@@ -39,9 +40,7 @@ const Header = (props) => {
           </div>
           <div className="header-buttons">
             {userID && !children &&
-              <div data-test="dashboard" className="header-dashboard" onClick={() => navigate('/dashboard')}>
-                <p>{t('header.dashboard')}</p>
-              </div>
+              <ButtonHeader data-test="dashboard" label={t('header.dashboard')} onClick={() => navigate('/dashboard')} />
             }
 
             {children

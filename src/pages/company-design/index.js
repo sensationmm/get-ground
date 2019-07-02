@@ -151,9 +151,9 @@ export class ProcessTracker extends React.Component {
           <div className="process-tracker" role="fullscreen company-design">
             { company &&
               <>
-                <h3 className="process-tracker--title">
+                <h1 className="process-tracker--title">
                   {t('companyDesign.progressTracker.inProgressTitle', { count: sectionsConfig.sections.length })}
-                </h3>
+                </h1>
                 <div className="process-tracker-sections">
                   {sectionsConfig.sections.map((section, idx) => (
                     <ProcessSection 

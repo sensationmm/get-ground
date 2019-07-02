@@ -31,6 +31,10 @@
 
 @media screen and (min-width: $breakpoint-desktop) {
   .dashboard {
+    h1 {
+      min-height: 50px;
+    }
+
     &-columns {
       display: flex;
       flex-direction: row;

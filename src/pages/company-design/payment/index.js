@@ -182,7 +182,7 @@ export class Payment extends Component {
           <p>{t('onBoarding.payment.content.second')}</p>
           <br />
 
-          <h2>{ t('onBoarding.payment.title') }</h2>
+          <h2>{ t('onBoarding.payment.subtitle') }</h2>
 
           <StripeProvider stripe={this.state.stripe}>
             <Elements>

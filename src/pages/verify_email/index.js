@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import queryString from 'query-string'
 
 import Layout from 'src/components/Layout/Layout'
+import TextImage from 'src/components/_layout/TextImage/TextImage'
 import Image from 'src/assets/images/verify-email.svg'
 
 import authService from 'src/services/Auth';
@@ -28,19 +29,18 @@ const AccountPending = ({ location }) => {
   }
 
   const accountPendingText = () => {
-    return `${t('onBoarding.accountPending.initialText')} ${email}. ${t('onBoarding.accountPending.text')}`
+    return `<p>${t('onBoarding.accountPending.initialText')} ${email}. ${t('onBoarding.accountPending.text')}</p>`
   }
 
   return (
     <Layout>
-      <div data-test="container-account-pending" className="account-pending" role="fullscreen account">
-        <img className="hero-image" src={Image} alt="clock" data-test="about-us-img" />
-        <div className="">
-          <h1>{ t('onBoarding.accountPending.title') }</h1>
-          <p data-test="account-pending-content">{ isPasswordReset ? t('forgotPassword.emailPending') :  accountPendingText() }</p>
+      <div data-test="container-account-pending" role="fullscreen account hasCurve">
 
-          <p>{ t('onBoarding.accountPending.introBox') }</p>
-        </div>
+        <TextImage
+          title={t('onBoarding.accountPending.title')}
+          image={Image}
+          text={isPasswordReset ? <p>{t('forgotPassword.emailPending')}</p> :  accountPendingText()}
+        />
       </div>
     </Layout>
   );

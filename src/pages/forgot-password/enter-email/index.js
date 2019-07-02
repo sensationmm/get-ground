@@ -79,7 +79,7 @@ class EnterEmail extends Component {
 
     return (
       <Layout>
-        <div className="enter-email" data-test="container-enter-email" role="account fullscreen">
+        <div className="enter-email" data-test="container-enter-email" role="account fullscreen hasCurve">
           <h1 className="enter-email-title">{ t('forgotPassword.title') }</h1>
 
           {showErrorMessage &&
@@ -91,11 +91,9 @@ class EnterEmail extends Component {
             </ErrorBox>
           }
 
-            <Form>
-              { formUtils.renderForm(this.config) }
-            </Form>
-
             <Form className="enter-email-actions" data-test="reset-password-form">
+              { formUtils.renderForm(this.config) }
+              
               <Button
                 data-test="enter-email-button"
                 classes="secondary"

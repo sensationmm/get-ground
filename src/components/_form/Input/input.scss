@@ -92,6 +92,15 @@
   }
 }
 
+.account {
+  .text-input {
+    &-label, &-required, input.error {
+      color: $text;
+      border-color: $text;
+    }
+  }
+}
+
 .company-design-purchase-details {
   .text-input {
 
