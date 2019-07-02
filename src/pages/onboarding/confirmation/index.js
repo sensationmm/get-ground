@@ -21,14 +21,6 @@ const OnboardingConfirmation = () => {
           buttonAction={() => navigate('/dashboard')}
           buttonLabel={t('onBoarding.confirmation.buttonText')}
         />
-        {/* <img className="intro--hero-image" src={confirmationImage} alt={t('onBoarding.confirmation.imageAltText')} />
-        <div className="confirmation-content">
-          <h1 className="confirmation--heading">{t('onBoarding.confirmation.heading')}</h1>
-          <div className="confirmation--copy" dangerouslySetInnerHTML={{ __html: t('onBoarding.confirmation.copy') }} />
-          <Link to="/dashboard">
-            <Button label={t('onBoarding.confirmation.buttonText')} />
-          </Link>
-        </div> */}
       </div>
     </Layout>
   );
