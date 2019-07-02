@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { navigate } from 'gatsby';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux'
+import { uniq } from 'lodash'
 
 import formUtils from 'src/utils/form';
 import Layout from 'src/components/Layout/Layout';
@@ -45,7 +46,8 @@ class ShareholderDetails extends Component {
       shareholders: 1,
       hasShareholders: this.props.company && this.props.company.shareholder_details.collection && this.props.company.shareholder_details.collection.filter(item => item.first_name !== '').length > 0,
       stage: 'add',
-      totalShares: 0
+      totalShares: 0,
+      owner_is_director: true
     };
 
     this.shareholder0 = null;
@@ -82,7 +84,7 @@ class ShareholderDetails extends Component {
     ], shareholders);
 
     if (populatedShareholders > 1) {
-      this.setState({ shareholders: populatedShareholders });
+      this.setState({ shareholders: populatedShareholders - 1 });
     }
   }
 
@@ -98,6 +100,7 @@ class ShareholderDetails extends Component {
    * @return {void}
    */
   updateShareholder = (id, key, value) => {
+    console.log('updateShareholder id key value', id, key, value )
     const shareholder = this.props.form.values[id];
     shareholder[key] = value;
 
@@ -225,17 +228,17 @@ class ShareholderDetails extends Component {
   renderShareholders = (count) => {
     const render = [];
     const { form } = this.props;
+    console.log('renderShareholders form', form.values)
 
     for(let i=0; i<count; i++) {
       const first_name = form.values[i] === undefined ? '' : form.values[i].first_name;
       const last_name = form.values[i] === undefined ? '' : form.values[i].last_name;
       const email = form.values[i] === undefined ? '' : form.values[i].email;
-
       render.push(
         <AddShareholder
           shareholderID={i}
           onRef={/* istanbul ignore next */(ref) => this[`shareholder${i}`] = ref}
-          key={`shareholder${i}`}
+          key={`${first_name}${i}`}
           onChange={this.updateShareholder}
           first_name={first_name}
           last_name={last_name}
@@ -284,7 +287,7 @@ class ShareholderDetails extends Component {
    * @return {void} saveShareholders
    */
   saveShareholders = async (isSaveAndExit) => {
-    const { form, showLoader, hideLoader, company } = this.props;
+    const { form, showLoader, hideLoader, company, user } = this.props;
     const { values, errors } = form;
     let shareholders = values;
 
@@ -304,8 +307,17 @@ class ShareholderDetails extends Component {
       shareholders = shareholders.length === 0 ? [{}] : shareholders;
     }
 
+    const creator = [{
+      allocated_shares: (100 - this.state.totalShares).toString(),
+      email: user.email,
+      first_name: user.first_name,
+      is_director: this.state.owner_is_director,
+      is_existing_user: true,
+      last_name: user.last_name
+    }]
+
     const payload = {
-      collection: shareholders
+      collection: creator.concat(shareholders),
     }
 
     showLoader();
@@ -368,7 +380,7 @@ class ShareholderDetails extends Component {
                   />
                 </div>
               }
-              
+
               <br /><br />
 
               <Form>
@@ -413,8 +425,8 @@ class ShareholderDetails extends Component {
                 shareholderID={null}
                 name={i18n.t('companyDesign.shareholderDetails.shares.you')}
                 shares={mainShareholder.toString()}
-                is_director={true}
-                onChange={() => {}}
+                is_director={this.state.owner_is_director}
+                onChange={() => this.setState({owner_is_director: !this.state.owner_is_director})}
                 mainShareholder
               />
 
@@ -455,8 +467,8 @@ class ShareholderDetails extends Component {
               shareholderID={null}
               name={i18n.t('companyDesign.shareholderDetails.shares.you')}
               shares={mainShareholder.toString()}
-              is_director={true}
-              onChange={() => {}}
+              is_director={this.state.owner_is_director}
+              onChange={() => this.setState({owner_is_director: !this.state.owner_is_director})}
               mainShareholder
               disabled
             />
@@ -493,11 +505,22 @@ ShareholderDetails.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   form: PropTypes.object,
-  company: PropTypes.object
+  company: PropTypes.object,
+  user: PropTypes.object
 };
 
+
+const filterForm = (form, user) => {
+  return {
+    errors: form.errors,
+    showErrorMessage: form.showErrorMessage,
+    // values: Array.isArray(form.values) ? uniq(form.values).filter(p => p.first_name !== user.first_name) : form.values
+    values: Array.isArray(form.values) ? form.values.filter(p => p.first_name !== user.first_name) : form.values
+  }
+}
+
 const mapStateToProps = (state) => ({
-  form: state.form,
+  form: filterForm(state.form, state.user),
   user: state.user,
   company: state.companies.find(company => company.id === state.activeCompany),
 });

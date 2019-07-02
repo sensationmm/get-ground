@@ -127,12 +127,12 @@ export const initialState = [];
 
 export const companies = (state = initialState, action = {}) => {
   switch (action.type) {
-    case ADD_COMPANY: 
+    case ADD_COMPANY:
       return [
         ...state,
         action.company
       ]
-      
+
     case COMPANY_UPDATE:
       return state.map(company => {
         if (company.id === action.companyID) {
