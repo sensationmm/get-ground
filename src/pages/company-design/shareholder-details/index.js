@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { navigate } from 'gatsby';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux'
-import { uniq } from 'lodash'
 
 import formUtils from 'src/utils/form';
 import Layout from 'src/components/Layout/Layout';
@@ -70,10 +69,11 @@ class ShareholderDetails extends Component {
   }
 
   componentDidMount() {
-    const { company: { shareholder_details }} = this.props;
-    const shareholders = shareholder_details.collection === null ? [{...shareholder}] : shareholder_details.collection;
-    const populatedShareholders = shareholders.length;
+    const { company: { shareholder_details }, user} = this.props;
+    let shareholders = shareholder_details.collection === null ? [{...shareholder}] : shareholder_details.collection;
+    shareholders = shareholders.filter(p => p.first_name !== user.first_name && p.last_name !== user.last_name)
 
+    const populatedShareholders = shareholders.length;
     for (let i = shareholders.length; i < 8; i++) {
       shareholders.push({...shareholder})
     }
@@ -84,8 +84,16 @@ class ShareholderDetails extends Component {
     ], shareholders);
 
     if (populatedShareholders > 1) {
-      this.setState({ shareholders: populatedShareholders - 1 });
+      this.setState({ shareholders: populatedShareholders });
     }
+
+    let totalShares = 0
+
+    for (let i=0; i < populatedShareholders; i++) {
+      totalShares = totalShares + Number(shareholders[i].allocated_shares)
+    }
+
+    this.setState({totalShares})
   }
 
   componentWillUnmount() {
@@ -100,7 +108,6 @@ class ShareholderDetails extends Component {
    * @return {void}
    */
   updateShareholder = (id, key, value) => {
-    console.log('updateShareholder id key value', id, key, value )
     const shareholder = this.props.form.values[id];
     shareholder[key] = value;
 
@@ -228,17 +235,17 @@ class ShareholderDetails extends Component {
   renderShareholders = (count) => {
     const render = [];
     const { form } = this.props;
-    console.log('renderShareholders form', form.values)
 
     for(let i=0; i<count; i++) {
       const first_name = form.values[i] === undefined ? '' : form.values[i].first_name;
       const last_name = form.values[i] === undefined ? '' : form.values[i].last_name;
       const email = form.values[i] === undefined ? '' : form.values[i].email;
+
       render.push(
         <AddShareholder
           shareholderID={i}
           onRef={/* istanbul ignore next */(ref) => this[`shareholder${i}`] = ref}
-          key={`${first_name}${i}`}
+          key={`shareholder${i}`}
           onChange={this.updateShareholder}
           first_name={first_name}
           last_name={last_name}
@@ -317,7 +324,7 @@ class ShareholderDetails extends Component {
     }]
 
     const payload = {
-      collection: creator.concat(shareholders),
+      collection: creator.concat(shareholders)
     }
 
     showLoader();
@@ -336,7 +343,6 @@ class ShareholderDetails extends Component {
   render() {
     const { t, form } = this.props;
     const { hasShareholders, shareholders, stage, totalShares } = this.state;
-
     const mainShareholder = (100 - totalShares >= 0) ? 100 - totalShares : NaN;
     const headerActions = <ButtonHeader onClick={() => {this.saveShareholders(true)}} label={t('header.buttons.saveAndExit')} />
 
@@ -509,18 +515,16 @@ ShareholderDetails.propTypes = {
   user: PropTypes.object
 };
 
-
-const filterForm = (form, user) => {
+const sliceForm = (form, user) => {
   return {
     errors: form.errors,
     showErrorMessage: form.showErrorMessage,
-    // values: Array.isArray(form.values) ? uniq(form.values).filter(p => p.first_name !== user.first_name) : form.values
-    values: Array.isArray(form.values) ? form.values.filter(p => p.first_name !== user.first_name) : form.values
+    values: Array.isArray(form.values) ? form.values.filter(p => p.first_name !== user.first_name && p.last_name !== user.last_name ) : form.values
   }
 }
 
 const mapStateToProps = (state) => ({
-  form: filterForm(state.form, state.user),
+  form: sliceForm(state.form, state.user),
   user: state.user,
   company: state.companies.find(company => company.id === state.activeCompany),
 });
