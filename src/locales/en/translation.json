@@ -432,10 +432,10 @@
       "portfolioHeader": "My Portfolio",
       "profileLink": "My Profile",
       "todoHeader": "To do",
-      "addCompanyButton": "Add property",
-      "noProperties": "Your first property will show here",
+      "addCompanyButton": "Add company",
+      "noProperties": "Your first company will show here",
       "noActions": "You currently don't have anything in your to do list",
-      "propertyInProgressText": "Your property purchase is currently in progress..."
+      "propertyInProgressText": "Your company setup is currently in progress"
     }
   },
   "footer": {
@@ -621,7 +621,7 @@
   },
   "myDocuments": {
     "title": "My Documents",
-    "intro": "Please read and sign all your company documents below. Your shareholders have also been notified that they to sign the relevant documents.",
+    "intro": "Please read and sign all your company documents below. Your shareholders have also been notified that they need to sign the relevant documents.",
     "downloadButtonText": "Download Documents",
     "modalHeading": "Shareholders agreement",
     "modalSignatureLabel": "Your signature",

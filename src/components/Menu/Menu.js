@@ -41,7 +41,7 @@ class Menu extends Component {
                 {menuLink.link ?
                   <Link to={`${menuLink.link}`} activeClassName="active">{`${menuLink.text}`}</Link>
                   :
-                  <Link to="/" onClick={menuLink.function} activeClassName="active">{`${menuLink.text}`}</Link>
+                  <Link to="/" onClick={menuLink.function}>{`${menuLink.text}`}</Link>
                 }
               </li>
             )
