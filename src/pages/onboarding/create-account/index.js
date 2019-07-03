@@ -181,7 +181,7 @@ class CreateAccount extends Component {
 
     return (
       <Layout loggedOutOnly>
-        <div data-test="container-create-account" className="create-account" role="account">
+        <div data-test="container-create-account" className="create-account" role="account form-page">
           <h1>{ t('onBoarding.createAccount.title') }</h1>
 
           <IntroBox>{ t('onBoarding.createAccount.intro') }</IntroBox>

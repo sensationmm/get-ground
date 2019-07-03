@@ -11,7 +11,7 @@ import './footer.scss';
 
 const Footer = (props) => {
   const [t, i18n] = useTranslation();
-  const { hideContact } = props;
+  const { hideNav } = props;
 
   const links = i18n.t('footer.navigation', { returnObjects: true });
   const linksConfig = {
@@ -57,27 +57,29 @@ const Footer = (props) => {
 
   return (
     <div className="footer-outer">
-      {!hideContact && <div className="footer-mask"><ContactUs /></div>}
-      <div className="footer" data-test="component-footer">
-        <div className="footer-links">
-          <img className="footer-logo" src={logo} data-test="component-footer-img" />
-          <div className="footer-navigation" data-test="component-footer-navigation">
-            {linksConfig.links.map((link, idx) => (
-              <Link key={`${idx} + ${link.title}`} to={link.link} className="footer-link" data-test="component-footer-link">
-                {link.title}
-              </Link>
-            ))}
+      <div className="footer-mask"><ContactUs /></div>
+      {!hideNav && (
+        <div className="footer" data-test="component-footer">
+          <div className="footer-links">
+            <img className="footer-logo" src={logo} data-test="component-footer-img" />
+            <div className="footer-navigation" data-test="component-footer-navigation">
+              {linksConfig.links.map((link, idx) => (
+                <Link key={`${idx} + ${link.title}`} to={link.link} className="footer-link" data-test="component-footer-link">
+                  {link.title}
+                </Link>
+              ))}
+            </div>
           </div>
+          <div data-test="component-footer-location" className="footer-location">{t('footer.location')}</div>
+          <div data-test="component-footer-legal" className="footer-legal">{t('footer.legal')}</div>
         </div>
-        <div data-test="component-footer-location" className="footer-location">{t('footer.location')}</div>
-        <div data-test="component-footer-legal" className="footer-legal">{t('footer.legal')}</div>
-      </div>
+      )}
     </div>
   );
 }
 
 Footer.propTypes = {
-  hideContact: PropTypes.bool
+  hideNav: PropTypes.bool
 };
 
 export default Footer;

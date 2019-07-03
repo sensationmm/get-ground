@@ -280,7 +280,7 @@ class PropertyAddress extends Component {
     return (
       <>
       <Layout headerActions={headerActions} secure>
-        <div className="company-design-property-address" data-test="container-company-design-property-address">
+        <div className="company-design-property-address" data-test="container-company-design-property-address" role="form-page">
           <h1>{t('companyDesign.propertyAddress.heading')}</h1>
 
           <IntroBox>{t('companyDesign.propertyAddress.intro')}</IntroBox>

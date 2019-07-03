@@ -14,6 +14,7 @@ import AlienHead from 'src/assets/images/alien-head.svg'
 import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 import Button from 'src/components/_buttons/Button/Button'
 import kycService from 'src/services/KYC'
+import { showLoader, hideLoader } from 'src/state/actions/loader';
 
 import './id-check.scss'
 
@@ -26,8 +27,11 @@ const KYCService = new kycService();
 export class IdCheck extends Component {
 
   submitFiles = () => {
-    const { passport, address, selfie } = this.props
+    const { passport, address, selfie, showLoader, hideLoader } = this.props
+    showLoader();
+
     KYCService.makeCheck(passport.img, address.img, selfie.img).then(() => {
+      hideLoader();
       navigate('onboarding');
     })
   }
@@ -38,7 +42,7 @@ export class IdCheck extends Component {
 
     return (
       <Layout headerActions={headerActions} secure>
-      <div data-test="container-id-check" className="id-check" role="account">
+      <div data-test="container-id-check" className="id-check" role="account form-page">
         <h1 className="id-check-title">{ t('onBoarding.idCheck.title') }</h1>
         <AddProof section="passport" initialImg={Passport} overlay={CameraCrosshair} />
         <AddProof section="address" initialImg={Address} overlay={CameraCrosshair} />
@@ -57,7 +61,9 @@ IdCheck.propTypes = {
   t: PropTypes.func.isRequired,
   passport: PropTypes.object,
   address: PropTypes.object,
-  selfie: PropTypes.object
+  selfie: PropTypes.object,
+  showLoader: PropTypes.func,
+  hideLoader: PropTypes.func
 }
 
 const mapStateToProps = state => ({
@@ -66,4 +72,6 @@ const mapStateToProps = state => ({
   selfie: state.idCheck.selfie
 })
 
-export default connect(mapStateToProps, null)(withTranslation()(IdCheck));
+const actions = { showLoader, hideLoader };
+
+export default connect(mapStateToProps, actions)(withTranslation()(IdCheck));

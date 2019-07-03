@@ -29,7 +29,9 @@
   }
 
   &--content {
-    margin: 30px;
+    padding: 0 30px;
+    max-width: $max-width;
+    margin: 30px auto;
     text-align: left;
     overflow: auto;
   }

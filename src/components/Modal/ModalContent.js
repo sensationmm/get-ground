@@ -133,7 +133,7 @@ class ModalContent extends Component {
             <h1 className="modal--title">{heading}</h1>
           }
 
-          <img className="hero-image" src={modalImage} />
+          {modalImage && <img className="hero-image" src={modalImage} />}
 
           { content &&
             <div className="modal--markdown">

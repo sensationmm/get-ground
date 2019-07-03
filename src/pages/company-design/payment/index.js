@@ -155,7 +155,7 @@ export class Payment extends Component {
 
     return (      
       <Layout headerActions={headerActions} secure>
-        <div data-test="container-payment" className="payment" role="account">
+        <div data-test="container-payment" className="payment" role="account form-page">
           <h1>{ t('onBoarding.payment.title') }</h1>
 
           {showErrorMessage &&

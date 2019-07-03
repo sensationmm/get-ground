@@ -14,7 +14,7 @@ const VerifyEmailSucess = () => {
 
   return (
     <Layout>
-      <div data-test="container-email-verified" role="fullscreen hasFooter account hasCurve">
+      <div data-test="container-email-verified" role="fullscreen hasFooter account hasCurve form-page">
         <TextImage
           title={t('onBoarding.emailVerified.title')}
           image={Image}

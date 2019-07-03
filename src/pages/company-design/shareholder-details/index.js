@@ -329,8 +329,8 @@ class ShareholderDetails extends Component {
     const headerActions = <ButtonHeader onClick={() => {this.saveShareholders(true)}} label={t('header.buttons.saveAndExit')} />
 
     return (
-      <Layout headerActions={headerActions} secure>
-        <div data-test="container-shareholder-details" className="shareholder" role="company-design">
+      <Layout headerActions={headerActions} secure companyID>
+        <div data-test="container-shareholder-details" className="shareholder" role="company-design form-page">
           {!hasShareholders &&
             <ShareholderChoice
               addShareholders={this.toggleShareholders}

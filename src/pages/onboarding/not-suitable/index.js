@@ -14,7 +14,7 @@ const NotSuitable = () => {
 
   return (
     <Layout>
-      <div data-test="container-not-suitable" className="email-verified" role="account">
+      <div data-test="container-not-suitable" className="email-verified" role="account form-page">
       <img className="email-verified--img" src={successImg} />
         <div className="email-verified--title">{t('onBoarding.compliance.notSuitable.title')}</div>
         <div className="email-verified--copy">{t('onBoarding.compliance.notSuitable.text')}</div>

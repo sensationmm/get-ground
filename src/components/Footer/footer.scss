@@ -14,7 +14,8 @@
 
   &-mask {
     background: $white;
-    padding-bottom: $padding-vertical-unit * 2 + 0px;
+    padding-top: $padding-vertical;
+    padding-bottom: $padding-vertical;
   }
 
   &-logo {
@@ -61,7 +62,14 @@
       }
     }
   }
+}
 
+.fullscreen:not(.hasCurve) {
+  .footer {
+    &-outer, &-mask {
+      background: none;
+    }
+  }
 }
 
 @media screen and (min-width: $breakpoint-desktop) {

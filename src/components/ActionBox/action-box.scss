@@ -21,6 +21,11 @@
 
   &.actions {
     @include gradient-horizontal-image($background-account-start, $background-account-end, '../../assets/images/background.png');
+
+    .button {
+      color: $text;
+      border-color: $text;
+    }
   }
 
   &-buttons {

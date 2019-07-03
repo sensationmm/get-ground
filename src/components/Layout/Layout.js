@@ -107,11 +107,15 @@ export class Layout extends Component {
   }
 
   loggedOutOnly = () => {
-    const { userID, loggedOutOnly } = this.props;
+    const { userID, loggedOutOnly, last_page_visited } = this.props;
 
     if(userID && loggedOutOnly) {
+      if (last_page_visited === 'dashboard') {
       navigate('/dashboard');
+      } else {
+        navigate('/onboarding');
     }
+  }
   }
 
   toggleMenu = () => {
@@ -129,7 +133,7 @@ export class Layout extends Component {
 
   render() {
     this.loggedOutOnly();
-    const { children, headerActions, isLoading, userID, t, menuIsOpen, isLoggedIn, idCheckActive, isMobile } = this.props;
+    const { children, headerActions, isLoading, userID, t, menuIsOpen, isLoggedIn, idCheckActive, isMobile, last_page_visited } = this.props;
     const { isLoggingOut } = this.state;
 
     const menuLinks = [
@@ -206,6 +210,7 @@ export class Layout extends Component {
           childrenDisabled={Boolean(idCheckActive)}
           isMobile={isMobile}
           menuLinks={<Menu menuLinks={menuLinks.filter(link => !link.hideDesktop)} />}
+          showDashboardButton={last_page_visited === 'dashboard'}
         >
           {headerActions}
         </Header>
@@ -218,7 +223,7 @@ export class Layout extends Component {
         </div>
         <div id="modal-root"></div>
         
-        <Footer hideContact={inArray('fullscreen', roles)} />
+        <Footer hideNav={inArray('form-page', roles)} />
 
         {isMobile &&
           <ModalWrapper
@@ -270,7 +275,8 @@ Layout.propTypes = {
   deleteUser: PropTypes.func,
   isLoggedIn: PropTypes.bool,
   idCheckActive: PropTypes.string,
-  isMobile: PropTypes.bool
+  isMobile: PropTypes.bool,
+  last_page_visited: PropTypes.string
 }
 
 Layout.defaultProps = {
@@ -284,7 +290,8 @@ const mapStateToProps = (state) => ({
   menuIsOpen: state.menu.isOpen,
   isLoggedIn: state.user.email,
   idCheckActive: state.idCheck.active,
-  isMobile: state.layout.isMobile
+  isMobile: state.layout.isMobile,
+  last_page_visited: state.user.last_page_visited
 });
 
 const actions = {

@@ -167,7 +167,7 @@ class SolicitorDetails extends Component {
 
     return (
       <Layout headerActions={headerActions} secure>
-        <div data-test="container-solicitor-details" className="solicitor-details" role="account">
+        <div data-test="container-solicitor-details" className="solicitor-details" role="account form-page">
           <h1>{ t('companyDesign.solicitorDetails.title') }</h1>
 
           <IntroBox>{ t('companyDesign.solicitorDetails.intro') }</IntroBox>

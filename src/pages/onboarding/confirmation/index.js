@@ -13,7 +13,7 @@ const OnboardingConfirmation = () => {
 
   return (
     <Layout secure>
-      <div role="fullscreen account hasFooter hasCurve">
+      <div role="fullscreen account hasFooter hasCurve form-page">
         <TextImage
           title={t('onBoarding.confirmation.heading')}
           image={confirmationImage}

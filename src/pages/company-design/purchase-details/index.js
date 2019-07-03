@@ -426,7 +426,7 @@ class PurchaseDetails extends Component {
     return (
       <>
       <Layout headerActions={headerActions} secure>
-        <div className="company-design-purchase-details" data-test="container-company-design-purchase-details">
+        <div className="company-design-purchase-details" data-test="container-company-design-purchase-details" role="form-page">
           <h1>{t('companyDesign.purchaseDetails.heading')}</h1>
 
           <IntroBox>{t('companyDesign.purchaseDetails.intro')}</IntroBox>
