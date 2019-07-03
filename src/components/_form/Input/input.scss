@@ -20,7 +20,7 @@
     position: absolute;
     right: 0;
     top: 0;
-    color: $warning;
+    color: $warning !important;
     text-transform: uppercase;
     font-weight: bold;
     font-size: 14px;
@@ -57,7 +57,7 @@
     }
 
     &.error {
-      border-color: $warning;
+      border-color: $warning !important;
     }
 
     &:read-only {

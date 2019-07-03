@@ -48,7 +48,7 @@ const OnboardingIntroContainer = () => {
 
   return (
     <Layout>
-      <div data-test="container-onboarding-intro" className="intro" role="fullscreen account hasFooter hasCurve">
+      <div data-test="container-onboarding-intro" className="intro" role="fullscreen account hasFooter hasCurve form-page">
         {slidesContent.length &&
           <IntroSlider slides={slidesConfig.slides} />
         }

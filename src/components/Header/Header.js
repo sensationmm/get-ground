@@ -20,7 +20,7 @@ import './header.scss';
  */
 
 const Header = (props) => {
-  const { menuIsOpen, children, isLoading, userID, onClick, childrenDisabled, isMobile, menuLinks } = props;
+  const { menuIsOpen, children, isLoading, userID, onClick, childrenDisabled, isMobile, menuLinks, showDashboardButton } = props;
   const [t] = useTranslation();
 
   return (
@@ -39,7 +39,7 @@ const Header = (props) => {
             </Link>
           </div>
           <div className="header-buttons">
-            {userID && !children &&
+            {userID && !children && showDashboardButton &&
               <ButtonHeader data-test="dashboard" label={t('header.dashboard')} onClick={() => navigate('/dashboard')} />
             }
 
@@ -96,7 +96,8 @@ Header.propTypes = {
   onClick: PropTypes.func,
   childrenDisabled: PropTypes.bool,
   isMobile: PropTypes.bool,
-  menuLinks: PropTypes.object
+  menuLinks: PropTypes.object,
+  showDashboardButton: PropTypes.bool
 }
 
 export default Header;

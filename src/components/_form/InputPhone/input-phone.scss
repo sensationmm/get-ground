@@ -18,12 +18,15 @@
   }
 
   &-box {
-    @extend .text-input-box;
+    @extend .text-input;
     display: flex;
+    border: 1px solid $border;
+    border-radius: 5px;
+    padding: $padding-horizontal;
 
     input[type=text] {
       outline: 0;
-      box-shadow: 0 0 0 0 $primary;
+      box-shadow: none !important;
       padding: 0;
       margin: 0;
       border: 0;

@@ -161,7 +161,7 @@ export class TaxQuestions extends Component {
 
     return (
       <Layout headerActions={headerActions} secure>
-        <div className="tax-questions" role="company-design">
+        <div className="tax-questions" role="company-design form-page">
         <h1 className="tax-questions-title">{t('taxQuestions.title')}</h1>
         <IntroBox>{t('taxQuestions.introBox')}</IntroBox>
         {showErrorMessage &&

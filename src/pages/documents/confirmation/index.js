@@ -13,7 +13,7 @@ const DocumentsConfirmation = () => {
 
   return (
     <Layout>
-      <div className="confirmation" role="fullscreen documents">
+      <div className="confirmation" role="fullscreen documents form-page">
         <div className="intro--hero-image"><img src={confirmationImage} alt={t('myDocuments.confirmation.imageAltText')} /></div>
         <div className="confirmation-content">
           <h1 className="confirmation--heading">{t('myDocuments.confirmation.heading')}</h1>

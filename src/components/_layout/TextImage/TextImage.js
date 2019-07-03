@@ -13,20 +13,27 @@ import './text-image.scss';
 * @return {JSXElement} - TextImage component
 */
 const TextImage = (props) => {
-  const { title, text, image, buttonLabel, buttonAction } = props;
+  const { title, text, image, buttonLabel, buttonAction, buttonClasses, buttonSecondaryLabel, buttonSecondaryAction, buttonSecondaryClasses } = props;
 
   return (
     <div data-test="component-list" className="text-image">
-      <div className="hero-image"><img src={image} alt="" /></div>
+      <div className="text-image-cols">
+        <div className="hero-image"><img src={image} alt="" /></div>
 
-      <div className="text-image-content">
-        <h1>{title}</h1>
+        <div className="text-image-content">
+          <h1>{title}</h1>
 
-        <div dangerouslySetInnerHTML={{ __html: text }} />
-
-        {buttonLabel && buttonAction && <Button label={buttonLabel} onClick={buttonAction} /> }
+          <div dangerouslySetInnerHTML={{ __html: text }} />
+        </div>
       </div>
 
+      <div className="text-image-buttons">
+        {buttonLabel && buttonAction && <Button label={buttonLabel} classes={buttonClasses} onClick={buttonAction} /> }
+
+        {buttonSecondaryLabel && buttonSecondaryAction && (
+          <Button onClick={buttonAction} classes={buttonSecondaryClasses ? buttonSecondaryClasses : 'opaque'} label={buttonSecondaryLabel} />
+        )}
+      </div>
     </div>
   );
 }
@@ -40,7 +47,11 @@ TextImage.propTypes = {
     PropTypes.string
   ]).isRequired,
   buttonLabel: PropTypes.string,
-  buttonAction: PropTypes.func
+  buttonAction: PropTypes.func,
+  buttonClasses: PropTypes.string,
+  buttonSecondaryLabel: PropTypes.string,
+  buttonSecondaryAction: PropTypes.func,
+  buttonSecondaryClasses: PropTypes.string
 };
 
 export default TextImage;

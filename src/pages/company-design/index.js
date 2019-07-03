@@ -148,7 +148,7 @@ export class ProcessTracker extends React.Component {
     return (
       <Fragment>
         <Layout secure companyID>
-          <div className="process-tracker" role="fullscreen company-design">
+          <div className="process-tracker" role="fullscreen company-design form-page">
             { company &&
               <>
                 <h1 className="process-tracker--title">

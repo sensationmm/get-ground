@@ -35,7 +35,7 @@ describe('<Header />', () => {
   });
 
   test('dashboard btn', () => {
-    wrapper = setup(Header, { onClick: onClickMock, isMobile: true });
+    wrapper = setup(Header, { onClick: onClickMock, isMobile: true, showDashboardButton: true });
 
     expect(findByTestAttr(wrapper, 'dashboard').length).toEqual(0);
     wrapper.setProps({

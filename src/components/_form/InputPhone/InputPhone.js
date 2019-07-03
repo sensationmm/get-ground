@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import Note from '../../_layout/Note/Note';
 
-import './input-phone.css';
+import './input-phone.scss';
 
 /**
  * InputPhone

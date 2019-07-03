@@ -13,10 +13,13 @@ import IntroBox from 'src/components/_layout/IntroBox/IntroBox'
 import ModalContent from 'src/components/Modal/ModalContent';
 import ModalWrapper from 'src/components/Modal/ModalWrapper';
 import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
+import TextImage from 'src/components/_layout/TextImage/TextImage';
 
 import { companyUpdate } from 'src/state/actions/activeCompany';
 import { showModal, hideModal } from 'src/state/actions/modal';
 import { showLoader, hideLoader } from 'src/state/actions/loader';
+
+import InTouchImage from 'src/assets/images/verify-email.svg'
 
 import companyService from 'src/services/Company';
 const CompanyService = new companyService();
@@ -147,8 +150,8 @@ export class AdditionalServices extends Component {
     const headerActions = <ButtonHeader onClick={this.submitAdditionalServices} label={t('header.buttons.saveAndExit')} />
 
     return (
-      <Layout headerActions={headerActions} secure>
-        <div className="add-services" role="company-design">
+      <Layout headerActions={headerActions} secure companyID>
+        <div className="add-services" role="company-design form-page">
           <h1 className="add-services-title">{t('additionalServices.title')}</h1>
           <IntroBox>{t('additionalServices.introBox')}</IntroBox>
           <Form className="add-services-form">
@@ -158,22 +161,19 @@ export class AdditionalServices extends Component {
           <ModalWrapper 
             transitionBool={modalIsOpen}
             transitionTime={600}
-            classes="modal"
+            classes="modal fullscreen"
           >
             <ModalContent
-              heading={t('additionalServices.modalHeading')}
               htmlContent={
-                <>
-                <p>{t('additionalServices.modalPara1')}</p>
-                <p>{t('additionalServices.modalPara2')}</p>
-                <p>{t('additionalServices.modalPara3')}</p>
-                <Button
-                  label={t('additionalServices.modalContentButton')}
-                  onClick={this.submitAdditionalServices}
-                  classes="primary"
-                  fullWidth
+                <TextImage
+                  title={t('additionalServices.modalHeading')}
+                  image={InTouchImage}
+                  text={`<p>${t('additionalServices.modalPara1')}</p>
+                  <p>${t('additionalServices.modalPara2')}</p>
+                  <p>${t('additionalServices.modalPara3')}</p>`}
+                  buttonAction={this.submitAdditionalServices}
+                  buttonLabel={t('additionalServices.modalContentButton')}
                 />
-                </>
               }
               closeModal={hideModal}
               closeIconAltText={t('onBoarding.createAccount.termsModalCloseIconAltText')}

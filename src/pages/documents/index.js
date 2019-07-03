@@ -249,7 +249,7 @@ export class MyDocuments extends Component {
     return (
       <Fragment>
         <Layout secure>
-          <div id="my-documents" className="process-tracker" role="fullscreen company-design">
+          <div id="my-documents" className="process-tracker" role="fullscreen company-design form-page">
             <h3 className="process-tracker--title">{t('myDocuments.title')}</h3>
             <p className="process-tracker--intro">{t('myDocuments.intro')}</p>
             <div className="process-tracker-sections">

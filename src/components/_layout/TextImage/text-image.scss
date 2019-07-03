@@ -3,15 +3,39 @@
 
 .text-image {
 
-  .button {
+  &-buttons {
     margin: 50px auto 0 auto;
+
+    > .button {
+      margin-bottom: 20px;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &-content {
+    h1 {
+      width: 100%;
+      min-height: 0;
+    }
+  }
+
+  &-buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
   }
 
   .hero-image {
     position: relative;
-    background: url('../../../assets/images/oval.svg') no-repeat;
-    background-position: center center;
-    background-size: contain;
+    background-image: url('../../../assets/images/oval.svg');
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: contain !important;
     width: 100%;
     text-align: center;
 
@@ -22,19 +46,31 @@
   }
 }
 
+:not(.fullscreen) {
+  .text-image {
+    .hero-image {
+      background-image: url('../../../assets/images/oval-dark.svg');
+    }
+  }
+}
+
 @media screen and (min-width: $breakpoint-desktop) {
   .text-image {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    padding: 50px 0;
+    padding-top: 50px;
 
-    div {
-      z-index: 2;
+    &-cols {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: space-between;
     }
 
     &-content {
       width: 55%;
+      padding-right: 50px;
+    }
+
+    div {
+      z-index: 2;
     }
 
     .hero-image {
@@ -46,7 +82,7 @@
       }
     }
 
-    .button {
+    &-buttons {
       margin: 30px 0 0 0;
     }
   }

@@ -13,10 +13,12 @@
     margin-top: 20px;
   }
 
-  &-title {
-    font-size: 34px;
-    font-weight: 300;
-    margin-top: 30px;
+  &-choice {
+    h1 {
+      font-size: 34px !important;
+      font-weight: 300 !important;
+      margin-top: 30px !important;
+    }
   }
 
   &-question {
