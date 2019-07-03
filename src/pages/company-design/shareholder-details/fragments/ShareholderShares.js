@@ -26,7 +26,7 @@ class ShareholderShares extends Component {
 
     onRef && onRef(this);
   }
-  
+
   componentWillUnmount() {
     const { onRef } = this.props;
 
@@ -54,8 +54,7 @@ class ShareholderShares extends Component {
         stateKey: 'is_director',
         component: Checkbox,
         checked: is_director,
-        onChange: /* istanbul ignore next */() => onChange(shareholderID, 'is_director', !is_director),
-        disabled: disabled
+        onChange: /* istanbul ignore next */() => onChange(shareholderID, 'is_director', !is_director)
       },
     ];
 
