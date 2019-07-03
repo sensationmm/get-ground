@@ -194,7 +194,7 @@
       &.link {
         position: absolute;
         z-index: 2;
-        top: 0;
+        top: -10px;
         right: 0;
         padding-left: $padding-vertical-unit * 3.5 + 0px;
         background-position: $padding-horizontal center;

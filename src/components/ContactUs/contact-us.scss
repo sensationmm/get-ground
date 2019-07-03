@@ -32,11 +32,12 @@
       margin-bottom: 0;
     }
   }
+
   &-divider {
     border: solid 1px $divider-color;
   }
 
-  &-livechat {
+  .button.chat {
     margin: 15px auto 0 auto;
   }
 }
@@ -62,6 +63,10 @@
 
     &-divider {
       display: none;
+    }
+
+    .button.chat {
+      margin: 0;
     }
   }
 }

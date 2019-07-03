@@ -86,8 +86,6 @@
     }
   }
 
-  .account 
-
   &.white {
     min-width: 100px;
     background: $white;
@@ -198,6 +196,11 @@
       max-width: 220px;
       margin-left: auto;
       margin-right: auto;
+    }
+    
+    &.chat {
+      padding: 8px 40px;
+      font-size: 14px;
     }
   }
 

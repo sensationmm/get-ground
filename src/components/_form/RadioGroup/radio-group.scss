@@ -16,6 +16,8 @@
 
   &--label {
     @extend .text-input-label;
+    padding: 0;
+    margin-bottom: 10px;
   }
 }
 

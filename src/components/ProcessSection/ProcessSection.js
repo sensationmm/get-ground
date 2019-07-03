@@ -60,13 +60,15 @@ export const ProcessSection = ({
           <img src={image} alt={imageAltText}/>
         }
       </div>
+
       <div className="process-section-body">
         <h3>{title}</h3>
         { copy &&
           <p className="process-section-copy">{copy}</p>
         }
-        {progress(status)}
       </div>
+
+      <div className="process-section-status">{ progress(status) }</div>
     </div>
   )
 }
