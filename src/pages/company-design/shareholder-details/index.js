@@ -195,9 +195,18 @@ class ShareholderDetails extends Component {
   }
 
   setNoShareholders = () => {
-    const { showLoader, hideLoader, company } = this.props;
+    const { showLoader, hideLoader, company, user } = this.props;
     showLoader();
-    CompanyService.updateCompany({collection: []}, 'shareholder_details', company.id).then((response) => {
+    const creator = [{
+      allocated_shares: (100 - this.state.totalShares).toString(),
+      email: user.email,
+      first_name: user.first_name,
+      is_director: this.state.owner_is_director,
+      is_existing_user: true,
+      last_name: user.last_name
+    }]
+
+    CompanyService.updateCompany({collection: creator}, 'shareholder_details', company.id).then((response) => {
       hideLoader();
       navigate('/company-design/tax-questions');
     });
