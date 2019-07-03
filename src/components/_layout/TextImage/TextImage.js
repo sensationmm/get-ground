@@ -31,7 +31,7 @@ const TextImage = (props) => {
         {buttonLabel && buttonAction && <Button label={buttonLabel} classes={buttonClasses} onClick={buttonAction} /> }
 
         {buttonSecondaryLabel && buttonSecondaryAction && (
-          <Button onClick={buttonAction} classes={buttonSecondaryClasses ? buttonSecondaryClasses : 'opaque'} label={buttonSecondaryLabel} />
+          <Button onClick={buttonSecondaryAction} classes={buttonSecondaryClasses ? buttonSecondaryClasses : 'opaque'} label={buttonSecondaryLabel} />
         )}
       </div>
     </div>
