@@ -44,6 +44,7 @@ class Datepicker extends Component {
           cancelText={cancelButtonText}
           showHeader={false}
           max={maxDate}
+          min={new Date(1930, 0, 1)}
         />
       </div>
     );
