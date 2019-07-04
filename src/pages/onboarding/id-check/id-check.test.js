@@ -19,6 +19,7 @@ describe('id-check', () => {
   beforeEach(() => {
     props = {
       t: jest.fn(),
+      resetActive: jest.fn(),
       i18n: {
         t: jest.fn().mockReturnValue('mock-string'),
       },
@@ -52,5 +53,10 @@ describe('id-check', () => {
   test('onUnmount calls KYC service', () => {
     wrapper.unmount()
     expect(kycService).toHaveBeenCalled();
+  })
+
+  it('does not show upload link if section is selfie', () => {
+    wrapper.unmount()
+    expect(props.resetActive).toHaveBeenCalled()
   })
 })
