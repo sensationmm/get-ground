@@ -39,7 +39,7 @@ export class ProofCamera extends Component {
           onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
           onCameraError = { (error) => { this.onCameraError(error); } }
           idealFacingMode = {section === 'selfie' ? FACING_MODES.USER : FACING_MODES.ENVIRONMENT}
-          idealResolution = {{width: 1216, height: 912}}
+          idealResolution = {{width: 1280, height: 720}}
           imageType = {IMAGE_TYPES.JPG}
           imageCompression = {0.97}
           isMaxResolution = {false}
