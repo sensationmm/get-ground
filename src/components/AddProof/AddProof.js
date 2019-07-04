@@ -47,12 +47,6 @@ export class AddProof extends Component {
     )
   }
 
-  componentWillUnmount() {
-    if (this.props.active === this.props.section) {
-      this.props.resetActive()
-    }
-  }
-
   /**
    * @param {Object} newState - new state object passed by parent function to set state
    * @return {void}

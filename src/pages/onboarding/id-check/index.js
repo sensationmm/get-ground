@@ -15,6 +15,7 @@ import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 import Button from 'src/components/_buttons/Button/Button'
 import kycService from 'src/services/KYC'
 import { showLoader, hideLoader } from 'src/state/actions/loader';
+import { resetActive } from 'src/state/actions/idCheck'
 
 import './id-check.scss'
 
@@ -34,6 +35,10 @@ export class IdCheck extends Component {
       hideLoader();
       navigate('onboarding');
     })
+  }
+
+  componentWillUnmount() {
+    this.props.resetActive()
   }
 
   render() {
@@ -63,7 +68,8 @@ IdCheck.propTypes = {
   address: PropTypes.object,
   selfie: PropTypes.object,
   showLoader: PropTypes.func,
-  hideLoader: PropTypes.func
+  hideLoader: PropTypes.func,
+  resetActive: PropTypes.func
 }
 
 const mapStateToProps = state => ({
@@ -72,6 +78,6 @@ const mapStateToProps = state => ({
   selfie: state.idCheck.selfie
 })
 
-const actions = { showLoader, hideLoader };
+const actions = { showLoader, hideLoader, resetActive };
 
 export default connect(mapStateToProps, actions)(withTranslation()(IdCheck));

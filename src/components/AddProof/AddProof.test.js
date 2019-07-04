@@ -269,14 +269,4 @@ describe('<AddProof />', () => {
 
     expect(wrapper.find('.add-proof-upload-file').length).toEqual(0)
   })
-
-  it('does not show upload link if section is selfie', () => {
-    const customProps = {
-      ...props,
-      active: 'passport'
-    }
-    wrapper = shallow(<AddProof {...customProps} />);
-    wrapper.unmount()
-    expect(props.resetActive).toHaveBeenCalled()
-  })
 })
