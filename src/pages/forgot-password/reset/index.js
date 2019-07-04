@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { navigate } from 'gatsby';
+import queryString from 'query-string';
 
 import Layout from 'src/components/Layout/Layout'
 import Button from 'src/components/_buttons/Button/Button';
@@ -52,7 +53,7 @@ class ResetPassword extends Component {
     if(formUtils.validateForm(this.config)) {
       showLoader();
 
-      if(state.acceptRoleToken) {
+      if(state && state.acceptRoleToken) {
         AuthService.acceptRoleSetPassword(password, state.acceptRoleToken).then((res) => {
           hideLoader();
           if(res.status === 200) {
@@ -67,7 +68,9 @@ class ResetPassword extends Component {
         })
       }
 
-      AuthService.setNewPassword(password, search).then((res) => {
+      const queryStringValues = queryString.parse(search);
+
+      AuthService.setNewPassword(password, queryStringValues.verification_code).then((res) => {
         hideLoader();
         if(res.status === 200) {
             navigate('/dashboard');

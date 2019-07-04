@@ -137,12 +137,12 @@ class AccountService extends BaseService {
    */
   getDocuments = () => {
     const config = {
-      url: `documents`,
+      url: `/users/${store.getState().user.id}/kyc/files/latest`,
       method: 'get'
     };
 
     return this.doRequest(config, (response) => {
-      store.dispatch(saveDocuments(response.data.filter(item => item.creator === store.getState().user.id)));
+      store.dispatch(saveDocuments(response.data));
     });
   };
 

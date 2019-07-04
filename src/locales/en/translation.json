@@ -580,6 +580,7 @@
   "meetTheFounders": {
     "title": "Meet the founders",
     "cta": "Read more",
+    "cta2": "Read less",
     "moubin": {
       "name": "Moubin",
       "content": {
@@ -591,7 +592,7 @@
       "name": "Misrab",
       "content": {
         "first": "Misrab is a computer scientist. He set up the data science team and Singapore office at Go-Jek, Indonesia’s first technology ‘unicorn’.",
-        "second": "There he was involved in numerous key transaction in the retail, consumer and IT services sectors. Previously Moubin was at McKinsey & Company and is trained as a medical doctor at Imperial College where he graduated with distinctions.",
+        "second": "Previously he taught data science at General Assembly, auction dynamics at Trip Advisor, and has been heavily involved in cryptographic theory and distributed ledger technology. ",
         "third": "Misrab is a Stanford University graduate with Bachelor’s and Master’s degrees focused around computer science, economics and mathematics."
       }
     },
@@ -1071,7 +1072,8 @@
     "validateNoOfCompanies": "No more than 20",
     "validateLettersOnly": "Invalid characters",
     "validateTotal": "Max {{max}}",
-    "validateMinimum": "Invalid password"
+    "validateMinimum": "Invalid password",
+    "validateNoSpaces": "No spaces"
   },
   "whatWeDo": {
     "title": "What we do",

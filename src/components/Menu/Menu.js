@@ -19,12 +19,18 @@ class Menu extends Component {
     this.state = {
       fadeInLinks: false
     }
+
+    this.timeout = null;
   }
 
   componentDidMount() {
-    setTimeout(() => {
+    this.timeout = setTimeout(() => {
       this.setState({ fadeInLinks: true })
     }, 200);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeout);
   }
 
   render() {

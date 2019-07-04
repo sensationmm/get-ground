@@ -217,7 +217,11 @@ class OnboardingPersonalDetailsContainer extends Component {
       isTextAreaHidden
     } = this.state;
 
-    const setCountries = (key) => countryData.map((country, index) => {
+    const setCountries = (key) => countryData
+      .sort((a, b) => {
+        return (a[key] > b[key]) ? 1 : ((b[key] > a[key]) ? -1 : 0); 
+      })
+      .map((country, index) => {
       return (
         <option 
           key={`country-${index}`} 
