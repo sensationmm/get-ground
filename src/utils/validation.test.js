@@ -172,3 +172,15 @@ describe('validateMinimum', () => {
     expect(isValid).toBe(false);
   });
 });
+
+describe('validateNoSpaces', () => {
+  test('returns true if no spaces', () => {
+    const isValid = validation.validateNoSpaces('password1');
+    expect(isValid).toBe(true);
+  });
+
+  test('returns false if spaces', () => {
+    const isValid = validation.validateNoSpaces('passw ord1');
+    expect(isValid).toBe(false);
+  });
+});

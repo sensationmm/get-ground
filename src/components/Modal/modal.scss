@@ -11,6 +11,7 @@
   top: 0;
   left: 0;
   z-index: 3;
+  overflow: scroll;
 
   &--header {
     display: flex;
@@ -29,7 +30,7 @@
   }
 
   &--content {
-    padding: 0 30px;
+    padding: 0 30px 50px 30px;
     max-width: $max-width;
     margin: 30px auto;
     text-align: left;

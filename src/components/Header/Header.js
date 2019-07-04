@@ -67,7 +67,7 @@ const Header = (props) => {
         <div className='header--logged-out'>
           <div className="header-inner-wrapper">
             <div className="header-inner">
-                <Link to="/onboarding/create-account/">
+                <Link to="/onboarding/intro">
                   <Button
                     classes="tertiary small"
                     label={t('header.buttons.register')}

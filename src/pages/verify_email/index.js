@@ -39,7 +39,7 @@ const AccountPending = ({ location }) => {
         <TextImage
           title={t('onBoarding.accountPending.title')}
           image={Image}
-          text={isPasswordReset ? <p>{t('forgotPassword.emailPending')}</p> :  accountPendingText()}
+          text={isPasswordReset ? `<p>${t('forgotPassword.emailPending')}</p>` :  accountPendingText()}
         />
       </div>
     </Layout>

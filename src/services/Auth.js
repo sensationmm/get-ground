@@ -99,7 +99,7 @@ class AuthService extends BaseService {
    */
   setNewPassword = (password, token) => {
     const config = {
-      url: 'auth/new_password',
+      url: 'reset_password',
       method: 'post',
       data: {
         'password': password,

@@ -109,6 +109,11 @@ export const validateMinimum = (value, min) => {
   return value.length >= min;
 };
 
+export const validateNoSpaces = (input) => {
+  return !/[\s]/.test(input);
+};
+validationMessages.validateNoSpaces = i18n.t('validation.validateNoSpaces');
+
 const validation = {
   validateEmail,
   validatePhone,
@@ -119,6 +124,7 @@ const validation = {
   validateLettersOnly,
   validateTotal,
   validateMinimum,
+  validateNoSpaces,
   messages: validationMessages,
 };
 

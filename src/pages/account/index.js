@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { navigate } from 'gatsby';
 
-import { getByValue } from 'src/utils/functions';
 import formUtils from 'src/utils/form';
 import Layout from 'src/components/Layout/Layout';
 import Form from 'src/components/_layout/Form/Form';
@@ -15,8 +14,6 @@ import Button from 'src/components/_buttons/Button/Button';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 import { userUpdate } from 'src/state/actions/user';
-
-import { filePath } from 'src/config/endpoints';
 
 import accountService from 'src/services/Account';
 export const AccountService = new accountService();
@@ -162,9 +159,9 @@ class Account extends Component {
       }]
     }
 
-    const passport = getByValue(documents, 'description', 'passport');
-    const addressProof = getByValue(documents, 'description', 'address');
-    const signature = getByValue(documents, 'description', 'signature');
+    const passportData = documents.file_passport && documents.file_passport.content;
+    const addressProof = documents.file_proof_of_address && documents.file_proof_of_address.content;
+    const signature = documents.signature && documents.signature.content;
 
     const paymentCard = user.payment_details ? user.payment_details : {};
 
@@ -211,10 +208,12 @@ class Account extends Component {
                     <p>{ `${user.first_name}${user.middle_name ? ` ${user.middle_name} ` : ''} ${user.last_name}`}</p>
                   </div>
 
-                  <div>
-                    <h2>{ t('profile.sections.previousNames') }</h2>
-                    <p>{user.previous_names ? user.previous_names : '-'}</p>
-                  </div>
+                  {user.previous_names &&
+                    <div>
+                      <h2>{ t('profile.sections.previousNames') }</h2>
+                      <p>{user.previous_names}</p>
+                    </div>
+                  }
 
                   <div>
                     <h2>{ t('profile.sections.dob') }</h2>
@@ -290,10 +289,10 @@ class Account extends Component {
                   <h2>{ t('profile.sections.payment') }</h2>
                   <div className="payment">
                     { cardImage }
-                    <table>
+                    <table><tbody>
                       <tr><th>{ t('profile.sections.paymentCard') }</th><td>{ paymentCard.last4 }</td></tr>
                       <tr><th>{ t('profile.sections.paymentExp') }</th><td>{ paymentCard.exp_month }/{ paymentCard.exp_year }</td></tr>
-                    </table>
+                      </tbody></table>
                   </div>
 
                   <div className="account-edit">
@@ -308,13 +307,13 @@ class Account extends Component {
               }
             </div>
           </div>
-          
 
           <div className="dashboard-columns">
             <div className="company-overview-section">
               <h2>{ t('profile.sections.passport') }</h2>
+              {passportData && <img src={`data:image/jpeg;base64,${passportData}`} /> }
+              
               <div className="account-edit">
-                {passport && <img src={`${filePath}${passport.filename}`} /> }
                 <Button
                   classes="inline chat"
                   data-test="live-chat-passport"
@@ -326,8 +325,9 @@ class Account extends Component {
 
             <div className="company-overview-section">
               <h2>{ t('profile.sections.proofAddress') }</h2>
+              {addressProof && <img src={`data:image/jpeg;base64,${addressProof}`} /> }
+
               <div className="account-edit">
-                {addressProof && <img src={`${filePath}${addressProof.filename}`} /> }
                 <Button
                   classes="inline chat"
                   data-test="live-chat-address"
@@ -341,8 +341,9 @@ class Account extends Component {
           <div className="company-overview-section" data-test="section-signature">
             <h2>{ t('profile.sections.signature') }</h2>
             <div className="signature">
-              {signature && <img src={`${filePath}${signature.filename}`} /> }
+              {signature && <img src={`data:image/jpeg;base64,${signature.filename}`} /> }
             </div>
+            
             <div className="account-edit">
               <Button classes="inline" label={ t('profile.edit') } onClick={() => navigate('/account/signature-edit') } />
             </div>
@@ -368,7 +369,7 @@ Account.propTypes = {
   hideLoader: PropTypes.func,
   user: PropTypes.object,
   form: PropTypes.object,
-  documents: PropTypes.arrayOf(PropTypes.object),
+  documents: PropTypes.array,
   userUpdate: PropTypes.func
 };
 

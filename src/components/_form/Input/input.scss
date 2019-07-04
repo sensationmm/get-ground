@@ -86,15 +86,15 @@
 .fullscreen {
   .text-input {
     &-label, &-required, input.error {
-      color: $white;
-      border-color: $white;
+      color: $white !important;
+      border-color: $white !important;
     }
   }
 }
 
 .account {
   .text-input {
-    &-label, &-required, input.error {
+    &-label, input.error {
       color: $text;
       border-color: $text;
     }
@@ -107,6 +107,5 @@
     &-label:not(.radio-group--label) {
       width: 70%;
     }
-
   }
 }
