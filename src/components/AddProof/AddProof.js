@@ -47,6 +47,12 @@ export class AddProof extends Component {
     )
   }
 
+  componentWillUnmount() {
+    if (this.props.active === this.props.section) {
+      this.props.resetActive()
+    }
+  }
+
   /**
    * @param {Object} newState - new state object passed by parent function to set state
    * @return {void}
@@ -191,7 +197,7 @@ export class AddProof extends Component {
           {'proof-active': this.props.active && this.props.active === section },
           {'disabled': this.props.active && this.props.active !== section }
         ])} role="account">
-        
+
         <div className="add-proof-text">
           <IntroBox data-test="intro-box">{ t(`onBoarding.idCheck.${section}.title`) }</IntroBox>
           <p className="add-proof-content">{ t(`onBoarding.idCheck.${section}.content`) }</p>
