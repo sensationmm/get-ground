@@ -11,7 +11,7 @@
   top: 0;
   left: 0;
   z-index: 3;
-  overflow: scroll;
+  overflow: hidden;
 
   &--header {
     display: flex;
@@ -35,6 +35,7 @@
     margin: 30px auto;
     text-align: left;
     overflow: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   &--title {

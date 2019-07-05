@@ -5,7 +5,7 @@ import { Link } from 'gatsby';
 
 import ContactUs from 'src/components/ContactUs/ContactUs'
 
-import logo from 'src/assets/images/logo-footer.svg';
+import logo from 'src/assets/images/logo-white.svg';
 
 import './footer.scss';
 
