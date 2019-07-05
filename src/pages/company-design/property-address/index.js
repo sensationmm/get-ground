@@ -73,18 +73,18 @@ class PropertyAddress extends Component {
             formUtils.updateValue('posttown', address.City);
             formUtils.updateValue('premise', address.BuildingNumber);
             formUtils.updateValue('postcode', address.PostalCode);
-    
+
             this.setState(() => ({
               ...this.state,
               isAddressValid: true,
               isTextAreaHidden: false
             }));
-    
+
           });
           clearInterval(timerId);
         }
       }, 500);
-      
+
     }
 
     script.src = addressNow
@@ -283,7 +283,7 @@ class PropertyAddress extends Component {
         <div className="company-design-property-address" data-test="container-company-design-property-address" role="form-page">
           <h1>{t('companyDesign.propertyAddress.heading')}</h1>
 
-          <IntroBox>{t('companyDesign.propertyAddress.intro')}</IntroBox>
+          <IntroBox data-test="intro-box">{t('companyDesign.propertyAddress.intro')}</IntroBox>
 
           {showErrorMessage &&
               <ErrorBox>
@@ -304,6 +304,7 @@ class PropertyAddress extends Component {
               fullWidth
               onClick={this.submitPropertyAddress}
               classes="primary"
+              data-test="button"
             />
 
             <Button
@@ -311,6 +312,7 @@ class PropertyAddress extends Component {
               label={t('companyDesign.propertyAddress.form.backButton')}
               fullWidth
               onClick={() => navigate('/company-design/add-services')}
+              data-test="button"
             />
           </Form>
         </div>
