@@ -33,4 +33,13 @@ describe('create-account', () => {
     cy.get('.button.primary.full').click()
     cy.get('[data-test="component-error-box"]').not.exist
   })
+
+  it('Email already exists ', () => {
+    cy.get('#email').type('fakeemail@fakeemail.co.uk')
+    cy.get('#password').type('password123965!!!!!')
+    cy.get('#passwordConfirm').type('password123965!!!!!')
+    cy.get('[data-test="component-checkbox-toggle"]').click({multiple: true})
+    cy.get('.button.primary.full').click()
+    cy.get('.error-box').contains('Email address already exists')
+  })
 })
