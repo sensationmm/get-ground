@@ -39,7 +39,7 @@ class PropertyAddress extends Component {
 
     this.state = {
       isAddressValid: true,
-      isManualAddress: false,
+      isManualAddress: typeof this.props.form.values.premise === 'string',
       isTextAreaHidden: true
     };
 
@@ -90,6 +90,14 @@ class PropertyAddress extends Component {
     script.src = addressNow
     script.async = true;
     document.body.appendChild(script);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.isManualAddress !== (typeof this.props.form.values.premise === 'string')) {
+      this.setState({
+        isManualAddress: typeof this.props.form.values.premise === 'string'
+      })
+    }
   }
 
   componentWillUnmount() {
@@ -159,8 +167,6 @@ class PropertyAddress extends Component {
   saveAndExit = async () => {
     const { showLoader, hideLoader, form, company } = this.props;
     const { values: { premise, street, posttown, postcode, is_confirmed, country_name }, errors } = form;
-
-    formUtils.validateForm(this.config);
 
     await Object.keys(errors).forEach(async (key) => {
       await formUtils.updateValue(key, '');

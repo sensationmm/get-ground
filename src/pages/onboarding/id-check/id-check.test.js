@@ -31,7 +31,8 @@ describe('id-check', () => {
       },
       selfie: {
         img: ''
-      }
+      },
+      form: {}
     }
 
     wrapper = shallow(<IdCheck {...props} />);

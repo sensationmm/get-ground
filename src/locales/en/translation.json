@@ -517,6 +517,7 @@
   },
   "header": {
     "dashboard": "My Dashboard",
+    "onboarding": "Onboarding",
     "buttons": {
       "register": "Register",
       "login": "Log In",
@@ -857,7 +858,8 @@
         "title": "Take a picture of yourself",
         "content": "We need this picture so we can match it with the one in your passport. This is to make sure no one is trying to create a false account using your documents.",
         "retakeImageContent": "Are you happy with this picture? Please make sure the picture is well-lit and not blurred."
-      }
+      },
+      "error": "Something went wrong. Please take your images again"
     },
     "payment": {
       "title": "Payment details",
