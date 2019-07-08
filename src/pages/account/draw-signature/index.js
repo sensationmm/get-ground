@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -70,8 +70,8 @@ class DrawSignature extends Component {
     return (
       <Layout secure>
         <div className="draw-signature" data-test="container-draw-signature">
-        { savedSignature === '' && 
-          <Fragment>
+        { savedSignature === '' &&
+          <>
             <h1>{t('account.drawSignature.title')}</h1>
             <span className="draw-signature--signature-pad-label">{t('account.drawSignature.signaturePadLabel')}</span>
             <SignaturePad
@@ -80,7 +80,7 @@ class DrawSignature extends Component {
               onEnd={ () => this.setState({ isSignature: true }) }
             />
             <div className="draw-signature--buttons">
-              <Button 
+              <Button
                 disabled={!isSignature}
                 classes="secondary"
                 data-test="button-redo"
@@ -90,7 +90,7 @@ class DrawSignature extends Component {
                   this.signature && this.signature.clear();
                 }}
               />
-              <Button 
+              <Button
                 disabled={!isSignature}
                 classes="primary"
                 data-test="button-save"
@@ -98,10 +98,10 @@ class DrawSignature extends Component {
                 onClick={this.splitSignature}
               />
             </div>
-          </Fragment>
+          </>
         }
-        { savedSignature !== '' && 
-          <Fragment>
+        { savedSignature !== '' &&
+          <>
             <h1>{t('account.yourSignature.title')}</h1>
 
             <IntroBox data-test="intro-box">
@@ -112,19 +112,19 @@ class DrawSignature extends Component {
             </IntroBox>
 
             <img className="your-signature--saved-image" src={savedSignature} />
-            <Button 
+            <Button
               data-test="button-edit"
               classes="secondary full edit"
               label={t('account.yourSignature.buttons.edit')}
               onClick={() => this.setState({ savedSignature: '', isSignature: false })}
             />
             <Link to={isEditMode ? '/account' : '/documents'}>
-              <Button 
+              <Button
                 classes="primary full"
-                label={t('account.yourSignature.buttons.continue')} 
+                label={t('account.yourSignature.buttons.continue')}
               />
             </Link>
-          </Fragment>
+          </>
         }
         </div>
       </Layout>
