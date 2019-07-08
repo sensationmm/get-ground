@@ -61,24 +61,24 @@ jobs:
 
       - run: npm test
 
-  deploy_staging:
-    docker:
-      - image: getground/customer-frontend-pwa:2.0.1
-    working_directory: /go/src/github.com/getground/customer-frontend-pwa
-    steps:
-     - checkout
-     - *attach_workspace
-     - run:
-        name: Restore js
-        command: |
-          set -exu
-          mkdir -p /tmp/workspace/public
-          mkdir -p public
-          mv /tmp/workspace/public/* public/
-     - run: go get -v -t -d ./...
-     - run: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
-     - run: gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-     - run: gcloud app deploy
+  # deploy_staging:
+  #   docker:
+  #     - image: getground/customer-frontend-pwa:2.0.1
+  #   working_directory: /go/src/github.com/getground/customer-frontend-pwa
+  #   steps:
+  #    - checkout
+  #    - *attach_workspace
+  #    - run:
+  #       name: Restore js
+  #       command: |
+  #         set -exu
+  #         mkdir -p /tmp/workspace/public
+  #         mkdir -p public
+  #         mv /tmp/workspace/public/* public/
+  #    - run: go get -v -t -d ./...
+  #    - run: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+  #    - run: gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+  #    - run: gcloud app deploy
 
   deploy_qa:
     docker:
