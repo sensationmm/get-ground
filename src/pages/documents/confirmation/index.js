@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { navigate } from 'gatsby'
 import { useTranslation } from 'react-i18next'
 
 import confirmationImage from 'src/assets/images/documents-confirmation.svg'
@@ -18,12 +18,12 @@ const DocumentsConfirmation = () => {
         <div className="confirmation-content">
           <h1 className="confirmation--heading">{t('myDocuments.confirmation.heading')}</h1>
           <div className="confirmation--copy" dangerouslySetInnerHTML={{ __html: t('myDocuments.confirmation.copy') }} />
-          <Link to="/dashboard">
-            <Button
-              classes="secondary"
-              label={t('myDocuments.confirmation.buttonText')}
-            />
-          </Link>
+          <Button
+            classes="secondary"
+            label={t('myDocuments.confirmation.buttonText')}
+            onClick={() => navigate('/dashboard')}
+            data-test="button"
+          />
         </div>
       </div>
     </Layout>
