@@ -1,6 +1,16 @@
 ## 🚀 Welcome To getGround!
 
+### Getting Started
+This project requires node (11.13.0), nvm to be installed. 
 
+On OS X with Homebrew, you can just run 
+`brew install nvm`
+`nvm install 11.13.0` 
+`nvm use 11.13.0`
+`npm install`
+
+### Running the app locally
+`npm start`
 
 ### guides
 
