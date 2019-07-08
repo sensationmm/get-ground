@@ -146,7 +146,7 @@ export class ProcessTracker extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  isLoading: state.loader,
+  isLoading: state.loader.isLoading,
   last_page_visited: state.user.last_page_visited,
   userID: state.user.id,
   progress: state.user.progress

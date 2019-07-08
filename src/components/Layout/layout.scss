@@ -34,7 +34,6 @@ body {
 
   > div {
     width: 100%;
-    // min-height: 100vh;
     background: $background-main-start;
     background-attachment: fixed;
 
@@ -48,6 +47,10 @@ body {
       &.company-design, &.documents {
         @include gradient-vertical-image($gradient-primary-1, $gradient-primary-2, '../../assets/images/background.png');
       }
+    }
+
+    &.fullscreen:not(.hasCurve) {
+      min-height: 100vh;
     }
 
     &.no-background-image {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { navigate } from 'gatsby';
 
 import { setup, findByTestAttr } from 'src/test-utils/test-utils';
@@ -39,7 +38,7 @@ describe('<AccountPending />', () => {
     const component = findByTestAttr(wrapper, 'container-account-pending');
 
     const layoutComp = component.find(TextImage);
-    expect(layoutComp.props().text).toEqual(<p>forgotPassword.emailPending</p>);
+    expect(layoutComp.props().text).toEqual('<p>forgotPassword.emailPending</p>');
     expect(AuthService.verifyEmail).toHaveBeenCalledTimes(0);
   });
 

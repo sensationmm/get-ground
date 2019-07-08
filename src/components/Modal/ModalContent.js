@@ -55,7 +55,7 @@ class ModalContent extends Component {
         const url = window.URL.createObjectURL(new Blob([response]));
         const link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download', 'file.pdf');
+        link.setAttribute('download', `${this.props.heading}.pdf`);
         if (this.modalHeader.current !== null) {
           this.modalHeader.current.appendChild(link);
           link.click();
@@ -78,6 +78,7 @@ class ModalContent extends Component {
 
     if (bottom) this.setState({ checkboxDisabled: false });
   }
+
   setSignature = () => {
     const { handleOnSign, currentModalSignature } = this.props;
     handleOnSign(currentModalSignature);

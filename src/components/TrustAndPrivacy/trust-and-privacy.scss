@@ -68,12 +68,20 @@
     color: $heading;
     font-weight: 300;
 
+    .hero-image {
+      width: 30%;
+    }
+
     &-subTitle {
       text-align: center !important;
     }
 
     &.read-more {
       text-align: left;
+
+      .trustAndPrivacy-subTitle {
+        text-align: left !important;
+      }
     }
   }
 }

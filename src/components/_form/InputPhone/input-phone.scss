@@ -24,7 +24,7 @@
     border-radius: 5px;
     padding: $padding-horizontal;
 
-    input[type=text] {
+    input[type=text], input[type=number] {
       outline: 0;
       box-shadow: none !important;
       padding: 0;

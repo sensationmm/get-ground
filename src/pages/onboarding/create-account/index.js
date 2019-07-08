@@ -132,8 +132,8 @@ class CreateAccount extends Component {
         component: InputPassword,
         label: t('onBoarding.createAccount.form.label.password'),
         value: values.password,
-        validationFunction: ['validateRequired','validateMinimum'],
-        validationParam: [null, 8],
+        validationFunction: ['validateRequired','validateNoSpaces','validateMinimum'],
+        validationParam: [null, null, 8],
         note: t('onBoarding.createAccount.form.note.password')
       },
       {

@@ -288,7 +288,7 @@ const mapStateToProps = (state) => ({
   userID: state.user.id,
   activeCompany: state.activeCompany,
   menuIsOpen: state.menu.isOpen,
-  isLoggedIn: state.user.email,
+  isLoggedIn: state.user.id !== null,
   idCheckActive: state.idCheck.active,
   isMobile: state.layout.isMobile,
   last_page_visited: state.user.last_page_visited

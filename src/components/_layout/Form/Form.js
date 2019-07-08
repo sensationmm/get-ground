@@ -18,6 +18,8 @@ const Form = props => {
   return (
     <div data-test="component-form" className={classNames('form', { 'full': desktopFullWidth })}>
       {children.map((child, key) => {
+        if(!child) return;
+        
         if(isArray(child)) {
           return child.map((childItem, childKey) => {
             return <div className="form-row" style={{ marginBottom: spacing }} key={`form-row-${childKey}`}>{childItem}</div>;
