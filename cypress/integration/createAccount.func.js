@@ -7,7 +7,7 @@ describe('create-account', () => {
   it('email verification ', () => {
     cy.get('#email').type('bogus')
     cy.get('#password').focus()
-    cy.get('[data-test="text-input-error"]').contains('Invalid email address')
+    cy.get('[data-test="text-input-error"]').contains('Invalid email')
     cy.get('#email').type('fakeemail@fakeemail.co.uk')
     cy.get('[data-test="text-input-error"]').not.exist
   })
