@@ -42,22 +42,6 @@ jobs:
           key: *js_deps_cache_key
           paths:
             - node_modules
-#   build:
-#     docker:
-#       - image: circleci/node:11.13.0
-#     steps:
-#       - checkout
-#       - restore_cache:
-#           keys:
-#             - v1-dependencies-{{ checksum "package.json" }}
-#             - v1-dependencies-
-#       - run: npm install
-#       - save_cache:
-#           paths:
-#             - node_modules
-#           key: v1-dependencies-{{ checksum "package.json" }}
-
-#       - run: npm run build
 
   test:
     docker:
@@ -121,20 +105,13 @@ workflows:
     jobs:
       - build
       - test
-      - deploy_staging:
-          requires:
-            - build
-            - test
-          filters:
-            branches:
-              only: develop
-      - deploy_staging:
-          requires:
-            - build
-            - test
-          filters:
-            branches:
-              only: develop
+      # - deploy_staging:
+      #     requires:
+      #       - build
+      #       - test
+      #     filters:
+      #       branches:
+      #         only: develop
       - deploy_qa:
           requires:
             - build
