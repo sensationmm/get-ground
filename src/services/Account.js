@@ -79,7 +79,7 @@ class AccountService extends BaseService {
       ];
 
       window.LC_API.set_custom_variables(login_variables);
-      
+
       store.dispatch(saveUser(response.data));
     });
   };
@@ -144,6 +144,24 @@ class AccountService extends BaseService {
     return this.doRequest(config, (response) => {
       store.dispatch(saveDocuments(response.data));
     });
+  };
+
+  /**
+   * getSignature
+   * Gets Users signature
+   * @return {Promise} getDocuments response
+   */
+  getSignature = () => {
+    const config = {
+      url: `/documents/${store.getState().user.id}/file`,
+      method: 'get'
+    };
+
+    return this.doRequest(config);
+
+    // return this.doRequest(config, (response) => {
+    //   store.dispatch(saveDocuments(response.data));
+    // });
   };
 
   /**

@@ -51,6 +51,12 @@ class Account extends Component {
     this.config = null;
   }
 
+  componentDidMount() {
+    AccountService.getSignature().then((res) => {
+      console.log('res', res)
+    })
+  }
+
   componentWillUnmount() {
     formUtils.clearFormState();
   }
@@ -249,7 +255,7 @@ class Account extends Component {
                 </div>
               </div>
             </div>
-            
+
             <div>
               <div className="company-overview-section" data-test="section-phone">
                 <h2>{ t('profile.sections.phone') }</h2>
@@ -284,7 +290,7 @@ class Account extends Component {
                 <p>{address && address.join(', ')}</p>
               </div>
 
-              {paymentCard.brand && 
+              {paymentCard.brand &&
                 <div className="company-overview-section">
                   <h2>{ t('profile.sections.payment') }</h2>
                   <div className="payment">
@@ -312,7 +318,7 @@ class Account extends Component {
             <div className="company-overview-section">
               <h2>{ t('profile.sections.passport') }</h2>
               {passportData && <img src={`data:image/jpeg;base64,${passportData}`} /> }
-              
+
               <div className="account-edit">
                 <Button
                   classes="inline chat"
@@ -343,7 +349,7 @@ class Account extends Component {
             <div className="signature">
               {signature && <img src={`data:image/jpeg;base64,${signature.filename}`} /> }
             </div>
-            
+
             <div className="account-edit">
               <Button classes="inline" label={ t('profile.edit') } onClick={() => navigate('/account/signature-edit') } />
             </div>
