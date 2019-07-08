@@ -26,7 +26,7 @@ describe('<Account />', () => {
     hideLoader: hideLoaderMock,
     userUpdate: userUpdateMock,
     form: ReduxFormMock,
-    user: { ...UserMock, payment_details: { brand: 'visa' } },
+    user: { ...UserMock, payment_details: { brand: 'visa' }, 'previous_names': 'asd' },
     documents: [
       { 'description': 'passport', filename: ''},
       { 'description': 'address', filename: ''},

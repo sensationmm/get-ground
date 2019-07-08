@@ -1,20 +1,18 @@
 
 import React, { Component } from 'react';
-import { Link } from 'gatsby';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { navigate } from 'gatsby';
 
-import Button from 'src/components/_buttons/Button/Button';
 import Layout from 'src/components/Layout/Layout';
+import TextImage from 'src/components/_layout/TextImage/TextImage';
 import successImg from 'src/assets/images/company-complete.svg';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
 import companyService from 'src/services/Company';
 const CompanyService = new companyService();
-
-import './company-complete.scss';
 
 /**
  * Dashboard
@@ -43,14 +41,14 @@ class CompanyComplete extends Component {
 
     return (
       <Layout>
-        <div data-test="container-company-complete" className="company-complete" role="fullscreen">
-          <div className="intro--hero-image"><img className="company-complete--image" src={successImg} /></div>
-          <h1 className="company-complete--heading">{t('companyDesign.companyComplete.title')}</h1>
-          <p className="company-complete--copy">{t('companyDesign.companyComplete.copy')}</p>
-          <p className="company-complete--copy">{ t('companyDesign.companyComplete.info') }</p>
-          <Link to="/dashboard">
-            <Button label={t('companyDesign.companyComplete.button')} classes="full" />
-          </Link>
+        <div data-test="container-company-complete" className="company-complete" role="fullscreen form-page">
+          <TextImage
+            title={t('companyDesign.companyComplete.title')}
+            image={successImg}
+            text={`<p>${t('companyDesign.companyComplete.copy')}</p><p>${ t('companyDesign.companyComplete.info') }</p>`}
+            buttonAction={() => navigate('/dashboard')}
+            buttonLabel={t('companyDesign.companyComplete.button')}
+          />
         </div>
       </Layout>
     );

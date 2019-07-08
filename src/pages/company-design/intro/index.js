@@ -5,8 +5,8 @@ import { navigate } from 'gatsby';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 
-import Button from 'src/components/_buttons/Button/Button';
 import Layout from 'src/components/Layout/Layout';
+import TextImage from 'src/components/_layout/TextImage/TextImage'
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 import { addCompany, setActiveCompany } from 'src/state/actions/activeCompany';
@@ -75,27 +75,17 @@ class CompanyDesignIntroContainer extends Component {
 
     return (
       <Layout>
-        <div data-test="container-company-design-intro" className="intro" role="brochure fullscreen">
-          <img className="hero-image" src={house} />
-          <h1>{t('companyDesign.intro.title')}</h1>
-          <p>{t('companyDesign.intro.para1')}</p>
-          <p>{t('companyDesign.intro.para2')}</p>
-          <p>{t('companyDesign.intro.para3')}</p>
-          <div className="intro--buttons-container">
-            <Button
-              data-test="add-services-button"
-              onClick={() => this.handleCreateCompany('/company-design/add-services', true)}
-              fullWidth
-              label={t('companyDesign.intro.button1')}
-            />
-            <Button
-              data-test="skip-services-button"
-              onClick={() => this.handleCreateCompany('/company-design', false)}
-              opaque
-              small
-              label={t('companyDesign.intro.button2')}
-            />
-          </div>
+        <div data-test="container-company-design-intro" className="intro" role="fullscreen form-page">
+
+          <TextImage
+            title={t('companyDesign.intro.title')}
+            image={house}
+            text={`<p>${t('companyDesign.intro.para1')}</p><p>${t('companyDesign.intro.para2')}</p><p>${t('companyDesign.intro.para3')}</p>`}
+            buttonAction={() => this.handleCreateCompany('/company-design/add-services', true)}
+            buttonLabel={t('companyDesign.intro.button1')}
+            buttonSecondaryAction={() => this.handleCreateCompany('/company-design', false)}
+            buttonSecondaryLabel={t('companyDesign.intro.button2')}
+          />
         </div>
       </Layout>
     );

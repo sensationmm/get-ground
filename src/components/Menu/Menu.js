@@ -19,12 +19,18 @@ class Menu extends Component {
     this.state = {
       fadeInLinks: false
     }
+
+    this.timeout = null;
   }
 
   componentDidMount() {
-    setTimeout(() => {
+    this.timeout = setTimeout(() => {
       this.setState({ fadeInLinks: true })
     }, 200);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeout);
   }
 
   render() {
@@ -41,7 +47,7 @@ class Menu extends Component {
                 {menuLink.link ?
                   <Link to={`${menuLink.link}`} activeClassName="active">{`${menuLink.text}`}</Link>
                   :
-                  <Link to="/" onClick={menuLink.function} activeClassName="active">{`${menuLink.text}`}</Link>
+                  <Link to="/" onClick={menuLink.function}>{`${menuLink.text}`}</Link>
                 }
               </li>
             )

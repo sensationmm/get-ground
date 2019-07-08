@@ -109,8 +109,8 @@ export class ProcessTracker extends Component {
     return (
       <Fragment>
         <Layout secure>
-          <div className="process-tracker onboarding" role="fullscreen account">
-            <h3 className="process-tracker--title">{t('onBoarding.progressTracker.inProgressTitle')}</h3>
+          <div className="process-tracker onboarding" role="fullscreen account form-page">
+            <h1 className="process-tracker--title">{t('onBoarding.progressTracker.inProgressTitle')}</h1>
             <div className="process-tracker-sections">
               {sectionsConfig.sections.map((section, idx) => {
                 return (
@@ -146,7 +146,7 @@ export class ProcessTracker extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  isLoading: state.loader,
+  isLoading: state.loader.isLoading,
   last_page_visited: state.user.last_page_visited,
   userID: state.user.id,
   progress: state.user.progress

@@ -55,7 +55,7 @@ class ModalContent extends Component {
         const url = window.URL.createObjectURL(new Blob([response]));
         const link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download', 'file.pdf');
+        link.setAttribute('download', `${this.props.heading}.pdf`);
         if (this.modalHeader.current !== null) {
           this.modalHeader.current.appendChild(link);
           link.click();
@@ -78,6 +78,7 @@ class ModalContent extends Component {
 
     if (bottom) this.setState({ checkboxDisabled: false });
   }
+
   setSignature = () => {
     const { handleOnSign, currentModalSignature } = this.props;
     handleOnSign(currentModalSignature);
@@ -107,7 +108,7 @@ class ModalContent extends Component {
     } = this.props;
 
     return (
-      <div className="modal">
+      <div className="modal" role="modal">
         <div data-test="modal-content" ref={this.modalHeader} className="modal--header">
           {downloadButtonLabel &&
             <Button
@@ -130,10 +131,10 @@ class ModalContent extends Component {
           onScroll={e => hasCheckbox ? this.handleScroll(e) : null }
         >
           {heading &&
-            <h2 className="modal--title">{heading}</h2>
+            <h1 className="modal--title">{heading}</h1>
           }
 
-          <img src={modalImage} />
+          {modalImage && <img className="hero-image" src={modalImage} />}
 
           { content &&
             <div className="modal--markdown">

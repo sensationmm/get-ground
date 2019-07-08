@@ -181,7 +181,7 @@ export class AcceptanceOfRole extends React.Component {
 
     return (
       <Layout>
-        <div role="account fullscreen" className="acceptance-of-role">
+        <div role="account fullscreen form-page" className="acceptance-of-role">
           <h1>{t('acceptanceOfRole.title')}</h1>
           <h3 className="acceptance-of-role-content">{`${this.state.inviteeName} ${t('acceptanceOfRole.content')}`}</h3>
           <List>

@@ -14,11 +14,11 @@ const TableSlider = ({ leftHandFeed, smallFeed1, smallFeed2, feed1, feed2, table
   useEffect(() => {
     const _T = document.querySelector(`.right.${tableName}`);
     let ts = 0;
-    _T.addEventListener('touchstart', function(e) {
+    _T.addEventListener('touchstart', (e) => {
       ts = e.changedTouches[0].clientX
     })
 
-    _T.addEventListener('touchend', function(e) {
+    _T.addEventListener('touchend', (e) => {
       const te = e.changedTouches[0].clientX
       if (ts < te ) {
         const idx = TableIndex === 0 ? 2 : TableIndex - 1
@@ -42,17 +42,13 @@ const TableSlider = ({ leftHandFeed, smallFeed1, smallFeed2, feed1, feed2, table
 
     if (index === 1) {
       return (
-        <div className="table-responses">
           <Table data-test="personal-table" header={t('advantages.personalHeader')} classes={classNames('right', tableName)} sections={feed1} />
-        </div>
       )
     }
 
     if (index === 2) {
       return (
-        <div className="table-responses">
           <Table data-test="company-table" header={t('advantages.companyHeader')} classes={classNames('right', 'blue', tableName)} sections={feed2} />
-        </div>
       )
     }
   }

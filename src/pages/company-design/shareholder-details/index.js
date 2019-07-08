@@ -45,7 +45,8 @@ class ShareholderDetails extends Component {
       shareholders: 1,
       hasShareholders: this.props.company && this.props.company.shareholder_details.collection && this.props.company.shareholder_details.collection.filter(item => item.first_name !== '').length > 0,
       stage: 'add',
-      totalShares: 0
+      totalShares: 0,
+      owner_is_director: true
     };
 
     this.shareholder0 = null;
@@ -68,10 +69,11 @@ class ShareholderDetails extends Component {
   }
 
   componentDidMount() {
-    const { company: { shareholder_details }} = this.props;
-    const shareholders = shareholder_details.collection === null ? [{...shareholder}] : shareholder_details.collection;
-    const populatedShareholders = shareholders.length;
+    const { company: { shareholder_details }, user} = this.props;
+    let shareholders = shareholder_details.collection === null ? [{...shareholder}] : shareholder_details.collection;
+    shareholders = shareholders.filter(p => p.first_name !== user.first_name && p.last_name !== user.last_name)
 
+    const populatedShareholders = shareholders.length;
     for (let i = shareholders.length; i < 8; i++) {
       shareholders.push({...shareholder})
     }
@@ -84,6 +86,14 @@ class ShareholderDetails extends Component {
     if (populatedShareholders > 1) {
       this.setState({ shareholders: populatedShareholders });
     }
+
+    let totalShares = 0
+
+    for (let i=0; i < populatedShareholders; i++) {
+      totalShares = totalShares + Number(shareholders[i].allocated_shares)
+    }
+
+    this.setState({totalShares})
   }
 
   componentWillUnmount() {
@@ -185,9 +195,18 @@ class ShareholderDetails extends Component {
   }
 
   setNoShareholders = () => {
-    const { showLoader, hideLoader, company } = this.props;
+    const { showLoader, hideLoader, company, user } = this.props;
     showLoader();
-    CompanyService.updateCompany({collection: []}, 'shareholder_details', company.id).then((response) => {
+    const creator = [{
+      allocated_shares: (100 - this.state.totalShares).toString(),
+      email: user.email,
+      first_name: user.first_name,
+      is_director: this.state.owner_is_director,
+      is_existing_user: true,
+      last_name: user.last_name
+    }]
+
+    CompanyService.updateCompany({collection: creator}, 'shareholder_details', company.id).then((response) => {
       hideLoader();
       navigate('/company-design/tax-questions');
     });
@@ -284,7 +303,7 @@ class ShareholderDetails extends Component {
    * @return {void} saveShareholders
    */
   saveShareholders = async (isSaveAndExit) => {
-    const { form, showLoader, hideLoader, company } = this.props;
+    const { form, showLoader, hideLoader, company, user } = this.props;
     const { values, errors } = form;
     let shareholders = values;
 
@@ -304,8 +323,18 @@ class ShareholderDetails extends Component {
       shareholders = shareholders.length === 0 ? [{}] : shareholders;
     }
 
+    const creator = [{
+      allocated_shares: (100 - this.state.totalShares).toString(),
+      email: user.email,
+      first_name: user.first_name,
+      is_director: this.state.owner_is_director,
+      is_existing_user: true,
+      last_name: user.last_name
+    }]
+
     const payload = {
-      collection: shareholders
+      collection: creator.concat(shareholders),
+      is_complete: isSaveAndExit
     }
 
     showLoader();
@@ -324,13 +353,12 @@ class ShareholderDetails extends Component {
   render() {
     const { t, form } = this.props;
     const { hasShareholders, shareholders, stage, totalShares } = this.state;
-
     const mainShareholder = (100 - totalShares >= 0) ? 100 - totalShares : NaN;
     const headerActions = <ButtonHeader onClick={() => {this.saveShareholders(true)}} label={t('header.buttons.saveAndExit')} />
 
     return (
-      <Layout headerActions={headerActions} secure>
-        <div data-test="container-shareholder-details" className="shareholder" role="company-design">
+      <Layout headerActions={headerActions} secure companyID>
+        <div data-test="container-shareholder-details" className="shareholder" role="company-design form-page">
           {!hasShareholders &&
             <ShareholderChoice
               addShareholders={this.toggleShareholders}
@@ -368,7 +396,7 @@ class ShareholderDetails extends Component {
                   />
                 </div>
               }
-              
+
               <br /><br />
 
               <Form>
@@ -413,8 +441,8 @@ class ShareholderDetails extends Component {
                 shareholderID={null}
                 name={i18n.t('companyDesign.shareholderDetails.shares.you')}
                 shares={mainShareholder.toString()}
-                is_director={true}
-                onChange={() => {}}
+                is_director={this.state.owner_is_director}
+                onChange={() => this.setState({owner_is_director: !this.state.owner_is_director})}
                 mainShareholder
               />
 
@@ -424,6 +452,7 @@ class ShareholderDetails extends Component {
 
               <Form>
                 <Button
+                  data-test="button-add"
                   onClick={this.confirmShares}
                   label={t('form.ctaPrimary')}
                   classes="primary"
@@ -455,8 +484,8 @@ class ShareholderDetails extends Component {
               shareholderID={null}
               name={i18n.t('companyDesign.shareholderDetails.shares.you')}
               shares={mainShareholder.toString()}
-              is_director={true}
-              onChange={() => {}}
+              is_director={this.state.owner_is_director}
+              onChange={() => this.setState({owner_is_director: !this.state.owner_is_director})}
               mainShareholder
               disabled
             />
@@ -493,11 +522,20 @@ ShareholderDetails.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   form: PropTypes.object,
-  company: PropTypes.object
+  company: PropTypes.object,
+  user: PropTypes.object
 };
 
+const sliceForm = (form, user) => {
+  return {
+    errors: form.errors,
+    showErrorMessage: form.showErrorMessage,
+    values: Array.isArray(form.values) ? form.values.filter(p => p.first_name !== user.first_name && p.last_name !== user.last_name ) : form.values
+  }
+}
+
 const mapStateToProps = (state) => ({
-  form: state.form,
+  form: sliceForm(state.form, state.user),
   user: state.user,
   company: state.companies.find(company => company.id === state.activeCompany),
 });

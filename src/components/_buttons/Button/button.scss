@@ -53,6 +53,11 @@
     box-shadow: 0px 3px 5px $shadow;
   }
 
+  &.primary-alternate {
+    border: 2px solid $text;
+    color: $text
+  }
+
   &.account {
     @include gradient-horizontal($background-account-start, $background-account-end);
     color: $white;
@@ -80,8 +85,6 @@
       font-size: 13px;
     }
   }
-
-  .account 
 
   &.white {
     min-width: 100px;
@@ -172,6 +175,12 @@
   }
 }
 
+.modal {
+  .button {
+    @extend .button.primary;
+  }
+}
+
 @media screen and (min-width: $breakpoint-desktop) {
   .button {
     padding: 10px 20px;
@@ -187,6 +196,11 @@
       max-width: 220px;
       margin-left: auto;
       margin-right: auto;
+    }
+    
+    &.chat {
+      padding: 8px 40px;
+      font-size: 14px;
     }
   }
 

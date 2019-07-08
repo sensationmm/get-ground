@@ -54,7 +54,7 @@ describe('process-tracker', () => {
   })
 
   test('renders title', () => {
-    expect(wrapper.find('h3').text()).toEqual('test-string');
+    expect(wrapper.find('h1').text()).toEqual('test-string');
   })
 
   test('renders ProcessSection', () => {

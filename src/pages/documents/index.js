@@ -16,16 +16,8 @@ import { showModal, hideModal } from 'src/state/actions/modal';
 import modalService from 'src/services/Modal';
 export const ModalService = new modalService();
 
-import ShareholdersAgreementImage from 'src/assets/images/shareholders-agreement.svg';
-import CompanyArticlesImage from 'src/assets/images/company-articles.svg';
-import DirectorsLoanImage from 'src/assets/images/directors-loan.svg';
-import ConsentToActImage from 'src/assets/images/consent-to-act.svg';
-import BoardResolutionImage from 'src/assets/images/board-resolution.svg';
-import ShareholdersAgreementSignedImage from 'src/assets/images/shareholders-agreement-signed.svg';
-import CompanyArticlesSignedImage from 'src/assets/images/company-articles-signed.svg';
-import DirectorsLoanSignedImage from 'src/assets/images/directors-loan-signed.svg';
-import ConsentToActSignedImage from 'src/assets/images/consent-to-act-signed.svg';
-import BoardResolutionSignedImage from 'src/assets/images/board-resolution-signed.svg';
+import DocumentImage from 'src/assets/images/document.svg';
+import DocumentSignedImage from 'src/assets/images/document-signed.svg';
 import documentsModal from 'src/assets/images/documents-modal.svg';
 
 import './my-documents.scss';
@@ -197,8 +189,8 @@ export class MyDocuments extends Component {
           'title': documentsContent['document1'].title,
           'imageAltText': documentsContent['document1'].imageAltText,
           'status': shareholdersAgreementSigned ? 'signed' : 'not_signed',
-          'image': ShareholdersAgreementImage,
-          'completeImage': ShareholdersAgreementSignedImage,
+          'image': DocumentImage,
+          'completeImage': DocumentSignedImage,
           'onClick': () => {
             this.initModal('shareholdersAgreementMarkdown', 'Investor Statement - High Net Worth', 'shareholdersAgreementSigned');
           }
@@ -207,8 +199,8 @@ export class MyDocuments extends Component {
           'title': documentsContent['document2'].title,
           'imageAltText': documentsContent['document2'].imageAltText,
           'status': companyArticlesSigned ? 'signed' : 'not_signed',
-          'image': CompanyArticlesImage,
-          'completeImage': CompanyArticlesSignedImage,
+          'image': DocumentImage,
+          'completeImage': DocumentSignedImage,
           'onClick': () => {
             this.initModal('companyArticlesMarkdown', 'Investor Statement - Sophisticated', 'companyArticlesSigned');
           }
@@ -217,8 +209,8 @@ export class MyDocuments extends Component {
           'title': documentsContent['document3'].title,
           'imageAltText': documentsContent['document3'].imageAltText,
           'status': directorsLoanSigned ? 'signed' : 'not_signed',
-          'image': DirectorsLoanImage,
-          'completeImage': DirectorsLoanSignedImage,
+          'image': DocumentImage,
+          'completeImage': DocumentSignedImage,
           'onClick': () => {
             this.initModal('directorsLoanMarkdown', 'directors loan agreement', 'directorsLoanSigned');
           }
@@ -227,8 +219,8 @@ export class MyDocuments extends Component {
           'title': documentsContent['document4'].title,
           'imageAltText': documentsContent['document4'].imageAltText,
           'status': consentToActSigned ? 'signed' : 'not_signed',
-          'image': ConsentToActImage,
-          'completeImage': ConsentToActSignedImage,
+          'image': DocumentImage,
+          'completeImage': DocumentSignedImage,
           'onClick': () => {
             this.initModal('consentToActMarkdown', 'consent to act as director', 'consentToActSigned');
           }
@@ -237,8 +229,8 @@ export class MyDocuments extends Component {
           'title': documentsContent['document5'].title,
           'imageAltText': documentsContent['document5'].imageAltText,
           'status': BoardResolutionSigned ? 'signed' : 'not_signed',
-          'image': BoardResolutionImage,
-          'completeImage': BoardResolutionSignedImage,
+          'image': DocumentImage,
+          'completeImage': DocumentSignedImage,
           'onClick': () => {
             this.initModal('BoardResolutionMarkdown', 'board resolution to exchange contracts', 'BoardResolutionSigned');
           }
@@ -249,7 +241,7 @@ export class MyDocuments extends Component {
     return (
       <Fragment>
         <Layout secure>
-          <div id="my-documents" className="process-tracker" role="fullscreen company-design">
+          <div id="my-documents" className="process-tracker" role="fullscreen company-design form-page">
             <h3 className="process-tracker--title">{t('myDocuments.title')}</h3>
             <p className="process-tracker--intro">{t('myDocuments.intro')}</p>
             <div className="process-tracker-sections">

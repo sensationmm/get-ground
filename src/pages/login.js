@@ -117,7 +117,7 @@ class Login extends Component {
 
     return (
       <Layout loggedOutOnly>
-        <div className="account-login" data-test="container-login" role="account fullscreen">
+        <div className="account-login" data-test="container-login" role="account fullscreen hasCurve">
           <h1>{ t('login.title') }</h1>
 
           {showErrorMessage && errors.form && <ErrorBox data-test="create-error-box">{errors.form}</ErrorBox>}

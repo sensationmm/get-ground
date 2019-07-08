@@ -37,26 +37,34 @@ const MeetTheFounders = () => {
                 <p>{t('meetTheFounders.misrab.content.third')}</p>
               </div>
             </div>
+            <div className="meet-the-founders-closed-btn">
+              <Button
+                data-test="read-less-button"
+                classes="primary"
+                label={t('meetTheFounders.cta2')}
+                onClick={() => toggleShow(!show)}
+              />
+            </div>
           </div>
         :
         <div className="meet-the-founders-closed">
           <div className="meet-the-founders-bios">
             <div className="meet-the-founders-closed-moubin">
-              <img src={Moubin} className="founder" alt="Moubin"/>
+              <img src={Moubin} className="founder" alt="Moubin" />
               <h3>{t('meetTheFounders.moubin.name')}</h3>
             </div>
             <div className="meet-the-founders-closed-misrab">
-              <img src={Misrab} className="founder" alt="Misrab"/>
+              <img src={Misrab} className="founder" alt="Misrab" />
               <h3>{t('meetTheFounders.misrab.name')}</h3>
             </div>
           </div>
           <div className="meet-the-founders-closed-btn">
-          <Button
-            data-test="read-more-button"
-            classes="primary"
-            label={t('meetTheFounders.cta')}
-            onClick={() => toggleShow(!show)}
-          />
+            <Button
+              data-test="read-more-button"
+              classes="primary"
+              label={t('meetTheFounders.cta')}
+              onClick={() => toggleShow(!show)}
+            />
           </div>
         </div>
       }

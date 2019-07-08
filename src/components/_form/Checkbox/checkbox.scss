@@ -1,5 +1,6 @@
 @import 'src/styles/modules/_colors.scss';
 @import 'src/styles/modules/_mixins.scss';
+@import 'src/styles/modules/_variables.scss';
 
 .checkbox {
   font-size: 14px;
@@ -74,6 +75,25 @@
 
     &.disabled:before {
       background: $disabled;
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .checkbox {
+    &-toggle {
+      min-width: 30px;
+      height: 30px;
+      margin-right: 20px;
+
+      &.checked:before {
+        position: absolute;
+        left: 12%;
+        top: 12%;
+        width: 76%;
+        height: 76%;
+        mask-size: contain;
+      }
     }
   }
 }

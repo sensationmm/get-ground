@@ -3,6 +3,7 @@ import { navigate } from 'gatsby';
 import { setup, findByTestAttr } from 'src/test-utils/test-utils';
 
 import AccountPending, { AuthService } from './index';
+import TextImage from 'src/components/_layout/TextImage/TextImage';
 
 jest.mock('gatsby', () => ({
   navigate: jest.fn()
@@ -35,10 +36,10 @@ describe('<AccountPending />', () => {
     }
     const wrapper = setup(AccountPending, props);
     const component = findByTestAttr(wrapper, 'container-account-pending');
-    const content = component.find('[data-test="account-pending-content"]')
 
-    expect(content.text()).toEqual('forgotPassword.emailPending')
-    expect(AuthService.verifyEmail).toHaveBeenCalledTimes(0)
+    const layoutComp = component.find(TextImage);
+    expect(layoutComp.props().text).toEqual('<p>forgotPassword.emailPending</p>');
+    expect(AuthService.verifyEmail).toHaveBeenCalledTimes(0);
   });
 
   test('renders without error', () => {
@@ -50,9 +51,9 @@ describe('<AccountPending />', () => {
   test('renders correct content', () => {
     const wrapper = setup(AccountPending, props);
     const component = findByTestAttr(wrapper, 'container-account-pending');
-    const content = component.find('[data-test="account-pending-content"]')
 
-    expect(content.text()).toEqual('onBoarding.accountPending.initialText test-email@getground.co.uk. onBoarding.accountPending.text')
+    const layoutComp = component.find(TextImage);
+    expect(layoutComp.props().text).toEqual('<p>onBoarding.accountPending.initialText test-email@getground.co.uk. onBoarding.accountPending.text</p>');
   });
 
   describe('verifyEmail()', () => {

@@ -36,7 +36,7 @@ validationMessages.validateNumeric = i18n.t('validation.validateNumeric');
  * @return {boolean} whether value is entered
  */
 export const validateRequired = (input) => {
-  return !!input;
+  return !!input && input !== '[undefined] undefined';
 };
 validationMessages.validateRequired = i18n.t('validation.validateRequired');
 
@@ -109,6 +109,11 @@ export const validateMinimum = (value, min) => {
   return value.length >= min;
 };
 
+export const validateNoSpaces = (input) => {
+  return !/[\s]/.test(input);
+};
+validationMessages.validateNoSpaces = i18n.t('validation.validateNoSpaces');
+
 const validation = {
   validateEmail,
   validatePhone,
@@ -119,6 +124,7 @@ const validation = {
   validateLettersOnly,
   validateTotal,
   validateMinimum,
+  validateNoSpaces,
   messages: validationMessages,
 };
 

@@ -14,7 +14,7 @@ import './company-link.scss';
 */
 
 const CompanyLink = props => {
-  const { company: { id, property_address, progress }, setActiveCompany } = props;
+  const { company: { id, property_address, progress }, setActiveCompany, propertyInProgressText } = props;
 
   return (
     <div 
@@ -25,7 +25,11 @@ const CompanyLink = props => {
         progress.overall_status === 'COMPLETE' ? navigate('/dashboard/company') : navigate('/company-design');
       }}
     >
-      {property_address.address.premise} {property_address.address.street}, {property_address.address.postcode}
+    { progress.overall_status === 'COMPLETE' ?
+      `${property_address.address.premise} ${property_address.address.street}, ${property_address.address.postcode}`
+      :
+      propertyInProgressText
+    }
     </div>
   );
 };
@@ -34,9 +38,10 @@ CompanyLink.propTypes = {
   company: PropTypes.shape({
     id: PropTypes.number,
     property_address: PropTypes.object,
-    progress: PropTypes.object
+    progress: PropTypes.object,
   }),
-  setActiveCompany: PropTypes.func
+  setActiveCompany: PropTypes.func,
+  propertyInProgressText: PropTypes.string
 };
 
 export default CompanyLink;

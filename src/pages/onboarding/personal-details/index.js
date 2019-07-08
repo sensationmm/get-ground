@@ -40,12 +40,14 @@ class OnboardingPersonalDetailsContainer extends Component {
   constructor(props) {
     super(props);
 
+    const { premise, previous_names } = this.props.form.values;
+
     this.state = {
       formattedDate: '',
       isAddressValid: true,
-      isManualAddress: this.props.form.values.premise === null,
+      isManualAddress: premise === null,
       isDatepickerOpen: false,
-      showPreviousNames: this.props.form.values.previous_names !== '' &&  this.props.form.values.previous_names !== null,
+      showPreviousNames: previous_names !== '' &&  previous_names !== null &&  previous_names !== undefined,
       isTextAreaHidden: true
     };
 
@@ -215,7 +217,11 @@ class OnboardingPersonalDetailsContainer extends Component {
       isTextAreaHidden
     } = this.state;
 
-    const setCountries = (key) => countryData.map((country, index) => {
+    const setCountries = (key) => countryData
+      .sort((a, b) => {
+        return (a[key] > b[key]) ? 1 : ((b[key] > a[key]) ? -1 : 0); 
+      })
+      .map((country, index) => {
       return (
         <option 
           key={`country-${index}`} 
@@ -233,7 +239,7 @@ class OnboardingPersonalDetailsContainer extends Component {
         component: InputText,
         label: t('onBoarding.personalDetails.form.firstNameLabel'),
         value: values.first_name,
-        validationFunction: 'validateLettersOnly'
+        validationFunction: ['validateRequired', 'validateLettersOnly'],
       },
       {
         stateKey: 'middle_name',
@@ -241,14 +247,14 @@ class OnboardingPersonalDetailsContainer extends Component {
         label: t('onBoarding.personalDetails.form.middleNameLabel'),
         value: values.middle_name,
         note: t('onBoarding.personalDetails.form.middleNameNote'),
-        validationFunction: 'validateLettersOnly'
+        validationFunction: 'validateLettersOnly',
       },
       {
         stateKey: 'last_name',
         component: InputText,
         label: t('onBoarding.personalDetails.form.lastNameLabel'),
         value: values.last_name,
-        validationFunction: 'validateLettersOnly'
+        validationFunction: ['validateRequired', 'validateLettersOnly'],
       },
       {
         stateKey: 'previous_names',
@@ -299,14 +305,14 @@ class OnboardingPersonalDetailsContainer extends Component {
         component: InputText,
         label: t('onBoarding.personalDetails.form.cityOfBirthLabel'),
         value: values.birth_town,
-        validationFunction: 'validateLettersOnly'
+        validationFunction: ['validateRequired', 'validateLettersOnly'],
       },
       {
         stateKey: 'occupation',
         component: InputText,
         label: t('onBoarding.personalDetails.form.jobTitleLabel'),
         value: values.occupation,
-        validationFunction: 'validateRequired',
+        validationFunction: ['validateRequired', 'validateLettersOnly'],
         wrapperClass: 'job-title-wrapper',
         note: t('onBoarding.personalDetails.form.jobTitleNote'),
       },
@@ -385,7 +391,7 @@ class OnboardingPersonalDetailsContainer extends Component {
     return (
       <>
       <Layout secure headerActions={headerActions}>
-        <div className="onboarding-details" data-test="container-onboarding-details" role="account">
+        <div className="onboarding-details" data-test="container-onboarding-details" role="account form-page">
           <h1>{t('onBoarding.personalDetails.heading')}</h1>
 
           <IntroBox>{t('onBoarding.personalDetails.intro')}</IntroBox>

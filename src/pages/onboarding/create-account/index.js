@@ -105,7 +105,7 @@ class CreateAccount extends Component {
     }
 
     ModalService.fetchModalContent(target).then(response => {
-      self.setState({ modalMarkdown: response.data.markdown_text });
+      self.setState({ modalTitle: response.data.title, modalMarkdown: response.data.markdown_text });
 
       hideLoader();
       showModal();
@@ -132,8 +132,8 @@ class CreateAccount extends Component {
         component: InputPassword,
         label: t('onBoarding.createAccount.form.label.password'),
         value: values.password,
-        validationFunction: ['validateRequired','validateMinimum'],
-        validationParam: [null, 6],
+        validationFunction: ['validateRequired','validateNoSpaces','validateMinimum'],
+        validationParam: [null, null, 8],
         note: t('onBoarding.createAccount.form.note.password')
       },
       {
@@ -181,7 +181,7 @@ class CreateAccount extends Component {
 
     return (
       <Layout loggedOutOnly>
-        <div data-test="container-create-account" className="create-account" role="account">
+        <div data-test="container-create-account" className="create-account" role="account form-page">
           <h1>{ t('onBoarding.createAccount.title') }</h1>
 
           <IntroBox>{ t('onBoarding.createAccount.intro') }</IntroBox>

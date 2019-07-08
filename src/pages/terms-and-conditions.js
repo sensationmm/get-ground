@@ -7,7 +7,7 @@ import { withTranslation } from 'react-i18next';
 import Layout from 'src/components/Layout/Layout';
 import Button from 'src/components/_buttons/Button/Button';
 
-import Image from 'src/assets/images/about-us.svg';
+import Image from 'src/assets/images/documents-modal.svg';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
@@ -72,8 +72,12 @@ class TermsConditions extends Component {
 
     return (
       <Layout>
-        <div classNames="modal-full" data-test="container-terms" role="brochure markdown" ref={this.modalHeader}>
-          <img className="hero-image" src={Image} alt="clock" data-test="about-us-img" />
+        <div classNames="modal-full" data-test="container-terms" role="account brochure markdown" ref={this.modalHeader}>
+          <h1>{ t('footer.navigation.link8.title') }</h1>
+          <div className="hero-image"><img src={Image} alt="clock" data-test="about-us-img" /></div>
+
+          {modalMarkdown && <ReactMarkdown escapeHtml={false} source={modalMarkdown} />}
+
           <center>
             <Button
               data-test="download-button"
@@ -82,8 +86,6 @@ class TermsConditions extends Component {
               onClick={this.getBlobForDownload}
             />
           </center>
-
-          {modalMarkdown && <ReactMarkdown escapeHtml={false} source={modalMarkdown} />}
         </div>
       </Layout>
     )

@@ -11,6 +11,7 @@
   top: 0;
   left: 0;
   z-index: 3;
+  overflow: hidden;
 
   &--header {
     display: flex;
@@ -29,9 +30,12 @@
   }
 
   &--content {
-    margin: 30px;
-    text-align: center;
+    padding: 0 30px 50px 30px;
+    max-width: $max-width;
+    margin: 30px auto;
+    text-align: left;
     overflow: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   &--title {

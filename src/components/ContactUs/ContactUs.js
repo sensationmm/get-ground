@@ -38,7 +38,7 @@ const ContactUs = () => {
           <p data-test="phone-title">{t('contactUs.phone')}</p>
         </div>
         <div className="contact-us-divider" data-test="contact-divider"></div>
-        <Button classes="contact-us-livechat" data-test="livechat-button" liveChat label={t('liveChat.button')} onClick={() => openChat()} />
+        <Button classes="chat" data-test="livechat-button" label={t('liveChat.button')} onClick={() => openChat()} />
       </div>
     </div>
   )

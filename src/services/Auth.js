@@ -6,6 +6,8 @@ import { saveAuth } from 'src/state/actions/auth';
 
 import accountService from 'src/services/Account';
 export const AccountService = new accountService();
+import companyService from 'src/services/Company';
+export const CompanyService = new companyService();
 
 /**
  * AuthService
@@ -45,6 +47,7 @@ class AuthService extends BaseService {
 
       setTimeout(function() { // jwt delayed 1 sec for bots
         AccountService.getDocuments();
+        CompanyService.getCompanies();
       }, 750);
     });
   };
@@ -83,6 +86,7 @@ class AuthService extends BaseService {
       store.dispatch(saveAuth(response.data.token));
 
       AccountService.getDocuments();
+      CompanyService.getCompanies();
     });
   };
 
@@ -95,7 +99,7 @@ class AuthService extends BaseService {
    */
   setNewPassword = (password, token) => {
     const config = {
-      url: 'auth/new_password',
+      url: 'reset_password',
       method: 'post',
       data: {
         'password': password,

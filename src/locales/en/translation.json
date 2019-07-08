@@ -138,7 +138,7 @@
     "modalHeading": "We'll be in touch",
     "modalPara1": "We’ll contact you shortly regarding the items you selected.",
     "modalPara2": "Our office is open from 9am to 6pm London time, Monday to Friday, and we usually respond within the hour.",
-    "modalPara3": "However, out of working hours it might take us longer to get back to you, but we’ll always do so as soon as possible, please bare with us.",
+    "modalPara3": "However, out of working hours it might take us longer to get back to you, but we’ll always do so as soon as possible, please bear with us.",
     "modalContentButton": "Dismiss"
   },
   "advantages": {
@@ -432,9 +432,10 @@
       "portfolioHeader": "My Portfolio",
       "profileLink": "My Profile",
       "todoHeader": "To do",
-      "addCompanyButton": "Add property",
-      "noProperties": "Your first property will show here",
-      "noActions": "You currently don't have anything in your to do list"
+      "addCompanyButton": "Add company",
+      "noProperties": "Your first company will show here",
+      "noActions": "You currently don't have anything in your to do list",
+      "propertyInProgressText": "Your company setup is currently in progress"
     }
   },
   "footer": {
@@ -579,6 +580,7 @@
   "meetTheFounders": {
     "title": "Meet the founders",
     "cta": "Read more",
+    "cta2": "Read less",
     "moubin": {
       "name": "Moubin",
       "content": {
@@ -590,7 +592,7 @@
       "name": "Misrab",
       "content": {
         "first": "Misrab is a computer scientist. He set up the data science team and Singapore office at Go-Jek, Indonesia’s first technology ‘unicorn’.",
-        "second": "There he was involved in numerous key transaction in the retail, consumer and IT services sectors. Previously Moubin was at McKinsey & Company and is trained as a medical doctor at Imperial College where he graduated with distinctions.",
+        "second": "Previously he taught data science at General Assembly, auction dynamics at Trip Advisor, and has been heavily involved in cryptographic theory and distributed ledger technology. ",
         "third": "Misrab is a Stanford University graduate with Bachelor’s and Master’s degrees focused around computer science, economics and mathematics."
       }
     },
@@ -620,7 +622,7 @@
   },
   "myDocuments": {
     "title": "My Documents",
-    "intro": "Please read and sign all your company documents below. Your shareholders have also been notified that they to sign the relevant documents.",
+    "intro": "Please read and sign all your company documents below. Your shareholders have also been notified that they need to sign the relevant documents.",
     "downloadButtonText": "Download Documents",
     "modalHeading": "Shareholders agreement",
     "modalSignatureLabel": "Your signature",
@@ -778,7 +780,7 @@
         },
         "note": {
           "email": "This will be your username",
-          "password": "Minimum six characters"
+          "password": "Minimum eight characters"
         },
         "errors": {
           "duplicateEmail": "Email address already exists"
@@ -1070,7 +1072,8 @@
     "validateNoOfCompanies": "No more than 20",
     "validateLettersOnly": "Invalid characters",
     "validateTotal": "Max {{max}}",
-    "validateMinimum": "Invalid password"
+    "validateMinimum": "Invalid password",
+    "validateNoSpaces": "No spaces"
   },
   "whatWeDo": {
     "title": "What we do",

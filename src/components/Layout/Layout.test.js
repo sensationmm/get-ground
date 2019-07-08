@@ -72,7 +72,7 @@ describe('<Layout />', () => {
   test('loggedOutOnly', () => {
     setup(Layout, { ...props, userID:1, loggedOutOnly: true });
 
-    expect(navigate).toHaveBeenCalledWith('/dashboard');
+    expect(navigate).toHaveBeenCalledWith('/onboarding');
   });
 
   test('toggleMenu opens the menu', () => {

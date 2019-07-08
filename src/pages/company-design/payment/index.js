@@ -155,7 +155,7 @@ export class Payment extends Component {
 
     return (      
       <Layout headerActions={headerActions} secure>
-        <div data-test="container-payment" className="payment" role="account">
+        <div data-test="container-payment" className="payment" role="account form-page">
           <h1>{ t('onBoarding.payment.title') }</h1>
 
           {showErrorMessage &&
@@ -182,7 +182,7 @@ export class Payment extends Component {
           <p>{t('onBoarding.payment.content.second')}</p>
           <br />
 
-          <h2>{ t('onBoarding.payment.title') }</h2>
+          <h2>{ t('onBoarding.payment.subtitle') }</h2>
 
           <StripeProvider stripe={this.state.stripe}>
             <Elements>

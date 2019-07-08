@@ -192,7 +192,7 @@ class ComplianceCheck extends Component {
 
     return (
       <Layout headerActions={headerActions} secure>
-        <div data-test="container-compliance-check" className="compliance-check" role="account">
+        <div data-test="container-compliance-check" className="compliance-check" role="account form-page">
           <h1>{ t('onBoarding.compliance.header') }</h1>
           <p>{ t('onBoarding.compliance.text') }</p>
 

@@ -70,6 +70,7 @@
 
     .hero-image.expanded {
       right: 17px;
+      width: 30%;
     }
 
     &-subTitle:not(.expanded) {
@@ -78,6 +79,10 @@
 
     &.read-more {
       text-align: left;
+
+      .trustAndPrivacy-subTitle {
+        text-align: left !important;
+      }
     }
   }
 }

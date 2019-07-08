@@ -5,6 +5,7 @@ import { Link, navigate } from 'gatsby';
 import { useTranslation } from 'react-i18next';
 
 import Button from 'src/components/_buttons/Button/Button';
+import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 
 import Logo from 'src/assets/images/logo-white.svg';
 import './header.scss';
@@ -19,7 +20,7 @@ import './header.scss';
  */
 
 const Header = (props) => {
-  const { menuIsOpen, children, isLoading, userID, onClick, childrenDisabled, isMobile, menuLinks } = props;
+  const { menuIsOpen, children, isLoading, userID, onClick, childrenDisabled, isMobile, menuLinks, showDashboardButton } = props;
   const [t] = useTranslation();
 
   return (
@@ -38,10 +39,8 @@ const Header = (props) => {
             </Link>
           </div>
           <div className="header-buttons">
-            {userID && !children &&
-              <div data-test="dashboard" className="header-dashboard" onClick={() => navigate('/dashboard')}>
-                <p>{t('header.dashboard')}</p>
-              </div>
+            {userID && !children && showDashboardButton &&
+              <ButtonHeader data-test="dashboard" label={t('header.dashboard')} onClick={() => navigate('/dashboard')} />
             }
 
             {children
@@ -68,7 +67,7 @@ const Header = (props) => {
         <div className='header--logged-out'>
           <div className="header-inner-wrapper">
             <div className="header-inner">
-                <Link to="/onboarding/create-account/">
+                <Link to="/onboarding/intro">
                   <Button
                     classes="tertiary small"
                     label={t('header.buttons.register')}
@@ -97,7 +96,8 @@ Header.propTypes = {
   onClick: PropTypes.func,
   childrenDisabled: PropTypes.bool,
   isMobile: PropTypes.bool,
-  menuLinks: PropTypes.object
+  menuLinks: PropTypes.object,
+  showDashboardButton: PropTypes.bool
 }
 
 export default Header;

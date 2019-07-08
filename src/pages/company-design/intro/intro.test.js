@@ -3,6 +3,8 @@ import { setup, findByTestAttr } from 'src/test-utils/test-utils';
 import { RawComponent as CompanyDesignIntroContainer } from './index';
 import { navigate } from 'gatsby';
 
+import TextImage from 'src/components/_layout/TextImage/TextImage';
+
 jest.mock('gatsby', () => ({
   navigate: jest.fn()
 }));
@@ -33,20 +35,20 @@ describe('<CompanyDesignIntroContainer />', () => {
   });
 
   test('fire handleCreateCompany on button click with props `/company-design/add-services`, true', () => {
-    const button = findByTestAttr(wrapper, 'add-services-button');
+    const component = wrapper.find(TextImage);
 
     jest.spyOn(wrapper.instance(), 'handleCreateCompany');
+    component.props().buttonAction();
 
-    button.props().onClick()
     expect(wrapper.instance().handleCreateCompany).toHaveBeenCalledWith('/company-design/add-services', true);
   });
 
   test('fire handleCreateCompany on button click with props `/company-design`, false', () => {
-    const button = findByTestAttr(wrapper, 'skip-services-button');
+    const component = wrapper.find(TextImage);
 
     jest.spyOn(wrapper.instance(), 'handleCreateCompany');
+    component.props().buttonSecondaryAction();
 
-    button.props().onClick()
     expect(wrapper.instance().handleCreateCompany).toHaveBeenCalledWith('/company-design', false);
   });
 

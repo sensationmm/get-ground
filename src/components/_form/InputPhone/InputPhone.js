@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import Note from '../../_layout/Note/Note';
 
-import './input-phone.css';
+import './input-phone.scss';
 
 /**
  * InputPhone
@@ -20,12 +20,12 @@ import './input-phone.css';
  * @return {JSXElement} InputPhone
  */
 const InputPhone = (props) => {
-  const { 
-    id, 
-    label, 
-    onChange, 
-    value, 
-    validate, 
+  const {
+    id,
+    label,
+    onChange,
+    value,
+    validate,
     readOnly,
     note,
     error,
@@ -65,7 +65,7 @@ const InputPhone = (props) => {
 
         <input
           data-test="phone-number"
-          type="text"
+          type="number"
           id={id}
           onBlur={onBlur}
           onChange={(e) => onChange(`(${country})${e.target.value}`)}
