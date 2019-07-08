@@ -220,8 +220,6 @@ class PurchaseDetails extends Component {
   saveAndExit = async (payload, errors) => {
     const { hideLoader, company } = this.props;
 
-    formUtils.validateForm(this.config);
-
     await Object.keys(errors).forEach(async (key) => {
       await formUtils.updateValue(key, '');
     });

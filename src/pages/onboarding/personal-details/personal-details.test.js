@@ -236,7 +236,6 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
       AccountService.savePersonalDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
       await wrapperPartial.instance().saveAndExit();
       
-      expect(formUtils.validateForm).toHaveBeenCalledTimes(1);
       expect(formUtils.updateValue).toHaveBeenCalledTimes(1);
       expect(formUtils.updateValue).toHaveBeenCalledWith('middle_name', '');
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
@@ -249,7 +248,6 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
       AccountService.savePersonalDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 404 }));
       await wrapperPartial.instance().saveAndExit();
       
-      expect(formUtils.validateForm).toHaveBeenCalledTimes(1);
       expect(formUtils.updateValue).toHaveBeenCalledTimes(1);
       expect(formUtils.updateValue).toHaveBeenCalledWith('middle_name', '');
       expect(showLoaderMock).toHaveBeenCalledTimes(1);

@@ -67,8 +67,9 @@ export class Layout extends Component {
       if(auth && authed) {
         this.props.saveAuth(auth.token);
         AuthService.reauthenticate().then((resp) => {
-          if(resp.status === 401) {
+          if(resp.status === 401 || resp.status === 404) {
             deleteUser();
+            localStorage.removeItem('gg-auth');
             navigate('/login');
           }
           hideLoader();
@@ -133,7 +134,18 @@ export class Layout extends Component {
 
   render() {
     this.loggedOutOnly();
-    const { children, headerActions, isLoading, userID, t, menuIsOpen, isLoggedIn, idCheckActive, isMobile, last_page_visited } = this.props;
+    const {
+      children,
+      headerActions,
+      isLoading,
+      userID,
+      t,
+      menuIsOpen,
+      isLoggedIn,
+      idCheckActive,
+      isMobile,
+      last_page_visited 
+    } = this.props;
     const { isLoggingOut } = this.state;
 
     const menuLinks = [
@@ -211,13 +223,13 @@ export class Layout extends Component {
           isMobile={isMobile}
           menuLinks={<Menu menuLinks={menuLinks.filter(link => !link.hideDesktop)} />}
           showDashboardButton={last_page_visited === 'dashboard'}
+          showOnboardingButton={last_page_visited !== 'dashboard'}
         >
           {headerActions}
         </Header>
 
         <div className={classNames('app', { 'extra-top-padding': !userID })}>
           <main className="main">{children}</main>
-
 
           {inArray('hasCurve', roles) && <CanvasCurve />}
         </div>

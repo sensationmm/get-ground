@@ -38,14 +38,6 @@ export class ProcessTracker extends Component {
     this.getProgress();
   }
 
-  componentDidUpdate(prevProps) {
-    const { isLoading } = this.props;
-
-    if(!isLoading && isLoading !== prevProps.isLoading) {
-      this.getProgress();
-    }
-  }
-
   getProgress = () => {
     const { userID, showLoader, hideLoader } = this.props;
 
