@@ -64,7 +64,7 @@ export class AdditionalServices extends Component {
     CompanyService.updateCompany(values, 'additional_services', company.id).then((response) => {
       hideLoader();
       if (response.status === 200) {
-        navigate('/company-design');
+        navigate('/company-design/property-address');
       }
     });
   }

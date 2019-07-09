@@ -36,7 +36,7 @@ validationMessages.validateNumeric = i18n.t('validation.validateNumeric');
  * @return {boolean} whether value is entered
  */
 export const validateRequired = (input) => {
-  return !!input && input !== '[undefined] undefined';
+  return !!input && input !== '[undefined] undefined' && input !== '[null] null';
 };
 validationMessages.validateRequired = i18n.t('validation.validateRequired');
 
