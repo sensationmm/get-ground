@@ -39,8 +39,7 @@
 
   &-section {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
     height: 110px;
     border-bottom: 2px solid $border-offset;
@@ -77,6 +76,7 @@
     .table-section-copy {
       font-size: 11px;
       margin: 0;
+      margin-left: 10px;
     }
   }
 }
