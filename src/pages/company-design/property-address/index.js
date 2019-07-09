@@ -69,9 +69,15 @@ class PropertyAddress extends Component {
         if(window.addressNow.controls[0]){
 
           window.addressNow.controls[0].listen('populate', (address) => {
+            let premise = address.BuildingNumber ? address.BuildingNumber : address.BuildingName;
+
+            if(address.SubBuilding) {
+              premise = [address.SubBuilding, address.BuildingName, address.BuildingNumber].join(', ')
+            }
+
             formUtils.updateValue('street', address.Street);
             formUtils.updateValue('posttown', address.City);
-            formUtils.updateValue('premise', address.BuildingNumber);
+            formUtils.updateValue('premise', premise);
             formUtils.updateValue('postcode', address.PostalCode);
 
             this.setState(() => ({

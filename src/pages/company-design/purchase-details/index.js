@@ -355,7 +355,6 @@ class PurchaseDetails extends Component {
         label: t('companyDesign.purchaseDetails.form.depositAmountLabel'),
         value: depositAmount,
         validationFunction: 'validateRequired',
-        wrapperClass: 'background-gradient',
         hidden: this.checkElementHidden()
       },
       {
@@ -375,7 +374,6 @@ class PurchaseDetails extends Component {
         label: t('companyDesign.purchaseDetails.form.firstInstallmentLabel'),
         value: firstInstallmentAmount,
         validationFunction: 'validateRequired',
-        wrapperClass: 'background-gradient',
         hidden: this.checkElementHidden()
       },
       // {
@@ -396,7 +394,7 @@ class PurchaseDetails extends Component {
       //   component: InputNumber,
       //   label: t('companyDesign.purchaseDetails.form.secondInstallmentLabel'),
       //   value: secondInstallmentAmount,
-      //   wrapperClass: 'background-gradient installment-amount',
+      //   wrapperClass: 'installment-amount',
       //   hidden: this.checkElementHidden() ||
       //           (is_new_build === true && payment_schedule === null) ||
       //           (is_new_build === true && payment_schedule && payment_schedule[2].due_date === '')
