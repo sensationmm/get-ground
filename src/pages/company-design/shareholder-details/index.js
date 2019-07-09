@@ -198,7 +198,7 @@ class ShareholderDetails extends Component {
     const { showLoader, hideLoader, company, user } = this.props;
     showLoader();
     const creator = [{
-      allocated_shares: (100 - this.state.totalShares).toString(),
+      allocated_shares: '100',
       email: user.email,
       first_name: user.first_name,
       is_director: this.state.owner_is_director,
