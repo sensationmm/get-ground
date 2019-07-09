@@ -18,11 +18,13 @@ describe('Shareholder details page', () => {
         values: [
           {
             first_name: 'first-name',
-            last_name: 'last-name'
+            last_name: 'last-name',
+            email: 'first-name1@email.co.uk'
           },
           {
             first_name: 'first-name',
-            last_name: 'last-name'
+            last_name: 'last-name',
+            email: 'first-name2@email.co.uk'
           }
         ],
         errors: {},
@@ -30,7 +32,8 @@ describe('Shareholder details page', () => {
       },
       user: {
         first_name: 'first-name-test',
-        last_name: 'last-name-test'
+        last_name: 'last-name-test',
+        email: 'creator@email.co.uk'
       },
       company: {
         shareholder_details: {

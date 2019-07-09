@@ -71,7 +71,7 @@ class ShareholderDetails extends Component {
   componentDidMount() {
     const { company: { shareholder_details }, user} = this.props;
     let shareholders = shareholder_details.collection === null ? [{...shareholder}] : shareholder_details.collection;
-    shareholders = shareholders.filter(p => p.first_name !== user.first_name && p.last_name !== user.last_name)
+    shareholders = shareholders.filter(p => p.email !== user.email)
 
     const populatedShareholders = shareholders.length;
     for (let i = shareholders.length; i < 8; i++) {
@@ -530,7 +530,7 @@ const sliceForm = (form, user) => {
   return {
     errors: form.errors,
     showErrorMessage: form.showErrorMessage,
-    values: Array.isArray(form.values) ? form.values.filter(p => p.first_name !== user.first_name && p.last_name !== user.last_name ) : form.values
+    values: Array.isArray(form.values) ? form.values.filter(p => p.email !== user.email ) : form.values
   }
 }
 
