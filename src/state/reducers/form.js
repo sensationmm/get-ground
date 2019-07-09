@@ -34,7 +34,7 @@ export const form = (state = initialState, action) => {
         ...state,
         values: newValues
       };
-    
+
     case SET_ERRORS:
       return {
         ...state,
@@ -51,10 +51,10 @@ export const form = (state = initialState, action) => {
         },
         showErrorMessage: true
       }
-    
+
     case CLEAR_FORM:
       return initialState;
-      
+
     default:
       return state;
   }

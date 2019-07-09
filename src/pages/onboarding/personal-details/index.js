@@ -45,7 +45,7 @@ class OnboardingPersonalDetailsContainer extends Component {
     this.state = {
       formattedDate: '',
       isAddressValid: true,
-      isManualAddress: premise === null,
+      isManualAddress: typeof premise === 'string',
       isDatepickerOpen: false,
       showPreviousNames: previous_names !== '' &&  previous_names !== null &&  previous_names !== undefined,
       isTextAreaHidden: true
@@ -80,9 +80,15 @@ class OnboardingPersonalDetailsContainer extends Component {
         if(window.addressNow.controls[0]){
 
           window.addressNow.controls[0].listen('populate', (address) => {
+            let premise = address.BuildingNumber ? address.BuildingNumber : address.BuildingName;
+
+            if(address.SubBuilding) {
+              premise = [address.SubBuilding, address.BuildingName, address.BuildingNumber].join(', ')
+            }
+
             formUtils.updateValue('street', address.Street);
             formUtils.updateValue('posttown', address.City);
-            formUtils.updateValue('premise', address.BuildingNumber);
+            formUtils.updateValue('premise', premise);
             formUtils.updateValue('postcode', address.PostalCode);
     
             this.setState(() => ({
@@ -101,6 +107,14 @@ class OnboardingPersonalDetailsContainer extends Component {
     script.src = addressNow
     script.async = true;
     document.body.appendChild(script);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.isManualAddress !== (typeof this.props.form.values.premise === 'string')) {
+      this.setState({
+        isManualAddress: typeof this.props.form.values.premise === 'string'
+      })
+    }
   }
 
   componentWillUnmount() {
@@ -144,8 +158,6 @@ class OnboardingPersonalDetailsContainer extends Component {
     const { showLoader, hideLoader, userID, form } = this.props;
     const { values, errors } = form;
     const { formattedDate } = this.state;
-
-    formUtils.validateForm(this.config);
 
     await Object.keys(errors).forEach(async (key) => {
       await formUtils.updateValue(key, '');
