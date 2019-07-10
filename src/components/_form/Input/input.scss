@@ -60,12 +60,6 @@
       border-color: $warning !important;
     }
 
-    &:read-only {
-      border: $disabled;
-      background: $disabled;
-      box-shadow: none;
-    }
-
     &#datepicker-field {
       background: none;
       border: 1px solid $border;
