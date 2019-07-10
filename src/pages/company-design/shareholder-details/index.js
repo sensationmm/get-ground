@@ -334,7 +334,7 @@ class ShareholderDetails extends Component {
 
     const payload = {
       collection: creator.concat(shareholders),
-      is_complete: isSaveAndExit
+      is_complete: !isSaveAndExit
     }
 
     showLoader();
