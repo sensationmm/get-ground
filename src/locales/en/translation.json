@@ -231,7 +231,7 @@
     },
     "progressTracker": {
       "inProgressTitle": "Design your company in {{count}} steps",
-      "complete": "complete",
+      "complete": "Completed",
       "completeTitle": "All 5 steps complete",
       "sections": {
         "step1": {
@@ -1019,7 +1019,7 @@
   },
   "progressTracker": {
     "labels": {
-      "complete": "Complete",
+      "complete": "Completed",
       "todo": "To do",
       "inProgress": "Incomplete",
       "signed": "Signed",
