@@ -6,7 +6,6 @@ import { RawComponent as PersonalDetails, AccountService } from './index';
 import Select from 'src/components/_form/Select/Select';
 import Button from 'src/components/_buttons/Button/Button';
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
-import Datepicker from 'src/components/Datepicker/Datepicker';
 import { initialState as ReduxFormMock } from 'src/state/reducers/form';
 
 jest.mock('gatsby', () => ({
@@ -96,44 +95,44 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
     expect(wrapper.state().showPreviousNames).toEqual(true);
   });
 
-  test('expect closeDatePicker to be called when the Datepicker is closed', () => {
-    const wrapper = setup(PersonalDetails, {
-      ...defaultProps,
-      form: {
-      ...defaultProps.form,
-      showErrorMessage: true
-      }
-    });
+  // test('expect closeDatePicker to be called when the Datepicker is closed', () => {
+  //   const wrapper = setup(PersonalDetails, {
+  //     ...defaultProps,
+  //     form: {
+  //     ...defaultProps.form,
+  //     showErrorMessage: true
+  //     }
+  //   });
 
-    const component = findByTestAttr(wrapper, 'container-onboarding-details');
+  //   const component = findByTestAttr(wrapper, 'container-onboarding-details');
 
-    jest.spyOn(wrapper.instance(), 'closeDatePicker');
+  //   jest.spyOn(wrapper.instance(), 'closeDatePicker');
 
-    component.find(Datepicker).props().closeDatepicker();
+  //   component.find(Datepicker).props().closeDatepicker();
 
-    expect(wrapper.instance().closeDatePicker).toHaveBeenCalled();
-    expect(wrapper.state().isDatepickerOpen).toEqual(false);
-  });
+  //   expect(wrapper.instance().closeDatePicker).toHaveBeenCalled();
+  //   expect(wrapper.state().isDatepickerOpen).toEqual(false);
+  // });
 
-  test('expect setDateofBirth to called when a date is selected in the Datepicker', () => {
-    const component = findByTestAttr(wrapper, 'container-onboarding-details');
+  // test('expect setDateofBirth to called when a date is selected in the Datepicker', () => {
+  //   const component = findByTestAttr(wrapper, 'container-onboarding-details');
 
-    jest.spyOn(wrapper.instance(), 'setDateOfBirth');
+  //   jest.spyOn(wrapper.instance(), 'setDateOfBirth');
 
-    component.find(Datepicker).props().setDateFieldValue();
+  //   component.find(Datepicker).props().setDateFieldValue();
 
-    expect(wrapper.instance().setDateOfBirth).toHaveBeenCalled();
-  });
+  //   expect(wrapper.instance().setDateOfBirth).toHaveBeenCalled();
+  // });
 
-  test('expect openDatePicker to be called when the Datepicker is opened', () => {
-    const component = findByTestAttr(wrapper, 'container-onboarding-details');
+  // test('expect openDatePicker to be called when the Datepicker is opened', () => {
+  //   const component = findByTestAttr(wrapper, 'container-onboarding-details');
 
-    jest.spyOn(wrapper.instance(), 'openDatePicker');
+  //   jest.spyOn(wrapper.instance(), 'openDatePicker');
 
-    component.find('#datepicker-field').props().onFocus();
+  //   component.find('#datepicker-field').props().onFocus();
 
-    expect(wrapper.state().isDatepickerOpen).toEqual(true);
-  });
+  //   expect(wrapper.state().isDatepickerOpen).toEqual(true);
+  // });
 
   describe('initFormValidation()', () => {
     let spy;

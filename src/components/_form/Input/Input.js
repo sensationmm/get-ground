@@ -44,7 +44,8 @@ const Input = (props) => {
     min,
     max,
     hidden,
-    wrapperClass
+    wrapperClass,
+    placeholder
   } = props;
 
   return (
@@ -71,6 +72,7 @@ const Input = (props) => {
           /* istanbul ignore else */
           if (onFocus) onFocus(e);
         }}
+        placeholder={placeholder}
         onBlur={(e) => {
           if (readOnly) return;
           validate ? validate() : null
