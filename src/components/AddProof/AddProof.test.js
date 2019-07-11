@@ -267,6 +267,6 @@ describe('<AddProof />', () => {
 
     wrapper = shallow(<AddProof {...customProps} />);
 
-    expect(wrapper.find('.add-proof-upload-file').length).toEqual(0)
+    expect(wrapper.find('.add-proof-upload-file').length).toEqual(1)
   })
 })
