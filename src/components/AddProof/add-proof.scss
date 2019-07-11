@@ -107,12 +107,20 @@
     margin-bottom: 20px;
   }
 
-  button.upload-file-button.link {
+  button.upload-file-button.link, .add-proof-upload-file {
     font-size: 12px;
-    margin: 12px auto;
+    margin: 0 0 10px 0;
     font-weight: 600;
-    line-height: 2.5;
     letter-spacing: 0.8px;
+    text-align: left;
+    cursor: pointer;
+    color: $primary;
+    text-decoration: underline;
+    font-size: 14px;
+    color: $primary;
+    text-decoration: underline;
+    padding: 0;
+    background: transparent;
   }
 
   .dropzone {
@@ -130,6 +138,15 @@
     align-items: flex-start;
     justify-content: center;
     overflow: hidden;
+
+    &-overlay {
+      max-width: 50%;
+      max-height: 50%;
+
+      &.selfie {
+        max-height: 60%;
+      }
+    }
 
     &-initial {
       width: 398px !important;
@@ -177,6 +194,7 @@
     }
 
     &-upload-file {
+
       .button.upload-file-button.link {
         padding: 0;
         margin: 0;
