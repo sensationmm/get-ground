@@ -172,7 +172,7 @@ class PurchaseDetails extends Component {
     const paymentSchedule = [
       {
         type: 'deposit',
-        due_date: moment(values.depositDueDate, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00'),
+        due_date: values.depositDueDate ? moment(values.depositDueDate, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00') : null,
         amount: {
           amount_in_cents: values.depositAmount,
           currency: 'GBP'
@@ -180,7 +180,7 @@ class PurchaseDetails extends Component {
       },
       {
         type: 'first_installment',
-        due_date: moment(values.firstInstallmentDate, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00'),
+        due_date: values.firstInstallmentDate ? moment(values.firstInstallmentDate, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00') : null,
         amount: {
           amount_in_cents: values.firstInstallmentAmount,
           currency:'GBP'
