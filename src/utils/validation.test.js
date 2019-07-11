@@ -184,3 +184,25 @@ describe('validateNoSpaces', () => {
     expect(isValid).toBe(false);
   });
 });
+
+describe('validateDate', () => {
+  test('returns true for valid format', () => {
+    const isValid = validation.validateDate('01/01/2020');
+    expect(isValid).toBe(true);
+  });
+
+  test('returns false for non valid format', () => {
+    const isValid = validation.validateDate('01-01-2020');
+    expect(isValid).toBe(false);
+  });
+
+  test('returns false for US order', () => {
+    const isValid = validation.validateDate('01/20/2020');
+    expect(isValid).toBe(false);
+  });
+
+  test('returns false if char', () => {
+    const isValid = validation.validateDate('0a/20/2020');
+    expect(isValid).toBe(false);
+  });
+});

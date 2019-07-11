@@ -52,8 +52,8 @@ class PurchaseDetails extends Component {
     const reduxFields = {
       amount_in_cents: purchase_details.price.amount_in_cents,
       is_new_build: purchase_details.is_new_build,
-      expected_exchange_date: exchangeDate === null ? '' : moment(exchangeDate).format('Do MMMM YYYY'),
-      completion_date: completionDate === null ? '' : moment(completionDate).format('Do MMMM YYYY'),
+      expected_exchange_date: exchangeDate === null ? '' : moment(exchangeDate).format('DD/MM/YYYY'),
+      completion_date: completionDate === null ? '' : moment(completionDate).format('DD/MM/YYYY'),
       depositDueDate: this.setReduxDateValues(payment, 0),
       depositAmount: payment === null ? '' : payment[0].amount.amount_in_cents,
       firstInstallmentDate: this.setReduxDateValues(payment, 1),
@@ -91,7 +91,7 @@ class PurchaseDetails extends Component {
       (payment && payment[index].due_date === undefined)) {
       return '';
     } else {
-      return moment(payment[index].due_date).format('Do MMMM YYYY');
+      return moment(payment[index].due_date).format('DD/MM/YYYY');
     }
   }
 
@@ -172,7 +172,7 @@ class PurchaseDetails extends Component {
     const paymentSchedule = [
       {
         type: 'deposit',
-        due_date: moment(values.depositDueDate, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00'),
+        due_date: values.depositDueDate ? moment(values.depositDueDate, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00') : null,
         amount: {
           amount_in_cents: values.depositAmount,
           currency: 'GBP'
@@ -180,7 +180,7 @@ class PurchaseDetails extends Component {
       },
       {
         type: 'first_installment',
-        due_date: moment(values.firstInstallmentDate, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00'),
+        due_date: values.firstInstallmentDate ? moment(values.firstInstallmentDate, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00') : null,
         amount: {
           amount_in_cents: values.firstInstallmentAmount,
           currency:'GBP'
@@ -311,8 +311,8 @@ class PurchaseDetails extends Component {
         component: InputText,
         label: t('companyDesign.purchaseDetails.form.expectedExchangeDateLabel'),
         value: expected_exchange_date,
-        validationFunction: 'validateRequired',
         placeholder: 'DD/MM/YYYY',
+        validationFunction: ['validateRequired', 'validateDate'],
         // onFocus: this.openDatePicker,
         id: 'exchangeDate',
         hidden: is_new_build == null,
@@ -323,7 +323,7 @@ class PurchaseDetails extends Component {
         component: InputText,
         label: t('companyDesign.purchaseDetails.form.completionDateLabel'),
         value: completion_date,
-        validationFunction: 'validateRequired',
+        validationFunction: ['validateRequired', 'validateDate'],
         placeholder: 'DD/MM/YYYY',
         // onFocus: this.openDatePicker,
         id: 'completionDate',
@@ -340,7 +340,7 @@ class PurchaseDetails extends Component {
         component: InputText,
         label: t('companyDesign.purchaseDetails.form.depositDueLabel'),
         value: depositDueDate,
-        validationFunction: 'validateRequired',
+        validationFunction: ['validateRequired', 'validateDate'],
         placeholder: 'DD/MM/YYYY',
         // onFocus: this.openDatePicker,
         id: 'depositDueDate',
@@ -360,7 +360,7 @@ class PurchaseDetails extends Component {
         component: InputText,
         label: t('companyDesign.purchaseDetails.form.firstInstallmentDateLabel'),
         value: firstInstallmentDate,
-        validationFunction: 'validateRequired',
+        validationFunction: ['validateRequired', 'validateDate'],
         placeholder: 'DD/MM/YYYY',
         // onFocus: this.openDatePicker,
         id: 'firstInstallmentDate',
