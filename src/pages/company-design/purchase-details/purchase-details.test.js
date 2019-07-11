@@ -6,7 +6,6 @@ import { navigate } from 'gatsby';
 
 import { RawComponent as PurchaseDetails, CompanyService } from './index';
 // import Button from 'src/components/_buttons/Button/Button';
-import Datepicker from 'src/components/Datepicker/Datepicker';
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import { initialState as ReduxFormMock } from 'src/state/reducers/form';
 
@@ -20,11 +19,11 @@ describe('purchase details', () => {
   const showLoaderMock = jest.fn();
   const hideLoaderMock = jest.fn();
   CompanyService.updateCompany = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
-  const mockEvent = {
-    target: {
-      id: 'completionDate'
-    }
-  };
+  // const mockEvent = {
+  //   target: {
+  //     id: 'completionDate'
+  //   }
+  // };
   const tMock = jest.fn().mockReturnValue('string');
   const defaultProps = {
     t: tMock,
@@ -170,37 +169,37 @@ describe('purchase details', () => {
     //   expect(wrapper.instance().showNextInstallment).toHaveBeenCalled();
     // });
 
-    test('expect closeDatePicker to be called when the Datepicker is closed', () => {
-      const component = findByTestAttr(wrapper, 'container-company-design-purchase-details');
+  //   test('expect closeDatePicker to be called when the Datepicker is closed', () => {
+  //     const component = findByTestAttr(wrapper, 'container-company-design-purchase-details');
 
-      jest.spyOn(wrapper.instance(), 'closeDatePicker');
+  //     jest.spyOn(wrapper.instance(), 'closeDatePicker');
 
-      component.find(Datepicker).props().closeDatepicker();
+  //     component.find(Datepicker).props().closeDatepicker();
 
-      expect(wrapper.instance().closeDatePicker).toHaveBeenCalled();
-      expect(wrapper.state().isDatepickerOpen).toEqual(false);
-    });
+  //     expect(wrapper.instance().closeDatePicker).toHaveBeenCalled();
+  //     expect(wrapper.state().isDatepickerOpen).toEqual(false);
+  //   });
 
-    test('expect openDatePicker to be called when the Datepicker is opened', () => {
-      const component = findByTestAttr(wrapper, 'container-company-design-purchase-details');
+  //   test('expect openDatePicker to be called when the Datepicker is opened', () => {
+  //     const component = findByTestAttr(wrapper, 'container-company-design-purchase-details');
 
-      jest.spyOn(wrapper.instance(), 'openDatePicker');
+  //     jest.spyOn(wrapper.instance(), 'openDatePicker');
 
-      component.find('#depositDueDate').props().onFocus(mockEvent);
+  //     component.find('#depositDueDate').props().onFocus(mockEvent);
 
-      expect(wrapper.state().isDatepickerOpen).toEqual(true);
-    });
+  //     expect(wrapper.state().isDatepickerOpen).toEqual(true);
+  //   });
   });
 
-  test('expect setDateFieldValue to called when a date is selected in the Datepicker', () => {
-    const component = findByTestAttr(wrapper, 'container-company-design-purchase-details');
+  // test('expect setDateFieldValue to called when a date is selected in the Datepicker', () => {
+  //   const component = findByTestAttr(wrapper, 'container-company-design-purchase-details');
 
-    jest.spyOn(wrapper.instance(), 'setDateFieldValue');
+  //   jest.spyOn(wrapper.instance(), 'setDateFieldValue');
 
-    component.find(Datepicker).props().setDateFieldValue();
+  //   component.find(Datepicker).props().setDateFieldValue();
 
-    expect(wrapper.instance().setDateFieldValue).toHaveBeenCalled();
-  });
+  //   expect(wrapper.instance().setDateFieldValue).toHaveBeenCalled();
+  // });
 
   test(`expect navigate to go to /company-design/shareholder-details when solicitor 
     has been selected on additional services (when skip button is clicked)`, () => {

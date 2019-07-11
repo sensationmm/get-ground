@@ -394,7 +394,7 @@
         "title": "My bank account",
         "sortCode": "Sort Code",
         "accountNumber": "Account Number",
-        "accountName": "Account Number",
+        "accountName": "Account Name",
         "address": "Address",
         "iban": "BIC/IBAN",
         "branchAddress": "Branch address",
