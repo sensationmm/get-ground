@@ -1075,7 +1075,8 @@
     "validateLettersOnly": "Invalid characters",
     "validateTotal": "Max {{max}}",
     "validateMinimum": "Invalid password",
-    "validateNoSpaces": "No spaces"
+    "validateNoSpaces": "No spaces",
+    "validateDate": "DD/MM/YYYY"
   },
   "whatWeDo": {
     "title": "What we do",

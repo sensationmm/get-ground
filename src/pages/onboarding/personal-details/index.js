@@ -290,7 +290,7 @@ class OnboardingPersonalDetailsContainer extends Component {
         component: InputText,
         label: t('onBoarding.personalDetails.form.dateOfBirthLabel'),
         value: values.date_of_birth,
-        validationFunction: 'validateRequired',
+        validationFunction: ['validateRequired', 'validateDate'],
         placeholder: 'DD/MM/YYYY',
         // onFocus: this.openDatePicker,
         id: 'datepicker-field',

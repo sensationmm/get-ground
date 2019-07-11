@@ -114,6 +114,11 @@ export const validateNoSpaces = (input) => {
 };
 validationMessages.validateNoSpaces = i18n.t('validation.validateNoSpaces');
 
+export const validateDate = (input) => {
+  return /^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[/]\d{4}$/.test(input);
+};
+validationMessages.validateDate = i18n.t('validation.validateDate');
+
 const validation = {
   validateEmail,
   validatePhone,
@@ -125,6 +130,7 @@ const validation = {
   validateTotal,
   validateMinimum,
   validateNoSpaces,
+  validateDate,
   messages: validationMessages,
 };
 
