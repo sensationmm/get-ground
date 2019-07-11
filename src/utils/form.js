@@ -162,6 +162,8 @@ export const validateForm = (config, arrayIndex=null) => {
   if(Object.keys(checkErrors).length > 0) {
     store.dispatch(setErrors(errors, true));
 
+    window.scrollTo(0,0);
+
     return false;
   } else {
     return true;
