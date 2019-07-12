@@ -292,19 +292,9 @@ class OnboardingPersonalDetailsContainer extends Component {
         value: values.date_of_birth,
         validationFunction: ['validateRequired', 'validateDate'],
         placeholder: 'DD/MM/YYYY',
-        // onFocus: this.openDatePicker,
         id: 'datepicker-field',
         note: t('onBoarding.personalDetails.form.dateOfBirthNote'),
       },
-      // {
-      //   component: Datepicker,
-      //   isDatepickerOpen: isDatepickerOpen,
-      //   closeDatepicker: () => this.closeDatePicker(),
-      //   setDateFieldValue: date => this.setDateOfBirth(date),
-      //   confirmButtonText: t('onBoarding.personalDetails.datepicker.button2'),
-      //   cancelButtonText: t('onBoarding.personalDetails.datepicker.button1'),
-      //   birthDate: true
-      // },
       {
         stateKey: 'nationality',
         component: Select,

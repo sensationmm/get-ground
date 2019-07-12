@@ -312,23 +312,19 @@ class PurchaseDetails extends Component {
         label: t('companyDesign.purchaseDetails.form.expectedExchangeDateLabel'),
         value: expected_exchange_date,
         placeholder: 'DD/MM/YYYY',
-        validationFunction: ['validateRequired', 'validateDate'],
-        // onFocus: this.openDatePicker,
+        validationFunction: ['validateRequired', 'validateDate', 'validateFutureDate'],
         id: 'exchangeDate',
         hidden: is_new_build == null,
-        // readOnly: true
       },
       {
         stateKey: 'completion_date',
         component: InputText,
         label: t('companyDesign.purchaseDetails.form.completionDateLabel'),
         value: completion_date,
-        validationFunction: ['validateRequired', 'validateDate'],
+        validationFunction: ['validateRequired', 'validateDate', 'validateFutureDate'],
         placeholder: 'DD/MM/YYYY',
-        // onFocus: this.openDatePicker,
         id: 'completionDate',
         hidden: is_new_build === null,
-        // readOnly: true
       },
       {
         component: 'h1',
@@ -340,12 +336,10 @@ class PurchaseDetails extends Component {
         component: InputText,
         label: t('companyDesign.purchaseDetails.form.depositDueLabel'),
         value: depositDueDate,
-        validationFunction: ['validateRequired', 'validateDate'],
+        validationFunction: ['validateRequired', 'validateDate', 'validateFutureDate'],
         placeholder: 'DD/MM/YYYY',
-        // onFocus: this.openDatePicker,
         id: 'depositDueDate',
         hidden: this.checkElementHidden(),
-        // readOnly: true
       },
       {
         stateKey: 'depositAmount',
@@ -360,12 +354,10 @@ class PurchaseDetails extends Component {
         component: InputText,
         label: t('companyDesign.purchaseDetails.form.firstInstallmentDateLabel'),
         value: firstInstallmentDate,
-        validationFunction: ['validateRequired', 'validateDate'],
+        validationFunction: ['validateRequired', 'validateDate', 'validateFutureDate'],
         placeholder: 'DD/MM/YYYY',
-        // onFocus: this.openDatePicker,
         id: 'firstInstallmentDate',
         hidden: this.checkElementHidden(),
-        // readOnly: true
       },
       {
         stateKey: 'firstInstallmentAmount',
@@ -405,14 +397,6 @@ class PurchaseDetails extends Component {
       //   small: true,
       //   label: t('companyDesign.purchaseDetails.form.addButton'),
       //   hidden: this.checkElementHidden()
-      // },
-      // {
-      //   component: Datepicker,
-      //   isDatepickerOpen: isDatepickerOpen,
-      //   closeDatepicker: () => this.closeDatePicker(),
-      //   setDateFieldValue: date => this.setDateFieldValue(date),
-      //   confirmButtonText: t('companyDesign.purchaseDetails.datepicker.button2'),
-      //   cancelButtonText: t('companyDesign.purchaseDetails.datepicker.button1')
       // },
     ];
 
