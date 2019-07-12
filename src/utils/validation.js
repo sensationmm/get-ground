@@ -1,4 +1,5 @@
 import i18n from '../i18n';
+import moment from 'moment';
 
 const validationMessages = {};
 
@@ -119,6 +120,14 @@ export const validateDate = (input) => {
 };
 validationMessages.validateDate = i18n.t('validation.validateDate');
 
+export const validateFutureDate = (input) => {
+  const dateInput = moment(input, 'DD/MM/YYYY').format('YYYY-MM-DD');
+  const today = moment().format('YYYY-MM-DD');
+
+  return dateInput > today;
+};
+validationMessages.validateFutureDate = i18n.t('validation.validateFutureDate');
+
 const validation = {
   validateEmail,
   validatePhone,
@@ -131,6 +140,7 @@ const validation = {
   validateMinimum,
   validateNoSpaces,
   validateDate,
+  validateFutureDate,
   messages: validationMessages,
 };
 

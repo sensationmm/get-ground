@@ -1076,7 +1076,8 @@
     "validateTotal": "Max {{max}}",
     "validateMinimum": "Invalid password",
     "validateNoSpaces": "No spaces",
-    "validateDate": "DD/MM/YYYY"
+    "validateDate": "DD/MM/YYYY",
+    "validateFutureDate": "Date is in past"
   },
   "whatWeDo": {
     "title": "What we do",

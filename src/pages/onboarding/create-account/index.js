@@ -124,7 +124,7 @@ class CreateAccount extends Component {
         component: InputText,
         label: t('onBoarding.createAccount.form.label.email'),
         value: values.email,
-        validationFunction: 'validateEmail',
+        validationFunction: ['validateLettersOnly', 'validateEmail'],
         note: t('onBoarding.createAccount.form.note.email')
       },
       {

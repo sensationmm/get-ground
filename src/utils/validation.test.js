@@ -1,4 +1,5 @@
 import * as validation from './validation';
+import moment from 'moment';
 
 describe('validateEmail()', () => {
   test('returns true for a valid email', () => {
@@ -203,6 +204,23 @@ describe('validateDate', () => {
 
   test('returns false if char', () => {
     const isValid = validation.validateDate('0a/20/2020');
+    expect(isValid).toBe(false);
+  });
+});
+
+describe('validateFutureDate', () => {
+  test('returns true if date is in future', () => {
+    const isValid = validation.validateFutureDate('01/01/2020');
+    expect(isValid).toBe(true);
+  });
+
+  test('returns false if date is in past', () => {
+    const isValid = validation.validateFutureDate('01/01/2017');
+    expect(isValid).toBe(false);
+  });
+
+  test('returns false if date is today', () => {
+    const isValid = validation.validateFutureDate(moment().format('DD/MM/YYYY'));
     expect(isValid).toBe(false);
   });
 });
