@@ -22,15 +22,16 @@ class ModalService extends BaseService {
 
   /**
     * @param {string} content - markdown to transform into PDF
+    * @param {string} title - passing title into markdown
     * @return {Promise} markdownToPDF response
     */
-   markdownToPDF = async content => (
+   markdownToPDF = async (content, title) => (
     await fetch(`${API}/md2pdf`, {
       method: 'post',
       headers: {
         'Authorization': 'avb068cbk2os5ujhodmt'
       },
-      body: JSON.stringify({ 'markdown_text': content }),
+      body: JSON.stringify({ 'markdown_text': title ? `# <center>[ ${title} ]</center>` + content : content }),
     })
     .then(response => response.status === 400 ? response : response.blob())
     .then(data => {
@@ -39,4 +40,4 @@ class ModalService extends BaseService {
   );
 }
 
-export default ModalService;  
+export default ModalService;

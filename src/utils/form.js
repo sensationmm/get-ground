@@ -27,7 +27,7 @@ export const initFormState = (fieldsInit, fieldsValues) => {
       } else if(key === 'nationality') {
         fields[key] = `[${fieldsValues['nationality_alpha_3_code']}] ${fieldsValues['nationality_name']}`;
       } else if(key === 'date_of_birth') {
-        fields[key] = fieldsValues[key] ? moment(fieldsValues[key]).format('Do MMMM YYYY') : ''; 
+        fields[key] = fieldsValues[key] ? moment(fieldsValues[key]).format('Do MMMM YYYY') : '';
       } else {
         fields[key] = fieldsValues[key]; // @TODO ideally only this line should be necessary...
       }
@@ -108,7 +108,7 @@ export const validateField = (config, stateID, arrayIndex=null) => {
     let failFunc = null;
 
     for(let i=0; i<validationList.length; i++) {
-      isValid = (validationParamList[i] !== undefined && validationParamList[i] !== null) 
+      isValid = (validationParamList[i] !== undefined && validationParamList[i] !== null)
         ? validation[validationList[i]](valueToCheck, validationParamList[i])
         : validation[validationList[i]](valueToCheck);
 
@@ -117,7 +117,7 @@ export const validateField = (config, stateID, arrayIndex=null) => {
         break;
       }
     }
-    
+
 
     if(!isValid) {
       if(arrayIndex !== null) {
