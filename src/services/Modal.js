@@ -31,7 +31,7 @@ class ModalService extends BaseService {
       headers: {
         'Authorization': 'avb068cbk2os5ujhodmt'
       },
-      body: JSON.stringify({ 'markdown_text': title ? `# <center>[ ${title} ]</center>` + content : content }),
+      body: JSON.stringify({ 'markdown_text': title ? `# <center>[ ${title} ]</center><br>` + content : content }),
     })
     .then(response => response.status === 400 ? response : response.blob())
     .then(data => {
