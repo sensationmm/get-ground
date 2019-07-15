@@ -21,8 +21,8 @@ class KYCService extends BaseService {
     const selfieFile = new File( [blobSelfie], 'passport.jpg', { type: 'image/jpeg' } )
 
     fd.append('file_passport', passportFile)
-    fd.append('file_selfie', addressFile)
-    fd.append('file_proof_of_address', selfieFile)
+    fd.append('file_selfie', selfieFile)
+    fd.append('file_proof_of_address', addressFile)
 
     const config = {
       url: `users/${store.getState().user.id}/kyc/files`,

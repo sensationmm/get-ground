@@ -1,4 +1,5 @@
 import * as validation from './validation';
+import moment from 'moment';
 
 describe('validateEmail()', () => {
   test('returns true for a valid email', () => {
@@ -173,6 +174,23 @@ describe('validateMinimum', () => {
   });
 });
 
+describe('validateMinValue', () => {
+  test('returns true if more', () => {
+    const isValid = validation.validateMinValue(4, 3);
+    expect(isValid).toBe(true);
+  });
+
+  test('returns true if equal', () => {
+    const isValid = validation.validateMinValue(4, 4);
+    expect(isValid).toBe(true);
+  });
+
+  test('returns false if less', () => {
+    const isValid = validation.validateMinValue(4, 6);
+    expect(isValid).toBe(false);
+  });
+});
+
 describe('validateNoSpaces', () => {
   test('returns true if no spaces', () => {
     const isValid = validation.validateNoSpaces('password1');
@@ -181,6 +199,57 @@ describe('validateNoSpaces', () => {
 
   test('returns false if spaces', () => {
     const isValid = validation.validateNoSpaces('passw ord1');
+    expect(isValid).toBe(false);
+  });
+});
+
+describe('validateDate', () => {
+  test('returns true for valid format', () => {
+    const isValid = validation.validateDate('01/01/2020');
+    expect(isValid).toBe(true);
+  });
+
+  test('returns false for non valid format', () => {
+    const isValid = validation.validateDate('01-01-2020');
+    expect(isValid).toBe(false);
+  });
+
+  test('returns false for US order', () => {
+    const isValid = validation.validateDate('01/20/2020');
+    expect(isValid).toBe(false);
+  });
+
+  test('returns false if char', () => {
+    const isValid = validation.validateDate('0a/20/2020');
+    expect(isValid).toBe(false);
+  });
+});
+
+describe('validateFutureDate', () => {
+  test('returns true if date is in future', () => {
+    const isValid = validation.validateFutureDate('01/01/2020');
+    expect(isValid).toBe(true);
+  });
+
+  test('returns false if date is in past', () => {
+    const isValid = validation.validateFutureDate('01/01/2017');
+    expect(isValid).toBe(false);
+  });
+
+  test('returns false if date is today', () => {
+    const isValid = validation.validateFutureDate(moment().format('DD/MM/YYYY'));
+    expect(isValid).toBe(false);
+  });
+});
+
+describe('validateNoSpecial', () => {
+  test('returns true if no special characters', () => {
+    const isValid = validation.validateNoSpecial('asdf1234, -.');
+    expect(isValid).toBe(true);
+  });
+
+  test('returns false if special characters found', () => {
+    const isValid = validation.validateNoSpecial('asdf1234, @');
     expect(isValid).toBe(false);
   });
 });

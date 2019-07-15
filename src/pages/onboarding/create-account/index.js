@@ -124,7 +124,7 @@ class CreateAccount extends Component {
         component: InputText,
         label: t('onBoarding.createAccount.form.label.email'),
         value: values.email,
-        validationFunction: 'validateEmail',
+        validationFunction: ['validateRequired', 'validateEmail'],
         note: t('onBoarding.createAccount.form.note.email')
       },
       {
@@ -145,8 +145,8 @@ class CreateAccount extends Component {
         component: InputPassword,
         label: t('onBoarding.createAccount.form.label.passwordConfirm'),
         value: values.passwordConfirm,
-        validationFunction: 'validateMatching',
-        validationParam: values.password
+        validationFunction: ['validateRequired','validateMatching'],
+        validationParam: [null,values.password]
       },
       {
         component: 'br'

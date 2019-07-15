@@ -118,28 +118,28 @@ class SolicitorDetails extends Component {
         component: InputText,
         label: t('companyDesign.solicitorDetails.form.label.firstName'),
         value: values.first_name,
-        validationFunction: 'validateRequired'
+        validationFunction: ['validateRequired', 'validateLettersOnly']
       },
       {
         stateKey: 'last_name',
         component: InputText,
         label: t('companyDesign.solicitorDetails.form.label.lastName'),
         value: values.last_name,
-        validationFunction: 'validateRequired'
+        validationFunction: ['validateRequired', 'validateLettersOnly']
       },
       {
         stateKey: 'email',
         component: InputText,
         label: t('companyDesign.solicitorDetails.form.label.email'),
         value: values.email,
-        validationFunction: 'validateEmail'
+        validationFunction: ['validateRequired', 'validateEmail']
       },
       {
         stateKey: 'phone_number',
         component: InputPhone,
         label: t('companyDesign.solicitorDetails.form.label.phone'),
         value: values.phone_number,
-        validationFunction: 'validatePhone'
+        validationFunction: ['validateRequired', 'validatePhone']
       },
       {
         component: 'br'

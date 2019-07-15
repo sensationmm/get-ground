@@ -45,56 +45,57 @@ class Company extends Component {
     }
 
     return (
-      <Layout secure companyID>
+      <Layout secure>
         { hasLoaded &&
           <div className="company-overview my-property" data-test="component-company">
             <h1>{ t('dashboard.company.title') }</h1>
 
-            <div className="company-header">{ address.premise }, { address.postcode }</div>
+            <div className="company-header">{ address.premise } { address.street }, { address.postcode }</div>
 
             <div className="company-overview-section">
               <h2>{ t('dashboard.company.overview.sections.company') }</h2>
-              {/* <p>{ company.name }</p> */}
+              { company.name }
             </div>
 
             <div className="company-overview-section">
               <h2>{ t('dashboard.company.overview.sections.address') }</h2>
-              <p>{ address.premise }<br />
-              { address.street }<br />
+              <p>{ address.premise } { address.street }<br />
               { address.posttown }<br />
               { address.postcode }</p>
             </div>
 
             <div className="company-overview-section">
-              <h2>{ t('dashboard.company.overview.sections.shareholders') }</h2>
-              {company.shareholder_details.collection.map((shareholder, count) => {
-                return <p key={`shareholder-${count}`}>{`${shareholder.first_name} ${shareholder.last_name}`}</p>
-              })
-              }
-            </div>
-
-            <div className="company-overview-section">
               <h2>{ t('dashboard.company.overview.sections.directors') }</h2>
-              {
-                company.shareholder_details.collection.map((shareholder, count) => {
-                  if ( shareholder.is_director ) {
-                    return <p key={`director-${count}`}>{`${shareholder.first_name} ${shareholder.last_name}`}</p>
-                  }
-                })
-              }
+              <ul>
+              {company.shareholder_details.collection.map((shareholder, count) => {
+                if (shareholder.is_director) {
+                  return <li key={`director-${count}`}>{`${shareholder.first_name} ${shareholder.last_name}`}</li>
+                }
+              })}
+              </ul>
             </div>
 
             <div className="company-overview-section">
+              <h2>{ t('dashboard.company.overview.sections.shareholders') }</h2>
+              <ul>
+              {company.shareholder_details.collection.map((shareholder, count) => {
+                if (!shareholder.is_director) {
+                  return <li key={`shareholder-${count}`}>{`${shareholder.first_name} ${shareholder.last_name}`}</li>
+                }
+              })}
+              </ul>
+            </div>
+
+            {/* <div className="company-overview-section">
               <h2>{ t('dashboard.company.overview.sections.documents') }</h2>
-              NOT GETTING THIS YET
-              {/* <ul>
+              <ul>
               {
                 company.documents.map((document, count) => {
                   return <li key={`document-${count}`}>{ document.name }</li>
                 })
               }
-              </ul> */}
-            </div>
+              </ul>
+            </div> */}
             
             <Form>
               <Button
@@ -122,8 +123,8 @@ class Company extends Component {
 
 const mapStateToProps = (state) => ({
   isLoading: state.loader.isLoading,
-  activeCompany: state.activeCompany,
-  companies: state.companies
+  activeCompany: state.testing.activeCompany,
+  companies: state.testing.companies
 });
 
 Company.propTypes = {

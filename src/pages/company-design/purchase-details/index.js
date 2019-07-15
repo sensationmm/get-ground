@@ -16,7 +16,6 @@ import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import Button from 'src/components/_buttons/Button/Button';
 import RadioGroup from 'src/components/_form/RadioGroup/RadioGroup';
-import Datepicker from 'src/components/Datepicker/Datepicker';
 import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
@@ -53,8 +52,8 @@ class PurchaseDetails extends Component {
     const reduxFields = {
       amount_in_cents: purchase_details.price.amount_in_cents,
       is_new_build: purchase_details.is_new_build,
-      expected_exchange_date: exchangeDate === null ? '' : moment(exchangeDate).format('Do MMMM YYYY'),
-      completion_date: completionDate === null ? '' : moment(completionDate).format('Do MMMM YYYY'),
+      expected_exchange_date: exchangeDate === null ? '' : moment(exchangeDate).format('DD/MM/YYYY'),
+      completion_date: completionDate === null ? '' : moment(completionDate).format('DD/MM/YYYY'),
       depositDueDate: this.setReduxDateValues(payment, 0),
       depositAmount: payment === null ? '' : payment[0].amount.amount_in_cents,
       firstInstallmentDate: this.setReduxDateValues(payment, 1),
@@ -92,7 +91,7 @@ class PurchaseDetails extends Component {
       (payment && payment[index].due_date === undefined)) {
       return '';
     } else {
-      return moment(payment[index].due_date).format('Do MMMM YYYY');
+      return moment(payment[index].due_date).format('DD/MM/YYYY');
     }
   }
 
@@ -168,13 +167,12 @@ class PurchaseDetails extends Component {
     const { 
       showLoader, 
       form: { values, errors },  
-      company: { purchase_details } 
     } = this.props;
 
     const paymentSchedule = [
       {
         type: 'deposit',
-        due_date: this.setPaymentScheduleDate(this.state.depositDueDate, 0),
+        due_date: values.depositDueDate ? moment(values.depositDueDate, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00') : null,
         amount: {
           amount_in_cents: values.depositAmount,
           currency: 'GBP'
@@ -182,7 +180,7 @@ class PurchaseDetails extends Component {
       },
       {
         type: 'first_installment',
-        due_date: this.setPaymentScheduleDate(this.state.firstInstallmentDate, 1),
+        due_date: values.firstInstallmentDate ? moment(values.firstInstallmentDate, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00') : null,
         amount: {
           amount_in_cents: values.firstInstallmentAmount,
           currency:'GBP'
@@ -196,10 +194,8 @@ class PurchaseDetails extends Component {
         currency: 'GBP' 
       },
       is_new_build: values.is_new_build,
-      completion_date:  this.state.completionDate ? 
-                        this.state.completionDate : 
-                        purchase_details.completion_date,
-      expected_exchange_date: this.state.exchangeDate ? this.state.exchangeDate : purchase_details.expected_exchange_date,
+      completion_date:  moment(values.completion_date, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00'),
+      expected_exchange_date: moment(values.expected_exchange_date, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00'),
       payment_schedule: paymentSchedule
     };
 
@@ -219,8 +215,6 @@ class PurchaseDetails extends Component {
    */
   saveAndExit = async (payload, errors) => {
     const { hideLoader, company } = this.props;
-
-    formUtils.validateForm(this.config);
 
     await Object.keys(errors).forEach(async (key) => {
       await formUtils.updateValue(key, '');
@@ -267,7 +261,6 @@ class PurchaseDetails extends Component {
   render() {
     const { t, form, company } = this.props;
     // const payment_schedule = company ? company.purchase_details.payment_schedule : []
-    const { isDatepickerOpen } = this.state;
     const {
       values: {
         amount_in_cents,
@@ -318,22 +311,20 @@ class PurchaseDetails extends Component {
         component: InputText,
         label: t('companyDesign.purchaseDetails.form.expectedExchangeDateLabel'),
         value: expected_exchange_date,
-        validationFunction: 'validateRequired',
-        onFocus: this.openDatePicker,
+        placeholder: 'DD/MM/YYYY',
+        validationFunction: ['validateRequired', 'validateDate', 'validateFutureDate'],
         id: 'exchangeDate',
         hidden: is_new_build == null,
-        readOnly: true
       },
       {
         stateKey: 'completion_date',
         component: InputText,
         label: t('companyDesign.purchaseDetails.form.completionDateLabel'),
         value: completion_date,
-        validationFunction: 'validateRequired',
-        onFocus: this.openDatePicker,
+        validationFunction: ['validateRequired', 'validateDate', 'validateFutureDate'],
+        placeholder: 'DD/MM/YYYY',
         id: 'completionDate',
         hidden: is_new_build === null,
-        readOnly: true
       },
       {
         component: 'h1',
@@ -345,11 +336,10 @@ class PurchaseDetails extends Component {
         component: InputText,
         label: t('companyDesign.purchaseDetails.form.depositDueLabel'),
         value: depositDueDate,
-        validationFunction: 'validateRequired',
-        onFocus: this.openDatePicker,
+        validationFunction: ['validateRequired', 'validateDate', 'validateFutureDate'],
+        placeholder: 'DD/MM/YYYY',
         id: 'depositDueDate',
         hidden: this.checkElementHidden(),
-        readOnly: true
       },
       {
         stateKey: 'depositAmount',
@@ -357,7 +347,6 @@ class PurchaseDetails extends Component {
         label: t('companyDesign.purchaseDetails.form.depositAmountLabel'),
         value: depositAmount,
         validationFunction: 'validateRequired',
-        wrapperClass: 'background-gradient',
         hidden: this.checkElementHidden()
       },
       {
@@ -365,11 +354,10 @@ class PurchaseDetails extends Component {
         component: InputText,
         label: t('companyDesign.purchaseDetails.form.firstInstallmentDateLabel'),
         value: firstInstallmentDate,
-        validationFunction: 'validateRequired',
-        onFocus: this.openDatePicker,
+        validationFunction: ['validateRequired', 'validateDate', 'validateFutureDate'],
+        placeholder: 'DD/MM/YYYY',
         id: 'firstInstallmentDate',
         hidden: this.checkElementHidden(),
-        readOnly: true
       },
       {
         stateKey: 'firstInstallmentAmount',
@@ -377,7 +365,6 @@ class PurchaseDetails extends Component {
         label: t('companyDesign.purchaseDetails.form.firstInstallmentLabel'),
         value: firstInstallmentAmount,
         validationFunction: 'validateRequired',
-        wrapperClass: 'background-gradient',
         hidden: this.checkElementHidden()
       },
       // {
@@ -398,7 +385,7 @@ class PurchaseDetails extends Component {
       //   component: InputNumber,
       //   label: t('companyDesign.purchaseDetails.form.secondInstallmentLabel'),
       //   value: secondInstallmentAmount,
-      //   wrapperClass: 'background-gradient installment-amount',
+      //   wrapperClass: 'installment-amount',
       //   hidden: this.checkElementHidden() ||
       //           (is_new_build === true && payment_schedule === null) ||
       //           (is_new_build === true && payment_schedule && payment_schedule[2].due_date === '')
@@ -411,14 +398,6 @@ class PurchaseDetails extends Component {
       //   label: t('companyDesign.purchaseDetails.form.addButton'),
       //   hidden: this.checkElementHidden()
       // },
-      {
-        component: Datepicker,
-        isDatepickerOpen: isDatepickerOpen,
-        closeDatepicker: () => this.closeDatePicker(),
-        setDateFieldValue: date => this.setDateFieldValue(date),
-        confirmButtonText: t('companyDesign.purchaseDetails.datepicker.button2'),
-        cancelButtonText: t('companyDesign.purchaseDetails.datepicker.button1')
-      },
     ];
 
     const headerActions = <ButtonHeader onClick={() => this.handleSubmitPurchaseDetails(true)} label={t('header.buttons.saveAndExit')} />

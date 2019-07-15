@@ -27,7 +27,7 @@ export const initFormState = (fieldsInit, fieldsValues) => {
       } else if(key === 'nationality') {
         fields[key] = `[${fieldsValues['nationality_alpha_3_code']}] ${fieldsValues['nationality_name']}`;
       } else if(key === 'date_of_birth') {
-        fields[key] = fieldsValues[key] ? moment(fieldsValues[key]).format('Do MMMM YYYY') : ''; 
+        fields[key] = fieldsValues[key] ? moment(fieldsValues[key]).format('DD/MM/YYYY') : ''; 
       } else {
         fields[key] = fieldsValues[key]; // @TODO ideally only this line should be necessary...
       }
@@ -161,6 +161,8 @@ export const validateForm = (config, arrayIndex=null) => {
 
   if(Object.keys(checkErrors).length > 0) {
     store.dispatch(setErrors(errors, true));
+
+    window.scrollTo(0,0);
 
     return false;
   } else {

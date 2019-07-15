@@ -11,6 +11,7 @@ import { companies } from './companies';
 import { activeCompany } from './activeCompany';
 import { menu } from './menu';
 import { documents } from './documents';
+import { testing } from './testing';
 
 export default combineReducers({
   actions,
@@ -24,5 +25,6 @@ export default combineReducers({
   loader,
   modal,
   user,
+  testing,
   menu
 });

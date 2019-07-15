@@ -7,7 +7,7 @@ describe('create-account', () => {
   it('email verification ', () => {
     cy.get('#email').type('bogus')
     cy.get('#password').focus()
-    cy.get('[data-test="text-input-error"]').contains('Invalid email address')
+    cy.get('[data-test="text-input-error"]').contains('Invalid email')
     cy.get('#email').type('fakeemail@fakeemail.co.uk')
     cy.get('[data-test="text-input-error"]').not.exist
   })
@@ -32,5 +32,14 @@ describe('create-account', () => {
     cy.get('#passwordConfirm').type('password123965!!!!!')
     cy.get('.button.primary.full').click()
     cy.get('[data-test="component-error-box"]').not.exist
+  })
+
+  it('Email already exists ', () => {
+    cy.get('#email').type('fakeemail@fakeemail.co.uk')
+    cy.get('#password').type('password123965!!!!!')
+    cy.get('#passwordConfirm').type('password123965!!!!!')
+    cy.get('[data-test="component-checkbox-toggle"]').click({multiple: true})
+    cy.get('.button.primary.full').click()
+    cy.get('.error-box').contains('Email address already exists')
   })
 })

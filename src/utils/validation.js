@@ -1,4 +1,5 @@
 import i18n from '../i18n';
+import moment from 'moment';
 
 const validationMessages = {};
 
@@ -10,7 +11,7 @@ const validationMessages = {};
  * @return {boolean} whether email passes validation
  */
 export const validateEmail = (email) => {
-  const re = /\S+@\S+\.\S+/;
+  const re = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
   return re.test(email);
 };
 validationMessages.validateEmail = i18n.t('validation.validateEmail');
@@ -36,7 +37,7 @@ validationMessages.validateNumeric = i18n.t('validation.validateNumeric');
  * @return {boolean} whether value is entered
  */
 export const validateRequired = (input) => {
-  return !!input && input !== '[undefined] undefined';
+  return !!input && input !== '[undefined] undefined' && input !== '[null] null';
 };
 validationMessages.validateRequired = i18n.t('validation.validateRequired');
 
@@ -80,7 +81,7 @@ validationMessages.validateNoOfCompanies = i18n.t('validation.validateNoOfCompan
  * @return {boolean} whether value is entered
  */
 export const validateLettersOnly = (input) => {
-  return !/[^a-zA-Z\s]/.test(input);
+  return !/[^a-zA-Z-\s]/.test(input);
 };
 validationMessages.validateLettersOnly = i18n.t('validation.validateLettersOnly');
 
@@ -109,10 +110,33 @@ export const validateMinimum = (value, min) => {
   return value.length >= min;
 };
 
+export const validateMinValue = (value, min) => {
+  validationMessages.validateMinValue = i18n.t('validation.validateMinValue', { min: min });
+  return value >= min;
+};
+
 export const validateNoSpaces = (input) => {
   return !/[\s]/.test(input);
 };
 validationMessages.validateNoSpaces = i18n.t('validation.validateNoSpaces');
+
+export const validateDate = (input) => {
+  return /^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[/]\d{4}$/.test(input);
+};
+validationMessages.validateDate = i18n.t('validation.validateDate');
+
+export const validateFutureDate = (input) => {
+  const dateInput = moment(input, 'DD/MM/YYYY').format('YYYY-MM-DD');
+  const today = moment().format('YYYY-MM-DD');
+
+  return dateInput > today;
+};
+validationMessages.validateFutureDate = i18n.t('validation.validateFutureDate');
+
+export const validateNoSpecial = (input) => {
+  return !/[^a-zA-Z0-9,.-\s]/.test(input);
+};
+validationMessages.validateNoSpecial = i18n.t('validation.validateNoSpecial');
 
 const validation = {
   validateEmail,
@@ -124,7 +148,11 @@ const validation = {
   validateLettersOnly,
   validateTotal,
   validateMinimum,
+  validateMinValue,
   validateNoSpaces,
+  validateDate,
+  validateFutureDate,
+  validateNoSpecial,
   messages: validationMessages,
 };
 

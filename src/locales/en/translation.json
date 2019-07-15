@@ -231,7 +231,7 @@
     },
     "progressTracker": {
       "inProgressTitle": "Design your company in {{count}} steps",
-      "complete": "complete",
+      "complete": "Completed",
       "completeTitle": "All 5 steps complete",
       "sections": {
         "step1": {
@@ -394,7 +394,7 @@
         "title": "My bank account",
         "sortCode": "Sort Code",
         "accountNumber": "Account Number",
-        "accountName": "Account Number",
+        "accountName": "Account Name",
         "address": "Address",
         "iban": "BIC/IBAN",
         "branchAddress": "Branch address",
@@ -517,6 +517,7 @@
   },
   "header": {
     "dashboard": "My Dashboard",
+    "onboarding": "Onboarding",
     "buttons": {
       "register": "Register",
       "login": "Log In",
@@ -857,7 +858,8 @@
         "title": "Take a picture of yourself",
         "content": "We need this picture so we can match it with the one in your passport. This is to make sure no one is trying to create a false account using your documents.",
         "retakeImageContent": "Are you happy with this picture? Please make sure the picture is well-lit and not blurred."
-      }
+      },
+      "error": "Something went wrong. Please take your images again"
     },
     "payment": {
       "title": "Payment details",
@@ -1017,7 +1019,7 @@
   },
   "progressTracker": {
     "labels": {
-      "complete": "Complete",
+      "complete": "Completed",
       "todo": "To do",
       "inProgress": "Incomplete",
       "signed": "Signed",
@@ -1072,8 +1074,12 @@
     "validateNoOfCompanies": "No more than 20",
     "validateLettersOnly": "Invalid characters",
     "validateTotal": "Max {{max}}",
-    "validateMinimum": "Invalid password",
-    "validateNoSpaces": "No spaces"
+    "validateMinimum": "Min length {{min}}",
+    "validateMinValue": "Min value {{min}}",
+    "validateNoSpaces": "No spaces",
+    "validateDate": "DD/MM/YYYY",
+    "validateNoSpecial": "Invalid characters",
+    "validateFutureDate": "Date is in past"
   },
   "whatWeDo": {
     "title": "What we do",

@@ -56,7 +56,7 @@ describe('process-tracker', () => {
   test('renders title', () => {
     expect(wrapper.find('h1').text()).toEqual('test-string');
   })
-
+  
   test('renders ProcessSection', () => {
     expect(wrapper.find('ProcessSection')).toHaveLength(3);
   })
@@ -68,12 +68,6 @@ describe('process-tracker', () => {
   test('hides Button until sections complete', () => {
     expect(wrapper.find('Button')).toHaveLength(0);
   })
-
-  test('refetch progress', () => {
-    wrapper.setProps({ isLoading: false });
-
-    expect(wrapper.instance().getProgress).toHaveBeenCalled();
-  });
 
   test('refetch progress without user set', () => {
     const newProps = {

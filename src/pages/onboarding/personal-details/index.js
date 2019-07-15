@@ -12,7 +12,6 @@ import Form from 'src/components/_layout/Form/Form';
 import AddressFinder from 'src/components/_form/AddressFinder/AddressFinder';
 import InputText from 'src/components/_form/InputText/InputText';
 import InputPhone from 'src/components/_form/InputPhone/InputPhone';
-import Datepicker from 'src/components/Datepicker/Datepicker';
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import Select from 'src/components/_form/Select/Select';
@@ -45,7 +44,7 @@ class OnboardingPersonalDetailsContainer extends Component {
     this.state = {
       formattedDate: '',
       isAddressValid: true,
-      isManualAddress: premise === null,
+      isManualAddress: typeof premise === 'string',
       isDatepickerOpen: false,
       showPreviousNames: previous_names !== '' &&  previous_names !== null &&  previous_names !== undefined,
       isTextAreaHidden: true
@@ -80,9 +79,15 @@ class OnboardingPersonalDetailsContainer extends Component {
         if(window.addressNow.controls[0]){
 
           window.addressNow.controls[0].listen('populate', (address) => {
+            let premise = address.BuildingNumber ? address.BuildingNumber : address.BuildingName;
+
+            if(address.SubBuilding) {
+              premise = [address.SubBuilding, address.BuildingName, address.BuildingNumber].join(', ')
+            }
+
             formUtils.updateValue('street', address.Street);
             formUtils.updateValue('posttown', address.City);
-            formUtils.updateValue('premise', address.BuildingNumber);
+            formUtils.updateValue('premise', premise);
             formUtils.updateValue('postcode', address.PostalCode);
     
             this.setState(() => ({
@@ -103,6 +108,14 @@ class OnboardingPersonalDetailsContainer extends Component {
     document.body.appendChild(script);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.isManualAddress !== (typeof this.props.form.values.premise === 'string')) {
+      this.setState({
+        isManualAddress: typeof this.props.form.values.premise === 'string'
+      })
+    }
+  }
+
   componentWillUnmount() {
     formUtils.clearFormState();
   }
@@ -111,16 +124,18 @@ class OnboardingPersonalDetailsContainer extends Component {
 
   initFormValidation = () => {
     const { showLoader, hideLoader, t, userID, form } = this.props;
-    const { formattedDate } = this.state;
 
     /* istanbul ignore else */
     if (formUtils.validateForm(this.config)) {
-      const countryName = form.values.country ? form.values.country.split('] ').pop() : '';
-      const nationalityName = form.values.nationality ? form.values.nationality.split('] ').pop() : '';
-      showLoader();
+      const countryName = form.values.country ? form.values.country.split('] ').pop() : null;
+      const nationalityName = form.values.nationality ? form.values.nationality.split('] ').pop() : null;
 
+      showLoader();
+      
       const payload = this.props.form.values;
       delete payload.nationality;
+      
+      const formattedDate = moment(payload.date_of_birth, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00');
 
       AccountService.savePersonalDetails({
         userID,
@@ -143,20 +158,19 @@ class OnboardingPersonalDetailsContainer extends Component {
   saveAndExit = async () => {
     const { showLoader, hideLoader, userID, form } = this.props;
     const { values, errors } = form;
-    const { formattedDate } = this.state;
-
-    formUtils.validateForm(this.config);
 
     await Object.keys(errors).forEach(async (key) => {
       await formUtils.updateValue(key, '');
     });
 
-    const countryName = values.country ? values.country.split('] ').pop() : '';
-    const nationalityName = values.nationality ? values.nationality.split('] ').pop() : '';
+    const countryName = values.country ? values.country.split('] ').pop() : null;
+    const nationalityName = values.nationality ? values.nationality.split('] ').pop() : null;
     showLoader();
 
     const payload = this.props.form.values;
     delete payload.nationality;
+
+    const formattedDate = moment(payload.date_of_birth, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00');
 
     AccountService.savePersonalDetails({
       userID,
@@ -212,7 +226,6 @@ class OnboardingPersonalDetailsContainer extends Component {
     const {
       isManualAddress,
       isAddressValid,
-      isDatepickerOpen,
       showPreviousNames,
       isTextAreaHidden
     } = this.state;
@@ -277,20 +290,10 @@ class OnboardingPersonalDetailsContainer extends Component {
         component: InputText,
         label: t('onBoarding.personalDetails.form.dateOfBirthLabel'),
         value: values.date_of_birth,
-        validationFunction: 'validateRequired',
-        onFocus: this.openDatePicker,
+        validationFunction: ['validateRequired', 'validateDate'],
+        placeholder: 'DD/MM/YYYY',
         id: 'datepicker-field',
         note: t('onBoarding.personalDetails.form.dateOfBirthNote'),
-        readOnly: true
-      },
-      {
-        component: Datepicker,
-        isDatepickerOpen: isDatepickerOpen,
-        closeDatepicker: () => this.closeDatePicker(),
-        setDateFieldValue: date => this.setDateOfBirth(date),
-        confirmButtonText: t('onBoarding.personalDetails.datepicker.button2'),
-        cancelButtonText: t('onBoarding.personalDetails.datepicker.button1'),
-        birthDate: true
       },
       {
         stateKey: 'nationality',
@@ -343,7 +346,7 @@ class OnboardingPersonalDetailsContainer extends Component {
         component: InputText,
         label: t('onBoarding.personalDetails.form.unitNumberLabel'),
         value: values.premise,
-        validationFunction: 'validateRequired',
+        validationFunction: ['validateRequired', 'validateNoSpecial'],
         hidden: !isManualAddress
       },
       {
@@ -351,7 +354,7 @@ class OnboardingPersonalDetailsContainer extends Component {
         component: InputText,
         label: t('onBoarding.personalDetails.form.streetLabel'),
         value: values.street,
-        validationFunction: 'validateRequired',
+        validationFunction: ['validateRequired', 'validateNoSpecial'],
         hidden: !isManualAddress
       },
       {
@@ -359,7 +362,7 @@ class OnboardingPersonalDetailsContainer extends Component {
         component: InputText,
         label: t('onBoarding.personalDetails.form.cityLabel'),
         value: values.posttown,
-        validationFunction: 'validateRequired',
+        validationFunction: ['validateRequired', 'validateNoSpecial'],
         hidden: !isManualAddress
       },
       {
@@ -367,7 +370,7 @@ class OnboardingPersonalDetailsContainer extends Component {
         component: InputText,
         label: t('onBoarding.personalDetails.form.postcodeLabel'),
         value: values.postcode,
-        validationFunction: 'validateRequired',
+        validationFunction: ['validateRequired', 'validateNoSpecial'],
         hidden: !isManualAddress
       },
       {

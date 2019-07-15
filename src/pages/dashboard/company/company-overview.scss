@@ -179,6 +179,11 @@
       padding: 0;
 
       li {
+        list-style: none;
+        padding: $padding-horizontal 0
+      }
+
+      li.document {
         padding: $padding-horizontal 0 $padding-horizontal 30px;
         list-style-type: none;
         background: url('../../../assets/images/pdf.svg') left center no-repeat;
@@ -231,14 +236,20 @@
 }
 
 @media screen and (min-width: $breakpoint-desktop) {
-  .company-overview.my-property {
-    .company-overview-section {
-      display: flex;
-      padding-bottom: $padding-vertical;
-      margin-bottom: $padding-vertical;
+  .company-overview {
+    .company-header.back {
+      margin-top: 20px;
+    }
 
-      h2 {
-        width: 40%;
+    &.my-property {
+      .company-overview-section {
+        display: flex;
+        padding-bottom: $padding-vertical;
+        margin-bottom: $padding-vertical;
+
+        h2 {
+          width: 40%;
+        }
       }
     }
   }

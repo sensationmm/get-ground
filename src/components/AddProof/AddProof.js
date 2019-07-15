@@ -198,7 +198,25 @@ export class AddProof extends Component {
         </div>
 
         <div className="add-proof-img">{this.handleProof(t)}</div>
-        {section !== 'selfie' && <div className="add-proof-upload-file">{this.uploadImg(t)}</div>}
+
+        {section !== 'selfie'
+          ? <div>
+              <div 
+                className="add-proof-upload-file"
+                onClick={() => this.handleActiveSection({takePicture: true})}
+              >
+                Take a picture of your document
+              </div>
+
+              <div className="add-proof-upload-file">{this.uploadImg(t)}</div>
+            </div>
+          : <div 
+              className="add-proof-upload-file"
+              onClick={() => this.handleActiveSection({takePicture: true})}
+            >
+              Take your picture
+            </div>
+        }
       </div>
     );
   }

@@ -71,7 +71,7 @@ class ShareholderDetails extends Component {
   componentDidMount() {
     const { company: { shareholder_details }, user} = this.props;
     let shareholders = shareholder_details.collection === null ? [{...shareholder}] : shareholder_details.collection;
-    shareholders = shareholders.filter(p => p.first_name !== user.first_name && p.last_name !== user.last_name)
+    shareholders = shareholders.filter(p => p.email !== user.email)
 
     const populatedShareholders = shareholders.length;
     for (let i = shareholders.length; i < 8; i++) {
@@ -198,7 +198,7 @@ class ShareholderDetails extends Component {
     const { showLoader, hideLoader, company, user } = this.props;
     showLoader();
     const creator = [{
-      allocated_shares: (100 - this.state.totalShares).toString(),
+      allocated_shares: '100',
       email: user.email,
       first_name: user.first_name,
       is_director: this.state.owner_is_director,
@@ -234,7 +234,17 @@ class ShareholderDetails extends Component {
     }
   }
 
-  addDetailsBack = () => this.setState({ stage: 'add' });
+  addDetailsBack = () => {
+    const isValid = this.validateShareholderShares();
+
+    if(isValid) {
+      this.setState({
+        stage: 'add'
+      });
+    } else {
+      formUtils.setFormError(this.props.t('companyDesign.shareholderDetails.shares.error'));
+    }
+  }
 
   /**
    * renderShareholders
@@ -334,7 +344,7 @@ class ShareholderDetails extends Component {
 
     const payload = {
       collection: creator.concat(shareholders),
-      is_complete: isSaveAndExit
+      is_complete: !isSaveAndExit
     }
 
     showLoader();
@@ -530,7 +540,7 @@ const sliceForm = (form, user) => {
   return {
     errors: form.errors,
     showErrorMessage: form.showErrorMessage,
-    values: Array.isArray(form.values) ? form.values.filter(p => p.first_name !== user.first_name && p.last_name !== user.last_name ) : form.values
+    values: Array.isArray(form.values) ? form.values.filter(p => p.email !== user.email ) : form.values
   }
 }
 
