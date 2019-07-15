@@ -73,7 +73,7 @@ class EnterEmail extends Component {
         component: InputText,
         label: t('login.form.label.email'),
         value: values.email,
-        validationFunction: 'validateEmail'
+        validationFunction: ['validateRequired','validateEmail'],
       },
     ];
 

@@ -5,7 +5,7 @@ import { withTranslation } from 'react-i18next';
 
 import formUtils from 'src/utils/form';
 
-import InputNumber from 'src/components/_form/InputNumber/InputNumber';
+import InputText from 'src/components/_form/InputText/InputText';
 import Checkbox from 'src/components/_form/Checkbox/Checkbox';
 
 import './shareholder-shares.scss';
@@ -43,10 +43,10 @@ class ShareholderShares extends Component {
     this.config = [
       {
         stateKey: 'allocated_shares',
-        component: InputNumber,
+        component: InputText,
         value: shares,
-        validationFunction: ['validateRequired','validateTotal'],
-        validationParam: [null, { total: totalShares, maxValue: 100 }],
+        validationFunction: ['validateRequired','validateNumeric','validateMinValue','validateTotal'],
+        validationParam: [null, null, '1', { total: totalShares, maxValue: 100 }],
         onChange: /* istanbul ignore next */(val) => onChange(shareholderID, 'allocated_shares', val),
         readOnly: disabled
       },
