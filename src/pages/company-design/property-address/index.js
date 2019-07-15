@@ -248,7 +248,7 @@ class PropertyAddress extends Component {
         component: InputText,
         label: t('companyDesign.propertyAddress.form.unitNumberLabel'),
         value: values.premise,
-        validationFunction: 'validateRequired',
+        validationFunction: ['validateRequired', 'validateNoSpecial'],
         hidden: !isManualAddress
       },
       {
@@ -256,7 +256,7 @@ class PropertyAddress extends Component {
         component: InputText,
         label: t('companyDesign.propertyAddress.form.streetLabel'),
         value: values.street,
-        validationFunction: 'validateRequired',
+        validationFunction: ['validateRequired', 'validateNoSpecial'],
         hidden: !isManualAddress
       },
       {
@@ -264,7 +264,7 @@ class PropertyAddress extends Component {
         component: InputText,
         label: t('companyDesign.propertyAddress.form.cityLabel'),
         value: values.posttown,
-        validationFunction: 'validateRequired',
+        validationFunction: ['validateRequired', 'validateNoSpecial'],
         hidden: !isManualAddress
       },
       {
@@ -272,7 +272,7 @@ class PropertyAddress extends Component {
         component: InputText,
         label: t('companyDesign.propertyAddress.form.postcodeLabel'),
         value: values.postcode,
-        validationFunction: 'validateRequired',
+        validationFunction: ['validateRequired', 'validateNoSpecial'],
         hidden: !isManualAddress
       },
       {

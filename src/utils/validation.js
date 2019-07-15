@@ -11,7 +11,7 @@ const validationMessages = {};
  * @return {boolean} whether email passes validation
  */
 export const validateEmail = (email) => {
-  const re = /\S+@\S+\.\S+/;
+  const re = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
   return re.test(email);
 };
 validationMessages.validateEmail = i18n.t('validation.validateEmail');
@@ -81,7 +81,7 @@ validationMessages.validateNoOfCompanies = i18n.t('validation.validateNoOfCompan
  * @return {boolean} whether value is entered
  */
 export const validateLettersOnly = (input) => {
-  return !/[^a-zA-Z\s]/.test(input);
+  return !/[^a-zA-Z-\s]/.test(input);
 };
 validationMessages.validateLettersOnly = i18n.t('validation.validateLettersOnly');
 
@@ -110,6 +110,11 @@ export const validateMinimum = (value, min) => {
   return value.length >= min;
 };
 
+export const validateMinValue = (value, min) => {
+  validationMessages.validateMinValue = i18n.t('validation.validateMinValue', { min: min });
+  return value >= min;
+};
+
 export const validateNoSpaces = (input) => {
   return !/[\s]/.test(input);
 };
@@ -128,6 +133,11 @@ export const validateFutureDate = (input) => {
 };
 validationMessages.validateFutureDate = i18n.t('validation.validateFutureDate');
 
+export const validateNoSpecial = (input) => {
+  return !/[^a-zA-Z0-9,.-\s]/.test(input);
+};
+validationMessages.validateNoSpecial = i18n.t('validation.validateNoSpecial');
+
 const validation = {
   validateEmail,
   validatePhone,
@@ -138,9 +148,11 @@ const validation = {
   validateLettersOnly,
   validateTotal,
   validateMinimum,
+  validateMinValue,
   validateNoSpaces,
   validateDate,
   validateFutureDate,
+  validateNoSpecial,
   messages: validationMessages,
 };
 

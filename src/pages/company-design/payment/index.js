@@ -144,7 +144,7 @@ export class Payment extends Component {
         stripeError: t('onBoarding.payment.stripeError'),
         setStripeToken: token => this.setState({ stripeToken: token }),
         validateForm: () => this.validateForm(),
-        cardFieldLabel: t('onBoarding.payment.form.cardLabel'),
+        cardFieldLabel: '',
         nextButtonLabel: t('onBoarding.createAccount.ctaPrimary'),
         backButtonLabel: t('onBoarding.createAccount.ctaSecondary'),
         handleChange: (e) => this.areCardDetailsValid(e.complete)

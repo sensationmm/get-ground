@@ -1074,9 +1074,11 @@
     "validateNoOfCompanies": "No more than 20",
     "validateLettersOnly": "Invalid characters",
     "validateTotal": "Max {{max}}",
-    "validateMinimum": "Invalid password",
+    "validateMinimum": "Min length {{min}}",
+    "validateMinValue": "Min value {{min}}",
     "validateNoSpaces": "No spaces",
     "validateDate": "DD/MM/YYYY",
+    "validateNoSpecial": "Invalid characters",
     "validateFutureDate": "Date is in past"
   },
   "whatWeDo": {

@@ -346,7 +346,7 @@ class OnboardingPersonalDetailsContainer extends Component {
         component: InputText,
         label: t('onBoarding.personalDetails.form.unitNumberLabel'),
         value: values.premise,
-        validationFunction: 'validateRequired',
+        validationFunction: ['validateRequired', 'validateNoSpecial'],
         hidden: !isManualAddress
       },
       {
@@ -354,7 +354,7 @@ class OnboardingPersonalDetailsContainer extends Component {
         component: InputText,
         label: t('onBoarding.personalDetails.form.streetLabel'),
         value: values.street,
-        validationFunction: 'validateRequired',
+        validationFunction: ['validateRequired', 'validateNoSpecial'],
         hidden: !isManualAddress
       },
       {
@@ -362,7 +362,7 @@ class OnboardingPersonalDetailsContainer extends Component {
         component: InputText,
         label: t('onBoarding.personalDetails.form.cityLabel'),
         value: values.posttown,
-        validationFunction: 'validateRequired',
+        validationFunction: ['validateRequired', 'validateNoSpecial'],
         hidden: !isManualAddress
       },
       {
@@ -370,7 +370,7 @@ class OnboardingPersonalDetailsContainer extends Component {
         component: InputText,
         label: t('onBoarding.personalDetails.form.postcodeLabel'),
         value: values.postcode,
-        validationFunction: 'validateRequired',
+        validationFunction: ['validateRequired', 'validateNoSpecial'],
         hidden: !isManualAddress
       },
       {

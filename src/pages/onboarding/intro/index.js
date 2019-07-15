@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Link } from 'gatsby';
+import { navigate } from 'gatsby';
 import { useTranslation } from 'react-i18next';
 
 import sliderImg1 from 'src/assets/images/getStarted.svg';
@@ -53,21 +53,20 @@ const OnboardingIntroContainer = () => {
           <IntroSlider slides={slidesConfig.slides} />
         }
         <div className="intro--buttons-container">
-          <Link to="/onboarding/create-account">
-            <Button
-              fullWidth
-              big
-              label={t('onBoarding.intro.button1')}
-            />
-          </Link>
-          <Link to="/login">
-            <Button
-              fullWidth
-              opaque
-              small
-              label={t('onBoarding.intro.button2')}
-            />
-          </Link>
+          <Button
+            fullWidth
+            big
+            label={t('onBoarding.intro.button1')}
+            onClick={() => navigate('/onboarding/create-account')}
+          />
+
+          <Button
+            fullWidth
+            opaque
+            small
+            label={t('onBoarding.intro.button2')}
+            onClick={() => navigate('/login')}
+          />
         </div>
       </div>
     </Layout>

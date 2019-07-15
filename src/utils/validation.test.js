@@ -174,6 +174,23 @@ describe('validateMinimum', () => {
   });
 });
 
+describe('validateMinValue', () => {
+  test('returns true if more', () => {
+    const isValid = validation.validateMinValue(4, 3);
+    expect(isValid).toBe(true);
+  });
+
+  test('returns true if equal', () => {
+    const isValid = validation.validateMinValue(4, 4);
+    expect(isValid).toBe(true);
+  });
+
+  test('returns false if less', () => {
+    const isValid = validation.validateMinValue(4, 6);
+    expect(isValid).toBe(false);
+  });
+});
+
 describe('validateNoSpaces', () => {
   test('returns true if no spaces', () => {
     const isValid = validation.validateNoSpaces('password1');
@@ -221,6 +238,18 @@ describe('validateFutureDate', () => {
 
   test('returns false if date is today', () => {
     const isValid = validation.validateFutureDate(moment().format('DD/MM/YYYY'));
+    expect(isValid).toBe(false);
+  });
+});
+
+describe('validateNoSpecial', () => {
+  test('returns true if no special characters', () => {
+    const isValid = validation.validateNoSpecial('asdf1234, -.');
+    expect(isValid).toBe(true);
+  });
+
+  test('returns false if special characters found', () => {
+    const isValid = validation.validateNoSpecial('asdf1234, @');
     expect(isValid).toBe(false);
   });
 });

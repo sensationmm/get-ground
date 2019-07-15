@@ -102,7 +102,7 @@ class Login extends Component {
         component: InputText,
         label: t('login.form.label.email'),
         value: values.email,
-        validationFunction: 'validateEmail',
+        validationFunction: ['validateRequired','validateEmail'],
         onKeyPress: this.enterSubmit
       },
       {

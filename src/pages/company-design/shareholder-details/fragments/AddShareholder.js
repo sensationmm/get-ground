@@ -38,7 +38,7 @@ class AddShareholder extends Component {
         component: InputText,
         label: t('companyDesign.shareholderDetails.add.new.form.firstName'),
         value: first_name,
-        validationFunction: 'validateRequired',
+        validationFunction: ['validateRequired', 'validateLettersOnly'],
         onChange: /* istanbul ignore next */(val) => onChange(shareholderID, 'first_name', val),
       },
       {
@@ -46,7 +46,7 @@ class AddShareholder extends Component {
         component: InputText,
         label: t('companyDesign.shareholderDetails.add.new.form.lastName'),
         value: last_name,
-        validationFunction: 'validateRequired',
+        validationFunction: ['validateRequired', 'validateLettersOnly'],
         onChange: /* istanbul ignore next */(val) => onChange(shareholderID, 'last_name', val),
       },
       {

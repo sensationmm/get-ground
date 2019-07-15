@@ -63,12 +63,14 @@ class Dashboard extends Component {
           <div className="dashboard-columns">
             <div>
               <h3>{ t('dashboard.main.portfolioHeader') }</h3>
-              <Button
-                classes="primary small add-company"
-                data-test="add-company-button"
-                label={ t('dashboard.main.addCompanyButton') }
-                onClick={() => navigate('/company-design/intro')}
-              />
+              {hasCompanies && 
+                <Button
+                  classes="primary small add-company"
+                  data-test="add-company-button"
+                  label={ t('dashboard.main.addCompanyButton') }
+                  onClick={() => navigate('/company-design/intro')}
+                />
+              }
   
               { hasCompanies && companies.map((company, count) => (
                 <CompanyLink
