@@ -29,6 +29,8 @@ const stateMock = {
 
 const mockCallback = jest.fn();
 
+window.scrollTo = () => {};
+
 const configMock = [
   {
     stateKey: 'name',

@@ -30,7 +30,7 @@ export class AddProof extends Component {
   }
 
   initialLanding = () => {
-    const { initialImg, section, t } = this.props;
+    const { initialImg, section, t, existing } = this.props;
 
     return (
       <div
@@ -39,10 +39,15 @@ export class AddProof extends Component {
         onClick={() => this.handleActiveSection({takePicture: true})}
         style={{ backgroundImage: `url(${initialImg})` }}
       >
-        <div className="add-proof-initial-label">
-          <img src={CameraIcon} className={`add-proof-initial-camera-icon ${section}`} />
-          <p className={`add-proof-initial-name ${section}`}>{t(`onBoarding.idCheck.${section}.name`)}</p>
-        </div>
+        { existing
+          ? <img src={`data:image/jpeg;base64,${existing}`} />
+          : (
+            <div className="add-proof-initial-label">
+              <img src={CameraIcon} className={`add-proof-initial-camera-icon ${section}`} />
+              <p className={`add-proof-initial-name ${section}`}>{t(`onBoarding.idCheck.${section}.name`)}</p>
+            </div>
+          )
+        }
       </div>
     )
   }
@@ -87,8 +92,20 @@ export class AddProof extends Component {
         <img className="confirm-image" data-test="confirm-img" src={imagesrc}/>
         <p className="happy-text">{ t(`onBoarding.idCheck.${section}.retakeImageContent`) }</p>
         <div className="confirm-buttons">
-          <Button data-test="happy-button" classes="primary confirm-happy" fullWidth label={t('onBoarding.idCheck.image.happy')} onClick={() => this.handleHappy()}/>
-          <Button data-test="retake-button" classes="secondary" fullWidth label={t('onBoarding.idCheck.image.retake')} onClick={() => this.retakePicture()}/>
+          <Button 
+            data-test="happy-button" 
+            classes="primary confirm-happy" 
+            fullWidth 
+            label={t('onBoarding.idCheck.image.happy')} 
+            onClick={() => this.handleHappy()}
+          />
+          <Button 
+            data-test="retake-button" 
+            classes="secondary" 
+            fullWidth 
+            label={t('onBoarding.idCheck.image.retake')} 
+            onClick={() => this.retakePicture()}
+          />
         </div>
       </>
     )
@@ -233,7 +250,8 @@ AddProof.propTypes = {
   active: PropTypes.string.isRequired,
   overlay: PropTypes.string,
   idCheck: PropTypes.object,
-  isMobile: PropTypes.bool
+  isMobile: PropTypes.bool,
+  existing: PropTypes.string
 }
 const mapStateToProps = (state) => ({
   active: state.idCheck.active,

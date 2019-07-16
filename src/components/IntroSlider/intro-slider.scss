@@ -1,59 +1,59 @@
 @import 'src/styles/modules/_colors.scss';
 @import 'src/styles/pages/intro.scss';
 
-.slick-slider {
-  overflow: hidden;
-  touch-action: none;
+.slick {
+  
+  &-slider {
+    overflow: hidden;
+    touch-action: none;
 
-  .slick-track {
-    display: flex;
+    .slick-track {
+      display: flex;
 
-    .slick-slide {
-      div {
-        outline: none;
-      }
+      .slick-slide {
+        div {
+          outline: none;
+        }
 
-      &--image {
-        @extend .intro--hero-image;
-        display: block;
-        height: 280px;
-      }
+        &--image {
+          @extend .intro--hero-image;
+          display: block;
+          height: 280px;
+        }
 
-      h2 {
-        font-size: 36px;
-        margin: 0;
-        padding: 20px 0;
+        h2 {
+          font-size: 36px;
+          margin: 0;
+          padding: 20px 0;
+        }
       }
     }
-  }
 
-  .slick-dots {
-    padding: 0;
-    text-align: center;
-    margin: 0;
+    .slick-dots {
+      padding: 0;
+      text-align: center;
+      margin: 0;
 
-    li {
-      display: inline-block;
-      margin-right: 5px;
+      li {
+        display: inline-block;
+        padding: 0px;
+        margin: 0 3px;
 
-      &.slick-active button {
-        background: #2e5472;
-      }
+        &.slick-active button {
+          background: #2e5472;
+        }
 
-      &:last-child {
-        margin-right: 0;
-      }
-
-      button {
-        width: 10px;
-        height: 10px;
-        border-radius: 5px;
-        background-color: #FFF;
-        text-indent: -9999px;
-        border: 0;
-        cursor: pointer;
-        padding: 0;
-        outline: none;
+        button {
+          width: 10px;
+          height: 10px;
+          border-radius: 5px;
+          background-color: #FFF;
+          text-indent: -9999px;
+          border: 0;
+          cursor: pointer;
+          padding: 0;
+          outline: none;
+        }
       }
     }
   }
@@ -68,15 +68,33 @@
 }
 
 @media screen and (min-width: $breakpoint-desktop) {
-  .slick-slider {
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+  .slick {
+    &-arrow {
+      position: absolute;
+      left: 50%;
+      bottom: 2px;
+      cursor: pointer;
+      filter: invert(1);
 
-    .slick-slide  {
-      &--container {
-        display: flex !important;
-        flex-direction: row-reverse !important;
+      &.slick-next {
+        transform: translateX(450%);
+      }
+
+      &.slick-prev {
+        transform: translateX(-550%);
+      }
+    }
+
+    &-slider {
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+
+      .slick-slide  {
+        &--container {
+          display: flex !important;
+          flex-direction: row-reverse !important;
+        }
       }
     }
   }
