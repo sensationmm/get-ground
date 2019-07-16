@@ -64,9 +64,9 @@ export class IdCheck extends Component {
           </ErrorBox>
         }
 
-        <AddProof section="passport" initialImg={Passport} existing={myPassport} overlay={CameraCrosshair} />
-        <AddProof section="address" initialImg={Address} existing={myAddress} overlay={CameraCrosshair} />
-        <AddProof section="selfie" initialImg= {Selfie} existing={mySelfie} overlay={AlienHead} />
+        <AddProof section="passport" initialImg={Passport} existing={myPassport && myPassport.content} overlay={CameraCrosshair} />
+        <AddProof section="address" initialImg={Address} existing={myAddress && myAddress.content} overlay={CameraCrosshair} />
+        <AddProof section="selfie" initialImg= {Selfie} existing={mySelfie && mySelfie.content} overlay={AlienHead} />
         <Button classes="primary id-check-next" onClick={this.submitFiles} label={ t('onBoarding.idCheck.buttonNext') } fullWidth />
         <Link to="/onboarding/personal-details">
           <Button classes="secondary id-check-back" label={ t('onBoarding.idCheck.buttonBack') } fullWidth />
@@ -96,9 +96,9 @@ const mapStateToProps = state => ({
   address: state.idCheck.address,
   selfie: state.idCheck.selfie,
   form: state.form,
-  myPassport: state.documents.file_passport.content,
-  myAddress: state.documents.file_proof_of_address.content,
-  mySelfie: state.documents.file_selfie.content,
+  myPassport: state.documents.file_passport,
+  myAddress: state.documents.file_proof_of_address,
+  mySelfie: state.documents.file_selfie,
 })
 
 const actions = { showLoader, hideLoader, resetActive };
