@@ -133,6 +133,15 @@ export const validateFutureDate = (input) => {
 };
 validationMessages.validateFutureDate = i18n.t('validation.validateFutureDate');
 
+export const validateMinDate = (value, min) => {
+  validationMessages.validateMinDate = i18n.t('validation.validateMinDate', { min: min.replace('/','/') });
+  
+  const isAfter = moment(value, 'DD/MM/YYYY').isAfter(moment(min, 'DD/MM/YYYY'));
+  const isSame = moment(value, 'DD/MM/YYYY').isSame(moment(min, 'DD/MM/YYYY'));
+  
+  return isAfter || isSame;
+};
+
 export const validateNoSpecial = (input) => {
   return !/[^a-zA-Z0-9,.-\s]/.test(input);
 };
@@ -153,6 +162,7 @@ const validation = {
   validateDate,
   validateFutureDate,
   validateNoSpecial,
+  validateMinDate,
   messages: validationMessages,
 };
 

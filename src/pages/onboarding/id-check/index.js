@@ -50,8 +50,8 @@ export class IdCheck extends Component {
   }
 
   render() {
-    const { t, form: { errors, showErrorMessage } } = this.props
-    const headerActions = <Link to="/onboarding"><ButtonHeader label={t('header.buttons.saveAndExit')} /></Link>;
+    const { t, form: { errors, showErrorMessage }, myPassport, myAddress, mySelfie } = this.props
+    const headerActions = <ButtonHeader onClick={this.submitFiles} label={t('header.buttons.saveAndExit')} />;
 
     return (
       <Layout headerActions={headerActions} secure>
@@ -64,9 +64,9 @@ export class IdCheck extends Component {
           </ErrorBox>
         }
 
-        <AddProof section="passport" initialImg={Passport} overlay={CameraCrosshair} />
-        <AddProof section="address" initialImg={Address} overlay={CameraCrosshair} />
-        <AddProof section="selfie" initialImg= {Selfie} overlay={AlienHead} />
+        <AddProof section="passport" initialImg={Passport} existing={myPassport} overlay={CameraCrosshair} />
+        <AddProof section="address" initialImg={Address} existing={myAddress} overlay={CameraCrosshair} />
+        <AddProof section="selfie" initialImg= {Selfie} existing={mySelfie} overlay={AlienHead} />
         <Button classes="primary id-check-next" onClick={this.submitFiles} label={ t('onBoarding.idCheck.buttonNext') } fullWidth />
         <Link to="/onboarding/personal-details">
           <Button classes="secondary id-check-back" label={ t('onBoarding.idCheck.buttonBack') } fullWidth />
@@ -85,14 +85,20 @@ IdCheck.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   resetActive: PropTypes.func,
-  form: PropTypes.object
+  form: PropTypes.object,
+  myPassport: PropTypes.string,
+  myAddress: PropTypes.string,
+  mySelfie: PropTypes.string
 }
 
 const mapStateToProps = state => ({
   passport: state.idCheck.passport,
   address: state.idCheck.address,
   selfie: state.idCheck.selfie,
-  form: state.form
+  form: state.form,
+  myPassport: state.documents.file_passport.content,
+  myAddress: state.documents.file_proof_of_address.content,
+  mySelfie: state.documents.file_selfie.content,
 })
 
 const actions = { showLoader, hideLoader, resetActive };
