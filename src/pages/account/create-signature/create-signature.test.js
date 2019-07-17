@@ -16,7 +16,8 @@ describe('create signature page', () => {
     t: tMock,
     showLoader: showLoaderMock,
     hideLoader: hideLoaderMock,
-    form: ReduxFormMock
+    form: ReduxFormMock,
+    location: { search: null }
   };
 
   beforeEach(() => {

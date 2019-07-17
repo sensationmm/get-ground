@@ -85,7 +85,7 @@ class CreateSignature extends Component {
   }
 
   render() {
-    const { t, form: { values } } = this.props;
+    const { t, form: { values }, location } = this.props;
     const { selectedSignature, savedSignature } = this.state;
 
     /* istanbul ignore next */
@@ -220,7 +220,8 @@ CreateSignature.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   t: PropTypes.func.isRequired,
-  form: PropTypes.object
+  form: PropTypes.object,
+  location: PropTypes.object
 };
 
 const mapStateToProps = state => ({
