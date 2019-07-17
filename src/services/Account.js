@@ -1,7 +1,8 @@
+import { blobToDataURL } from 'blob-util'
 import BaseService from './BaseService';
 import store from 'src/state/store';
 
-import { saveDocuments } from 'src/state/actions/documents';
+import { saveDocuments, saveSignature } from 'src/state/actions/documents';
 import { saveUser } from 'src/state/actions/user';
 
 /**
@@ -127,6 +128,10 @@ class AccountService extends BaseService {
       data: formData
     };
 
+    blobToDataURL(signatureBlob).then((res) => {
+      store.dispatch(saveSignature(res))
+    })
+
     return this.doRequest(config);
   };
 
@@ -153,15 +158,15 @@ class AccountService extends BaseService {
    */
   getSignature = () => {
     const config = {
-      url: `/documents/${store.getState().user.id}/file`,
+      url: `/users/${store.getState().user.id}/signature`,
       method: 'get'
     };
 
-    return this.doRequest(config);
+    return this.doRequest(config, (response) => {
+      const { data: { content } } = response;
 
-    // return this.doRequest(config, (response) => {
-    //   store.dispatch(saveDocuments(response.data));
-    // });
+      store.dispatch(saveSignature(content))
+    });
   };
 
   /**

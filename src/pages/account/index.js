@@ -51,12 +51,6 @@ class Account extends Component {
     this.config = null;
   }
 
-  componentDidMount() {
-    AccountService.getSignature().then((res) => {
-      // console.log('res', res)
-    })
-  }
-
   componentWillUnmount() {
     formUtils.clearFormState();
   }
@@ -167,7 +161,7 @@ class Account extends Component {
 
     const passportData = documents.file_passport && documents.file_passport.content;
     const addressProof = documents.file_proof_of_address && documents.file_proof_of_address.content;
-    const signature = documents.signature && documents.signature.content;
+    const signature = documents.file_signature;
 
     const paymentCard = user.payment_details ? user.payment_details : {};
 
@@ -347,7 +341,7 @@ class Account extends Component {
           <div className="company-overview-section" data-test="section-signature">
             <h2>{ t('profile.sections.signature') }</h2>
             <div className="signature">
-              {signature && <img src={`data:image/jpeg;base64,${signature.filename}`} /> }
+              {signature && <img data-test="signature" src={signature.includes('data:image') ? signature : `data:image/jpeg;base64, ${signature}`} /> }
             </div>
 
             <div className="account-edit">
@@ -375,7 +369,7 @@ Account.propTypes = {
   hideLoader: PropTypes.func,
   user: PropTypes.object,
   form: PropTypes.object,
-  documents: PropTypes.array,
+  documents: PropTypes.object,
   userUpdate: PropTypes.func
 };
 
