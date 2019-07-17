@@ -27,11 +27,6 @@ describe('<Account />', () => {
     userUpdate: userUpdateMock,
     form: ReduxFormMock,
     user: { ...UserMock, payment_details: { brand: 'visa' }, 'previous_names': 'asd' },
-    // documents: [
-    //   { 'description': 'passport', filename: ''},
-    //   { 'description': 'address', filename: ''},
-    //   { 'description': 'signature', filename: ''}
-    // ],
     documents: {
       file_passport: {
         content: 'imageofpassport'
