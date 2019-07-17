@@ -70,6 +70,10 @@ describe('process-tracker', () => {
     expect(wrapper.find('Button')).toHaveLength(1);
   })
 
+  test('signature', () => {
+    expect(wrapper.find('[data-test="modal-content"]').props().signatureUrl).toEqual('data:image/jpeg;base64, iVBORw0KGgoAAAANSUhEUgAABV4AAACWCAYAAAAmPpP1AAAWS0lEQVR4Xu3daai1VRk');
+  })
+
   describe('initmodal()', () => {
 
     test('executes and calls `getModalContent` with `shareholdersAgreementMarkdown` & `shareholders agreement`', () => {

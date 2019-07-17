@@ -276,6 +276,7 @@ export class MyDocuments extends Component {
                 signaturePlaceholderText={t('myDocuments.modalSignaturePlaceholderText')}
                 signatureButtonLabel={t('myDocuments.modalSignatureButtonLabel')}
                 signatureUrl={signature.includes('data:image') ? signature : `data:image/jpeg;base64, ${signature}`}
+                data-test="modal-content"
               />
             </ModalWrapper>
           </div>
