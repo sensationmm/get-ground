@@ -206,7 +206,12 @@ class ShareholderDetails extends Component {
       last_name: user.last_name
     }]
 
-    CompanyService.updateCompany({collection: creator}, 'shareholder_details', company.id).then((response) => {
+    const payload = {
+      collection: creator,
+      is_complete: true
+    }
+
+    CompanyService.updateCompany(payload, 'shareholder_details', company.id).then((response) => {
       hideLoader();
       navigate('/company-design/tax-questions');
     });
@@ -234,7 +239,17 @@ class ShareholderDetails extends Component {
     }
   }
 
-  addDetailsBack = () => this.setState({ stage: 'add' });
+  addDetailsBack = () => {
+    const isValid = this.validateShareholderShares();
+
+    if(isValid) {
+      this.setState({
+        stage: 'add'
+      });
+    } else {
+      formUtils.setFormError(this.props.t('companyDesign.shareholderDetails.shares.error'));
+    }
+  }
 
   /**
    * renderShareholders

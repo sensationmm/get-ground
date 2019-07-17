@@ -1,6 +1,6 @@
 import { setup } from '../../test-utils/test-utils'
 
-import IntroSlider from './IntroSlider'
+import { RawComponent as IntroSlider } from './IntroSlider'
 
 describe('<IntroSlider />', () => {
   let wrapper;

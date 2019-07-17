@@ -25,6 +25,6 @@ describe('MeetTheFounders', () => {
   test('join us', () => {
     expect(wrapper.find('[data-test="join-us-button"]').length).toEqual(1)
     wrapper.find('[data-test="join-us-button"]').props().onClick()
-    expect(window.location.assign).toHaveBeenCalledWith('mailto:info@getground.com');
+    expect(window.location.assign).toHaveBeenCalledWith('mailto:info@getground.com?subject=Join Us');
   })
 })

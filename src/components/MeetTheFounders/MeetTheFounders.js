@@ -76,7 +76,7 @@ const MeetTheFounders = () => {
             classes="meet-the-founders-join-us-btn primary"
             data-test="join-us-button"
             label={t('meetTheFounders.joinUs.title')}
-            onClick={ () => window.location.assign('mailto:info@getground.com')}
+            onClick={ () => window.location.assign('mailto:info@getground.com?subject=Join Us')}
           />
         </center>
       </div>

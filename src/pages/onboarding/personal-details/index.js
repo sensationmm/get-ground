@@ -292,19 +292,9 @@ class OnboardingPersonalDetailsContainer extends Component {
         value: values.date_of_birth,
         validationFunction: ['validateRequired', 'validateDate'],
         placeholder: 'DD/MM/YYYY',
-        // onFocus: this.openDatePicker,
         id: 'datepicker-field',
         note: t('onBoarding.personalDetails.form.dateOfBirthNote'),
       },
-      // {
-      //   component: Datepicker,
-      //   isDatepickerOpen: isDatepickerOpen,
-      //   closeDatepicker: () => this.closeDatePicker(),
-      //   setDateFieldValue: date => this.setDateOfBirth(date),
-      //   confirmButtonText: t('onBoarding.personalDetails.datepicker.button2'),
-      //   cancelButtonText: t('onBoarding.personalDetails.datepicker.button1'),
-      //   birthDate: true
-      // },
       {
         stateKey: 'nationality',
         component: Select,
@@ -356,7 +346,7 @@ class OnboardingPersonalDetailsContainer extends Component {
         component: InputText,
         label: t('onBoarding.personalDetails.form.unitNumberLabel'),
         value: values.premise,
-        validationFunction: 'validateRequired',
+        validationFunction: ['validateRequired', 'validateNoSpecial'],
         hidden: !isManualAddress
       },
       {
@@ -364,7 +354,7 @@ class OnboardingPersonalDetailsContainer extends Component {
         component: InputText,
         label: t('onBoarding.personalDetails.form.streetLabel'),
         value: values.street,
-        validationFunction: 'validateRequired',
+        validationFunction: ['validateRequired', 'validateNoSpecial'],
         hidden: !isManualAddress
       },
       {
@@ -372,7 +362,7 @@ class OnboardingPersonalDetailsContainer extends Component {
         component: InputText,
         label: t('onBoarding.personalDetails.form.cityLabel'),
         value: values.posttown,
-        validationFunction: 'validateRequired',
+        validationFunction: ['validateRequired', 'validateNoSpecial'],
         hidden: !isManualAddress
       },
       {
@@ -380,7 +370,7 @@ class OnboardingPersonalDetailsContainer extends Component {
         component: InputText,
         label: t('onBoarding.personalDetails.form.postcodeLabel'),
         value: values.postcode,
-        validationFunction: 'validateRequired',
+        validationFunction: ['validateRequired', 'validateNoSpecial'],
         hidden: !isManualAddress
       },
       {

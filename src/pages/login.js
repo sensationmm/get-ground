@@ -72,7 +72,11 @@ class Login extends Component {
               formUtils.setFormError(t('login.form.errorVerify'));
               break;
             case 'Invalid password':
+              formUtils.setFormError(t('login.form.errorPassword'));
+              break;
             case 'User not found':
+              formUtils.setFormError(t('login.form.errorUser'));
+              break;
             default:
               formUtils.setFormError(t('login.form.error'));
               break;
@@ -102,7 +106,7 @@ class Login extends Component {
         component: InputText,
         label: t('login.form.label.email'),
         value: values.email,
-        validationFunction: 'validateEmail',
+        validationFunction: ['validateRequired','validateEmail'],
         onKeyPress: this.enterSubmit
       },
       {
