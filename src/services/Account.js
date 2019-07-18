@@ -154,7 +154,7 @@ class AccountService extends BaseService {
    */
   retrieveInvestedUser = (token) => {
     const config = {
-      url: `property_purchases/property_purchases_users/${token}`,
+      url: `property_purchases_users/${token}`,
       method: 'get'
     };
 
