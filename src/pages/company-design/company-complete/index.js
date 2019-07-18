@@ -31,9 +31,11 @@ class CompanyComplete extends Component {
     const { showLoader, hideLoader, company } = this.props;
     
     showLoader();
-    CompanyService.confirmCompany(company.id).then(() => {
-      hideLoader();
-    });
+    if(company) {
+      CompanyService.confirmCompany(company.id).then(() => {
+        hideLoader();
+      });
+    }
   }
 
   render() {
@@ -41,7 +43,7 @@ class CompanyComplete extends Component {
 
     return (
       <Layout>
-        <div data-test="container-company-complete" className="company-complete" role="fullscreen form-page">
+        <div data-test="container-company-complete" className="company-complete" role="fullscreen form-page hasCurve">
           <TextImage
             title={t('companyDesign.companyComplete.title')}
             image={successImg}

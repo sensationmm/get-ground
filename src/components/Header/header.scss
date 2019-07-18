@@ -11,9 +11,8 @@
   left: 0px;
   font-size: 14px;
 
-  @include gradient-horizontal-image(
-    $background-main-start,
-    $background-main-end,
+  @include background-horizontal-image(
+    $gradient,
     '../../assets/images/background.png'
   );
 
@@ -50,7 +49,7 @@
       cursor: pointer;
 
       &:after, &:before, div {
-        background-color: $white;
+        background-color: $text;
         border-radius: 3px;
         content: '';
         display: block;
@@ -93,14 +92,14 @@
     width: auto;
     height: 31px;
     border-radius: 17px;
-    border: solid 2px $white;
+    border: solid 2px $text;
     text-align: center;
     cursor: pointer;
     white-space: nowrap;
     padding: 0 10px;
 
     p {
-      color: $white;
+      color: $text;
       font-size: 13px;
       font-weight: 600;
       margin: 0;
@@ -123,24 +122,23 @@
       margin-left: 20px;
 
       &:first-child {
-        margin-left: 0;
+        margin-left: 10px;
       }
     }
 
     .button.tertiary {
       font-size: 16px;
       min-width: fit-content;
-      color: $white;
-      border-color: $white;
+      color: $text;
+      border-color: $text;
     }
   }
 }
 
 
 .account .header {
-  @include gradient-horizontal-image(
-    $background-account-start,
-    $background-account-end,
+  @include background-horizontal-image(
+    $gradient-account,
     '../../assets/images/background.png'
   );
 
@@ -150,9 +148,8 @@
 }
 
 .company-design .header {
-  @include gradient-horizontal-image(
-    $gradient-primary-1,
-    $gradient-primary-2,
+  @include background-horizontal-image(
+    $gradient,
     '../../assets/images/background.png'
   );
 
@@ -190,12 +187,12 @@
 
   .fullscreen {
     .header {
-      background: $background-main-start;
+      @include background-horizontal($gradient);
     }
 
     &.account {
       .header {
-        background: $background-account-start;
+        @include background-horizontal($gradient-account);
       }
     }
   }

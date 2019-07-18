@@ -7,8 +7,8 @@ import { navigate } from 'gatsby';
 import Layout from 'src/components/Layout/Layout';
 import ActionBox from 'src/components/ActionBox/ActionBox';
 import CompanyLink from 'src/components/CompanyLink/CompanyLink';
-// import ToDo from 'src/components/ToDo/ToDo';
-// import List from 'src/components/_layout/List/List';
+import ToDo from 'src/components/ToDo/ToDo';
+import List from 'src/components/_layout/List/List';
 import Button from 'src/components/_buttons/Button/Button';
 import { setActiveCompany } from 'src/state/actions/activeCompany';
 
@@ -17,7 +17,7 @@ import { showLoader, hideLoader } from 'src/state/actions/loader';
 import companyService from 'src/services/Company';
 export const CompanyService = new companyService();
 
-// import functions from 'src/utils/functions';
+import functions from 'src/utils/functions';
 
 import './dashboard.scss';
 
@@ -38,8 +38,8 @@ class Dashboard extends Component {
   
   render() {
     const { actions, companies, setActiveCompany, t } = this.props;
+    const hasActions = (actions.length > 0);
     const hasCompanies = (companies.length > 0);
-    // const hasActions = (actions.length > 0);
     let addCompany;
     
     if(!hasCompanies) {
@@ -49,6 +49,12 @@ class Dashboard extends Component {
         dismissable: false
       }
     }
+
+    const completeCompanies = companies.filter(company => company.progress.overall_status !== 'INCOMPLETE');
+    const hasCompleteCompanies = (completeCompanies.length > 0);
+
+    const incompleteCompanies = companies.filter(company => company.progress.overall_status === 'INCOMPLETE');
+    const hasIncompleteCompanies = (incompleteCompanies.length > 0);
 
     return (
       <Layout secure>
@@ -72,34 +78,50 @@ class Dashboard extends Component {
                 />
               }
   
-              { hasCompanies && companies.map((company, count) => (
-                <CompanyLink
-                  key={`company-${count}`}
-                  company={(({ id, property_address, progress }) => ({ id, property_address, progress }))(company)}
-                  setActiveCompany={setActiveCompany}
-                  propertyInProgressText={t('dashboard.main.propertyInProgressText')}
-                />
-              ))}
+              {hasCompleteCompanies && 
+                completeCompanies.map((company, count) => (
+                  <CompanyLink
+                    key={`company-${count}`}
+                    company={(({ id, property_address, progress }) => ({ id, property_address, progress }))(company)}
+                    setActiveCompany={setActiveCompany}
+                    propertyInProgressText={t('dashboard.main.propertyInProgressText')}
+                  />
+                ))
+              }
   
-              {!hasCompanies && <div className="no-properties">{ t('dashboard.main.noProperties') }</div>}
+              {!hasCompleteCompanies && <div className="no-properties">{ t('dashboard.main.noProperties') }</div>}
             </div>
             
             <div>
-              {/* <List numToShow={2}>
+              <List>
               <h3>{ t('dashboard.main.todoHeader') }</h3>
+              {incompleteCompanies.map((company, count) => {
+                return (
+                  <ToDo
+                    key={`todo-company-${count}`}
+                    action={{
+                      type: 'complete_company',
+                      companyID: company.id
+                    }}
+                    company={company}
+                    setActiveCompany={setActiveCompany}
+                  />
+                )
+              })}
+
               { hasCompanies && hasActions && actions.map((action, count) => {
                 const company = functions.getByValue(companies, 'id', action.companyID);
                 return (
                   <ToDo
                     key={`todo-${count}`}
                     action={action}
-                    company={(({ id, property_address }) => ({ id, property_address }))(company)}
+                    company={company}
                     setActiveCompany={setActiveCompany}
                   />
                 )
               })}
-              {(!hasCompanies || !hasActions) && <p>{ t('dashboard.main.noActions') }</p>}
-              </List> */}
+              {(!hasIncompleteCompanies && (!hasCompanies || !hasActions)) && <p>{ t('dashboard.main.noActions') }</p>}
+              </List>
             </div>
           </div>
         </div>

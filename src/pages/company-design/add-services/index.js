@@ -73,8 +73,20 @@ export class AdditionalServices extends Component {
     formUtils.clearFormState();
   }
 
+  save = () => {
+    const { values: { mortgage, insurance, management, solicitor } } = this.props.form;
+
+    const servicesRequired = mortgage || insurance || management || solicitor;
+
+    if(servicesRequired) {
+      this.props.showModal();
+    } else {
+      this.submitAdditionalServices();
+    }
+  }
+
   render() {
-    const { t, form, modalIsOpen, showModal, hideModal } = this.props
+    const { t, form, modalIsOpen, hideModal } = this.props
     const { values } = form;
 
     const config = [
@@ -135,7 +147,7 @@ export class AdditionalServices extends Component {
       },
       {
         component: Button,
-        onClick: () => showModal(),
+        onClick: this.save,
         label: t('additionalServices.nextButton'),
         classes: 'primary full',
       },

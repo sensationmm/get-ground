@@ -107,7 +107,7 @@ export const validateTotal = (input, { total, maxValue }) => {
  */
 export const validateMinimum = (value, min) => {
   validationMessages.validateMinimum = i18n.t('validation.validateMinimum', { min: min });
-  return value.length >= min;
+  return !value || (value && value.length >= min);
 };
 
 export const validateMinValue = (value, min) => {
@@ -139,7 +139,7 @@ export const validateMinDate = (value, min) => {
   const isAfter = moment(value, 'DD/MM/YYYY').isAfter(moment(min, 'DD/MM/YYYY'));
   const isSame = moment(value, 'DD/MM/YYYY').isSame(moment(min, 'DD/MM/YYYY'));
   
-  return isAfter || isSame;
+  return min === '' || isAfter || isSame;
 };
 
 export const validateNoSpecial = (input) => {

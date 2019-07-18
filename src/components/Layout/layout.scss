@@ -38,14 +38,14 @@ body {
     background-attachment: fixed;
 
     &:not(.no-background-image) {
-      @include gradient-vertical-image($background-main-start, $background-main-end, '../../assets/images/background.png');
+      @include background-horizontal-image($gradient, '../../assets/images/background.png');
 
       &.account {
-        @include gradient-vertical-image($background-account-start, $background-account-end, '../../assets/images/background.png');
+        @include background-horizontal-image($gradient-account, '../../assets/images/background.png');
       }
   
       &.company-design, &.documents {
-        @include gradient-vertical-image($gradient-primary-1, $gradient-primary-2, '../../assets/images/background.png');
+        @include background-horizontal-image($gradient, '../../assets/images/background.png');
       }
     }
 
@@ -54,10 +54,10 @@ body {
     }
 
     &.no-background-image {
-      @include gradient-vertical($background-main-start, $background-main-end);
+      @include background-horizontal($gradient);
 
       &.account {
-        @include gradient-vertical($background-account-start, $background-account-end);
+        @include background-horizontal($gradient-account,);
       }
     }
   }
@@ -121,7 +121,7 @@ b {
 
 .fullscreen {
   h1 {
-    font-size: 48px;
+    font-size: 40px;
     line-height: 1.2;
   }
 

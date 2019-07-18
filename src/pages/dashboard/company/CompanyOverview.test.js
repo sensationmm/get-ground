@@ -122,6 +122,9 @@ export const companyMock = {
         balance: '£483,293.62'
       }
     ]
+  },
+  progress: {
+    overall_status: 'INCOMPLETE'
   }
 };
 

@@ -59,7 +59,7 @@ describe('Shareholder details page', () => {
   })
 
   test('renders 3 ShareholderShares components', () => {
-    wrapper.setState({stage: 'confirm'})
+    wrapper.setState({stage: 'details'})
     expect(wrapper.find(ShareholderShares).length).toEqual(3)
   })
 })

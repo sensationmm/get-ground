@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 import ActionButton from 'src/components/ActionBox/ActionButton';
 
@@ -20,15 +21,21 @@ import './to-do.scss';
 
 const ToDo = props => {
   const { action, company: { id, property_address }, setActiveCompany } = props;
-
+  const [t] = useTranslation();
+  
   return (
     <div 
       data-test="component-todo" 
       className="to-do"
       onClick={() => setActiveCompany(id)}
     >
-      <div className="to-do-address">{property_address.address.premise}</div>
-      <div className="to-do-postcode">{ property_address.address.postcode }</div>
+      {property_address.address.premise
+        ? <div>
+          <div className="to-do-address">{property_address.address.premise}</div>
+          <div className="to-do-postcode">{ property_address.address.postcode }</div>
+        </div>
+        : <div className="to-do-address">{ t('actionBox.actions.complete_company.label')}</div>
+      }
 
       <ActionButton alert={action} />
     </div>

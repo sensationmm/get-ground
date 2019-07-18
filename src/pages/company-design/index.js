@@ -37,14 +37,6 @@ export class ProcessTracker extends React.Component {
     this.getProgress();
   }
 
-  componentDidUpdate(prevProps) {
-    const { isLoading } = this.props;
-
-    if(!isLoading && isLoading !== prevProps.isLoading) {
-      this.getProgress();
-    }
-  }
-
   getProgress = () => {
     const { company, showLoader, hideLoader } = this.props;
 
@@ -172,7 +164,7 @@ export class ProcessTracker extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  isLoading: state.loader,
+  isLoading: state.loader.isLoading,
   company: state.companies.find(company => company.id === state.activeCompany)
 });
 
