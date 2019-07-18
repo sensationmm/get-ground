@@ -137,8 +137,8 @@ export class AcceptanceOfRole extends React.Component {
         groupLabel: t('acceptanceOfRole.question.shareholder'),
         name: 'shareholder',
         items: [
-          { value: 'yes', label: t('form.radioConfirm.true') },
-          { value: 'no', label: t('form.radioConfirm.false') }
+          { value: 'Yes', label: t('form.radioConfirm.true') },
+          { value: 'No', label: t('form.radioConfirm.false') }
         ],
         value: values.shareholder,
         validationFunction: 'validateRequired',
@@ -155,8 +155,8 @@ export class AcceptanceOfRole extends React.Component {
         groupLabel: t('acceptanceOfRole.question.director'),
         name: 'director',
         items: [
-          { value: 'yes', label: t('form.radioConfirm.true') },
-          { value: 'no', label: t('form.radioConfirm.false') }
+          { value: 'Yes', label: t('form.radioConfirm.true') },
+          { value: 'No', label: t('form.radioConfirm.false') }
         ],
         value: values.director,
         hidden: !this.state.isDirector,

@@ -2,6 +2,7 @@ $white: #ffffff;
 $white-opaque: rgba($white, 0.4);
 
 $grey: #eeeeee;
+$grey-offset: rgba($grey, 0.2);
 
 $primary: #8ac9c6;
 $primary-offset: rgba($primary, 0.6);
@@ -30,8 +31,11 @@ $gradient-option-2: #fec858;
 $background-main-start: #559bab;
 $background-main-end: #8ad9d0;
 
-$background-account-start: #f0817f;
-$background-account-end: #f0aa73;
+$background-account-start: #f27e8d;
+$background-account-end: #fedda3;
+
+$gradient: #299bb6, #a4e9e1 24%, #a4e9e1 76%, #329ab2;
+$gradient-account: #f27e8d, #f29886 8%, #f2a682 13%, #fedda3 31%, #ffdfa4 68%, #f2b07f 88%, #f29387;
 
 $warning: #ff5a62;
 $warning-offset: rgba(#ff5a62, 0.2);

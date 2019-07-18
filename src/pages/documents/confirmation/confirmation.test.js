@@ -2,6 +2,8 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { navigate } from 'gatsby';
 
+import TextImage from 'src/components/_layout/TextImage/TextImage'
+
 import DocumentsConfirmation from './index'
 
 jest.mock('gatsby', () => ({
@@ -16,12 +18,12 @@ describe('DocumentsConfirmation', () => {
   })
 
   test('confirmation--copy', () => {
-    expect(wrapper.find('.confirmation--copy').props().dangerouslySetInnerHTML).toEqual({ __html: 'myDocuments.confirmation.copy' })
+
+    expect(wrapper.find(TextImage).props().text).toEqual('myDocuments.confirmation.copy')
   })
 
   test('button', () => {
-    expect(wrapper.find('[data-test="button"]').length).toEqual(1)
-    wrapper.find('[data-test="button"]').props().onClick()
+    wrapper.find(TextImage).props().buttonAction();
     expect(navigate).toHaveBeenCalledWith('/dashboard')
   })
 })

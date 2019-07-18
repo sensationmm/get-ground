@@ -18,12 +18,12 @@ describe('<StrengthMeter />', () => {
 
   describe('createLabel()', () => {
     test('returns expected value', () => {
-      expect(wrapper.instance().createLabel({ score: 10 })).toEqual('Weak');
-      expect(wrapper.instance().createLabel({ score: 0 })).toEqual('Weak');
-      expect(wrapper.instance().createLabel({ score: 1 })).toEqual('Weak');
-      expect(wrapper.instance().createLabel({ score: 2 })).toEqual('Fair');
-      expect(wrapper.instance().createLabel({ score: 3 })).toEqual('Good');
-      expect(wrapper.instance().createLabel({ score: 4 })).toEqual('Strong');
+      expect(wrapper.instance().createLabel(10)).toEqual('Weak');
+      expect(wrapper.instance().createLabel(0)).toEqual('Weak');
+      expect(wrapper.instance().createLabel(1)).toEqual('Fair');
+      expect(wrapper.instance().createLabel(2)).toEqual('Fair');
+      expect(wrapper.instance().createLabel(3)).toEqual('Good');
+      expect(wrapper.instance().createLabel(4)).toEqual('Strong');
     });
   });
 });

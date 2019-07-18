@@ -468,7 +468,7 @@ class ShareholderDetails extends Component {
               <Form>
                 <Button
                   data-test="button-add"
-                  onClick={this.confirmShares}
+                  onClick={() => {this.saveShareholders(false)}}
                   label={t('form.ctaPrimary')}
                   classes="primary"
                   fullWidth
@@ -482,49 +482,6 @@ class ShareholderDetails extends Component {
                 />
               </Form>
             </div>
-          }
-
-          {hasShareholders && stage === 'confirm' &&
-            <div>
-            <h1>{t('companyDesign.shareholderDetails.confirm.title')}</h1>
-
-            <IntroBox>{ t('companyDesign.shareholderDetails.confirm.text') }</IntroBox>
-
-            <div className="table-headers">
-              <div>{t('companyDesign.shareholderDetails.shares.sharesLabel')}</div>
-              <div>{t('companyDesign.shareholderDetails.shares.directorLabel')}</div>
-            </div>
-
-            <ShareholderShares
-              shareholderID={null}
-              name={i18n.t('companyDesign.shareholderDetails.shares.you')}
-              shares={mainShareholder.toString()}
-              is_director={this.state.owner_is_director}
-              onChange={() => this.setState({owner_is_director: !this.state.owner_is_director})}
-              mainShareholder
-              disabled
-            />
-
-            {this.renderShareholderShares(shareholders, true)}
-
-            <br />
-
-            <Form>
-              <Button
-                onClick={() => {this.saveShareholders(false)}}
-                label={t('companyDesign.shareholderDetails.confirm.ctaPrimary')}
-                classes="primary"
-                fullWidth
-              />
-
-              <Button
-                onClick={this.addDetails}
-                label={t('companyDesign.shareholderDetails.confirm.ctaSecondary')}
-                classes="secondary"
-                fullWidth
-              />
-            </Form>
-          </div>
           }
         </div>
       </Layout>

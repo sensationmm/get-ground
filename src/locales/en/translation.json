@@ -102,6 +102,11 @@
     "noActions": "Great! Everything is up to date.",
     "dismiss": "Remind later",
     "actions": {
+      "complete_company": {
+        "label": "Continue creating your company",
+        "labelShort": "Progress Tracker",
+        "cta": "Continue"
+      },
       "add_company": {
         "label": "Create your first company",
         "labelShort": "Add Company",
@@ -798,8 +803,8 @@
     "intro": {
       "slides": [
         {
-          "title": "Get started",
-          "copy": "<p class='fs-large'>You’ll create your account in 3 simple steps.</p><p class='fs-large'>You’ll need your passport and a proof of address at hand.</p><p class='fs-large'>You can then access your dashboard and start creating companies.</p>",
+          "title": "Create your account <br /> in 3 simple steps",
+          "copy": "<p class='fs-large'>You’ll need your passport and proof of address to hand before being able to access your dashboard and start creating companies.</p>",
           "imageAltText": "Arm chair"
         },
         {

@@ -34,21 +34,57 @@
     }
   }
 
-  input[type=text], input[type=password], input[type=number], textarea {
-    box-sizing: border-box;
-    width: 100%;
+  &-wrapper {
+    width: calc(100% - #{$padding-horizontal-unit * 2 + 0px});
     border: 1px solid $border;
     border-radius: 5px;
     padding: $padding-horizontal;
+  }
+
+  &.currency {
+    .text-input-wrapper {
+
+      input {
+        margin-left: 10px;
+        width: calc(100% - 10px);
+      }
+
+      &:before {
+        content: '£';
+        position: absolute;
+        font-size: 14px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        top: 0;
+        left: 0;
+        width: 20px;
+        height: 100%;
+        color: $text;
+        padding-top: 1px;
+      }
+    }
+  }
+
+  input[type=text], input[type=password], input[type=number], textarea {
+    box-sizing: border-box;
+    width: 100%;
     background: none;
     font-size: 14px;
     color: $text;
     outline: 0;
     box-shadow: 0 0 0 0 $primary;
     transition: all 0.3s;
+    border: 0;
 
     &:focus {
-      box-shadow: 0 0 10px 0 $primary;
+      outline: 0;
+      border: 0;
+      background: none;
+
+      .formatted-currency {
+        display: flex;
+      }
     }
 
     &::placeholder {
@@ -80,7 +116,6 @@
 .fullscreen {
   .text-input {
     &-label, &-required, input.error {
-      color: $white !important;
       border-color: $white !important;
     }
   }

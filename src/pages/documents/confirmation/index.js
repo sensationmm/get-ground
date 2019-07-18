@@ -3,7 +3,7 @@ import { navigate } from 'gatsby'
 import { useTranslation } from 'react-i18next'
 
 import confirmationImage from 'src/assets/images/documents-confirmation.svg'
-import Button from 'src/components/_buttons/Button/Button'
+import TextImage from 'src/components/_layout/TextImage/TextImage';
 import Layout from 'src/components/Layout/Layout'
 
 import 'src/styles/pages/confirmation.scss'
@@ -13,18 +13,14 @@ const DocumentsConfirmation = () => {
 
   return (
     <Layout>
-      <div className="confirmation" role="fullscreen documents form-page">
-        <div className="intro--hero-image"><img src={confirmationImage} alt={t('myDocuments.confirmation.imageAltText')} /></div>
-        <div className="confirmation-content">
-          <h1 className="confirmation--heading">{t('myDocuments.confirmation.heading')}</h1>
-          <div className="confirmation--copy" dangerouslySetInnerHTML={{ __html: t('myDocuments.confirmation.copy') }} />
-          <Button
-            classes="secondary"
-            label={t('myDocuments.confirmation.buttonText')}
-            onClick={() => navigate('/dashboard')}
-            data-test="button"
-          />
-        </div>
+      <div className="confirmation" role="fullscreen form-page hasCurve">
+        <TextImage
+          title={t('myDocuments.confirmation.heading')}
+          image={confirmationImage}
+          text={t('myDocuments.confirmation.copy')}
+          buttonAction={() => navigate('/dashboard')}
+          buttonLabel={t('myDocuments.confirmation.buttonText')}
+        />
       </div>
     </Layout>
   );

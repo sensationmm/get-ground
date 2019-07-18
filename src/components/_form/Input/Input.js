@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-// import * as validation from '../../../utils/validation';
+import { formatCurrency, stripCurrency } from 'src/utils/functions';
 
-import Note from '../../_layout/Note/Note';
+import Note from 'src/components/_layout/Note/Note';
 
 import './input.scss';
 
@@ -28,7 +28,6 @@ import './input.scss';
  * @return {JSXElement} Input
  */
 const Input = (props) => {
-
   const {
     id,
     type,
@@ -48,6 +47,8 @@ const Input = (props) => {
     placeholder
   } = props;
 
+  const isCurrencyField = wrapperClass && wrapperClass.search('currency') > -1;
+
   return (
     <div
       className={classNames('text-input', wrapperClass)}
@@ -64,29 +65,31 @@ const Input = (props) => {
         <div data-test="text-input-error" className="text-input-required">{error}</div>
       }
 
-      <input
-        data-test="component-input-field"
-        type={type}
-        id={id}
-        onFocus={(e) => {
-          /* istanbul ignore else */
-          if (onFocus) onFocus(e);
-        }}
-        placeholder={placeholder}
-        onBlur={(e) => {
-          if (readOnly) return;
-          validate ? validate() : null
-        }}
-        onChange={(e) => onChange(e.target.value)}
-        onKeyPress={onKeyPress}
-        value={value}
-        readOnly={readOnly}
-        className={classNames([
-          {'error': error }
-        ])}
-        min={min}
-        max={max}
-      />
+      <div className="text-input-wrapper">
+        <input
+          data-test="component-input-field"
+          type={type}
+          id={id}
+          onFocus={(e) => {
+            /* istanbul ignore else */
+            if (onFocus) onFocus(e);
+          }}
+          placeholder={placeholder}
+          onBlur={(e) => {
+            if (readOnly) return;
+            validate ? validate() : null
+          }}
+          onChange={(e) => isCurrencyField ? onChange(stripCurrency(e.target.value)) : onChange(e.target.value)}
+          onKeyPress={onKeyPress}
+          value={isCurrencyField ? formatCurrency(value) : value}
+          readOnly={readOnly}
+          className={classNames([
+            {'error': error }
+          ])}
+          min={min}
+          max={max}
+        />
+      </div>
 
       {note && <Note data-test="text-input-note">{note}</Note>}
     </div>

@@ -14,6 +14,15 @@ const ActionConfig = (alert) => {
   let label = '', labelShort = '', cta = '', action = null;
   
   switch(alert.type) {
+    case 'complete_company':
+      label = 'actionBox.actions.complete_company.label';
+      labelShort = 'actionBox.actions.complete_company.labelShort';
+      cta = 'actionBox.actions.complete_company.cta';
+      action = () => {
+        store.dispatch(setActiveCompany(alert.companyID));
+        navigate('/company-design');
+      };
+      break;
     case 'documents_ready':
       label = 'actionBox.actions.documents_ready.label';
       labelShort = 'actionBox.actions.documents_ready.labelShort';

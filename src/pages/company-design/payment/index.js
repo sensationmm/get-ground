@@ -154,8 +154,8 @@ export class Payment extends Component {
     const headerActions = <Link to="/company-design"><ButtonHeader label={t('header.buttons.exit')} /></Link>;
 
     return (      
-      <Layout headerActions={headerActions} secure>
-        <div data-test="container-payment" className="payment" role="account form-page">
+      <Layout headerActions={headerActions} secure companyID>
+        <div data-test="container-payment" className="payment" role="company-design form-page">
           <h1>{ t('onBoarding.payment.title') }</h1>
 
           {showErrorMessage &&
