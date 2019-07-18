@@ -79,7 +79,7 @@ class AccountService extends BaseService {
       ];
 
       window.LC_API.set_custom_variables(login_variables);
-      
+
       store.dispatch(saveUser(response.data));
     });
   };
@@ -154,7 +154,7 @@ class AccountService extends BaseService {
    */
   retrieveInvestedUser = (token) => {
     const config = {
-      url: `property_purchases/retrieve_invested_user${token}`,
+      url: `property_purchases/property_purchases_users/${token}`,
       method: 'get'
     };
 
