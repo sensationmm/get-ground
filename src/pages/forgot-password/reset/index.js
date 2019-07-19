@@ -10,6 +10,8 @@ import Button from 'src/components/_buttons/Button/Button';
 import Form from 'src/components/_layout/Form/Form';
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import formUtils from 'src/utils/form';
+import { saveAuth } from 'src/state/actions/auth';
+import { userLogin } from 'src/state/actions/user';
 
 import StrengthMeter from 'src/components/StrengthMeter/StrengthMeter';
 import InputPassword from 'src/components/_form/InputPassword/InputPassword';
@@ -47,17 +49,21 @@ class ResetPassword extends Component {
   }
 
   onSetNewPassword = async () => {
-    const { showLoader, hideLoader, t, location: { search, state }, form } = this.props;
-    const { values: { password } } = form;
+    const { showLoader, hideLoader, t, location: { search }, form, saveAuth, userLogin } = this.props;
+    const { state } = this.props.location;
 
+    const { values: { password } } = form;
     if(formUtils.validateForm(this.config)) {
       showLoader();
-
-      if(state && state.acceptRoleToken) {
+      if(state.acceptRoleToken) {
         AuthService.acceptRoleSetPassword(password, state.acceptRoleToken).then((res) => {
+
+          saveAuth(res.data.token)
+          userLogin(res.data.user)
           hideLoader();
+
           if(res.status === 200) {
-              navigate('/dashboard', {
+            navigate('/dashboard', {
                 state: {
                   acceptRoleToken: ''
                 }
@@ -66,18 +72,18 @@ class ResetPassword extends Component {
             formUtils.setFormError(t('forgotPassword.reset.form.errors.formFail'));
           }
         })
+      } else {
+        const queryStringValues = queryString.parse(search);
+
+        AuthService.setNewPassword(password, queryStringValues.verification_code).then((res) => {
+          hideLoader();
+          if(res.status === 200) {
+              navigate('/dashboard');
+          } else {
+            formUtils.setFormError(t('forgotPassword.reset.form.errors.formFail'));
+          }
+        });
       }
-
-      const queryStringValues = queryString.parse(search);
-
-      AuthService.setNewPassword(password, queryStringValues.verification_code).then((res) => {
-        hideLoader();
-        if(res.status === 200) {
-            navigate('/dashboard');
-        } else {
-          formUtils.setFormError(t('forgotPassword.reset.form.errors.formFail'));
-        }
-      });
     }
   }
 
@@ -124,7 +130,7 @@ class ResetPassword extends Component {
 
             <Form data-test="reset-password-form">
               { formUtils.renderForm(this.config) }
-              
+
               <Button
                 data-test="reset-password-button"
                 classes="secondary"
@@ -144,7 +150,9 @@ ResetPassword.propTypes = {
   hideLoader: PropTypes.func,
   t: PropTypes.func.isRequired,
   location: PropTypes.object,
-  form: PropTypes.object
+  form: PropTypes.object,
+  saveAuth: PropTypes.func,
+  userLogin: PropTypes.func
 };
 
 export const RawComponent = ResetPassword;
@@ -152,6 +160,6 @@ export const RawComponent = ResetPassword;
 const mapStateToProps = (state) => ({
   form: state.form
 })
-const actions = { showLoader, hideLoader };
+const actions = { showLoader, hideLoader, saveAuth, userLogin };
 
 export default connect(mapStateToProps, actions)(withTranslation()(ResetPassword));
