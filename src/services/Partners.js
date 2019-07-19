@@ -13,7 +13,7 @@ class PartnersService extends BaseService {
    */
   sendEmail = (email) => {
     const config = {
-      url: '/partners/know_more_email',
+      url: 'v1/partners/know_more_email',
       method: 'post',
       data: {
         'email': email

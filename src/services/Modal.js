@@ -25,7 +25,7 @@ class ModalService extends BaseService {
     * @return {Promise} markdownToPDF response
     */
    markdownToPDF = async content => (
-    await fetch(`${API}/md2pdf`, {
+    await fetch(`${API}v1/md2pdf`, {
       method: 'post',
       headers: {
         'Authorization': 'avb068cbk2os5ujhodmt'
@@ -39,4 +39,4 @@ class ModalService extends BaseService {
   );
 }
 
-export default ModalService;  
+export default ModalService;

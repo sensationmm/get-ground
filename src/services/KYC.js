@@ -25,7 +25,7 @@ class KYCService extends BaseService {
     fd.append('file_proof_of_address', addressFile)
 
     const config = {
-      url: `users/${store.getState().user.id}/kyc/files`,
+      url: `v2/users/${store.getState().user.id}/kyc/files`,
       method: 'post',
       data: fd,
     };

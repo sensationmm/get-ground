@@ -23,7 +23,7 @@ class AuthService extends BaseService {
    */
   login = (email, password) => {
     const config = {
-      url: 'auth',
+      url: 'v1/auth',
       method: 'post',
       data: {
         'email': email,
@@ -60,7 +60,7 @@ class AuthService extends BaseService {
    */
   requestResetPassword = (email) => {
     const config = {
-      url: '/auth/request_reset_password',
+      url: 'v1/auth/request_reset_password',
       method: 'post',
       data: {
         'email': email
@@ -77,7 +77,7 @@ class AuthService extends BaseService {
    */
   reauthenticate = () => {
     const config = {
-      url: 'auth_reset',
+      url: 'v1/auth_reset',
       method: 'post'
     };
 
@@ -99,7 +99,7 @@ class AuthService extends BaseService {
    */
   setNewPassword = (password, token) => {
     const config = {
-      url: 'reset_password',
+      url: 'v1/reset_password',
       method: 'post',
       data: {
         'password': password,
@@ -119,7 +119,7 @@ class AuthService extends BaseService {
    */
   verifyEmail = (verificationCode) => {
     const config = {
-      url: 'users/verify_email',
+      url: 'v2/users/verify_email',
       method: 'post',
       data: JSON.stringify({'email_verification_code': verificationCode})
     };
@@ -151,7 +151,7 @@ class AuthService extends BaseService {
    */
   acceptRoleLogin = (token) => {
     const config = {
-      url: 'accept-role/login',
+      url: 'v1/accept-role/login',
       method: 'post',
       data: JSON.stringify({'token': token})
     };
@@ -182,7 +182,7 @@ class AuthService extends BaseService {
    */
   acceptRoleSetPassword = (token) => {
     const config = {
-      url: 'accept-role/set_password',
+      url: 'v1/accept-role/set_password',
       method: 'post',
       data: JSON.stringify({'token': token})
     };
