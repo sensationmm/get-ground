@@ -60,7 +60,7 @@ class CreateSignature extends Component {
     } else {
       signatureImgPath = signatureThreeImg;
     }
-  
+
     const signatureBlob = signatureUtils.splitSignatureData(signatureImgPath);
     this.saveSignature(signatureBlob, signatureImgPath);
   }
@@ -85,7 +85,7 @@ class CreateSignature extends Component {
   }
 
   render() {
-    const { t, form: { values } } = this.props;
+    const { t, form: { values }, location } = this.props;
     const { selectedSignature, savedSignature } = this.state;
 
     /* istanbul ignore next */
@@ -108,7 +108,7 @@ class CreateSignature extends Component {
       {
         label: '',
         value: 'signature1',
-        children: <TextToImage 
+        children: <TextToImage
           canvasWrapperId="canvas-wrapper-1"
           canvasId="canvas-component-1"
           imageId="image-component-1"
@@ -122,7 +122,7 @@ class CreateSignature extends Component {
       {
         label: '',
         value: `signature2`,
-        children: <TextToImage 
+        children: <TextToImage
           canvasWrapperId="canvas-wrapper-2"
           canvasId="canvas-component-2"
           imageId="image-component-2"
@@ -136,7 +136,7 @@ class CreateSignature extends Component {
       {
         label: '',
         value: 'signature3',
-        children: <TextToImage 
+        children: <TextToImage
           canvasWrapperId="canvas-wrapper-3"
           canvasId="canvas-component-3"
           imageId="image-component-3"
@@ -148,6 +148,8 @@ class CreateSignature extends Component {
         />
       }
     ];
+
+    const isEditMode = location.search === '?edit';
 
     return (
       <Layout secure>
@@ -167,7 +169,7 @@ class CreateSignature extends Component {
               display: values.firstname === '' ? 'none' : 'block'
             }}>
 
-              <RadioGroup 
+              <RadioGroup
                 groupLabel={t('account.createSignature.selectLabel')}
                 classes="signatures"
                 items={this.radioConfig}
@@ -177,14 +179,14 @@ class CreateSignature extends Component {
               />
 
               { selectedSignature !== '' &&
-                <Button 
-                  classes="primary" 
-                  label={t('account.createSignature.selectLabel')} 
-                  fullWidth 
+                <Button
+                  classes="primary"
+                  label={t('account.createSignature.selectLabel')}
+                  fullWidth
                   onClick={this.splitSignature}
                 />
               }
-              
+
             </div>
 
           </div>
@@ -195,20 +197,19 @@ class CreateSignature extends Component {
             <h1>{t('account.yourSignature.title')}</h1>
             <IntroBox data-test="intro-box">{t('account.yourSignature.intro')}</IntroBox>
             <img className="your-signature--saved-image" src={savedSignature} />
-            <Button 
+            <Button
               data-test="button-edit"
               classes="secondary full edit"
               label={t('account.yourSignature.buttons.edit')}
               onClick={() => this.setState({ savedSignature: '' })}
             />
-            <Link to="/documents">
-              <Button 
+            <Link to={isEditMode ? '/account' : '/documents'}>
+              <Button
                 classes="primary full"
-                label={t('account.yourSignature.buttons.continue')} 
+                label={t('account.yourSignature.buttons.continue')}
               />
             </Link>
           </div>
-
         </div>
       </Layout>
     )
@@ -220,6 +221,7 @@ CreateSignature.propTypes = {
   hideLoader: PropTypes.func,
   t: PropTypes.func.isRequired,
   form: PropTypes.object,
+  location: PropTypes.object,
   user: PropTypes.object
 };
 
