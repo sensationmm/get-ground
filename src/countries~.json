@@ -819,6 +819,15 @@
     "dial_code": "+502"
   },
   {
+    "id": 92,
+    "num_code": 831,
+    "alpha_2_code": "GG",
+    "alpha_3_code": "GGY",
+    "country_name": "Guernsey",
+    "nationality": "Channel Island",
+    "dial_code": "+44"
+  },
+  {
     "id": 93,
     "num_code": 324,
     "alpha_2_code": "GN",
@@ -954,6 +963,15 @@
     "dial_code": "+353"
   },
   {
+    "id": 108,
+    "num_code": 833,
+    "alpha_2_code": "IM",
+    "alpha_3_code": "IMN",
+    "country_name": "Isle of Man",
+    "nationality": "Manx",
+    "dial_code": "+44"
+  },
+  {
     "id": 109,
     "num_code": 376,
     "alpha_2_code": "IL",
@@ -988,6 +1006,15 @@
     "country_name": "Japan",
     "nationality": "Japanese",
     "dial_code": "+81"
+  },
+  {
+    "id": 113,
+    "num_code": 832,
+    "alpha_2_code": "JE",
+    "alpha_3_code": "JEY",
+    "country_name": "Jersey",
+    "nationality": "Channel Island",
+    "dial_code": "+44"
   },
   {
     "id": 114,

@@ -39,6 +39,17 @@
     border: 1px solid $border;
     border-radius: 5px;
     padding: $padding-horizontal;
+    background: $white;
+
+    &.error {
+      border-color: $warning !important;
+    }
+  }
+
+  &.error {
+    .text-input-wrapper {
+      border-color: $warning !important;
+    }
   }
 
   &.currency {
@@ -69,11 +80,11 @@
   input[type=text], input[type=password], input[type=number], textarea {
     box-sizing: border-box;
     width: 100%;
-    background: none;
+    background: $white !important;
     font-size: 14px;
     color: $text;
     outline: 0;
-    box-shadow: 0 0 0 0 $primary;
+    box-shadow: 0 0 0 0 $white inset !important;
     transition: all 0.3s;
     border: 0;
 
@@ -92,13 +103,9 @@
       opacity: 0.5;
     }
 
-    &.error {
-      border-color: $warning !important;
-    }
-
     &#datepicker-field {
       background: none;
-      border: 1px solid $border;
+      border: 0;
     }
   }
 

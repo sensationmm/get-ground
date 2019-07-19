@@ -56,7 +56,11 @@ export class AdditionalServices extends Component {
 
   }
 
-  submitAdditionalServices = () => {
+  /**
+   * @param {boolean} saveAndExit - whether this is a save and exit call
+   * @return {void}
+   */
+  submitAdditionalServices = (saveAndExit = false) => {
     const { form: { values }, showLoader, hideLoader, company } = this.props;
 
     showLoader();
@@ -64,7 +68,11 @@ export class AdditionalServices extends Component {
     CompanyService.updateCompany(values, 'additional_services', company.id).then((response) => {
       hideLoader();
       if (response.status === 200) {
-        navigate('/company-design/property-address');
+        if(saveAndExit) {
+          navigate('/company-design');
+        } else {
+          navigate('/company-design/property-address');
+        }
       }
     });
   }
@@ -159,7 +167,7 @@ export class AdditionalServices extends Component {
       }
     ];
 
-    const headerActions = <ButtonHeader onClick={this.submitAdditionalServices} label={t('header.buttons.saveAndExit')} />
+    const headerActions = <ButtonHeader onClick={() => this.submitAdditionalServices(true)} label={t('header.buttons.saveAndExit')} />
 
     return (
       <Layout headerActions={headerActions} secure companyID>

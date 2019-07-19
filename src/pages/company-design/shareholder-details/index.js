@@ -5,6 +5,7 @@ import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux'
 
 import formUtils from 'src/utils/form';
+import { inArray } from 'src/utils/functions';
 import Layout from 'src/components/Layout/Layout';
 import Form from 'src/components/_layout/Form/Form';
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
@@ -71,7 +72,7 @@ class ShareholderDetails extends Component {
   componentDidMount() {
     const { company: { shareholder_details }, user} = this.props;
     let shareholders = shareholder_details.collection === null ? [{...shareholder}] : shareholder_details.collection;
-    shareholders = shareholders.filter(p => p.email !== user.email)
+    shareholders = shareholders.filter(p => p.email !== user.email && p.first_name !== '')
 
     const populatedShareholders = shareholders.length;
     for (let i = shareholders.length; i < 8; i++) {
@@ -133,6 +134,8 @@ class ShareholderDetails extends Component {
 
   validateShareholders = /* istanbul ignore next */() => {
 
+    const formValues = this.props.form.values;
+
     const shareholder0Valid = !this.shareholder0 || (this.shareholder0 && this.shareholder0.validate());
     const shareholder1Valid = !this.shareholder1 || (this.shareholder1 && this.shareholder1.validate());
     const shareholder2Valid = !this.shareholder2 || (this.shareholder2 && this.shareholder2.validate());
@@ -142,6 +145,11 @@ class ShareholderDetails extends Component {
     const shareholder6Valid = !this.shareholder6 || (this.shareholder6 && this.shareholder6.validate());
     const shareholder7Valid = !this.shareholder7 || (this.shareholder7 && this.shareholder7.validate());
 
+    const shareholders = formValues.filter(shareholder => shareholder.email !== '');
+    const shareholdersUnique = new Set(shareholders.map(shareholder => shareholder.email));
+
+    const selfAdded = inArray(this.props.user.email, shareholders.map(shareholder => shareholder.email));
+
     const isValid = shareholder0Valid &&
       shareholder1Valid &&
       shareholder2Valid &&
@@ -150,8 +158,16 @@ class ShareholderDetails extends Component {
       shareholder5Valid &&
       shareholder6Valid &&
       shareholder7Valid;
-
-    return isValid;
+      
+    if(shareholders.length !== shareholdersUnique.size) {
+      formUtils.setFormError(this.props.t('companyDesign.shareholderDetails.error'));
+      return false;
+    } else if(selfAdded) {
+      formUtils.setFormError(this.props.t('companyDesign.shareholderDetails.errorSelf'));
+      return false;
+    } else {
+      return isValid;
+    }
   }
 
   validateShareholderShares = /* istanbul ignore next */() => {
@@ -188,6 +204,35 @@ class ShareholderDetails extends Component {
         shareholders: shareholders + 1
       });
     }
+  }
+
+  /**
+   * @param {integer} index - shareholder array item to delete
+   * @return {void}
+   */
+  deleteShareholder = async (index) => {
+    const existing = this.props.form.values; 
+    let newTotalShares = 0;
+
+    for(let i=index; i<=this.state.shareholders; i++) {
+      if(!existing[i+1]) {
+        await formUtils.updateValue(i, shareholder, null, true); 
+      } else {
+        await formUtils.updateValue(i, existing[i+1], null, true); 
+      }
+    }
+
+    this.props.form.values.forEach(item => {
+      if(item.allocated_shares) {
+        newTotalShares = newTotalShares + parseInt(item.allocated_shares);
+      }
+    });
+
+    this.setState({
+      ...this.state,
+      shareholders: this.state.shareholders - 1,
+      totalShares: newTotalShares
+    });
   }
 
   toggleShareholders = () => {
@@ -275,6 +320,7 @@ class ShareholderDetails extends Component {
           last_name={last_name}
           email={email}
           totalShares={this.state.mainShares}
+          onDelete={() => this.deleteShareholder(i)}
         />
       )
     }
@@ -325,10 +371,12 @@ class ShareholderDetails extends Component {
     for (let i = shareholders.length - 1; i >= 0; i--) {
       if (shareholders[i].is_director === null) shareholders[i].is_director = false;
       if (shareholders[i].is_existing_user === null) shareholders[i].is_existing_user = false;
-      if (shareholders[i].first_name === '' && shareholders[i].last_name === '' && shareholders[i].email === '') {
-          shareholders.splice(i, 1);
-      }
+      // if (shareholders[i].first_name === '' && shareholders[i].last_name === '' && shareholders[i].email === '') {
+      //     shareholders.splice(i, 1);
+      // }
     }
+    
+    const isValid = this.validateShareholderShares();
 
     if (isSaveAndExit) {
       await Object.keys(errors).forEach(async (key) => {
@@ -336,33 +384,35 @@ class ShareholderDetails extends Component {
       });
 
       shareholders = shareholders.length === 0 ? [{}] : shareholders;
-    }
+    } else if(isValid) {
+      const creator = [{
+        allocated_shares: (100 - this.state.totalShares).toString(),
+        email: user.email,
+        first_name: user.first_name,
+        is_director: this.state.owner_is_director,
+        is_existing_user: true,
+        last_name: user.last_name
+      }]
 
-    const creator = [{
-      allocated_shares: (100 - this.state.totalShares).toString(),
-      email: user.email,
-      first_name: user.first_name,
-      is_director: this.state.owner_is_director,
-      is_existing_user: true,
-      last_name: user.last_name
-    }]
-
-    const payload = {
-      collection: creator.concat(shareholders),
-      is_complete: !isSaveAndExit
-    }
-
-    showLoader();
-    CompanyService.updateCompany(payload, 'shareholder_details', company.id).then((response) => {
-      hideLoader();
-      if (response.status === 200) {
-        if(isSaveAndExit) {
-          navigate('/company-design');
-        } else {
-          navigate('/company-design/tax-questions');
-        }
+      const payload = {
+        collection: creator.concat(shareholders),
+        is_complete: !isSaveAndExit
       }
-    });
+
+      showLoader();
+      CompanyService.updateCompany(payload, 'shareholder_details', company.id).then((response) => {
+        hideLoader();
+        if (response.status === 200) {
+          if(isSaveAndExit) {
+            navigate('/company-design');
+          } else {
+            navigate('/company-design/tax-questions');
+          }
+        }
+      });
+    } else {
+      formUtils.setFormError(this.props.t('companyDesign.shareholderDetails.shares.error'));
+    }
   }
 
   render() {
@@ -498,16 +548,8 @@ ShareholderDetails.propTypes = {
   user: PropTypes.object
 };
 
-const sliceForm = (form, user) => {
-  return {
-    errors: form.errors,
-    showErrorMessage: form.showErrorMessage,
-    values: Array.isArray(form.values) ? form.values.filter(p => p.email !== user.email ) : form.values
-  }
-}
-
 const mapStateToProps = (state) => ({
-  form: sliceForm(state.form, state.user),
+  form: state.form,
   user: state.user,
   company: state.companies.find(company => company.id === state.activeCompany),
 });

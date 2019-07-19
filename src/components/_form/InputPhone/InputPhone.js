@@ -1,8 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import ReactFlagsSelect from 'react-flags-select';
+import 'react-flags-select/scss/react-flags-select.scss';
 
-import Note from '../../_layout/Note/Note';
+import countryData from 'src/countries.json';
+import Note from 'src/components/_layout/Note/Note';
+import { getByValue } from 'src/utils/functions';
 
 import './input-phone.scss';
 
@@ -42,6 +46,15 @@ const InputPhone = (props) => {
   }
 
   const onBlur = validate ? validate : undefined;
+  
+  const flagLabels = {};
+  const flags = countryData.map((country) => {
+    flagLabels[country.alpha_2_code] = country.dial_code;
+
+    return country.alpha_2_code;
+  });
+
+  const selectedCountry = getByValue(countryData, 'dial_code', country).alpha_2_code;
 
   return (
     <div className="input-phone" data-test="component-input-phone">
@@ -55,14 +68,15 @@ const InputPhone = (props) => {
 
       <div className="input-phone-box">
         <div className="input-phone-country">
-          <select data-test="phone-country" onChange={(e) => onChange(`(${e.target.value})${number}`, id)} value={country}>
-            <option value="+44">+44</option>
-            <option value="+01">+01</option>
-            <option value="+22">+22</option>
-            <option value="+33">+33</option>
-          </select>
+        <ReactFlagsSelect
+          countries={flags}
+          defaultCountry={selectedCountry}
+          customLabels={flagLabels}
+          searchable
+          onSelect={(countryCode) => onChange(`(${getByValue(countryData, 'alpha_2_code', countryCode).dial_code})${number}`, id)} 
+        />
         </div>
-
+        
         <input
           data-test="phone-number"
           type="number"

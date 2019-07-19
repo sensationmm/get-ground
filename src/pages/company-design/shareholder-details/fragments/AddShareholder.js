@@ -30,7 +30,7 @@ class AddShareholder extends Component {
   }
 
   render() {
-    const { t, shareholderID, onChange, first_name, last_name, email } = this.props;
+    const { t, shareholderID, onChange, first_name, last_name, email, onDelete } = this.props;
 
     this.config = [
       {
@@ -38,7 +38,8 @@ class AddShareholder extends Component {
         component: InputText,
         label: t('companyDesign.shareholderDetails.add.new.form.firstName'),
         value: first_name,
-        validationFunction: ['validateRequired', 'validateLettersOnly'],
+        validationFunction: ['validateRequired', 'validateMinimum', 'validateLettersOnly'],
+        validationParam: [null, 2, null],
         onChange: /* istanbul ignore next */(val) => onChange(shareholderID, 'first_name', val),
       },
       {
@@ -46,7 +47,8 @@ class AddShareholder extends Component {
         component: InputText,
         label: t('companyDesign.shareholderDetails.add.new.form.lastName'),
         value: last_name,
-        validationFunction: ['validateRequired', 'validateLettersOnly'],
+        validationFunction: ['validateRequired', 'validateMinimum', 'validateLettersOnly'],
+        validationParam: [null, 2, null],
         onChange: /* istanbul ignore next */(val) => onChange(shareholderID, 'last_name', val),
       },
       {
@@ -54,7 +56,7 @@ class AddShareholder extends Component {
         component: InputText,
         label: t('companyDesign.shareholderDetails.add.new.form.email'),
         value: email,
-        validationFunction: 'validateEmail',
+        validationFunction: ['validateRequired', 'validateEmail'],
         onChange: /* istanbul ignore next */(val) => onChange(shareholderID, 'email', val),
       }
     ];
@@ -62,6 +64,11 @@ class AddShareholder extends Component {
     return (
       <div data-test="component-add-shareholder" className="shareholder-detail" role="company-design">
         <h2>{t('companyDesign.shareholderDetails.add.new.title')}</h2>
+
+        <div className="shareholder-detail-delete" onClick={onDelete}>
+          { t('companyDesign.shareholderDetails.add.delete')}
+        </div>
+
         <Form>{formUtils.renderForm(this.config, shareholderID)}</Form>
       </div>
     )
@@ -76,7 +83,8 @@ AddShareholder.propTypes = {
   onChange: PropTypes.func,
   first_name: PropTypes.string,
   last_name: PropTypes.string,
-  email: PropTypes.string
+  email: PropTypes.string,
+  onDelete: PropTypes.func
 }
 
 export const RawComponent = AddShareholder;
