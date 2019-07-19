@@ -27,7 +27,7 @@ class CompanyService extends BaseService {
 
   getCompanies = () => {
     const config = {
-      url: `v1/property_purchases?creator_id=${store.getState().user.id}`,
+      url: `v2/users/${store.getState().user.id}/property_purchases`,
       method: 'get'
     };
 
