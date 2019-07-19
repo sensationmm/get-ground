@@ -63,7 +63,7 @@ class ResetPassword extends Component {
           hideLoader();
 
           if(res.status === 200) {
-            navigate('/dashboard', {
+            navigate('/onboarding', {
                 state: {
                   acceptRoleToken: ''
                 }

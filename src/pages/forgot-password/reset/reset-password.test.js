@@ -90,7 +90,7 @@ describe('ResetPassword', () => {
     expect(props.userLogin).toHaveBeenCalledWith({ id: 1 });
     expect(props.hideLoader).toHaveBeenCalled();
     expect(AuthService.setNewPassword).not.toHaveBeenCalled()
-    expect(navigate).toHaveBeenCalledWith('/dashboard', {
+    expect(navigate).toHaveBeenCalledWith('/onboarding', {
       state: {
         acceptRoleToken: ''
       }
