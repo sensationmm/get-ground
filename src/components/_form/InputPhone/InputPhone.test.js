@@ -1,16 +1,18 @@
 import React from 'react';
-import { setup, findByTestAttr } from '../../../test-utils/test-utils';
+import ReactFlagsSelect from 'react-flags-select';
 
+import { setup, findByTestAttr } from 'src/test-utils/test-utils';
 import InputPhone from './InputPhone';
-import Note from '../../_layout/Note/Note';
+import Note from 'src/components/_layout/Note/Note';
 
 describe('<InputPhone />', () => {
-  let wrapper, component, input, select;
+  let wrapper, component, input;
 
   const changeMock = jest.fn();
   const focusMock = jest.fn();
   const validateMock = jest.fn();
   const countryMock = '+44';
+  const countryCodeMock = 'GB';
   const numberMock = '012345';
   const noteMock = 'test note';
   // const splitValueSpy = jest.spyOn(InputPhone.prototype, 'setValue');
@@ -28,7 +30,6 @@ describe('<InputPhone />', () => {
       });
       component = findByTestAttr(wrapper, 'component-input-phone');
       input = findByTestAttr(wrapper, 'phone-number');
-      select = findByTestAttr(wrapper, 'phone-country');
     });
     
     test('renders without error', () => {
@@ -57,12 +58,11 @@ describe('<InputPhone />', () => {
 
     describe('select component', () => {
       test('onChange callback fires on select', () => {
-        select.simulate('change', {
-          preventDefault() {},
-          target: { value: countryMock}
-        });
+        const component = wrapper.find(ReactFlagsSelect);
 
-        expect(changeMock).toHaveBeenCalledWith(`(${countryMock})${numberMock}`);
+        component.props().onSelect(countryCodeMock);
+
+        expect(changeMock).toHaveBeenCalledWith(`(${countryMock})`, 'input-name');
       });
     });
 

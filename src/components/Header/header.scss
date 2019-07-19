@@ -158,8 +158,16 @@
   }
 }
 
-.fullscreen .header {
-  background: none;
+.fullscreen {
+  .header {
+    @include background-horizontal($gradient);
+  }
+
+  &.account {
+    .header {
+      @include background-horizontal($gradient-account);
+    }
+  }
 }
 
 .brochure .header {
@@ -182,18 +190,6 @@
 
     &-buttons {
       flex-direction: row-reverse;
-    }
-  }
-
-  .fullscreen {
-    .header {
-      @include background-horizontal($gradient);
-    }
-
-    &.account {
-      .header {
-        @include background-horizontal($gradient-account);
-      }
     }
   }
 }

@@ -69,6 +69,19 @@ export const validateMatching = (input, inputToMatch) => {
 };
 validationMessages.validateMatching = i18n.t('validation.validateMatching');
 
+/**
+ * validateNotMatching
+ * validates input not matching given argument
+ * @author Kevin Reynolds
+ * @param {string} input - value to be validated
+ * @param {string} inputToMatch - value to compare to
+ * @return {boolean} whether values dont match
+ */
+export const validateNotMatching = (input, inputToMatch) => {
+  return input !== inputToMatch && !!input;
+};
+validationMessages.validateNotMatching = i18n.t('validation.validateNotMatching');
+
 export const validateNoOfCompanies = (input) => {
   return input > 0 && input < 21;
 };
@@ -152,6 +165,7 @@ const validation = {
   validatePhone,
   validateRequired,
   validateMatching,
+  validateNotMatching,
   validateNumeric,
   validateNoOfCompanies,
   validateLettersOnly,

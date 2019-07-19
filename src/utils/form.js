@@ -58,6 +58,8 @@ export const clearFormState = () => {
  */
 export const setFormError = (error) => {
   store.dispatch(setFormErrors(error));
+
+  window.scrollTo(0,0);
 };
 
 /**
@@ -135,7 +137,7 @@ export const validateField = (config, stateID, arrayIndex=null) => {
 
     const newErrors = !errors.fields ? errorsList : { ...errors, fields: errorsList };
 
-    store.dispatch(setErrors(newErrors));
+    store.dispatch(setErrors(newErrors, (errors.form && errors.form !== '')));
   }
 };
 

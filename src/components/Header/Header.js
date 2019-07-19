@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import Button from 'src/components/_buttons/Button/Button';
 import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 
-import Logo from 'src/assets/images/logo-white.svg';
+import Logo from 'src/assets/images/logo.svg';
 import './header.scss';
 
 /**

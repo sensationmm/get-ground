@@ -101,7 +101,6 @@ export class AddProof extends Component {
           />
           <Button 
             data-test="retake-button" 
-            classes="secondary" 
             fullWidth 
             label={t('onBoarding.idCheck.image.retake')} 
             onClick={() => this.retakePicture()}

@@ -17,6 +17,7 @@
     "prop-types": "^15.7.2",
     "raf": "^3.4.1",
     "react-dom": "^16.8.6",
+    "react-flags-select": "^1.1.10",
     "react-helmet": "^5.2.1",
     "react-html5-camera-photo": "^1.4.1",
     "react-idle-timer": "^4.2.5",
