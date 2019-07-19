@@ -72,7 +72,11 @@ class Login extends Component {
               formUtils.setFormError(t('login.form.errorVerify'));
               break;
             case 'Invalid password':
+              formUtils.setFormError(t('login.form.errorPassword'));
+              break;
             case 'User not found':
+              formUtils.setFormError(t('login.form.errorUser'));
+              break;
             default:
               formUtils.setFormError(t('login.form.error'));
               break;
@@ -131,7 +135,6 @@ class Login extends Component {
           <Form className="account-login-actions">
             <Button
               data-test="login-button"
-              classes="secondary"
               label={ t('login.ctaPrimary') }
               fullWidth
               onClick={() => this.onLogin()}
@@ -139,7 +142,7 @@ class Login extends Component {
 
             <center>
               <Link to="/forgot-password/enter-email">
-                <Button classes="secondary faded" label={ t('login.ctaSecondary') } small />
+                <Button classes="faded" label={ t('login.ctaSecondary') } small />
               </Link>
             </center>
           </Form>

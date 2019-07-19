@@ -44,8 +44,8 @@ class CreateSignature extends Component {
 
   componentDidMount() {
     formUtils.initFormState({
-      firstname: '',
-      lastname: ''
+      firstname: this.props.user.first_name,
+      lastname: this.props.user.last_name
     });
   }
 
@@ -221,11 +221,13 @@ CreateSignature.propTypes = {
   hideLoader: PropTypes.func,
   t: PropTypes.func.isRequired,
   form: PropTypes.object,
-  location: PropTypes.object
+  location: PropTypes.object,
+  user: PropTypes.object
 };
 
 const mapStateToProps = state => ({
-  form: state.form
+  form: state.form,
+  user: state.user
 });
 
 const actions = { showLoader, hideLoader };

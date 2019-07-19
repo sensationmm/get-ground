@@ -11,14 +11,14 @@ import store from 'src/state/store';
  */
 class KYCService extends BaseService {
   makeCheck = (passport, address, selfie) => {
-    const blobPassport = passport ? dataURLToBlob(passport) : null
-    const blobAddress = address ? dataURLToBlob(address) : null;
-    const blobSelfie = selfie ? dataURLToBlob(selfie) : null;
+    const blobPassport = passport !== '' ? dataURLToBlob(passport) : null
+    const blobAddress = address !== '' ? dataURLToBlob(address) : null;
+    const blobSelfie = selfie !== '' ? dataURLToBlob(selfie) : null;
 
     const fd = new FormData();
-    const passportFile = new File( [blobPassport], 'passport.jpg', { type: 'image/jpeg' } )
-    const addressFile = new File( [blobAddress], 'passport.jpg', { type: 'image/jpeg' } )
-    const selfieFile = new File( [blobSelfie], 'passport.jpg', { type: 'image/jpeg' } )
+    const passportFile = blobPassport !== null ? new File( [blobPassport], 'passport.jpg', { type: 'image/jpeg' } ) : null;
+    const addressFile = blobAddress !== null ? new File( [blobAddress], 'passport.jpg', { type: 'image/jpeg' } ) : null;
+    const selfieFile = blobSelfie !== null ? new File( [blobSelfie], 'passport.jpg', { type: 'image/jpeg' } ) : null;
 
     fd.append('file_passport', passportFile)
     fd.append('file_selfie', selfieFile)

@@ -10,6 +10,8 @@ jest.mock('gatsby', () => ({
   Link: jest.fn()
 }));
 
+window.scrollTo = () => {};
+
 describe('Login', () => {
   let wrapper, loginSpy;
 
@@ -104,7 +106,7 @@ describe('Login', () => {
       expect(showLoaderMock).toHaveBeenCalled();
       expect(hideLoaderMock).toHaveBeenCalled();
       expect(navigate).toHaveBeenCalledTimes(0);
-      expect(formUtils.setFormError).toHaveBeenCalledWith('login.form.error');
+      expect(formUtils.setFormError).toHaveBeenCalledWith('login.form.errorUser');
     });
 
     test('password failure', async () => {
@@ -116,7 +118,7 @@ describe('Login', () => {
       expect(showLoaderMock).toHaveBeenCalled();
       expect(hideLoaderMock).toHaveBeenCalled();
       expect(navigate).toHaveBeenCalledTimes(0);
-      expect(formUtils.setFormError).toHaveBeenCalledWith('login.form.error');
+      expect(formUtils.setFormError).toHaveBeenCalledWith('login.form.errorPassword');
     });
 
     test('verify failure', async () => {

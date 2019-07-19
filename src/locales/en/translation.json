@@ -102,6 +102,11 @@
     "noActions": "Great! Everything is up to date.",
     "dismiss": "Remind later",
     "actions": {
+      "complete_company": {
+        "label": "Continue creating your company",
+        "labelShort": "Progress Tracker",
+        "cta": "Continue"
+      },
       "add_company": {
         "label": "Create your first company",
         "labelShort": "Add Company",
@@ -139,7 +144,7 @@
     "modalPara1": "We’ll contact you shortly regarding the items you selected.",
     "modalPara2": "Our office is open from 9am to 6pm London time, Monday to Friday, and we usually respond within the hour.",
     "modalPara3": "However, out of working hours it might take us longer to get back to you, but we’ll always do so as soon as possible, please bear with us.",
-    "modalContentButton": "Dismiss"
+    "modalContentButton": "Next"
   },
   "advantages": {
     "title": "GetGround Advantages",
@@ -575,7 +580,9 @@
         "password": "Password"
       },
       "error": "Invalid login - please try again",
-      "errorVerify": "Please verify your email address"
+      "errorVerify": "Please verify your email address",
+      "errorUser": "Email address not recognised",
+      "errorPassword": "Password incorrect"
     }
   },
   "meetTheFounders": {
@@ -796,8 +803,8 @@
     "intro": {
       "slides": [
         {
-          "title": "Get started",
-          "copy": "<p class='fs-large'>You’ll create your account in 3 simple steps.</p><p class='fs-large'>You’ll need your passport and a proof of address at hand.</p><p class='fs-large'>You can then access your dashboard and start creating companies.</p>",
+          "title": "Create your account <br /> in 3 simple steps",
+          "copy": "<p class='fs-large'>You’ll need your passport and proof of address to hand before being able to access your dashboard and start creating companies.</p>",
           "imageAltText": "Arm chair"
         },
         {
@@ -1079,7 +1086,8 @@
     "validateNoSpaces": "No spaces",
     "validateDate": "DD/MM/YYYY",
     "validateNoSpecial": "Invalid characters",
-    "validateFutureDate": "Date is in past"
+    "validateFutureDate": "Date is in past",
+    "validateMinDate": "Less than {{min}}"
   },
   "whatWeDo": {
     "title": "What we do",

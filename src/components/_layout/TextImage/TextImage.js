@@ -21,7 +21,7 @@ const TextImage = (props) => {
         <div className="hero-image"><img src={image} alt="" /></div>
 
         <div className="text-image-content">
-          <h1>{title}</h1>
+          <h1 dangerouslySetInnerHTML={{ __html: title }} />
 
           <div dangerouslySetInnerHTML={{ __html: text }} />
         </div>

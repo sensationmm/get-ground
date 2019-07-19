@@ -23,7 +23,7 @@ import { showLoader, hideLoader } from 'src/state/actions/loader';
 import accountService from 'src/services/Account';
 export const AccountService = new accountService();
 
-import countryData from 'src/countries.json';
+import { setCountries } from 'src/utils/functions';
 import { addressNow } from 'src/config/endpoints';
 import addIcon from 'src/assets/images/add-icon.svg';
 import 'src/styles/pages/onboarding-details.scss';
@@ -230,20 +230,6 @@ class OnboardingPersonalDetailsContainer extends Component {
       isTextAreaHidden
     } = this.state;
 
-    const setCountries = (key) => countryData
-      .sort((a, b) => {
-        return (a[key] > b[key]) ? 1 : ((b[key] > a[key]) ? -1 : 0); 
-      })
-      .map((country, index) => {
-      return (
-        <option 
-          key={`country-${index}`} 
-          value={`[${country.alpha_3_code}] ${country[key]}`}
-        >
-          {country[key]}
-        </option>
-      );
-    });
 
     /* istanbul ignore next */
     this.config = [
@@ -252,7 +238,8 @@ class OnboardingPersonalDetailsContainer extends Component {
         component: InputText,
         label: t('onBoarding.personalDetails.form.firstNameLabel'),
         value: values.first_name,
-        validationFunction: ['validateRequired', 'validateLettersOnly'],
+        validationFunction: ['validateRequired', 'validateMinimum', 'validateLettersOnly'],
+        validationParam: [null, 2, null]
       },
       {
         stateKey: 'middle_name',
@@ -260,21 +247,24 @@ class OnboardingPersonalDetailsContainer extends Component {
         label: t('onBoarding.personalDetails.form.middleNameLabel'),
         value: values.middle_name,
         note: t('onBoarding.personalDetails.form.middleNameNote'),
-        validationFunction: 'validateLettersOnly',
+        validationFunction: ['validateMinimum', 'validateLettersOnly'],
+        validationParam: [2, null]
       },
       {
         stateKey: 'last_name',
         component: InputText,
         label: t('onBoarding.personalDetails.form.lastNameLabel'),
         value: values.last_name,
-        validationFunction: ['validateRequired', 'validateLettersOnly'],
+        validationFunction: ['validateRequired', 'validateMinimum', 'validateLettersOnly'],
+        validationParam: [null, 2, null]
       },
       {
         stateKey: 'previous_names',
         component: InputText,
         label: t('onBoarding.personalDetails.form.previousNamesLabel'),
         value: values.previous_names,
-        validationFunction: 'validateLettersOnly',
+        validationFunction: ['validateMinimum', 'validateLettersOnly'],
+        validationParam: [2, null],
         hidden: !showPreviousNames
       },
       {
@@ -316,7 +306,6 @@ class OnboardingPersonalDetailsContainer extends Component {
         label: t('onBoarding.personalDetails.form.jobTitleLabel'),
         value: values.occupation,
         validationFunction: ['validateRequired', 'validateLettersOnly'],
-        wrapperClass: 'job-title-wrapper',
         note: t('onBoarding.personalDetails.form.jobTitleNote'),
       },
       {
@@ -400,9 +389,7 @@ class OnboardingPersonalDetailsContainer extends Component {
           <IntroBox>{t('onBoarding.personalDetails.intro')}</IntroBox>
 
           {showErrorMessage && 
-            <ErrorBox>
-            { errors.form ? errors.form : t('form.correctErrors') }
-            </ErrorBox>
+            <ErrorBox>{ errors.form ? errors.form : t('form.correctErrors') }</ErrorBox>
           }
 
           <Form>

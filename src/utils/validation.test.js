@@ -191,6 +191,23 @@ describe('validateMinValue', () => {
   });
 });
 
+describe('validateMinDate', () => {
+  test('returns true if more', () => {
+    const isValid = validation.validateMinDate('04/01/2020', '01/01/2020');
+    expect(isValid).toBe(true);
+  });
+
+  test('returns true if equal', () => {
+    const isValid = validation.validateMinDate('01/01/2020', '01/01/2020');
+    expect(isValid).toBe(true);
+  });
+
+  test('returns false if less', () => {
+    const isValid = validation.validateMinDate('31/12/2019', '01/01/2020');
+    expect(isValid).toBe(false);
+  });
+});
+
 describe('validateNoSpaces', () => {
   test('returns true if no spaces', () => {
     const isValid = validation.validateNoSpaces('password1');

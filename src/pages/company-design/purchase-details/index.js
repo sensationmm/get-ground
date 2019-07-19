@@ -11,7 +11,7 @@ import formUtils from 'src/utils/form';
 
 import Form from 'src/components/_layout/Form/Form';
 import InputText from 'src/components/_form/InputText/InputText';
-import InputNumber from 'src/components/_form/InputNumber/InputNumber';
+import InputCurrency from 'src/components/_form/InputCurrency/InputCurrency';
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import Button from 'src/components/_buttons/Button/Button';
@@ -194,8 +194,8 @@ class PurchaseDetails extends Component {
         currency: 'GBP' 
       },
       is_new_build: values.is_new_build,
-      completion_date:  moment(values.completion_date, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00'),
-      expected_exchange_date: moment(values.expected_exchange_date, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00'),
+      completion_date:  values.completion_date !== '' ? moment(values.completion_date, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00') : null,
+      expected_exchange_date: values.expected_exchange_date !== '' ? moment(values.expected_exchange_date, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00') : null,
       payment_schedule: paymentSchedule
     };
 
@@ -280,11 +280,11 @@ class PurchaseDetails extends Component {
 
     this.radioConfig = [
       {
-        label: 'no',
+        label: 'No',
         value: false
       },
       {
-        label: 'yes',
+        label: 'Yes',
         value: true
       }
     ]
@@ -292,7 +292,7 @@ class PurchaseDetails extends Component {
     this.config = [
       {
         stateKey: 'amount_in_cents',
-        component: InputNumber,
+        component: InputCurrency,
         label: t('companyDesign.purchaseDetails.form.priceOfPropertyLabel'),
         value: amount_in_cents,
         validationFunction: 'validateRequired',
@@ -321,7 +321,8 @@ class PurchaseDetails extends Component {
         component: InputText,
         label: t('companyDesign.purchaseDetails.form.completionDateLabel'),
         value: completion_date,
-        validationFunction: ['validateRequired', 'validateDate', 'validateFutureDate'],
+        validationFunction: ['validateRequired', 'validateDate', 'validateFutureDate', 'validateMinDate'],
+        validationParam: [null, null, null, expected_exchange_date],
         placeholder: 'DD/MM/YYYY',
         id: 'completionDate',
         hidden: is_new_build === null,
@@ -343,7 +344,7 @@ class PurchaseDetails extends Component {
       },
       {
         stateKey: 'depositAmount',
-        component: InputNumber,
+        component: InputCurrency,
         label: t('companyDesign.purchaseDetails.form.depositAmountLabel'),
         value: depositAmount,
         validationFunction: 'validateRequired',
@@ -354,14 +355,15 @@ class PurchaseDetails extends Component {
         component: InputText,
         label: t('companyDesign.purchaseDetails.form.firstInstallmentDateLabel'),
         value: firstInstallmentDate,
-        validationFunction: ['validateRequired', 'validateDate', 'validateFutureDate'],
+        validationFunction: ['validateRequired', 'validateDate', 'validateFutureDate', 'validateMinDate'],
+        validationParam: [null, null, null, depositDueDate],
         placeholder: 'DD/MM/YYYY',
         id: 'firstInstallmentDate',
         hidden: this.checkElementHidden(),
       },
       {
         stateKey: 'firstInstallmentAmount',
-        component: InputNumber,
+        component: InputCurrency,
         label: t('companyDesign.purchaseDetails.form.firstInstallmentLabel'),
         value: firstInstallmentAmount,
         validationFunction: 'validateRequired',
