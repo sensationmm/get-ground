@@ -49,7 +49,7 @@ class PrivacyPolicy extends Component {
     showLoader();
     this.setState({ modalError: false });
 
-    return ModalService.markdownToPDF(modalMarkdown).then(response => {
+    return ModalService.markdownToPDF(modalMarkdown, 'Privacy Policy').then(response => {
       hideLoader();
       if (response.status === 400) {
         this.setState({ modalError: true });
@@ -57,7 +57,7 @@ class PrivacyPolicy extends Component {
         const url = window.URL.createObjectURL(new Blob([response]));
         const link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download', 'get-ground-terms-conditions.pdf');
+        link.setAttribute('download', 'privacy-policy.pdf');
         if (this.modalHeader.current !== null) {
           this.modalHeader.current.appendChild(link);
           link.click();

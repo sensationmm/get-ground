@@ -131,19 +131,20 @@ export class MyDocuments extends Component {
           this.setState({
             [markdown.markdownStateKey]: response.data.markdown_text
           });
-          this.downloadAllFiles(response.data.markdown_text);
+          this.downloadAllFiles(response.data.markdown_text, markdown.title);
         });
       // Else just download them ( they could have previously been stored by opening the
       // relevant modal OR by firing getAllMarkdown once already... )
       } else {
-        this.downloadAllFiles(this.state[markdown.markdownStateKey]);
+        this.downloadAllFiles(this.state[markdown.markdownStateKey], markdown.title);
       }
     });
   }
 
   // Transform the markdown into PDF urls, create links and click them progromatically for download
-  downloadAllFiles = (markdown) => {
-    return ModalService.markdownToPDF(markdown).then(response => {
+  downloadAllFiles = (markdown, title) => {
+
+    return ModalService.markdownToPDF(markdown, title).then(response => {
       const url = window.URL.createObjectURL(new Blob([response]));
       const link = document.createElement('a');
       link.href = url;
