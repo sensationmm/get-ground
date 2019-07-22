@@ -23,7 +23,8 @@ import { showLoader, hideLoader } from 'src/state/actions/loader';
 import companyService from 'src/services/Company';
 export const CompanyService = new companyService();
 
-// import addIcon from 'src/assets/images/add-icon.svg';
+import addIcon from 'src/assets/images/add-icon.svg';
+import removeIcon from 'src/assets/images/remove-icon.svg';
 
 /**
   * PurchaseDetails
@@ -58,8 +59,12 @@ class PurchaseDetails extends Component {
       depositAmount: payment === null ? '' : payment[0].amount.amount_in_cents,
       firstInstallmentDate: this.setReduxDateValues(payment, 1),
       firstInstallmentAmount: payment === null ? '' : payment[1].amount.amount_in_cents,
-      // secondInstallmentDate: this.setReduxDateValues(payment, 2),
-      // secondInstallmentAmount: payment === null ? '' : payment[2].amount.amount_in_cents
+      secondInstallmentDate: this.setReduxDateValues(payment, 2),
+      secondInstallmentAmount: payment === null || !payment[2] ? '' : payment[2].amount.amount_in_cents,
+      thirdInstallmentDate: this.setReduxDateValues(payment, 3),
+      thirdInstallmentAmount: payment === null || !payment[3] ? '' : payment[3].amount.amount_in_cents,
+      fourthInstallmentDate: this.setReduxDateValues(payment, 4),
+      fourthInstallmentAmount: payment === null || !payment[4] ? '' : payment[4].amount.amount_in_cents
     }
     
     formUtils.initFormState({
@@ -71,9 +76,26 @@ class PurchaseDetails extends Component {
       expected_exchange_date: '',
       firstInstallmentDate: '',
       firstInstallmentAmount: '',
-      // secondInstallmentDate: '',
-      // secondInstallmentAmount: ''
+      secondInstallmentDate: '',
+      secondInstallmentAmount: '',
+      thirdInstallmentDate: '',
+      thirdInstallmentAmount: '',
+      fourthInstallmentDate: '',
+      fourthInstallmentAmount: ''
     }, reduxFields);
+
+    let numInstallments = 0;
+    if(reduxFields.fourthInstallmentDate) {
+      numInstallments = 3;
+    } else if(reduxFields.thirdInstallmentDate) {
+      numInstallments = 2;
+    } else if(reduxFields.secondInstallmentDate) {
+      numInstallments = 1;
+    }
+
+    this.setState({
+      extraInstallmentFieldsShowing: numInstallments
+    })
   }
 
   componentWillUnmount() {
@@ -87,7 +109,7 @@ class PurchaseDetails extends Component {
    * @return {void} setReduxDateValues
    */
   setReduxDateValues = (payment, index) => {
-    if (payment === null || (payment && payment[index].due_date === null) || 
+    if (payment === null || (payment && (!payment[index] || payment[index].due_date === null)) || 
       (payment && payment[index].due_date === undefined)) {
       return '';
     } else {
@@ -128,15 +150,29 @@ class PurchaseDetails extends Component {
 
   showNextInstallment = /* istanbul ignore next */ () => {
     const { extraInstallmentFieldsShowing } = this.state;
-    const installmentDateField = document.getElementsByClassName('installment-date');
-    const installmentDateAmount = document.getElementsByClassName('installment-amount');
-
-    if (installmentDateField.length === extraInstallmentFieldsShowing) return;
 
     this.setState({ extraInstallmentFieldsShowing: extraInstallmentFieldsShowing + 1});
+  }
 
-    installmentDateField[extraInstallmentFieldsShowing].style.display = 'block';
-    installmentDateAmount[extraInstallmentFieldsShowing].style.display = 'block';
+  removeNextInstallment = /* istanbul ignore next */ () => {
+    const { extraInstallmentFieldsShowing } = this.state;
+
+    switch(extraInstallmentFieldsShowing) {
+      case 1:
+        formUtils.updateValue('secondInstallmentDate', '');
+        formUtils.updateValue('secondInstallmentAmount', null);
+        break;
+      case 2:
+        formUtils.updateValue('thirdInstallmentDate', '');
+        formUtils.updateValue('thirdInstallmentAmount', null);
+        break;
+      case 3:
+        formUtils.updateValue('fourthInstallmentDate', '');
+        formUtils.updateValue('fourthInstallmentAmount', null);
+        break;
+    }
+
+    this.setState({ extraInstallmentFieldsShowing: extraInstallmentFieldsShowing - 1});
   }
 
   /**
@@ -183,6 +219,30 @@ class PurchaseDetails extends Component {
         due_date: values.firstInstallmentDate ? moment(values.firstInstallmentDate, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00') : null,
         amount: {
           amount_in_cents: values.firstInstallmentAmount,
+          currency:'GBP'
+        }
+      },
+      {
+        type: 'second_installment',
+        due_date: values.secondInstallmentDate ? moment(values.secondInstallmentDate, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00') : null,
+        amount: {
+          amount_in_cents: values.secondInstallmentAmount,
+          currency:'GBP'
+        }
+      },
+      {
+        type: 'third_installment',
+        due_date: values.thirdInstallmentDate ? moment(values.thirdInstallmentDate, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00') : null,
+        amount: {
+          amount_in_cents: values.thirdInstallmentAmount,
+          currency:'GBP'
+        }
+      },
+      {
+        type: 'fourth_installment',
+        due_date: values.fourthInstallmentDate ? moment(values.fourthInstallmentDate, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00') : null,
+        amount: {
+          amount_in_cents: values.fourthInstallmentAmount,
           currency:'GBP'
         }
       }
@@ -260,7 +320,7 @@ class PurchaseDetails extends Component {
 
   render() {
     const { t, form, company } = this.props;
-    // const payment_schedule = company ? company.purchase_details.payment_schedule : []
+    const { extraInstallmentFieldsShowing } = this.state;
     const {
       values: {
         amount_in_cents,
@@ -270,8 +330,12 @@ class PurchaseDetails extends Component {
         depositAmount,
         firstInstallmentDate,
         firstInstallmentAmount,
-        // secondInstallmentDate,
-        // secondInstallmentAmount,
+        secondInstallmentDate,
+        secondInstallmentAmount,
+        thirdInstallmentDate,
+        thirdInstallmentAmount,
+        fourthInstallmentDate,
+        fourthInstallmentAmount,
         expected_exchange_date
       },
       showErrorMessage,
@@ -369,37 +433,79 @@ class PurchaseDetails extends Component {
         validationFunction: 'validateRequired',
         hidden: this.checkElementHidden()
       },
-      // {
-      //   stateKey: 'secondInstallmentDate',
-      //   component: InputText,
-      //   label: t('companyDesign.purchaseDetails.form.secondInstallmentDateLabel'),
-      //   value: secondInstallmentDate,
-      //   onFocus: this.openDatePicker,
-      //   id: 'secondInstallmentDate',
-      //   wrapperClass: 'installment-date',
-      //   readOnly: true,
-      //   hidden: this.checkElementHidden() ||
-      //           (is_new_build === true && payment_schedule === null) ||
-      //           (is_new_build === true && payment_schedule && payment_schedule[2].due_date === '')
-      // },
-      // {
-      //   stateKey: 'secondInstallmentAmount',
-      //   component: InputNumber,
-      //   label: t('companyDesign.purchaseDetails.form.secondInstallmentLabel'),
-      //   value: secondInstallmentAmount,
-      //   wrapperClass: 'installment-amount',
-      //   hidden: this.checkElementHidden() ||
-      //           (is_new_build === true && payment_schedule === null) ||
-      //           (is_new_build === true && payment_schedule && payment_schedule[2].due_date === '')
-      // },
-      // {
-      //   component: Button,
-      //   onClick: () => this.showNextInstallment(),
-      //   icon: addIcon,
-      //   small: true,
-      //   label: t('companyDesign.purchaseDetails.form.addButton'),
-      //   hidden: this.checkElementHidden()
-      // },
+      {
+        stateKey: 'secondInstallmentDate',
+        component: InputText,
+        label: t('companyDesign.purchaseDetails.form.secondInstallmentDateLabel'),
+        value: secondInstallmentDate,
+        validationFunction: ['validateDate', 'validateFutureDate', 'validateMinDate'],
+        validationParam: [null, null, firstInstallmentDate],
+        placeholder: 'DD/MM/YYYY',
+        id: 'secondInstallmentDate',
+        hidden: this.checkElementHidden() || extraInstallmentFieldsShowing < 1
+      },
+      {
+        stateKey: 'secondInstallmentAmount',
+        component: InputCurrency,
+        label: t('companyDesign.purchaseDetails.form.secondInstallmentLabel'),
+        value: secondInstallmentAmount,
+        validationFunction: 'validateRequired',
+        hidden: this.checkElementHidden() || extraInstallmentFieldsShowing < 1
+      },
+      {
+        stateKey: 'thirdInstallmentDate',
+        component: InputText,
+        label: t('companyDesign.purchaseDetails.form.thirdInstallmentDateLabel'),
+        value: thirdInstallmentDate,
+        validationFunction: ['validateDate', 'validateFutureDate', 'validateMinDate'],
+        validationParam: [null, null, secondInstallmentDate],
+        placeholder: 'DD/MM/YYYY',
+        id: 'thirdInstallmentDate',
+        hidden: this.checkElementHidden() || extraInstallmentFieldsShowing < 2
+      },
+      {
+        stateKey: 'thirdInstallmentAmount',
+        component: InputCurrency,
+        label: t('companyDesign.purchaseDetails.form.thirdInstallmentLabel'),
+        value: thirdInstallmentAmount,
+        validationFunction: 'validateRequired',
+        hidden: this.checkElementHidden() || extraInstallmentFieldsShowing < 2
+      },
+      {
+        stateKey: 'fourthInstallmentDate',
+        component: InputText,
+        label: t('companyDesign.purchaseDetails.form.fourthInstallmentDateLabel'),
+        value: fourthInstallmentDate,
+        validationFunction: ['validateDate', 'validateFutureDate', 'validateMinDate'],
+        validationParam: [null, null, thirdInstallmentDate],
+        placeholder: 'DD/MM/YYYY',
+        id: 'fourthInstallmentDate',
+        hidden: this.checkElementHidden() || extraInstallmentFieldsShowing < 3
+      },
+      {
+        stateKey: 'fourthInstallmentAmount',
+        component: InputCurrency,
+        label: t('companyDesign.purchaseDetails.form.fourthInstallmentLabel'),
+        value: fourthInstallmentAmount,
+        validationFunction: 'validateRequired',
+        hidden: this.checkElementHidden() || extraInstallmentFieldsShowing < 3
+      },
+      {
+        component: Button,
+        onClick: () => this.showNextInstallment(),
+        icon: addIcon,
+        small: true,
+        label: t('companyDesign.purchaseDetails.form.addButton'),
+        hidden: this.checkElementHidden() || extraInstallmentFieldsShowing >= 3
+      },
+      {
+        component: Button,
+        onClick: () => this.removeNextInstallment(),
+        icon: removeIcon,
+        small: true,
+        label: t('companyDesign.purchaseDetails.form.removeButton'),
+        hidden: this.checkElementHidden() || extraInstallmentFieldsShowing < 1 
+      },
     ];
 
     const headerActions = <ButtonHeader onClick={() => this.handleSubmitPurchaseDetails(true)} label={t('header.buttons.saveAndExit')} />
