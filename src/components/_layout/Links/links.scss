@@ -1,0 +1,28 @@
+.links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 80px;
+  font-size: 14px;
+
+  &-link {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    &-label {
+      padding: 0 30px;
+      font-weight: 300;
+
+      b {
+        display: block;
+        font-weight: 400;
+        margin-bottom: 3px;
+      }
+    }
+
+    &:last-of-type {
+      text-align: right;
+    }
+  }
+}

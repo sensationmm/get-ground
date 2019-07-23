@@ -13,12 +13,16 @@
   img {
     display: block;
     width: 100%;
-    max-width: 40px;
-    max-height: 40px;
+    max-width: 20px;
+    max-height: 20px;
   }
 
   &.chat {
     @include gradient-horizontal($gradient-option-1, $gradient-option-2);
+
+    img {
+      fill: $white;
+    }
   }
 
   &.disabled {

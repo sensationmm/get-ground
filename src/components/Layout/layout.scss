@@ -80,7 +80,30 @@ body {
   }
 }
 
-div.fullscreen {
+.landing {
+  .app {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+
+    .main {
+      max-width: none;
+    }
+  }
+
+  &-content {
+    padding: 0 (($padding-horizontal-unit * 2) + 0px) $padding-vertical (($padding-horizontal-unit * 2) + 0px);
+    background: $white;
+    
+    &-inner {
+      max-width: $max-width;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+div.fullscreen, div.landing {
   position: relative;
   display: block;
   height: 100%;
@@ -92,7 +115,7 @@ div.fullscreen {
 
 h1, h2 {
   font-family: inherit;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 24px;
 }
 
@@ -228,7 +251,7 @@ canvas {
     }
   }
 
-  .brochure, .landing {
+  .brochure {
     h2 {
       text-transform: uppercase;
     }
@@ -252,7 +275,7 @@ canvas {
   canvas {
     display: block;
     width: 100%;
-    height: 200px;
+    height: 150px;
     position: absolute;
     bottom: 0;
     left: 0;

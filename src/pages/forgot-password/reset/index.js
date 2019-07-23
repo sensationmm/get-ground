@@ -127,7 +127,6 @@ class ResetPassword extends Component {
               
               <Button
                 data-test="reset-password-button"
-                classes="secondary"
                 label={ t('forgotPassword.reset.setPasswordButton') }
                 fullWidth
                 onClick={this.onSetNewPassword}
