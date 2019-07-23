@@ -23,7 +23,7 @@ class AuthService extends BaseService {
    */
   login = (email, password) => {
     const config = {
-      url: 'v1/auth',
+      url: 'v2/auth',
       method: 'post',
       data: {
         'email': email,
@@ -77,7 +77,7 @@ class AuthService extends BaseService {
    */
   reauthenticate = () => {
     const config = {
-      url: 'v1/auth_reset',
+      url: 'v2/auth_reset',
       method: 'post'
     };
 

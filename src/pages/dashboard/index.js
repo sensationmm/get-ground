@@ -35,13 +35,13 @@ class Dashboard extends Component {
       liveChatTopic: null
     };
   }
-  
+
   render() {
     const { actions, companies, setActiveCompany, t } = this.props;
     const hasActions = (actions.length > 0);
     const hasCompanies = (companies.length > 0);
     let addCompany;
-    
+
     if(!hasCompanies) {
       addCompany = {
         type: 'add_company',
@@ -63,13 +63,13 @@ class Dashboard extends Component {
           <div className="company-header link profile" data-test="profile-button" onClick={() => navigate('/account')}>
             { t('dashboard.main.profileLink') }
           </div>
-  
+
           <ActionBox actions={!hasCompanies ? [addCompany] : actions} />
-  
+
           <div className="dashboard-columns">
             <div>
               <h3>{ t('dashboard.main.portfolioHeader') }</h3>
-              {hasCompanies && 
+              {hasCompanies &&
                 <Button
                   classes="primary small add-company"
                   data-test="add-company-button"
@@ -77,8 +77,8 @@ class Dashboard extends Component {
                   onClick={() => navigate('/company-design/intro')}
                 />
               }
-  
-              {hasCompleteCompanies && 
+
+              {hasCompleteCompanies &&
                 completeCompanies.map((company, count) => (
                   <CompanyLink
                     key={`company-${count}`}
@@ -88,10 +88,10 @@ class Dashboard extends Component {
                   />
                 ))
               }
-  
+
               {!hasCompleteCompanies && <div className="no-properties">{ t('dashboard.main.noProperties') }</div>}
             </div>
-            
+
             <div>
               <List>
               <h3>{ t('dashboard.main.todoHeader') }</h3>
@@ -138,7 +138,7 @@ const mapStateToProps = (state) => ({
   userID: state.user.id
 });
 
-const actions = { 
+const actions = {
   setActiveCompany,
   showLoader,
   hideLoader
