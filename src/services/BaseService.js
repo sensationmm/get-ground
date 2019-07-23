@@ -22,6 +22,7 @@ class BaseService {
     if (auth.token && unauthed !== true) {
       token = `Bearer ${auth.token}`;
     } else {
+      // API Key
       token = 'avb068cbk2os5ujhodmt';
     }
 

@@ -14,6 +14,8 @@ import Button from 'src/components/_buttons/Button/Button'
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox'
 import Modal from './modal/index'
 
+import { formatCurrency } from 'src/utils/functions';
+
 import { showLoader, hideLoader } from 'src/state/actions/loader'
 
 import './acceptance-of-role.scss'
@@ -52,21 +54,24 @@ export class AcceptanceOfRole extends React.Component {
 
     const { location, t, showLoader, hideLoader } = this.props;
     showLoader();
-    AccountService.retrieveInvestedUser(location.search).then((response) => {
+    const token = location.search.split('=')[1];
+
+    AccountService.retrieveInvestedUser(token).then((response) => {
+      const { data: { property_purchase: { property_address: { address }, purchase_details, shareholder_details }, shareholder_detail } } = response;
       hideLoader();
       if (response.status === 200) {
         this.setState({
           companyAddress: {
-            lineOfAddress: response.property.first_line_of_address,
-            town: response.property.town,
-            city: response.property.city,
-            postCode: response.property.post_code
+            lineOfAddress: `${address.premise} ${address.street}`,
+            town: address.posttown,
+            city: address.city,
+            postCode: address.postcode
           },
-          propertyPrice: response.price_of_property.amount_in_cents,
-          shares: response.num_shares,
-          inviteeName: response.invitee_name,
-          isDirector: response.is_director,
-          isExistingUser: response.is_existing_user
+          propertyPrice: purchase_details.price.amount_in_cents,
+          shares: shareholder_detail.allocated_shares,
+          inviteeName: `${shareholder_details.collection[0].first_name} ${shareholder_details.collection[0].last_name}`,
+          isDirector: shareholder_detail.is_director,
+          isExistingUser: shareholder_detail.is_existing_user
         })
       } else if (response.status === 400) {
         this.setState({
@@ -98,11 +103,11 @@ export class AcceptanceOfRole extends React.Component {
     }
 
     if (!isExistingUser ) {
-      return navigate('/forgot-password/reset', {
-        state: {
-          acceptRoleToken: token
+      return navigate('/forgot-password/reset',
+        {
+          state: { acceptRoleToken: token}
         }
-      })
+      )
     }
 
 
@@ -194,7 +199,7 @@ export class AcceptanceOfRole extends React.Component {
             </div>
             <div>
               <h3>{t('acceptanceOfRole.property.price')}</h3>
-              <p>{`£${this.state.propertyPrice}`}</p>
+              <p>{`£${formatCurrency(this.state.propertyPrice)}`}</p>
             </div>
             <div>
               <h3>{t('acceptanceOfRole.property.shares')}</h3>

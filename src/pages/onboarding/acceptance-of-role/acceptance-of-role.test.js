@@ -19,19 +19,37 @@ describe('acceptance-of-role', () => {
 
   beforeEach(() => {
     AccountService.retrieveInvestedUser = jest.fn().mockReturnValue(Promise.resolve({ status: 200,
-    property: {
-      first_line_of_address: '666 test road',
-      town: 'london town',
-      city: 'london city',
-      post_code: 'TW8 8NJ'
-    },
-    price_of_property: {
-      amount_in_cents: 14000001
-    },
-    num_shares: 33,
-    invitee_name: 'J Cole',
-    is_director: true,
-    is_existing_user: false
+      data: {
+        property_purchase: {
+          property_address: {
+            address: {
+              premise: '666',
+              street: 'test road',
+              posttown: 'test town',
+              city: 'test city',
+              postcode: 'TW8 8NJ'
+            }
+          },
+          purchase_details: {
+            price: {
+              amount_in_cents: 10000
+            }
+          },
+          shareholder_details: {
+            collection: [
+              {
+                first_name: 'lead',
+                last_name: 'shareholder'
+              }
+            ],
+          },
+        },
+        shareholder_detail: {
+          is_director: true,
+          is_existing_user: false,
+          allocated_shares: 11
+        },
+      }
     }));
 
     AuthService.acceptRoleLogin = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
@@ -53,14 +71,14 @@ describe('acceptance-of-role', () => {
     expect(props.hideLoader).toHaveBeenCalled()
     expect(wrapper.state().companyAddress).toEqual({
         lineOfAddress: '666 test road',
-        town: 'london town',
-        city: 'london city',
+        town: 'test town',
+        city: 'test city',
         postCode: 'TW8 8NJ'
     })
 
-    expect(wrapper.state().propertyPrice).toEqual(14000001)
-    expect(wrapper.state().shares).toEqual(33)
-    expect(wrapper.state().inviteeName).toEqual('J Cole')
+    expect(wrapper.state().propertyPrice).toEqual(10000)
+    expect(wrapper.state().shares).toEqual(11)
+    expect(wrapper.state().inviteeName).toEqual('lead shareholder')
     expect(wrapper.state().isDirector).toEqual(true)
     expect(wrapper.state().isExistingUser).toEqual(false)
   })

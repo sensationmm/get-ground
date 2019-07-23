@@ -16,13 +16,20 @@ describe('ResetPassword', () => {
 
   beforeEach(() => {
     AuthService.setNewPassword = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
-    AuthService.acceptRoleSetPassword = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
+    AuthService.acceptRoleSetPassword = jest.fn().mockReturnValue(Promise.resolve({ status: 200, data: {
+      token: '1234',
+      user: {
+        id: 1
+      }
+    } }));
     jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
 
     props = {
       t: jest.fn(),
       showLoader: jest.fn(),
       hideLoader: jest.fn(),
+      saveAuth: jest.fn(),
+      userLogin: jest.fn(),
       form: ReduxFormMock,
       location: {
         search: '',
@@ -79,8 +86,11 @@ describe('ResetPassword', () => {
     const button = wrapper.find('[data-test="reset-password-button"]')
     await button.props().onClick()
     expect(props.showLoader).toHaveBeenCalled();
+    expect(props.saveAuth).toHaveBeenCalledWith('1234');
+    expect(props.userLogin).toHaveBeenCalledWith({ id: 1 });
     expect(props.hideLoader).toHaveBeenCalled();
-    expect(navigate).toHaveBeenCalledWith('/dashboard', {
+    expect(AuthService.setNewPassword).not.toHaveBeenCalled()
+    expect(navigate).toHaveBeenCalledWith('/onboarding', {
       state: {
         acceptRoleToken: ''
       }
