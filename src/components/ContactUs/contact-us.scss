@@ -14,22 +14,27 @@
   &-title {
     font-size: 20px;
     font-weight: 300;
+    margin-bottom: 20px;
   }
 
   &-phone, &-email {
     margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
     img {
       width: 16px;
       display: inline-block;
       margin-left: 5px;
-      margin-right: 20px;
+      margin-right: 10px;
     }
 
     p {
       font-size: 16px;
       display: inline-block;
       font-weight: 300;
-      margin-bottom: 0;
+      margin-bottom: 0 !important;
     }
   }
 
@@ -44,8 +49,8 @@
 
 @media screen and (min-width: $breakpoint-desktop) {
   .contact-us {
-    width: calc(100% - #{$padding-horizontal-unit * 8 + 0px});
-    max-width: $max-width;
+    width: calc(100% - #{$padding-horizontal-unit * 10 + 0px});
+    max-width: 595px;
     margin-left: auto;
     margin-right: auto;
 

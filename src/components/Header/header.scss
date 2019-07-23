@@ -158,7 +158,7 @@
   }
 }
 
-.fullscreen {
+.fullscreen, .landing {
   .header {
     @include background-horizontal($gradient);
   }

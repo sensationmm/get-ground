@@ -12,6 +12,8 @@ jest.mock('gatsby', () => ({
   navigate: jest.fn()
 }));
 
+window.scrollTo = () => {};
+
 describe('<OnboardingPersonalDetailsContainer />', () => {
   let wrapper;
   const setCountryMock = jest.fn();

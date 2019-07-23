@@ -1,0 +1,25 @@
+@import '../../../styles/modules/_variables';
+
+.curve-box {
+  background-image: linear-gradient(to bottom, #CEF2E6, #F1F6CF);
+  padding: 130px ($padding-horizontal-unit * 2 + 0px);
+
+  &-content {
+    max-width: $max-width;
+    margin-left: auto;
+    margin-right: auto;  
+  }
+
+  canvas {
+    position: absolute;
+    left: 0;
+
+    &#top {
+      top: 0;
+    }
+
+    &#bottom {
+      bottom: 0;
+    }
+  }
+}

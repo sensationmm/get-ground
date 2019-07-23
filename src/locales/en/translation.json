@@ -460,7 +460,7 @@
         "title": "About us"
       },
       "link2": {
-        "title": "GetGround Advantages"
+        "title": "Advantages"
       },
       "link3": {
         "title": "Partnerships"
@@ -834,9 +834,6 @@
       "button1": "Create your profile",
       "button2": "Already on GG? Log In"
     },
-    "accountCreation": {
-
-    },
     "confirmation": {
       "heading": "Well done",
       "imageAltText": "confirmation image",
@@ -1100,16 +1097,56 @@
   },
   "whatWeDo": {
     "title": "What we do",
+    "intro": "<p>With GetGround, you can purchase your property through a company, without the complexity and costs of setting up and managing it.</p><p>We set up a company and bank account for you, and once your company owns your property we manage your company on an on-going basis. </p>",
     "content": {
-      "first": "Through technology GetGround makes it easier and cheaper than ever to own property in a company. We provide all the services your company needs under one roof.",
-      "second": "Our simple website means you no longer have to spend time on the phone or email chasing your company lawyers, accountants, secretaries or banks.",
-      "third": "We’ve have crafted the optimal company structure for UK investment property. Using it means you are likely to pay less tax.",
-      "fourth": "Through our partners we can provide seamless access to the best services for all your property needs; including mortgages, insurance, property management and solicitors.",
-      "fifth": "GetGround customers also have access to the GetGround marketplace making buying and selling shares in companies holding property fast and cost effective."
+      "heading": "Our service",
+      "text": {
+        "p1": "<p>Our service is for anyone looking to purchase residential property in England and Wales as an investment to be rented out.</p>",
+        "p2": "<p>We set up a company and bank account for you, and once your company owns your property we manage your company on an on-going basis including:</p>",
+        "p3": "<ul><li>All required company legal documents</li><li>Company accounts</li><li>Company tax filings</li><li>Company secretarial work (inc. registered office and filings)</li></ul>",
+        "p4": "<p>Ideally, you should set up your company before you exchange contracts on your property. But we still might be able to help even if you have already exchanged contracts or own property you want to transfer into a company. Get in touch to see if we can.</p>",
+        "p5": "<p>For your property, we do not provide any services but can give you access to our carefully selected partners to get access to a wide range of products from mortgages to property management. </p>"
+      }
+    },
+    "sections": {
+      "first": {
+        "heading": "You own and control your company",
+        "text": "<p>You can buy your property alone or with up to 7 other people you choose (maximum 8 shareholders in a company). At least one shareholder needs to be a director.</p><p>GetGround is a service provider and does not have any directorship or ownership in your company. We cannot perform any activities on your company without your explicit consent and you are free to leave our services at any time without penalty.</p>"
+      },
+      "second": {
+        "heading": "Companies that are designed for investment property",
+        "text": "<p>All our companies are UK Limited companies. They are tailor made for investment property, which means they are tax efficient, work with mortgages and have high quality legal documentation.</p><p>Each company only ever holds one property. We believe this is better than holding multiple properties in one company. </p>",
+        "more": "<ul><li>You have greater control of your property portfolio. Decide what to do with each property e.g., sell one, gift another to children, or take a dividend out from another</li><li>You can easily buy or sell a property just by changing ownership in the shares of the company holding it </li><li>You are better protected as each asset is legally ring fenced in case things go wrong</li><li>You understand the performance of each property better as each has its own bank account and cashflows </li></ul>"
+      },
+      "third": {
+        "heading": "Your lawyers, your choice",
+        "text": "<p>You can choose your own or we can connect you with our partners. They’ll need to be based in the UK and be a member of either the Solicitors Regulation Authority or the Council for Licensed Conveyancers.</p><p>Just as usual you send the money required to purchase your property to your lawyers client account. GetGround does not handle these funds.</p>"
+      },
+      "fourth": {
+        "heading": "Every company comes with a bank account",
+        "text": "<p>Every company set up with GetGround comes with a bank account that is used for your property’s rental income and expenses. Your company owns the bank account and you control it. </p>"
+      }
+    },
+    "tiles": {
+      "heading": "What we ask you not to do while you choose to use us",
+      "text": "<p>We’re creating a platform that’s built on a foundation of mutual trust. With that in mind, there are a few things we ask you not to do while you choose to use our services, for both your and our benefit.</p><p>As a member of a community of trust we ask you to refrain from the following things - you’re free to choose not to, but we won’t be able to provide our services to the affected company: </p>",
+      "content": {
+        "property": "Only use your company for the one property you’ve told us about. Your company should not conduct any other business.",
+        "investment": "Only use the property for investment purposes to rent out to unrelated third parties.",
+        "lending": "If you want to take any lending, issue or transfer any shares or take out insurance you can do so, but please let us know first.",
+        "employment": "Do not employ anyone through the company.",
+        "legalDocs": "Do not change any of the company’s legal documents.",
+        "accounting": "Do not change the company’s accounting date or it’s name.",
+        "partnerships": "Do not enter the company into any partnerships, joint ventures or incorporate any subsidiaries.",
+        "bankAccount": "Only use the bank account given through GetGround for your company. If your mortgage lender requires you to open a bank account with them, that is fine so long as it is only used to make mortgage interest payments."
+      },
+      "outro": "<p>For more information please see copies of the legal documents we use for GetGround companies here.</p>"
     }
-
   },
   "showAll": "Show all",
+  "scroll": "Scroll down",
+  "seeLess": "See less",
+  "seeMore": "See more",
   "404": {
     "title": "Oops!",
     "text": "We are sorry but that page could not be found. Click the  button below to return to the homepage, or use the menu above.",

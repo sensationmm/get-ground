@@ -73,9 +73,13 @@
     padding: 8px 31px;
   }
 
-  &.chat {
+  &.chat, &.get-started {
     @include gradient-horizontal($gradient-option-1, $gradient-option-2);
     color: $text;
+  }
+
+  &.get-started {
+    padding: 15px 70px;
   }
 
   &.tertiary {
@@ -187,7 +191,7 @@
 }
 
 @media screen and (min-width: $breakpoint-desktop) {
-  .button {
+  .button:not(.get-started) {
     padding: 7px 50px;
     font-size: 18px;
 

@@ -28,6 +28,8 @@ export const mockStore = (initialState) => {
  * @return {ShallowWrapper} - configured ShallowWrapper component
  */
 export const setup = (Component, props={}, state=null) => {
+
+  window.scrollTo = () => {};
   const wrapper = shallow(<Component {...props} />)
 
   if(state) {
