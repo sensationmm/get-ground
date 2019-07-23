@@ -179,14 +179,18 @@ class AuthService extends BaseService {
   /**
    * acceptSetPassword
    * Login for accept role
+   * @param {string} password - password set for account
    * @param {string} token - accept role token
    * @return {Promise} verify email response
    */
-  acceptRoleSetPassword = (token) => {
+  acceptRoleSetPassword = (password, token) => {
     const config = {
-      url: 'accept-role/set_password',
+      url: '/property_purchases/accept_role',
       method: 'post',
-      data: JSON.stringify({'token': token})
+      data: JSON.stringify({
+        'password': password,
+        'token': token
+      })
     };
 
     return this.doRequest(config);
