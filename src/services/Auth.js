@@ -61,7 +61,7 @@ class AuthService extends BaseService {
    */
   requestResetPassword = (email) => {
     const config = {
-      url: 'v1/auth/request_reset_password',
+      url: 'v2/auth/request_reset_password',
       method: 'post',
       data: {
         'email': email
@@ -101,7 +101,7 @@ class AuthService extends BaseService {
    */
   setNewPassword = (password, token) => {
     const config = {
-      url: 'v1/reset_password',
+      url: 'v2/auth/reset_password',
       method: 'post',
       data: {
         'password': password,

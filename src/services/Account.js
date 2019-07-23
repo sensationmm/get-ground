@@ -158,7 +158,7 @@ class AccountService extends BaseService {
    */
   getSignature = () => {
     const config = {
-      url: `/users/${store.getState().user.id}/signature`,
+      url: `v2/users/${store.getState().user.id}/signature`,
       method: 'get'
     };
 
@@ -177,7 +177,7 @@ class AccountService extends BaseService {
    */
   retrieveInvestedUser = (token) => {
     const config = {
-      url: `v1/property_purchases_users/${token}`,
+      url: `v2/property_purchases_users/${token}`,
       method: 'get'
     };
 

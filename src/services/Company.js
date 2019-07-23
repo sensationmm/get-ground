@@ -32,7 +32,6 @@ class CompanyService extends BaseService {
     };
 
     return this.doRequest(config, (response) => {
-      console.log('response.data', response.data)
       store.dispatch(setCompanies(response.data.property_purchases));
     });
   }
