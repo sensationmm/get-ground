@@ -307,13 +307,18 @@
         "completionDateLabel": "When is the expected completion date?",
         "depositDueLabel": "What date is your deposit due?",
         "depositAmountLabel": "Deposit Amount",
-        "firstInstallmentDateLabel": "First installment date?",
+        "firstInstallmentDateLabel": "First installment date",
         "firstInstallmentLabel": "First installment amount",
-        "secondInstallmentDateLabel": "Second installment date?",
+        "secondInstallmentDateLabel": "Second installment date",
         "secondInstallmentLabel": "Second installment amount",
+        "thirdInstallmentDateLabel": "Third installment date",
+        "thirdInstallmentLabel": "Third installment amount",
+        "fourthInstallmentDateLabel": "Fourth installment date",
+        "fourthInstallmentLabel": "Fourth installment amount",
         "expectedExchangeLabel": "Do you have an expected exchange date?",
         "expectedExchangeDateLabel": "Please provide your expected exchange date",
         "addButton": "Another payment date",
+        "removeButton": "Remove payment date",
         "nextButton": "Next",
         "backButton": "Back",
         "skipButton": "I don't know the answers yet"
@@ -344,7 +349,8 @@
             "email": "Email"
           },
           "cta": "Another shareholder"
-        }
+        },
+        "delete": "Delete"
       },
       "shares": {
         "title": "Shareholder's details",
@@ -359,7 +365,9 @@
         "text": "Please confirm all the details below are correct",
         "ctaPrimary": "Yes I confirm",
         "ctaSecondary": "Make changes"
-      }
+      },
+      "error": "Each shareholder must have a unique email address",
+      "errorSelf": "You should not add yourself here"
     },
     "solicitorDetails": {
       "title": "Solicitor details",
@@ -1076,6 +1084,7 @@
     "validateEmail": "Invalid email",
     "validateRequired": "Required",
     "validateMatching": "No match",
+    "validateNotMatching": "Can't add self",
     "validatePhone": "Invalid phone",
     "validateNumeric": "Number only",
     "validateNoOfCompanies": "No more than 20",

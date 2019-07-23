@@ -163,14 +163,15 @@ class OnboardingPersonalDetailsContainer extends Component {
       await formUtils.updateValue(key, '');
     });
 
-    const countryName = values.country ? values.country.split('] ').pop() : null;
-    const nationalityName = values.nationality ? values.nationality.split('] ').pop() : null;
+    const countryName = values.country && values.country !== '[null] null' ? values.country.split('] ').pop() : null;
+    const nationalityName = values.nationality && values.nationality !== '[null] null' ? values.nationality.split('] ').pop() : null;
+
     showLoader();
 
     const payload = this.props.form.values;
     delete payload.nationality;
 
-    const formattedDate = moment(payload.date_of_birth, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00');
+    const formattedDate = payload.date_of_birth !== '' ? moment(payload.date_of_birth, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00') : null;
 
     AccountService.savePersonalDetails({
       userID,

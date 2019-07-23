@@ -17,6 +17,7 @@ describe('create signature page', () => {
     showLoader: showLoaderMock,
     hideLoader: hideLoaderMock,
     form: ReduxFormMock,
+    location: { search: null },
     user: {}
   };
 
@@ -86,9 +87,9 @@ describe('create signature page', () => {
 
     test('save signature success', async () => {
       AccountService.saveSignature = jest.fn().mockReturnValue(Promise.resolve({ status: 201 }));
-      
+
       await wrapper.instance().saveSignature('someblob', 'signatureimgpath');
-      
+
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
       expect(wrapper.state().savedSignature).toEqual('signatureimgpath');
@@ -97,9 +98,9 @@ describe('create signature page', () => {
     test('save signature failure', async () => {
       AccountService.saveSignature = jest.fn().mockReturnValue(Promise.resolve({ status: 400 }));
       const wrapper = setup(CreateSignature, defaultProps);
-      
+
       await wrapper.instance().saveSignature();
-      
+
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
     });

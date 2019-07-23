@@ -46,7 +46,8 @@ describe('process-tracker', () => {
     hideModal: hideModalMock,
     showModal: showModalMock,
     showLoader: showLoaderMock,
-    hideLoader: hideLoaderMock
+    hideLoader: hideLoaderMock,
+    signature: 'iVBORw0KGgoAAAANSUhEUgAABV4AAACWCAYAAAAmPpP1AAAWS0lEQVR4Xu3daai1VRk'
   }
 
   global.URL = {
@@ -67,6 +68,10 @@ describe('process-tracker', () => {
 
   test('renders Button', () => {
     expect(wrapper.find('Button')).toHaveLength(1);
+  })
+
+  test('signature', () => {
+    expect(wrapper.find('[data-test="modal-content"]').props().signatureUrl).toEqual('data:image/jpeg;base64, iVBORw0KGgoAAAANSUhEUgAABV4AAACWCAYAAAAmPpP1AAAWS0lEQVR4Xu3daai1VRk');
   })
 
   describe('initmodal()', () => {
@@ -93,9 +98,9 @@ describe('process-tracker', () => {
 
   test('getModalContent stores the markdown', async () => {
     const wrapper = setupWithStore(MyDocuments, defaultProps, { modalMarkdown: '', shareholdersAgreementMarkdown: ''});
-    
+
     await wrapper.instance().getModalContent('shareholdersAgreementMarkdown', 'shareholders agreement');
-    
+
     expect(showLoaderMock).toHaveBeenCalledTimes(1);
     expect(hideLoaderMock).toHaveBeenCalledTimes(1);
     expect(wrapper.state().shareholdersAgreementMarkdown).toEqual('<h1>HI</h1>');
@@ -115,7 +120,7 @@ describe('process-tracker', () => {
       consentToActSigned: true,
       BoardResolutionSigned: true
     });
-    
+
 
     wrapper.instance().checkAllSigned();
 
@@ -123,7 +128,7 @@ describe('process-tracker', () => {
   })
 
   test('getAllMarkdown fetches and stores the markdown', async () => {
-    const wrapper = setupWithStore(MyDocuments, defaultProps, { 
+    const wrapper = setupWithStore(MyDocuments, defaultProps, {
       shareholdersAgreementMarkdown: '',
       companyArticlesMarkdown: '',
       directorsLoanMarkdown: '',
@@ -132,9 +137,9 @@ describe('process-tracker', () => {
     });
 
     wrapper.instance().downloadAllFiles = jest.fn();
-    
+
     await wrapper.instance().getAllMarkdown();
-    
+
     expect(wrapper.state().shareholdersAgreementMarkdown).toEqual('<h1>HI</h1>');
     expect(wrapper.state().companyArticlesMarkdown).toEqual('<h1>HI</h1>');
     expect(wrapper.state().directorsLoanMarkdown).toEqual('<h1>HI</h1>');
@@ -144,7 +149,7 @@ describe('process-tracker', () => {
   });
 
   test('getAllMarkdown fires downloadAllFiles if markup is already stored', async () => {
-    const wrapper = setupWithStore(MyDocuments, defaultProps, { 
+    const wrapper = setupWithStore(MyDocuments, defaultProps, {
       shareholdersAgreementMarkdown: '<h1>HI</h1>',
       companyArticlesMarkdown: '<h1>HI</h1>',
       directorsLoanMarkdown: '<h1>HI</h1>',
@@ -153,19 +158,18 @@ describe('process-tracker', () => {
     });
 
     wrapper.instance().downloadAllFiles = jest.fn();
-    
+
     await wrapper.instance().getAllMarkdown();
-    
+
     expect(wrapper.instance().downloadAllFiles).toHaveBeenCalled();
   });
 
   test('downloadAllFiles creates links for download', async () => {
     ModalService.markdownToPDF = jest.fn().mockReturnValue(Promise.resolve({ status: 201 }));
     const wrapperNew = setupWithStore(MyDocuments, defaultProps);
-    
+
     await wrapperNew.instance().downloadAllFiles('<h1>HI</h1>');
 
     // cant test the length of the element because I think I need mount for document.getElementById('my-documents')
   });
-
 })

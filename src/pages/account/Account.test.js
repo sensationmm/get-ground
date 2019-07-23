@@ -27,11 +27,15 @@ describe('<Account />', () => {
     userUpdate: userUpdateMock,
     form: ReduxFormMock,
     user: { ...UserMock, payment_details: { brand: 'visa' }, 'previous_names': 'asd' },
-    documents: [
-      { 'description': 'passport', filename: ''},
-      { 'description': 'address', filename: ''},
-      { 'description': 'signature', filename: ''}
-    ]
+    documents: {
+      file_passport: {
+        content: 'imageofpassport'
+      },
+      file_proof_of_address: {
+        content: 'imageofpassport'
+      },
+      file_signature: 'imageofsignature'
+    }
   };
   jest.spyOn(formUtils, 'initFormState');
 
@@ -220,6 +224,25 @@ describe('<Account />', () => {
     expect(wrapper.find('h2').at(10).text()).toBe('profile.sections.proofAddress');
     expect(wrapper.find('h2').at(11).text()).toBe('profile.sections.signature');
   });
+
+  test('signature', () => {
+    expect(wrapper.find('[data-test="signature"]').length).toEqual(1)
+    expect(wrapper.find('[data-test="signature"]').props().src).toEqual('data:image/jpeg;base64, imageofsignature')
+
+    wrapper = setup(Account, {
+      ...defaultProps,
+      documents: {
+        file_passport: {
+          content: 'imageofpassport'
+        },
+        file_proof_of_address: {
+          content: 'imageofpassport'
+        },
+        file_signature: 'data:image/jpeg;base64, iamsignaturewithinitialdataurl'
+      }
+    });
+    expect(wrapper.find('[data-test="signature"]').props().src).toEqual('data:image/jpeg;base64, iamsignaturewithinitialdataurl')
+  })
 
   afterEach(() => {
     showLoaderMock.mockClear();

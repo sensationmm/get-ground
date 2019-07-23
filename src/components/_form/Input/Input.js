@@ -65,7 +65,11 @@ const Input = (props) => {
         <div data-test="text-input-error" className="text-input-required">{error}</div>
       }
 
-      <div className="text-input-wrapper">
+      <div className={classNames([
+          'text-input-wrapper',
+          {'error': error }
+        ])}
+      >
         <input
           data-test="component-input-field"
           type={type}
@@ -83,9 +87,6 @@ const Input = (props) => {
           onKeyPress={onKeyPress}
           value={isCurrencyField ? formatCurrency(value) : value}
           readOnly={readOnly}
-          className={classNames([
-            {'error': error }
-          ])}
           min={min}
           max={max}
         />

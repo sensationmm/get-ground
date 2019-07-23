@@ -44,12 +44,13 @@ class TermsConditions extends Component {
 
   getBlobForDownload = () => {
     const { modalMarkdown } = this.state;
-    const { showLoader, hideLoader } = this.props;
+    const { showLoader, hideLoader, t } = this.props;
+    const title = t('footer.navigation.link8.title')
 
     showLoader();
     this.setState({ modalError: false });
 
-    return ModalService.markdownToPDF(modalMarkdown).then(response => {
+    return ModalService.markdownToPDF(modalMarkdown, title).then(response => {
       hideLoader();
       if (response.status === 400) {
         this.setState({ modalError: true });

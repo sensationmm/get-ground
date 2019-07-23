@@ -74,7 +74,7 @@
       }
     }
 
-    .text-input input {
+    .text-input-wrapper {
       pointer-events: none;
       border: 0;
       @include gradient-horizontal($gradient-option-1, $gradient-option-2);

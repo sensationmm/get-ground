@@ -47,3 +47,4 @@ export const USER_UPDATE = 'USER_UPDATE';
 export const SAVE_USER = 'SAVE_USER';
 
 export const SAVE_DOCUMENTS = 'SAVE_DOCUMENTS';
+export const SAVE_SIGNATURE = 'SAVE_SIGNATURE';

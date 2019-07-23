@@ -58,6 +58,8 @@ export const clearFormState = () => {
  */
 export const setFormError = (error) => {
   store.dispatch(setFormErrors(error));
+
+  window.scrollTo(0,0);
 };
 
 /**
@@ -108,7 +110,7 @@ export const validateField = (config, stateID, arrayIndex=null) => {
     let failFunc = null;
 
     for(let i=0; i<validationList.length; i++) {
-      isValid = (validationParamList[i] !== undefined && validationParamList[i] !== null) 
+      isValid = (validationParamList[i] !== undefined && validationParamList[i] !== null)
         ? validation[validationList[i]](valueToCheck, validationParamList[i])
         : validation[validationList[i]](valueToCheck);
 
@@ -117,7 +119,7 @@ export const validateField = (config, stateID, arrayIndex=null) => {
         break;
       }
     }
-    
+
 
     if(!isValid) {
       if(arrayIndex !== null) {
@@ -135,7 +137,7 @@ export const validateField = (config, stateID, arrayIndex=null) => {
 
     const newErrors = !errors.fields ? errorsList : { ...errors, fields: errorsList };
 
-    store.dispatch(setErrors(newErrors));
+    store.dispatch(setErrors(newErrors, (errors.form && errors.form !== '')));
   }
 };
 

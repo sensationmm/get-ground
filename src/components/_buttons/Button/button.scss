@@ -35,7 +35,9 @@
   &-icon {
     position: absolute;
     left: 20px;
-    top: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
   }
 
   &.small.icon {
@@ -43,7 +45,8 @@
   }
 
   .small &-icon {
-    top: 9px;
+    top: 50%;
+    transform: translateY(-50%);
     left: 15px;
   }
 

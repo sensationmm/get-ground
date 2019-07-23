@@ -42,12 +42,12 @@ class ModalContent extends Component {
   }
 
   getBlobForDownload = () => {
-    const { showLoader, hideLoader, content } = this.props;
+    const { showLoader, hideLoader, content, heading } = this.props;
 
     showLoader();
     this.setState({ modalError: false });
 
-    return ModalService.markdownToPDF(content).then(response => {
+    return ModalService.markdownToPDF(content, heading).then(response => {
       hideLoader();
       if (response.status === 400) {
         this.setState({ modalError: true });

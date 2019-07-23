@@ -161,7 +161,7 @@ class Account extends Component {
 
     const passportData = documents.file_passport && documents.file_passport.content;
     const addressProof = documents.file_proof_of_address && documents.file_proof_of_address.content;
-    const signature = documents.signature && documents.signature.content;
+    const signature = documents.file_signature;
 
     const paymentCard = user.payment_details ? user.payment_details : {};
 
@@ -249,7 +249,7 @@ class Account extends Component {
                 </div>
               </div>
             </div>
-            
+
             <div>
               <div className="company-overview-section" data-test="section-phone">
                 <h2>{ t('profile.sections.phone') }</h2>
@@ -284,7 +284,7 @@ class Account extends Component {
                 <p>{address && address.join(', ')}</p>
               </div>
 
-              {paymentCard.brand && 
+              {paymentCard.brand &&
                 <div className="company-overview-section">
                   <h2>{ t('profile.sections.payment') }</h2>
                   <div className="payment">
@@ -312,7 +312,7 @@ class Account extends Component {
             <div className="company-overview-section">
               <h2>{ t('profile.sections.passport') }</h2>
               {passportData && <img src={`data:image/jpeg;base64,${passportData}`} /> }
-              
+
               <div className="account-edit">
                 <Button
                   classes="inline chat"
@@ -341,9 +341,9 @@ class Account extends Component {
           <div className="company-overview-section" data-test="section-signature">
             <h2>{ t('profile.sections.signature') }</h2>
             <div className="signature">
-              {signature && <img src={`data:image/jpeg;base64,${signature.filename}`} /> }
+              {signature && <img data-test="signature" src={signature.includes('data:image') ? signature : `data:image/jpeg;base64, ${signature}`} /> }
             </div>
-            
+
             <div className="account-edit">
               <Button classes="inline" label={ t('profile.edit') } onClick={() => navigate('/account/signature-edit') } />
             </div>
@@ -369,7 +369,7 @@ Account.propTypes = {
   hideLoader: PropTypes.func,
   user: PropTypes.object,
   form: PropTypes.object,
-  documents: PropTypes.array,
+  documents: PropTypes.object,
   userUpdate: PropTypes.func
 };
 
