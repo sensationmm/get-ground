@@ -607,31 +607,30 @@
   },
   "howItWorks": {
     "title": "How it works",
+    "intro": "<p>For a one-time sign up and small monthly subscription we will set up a company and bank account for you, coordinate with your lawyers to buy your property and then manage all your company’s needs on an on-going basis.</p>",
+    "content": {
+      "heading": "SIGN-UP",
+      "text": "<p>It's free and quick to join GetGround. All you need is a copy of your passport and proof of address. You only need to pay if you decide to set up a company through us.</p>"
+    },
+    "outro": {
+      "heading": "It's as easy as 1,2,3",
+      "text": "<p>Get in touch with us at any time if you need anything at all.</p>"
+    },
     "sections": {
       "step1": {
-        "title": "Step 1",
-        "copy": "GetGround will set up a UK Limited company and bank account for you",
-        "imageAltText": "Property"
+        "stepName": "Step 1",
+        "heading": "Design your company",
+        "content": "<p>As soon as you have a property in mind to purchase, set up your company by following six simple steps: </p><ul><li>Provide the address of the property your company will purchase</li><li>If you have it, give us your expected exchange and completion dates and payments</li><li>Provide your solicitor’s details (or request to be put in touch with one)</li><li>Let us know if you would like anyone else to be a shareholder of your company</li><li>Answer a simple tax question</li><li>Make payment for your new company</li></ul>"
       },
       "step2": {
-        "title": "Step 2",
-        "copy": "GetGround can connect you to mortgages, insurance, property management and solicitors (optional service)",
-        "imageAltText": "Purchase"
+        "stepName": "Step 2",
+        "heading": "Coordinate with your lawyers",
+        "content": "<p>Once your company is set up we will:</p><ul><li>Work with your lawyers to purchase your property through your new company</li><li>Set up a company bank account</li><li>Remind you to purchase directors & officers insurance just before the property purchase completes (you can get your own, or we can help you through our broker partner. If we help, this is an activity regulated by the Financial Conduct Authority for which we are an Appointed Representative of <u><a href='https://resolutioncompliance.co.uk/' target='_blank'>Resolution Compliance Ltd</a></u>)</li></ul>"
       },
       "step3": {
-        "title": "Step 3",
-        "copy": "GetGround will coordinate with your lawyers to purchase your property through your company",
-        "imageAltText": "Solicitor Details"
-      },
-      "step4": {
-        "title": "Step 4",
-        "copy": "GetGround will manage on an on-going basis all your company requirements including accounting, tax, legal documents, filings and secretarial work",
-        "imageAltText": "Shareholder details"
-      },
-      "step5": {
-        "title": "Step 5",
-        "copy": "GetGround can connect you to other investors on the platform to buy and sell shares in companies holding property (optional service)",
-        "imageAltText": "Services"
+        "stepName": "Step 3",
+        "heading": "Manage your company",
+        "content": "<p>Once your company has purchased your property we will manage all your company’s requirements.</p><p>Simply login to your account to:</p><ul><li>See your company’s and property’s details</li><li>Request any services you need for your company or, through our partners, for your property</li><li>Use your company’s bank account. </li></ul>"
       }
     }
   },

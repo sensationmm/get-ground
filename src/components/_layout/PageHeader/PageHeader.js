@@ -47,7 +47,7 @@ PageHeader.propTypes = {
     PropTypes.element,
     PropTypes.array,
     PropTypes.string
-  ]).isRequired,
+  ]),
 };
 
 export default PageHeader;
