@@ -147,41 +147,33 @@
     "modalContentButton": "Next"
   },
   "advantages": {
-    "title": "GetGround Advantages",
-    "cta": "Find out more",
-    "warning": "None of the information contained here, nor anywhere in this presentation contributes advice",
-    "companyHeader": "Company ownership",
-    "personalHeader": "Personal ownership",
     "tax": {
-      "title": "UK TAX ADVANTAGES",
-      "info1": "When you buy investment property that you rent out, there is no difference in stamp duty and land tax (SDLT) versus personal ownership.",
-      "info2": "There is no SDLT when you buy shares, rather than property. Benefit from this if you sell or buy shares of property holding companies on the GetGround marketplace.",
-      "info3": "Deduct mortgage interest from your tax bill. Under personal ownership this is being phased out and replaced with a basic rate credit.",
-      "info4": "There is lower capital gains tax on a sale of shares, rather than property.",
-      "info5": "Choose multiple ways to take money from your company e.g., capital repayments or dividends (utilise your tax-free dividend allowance; non-UK residents do not pay dividend tax).",
+      "personalHeader": "Personal Ownership",
+      "companyHeader": "Company Ownership",
+      "footnote": "Tax treatment depends on the individual circumstances of each client and may be subject to change in the future",
       "table": {
         "left": {
-          "info1": "Same taxes on property purchase",
-          "info2": "Deduct mortgage interest from your UK tax bill",
-          "info3": "Lower capital gains tax (CGT)",
-          "info4": "Save on stamp duty and land tax (SDLT) when you sell",
-          "info5": "Efficiently take income from your property"
+          "info1": "Taxes on Property Purchase",
+          "info2": "Mortgage interest tax deductability",
+          "info3": "Capital gains tax",
+          "info4": "If you sell, stamp duty land tax for the buyer",
+          "info5": "Property Income"
         },
         "right": {
           "large": {
             "feed1": {
-              "info1": "",
-              "info2": "Replaced with a basic rate credit",
-              "info3": "18% or 28% CGT tax",
-              "info4": "",
-              "info5": "Either income tax or capital gains tax"
+              "info1": "Same taxes (eg. stamp duty land tax) for personal and company ownership if you rent out your property to a third party.",
+              "info2": "Fully deducted from your tax bill",
+              "info3": "10% or 20% for sale of shares",
+              "info4": "None when buying shares",
+              "info5": "Also choose capital repayments or dividends"
             },
             "feed2": {
-              "info1": "same taxes (e.g SDLT) as personal ownership if you rent out your property to 3rd parties",
-              "info2": "",
-              "info3": "10% or 20% CGT tax for sale of shares",
-              "info4": "No SDLT when buying shares",
-              "info5": "Choose between capital repayments or dividends"
+              "info1": "Same taxes (eg. stamp duty land tax) for personal and company ownership if you rent out your property to a third party.",
+              "info2": "Replaced with basic rate credit",
+              "info3": "18% or 28%",
+              "info4": "Fully payable on property purchase",
+              "info5": "Income tax or capital gains tax payable"
             }
           }
         }
@@ -216,6 +208,81 @@
             }
           }
         }
+      }
+    },
+    "title": "Advantages",
+    "intro": "<p>There are many advantages to purchasing your buy-to-let property through a company such as tax efficiency, better protecting your wealth and easily purchasing with your friends, family and business partners.</p><p>GetGround allows you to capture these benefits without the high fees usually associated with running a company.</p>",
+    "content": {
+      "heading": "Get UK tax advantages",
+      "text": "<p>The UK government has put in place tax advantages that landlords can take advantage of if purchasing property through a company.</p>"
+    },
+    "columns": {
+      "heading": "Get access to capital",
+      "text": "<p>Through our carefully selected brokers we get you access to over 25 lenders that specialise in company buy-to-let mortgages.</p><p>You also have access to capital from other benefits that come from purchasing through a company:</p>",
+      "content": {
+        "others": {
+          "heading": "Purchase with others",
+          "text": "Reduce your mortgage needs by easily purchasing with up to 7 other people that you choose (maximum 8 shareholders in a company)."
+        },
+        "mortgage": {
+          "heading": "Access a bigger mortgage",
+          "text": "Get access to a potentially bigger mortgage. Banks tend to have easier tests for rental income vs interest costs when using a company than when making a personal purchase."
+        },
+        "income": {
+          "heading": "Lower income requirements",
+          "text": "Companies have different income requirements from mortgage lenders. Typically banks require a combined shareholder income of £25k per year."
+        }
+      }
+    },
+    "comparison": {
+      "heading": "Company buy-to-let mortgage deals currently in the market",
+      "tables": {
+        "labels": {
+          "uk": "UK Residents",
+          "nonUk": "Non UK Residents",
+          "60percent": "60% loan-to-value",
+          "75percent": "75% loan-to-value",
+          "updated": "Last updated July 2019"
+        },
+        "2year": {
+          "heading": "2-year Fixed",
+          "uk": {
+            "60percent": "2.59",
+            "75percent": "2.59"
+          },
+          "nonUk": {
+            "60percent": "3.18",
+            "75percent": "3.83"
+          }
+        },
+        "5year": {
+          "heading": "5-year Fixed",
+          "uk": {
+            "60percent": "3.25",
+            "75percent": "3.25"
+          },
+          "nonUk": {
+            "60percent": "3.23",
+            "75percent": "3.99"
+          }
+        }
+      }
+    },
+    "fees": {
+      "heading": "Get lower fees",
+      "pricePer": "/yr",
+      "priceVat": "(inc. vat)",
+      "getground": {
+        "name": "GetGround",
+        "price": "288",
+        "explanation": "All the services your company needs under one-roof",
+        "content": "<ul><li>UK Limited company </li><li>Company bank account</li><li>Legal documentation</li><li>Accounting</li><li>Tax filings</li><li>Company secretary</li></ul>"
+      },
+      "others": {
+        "name": "Others",
+        "price": "3,000",
+        "explanation": "You will need to piece together all the services your company needs using multiple providers ",
+        "content": "<ul><li>UK Limited company </li><li>Company bank account</li><li>Legal documentation</li><li>Accounting</li><li>Tax filings</li><li>Company secretary</li></ul>"
       }
     }
   },
@@ -619,6 +686,7 @@
   },
   "menu": {
     "links": {
+      "home": "Home",
       "first": "What we do",
       "second": "Advantages",
       "third": "How it works",
@@ -832,7 +900,7 @@
         }
       ],
       "button1": "Create your profile",
-      "button2": "Already on GG? Log In"
+      "button2": "Already on GetGround? Log In"
     },
     "confirmation": {
       "heading": "Well done",

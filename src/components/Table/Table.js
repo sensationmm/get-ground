@@ -19,7 +19,7 @@ const Table = ({ sections, classes, images, header, small }) => {
       classes
     )}>
       {sections.map((section, idx) => (
-        <div key={`${section} + ${idx}`} className="table-section">
+        <div key={`${section} + ${idx}`} className={classNames('table-section', { full: section.override }, { empty: !section.copy })}>
           { images ?
           <img className="table-section-img" src={section.img}/>
           :
