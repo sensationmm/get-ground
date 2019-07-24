@@ -23,7 +23,7 @@ const OnboardingIntroContainer = () => {
           text={slidesContent[0].copy}
           image={sliderImg1}
         />
-        
+
         <div className="intro--buttons-container">
           <Button
             fullWidth

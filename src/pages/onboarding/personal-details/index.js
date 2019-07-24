@@ -89,18 +89,18 @@ class OnboardingPersonalDetailsContainer extends Component {
             formUtils.updateValue('posttown', address.City);
             formUtils.updateValue('premise', premise);
             formUtils.updateValue('postcode', address.PostalCode);
-    
+
             this.setState(() => ({
               ...this.state,
               isAddressValid: true,
               isTextAreaHidden: false
             }));
-    
+
           });
           clearInterval(timerId);
         }
       }, 500);
-      
+
     }
 
     script.src = addressNow
@@ -131,10 +131,10 @@ class OnboardingPersonalDetailsContainer extends Component {
       const nationalityName = form.values.nationality ? form.values.nationality.split('] ').pop() : null;
 
       showLoader();
-      
+
       const payload = this.props.form.values;
       delete payload.nationality;
-      
+
       const formattedDate = moment(payload.date_of_birth, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00');
 
       AccountService.savePersonalDetails({
@@ -389,7 +389,7 @@ class OnboardingPersonalDetailsContainer extends Component {
 
           <IntroBox>{t('onBoarding.personalDetails.intro')}</IntroBox>
 
-          {showErrorMessage && 
+          {showErrorMessage &&
             <ErrorBox>{ errors.form ? errors.form : t('form.correctErrors') }</ErrorBox>
           }
 

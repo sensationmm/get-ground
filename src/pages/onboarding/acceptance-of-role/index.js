@@ -102,7 +102,7 @@ export class AcceptanceOfRole extends React.Component {
       })
     }
 
-    if (!isExistingUser ) {
+    if (!isExistingUser) {
       return navigate('/forgot-password/reset',
         {
           state: { acceptRoleToken: token}
@@ -111,9 +111,9 @@ export class AcceptanceOfRole extends React.Component {
     }
 
 
-    if (isExistingUser ) {
+    if (isExistingUser) {
       showLoader();
-      AuthService.acceptRoleLogin(token).then((response) => {
+      AuthService.acceptRoleSetPassword(null, token).then((response) => {
         hideLoader();
         if (response.status === 200) {
           navigate('/dashboard')

@@ -15,7 +15,7 @@ class CompanyService extends BaseService {
    */
   addCompany = (isAddServices) => {
     const config = {
-      url: `v1/property_purchases`,
+      url: `v2/property_purchases`,
       method: 'post',
       data: {
         additional_services_required: isAddServices
@@ -43,7 +43,7 @@ class CompanyService extends BaseService {
    */
   getCompany = id => {
     const config = {
-      url: `v1/property_purchases/${id}`,
+      url: `v2/property_purchases/${id}`,
       method: 'get'
     };
 
@@ -62,7 +62,7 @@ class CompanyService extends BaseService {
    */
   updateCompany = (payload, key, companyId) => {
     const config = {
-      url: `v1/property_purchases/${companyId}`,
+      url: `v2/property_purchases/${companyId}`,
       method: 'put',
       data: {
         [key]: payload
@@ -81,7 +81,7 @@ class CompanyService extends BaseService {
    */
   confirmCompany = (companyId) => {
     const config = {
-      url: `v1/property_purchases/${companyId}/confirm`,
+      url: `v2/property_purchases/${companyId}/confirm`,
       method: 'put',
       data: {}
     };

@@ -144,7 +144,7 @@ export class Layout extends Component {
       isLoggedIn,
       idCheckActive,
       isMobile,
-      last_page_visited 
+      last_page_visited
     } = this.props;
     const { isLoggingOut } = this.state;
 
@@ -234,7 +234,7 @@ export class Layout extends Component {
           {inArray('hasCurve', roles) && <CanvasCurve />}
         </div>
         <div id="modal-root"></div>
-        
+
         <Footer hideNav={inArray('form-page', roles)} />
 
         {isMobile &&

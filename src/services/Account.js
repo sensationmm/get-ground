@@ -123,7 +123,7 @@ class AccountService extends BaseService {
     }
 
     const config = {
-      url: 'v1/documents',
+      url: 'v2/documents',
       method: 'post',
       data: formData
     };
