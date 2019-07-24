@@ -23,7 +23,7 @@ const PageIntro = props => {
 };
 
 PageIntro.propTypes = {
-  text: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   heading: PropTypes.string
 };
 

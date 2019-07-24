@@ -1,0 +1,47 @@
+@import 'src/styles/modules/_colors';
+
+.landing {
+  .step {
+    padding: 20px 0 30px 0;
+  
+    h2 {
+      text-transform: uppercase !important;
+      text-align: center;
+      margin-bottom: 50px !important;
+    }
+
+    &-content {
+      display: flex;
+    }
+
+    &-image {
+      width: 42.5%;
+      margin-right: 7.5%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url(../../../assets/images/oval-dark.svg) center center no-repeat;
+      background-size: 300px;
+
+      img {
+        max-width: 200px;
+      }
+    }
+
+    &-instructions {
+      width: 42.5%;
+      border-left: 2px solid $border-offset;
+      padding-left: 7.5%;
+      padding-top: 3%;
+
+      h3 {
+        font-size: 23px !important;
+        margin-bottom: 20px;
+      }
+
+      ul {
+        width: 90%;
+      }
+    }
+  }
+}

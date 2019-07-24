@@ -30,7 +30,7 @@ jest.mock('react-i18next', () => ({
   ])
 }));
 
-describe('', () => {
+describe('<Advantages />', () => {
   let wrapper;
 
   beforeEach(() => {

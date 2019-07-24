@@ -4,12 +4,12 @@ import { navigate } from 'gatsby';
 
 import Layout from 'src/components/Layout/Layout';
 import PageHeader from 'src/components/_layout/PageHeader/PageHeader';
-import Sections from 'src/components/_layout/Sections/Sections';
-import Tiles from 'src/components/_layout/Tiles/Tiles';
 import Links from 'src/components/_layout/Links/Links';
-import CurveBox from 'src/components/_layout/CurveBox/CurveBox';
 import Button from 'src/components/_buttons/Button/Button';
 import LandingContent from 'src/components/_layout/LandingContent/LandingContent';
+import Sections from 'src/components/_layout/Sections/Sections';
+import Tiles from 'src/components/_layout/Tiles/Tiles';
+import CurveBox from 'src/components/_layout/CurveBox/CurveBox';
 
 import ImageSection1 from 'src/assets/images/partnerships.svg';
 import ImageSection2 from 'src/assets/images/what-we-do.svg';
