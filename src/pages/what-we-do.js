@@ -9,6 +9,7 @@ import Tiles from 'src/components/_layout/Tiles/Tiles';
 import Links from 'src/components/_layout/Links/Links';
 import CurveBox from 'src/components/_layout/CurveBox/CurveBox';
 import Button from 'src/components/_buttons/Button/Button';
+import LandingContent from 'src/components/_layout/LandingContent/LandingContent';
 
 import ImageSection1 from 'src/assets/images/partnerships.svg';
 import ImageSection2 from 'src/assets/images/what-we-do.svg';
@@ -24,7 +25,7 @@ import IconAccounting from 'src/assets/images/icon-company-name.svg';
 import IconPartnerships from 'src/assets/images/icon-partnerships.svg';
 import IconBankAccount from 'src/assets/images/icon-debit-card.svg';
 
-import 'src/styles/pages/landing-pages.scss'
+import 'src/styles/pages/landing-pages.scss';
 
 const WhatWeDo = () => {
   const [t] = useTranslation();
@@ -35,43 +36,41 @@ const WhatWeDo = () => {
         <div data-test="container-whatWeDo" className="whatWeDo" role="company-design landing">
           <PageHeader title={ t('whatWeDo.title') } text={ t('whatWeDo.intro') } />
 
-          <div className="landing-content">
-            <div className="landing-content-inner">
-              <h2 className="center">{ t('whatWeDo.content.heading') }</h2>
-              <div dangerouslySetInnerHTML={{ __html: t('whatWeDo.content.text.p1') }} />
-              <div dangerouslySetInnerHTML={{ __html: t('whatWeDo.content.text.p2') }} />
-              <div dangerouslySetInnerHTML={{ __html: t('whatWeDo.content.text.p3') }} />
-              <div dangerouslySetInnerHTML={{ __html: t('whatWeDo.content.text.p4') }} />
-              <div dangerouslySetInnerHTML={{ __html: t('whatWeDo.content.text.p5') }} />
+          <LandingContent>
+            <h2 className="center">{ t('whatWeDo.content.heading') }</h2>
+            <div dangerouslySetInnerHTML={{ __html: t('whatWeDo.content.text.p1') }} />
+            <div dangerouslySetInnerHTML={{ __html: t('whatWeDo.content.text.p2') }} />
+            <div dangerouslySetInnerHTML={{ __html: t('whatWeDo.content.text.p3') }} />
+            <div dangerouslySetInnerHTML={{ __html: t('whatWeDo.content.text.p4') }} />
+            <div dangerouslySetInnerHTML={{ __html: t('whatWeDo.content.text.p5') }} />
 
-              <Sections
-                sections={[
-                  {
-                    heading: t('whatWeDo.sections.first.heading'),
-                    text: t('whatWeDo.sections.first.text'),
-                    image: ImageSection1
-                  }, 
-                  {
-                    heading: t('whatWeDo.sections.second.heading'),
-                    text: t('whatWeDo.sections.second.text'),
-                    more: t('whatWeDo.sections.second.more'),
-                    image: ImageSection2
-                  }, 
-                  {
-                    heading: t('whatWeDo.sections.third.heading'),
-                    text: t('whatWeDo.sections.third.text'),
-                    image: ImageSection3
-                  }, 
-                  {
-                    heading: t('whatWeDo.sections.fourth.heading'),
-                    text: t('whatWeDo.sections.fourth.text'),
-                    image: ImageSection4
-                  }
-                ]}
-              />
+            <Sections
+              sections={[
+                {
+                  heading: t('whatWeDo.sections.first.heading'),
+                  text: t('whatWeDo.sections.first.text'),
+                  image: ImageSection1
+                }, 
+                {
+                  heading: t('whatWeDo.sections.second.heading'),
+                  text: t('whatWeDo.sections.second.text'),
+                  more: t('whatWeDo.sections.second.more'),
+                  image: ImageSection2
+                }, 
+                {
+                  heading: t('whatWeDo.sections.third.heading'),
+                  text: t('whatWeDo.sections.third.text'),
+                  image: ImageSection3
+                }, 
+                {
+                  heading: t('whatWeDo.sections.fourth.heading'),
+                  text: t('whatWeDo.sections.fourth.text'),
+                  image: ImageSection4
+                }
+              ]}
+            />
 
-            </div>
-          </div>
+          </LandingContent>
 
           <CurveBox>
             <h2>{ t('whatWeDo.tiles.heading') }</h2>
@@ -93,16 +92,14 @@ const WhatWeDo = () => {
             <div dangerouslySetInnerHTML={{ __html: t('whatWeDo.tiles.outro') }} />
           </CurveBox>
 
-          <div className="landing-content padded">
-            <div className="landing-content-inner">
-              <center><Button classes="get-started" label="Get Started" onClick={() => navigate('/onboarding/intro') } /></center>
+          <LandingContent>
+            <center><Button classes="get-started" label="Get Started" onClick={() => navigate('/onboarding/intro') } /></center>
 
-              <Links
-                prev={{ label: t('menu.links.third'), link: '/how-it-works' }}
-                next={{ label: t('menu.links.second'), link: '/advantages' }}
-              />
-            </div>
-          </div>
+            <Links
+              prev={{ label: t('menu.links.home'), link: '/' }}
+              next={{ label: t('menu.links.second'), link: '/advantages' }}
+            />
+          </LandingContent>
         </div>
       </Layout>
     </Fragment>

@@ -1,0 +1,63 @@
+@import '../../../styles/modules/variables';
+@import '../../../styles/modules/colors';
+
+.comparison {
+  padding-top: 20px;
+
+  h3 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  &-footnote {
+    max-width: 626px;
+    text-align: right;
+    margin: 0 auto;
+    font-size: 14px;
+    font-style: italic;
+    top: -20px;
+  }
+
+  &-table {
+    display: flex;
+    max-width: 626px;
+    margin: 0 auto 50px auto;
+    box-shadow: 0 5px 10px $shadow;
+    border-radius: 10px;
+    overflow: hidden;
+    background: $disabled-offset;
+
+    &-block {
+      width: 50%;
+      padding: ($padding-vertical-unit * 2 + 0px) ($padding-horizontal * 2 + 0px) 10px ($padding-horizontal * 2 + 0px);
+      text-align: center;
+
+      h4 {
+        font-size: 24px;
+        font-weight: 400;
+        height: 70px;
+        margin: 0 auto 20px auto;
+        width: 70%;
+      }
+
+      &:first-of-type {
+        background: $gradient-option-1;
+        border-radius: 0 10px 10px 0;
+      }
+    }
+
+    &-item {
+      margin-bottom: 30px;
+
+      &-label {
+        font-size: 14px;
+      }
+
+      &-value {
+        font-size: 24px;
+        font-weight: 300;
+      }
+    }
+  }
+}
