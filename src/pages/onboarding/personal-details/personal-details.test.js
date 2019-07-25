@@ -90,7 +90,6 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
       address.setAttribute('id', 'addressArea')
       address.setAttribute('value', 'something')
       document.querySelector('body').appendChild(address);
-      // console.log(document.body.innerHTML)
 
       wrapper.setState({isManualAddress: false})
       wrapper.instance().submitPersonalDetails()
