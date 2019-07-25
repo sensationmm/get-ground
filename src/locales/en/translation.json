@@ -689,12 +689,13 @@
       "first": "What we do",
       "second": "Advantages",
       "third": "How it works",
-      "fourth": "Pricing",
+      "fourth": "Fees",
       "fifth": "About us",
       "sixth": "Partnerships",
       "seventh": "FAQs",
       "eigth": "Login",
-      "ninth": "Logout"
+      "ninth": "Logout",
+      "tenth": "Trust and Privacy"
     }
   },
   "modal": {
@@ -1041,28 +1042,33 @@
     }
   },
   "pricing": {
-    "title": "Pricing",
+    "title": "Fees",
+    "intro": "<p>It’s free to join GetGround and you only need to pay once you set up a company through us.</p>",
     "vat": "(+VAT)",
-    "property": {
-      "title": "PRICING PER PROPERTY",
-      "oneTime": {
-        "price": "£500",
-        "caption": "One-time sign up fee"
+    "content": {
+      "fees": {
+        "title": "Our fees",
+        "text": "<center><p>Charged per company. Each company holds one property.</p></center>",
+        "prices": {
+          "signup": {
+            "heading": "£600",
+            "text": "(inc vat)<br />One-time sign-up fee"
+          },
+          "subscription": {
+            "heading": "288",
+            "text": "(inc vat)<br />Total annual company running costs *"
+          }
+        },
+        "footer": "* Charged as monthly subscription of £24"
       },
-      "monthly": {
-        "price": "£20",
-        "caption": "Monthly subscription"
+      "included": {
+        "title": "What's included",
+        "text": "<ul><li>A UK Limited company for you</li><li>A company bank account</li><li>All required company legal documents</li><li>Company accounts</li><li>Company tax filings</li><li>Company secretarial work (inc. registered office and filings) </li></ul>"
       },
-      "annual": {
-        "price": "£200-300*",
-        "caption": "Annual directors and officers insurance",
-        "smallCaption": "*Actual pricing depends on the value of your property"
+      "other": {
+        "title": "Other potential costs",
+        "text": "<p>When your property transaction completes you’ll need to take out directors & officers insurance with a cover of at least £250k. </p><p>This typically costs around £200 per year but depends on the value of your property. We will prompt you when the time is right.</p><p>Our partners may charge a fee if you decide to use their services - you’ll be advised of this at the time if you request a quote from them.</p>"
       }
-    },
-    "services": {
-      "title": "OPTIONAL SERVICES PRICING",
-      "firstContent": "Our partners may charge a fee if you decide to use their mortgage, insurance, solicitor or property management services.",
-      "secondContent": "We charge 0.2% of the property’s sale value if you buy or sell shares in companies holding property on the GetGround platform. You do not have to sell through us, this is an optional service."
     }
   },
   "profile": {

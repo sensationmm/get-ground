@@ -1,59 +1,54 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next';
+import { navigate } from 'gatsby';
 
 import Layout from 'src/components/Layout/Layout'
+import PageHeader from 'src/components/_layout/PageHeader/PageHeader';
+import Boxes from 'src/components/_layout/Boxes/Boxes';
+import LandingContent from 'src/components/_layout/LandingContent/LandingContent';
+import Button from 'src/components/_buttons/Button/Button';
+import Links from 'src/components/_layout/Links/Links';
 
-import Image from 'src/assets/images/pricing.svg'
-import 'src/styles/pages/pricing.scss'
+import 'src/styles/pages/pricing.scss';
 
 const Pricing = () => {
   const [t] = useTranslation();
 
   return (
     <Layout>
-      <div role="brochure">
-        <img className="hero-image" src={Image} alt="coins in a jar" data-test="pricing-img" />
-        <h1 className="pricing-title">{t('pricing.title')}</h1>
-        <div className="pricing-property">
-          <h3 className="pricing-property-title">{t('pricing.property.title')}</h3>
+      <div data-test="container-pricing" role="landing">
+        <PageHeader title={ t('pricing.title') } text={ t('pricing.intro') } />
 
-          <div className="pricing-chart">
-            <div className="pricing-chart-prices">
-              <div>
-                <div className="pricing-property-sign">
-                  <h3 data-test="property-oneTime-price">{t('pricing.property.oneTime.price')}</h3>
-                  <h3 data-test="property-oneTime-price">{t('pricing.vat')}</h3>
-                </div>
-                <p className="pricing-property-sign-caption">{t('pricing.property.oneTime.caption')}</p>
-              </div>
+        <LandingContent>
+          <Boxes
+            content={[
+              {
+                heading: t('pricing.content.fees.title'),
+                text: t('pricing.content.fees.text'),
+                items: [
+                  { heading: t('pricing.content.fees.prices.signup.heading'), content: t('pricing.content.fees.prices.signup.text') },
+                  { heading: t('pricing.content.fees.prices.subscription.heading'), content: t('pricing.content.fees.prices.subscription.text') },
+                ],
+                footer: t('pricing.content.fees.footer')
+              }, 
+              {
+                heading: t('pricing.content.included.title'),
+                text: t('pricing.content.included.text'),
+              },
+              {
+                heading: t('pricing.content.other.title'),
+                text: t('pricing.content.other.text'),
+              }
+            ]}
+          />
+          
+          <center><Button classes="get-started" label="Get Started" onClick={() => navigate('/onboarding/intro') } /></center>
 
-              <div>
-                <div className="pricing-property-monthly">
-                  <h3 data-test="property-monthly-price">{t('pricing.property.monthly.price')}</h3>
-                  <h3 data-test="property-monthly-vat" >{t('pricing.vat')}</h3>
-                </div>
-                <p className="pricing-property-monthly-caption">{t('pricing.property.monthly.caption')}</p>
-              </div>
-
-              <div>
-                <div className="pricing-property-annual">
-                  <h3 data-test="property-annual-price">{t('pricing.property.annual.price')}</h3>
-                </div>
-                <p data-test="property-annual-caption" className="pricing-property-annual-caption">{t('pricing.property.annual.caption')}</p>
-              </div>
-            </div>
-
-            <div data-test="property-annual-caption-small" className="pricing-property-annual-small">
-              {t('pricing.property.annual.smallCaption')}
-            </div>
-          </div>
-        </div>
-
-        <div className="pricing-services">
-          <h3 className="pricing-services-title">{t('pricing.services.title')}</h3>
-          <p data-test="services-content-first" >{t('pricing.services.firstContent')}</p>
-          <p data-test="services-content-second" >{t('pricing.services.secondContent')}</p>
-        </div>
+          <Links
+            next={{ label: t('menu.links.tenth'), link: '/trust-and-privacy' }}
+            prev={{ label: t('menu.links.third'), link: '/how-it-works' }}
+          />
+        </LandingContent>
       </div>
     </Layout>
   )
