@@ -24,9 +24,13 @@ class KYCService extends BaseService {
     fd.append('file_selfie', selfieFile)
     fd.append('file_proof_of_address', addressFile)
 
-    const encodedSelfie = btoa(selfie)
-    const encodedAddress = btoa(address)
-    const encodedPassport = btoa(passport)
+    // const encodedSelfie = btoa(selfie)
+    // const encodedPassport = btoa(passport)
+    // const encodedAddress = btoa(address)
+    console.log('selfie url', selfie);
+    const encodedSelfie = selfie.split(',')[1]
+    const encodedPassport = passport.split(',')[1]
+    const encodedAddress = address.split(',')[1]
 
    const base64ToByteArray = (base64String)  => {
       try {
@@ -53,10 +57,11 @@ class KYCService extends BaseService {
       }
   }
   // let bits = Buffer.from(b64Encoded, 'base64').toString();
+
     const newID = JSON.stringify({
-      'file_selfie': Buffer.from(encodedSelfie, 'base64').toString(),
-      'file_passport': Buffer.from(encodedPassport, 'base64').toString(),
-      'file_proof_of_address': Buffer.from(encodedAddress, 'base64').toString()
+      'file_selfie': encodedSelfie,
+      'file_passport': encodedPassport,
+      'file_proof_of_address': encodedAddress
     })
 
     const config = {
