@@ -3,7 +3,8 @@ import {
   CLEAR_FORM,
   UPDATE_FORM,
   SET_ERRORS,
-  SET_FORM_ERRORS
+  SET_FORM_ERRORS,
+  CLEAR_FORM_ERRORS
 } from '../../config/constants';
 
 export const initialState = {
@@ -51,6 +52,13 @@ export const form = (state = initialState, action) => {
         },
         showErrorMessage: true
       }
+
+      case CLEAR_FORM_ERRORS:
+        return {
+          ...state,
+          errors: {},
+          showErrorMessage: false
+        };
 
     case CLEAR_FORM:
       return initialState;
