@@ -1,16 +1,18 @@
 {
   "aboutUs": {
-    "title": {
-      "first": "About us",
-      "second": "We want to change that. "
-    },
+    "title": "About us",
+    "intro": "<p>Being a landlord is getting tougher. Costs are on the rise and so are taxes.</p>",
     "content": {
-      "first": "Our mission is to create a more productive and fairer world.",
-      "second": "Trillions of dollars of real assets (e.g., houses, ships, machinery) are stuck in illiquid non-transparent markets.  If we can’t understand the real assets that drive the world’s economy it is likely they are not fully productive. If many cannot access real asset ownership it is likely we create greater inequality.",
-      "third": "We believe we can do it by holding a single asset in a single company. Each company gives its asset an identity through which we can better understand it, a framework of governance to own and operate it and through shares, the ability to effectively change ownership.",
-      "fourth": "The issue with companies is that they are expensive and difficult to manage. And on their own, they do not necessarily create trust. This is what we are solving. Make companies cheap and easy to use. Create a platform that builds trust.",
-      "fifth": "We are starting with the residential buy-to-let sector in the UK. There is £1.3 trillion of stock in this market. A huge business. But ironically nearly all of it is in personal rather than company ownership.",
-      "sixth": "Come join us create a more productive and fairer world."
+      "heading": "But, purchasing your investment property through a company can help solve this.",
+      "text": "<p>There are many other benefits too. Such as, protecting your wealth, helping plan for inheritance and easily buying with others.</p><p>After all, an investment property is a business and companies are designed for business. At GetGround we’ve created a service that helps you capture these benefits - without the hassle or high fees.</p><p>We believe that holding property in a company helps lower costs, improve information and reduce barriers to buy and sell. As a result, we think both landlords and tenants will benefit.</p><p>Our mission is to create a fairer property market for all. </p>"
+    },
+    "moubin": {
+      "name": "Moubin",
+      "text": "<p>Moubin is the CEO of GetGround and was an investment professional at Apax Partners, one of the world’s leading private equity houses. There he was involved in numerous key transactions in the retail, consumer and services sectors.</p><p>Previously Moubin was at McKinsey & Company and is trained as a medical doctor at Imperial College where he graduated with distinctions.</p>"
+    },
+    "misrab": {
+      "name": "Misrab",
+      "text": "<p>Misrab is the CTO of GetGround. He is a computer scientist and set up the data science team and Singapore office at Go-Jek, Indonesia’s first technology ‘unicorn’. </p><p>Previously he taught data science at General Assembly, auction dynamics at TripAdvisor, and has been heavily involved in cryptographic theory and distributed ledger technology. </p><p>Misrab is Stanford University graduate with Bachelor’s and Master’s degrees focused around computer science, economics and mathematics.</p>"
     }
   },
   "acceptanceOfRole": {

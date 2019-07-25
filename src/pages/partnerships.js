@@ -131,7 +131,7 @@ class Partnerships extends Component {
 
             <Links
               prev={{ label: t('menu.links.tenth'), link: '/trust-and-privacy' }}
-              next={{ label: t('menu.links.fifth'), link: '/about-us' }}
+              next={{ label: t('menu.links.home'), link: '/' }}
             />
 
           </LandingContent>
