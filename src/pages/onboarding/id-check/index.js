@@ -58,7 +58,7 @@ export class IdCheck extends Component {
       <div data-test="container-id-check" className="id-check" role="account form-page">
         <h1 className="id-check-title">{ t('onBoarding.idCheck.title') }</h1>
 
-        {showErrorMessage && 
+        {showErrorMessage &&
           <ErrorBox>
           { errors.form ? errors.form : t('form.correctErrors') }
           </ErrorBox>

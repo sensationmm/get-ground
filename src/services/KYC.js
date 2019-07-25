@@ -24,10 +24,45 @@ class KYCService extends BaseService {
     fd.append('file_selfie', selfieFile)
     fd.append('file_proof_of_address', addressFile)
 
+    const encodedSelfie = btoa(selfie)
+    const encodedAddress = btoa(address)
+    const encodedPassport = btoa(passport)
+
+   const base64ToByteArray = (base64String)  => {
+      try {
+          const sliceSize = 1024;
+          const byteCharacters = atob(base64String);
+          const bytesLength = byteCharacters.length;
+          const slicesCount = Math.ceil(bytesLength / sliceSize);
+          const byteArrays = new Array(slicesCount);
+
+          for (let sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+              const begin = sliceIndex * sliceSize;
+              const end = Math.min(begin + sliceSize, bytesLength);
+
+              const bytes = new Array(end - begin);
+              for (let offset = begin, i = 0; offset < end; ++i, ++offset) {
+                  bytes[i] = byteCharacters[offset].charCodeAt(0);
+              }
+              byteArrays[sliceIndex] = new Uint8Array(bytes);
+          }
+          return byteArrays;
+      } catch (e) {
+          console.log("Couldn't convert to byte array: " + e);
+          return undefined;
+      }
+  }
+  // let bits = Buffer.from(b64Encoded, 'base64').toString();
+    const newID = JSON.stringify({
+      'file_selfie': Buffer.from(encodedSelfie, 'base64').toString(),
+      'file_passport': Buffer.from(encodedPassport, 'base64').toString(),
+      'file_proof_of_address': Buffer.from(encodedAddress, 'base64').toString()
+    })
+
     const config = {
       url: `v2/users/${store.getState().user.id}/kyc/files`,
       method: 'post',
-      data: fd,
+      data: newID,
     };
 
     return this.doRequest(config);

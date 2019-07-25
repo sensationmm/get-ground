@@ -61,6 +61,8 @@ class BaseService {
           callback(response);
         }
 
+        console.log('response', response.data);
+
         return response;
       })
       .catch(e => {
