@@ -144,7 +144,7 @@ export class Layout extends Component {
       isLoggedIn,
       idCheckActive,
       isMobile,
-      last_page_visited 
+      last_page_visited
     } = this.props;
     const { isLoggingOut } = this.state;
 
@@ -205,7 +205,7 @@ export class Layout extends Component {
             element={document}
             onIdle={this.onIdle}
             debounce={250}
-            timeout={1800000} // 30 mins
+            timeout={1500000} // 25 mins
           />
         }
 
@@ -234,7 +234,7 @@ export class Layout extends Component {
           {inArray('hasCurve', roles) && <CanvasCurve />}
         </div>
         <div id="modal-root"></div>
-        
+
         <Footer hideNav={inArray('form-page', roles)} />
 
         {isMobile &&
