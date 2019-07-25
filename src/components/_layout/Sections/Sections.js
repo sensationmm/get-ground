@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import classNames from 'classnames';
 
 import './sections.scss';
 
@@ -11,11 +12,11 @@ import './sections.scss';
 * @return {JSXElement} - Sections component
 */
 const Sections = (props) => {
-  const { sections } = props;
+  const { sections, reverse } = props;
   const [t] = useTranslation();
 
   return (
-    <div data-test="component-sections" className="sections">
+    <div data-test="component-sections" className={classNames('sections', { reversed: reverse })}>
     {sections.map((section, count) => <Section key={`section-${count}`} {...section} t={t} /> )}
     </div>
   );
@@ -72,7 +73,12 @@ Sections.propTypes = {
       more: PropTypes.string,
       t: PropTypes.func
     })
-  )
+  ),
+  reverse: PropTypes.bool
+};
+
+Sections.defaultProps = {
+  reverse: false
 };
 
 Section.propTypes = {

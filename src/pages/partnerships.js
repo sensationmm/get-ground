@@ -2,20 +2,22 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
+import { navigate } from 'gatsby';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
 
 import Layout from 'src/components/Layout/Layout'
+import PageHeader from 'src/components/_layout/PageHeader/PageHeader';
+import PageIntro from 'src/components/_layout/PageIntro/PageIntro';
+import Links from 'src/components/_layout/Links/Links';
+import LandingContent from 'src/components/_layout/LandingContent/LandingContent';
 import ErrorBox from 'src/components/_layout/ErrorBox/ErrorBox';
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
 import InputText from 'src/components/_form/InputText/InputText';
 import Button from 'src/components/_buttons/Button/Button';
 import formUtils from 'src/utils/form';
-import Form from 'src/components/_layout/Form/Form';
 import partners from 'src/services/Partners';
 export const PartnerService = new partners();
-
-import Image from 'src/assets/images/partnerships.svg'
 
 import 'src/styles/pages/partnerships.scss'
 
@@ -99,26 +101,40 @@ class Partnerships extends Component {
 
     return (
       <Layout>
-        <div className="partnerships" role="brochure">
-          <img className="hero-image" src={Image} alt="shaking-hands" data-test="partnerships-img" />
-          <h1 className="partnerships-title">Partnerships</h1>
-          <p className="partnerships-content">Interested in selling GetGround and earning a commission? We work with partners such as estate agents, mortgage brokers and property developers. If you’d like to know more, enter your email and we’ll be in touch.</p>
-          <p className="partnerships-content">If you’d like to know more, enter your email and we’ll be in touch.</p>
-          {this.formResponseBox(showErrorMessage, errors, this.state.sentEmail, t)}
-          <Form data-test="partnership-form">
-            { formUtils.renderForm(this.config) }
-          </Form><br />
+        <div className="partnerships" role="landing">
+          <PageHeader title={ t('partnerships.title') } text={ t('partnerships.intro') } />
 
-          <Form className="enter-email-actions" data-test="partnership-form">
-          <Button
-              data-test="enter-email-button"
-              classes="primary"
-              label={ t('partnerships.cta') }
-              fullWidth
-              onClick={this.onSendEmail}
+          <LandingContent>
+            <PageIntro text={ t('partnerships.content') } />
+
+            
+            <div className="partnerships-form">
+              {this.formResponseBox(showErrorMessage, errors, this.state.sentEmail, t)}
+            </div>
+
+            <div className="partnerships-form" data-test="partnership-form">
+              { formUtils.renderForm(this.config) }
+              <div data-test="partnership-form">
+                <Button
+                  data-test="enter-email-button"
+                  classes="primary"
+                  label={ t('partnerships.cta') }
+                  fullWidth
+                  onClick={this.onSendEmail}
+                />
+              </div>
+            </div>
+
+            <br /><br />
+
+            <center><Button classes="get-started" label="Get Started" onClick={() => navigate('/onboarding/intro') } /></center>
+
+            <Links
+              prev={{ label: t('menu.links.tenth'), link: '/trust-and-privacy' }}
+              next={{ label: t('menu.links.fifth'), link: '/about-us' }}
             />
-            <br/>
-          </Form>
+
+          </LandingContent>
         </div>
       </Layout>
     );
