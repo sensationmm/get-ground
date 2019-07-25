@@ -1032,6 +1032,9 @@
     }
   },
   "partnerships": {
+    "title": "Partnerships",
+    "intro": "<p>Interested in selling GetGround and earning a commission? We work with partners to sell the GetGround product (e.g., estate agents, mortgage brokers, developers).</p><p>Interested in becoming a partner on the GetGround platform to provide property related services? </p>",
+    "content": "<p>Get in touch with us here.</p>",
     "cta": "Submit",
     "input": {
       "title": "Your Email"

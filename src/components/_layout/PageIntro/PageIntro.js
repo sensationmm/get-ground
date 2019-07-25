@@ -16,7 +16,7 @@ const PageIntro = props => {
 
   return (
     <div className="page-intro">
-      <h2>{ heading }</h2>
+      {heading && <h2>{ heading }</h2>}
       {text && <div dangerouslySetInnerHTML={{ __html: text }} />}
     </div>
   );
