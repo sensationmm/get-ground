@@ -1,0 +1,63 @@
+@import '../../../styles/modules/colors';
+@import '../../../styles/modules/variables';
+
+.landing {
+  .boxes {
+    padding: 10px 0 60px 0;
+
+    &-content {
+      display: flex;
+      justify-content: center;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .box {
+      box-shadow: 0 0 10px $shadow;
+      width: 0;
+      flex-grow: 1;
+      padding: ($padding-horizontal-unit * 5 + 0px) ($padding-horizontal-unit * 3 + 0px) ($padding-horizontal-unit * 3 + 0px);
+      background: $white;
+      border-radius: 10px;
+      margin-right: 20px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+      
+      ul {
+        width: 100%;
+        font-size: 13px !important;
+        padding-left: 20px;
+        padding-top: 0;
+      }
+
+      &-footer {
+        text-align: center;
+        font-size: 11px;
+        padding: 0 10%;
+        font-weight: 300;
+      }
+      
+      &-item {
+        text-align: center;
+        margin-bottom: 50px;
+
+        &-heading {
+          font-size: 30px;
+          font-weight: 600;
+          margin-bottom: 10px;
+        }
+
+        &-content {
+          font-size: 14px;
+          font-weight: 300;
+          padding: 0 10%;
+        }
+      }
+    }
+  }
+}

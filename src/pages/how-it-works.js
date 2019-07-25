@@ -22,7 +22,6 @@ const HowItWorks = () => {
       <div data-test="container-how-it-works" className="how-it-works" role="landing">
         <PageHeader title={ t('howItWorks.title') } text={ t('howItWorks.intro') } />
 
-
         <LandingContent>
           <PageIntro heading={ t('howItWorks.content.heading') } text={t('howItWorks.content.text') } />
 
