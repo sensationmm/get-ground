@@ -14,7 +14,7 @@ export const initForm = (payload) => {
   };
 };
 
-export const clearForm = (payload) => {
+export const clearForm = () => {
   return {
     type: CLEAR_FORM
   };

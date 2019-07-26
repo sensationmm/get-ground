@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import { setup, findByTestAttr } from 'src/test-utils/test-utils';
 import formUtils from 'src/utils/form';
 import { navigate } from 'gatsby';
@@ -85,17 +85,17 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
       expect(wrapper.state().isAddressValid).toEqual(true)
     })
 
-    test.only('isManualAddress, isValid', () => {
-      const address = document.createElement('div')
-      address.setAttribute('id', 'addressArea')
-      address.setAttribute('value', 'something')
-      document.querySelector('body').appendChild(address);
+    // test.only('isManualAddress, isValid', () => {
+    //   const address = document.createElement('div')
+    //   address.setAttribute('id', 'addressArea')
+    //   address.setAttribute('value', 'something')
+    //   document.querySelector('body').appendChild(address);
 
-      wrapper.setState({isManualAddress: false})
-      wrapper.instance().submitPersonalDetails()
-      expect(defaultProps.setErrors).toHaveBeenCalled()
-      expect(wrapper.state().isAddressValid).toEqual(false)
-    })
+    //   wrapper.setState({isManualAddress: false})
+    //   wrapper.instance().submitPersonalDetails()
+    //   expect(defaultProps.setErrors).toHaveBeenCalled()
+    //   expect(wrapper.state().isAddressValid).toEqual(false)
+    // })
   })
 
   test('form cleared on unmount', () => {
