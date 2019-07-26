@@ -25,16 +25,16 @@ const Footer = (props) => {
         link: '/pricing'
       },
       {
-        title: links['link5'].title,
-        link: '/frequently-asked-questions'
+        title: links['link1'].title,
+        link: '/about-us'
       },
       {
         title: links['link2'].title,
         link: '/advantages'
       },
       {
-        title: links['link1'].title,
-        link: '/about-us'
+        title: links['link5'].title,
+        link: '/trust-and-privacy'
       },
       {
         title: links['link8'].title,
