@@ -48,7 +48,7 @@ const HowItWorks = () => {
           
           <PageIntro heading={ t('howItWorks.outro.heading') } text={t('howItWorks.outro.text') } />
 
-          <center><Button classes="get-started" label="Get Started" onClick={() => navigate('/onboarding/intro') } /></center>
+          <center><Button classes="get-started" label={ t('home.cta')} onClick={() => navigate('/onboarding/intro') } /></center>
 
           <Links
             next={{ label: t('menu.links.fourth'), link: '/pricing' }}

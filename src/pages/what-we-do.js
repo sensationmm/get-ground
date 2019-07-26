@@ -93,7 +93,7 @@ const WhatWeDo = () => {
           </CurveBox>
 
           <LandingContent>
-            <center><Button classes="get-started" label="Get Started" onClick={() => navigate('/onboarding/intro') } /></center>
+            <center><Button classes="get-started" label={ t('home.cta')} onClick={() => navigate('/onboarding/intro') } /></center>
 
             <Links
               prev={{ label: t('menu.links.home'), link: '/' }}

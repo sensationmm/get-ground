@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="28px" height="29px" viewBox="0 0 28 29" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 56.1 (81669) - https://sketch.com -->
+    <title>Fill 1</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="3.38882283%" y1="0%" x2="96.6111772%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#F2B47E" offset="0%"></stop>
+            <stop stop-color="#FEC858" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Landing-Pages-Mobile" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Landing-Page-" transform="translate(-31.000000, -2599.000000)" fill="url(#linearGradient-1)">
+            <path d="M45,2599 L38,2603.78166 L31,2608.56298 L33.0275111,2608.56298 L33.0275111,2610 L56.9724889,2610 L56.9724889,2608.56298 L59,2608.56298 L52,2603.78166 L45,2599 Z M50,2611 L50,2624 L55,2624 L54.1369498,2611 L50,2611 Z M43.4326108,2611 L43,2624 L48,2624 L47.5689029,2611 L43.4326108,2611 Z M35.8660774,2611 L35,2624 L40,2624 L40,2611 L35.8660774,2611 Z M33.4318033,2624 L33.4318033,2625.86608 L32,2625.86608 L32,2628 L58,2628 L58,2625.86608 L56.5681967,2625.86608 L56.5681967,2624 L33.4318033,2624 Z" id="Fill-1"></path>
+        </g>
+    </g>
+</svg>

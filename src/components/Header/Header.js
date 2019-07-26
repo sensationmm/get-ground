@@ -50,6 +50,11 @@ const Header = (props) => {
             </Link>
           </div>
           <div className="header-buttons">
+
+            {!isLoading && !userID && !menuIsOpen &&
+              <Button onClick={() => navigate('/login')} classes="tertiary small" label={t('header.buttons.login')} />
+            }
+
             {userID && !children && showDashboardButton &&
               <ButtonHeader data-test="dashboard" label={t('header.dashboard')} onClick={() => navigate('/dashboard')} />
             }
@@ -78,26 +83,6 @@ const Header = (props) => {
           </div>
         </div>
       </div>
-      {!isLoading && !userID && !menuIsOpen &&
-        <div className='header--logged-out'>
-          <div className="header-inner-wrapper">
-            <div className="header-inner">
-                <Link to="/onboarding/intro">
-                  <Button
-                    classes="tertiary small"
-                    label={t('header.buttons.register')}
-                  />
-                </Link>
-                <Link to="/login">
-                  <Button
-                    classes="tertiary small"
-                    label={t('header.buttons.login')}
-                  />
-                </Link>
-            </div>
-          </div>
-        </div>
-      }
     </header>
   );
 }
