@@ -20,12 +20,6 @@ describe('<Header />', () => {
     expect(component.length).toBe(1);
   });
 
-  test('renders header buttons', () => {
-    wrapper = setup(Header, { children: <Button label="str" />, isMobile: true});
-
-    expect(wrapper.find(Button).length).toBe(3);
-  });
-
   test('clicking menu icon toggles the menu', () => {
     wrapper = setup(Header, { onClick: onClickMock, isMobile: true });
     const menuIcon = wrapper.find('.header-menu-toggle');

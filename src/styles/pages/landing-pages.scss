@@ -46,5 +46,13 @@
     &.padded {
       padding: 50px 0;
     }
+
+    &.green {
+      background-image: linear-gradient(to bottom, #CEF2E6, #F1F6CF);
+    }
+
+    &.orange {
+      background-image: linear-gradient(135deg, #F2B47E 0%, #FEC858 100%);
+    }
   }
 }
