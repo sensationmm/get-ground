@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Link, navigate } from 'gatsby';
-import { useTranslation } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 
 import Button from 'src/components/_buttons/Button/Button';
 import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
@@ -18,73 +18,95 @@ import './header.scss';
  * @param {string} classNames - list of classname modifiers ['fullscreen']
  * @return {JSXElement} Header component
  */
+class Header extends Component {
 
-const Header = (props) => {
-  const {
-    menuIsOpen,
-    children,
-    isLoading,
-    userID,
-    onClick,
-    childrenDisabled,
-    isMobile,
-    menuLinks,
-    showDashboardButton,
-    showOnboardingButton
-  } = props;
-  const [t] = useTranslation();
+  constructor(props) {
+    super(props);
 
-  return (
-    <header
-      data-test="component-header"
-      className={classNames('header',
-        props.classNames,
-        {'no-background': menuIsOpen}
-      )}
-    >
-      <div className="header-inner-wrapper">
-        <div className="header-inner">
-          <div className="header-logo">
-            <Link to="/">
-              <img src={Logo} alt="GetGround logo" />
-            </Link>
-          </div>
-          <div className="header-buttons">
+    this.state = {
+      menuActive: false
+    };
+  }
 
-            {!isLoading && !userID && !menuIsOpen &&
-              <Button onClick={() => navigate('/login')} classes="tertiary small" label={t('header.buttons.login')} />
-            }
+  render() {
+    const {
+      menuIsOpen,
+      children,
+      isLoading,
+      userID,
+      onClick,
+      childrenDisabled,
+      isMobile,
+      menuLinks,
+      showDashboardButton,
+      showOnboardingButton,
+      t
+    } = this.props;
+    const { menuActive } = this.state;
 
-            {userID && !children && showDashboardButton &&
-              <ButtonHeader data-test="dashboard" label={t('header.dashboard')} onClick={() => navigate('/dashboard')} />
-            }
+    return (
+      <header
+        data-test="component-header"
+        className={classNames('header',
+          this.props.classNames,
+          {'no-background': menuIsOpen}
+        )}
+      >
+        <div className="header-inner-wrapper">
+          <div className="header-inner">
+            <div className="header-logo">
+              <Link to="/">
+                <img src={Logo} alt="GetGround logo" />
+              </Link>
+            </div>
+            <div className="header-buttons">
 
-            {userID && !children && showOnboardingButton &&
-              <ButtonHeader data-test="onboarding" label={t('header.onboarding')} onClick={() => navigate('/onboarding')} />
-            }
+              {!isLoading && !userID && !menuIsOpen &&
+                <Button onClick={() => navigate('/login')} classes="header-signIn small" label={t('header.buttons.login')} />
+              }
 
-            {children
-              ? <div data-test="children" className={classNames('header-children', {
-                'disabled': childrenDisabled
-              })}>{children}</div>
-              : (
-                isMobile
-                ? <div
-                    className={classNames('header-menu-toggle',
-                      {'header-menu-toggle-close': menuIsOpen }
-                    )}
-                    onClick={onClick}
-                  >
-                    <div></div>
-                  </div>
-                : menuLinks
-              )
-            }
+              {userID && !children && showDashboardButton &&
+                <ButtonHeader data-test="dashboard" label={t('header.dashboard')} onClick={() => navigate('/dashboard')} />
+              }
+
+              {userID && !children && showOnboardingButton &&
+                <ButtonHeader data-test="onboarding" label={t('header.onboarding')} onClick={() => navigate('/onboarding')} />
+              }
+
+              {children
+                ? <div data-test="children" className={classNames('header-children', {
+                  'disabled': childrenDisabled
+                })}>{children}</div>
+                : (
+                  isMobile
+                  ? <div
+                      className={classNames('header-menu-toggle',
+                        {'header-menu-toggle-close': menuIsOpen }
+                      )}
+                      onClick={onClick}
+                    >
+                      <div></div>
+                    </div>
+                  : [
+                    <div key="nav-about" className="header-links" onClick={() => navigate('/about-us') }>{ t('menu.links.fifth.label') }</div>,
+                    <div key="nav-menu" className="header-links hover" onClick={() => this.setState({ menuActive: !menuActive })}>
+                      Explore
+
+                      {menuActive &&
+                        <div className="header-links-menu" onMouseLeave={() => this.setState({ menuActive: !menuActive })}>
+                          { menuLinks }
+                        </div>
+                      }
+                    </div>
+                  ]
+                )
+              }
+            </div>
           </div>
         </div>
-      </div>
-    </header>
-  );
+      </header>
+    );
+  }
 }
 
 Header.propTypes = {
@@ -98,7 +120,10 @@ Header.propTypes = {
   isMobile: PropTypes.bool,
   menuLinks: PropTypes.object,
   showDashboardButton: PropTypes.bool,
-  showOnboardingButton: PropTypes.bool
+  showOnboardingButton: PropTypes.bool,
+  t: PropTypes.func
 }
 
-export default Header;
+export const RawComponent = Header;
+
+export default withTranslation()(Header);

@@ -95,6 +95,12 @@
     }
   }
 
+  &.header-signIn {
+    color: $white;
+    background: $background-3;
+    font-weight: 300;
+  }
+
   &.white {
     min-width: 100px;
     background: $white;
@@ -200,7 +206,7 @@
     }
     
     &.full {
-      max-width: 300px;
+      max-width: 330px;
       margin-left: auto;
       margin-right: auto;
     }
@@ -225,6 +231,12 @@
     .button {
       padding: 12px 35px;
       font-size: 18px;
+    }
+  }
+
+  .header-buttons {
+    .button {
+      padding: 12px 20px;
     }
   }
 }

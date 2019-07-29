@@ -51,8 +51,8 @@ const HowItWorks = () => {
           <center><Button classes="get-started" label={ t('home.cta')} onClick={() => navigate('/onboarding/intro') } /></center>
 
           <Links
-            next={{ label: t('menu.links.fourth'), link: '/pricing' }}
-            prev={{ label: t('menu.links.second'), link: '/advantages' }}
+            next={{ label: t('menu.links.fourth.label'), link: '/pricing' }}
+            prev={{ label: t('menu.links.second.label'), link: '/advantages' }}
           />
         </LandingContent>
       </div>

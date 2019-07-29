@@ -182,8 +182,8 @@ const IndexPage = () => {
               </center>
 
               <Links
-                next={{ label: t('menu.links.first'), link: '/what-we-do' }}
-                prev={{ label: t('menu.links.sixth'), link: '/partnerships' }}
+                next={{ label: t('menu.links.first.label'), link: '/what-we-do' }}
+                prev={{ label: t('menu.links.sixth.label'), link: '/partnerships' }}
               />
             </LandingContent>
           </div>
