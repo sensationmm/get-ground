@@ -14,13 +14,13 @@
 
   &-property {
     &-title {
-      font-size: 15px;
+      font-size: 17px;
       line-height: 2.15;
       color: $heading;
     }
 
     &-sign, &-monthly, &-annual {
-      font-size: 26px;
+      font-size: 28px;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -29,27 +29,27 @@
       h3:first-child {
         margin: 0;
         margin-right: 0;
-        font-size: 26px;
+        font-size: 28px;
         line-height: 28px;
       }
 
       h3:nth-child(2) {
         margin: 0;
         margin-left: 5px;
-        font-size: 16px;
+        font-size: 18px;
       }
 
       &-caption {
         margin: 0 auto;
         width: 60%;
-        font-size: 14px;
+        font-size: 16px;
         line-height: 1.75;
         margin-bottom: 30px;
         text-align: center;
       }
 
       &-small {
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 300;
         text-align: center;
       }
@@ -60,12 +60,12 @@
     margin-top: 70px;
     margin-bottom: 50px;
     &-title {
-      font-size: 15px;
+      font-size: 17px;
       color: $text;
     }
     p {
       color: $heading;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 300;
       line-height: 1.75;
     }
@@ -76,22 +76,22 @@
   .pricing {
     &-property, &-services {
       &-title {
-        font-size: 20px;
+        font-size: 22px;
       }
 
 
       &-sign, &-monthly, &-annual {
         h3:first-child {
-          font-size: 32px;
+          font-size: 34px;
         }
 
         h3:nth-child(2) {
-          font-size: 24px;
+          font-size: 26px;
         }
 
         &-caption {
           width: 100%;
-          font-size: 16px;
+          font-size: 18px;
           font-weight: 300;
           padding-top: 10px;
           line-height: 1;

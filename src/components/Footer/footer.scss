@@ -31,7 +31,7 @@
   }
 
   &-location, &-legal {
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 300;
     line-height: 2.15;
     margin-top: 30px;
@@ -43,7 +43,7 @@
     display: flex;
     align-content: flex-start;
     flex-direction: row;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 300;
     width: 100%;
     flex-wrap: wrap;
@@ -54,7 +54,7 @@
       padding: 10px 0;
       display: flex;
       align-items: center;
-      font-size: 12px;
+      font-size: 14px;
 
       &:nth-child(even) {
         justify-content: flex-end;
