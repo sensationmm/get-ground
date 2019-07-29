@@ -47,6 +47,7 @@
       width: 32px;
       overflow: hidden;
       cursor: pointer;
+      margin-left: 30px;
 
       &:after, &:before, div {
         background-color: $text;
