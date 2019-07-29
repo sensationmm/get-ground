@@ -37,7 +37,7 @@ const Column = (props) => {
 
       <div className="column-text">
         <h3>{heading}</h3>
-        <p dangerouslySetInnerHTML={{ __html: text }} />
+        <div dangerouslySetInnerHTML={{ __html: <p>{ text }</p> }} />
       </div>
     </div>
   )
