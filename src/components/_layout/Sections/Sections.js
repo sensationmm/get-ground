@@ -44,7 +44,7 @@ class Section extends Component {
         <div className="section-inner">
           <div className="section-text">
             <h2>{heading}</h2>
-            <div dangerouslySetInnerHTML={{ __html: <p>{ text } </p> }} />
+            <div dangerouslySetInnerHTML={{ __html: `<p>${ text } </p>` }} />
 
             {more && 
               <p className="section-expand" onClick={() => this.setState({ expanded: !expanded })}>
