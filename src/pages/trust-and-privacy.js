@@ -67,8 +67,8 @@ const TrustAndPrivacy = () => {
             <center><Button classes="get-started" label={ t('home.cta')} onClick={() => navigate('/onboarding/intro') } /></center>
 
             <Links
-              prev={{ label: t('menu.links.fourth'), link: '/pricing' }}
-              next={{ label: t('menu.links.sixth'), link: '/partnerships' }}
+              prev={{ label: t('menu.links.fourth.label'), link: '/pricing' }}
+              next={{ label: t('menu.links.sixth.label'), link: '/partnerships' }}
             />
           </LandingContent>
         </div>

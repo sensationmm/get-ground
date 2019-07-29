@@ -602,7 +602,7 @@
     "onboarding": "Onboarding",
     "buttons": {
       "register": "Register",
-      "login": "Log In",
+      "login": "Sign In",
       "saveAndExit": "Save and Exit",
       "exit": "Exit"
     }
@@ -728,17 +728,46 @@
   },
   "menu": {
     "links": {
-      "home": "Home",
-      "first": "What we do",
-      "second": "Advantages",
-      "third": "How it works",
-      "fourth": "Fees",
-      "fifth": "About us",
-      "sixth": "Partnerships",
-      "seventh": "FAQs",
-      "eigth": "Login",
-      "ninth": "Logout",
-      "tenth": "Trust and Privacy"
+      "home": {
+        "label": "Home"
+      },
+      "first": {
+        "label": "What we do",
+        "summary": "Find out more about what we offer"
+      },
+      "second": {
+        "label": "Advantages",
+        "summary": "How you benefit from our services"
+      },
+      "third": {
+        "label": "How it works",
+        "summary": "What to expect when you sign up"
+      },
+      "fourth": {
+        "label": "Fees",
+        "summary": "Details of our fees"
+      },
+      "fifth": {
+        "label": "About us"
+      },
+      "sixth": {
+        "label": "Partnerships",
+        "summary": "See how to partner with us"
+      },
+      "seventh": {
+        "label": "FAQs",
+        "summary": "See our frequently asked questions"
+      },
+      "eigth": {
+        "label": "Login"
+      },
+      "ninth": {
+        "label": "Logout"
+      },
+      "tenth": {
+        "label": "Trust and Privacy",
+        "summary": "How trust is at the heart of everything we do"
+      }
     }
   },
   "modal": {

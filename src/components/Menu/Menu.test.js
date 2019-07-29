@@ -19,19 +19,11 @@ describe('<Menu />', () => {
         }
       ]
     }
-    wrapper = setup(Menu, props, { fadeInLinks: false });
+    wrapper = setup(Menu, props);
   });
 
   test('renders without error', () => {
     const component = findByTestAttr(wrapper, 'component-menu');
     expect(component.length).toBe(1);
   });
-
-  // test('menu links fade in after it has been opened', (done) => {
-  //   setTimeout(() => {
-  //     expect(wrapper.state().fadeInLinks).toBe(true);
-  //     done();
-  //   }, 200);
-  // });
-
 });

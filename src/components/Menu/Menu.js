@@ -1,61 +1,36 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
-
-import classNames from 'classnames';
 
 import './menu.scss';
 
 /**
  * Menu
- *
+ * @param {object} props - props object
  * @return {JSXElement} Menu
  */
-class Menu extends Component {
-  constructor(props) {
-    super(props);
+const Menu = (props) => {
+  const { menuLinks } = props;
 
-    this.state = {
-      fadeInLinks: false
-    }
+  return(
+    <div className="menu" data-test="component-menu">
+      <ul className="menu--list">
+        {menuLinks.map((menuLink, i) => {
+          const link = menuLink.link ? menuLink.link : '/';
 
-    this.timeout = null;
-  }
-
-  componentDidMount() {
-    this.timeout = setTimeout(() => {
-      this.setState({ fadeInLinks: true })
-    }, 200);
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timeout);
-  }
-
-  render() {
-    const { menuLinks } = this.props;
-    const { fadeInLinks } = this.state;
-    return(
-      <div className="menu" data-test="component-menu">
-        <ul className={classNames('menu--list',
-            { 'fade-in': fadeInLinks }
-          )}>
-          {menuLinks.map((menuLink, i) => {
-            return(
-              <li className="menu--list-item" key={`menu-link-${i}`}>
-                {menuLink.link ?
-                  <Link to={`${menuLink.link}`} activeClassName="active">{`${menuLink.text}`}</Link>
-                  :
-                  <Link to="/" onClick={menuLink.function}>{`${menuLink.text}`}</Link>
-                }
-              </li>
-            )
-          })}
-        </ul>
-      </div>
-    )
-  }
+          return(
+            <li className="menu--list-item" key={`menu-link-${i}`}>
+              <Link to={link} activeClassName="active">
+                <div className="menu--list-item-label">{ menuLink.text }</div>
+                { menuLink.summary }
+              </Link>
+            </li>
+          )
+        })}
+      </ul>
+    </div>
+  )
 }
 
 Menu.propTypes = {
