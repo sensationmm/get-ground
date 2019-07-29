@@ -184,11 +184,6 @@ export class Layout extends Component {
         text: t('menu.links.sixth.label'),
         summary: t('menu.links.sixth.summary'),
         link: '/partnerships'
-      },
-      {
-        text: t('menu.links.seventh.label'),
-        summary: t('menu.links.seventh.summary'),
-        link: '/frequently-asked-questions'
       }
     ];
 
