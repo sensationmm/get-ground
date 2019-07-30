@@ -122,7 +122,7 @@ class AuthService extends BaseService {
   verifyEmail = (verificationCode) => {
     const config = {
       url: 'v2/users/verify',
-      method: 'post',
+      method: 'put',
       data: JSON.stringify({'email_verification_code': verificationCode})
     };
 
