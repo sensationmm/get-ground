@@ -29,7 +29,7 @@ class CompanyDesignIntroContainer extends Component {
 
 /**
   * handleCreateCompany
-  * @param {string} navigateUrl - url to navigate to 
+  * @param {string} navigateUrl - url to navigate to
   * @param {boolean} isAddServices - boolean for whether the user has chosen to add services or not
   * @return {void}
   */
@@ -41,7 +41,7 @@ class CompanyDesignIntroContainer extends Component {
 
 /**
   * handleCreateCompany
-  * @param {string} navigateUrl - url to navigate to 
+  * @param {string} navigateUrl - url to navigate to
   * @param {boolean} isAddServices - boolean for whether the user has chosen to add services or not
   * @return {void}
   */
@@ -54,14 +54,14 @@ class CompanyDesignIntroContainer extends Component {
 
 /**
   * handleCreateCompany
-  * @param {boolean} navigateUrl - url to navigate to 
+  * @param {boolean} navigateUrl - url to navigate to
   * @param {object} response - response from CompanyService
   * @return {void}
   */
   handleCreateCompanyResponse = (navigateUrl, response) => {
     const { hideLoader, addCompany, setActiveCompany } = this.props;
     hideLoader();
-    if (response.status === 201) {
+    if (response.status === 200) {
       navigate(navigateUrl);
       addCompany(response.data);
       setActiveCompany(response.data.id);

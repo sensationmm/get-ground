@@ -20,7 +20,7 @@ class AccountService extends BaseService {
    */
   createAccount = (email, password, receives_marketing) => {
     const config = {
-      url: 'users',
+      url: 'v2/users',
       method: 'post',
       data: {
         'email': email,
@@ -40,7 +40,7 @@ class AccountService extends BaseService {
    */
   getUser = (userID) => {
     const config = {
-      url: `users/${userID}`,
+      url: `v2/users/${userID}`,
       method: 'get'
     };
 
@@ -66,7 +66,7 @@ class AccountService extends BaseService {
     });
 
     const config = {
-      url: `users/${userID}`,
+      url: `v2/users/${userID}`,
       method: 'put',
       data
     };
@@ -96,7 +96,7 @@ class AccountService extends BaseService {
     delete data.userID;
 
     const config = {
-      url: `users/${userID}`,
+      url: `v2/users/${userID}`,
       method: 'put',
       data
     };
@@ -123,7 +123,7 @@ class AccountService extends BaseService {
     }
 
     const config = {
-      url: 'documents',
+      url: 'v2/documents',
       method: 'post',
       data: formData
     };
@@ -142,7 +142,7 @@ class AccountService extends BaseService {
    */
   getDocuments = () => {
     const config = {
-      url: `/users/${store.getState().user.id}/kyc/files/latest`,
+      url: `v2/users/${store.getState().user.id}/kyc/files/latest`,
       method: 'get'
     };
 
@@ -158,7 +158,7 @@ class AccountService extends BaseService {
    */
   getSignature = () => {
     const config = {
-      url: `/users/${store.getState().user.id}/signature`,
+      url: `v2/users/${store.getState().user.id}/signature`,
       method: 'get'
     };
 
@@ -177,7 +177,7 @@ class AccountService extends BaseService {
    */
   retrieveInvestedUser = (token) => {
     const config = {
-      url: `property_purchases_users/${token}`,
+      url: `v2/property_purchases_users/${token}`,
       method: 'get'
     };
 
@@ -193,7 +193,7 @@ class AccountService extends BaseService {
     const userID = store.getState().user.id.toString();
 
     const config = {
-      url: `users/${userID}`,
+      url: `v2/users/${userID}`,
       method: 'put',
       data: {
         last_page_visited: 'dashboard'

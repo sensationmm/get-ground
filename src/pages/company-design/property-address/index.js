@@ -49,6 +49,7 @@ class PropertyAddress extends Component {
   /* istanbul ignore next */
   componentDidMount() {
     const { company: { property_address: { address, is_confirmed }}} = this.props;
+    // console.log(this.props);
     const script = document.createElement('script');
     const reduxFields = address;
 

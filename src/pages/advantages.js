@@ -190,11 +190,12 @@ const Advantages = (props) => {
             }}
           />
 
-          <center><Button classes="get-started" label="Get Started" onClick={() => navigate('/onboarding/intro') } /></center>
+
+          <center><Button classes="get-started" label={ t('home.cta')} onClick={() => navigate('/onboarding/intro') } /></center>
 
           <Links
-            next={{ label: t('menu.links.third'), link: '/how-it-works' }}
-            prev={{ label: t('menu.links.first'), link: '/what-we-do' }}
+            next={{ label: t('menu.links.third.label'), link: '/how-it-works' }}
+            prev={{ label: t('menu.links.first.label'), link: '/what-we-do' }}
           />
         </LandingContent>
       </div>

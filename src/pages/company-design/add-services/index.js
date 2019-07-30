@@ -178,7 +178,7 @@ export class AdditionalServices extends Component {
             {formUtils.renderForm(config)}
           </Form>
 
-          <ModalWrapper 
+          <ModalWrapper
             transitionBool={modalIsOpen}
             transitionTime={600}
             classes="modal fullscreen"

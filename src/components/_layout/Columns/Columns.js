@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import './columns.scss';
 
@@ -10,10 +11,10 @@ import './columns.scss';
 * @return {JSXElement} - Columns component
 */
 const Columns = (props) => {
-  const { sections } = props;
+  const { sections, bordered } = props;
 
   return (
-    <div data-test="component-columns" className="columns">
+    <div data-test="component-columns" className={classNames('columns', { bordered: bordered })}>
     {sections.map((section, count) => <Column key={`section-${count}`} {...section} /> )}
     </div>
   );
@@ -36,7 +37,7 @@ const Column = (props) => {
 
       <div className="column-text">
         <h3>{heading}</h3>
-        <p>{ text }</p>
+        <div dangerouslySetInnerHTML={{ __html: `<p>${ text } </p>` }} />
       </div>
     </div>
   )
@@ -51,7 +52,8 @@ Columns.propTypes = {
       more: PropTypes.string,
       t: PropTypes.func
     })
-  )
+  ),
+  bordered: PropTypes.bool
 };
 
 Column.propTypes = {

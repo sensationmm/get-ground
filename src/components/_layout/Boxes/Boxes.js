@@ -20,7 +20,7 @@ const Boxes = (props) => {
       {content.map((box, count) => {
         return (
           <div className="box" key={`box-${count}`}>
-            <h2>{ box.heading }</h2>
+            {box.heading && <h3>{ box.heading }</h3>}
             <div dangerouslySetInnerHTML={{ __html: box.text }} />
             {box.items && box.items.map((item, i) => {
               return (

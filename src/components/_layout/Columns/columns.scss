@@ -1,3 +1,6 @@
+@import '../../../styles/modules/colors';
+@import '../../../styles/modules/variables';
+
 .columns {
   display: flex;
   flex-direction: row;
@@ -6,8 +9,14 @@
   padding: 50px 0;
 
   .column {
-    width: 25%;
+    width: 0;
+    flex-grow: 1;
     text-align: center;
+    margin-right: 12%;
+
+    &:last-child {
+      margin-right: 0;
+    }
 
     h3 {
       font-size: 24px;
@@ -16,7 +25,11 @@
     }
 
     p {
-      font-size: 13px !important;
+      font-size: 17px !important;
+    }
+
+    ul {
+      width: 100%;
     }
 
     &-image {
@@ -27,6 +40,15 @@
         width: 100%;
         max-height: 120px;
       }
+    }
+  }
+
+  &.bordered {
+    .column {
+      border: 1px solid $border-offset;
+      border-radius: 10px;
+      padding: ($padding-horizontal-unit * 2 + 0px);
+      margin-right: 3%;
     }
   }
 }

@@ -1,9 +1,26 @@
 import React, { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
-import ImageFull from 'src/components/ImageFull/ImageFull'
+import { navigate } from 'gatsby';
 
-import Image from 'src/assets/images/home.svg'
 import Layout from 'src/components/Layout/Layout'
+import PageHeader from 'src/components/_layout/PageHeader/PageHeader';
+import PageIntro from 'src/components/_layout/PageIntro/PageIntro';
+import Links from 'src/components/_layout/Links/Links';
+import Boxes from 'src/components/_layout/Boxes/Boxes';
+import Sections from 'src/components/_layout/Sections/Sections';
+import Columns from 'src/components/_layout/Columns/Columns';
+import Button from 'src/components/_buttons/Button/Button';
+import LandingContent from 'src/components/_layout/LandingContent/LandingContent';
+
+import IconCapital from 'src/assets/images/icon-capital.svg';
+import IconProfits from 'src/assets/images/icon-profits.svg';
+import IconTime from 'src/assets/images/icon-time.svg';
+
+import Step1 from 'src/assets/images/for-sale.svg';
+import Step2 from 'src/assets/images/deed.svg';
+import Step3 from 'src/assets/images/documents-modal.svg';
+import LogosTrust from 'src/assets/images/logos-trust.png';
+import ImageHome from 'src/assets/images/home.svg';
 
 import 'src/styles/pages/home.scss'
 
@@ -13,17 +30,162 @@ const IndexPage = () => {
   return (
     <Fragment>
       <Layout>
-        <div data-test="container-landing" className="home" role="brochure company-design">
-          <div className="heading">
-            <h1 data-test="landing-title" >{t('landing.title')}</h1>
-            <h2 data-test="landing-secondary-title" >{t('landing.secondaryTitle')}</h2>
-          </div>
+        <div data-test="container-landing" className="home" role="landing account">
+          <PageHeader
+            title={ t('home.title') }
+            text={ t('home.intro') }
+            image={ImageHome}
+            button={(
+              <Button 
+                classes="get-started" 
+                label={ t('home.cta')} 
+                onClick={() => navigate('/onboarding/intro') } 
+              />
+            )}
+          />
 
-          <ImageFull src={Image} alt="house" data-test="landing-img" />
-          <div className="home-content">
-            <p data-test="landing-content-first" >{t('landing.firstParagraph')}</p>
-            <p data-test="landing-content-second" >{t('landing.secondParagraph')}</p>
-            <p data-test="landing-content-third" >{t('landing.thirdParagraph')}</p>
+          <div>
+            <LandingContent>
+              <PageIntro heading={ t('home.whatWeDo.heading') } />
+
+              <Sections
+                sections={[
+                  {
+                    text: t('home.whatWeDo.content'),
+                    image: <Boxes content={[ { text: t('home.whatWeDo.box') } ]} />
+                  }
+                ]}
+              />
+
+              <center>
+                <Button 
+                  classes="get-started" 
+                  label={ t('findOutMore.label')} 
+                  onClick={() => navigate('/what-we-do') } 
+                />
+              </center>
+            </LandingContent>
+            
+            <LandingContent green>
+              <PageIntro heading={ t('home.advantages.heading') } />
+              
+              <div className="cols">
+                <div style={{ backgroundImage: `url(${IconProfits})` }} dangerouslySetInnerHTML={{ __html: t('home.advantages.columns.first') }} />
+                <div style={{ backgroundImage: `url(${IconTime})` }} dangerouslySetInnerHTML={{ __html: t('home.advantages.columns.second') }} />
+                <div style={{ backgroundImage: `url(${IconCapital})` }} dangerouslySetInnerHTML={{ __html: t('home.advantages.columns.third') }} />
+              </div>
+
+              <center>
+                <Button 
+                  classes="get-started" 
+                  label={ t('findOutMore.label')} 
+                  onClick={() => navigate('/advantages') } 
+                />
+              </center>
+            </LandingContent>
+            
+            <LandingContent>
+              <PageIntro heading={ t('home.howItWorks.heading') } text={ t('home.howItWorks.content') } />
+
+              <Columns
+                sections={[
+                  {
+                    heading: t('home.howItWorks.columns.step1.stepName'),
+                    text: t('home.howItWorks.columns.step1.text'),
+                    image: Step1
+                  }, 
+                  {
+                    heading: t('home.howItWorks.columns.step2.stepName'),
+                    text: t('home.howItWorks.columns.step2.text'),
+                    image: Step2
+                  }, 
+                  {
+                    heading: t('home.howItWorks.columns.step3.stepName'),
+                    text: t('home.howItWorks.columns.step3.text'),
+                    image: Step3
+                  }
+                ]}
+                bordered
+              />
+
+              <h3>{ t('home.howItWorks.outro.heading') }</h3>
+              <div dangerouslySetInnerHTML={{ __html: t('home.howItWorks.outro.text') }} />
+
+              <center>
+                <Button 
+                  classes="get-started" 
+                  label={ t('findOutMore.label')} 
+                  onClick={() => navigate('/how-it-works') } 
+                />
+              </center>
+            </LandingContent>
+            
+            <LandingContent orange>
+              <PageIntro heading={ t('home.fees.heading')} text={ t('home.fees.content') } />
+
+              <Boxes
+                content={[
+                  {
+                    heading: t('pricing.content.fees.title'),
+                    text: t('pricing.content.fees.text'),
+                    items: [
+                      {
+                        heading: t('pricing.content.fees.prices.signup.heading'),
+                        content: t('pricing.content.fees.prices.signup.text')
+                      },
+                      {
+                        heading: t('pricing.content.fees.prices.subscription.heading'),
+                        content: t('pricing.content.fees.prices.subscription.text')
+                      },
+                    ],
+                    footer: t('pricing.content.fees.footer')
+                  }, 
+                  {
+                    heading: t('pricing.content.included.title'),
+                    text: t('pricing.content.included.text'),
+                  },
+                  {
+                    heading: t('pricing.content.other.title'),
+                    text: t('pricing.content.other.text'),
+                  }
+                ]}
+              />
+            </LandingContent>
+            
+            <LandingContent>
+              <Sections
+                sections={[
+                  {
+                    heading: t('home.trustAndPrivacy.heading'),
+                    text: t('home.trustAndPrivacy.content'),
+                    image: LogosTrust,
+                    button: (
+                      <Button 
+                        classes="get-started" 
+                        label={ t('findOutMore.label')} 
+                        onClick={() => navigate('/trust-and-privacy') } 
+                      />
+                    )
+                  }
+                ]}
+                imageFull
+              />
+            </LandingContent>
+            
+            <LandingContent>
+              <center>
+                <Button 
+                  classes="get-started" 
+                  label={ t('home.cta') } 
+                  onClick={() => navigate('/onboarding/intro') } 
+                />
+              </center>
+
+              <Links
+                next={{ label: t('menu.links.first.label'), link: '/what-we-do' }}
+                prev={{ label: t('menu.links.sixth.label'), link: '/partnerships' }}
+              />
+            </LandingContent>
           </div>
         </div>
       </Layout>

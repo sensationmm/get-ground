@@ -23,7 +23,7 @@ const OnboardingIntroContainer = () => {
           text={slidesContent[0].copy}
           image={sliderImg1}
         />
-        
+
         <div className="intro--buttons-container">
           <Button
             fullWidth
@@ -35,7 +35,7 @@ const OnboardingIntroContainer = () => {
           <Button
             fullWidth
             opaque
-            small
+            
             label={t('onBoarding.intro.button2')}
             onClick={() => navigate('/login')}
           />

@@ -18,7 +18,7 @@ export const addCompany = (company) => ({
 
 export const companyUpdate = (companyID, key, value) => {
   return {
-    type: COMPANY_UPDATE, 
+    type: COMPANY_UPDATE,
     companyID,
     key,
     value

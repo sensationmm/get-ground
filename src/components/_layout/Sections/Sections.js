@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import classNames from 'classnames';
 
 import './sections.scss';
 
@@ -11,12 +12,12 @@ import './sections.scss';
 * @return {JSXElement} - Sections component
 */
 const Sections = (props) => {
-  const { sections } = props;
+  const { sections, reverse, imageFull } = props;
   const [t] = useTranslation();
 
   return (
-    <div data-test="component-sections" className="sections">
-    {sections.map((section, count) => <Section key={`section-${count}`} {...section} t={t} /> )}
+    <div data-test="component-sections" className={classNames('sections', { reversed: reverse })}>
+    {sections.map((section, count) => <Section imageFull={imageFull} key={`section-${count}`} {...section} t={t} /> )}
     </div>
   );
 }
@@ -35,7 +36,7 @@ class Section extends Component {
   }
 
   render() {
-    const { heading, text, image, more, t } = this.props;
+    const { heading, text, image, more, t, imageFull, button } = this.props;
     const { expanded } = this.state;
 
     return (
@@ -43,17 +44,22 @@ class Section extends Component {
         <div className="section-inner">
           <div className="section-text">
             <h2>{heading}</h2>
-            <div dangerouslySetInnerHTML={{ __html: text }} />
+            <div dangerouslySetInnerHTML={{ __html: `<p>${ text } </p>` }} />
 
             {more && 
               <p className="section-expand" onClick={() => this.setState({ expanded: !expanded })}>
                 { expanded ? t('seeLess') : t('seeMore') }
               </p>
             }
+
+            {button && button}
           </div>
 
-          <div className="section-image">
-            <img src={image} />
+          <div className={classNames('section-image', { jsx: typeof image !== 'string' }, { imageFull: imageFull })}>
+            {typeof image === 'string'
+              ? <img src={image} />
+              : image
+            }
           </div>
         </div>
 
@@ -72,7 +78,14 @@ Sections.propTypes = {
       more: PropTypes.string,
       t: PropTypes.func
     })
-  )
+  ),
+  reverse: PropTypes.bool,
+  imageFull: PropTypes.bool
+};
+
+Sections.defaultProps = {
+  reverse: false,
+  imageFull: false
 };
 
 Section.propTypes = {
@@ -80,7 +93,9 @@ Section.propTypes = {
   text: PropTypes.string,
   image: PropTypes.string,
   more: PropTypes.string,
-  t: PropTypes.func
+  t: PropTypes.func,
+  imageFull: PropTypes.bool,
+  button: PropTypes.object
 };
 
 export default Sections;

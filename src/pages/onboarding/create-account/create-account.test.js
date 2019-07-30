@@ -105,7 +105,7 @@ describe('<CreateAccount />', () => {
 
     test('creates account', async () => {
       spy = jest.spyOn(formUtils, 'validateForm').mockReturnValue(true);
-      AccountService.createAccount = jest.fn().mockReturnValue(Promise.resolve({ status: 201 }));
+      AccountService.createAccount = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
       const wrapperNew = setup(CreateAccount, defaultProps);
 
       await wrapperNew.instance().createAccount();

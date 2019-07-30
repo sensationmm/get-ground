@@ -23,7 +23,7 @@ class AuthService extends BaseService {
    */
   login = (email, password) => {
     const config = {
-      url: 'auth',
+      url: 'v2/auth',
       method: 'post',
       data: {
         'email': email,
@@ -61,7 +61,7 @@ class AuthService extends BaseService {
    */
   requestResetPassword = (email) => {
     const config = {
-      url: '/auth/request_reset_password',
+      url: 'v2/auth/request_reset_password',
       method: 'post',
       data: {
         'email': email
@@ -78,7 +78,7 @@ class AuthService extends BaseService {
    */
   reauthenticate = () => {
     const config = {
-      url: 'auth_reset',
+      url: 'v2/auth_reset',
       method: 'post'
     };
 
@@ -101,7 +101,7 @@ class AuthService extends BaseService {
    */
   setNewPassword = (password, token) => {
     const config = {
-      url: 'reset_password',
+      url: 'v2/auth/reset_password',
       method: 'post',
       data: {
         'password': password,
@@ -121,7 +121,7 @@ class AuthService extends BaseService {
    */
   verifyEmail = (verificationCode) => {
     const config = {
-      url: 'users/verify_email',
+      url: 'v2/users/verify_email',
       method: 'post',
       data: JSON.stringify({'email_verification_code': verificationCode})
     };
@@ -146,37 +146,6 @@ class AuthService extends BaseService {
   };
 
   /**
-   * acceptRoleLogin
-   * Login for accept role
-   * @param {string} token - accept role token
-   * @return {Promise} verify email response
-   */
-  acceptRoleLogin = (token) => {
-    const config = {
-      url: 'accept-role/login',
-      method: 'post',
-      data: JSON.stringify({'token': token})
-    };
-
-    return this.doRequest(config, (response) => {
-      store.dispatch(userLogin(response.data.user));
-      store.dispatch(saveAuth(response.data.token));
-
-      const { first_name, middle_name, last_name, email } = response.data.user
-
-      const login_variables = [
-        { name: 'First Name', value: first_name },
-        { name: 'Middle Name', value: middle_name },
-        { name: 'Last Name', value: last_name },
-        { name: 'Email', value: email }
-      ];
-
-      window.LC_API.set_custom_variables(login_variables);
-
-    });
-  };
-
-  /**
    * acceptSetPassword
    * Login for accept role
    * @param {string} password - password set for account
@@ -185,15 +154,21 @@ class AuthService extends BaseService {
    */
   acceptRoleSetPassword = (password, token) => {
     const config = {
-      url: '/property_purchases/accept_role',
+      url: 'v2/property_purchases/accept_role',
       method: 'post',
-      data: JSON.stringify({
-        'password': password,
-        'token': token
-      })
+      data: password ?
+             JSON.stringify({
+              'password': password,
+              'token': token
+              })
+            :
+            JSON.stringify({'token': token})
     };
 
-    return this.doRequest(config);
+    return this.doRequest(config, (response) => {
+      store.dispatch(userLogin(response.data.user));
+      CompanyService.getCompanies();
+    });
   };
 }
 

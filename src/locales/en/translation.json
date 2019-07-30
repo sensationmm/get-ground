@@ -1,16 +1,18 @@
 {
   "aboutUs": {
-    "title": {
-      "first": "About us",
-      "second": "We want to change that. "
-    },
+    "title": "About us",
+    "intro": "<p>Being a landlord is getting tougher. Costs are on the rise and so are taxes.</p>",
     "content": {
-      "first": "Our mission is to create a more productive and fairer world.",
-      "second": "Trillions of dollars of real assets (e.g., houses, ships, machinery) are stuck in illiquid non-transparent markets.  If we can’t understand the real assets that drive the world’s economy it is likely they are not fully productive. If many cannot access real asset ownership it is likely we create greater inequality.",
-      "third": "We believe we can do it by holding a single asset in a single company. Each company gives its asset an identity through which we can better understand it, a framework of governance to own and operate it and through shares, the ability to effectively change ownership.",
-      "fourth": "The issue with companies is that they are expensive and difficult to manage. And on their own, they do not necessarily create trust. This is what we are solving. Make companies cheap and easy to use. Create a platform that builds trust.",
-      "fifth": "We are starting with the residential buy-to-let sector in the UK. There is £1.3 trillion of stock in this market. A huge business. But ironically nearly all of it is in personal rather than company ownership.",
-      "sixth": "Come join us create a more productive and fairer world."
+      "heading": "But, purchasing your investment property through a company can help solve this.",
+      "text": "<p>There are many other benefits too. Such as, protecting your wealth, helping plan for inheritance and easily buying with others.</p><p>After all, an investment property is a business and companies are designed for business. At GetGround we’ve created a service that helps you capture these benefits - without the hassle or high fees.</p><p>We believe that holding property in a company helps lower costs, improve information and reduce barriers to buy and sell. As a result, we think both landlords and tenants will benefit.</p><p>Our mission is to create a fairer property market for all. </p>"
+    },
+    "moubin": {
+      "name": "Moubin",
+      "text": "<p>Moubin is the CEO of GetGround and was an investment professional at Apax Partners, one of the world’s leading private equity houses. There he was involved in numerous key transactions in the retail, consumer and services sectors.</p><p>Previously Moubin was at McKinsey & Company and is trained as a medical doctor at Imperial College where he graduated with distinctions.</p>"
+    },
+    "misrab": {
+      "name": "Misrab",
+      "text": "<p>Misrab is the CTO of GetGround. He is a computer scientist and set up the data science team and Singapore office at Go-Jek, Indonesia’s first technology ‘unicorn’. </p><p>Previously he taught data science at General Assembly, auction dynamics at TripAdvisor, and has been heavily involved in cryptographic theory and distributed ledger technology. </p><p>Misrab is Stanford University graduate with Bachelor’s and Master’s degrees focused around computer science, economics and mathematics.</p>"
     }
   },
   "acceptanceOfRole": {
@@ -535,11 +537,11 @@
       "link4": {
         "title": "How it works"
       },
-      "link5": {
-        "title": "FAQs"
-      },
       "link6": {
-        "title": "Pricing"
+        "title": "Fees"
+      },
+      "link5": {
+        "title": "Trust and Privacy"
       },
       "link7": {
         "title": "Contact us"
@@ -600,9 +602,57 @@
     "onboarding": "Onboarding",
     "buttons": {
       "register": "Register",
-      "login": "Log In",
+      "login": "Sign In",
       "saveAndExit": "Save and Exit",
       "exit": "Exit"
+    }
+  },
+  "home": {
+    "title": "Smarter property purchasing for landlords. Make your money work harder.",
+    "intro": "GetGround lets you purchase your property tax efficiently through a company, without the hassle and high fees.",
+    "cta": "Get started",
+    "whatWeDo": {
+      "heading": "What we do",
+      "content": "<p>We want to make life easier and more profitable for landlords. </p><p>Purchasing property through a company can be tax efficient. There are many other benefits, such as protecting your wealth, planning for inheritance or easily buying with others.</p><p>With us, you can purchase your property through a company, without the complexity and costs of setting up and managing it.</p>",
+      "box": "<p><b>We make it easy and affordable to purchase your property through a company by providing:</b></p><ul><li>A UK Limited company for you</li><li>A company bank account</li><li>All required company legal documents</li><li>Company accounts</li><li>Company tax filings </li><li>Company secretarial work (inc. registered office and filings) </li></ul>"
+    },
+    "advantages": {
+      "heading": "Advantages",
+      "columns": {
+        "first": "<h3>Get lower costs, more profit, better returns.</h3><ul><li>Open the potential of tax efficiency vs personal property ownership.</li><li>Better protect your wealth if your investment goes wrong.</li><li>Minimise your company costs. Through technology, we are 5-10x cheaper than others in the market. </li></ul>",
+        "second": "<h3>Get time back. Manage everything in one place. </h3><ul><li>Manage all your company needs through our simple website.</li><li>Seamlessly handle all your property needs through our network of carefully selected partners </li><li>Easily get in touch. Call us on the phone. Chat to us online or by email. </li></ul>",
+        "third": "<h3>Get access to capital. </h3><ul><li>Buy your property alone or together with your friends, family members or business partners (maximum 8 shareholders per company). </li><li>Access over 25 mortgage lenders who specialise in company buy-to-let, through our carefully selected brokers.</li><li>Discover the potential of a larger mortgage and lower personal income requirements by using a company.</li></ul>"
+      }
+    },
+    "howItWorks": {
+      "heading": "How it works",
+      "content": "<p>We do everything required for your company.</p>",
+      "columns": {
+        "step1":{
+          "stepName": "Step 1",
+          "text": "<p>We set up a UK Limited company for you to purchase your buy-to-let property. </p>"
+        },
+        "step2":{
+          "stepName": "Step 2",
+          "text": "<p>We work with your lawyers to purchase your property through your new company. We also set up your company bank account.</p>"
+        },
+        "step3":{
+          "stepName": "Step 3",
+          "text": "<p>We manage your company for you, including accounting, tax, legal documents, filings, registered office, and even secretarial work.</p>"
+        }
+      },
+      "outro": {
+        "heading": "Also",
+        "text": "<p class='intro'>We do not provide services for your property but can connect you to our carefully selected partners to get access to a wide range of mortgages, insurance, tax advice, solicitor and property management options.</p>"
+      }
+    },
+    "fees": {
+      "heading": "Fees",
+      "content": "<p>It’s free to join GetGround and you only need to pay once you set up a company through us.</p>"
+    },
+    "trustAndPrivacy": {
+      "heading": "Trust and Privacy",
+      "content": "<p>Trust is at the heart of our business. Everything we do is built around being open, honest and transparent at every stage.</p><p>You own and control your company, you can leave us at any time, and we work with the lawyers you trust to purchase your property through your company. We’re partly funded by the UK government through HM Land Registry. </p>"
     }
   },
   "howItWorks": {
@@ -633,13 +683,6 @@
         "content": "<p>Once your company has purchased your property we will manage all your company’s requirements.</p><p>Simply login to your account to:</p><ul><li>See your company’s and property’s details</li><li>Request any services you need for your company or, through our partners, for your property</li><li>Use your company’s bank account. </li></ul>"
       }
     }
-  },
-  "landing": {
-    "title": "GetGround for smarter property purchasing.",
-    "secondaryTitle": "Protect your wealth and be tax efficient.",
-    "firstParagraph": "GetGround makes it easy and affordable to purchase investment property the smarter way – through a company.",
-    "secondParagraph": "By using our platform you better protect your personal wealth, drive tax efficiency and create more flexibility in how you buy, manage and sell your property. ",
-    "thirdParagraph": "GetGround sets up your company that purchases your investment property. We manage all your company’s on-going needs under one roof. "
   },
   "liveChat": {
     "button": "Live chat"
@@ -685,17 +728,46 @@
   },
   "menu": {
     "links": {
-      "home": "Home",
-      "first": "What we do",
-      "second": "Advantages",
-      "third": "How it works",
-      "fourth": "Fees",
-      "fifth": "About us",
-      "sixth": "Partnerships",
-      "seventh": "FAQs",
-      "eigth": "Login",
-      "ninth": "Logout",
-      "tenth": "Trust and Privacy"
+      "home": {
+        "label": "Home"
+      },
+      "first": {
+        "label": "What we do",
+        "summary": "Find out more about what we offer"
+      },
+      "second": {
+        "label": "Advantages",
+        "summary": "How you benefit from our services"
+      },
+      "third": {
+        "label": "How it works",
+        "summary": "What to expect when you sign up"
+      },
+      "fourth": {
+        "label": "Fees",
+        "summary": "Details of our fees"
+      },
+      "fifth": {
+        "label": "About us"
+      },
+      "sixth": {
+        "label": "Partnerships",
+        "summary": "See how to partner with us"
+      },
+      "seventh": {
+        "label": "FAQs",
+        "summary": "See our frequently asked questions"
+      },
+      "eigth": {
+        "label": "Login"
+      },
+      "ninth": {
+        "label": "Logout"
+      },
+      "tenth": {
+        "label": "Trust and Privacy",
+        "summary": "How trust is at the heart of everything we do"
+      }
     }
   },
   "modal": {
@@ -1032,6 +1104,9 @@
     }
   },
   "partnerships": {
+    "title": "Partnerships",
+    "intro": "<p>Interested in selling GetGround and earning a commission? We work with partners to sell the GetGround product (e.g., estate agents, mortgage brokers, developers).</p><p>Interested in becoming a partner on the GetGround platform to provide property related services? </p>",
+    "content": "<p>Get in touch with us here.</p>",
     "cta": "Submit",
     "input": {
       "title": "Your Email"
@@ -1111,42 +1186,25 @@
       "todoSigned": "To be signed"
     }
   },
-  "trustAndPrivacy" : {
+  "trustAndPrivacy": {
     "title": "Trust and Privacy",
-    "subTitle": "At GetGround, we take the trust our customers place in us very seriously.",
-    "cta": "Read more",
+    "intro": "<p>Trust is at the heart of our business.<br />Everything we do is built around being open, honest and transparent at every stage.</p>",
     "sections": {
-      "info0": {
-        "title": "You own and control your company",
-        "copy": "GetGround is a service provider and does not have any directorship or ownership in your company. We cannot perform any activities on your company without your explicit consent."
+      "first": {
+        "heading": "Funded by the UK Government",
+        "text": "<p>We are funded in part by the Government through HM Land Registry’s Geovation program as well as being funded by other prestigious private investors. </p>"
       },
-     "info1": {
-        "title": "You can leave us at any time",
-        "copy": "You are free to leave our services at any time without penalty."
+      "second": {
+        "heading": "Compliant and secure",
+        "text": "<p>All GetGround customers need to pass UK approved Know-Your-Customer (KYC) and Anti-Money Laundering (AML) checks. GetGround is registered with the Information Commissioner’s Office and adheres to UK General Data Protection Regulation (GDPR).</p>"
       },
-      "info2": {
-        "title": "We work with your lawyers",
-        "copy": "When you purchase your property through GetGround you continue to use your conveyancing lawyer as per normal. You send your funds to purchase the property directly to your conveyancing lawyer’s client account. As a result, the underlying checks and procedures operating in the market are maintained."
+      "third": {
+        "heading": "Transparent",
+        "text": "<p>We believe transparency is key in establishing trust. All GetGround companies are UK limited companies and as such their details are recorded at Companies House in the UK. This is a public register that anyone is able to check and includes company details, owner and director information and copies of key company documents. </p>"
       },
-      "info3": {
-        "title": "Funded by the UK Government",
-        "copy": "We are funded in part by the Government through HM Land Registry’s Geovation program as well as being funded by other prestigious private investors."
-      },
-      "info4": {
-        "title": "FCA regulated",
-        "copy": "We are regulated by the UK Financial Conduct Authority and abide to high standards with regard to compliance. We are subject to regular supervision to ensure we meet these standards and treat our customers fairly."
-      },
-      "info5": {
-        "title": "Compliance",
-        "copy": "All GetGround customers need to pass UK approved Know-Your-Customer (KYC) and Anti-Money Laundering (AML) checks. GetGround is registered with the Information Commissioner’s Office and adheres to UK General Data Protection Regulation (GDPR)."
-      },
-      "info6": {
-        "title": "Transparency",
-        "copy": "We believe transparency is key in establishing trust. All GetGround companies are UK limited companies and as such their details are recorded at Companies House in the UK. This is a public register that anyone is able to check and includes company details, owner and director information and copies of key company documents."
-      },
-      "info7": {
-        "title": "We work with industry leaders",
-        "copy": "GetGround works with the best in the industry. All legal documents for GetGround companies are produced by CMS Cameron McKenna Nabarro OlswangLLP. GetGround is proud to partner with One Global Property Service, RPI Complete, Paradigm Land and numerous others in the residential buy-to-let property sector."
+      "fourth": {
+        "heading": "Working with industry leaders",
+        "text": "<p>GetGround works with the best in the industry. All legal documents for GetGround companies are produced by CMS Cameron McKenna Nabarro Olswang LLP.</p>"
       }
     }
   },

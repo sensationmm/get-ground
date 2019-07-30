@@ -15,7 +15,7 @@ class CompanyService extends BaseService {
    */
   addCompany = (isAddServices) => {
     const config = {
-      url: `property_purchases`,
+      url: `v2/property_purchases`,
       method: 'post',
       data: {
         additional_services_required: isAddServices
@@ -27,12 +27,12 @@ class CompanyService extends BaseService {
 
   getCompanies = () => {
     const config = {
-      url: `/property_purchases?creator_id=${store.getState().user.id}`,
+      url: `v2/users/${store.getState().user.id}/property_purchases`,
       method: 'get'
     };
 
     return this.doRequest(config, (response) => {
-      store.dispatch(setCompanies(response.data));
+      store.dispatch(setCompanies(response.data.property_purchases));
     });
   }
 
@@ -43,10 +43,10 @@ class CompanyService extends BaseService {
    */
   getCompany = id => {
     const config = {
-      url: `property_purchases/${id}`,
+      url: `v2/property_purchases/${id}`,
       method: 'get'
     };
-    
+
     return this.doRequest(config, (response) => {
       const { data: { id, progress }} = response;
       store.dispatch(companyUpdate(id, 'progress', progress));
@@ -62,7 +62,7 @@ class CompanyService extends BaseService {
    */
   updateCompany = (payload, key, companyId) => {
     const config = {
-      url: `property_purchases/${companyId}`,
+      url: `v2/property_purchases/${companyId}`,
       method: 'put',
       data: {
         [key]: payload
@@ -81,7 +81,7 @@ class CompanyService extends BaseService {
    */
   confirmCompany = (companyId) => {
     const config = {
-      url: `property_purchases/${companyId}/confirm`,
+      url: `v2/property_purchases/${companyId}/confirm`,
       method: 'put',
       data: {}
     };
