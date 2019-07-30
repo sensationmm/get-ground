@@ -1,4 +1,3 @@
-// import React from 'react'
 import { setup, findByTestAttr } from 'src/test-utils/test-utils';
 import formUtils from 'src/utils/form';
 import { navigate } from 'gatsby';
