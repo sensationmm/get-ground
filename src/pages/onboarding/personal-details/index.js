@@ -191,8 +191,6 @@ class OnboardingPersonalDetailsContainer extends Component {
   submitPersonalDetails = () => {
     const { isManualAddress } = this.state;
 
-    // console.log(document.querySelector('addressArea'));
-
     if (!isManualAddress && (document.getElementById('addressArea') && document.getElementById('addressArea').value === '')) {
       this.props.setErrors({
         isAddressValid: 'Required'
