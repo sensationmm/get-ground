@@ -55,7 +55,7 @@ class ResetPassword extends Component {
     const { values: { password } } = form;
     if(formUtils.validateForm(this.config)) {
       showLoader();
-      if(state.acceptRoleToken) {
+      if(state && state.acceptRoleToken) {
         AuthService.acceptRoleSetPassword(password, state.acceptRoleToken).then((res) => {
 
           saveAuth(res.data.token)

@@ -99,6 +99,31 @@ describe('ResetPassword', () => {
     })
   })
 
+
+  test('does fire actions to saveAuth and userLogin if no state in location', async () => {
+    wrapper.setProps({
+      form: {
+        ...props.form,
+        values: {
+          password: 'test1',
+          passwordConfirm: 'test1',
+          optin: false,
+          privacy: false
+        }
+      },
+      location: {
+        search: ''
+      }
+    })
+
+    const button = wrapper.find('[data-test="reset-password-button"]')
+    await button.props().onClick()
+    expect(props.showLoader).toHaveBeenCalled();
+    expect(props.saveAuth).not.toHaveBeenCalledWith('1234');
+    expect(props.userLogin).not.toHaveBeenCalledWith({ id: 1 });
+    expect(props.hideLoader).toHaveBeenCalled();
+  })
+
   test('error state', async () => {
     wrapper.setProps({
       form: {
