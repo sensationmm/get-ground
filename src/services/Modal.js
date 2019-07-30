@@ -28,7 +28,7 @@ class ModalService extends BaseService {
 
     //TODO: change to be V2
    markdownToPDF = async (content, title) => (
-    await fetch(`https://staging-backend-236514.appspot.com/api/v1/md2pdf`, {
+    await fetch(`https://staging-backend-236514.appspot.com/api/v2/md2pdf`, {
       method: 'post',
       headers: {
         'Authorization': 'avb068cbk2os5ujhodmt'

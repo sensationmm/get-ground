@@ -15,7 +15,7 @@ class PartnersService extends BaseService {
    //TODO: this is low priority and updated last in v2
   sendEmail = (email) => {
     const config = {
-      url: 'v1/partners/know_more_email',
+      url: 'v2/partners/know_more_email',
       method: 'post',
       data: {
         'email': email
