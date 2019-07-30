@@ -6,6 +6,8 @@ import { initialState as ReduxFormMock } from 'src/state/reducers/form';
 
 import formUtils from 'src/utils/form';
 
+window.scrollTo = () => {};
+
 describe('Partnerships' ,() => {
   let wrapper;
   let props;

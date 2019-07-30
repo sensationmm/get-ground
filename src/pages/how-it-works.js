@@ -1,87 +1,62 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next';
-import Reveal from 'react-reveal/Reveal';
-import useWindowScroll from 'react-use/lib/useWindowScroll';
+import { navigate } from 'gatsby';
 
-import Layout from 'src/components/Layout/Layout'
-import MoreInformation from 'src/components/MoreInformation/MoreInformation';
+import Layout from 'src/components/Layout/Layout';
+import PageHeader from 'src/components/_layout/PageHeader/PageHeader';
+import PageIntro from 'src/components/_layout/PageIntro/PageIntro';
+import LandingContent from 'src/components/_layout/LandingContent/LandingContent';
+import Button from 'src/components/_buttons/Button/Button';
+import Links from 'src/components/_layout/Links/Links';
+import Step from 'src/components/_layout/Step/Step';
 
-import Image from 'src/assets/images/how-it-works.svg'
-import Step1 from 'src/assets/images/howItWorks-step1.svg'
-import Step2 from 'src/assets/images/howItWorks-step2.svg'
-import Step3 from 'src/assets/images/howItWorks-step3.svg'
-import Step4 from 'src/assets/images/howItWorks-step4.svg'
-import Step5 from 'src/assets/images/howItWorks-step5.svg'
-
-import 'src/styles/pages/how-it-works.scss'
+import Step1 from 'src/assets/images/for-sale.svg';
+import Step2 from 'src/assets/images/deed.svg';
+import Step3 from 'src/assets/images/documents-modal.svg';
 
 const HowItWorks = () => {
-  const [t, i18n] = useTranslation()
-
-  const { y } = useWindowScroll()
-
-  const stepContent = i18n.t('howItWorks.sections', { returnObjects: true });
-  const stepConfig = {
-    steps: [
-      {
-        'title': stepContent['step1'].title,
-        'copy': stepContent['step1'].copy,
-        'image': Step1
-      },
-      {
-        'title': stepContent['step2'].title,
-        'copy': stepContent['step2'].copy,
-        'image': Step2
-      },
-      {
-        'title': stepContent['step3'].title,
-        'copy': stepContent['step3'].copy,
-        'image': Step3
-      },
-      {
-        'title': stepContent['step4'].title,
-        'copy': stepContent['step4'].copy,
-        'image': Step4
-      },
-      {
-        'title': stepContent['step5'].title,
-        'copy': stepContent['step5'].copy,
-        'image': Step5
-      }
-    ]
-  };
-
-  let lineHeight = 79;
-
-  useEffect(() => {
-    lineHeight = Math.round((y/window.innerHeight) * 100);
-  })
-
+  const [t] = useTranslation()
 
   return (
     <Layout>
-      <div className="how-it-works" role="brochure">
-        <img className="hero-image" src={Image} alt="roof of house" data-test="how-it-works-img" />
-        <h1 className="how-it-works-title">{t('howItWorks.title')}</h1>
-          <ul>
-          {stepConfig.steps.map((step, idx) => (
-            <div key={`${idx} + ${step.title}`} className="how-it-works-steps">
-              <Reveal duration={450} effect="bounceIn">
-                <div className="how-it-works-step">
-                  <img src={step.image}/>
-                  <li className="how-it-works-step-li">
-                    <p className="how-it-works-step-title">{step.title}</p>
-                    <p className="how-it-works-step-copy">{step.copy}</p>
-                  </li>
-                </div>
-              </Reveal>
-            </div>
-          ))}
-          <div className="how-it-works-step-verticalLine" style={{height: lineHeight > 78 ? `78%` : `${lineHeight}%`}} data-test="how-it-works-vertical-line"></div>
-        </ul>
-        <MoreInformation data-test="how-it-works-more-information" />
+      <div data-test="container-how-it-works" className="how-it-works" role="landing">
+        <PageHeader title={ t('howItWorks.title') } text={ t('howItWorks.intro') } />
+
+        <LandingContent>
+          <PageIntro heading={ t('howItWorks.content.heading') } text={t('howItWorks.content.text') } />
+
+          <Step
+            image={Step1}
+            stepName={ t('howItWorks.sections.step1.stepName') }
+            heading={ t('howItWorks.sections.step1.heading') }
+            content={ t('howItWorks.sections.step1.content') }
+          />
+
+          <Step
+            image={Step2}
+            stepName={ t('howItWorks.sections.step2.stepName') }
+            heading={ t('howItWorks.sections.step2.heading') }
+            content={ t('howItWorks.sections.step2.content') }
+          />
+
+          <Step
+            image={Step3}
+            stepName={ t('howItWorks.sections.step3.stepName') }
+            heading={ t('howItWorks.sections.step3.heading') }
+            content={ t('howItWorks.sections.step3.content') }
+          />
+          
+          <PageIntro heading={ t('howItWorks.outro.heading') } text={t('howItWorks.outro.text') } />
+
+          <center><Button classes="get-started" label={ t('home.cta')} onClick={() => navigate('/onboarding/intro') } /></center>
+
+          <Links
+            next={{ label: t('menu.links.fourth.label'), link: '/pricing' }}
+            prev={{ label: t('menu.links.second.label'), link: '/advantages' }}
+          />
+        </LandingContent>
       </div>
-      </Layout>
+    </Layout>
   )
 }
 

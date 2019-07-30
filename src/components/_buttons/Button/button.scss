@@ -73,9 +73,13 @@
     padding: 8px 31px;
   }
 
-  &.chat {
+  &.chat, &.get-started {
     @include gradient-horizontal($gradient-option-1, $gradient-option-2);
     color: $text;
+  }
+
+  &.get-started {
+    padding: 15px 70px;
   }
 
   &.tertiary {
@@ -89,6 +93,12 @@
       padding: 5px 15px;
       font-size: 13px;
     }
+  }
+
+  &.header-signIn {
+    color: $white;
+    background: $background-3;
+    font-weight: 300;
   }
 
   &.white {
@@ -187,7 +197,7 @@
 }
 
 @media screen and (min-width: $breakpoint-desktop) {
-  .button {
+  .button:not(.get-started) {
     padding: 7px 50px;
     font-size: 18px;
 
@@ -196,7 +206,7 @@
     }
     
     &.full {
-      max-width: 300px;
+      max-width: 330px;
       margin-left: auto;
       margin-right: auto;
     }
@@ -221,6 +231,12 @@
     .button {
       padding: 12px 35px;
       font-size: 18px;
+    }
+  }
+
+  .header-buttons {
+    .button {
+      padding: 12px 20px;
     }
   }
 }

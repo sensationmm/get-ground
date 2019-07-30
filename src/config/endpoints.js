@@ -1,4 +1,4 @@
-const version = 'v1';
+// const version = 'v1';
 const addressNowKey = 'jy73-yx25-bu91-gk98';
 export const stripeKey = 'pk_test_IekVa77loZrt2oMKeUXuHek7';
 

@@ -150,35 +150,40 @@ export class Layout extends Component {
 
     const menuLinks = [
       {
-        text: t('menu.links.first'),
+        text: t('menu.links.first.label'),
+        summary: t('menu.links.first.summary'),
         link: '/what-we-do'
       },
       {
-        text: t('menu.links.second'),
+        text: t('menu.links.second.label'),
+        summary: t('menu.links.second.summary'),
         link: '/advantages'
       },
       {
-        text: t('menu.links.third'),
+        text: t('menu.links.third.label'),
+        summary: t('menu.links.third.summary'),
         link: '/how-it-works'
       },
       {
-        text: t('menu.links.fourth'),
+        text: t('menu.links.fourth.label'),
+        summary: t('menu.links.fourth.summary'),
         link: '/pricing'
       },
       {
-        text: t('menu.links.fifth'),
+        text: t('menu.links.tenth.label'),
+        summary: t('menu.links.tenth.summary'),
+        link: '/trust-and-privacy'
+      },
+      {
+        text: t('menu.links.fifth.label'),
+        summary: t('menu.links.fifth.summary'),
         link: '/about-us',
         hideDesktop: true
       },
       {
-        text: t('menu.links.sixth'),
-        link: '/partnerships',
-        hideDesktop: true
-      },
-      {
-        text: t('menu.links.seventh'),
-        link: '/frequently-asked-questions',
-        hideDesktop: true
+        text: t('menu.links.sixth.label'),
+        summary: t('menu.links.sixth.summary'),
+        link: '/partnerships'
       }
     ];
 
@@ -205,7 +210,7 @@ export class Layout extends Component {
             element={document}
             onIdle={this.onIdle}
             debounce={250}
-            timeout={1800000} // 30 mins
+            timeout={1500000} // 25 mins
           />
         }
 

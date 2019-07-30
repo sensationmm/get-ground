@@ -1,0 +1,28 @@
+@import '../../styles/modules/colors';
+
+.landing {
+  .about-us {
+    .sections {
+      .section {
+        h2, p {
+          margin-bottom: 15px !important;
+        }
+
+        &-image {
+          width: 30%;
+
+          img {
+            width: 100%;
+            height: auto;
+            max-height: none;
+            border: 2px solid $border-offset;
+          }
+        }
+
+        &-inner {
+          align-items: flex-start;
+        }
+      }
+    }
+  }
+}

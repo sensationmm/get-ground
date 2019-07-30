@@ -2,7 +2,7 @@
 @import '../../styles/modules/_variables';
 
 .footer {
-  max-width: $max-width;
+  max-width: 635px;
   margin-left: auto;
   margin-right: auto;
   padding: (($padding-vertical-unit * 2) + 0px) (($padding-horizontal-unit * 2) + 0px);
@@ -31,7 +31,7 @@
   }
 
   &-location, &-legal {
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 300;
     line-height: 2.15;
     margin-top: 30px;
@@ -43,7 +43,7 @@
     display: flex;
     align-content: flex-start;
     flex-direction: row;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 300;
     width: 100%;
     flex-wrap: wrap;
@@ -74,6 +74,9 @@
 
 @media screen and (min-width: $breakpoint-desktop) {
   .footer {
+    padding-left: 0;
+    padding-right: 0;
+
     &-links {
       display: flex;
       align-items: flex-start;

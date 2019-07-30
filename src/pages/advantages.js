@@ -1,271 +1,86 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { connect } from 'react-redux';
 import Layout from 'src/components/Layout/Layout'
 import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types';
+import { navigate } from 'gatsby';
 
-import Button from 'src/components/_buttons/Button/Button'
+import PageHeader from 'src/components/_layout/PageHeader/PageHeader';
+import PageIntro from 'src/components/_layout/PageIntro/PageIntro';
+import LandingContent from 'src/components/_layout/LandingContent/LandingContent';
+import Links from 'src/components/_layout/Links/Links';
+import Columns from 'src/components/_layout/Columns/Columns';
+import Cards from 'src/components/_layout/Cards/Cards';
+import Comparison from 'src/components/_layout/Comparison/Comparison';
+import CurveBox from 'src/components/_layout/CurveBox/CurveBox';
+import Button from 'src/components/_buttons/Button/Button';
+
 import TableSlider from 'src/components/TableSlider/TableSlider'
 
-import Image from 'src/assets/images/advantages.svg'
-import whiteTick from 'src/assets/images/white-tick.svg'
-import orangeCross from 'src/assets/images/orange-cross.svg'
-import orangeTick from 'src/assets/images/orange-tick.svg'
-import blueTick from 'src/assets/images/blue-tick.svg'
+import ImageOthers from 'src/assets/images/how-it-works.svg'
+import ImageMortgage from 'src/assets/images/palace.svg'
+import ImageIncome from 'src/assets/images/advantages.svg'
 
-import 'src/styles/pages/advantages.scss'
+import tick from 'src/assets/images/tick.svg'
+import cross from 'src/assets/images/cross.svg'
+
+import 'src/styles/pages/landing-pages.scss';
+
 
 const Advantages = (props) => {
   const { isMobile } = props;
   const [t, i18n] = useTranslation()
-  const [showTaxTable, toggleTaxTable] = useState(false);
-  const [showCompanyTable, toggleCompanyTable] = useState(false);
 
   const ukTaxObj = i18n.t('advantages.tax', { returnObjects: true });
-  const companyObj = i18n.t('advantages.company', { returnObjects: true });
-
-  const uKTaxAdvantages = [
-    ukTaxObj['info1'],
-    ukTaxObj['info2'],
-    ukTaxObj['info3'],
-    ukTaxObj['info4'],
-    ukTaxObj['info5']
-  ]
-
-  const companyAdvantages = [
-    companyObj['info1'],
-    companyObj['info2'],
-    companyObj['info3']
-  ]
 
   const taxSections = [
-    {
-      copy: ukTaxObj.table.left['info1'],
-      img: ''
-    },
-    {
-      copy: ukTaxObj.table.left['info2'],
-      img: ''
-    },
-    {
-      copy: ukTaxObj.table.left['info3'],
-      img: ''
-    },
-    {
-      copy: ukTaxObj.table.left['info4'],
-      img: ''
-    },
-    {
-      copy: ukTaxObj.table.left['info5'],
-      img: ''
-    }
+    { copy: ukTaxObj.table.left['info1'], img: '' },
+    { copy: ukTaxObj.table.left['info2'], img: '' },
+    { copy: ukTaxObj.table.left['info3'], img: '' },
+    { copy: ukTaxObj.table.left['info4'], img: '' },
+    { copy: ukTaxObj.table.left['info5'], img: '' }
   ]
 
   const taxSmallFeed1 = [
-    {
-      copy: '',
-      img: ''
-    },
-    {
-      copy: '',
-      img: orangeCross
-    },
-    {
-      copy: '',
-      img: orangeCross
-    },
-    {
-      copy: '',
-      img: orangeCross
-    },
-    {
-      copy: '',
-      img: orangeCross
-    }
+    { copy: '', img: cross },
+    { copy: '', img: cross },
+    { copy: '', img: cross },
+    { copy: '', img: cross },
+    { copy: '', img: cross }
   ]
 
   const taxSmallFeed2 = [
-    {
-      copy: '',
-      img: ''
-    },
-    {
-      copy: '',
-      img: whiteTick
-    },
-    {
-      copy: '',
-      img: whiteTick
-    },
-    {
-      copy: '',
-      img: whiteTick
-    },
-    {
-      copy: '',
-      img: whiteTick
-    }
+    { copy: '', img: tick },
+    { copy: '', img: tick },
+    { copy: '', img: tick },
+    { copy: '', img: tick },
+    { copy: '', img: tick }
   ]
 
   const taxLargeFeed1 = [
-    {
-      copy: ukTaxObj.table.right.large.feed1['info1'],
-      img: ''
-    },
-    {
-      copy: ukTaxObj.table.right.large.feed1['info2'],
-      img: orangeCross
-    },
-    {
-      copy: ukTaxObj.table.right.large.feed1['info3'],
-      img: orangeCross
-    },
-    {
-      copy: ukTaxObj.table.right.large.feed1['info4'],
-      img: orangeCross
-    },
-    {
-      copy: ukTaxObj.table.right.large.feed1['info5'],
-      img: orangeCross
-    }
+    { copy: ukTaxObj.table.right.large.feed1['info1'], img: tick, override: true },
+    { copy: ukTaxObj.table.right.large.feed1['info2'], img: tick },
+    { copy: ukTaxObj.table.right.large.feed1['info3'], img: tick },
+    { copy: ukTaxObj.table.right.large.feed1['info4'], img: tick },
+    { copy: ukTaxObj.table.right.large.feed1['info5'], img: tick }
   ]
 
   const taxLargeFeed2 = [
-    {
-      copy: ukTaxObj.table.right.large.feed2['info1'],
-      img: ''
-    },
-    {
-      copy: ukTaxObj.table.right.large.feed2['info2'],
-      img: whiteTick
-    },
-    {
-      copy: ukTaxObj.table.right.large.feed2['info3'],
-      img: whiteTick
-    },
-    {
-      copy: ukTaxObj.table.right.large.feed2['info4'],
-      img: whiteTick
-    },
-    {
-      copy: ukTaxObj.table.right.large.feed2['info5'],
-      img: whiteTick
-    }
+    { copy: '', img: '' },
+    { copy: ukTaxObj.table.right.large.feed2['info2'], img: cross },
+    { copy: ukTaxObj.table.right.large.feed2['info3'], img: cross },
+    { copy: ukTaxObj.table.right.large.feed2['info4'], img: cross },
+    { copy: ukTaxObj.table.right.large.feed2['info5'], img: cross }
   ]
-
-
-  const companySections = [
-    {
-      copy: companyObj.table.left['info1'],
-      img: ''
-    },
-    {
-      copy: companyObj.table.left['info2'],
-      img: ''
-    },
-    {
-      copy: companyObj.table.left['info3'],
-      img: ''
-    },
-    {
-      copy: companyObj.table.left['info4'],
-      img: ''
-    },
-  ]
-
-  const companySmallFeed1 = [
-    {
-      copy: '',
-      img: blueTick
-    },
-    {
-      copy: '',
-      img: orangeCross
-    },
-    {
-      copy: '',
-      img: orangeCross
-    },
-    {
-      copy: '',
-      img: orangeCross
-    }
-  ]
-
-  const companySmallFeed2 = [
-    {
-      copy: '',
-      img: whiteTick
-    },
-    {
-      copy: '',
-      img: whiteTick
-    },
-    {
-      copy: '',
-      img: whiteTick
-    },
-    {
-      copy: '',
-      img: whiteTick
-    }
-  ]
-
-  const companyLargeFeed1 = [
-    {
-      copy: companyObj.table.right.large.feed1['info1'],
-      img: orangeTick
-    },
-    {
-      copy: companyObj.table.right.large.feed1['info2'],
-      img: orangeCross
-    },
-    {
-      copy: companyObj.table.right.large.feed1['info3'],
-      img: orangeCross
-    },
-    {
-      copy: companyObj.table.right.large.feed1['info4'],
-      img: orangeCross
-    },
-  ]
-
-  const companyLargeFeed2 = [
-    {
-      copy: companyObj.table.right.large.feed2['info1'],
-      img: whiteTick
-    },
-    {
-      copy: companyObj.table.right.large.feed2['info2'],
-      img: whiteTick
-    },
-    {
-      copy: companyObj.table.right.large.feed2['info3'],
-      img: whiteTick
-    },
-    {
-      copy: companyObj.table.right.large.feed2['info4'],
-      img: whiteTick
-    },
-  ]
-
 
   return (
     <Layout>
-      <div className="advantages" role="brochure">
-        <img className="hero-image" src={Image} alt="Piggy bank"/>
-        <h1>{t('advantages.title')}</h1>
-        <div className="advantages-uk-tax">
-        <h3 className="advantages-uk-tax-title">{t('advantages.tax.title')}</h3>
-        <ul>
-          {uKTaxAdvantages.map((info, idx) => (
-            <li key={`${info} + ${idx}`}>
-              <p className="advantages-uk-tax-info" >{info}</p>
-            </li>
-          ))}
-        </ul>
-        {showTaxTable ?
-          <div className="advantages-uk-tax-more-expanded">
+      <div data-test="container-advantages" className="advantages" role="landing">
+        <PageHeader title={ t('advantages.title') } text={ t('advantages.intro') } />
+
+        <LandingContent>
+          <PageIntro heading={ t('advantages.content.heading') } text={t('advantages.content.text') } />
+
           <TableSlider
             leftHandFeed={taxSections}
             smallFeed1={taxSmallFeed1}
@@ -276,39 +91,113 @@ const Advantages = (props) => {
             data-test="tax-table-slider"
             isMobile={isMobile}
           />
-          <p className="advantages-uk-tax-more-expanded-info">{t('advantages.warning')}</p>
-          </div>
-          :
-          <Button data-test="tax-more-button" classes="advantages-btn primary" fullWidth label={t('advantages.cta')} onClick={() => toggleTaxTable(!showTaxTable)}/>
-        }
-        </div>
-        <div className="advantages-company">
-        <h3 className="advantages-company-title">{t('advantages.company.title')}</h3>
-        <ul>
-          {companyAdvantages.map((info, idx) => (
-            <li key={`${info} + ${idx}`}>
-              <p className="advantages-company-info" >{info}</p>
-            </li>
-          ))}
-        </ul>
-        {showCompanyTable ?
-          <div className="advantages-company-more-expanded">
-            <TableSlider
-              leftHandFeed={companySections}
-              smallFeed1={companySmallFeed1}
-              smallFeed2={companySmallFeed2}
-              feed1={companyLargeFeed1}
-              feed2={companyLargeFeed2}
-              tableName="company"
-              data-test="company-table-slider"
-              isMobile={isMobile}
-            />
-            <p className="advantages-company-more-expanded-info">{t('advantages.warning')}</p>
-          </div>
-          :
-          <Button data-test="company-more-button" classes="advantages-btn primary" fullWidth label={t('advantages.cta')} onClick={() => toggleCompanyTable(!showCompanyTable)}/>
-        }
-        </div>
+
+          <div className="table-footnote">{ t('advantages.tax.footnote') }</div>
+        </LandingContent>
+
+        <CurveBox>
+          <PageIntro heading={ t('advantages.columns.heading') } text={t('advantages.columns.text') } />
+
+          <Columns
+            sections={[
+              {
+                heading: t('advantages.columns.content.others.heading'),
+                text: t('advantages.columns.content.others.text'),
+                image: ImageOthers
+              }, 
+              {
+                heading: t('advantages.columns.content.mortgage.heading'),
+                text: t('advantages.columns.content.mortgage.text'),
+                image: ImageMortgage
+              }, 
+              {
+                heading: t('advantages.columns.content.income.heading'),
+                text: t('advantages.columns.content.income.text'),
+                image: ImageIncome
+              }
+            ]}
+          />
+
+          <PageIntro heading={ t('advantages.comparison.heading') } />
+
+          <Comparison
+            heading={ t('advantages.comparison.tables.2year.heading') }
+            compareA={{
+              heading: t('advantages.comparison.tables.labels.uk') ,
+              labels: [
+                t('advantages.comparison.tables.labels.60percent'),
+                t('advantages.comparison.tables.labels.75percent')
+              ],
+              values: [
+                t('advantages.comparison.tables.2year.uk.60percent'),
+                t('advantages.comparison.tables.2year.uk.75percent')
+              ]
+            }}
+            compareB={{
+              heading: t('advantages.comparison.tables.labels.nonUk') ,
+              labels: [
+                t('advantages.comparison.tables.labels.60percent'),
+                t('advantages.comparison.tables.labels.75percent')
+              ],
+              values: [
+                t('advantages.comparison.tables.2year.nonUk.60percent'),
+                t('advantages.comparison.tables.2year.nonUk.75percent')
+              ]
+            }}
+          />
+
+          <Comparison
+            heading={ t('advantages.comparison.tables.5year.heading') }
+            compareA={{
+              heading: t('advantages.comparison.tables.labels.uk'),
+              labels: [
+                t('advantages.comparison.tables.labels.60percent'),
+                t('advantages.comparison.tables.labels.75percent')
+              ],
+              values: [
+                t('advantages.comparison.tables.5year.uk.60percent'),
+                t('advantages.comparison.tables.5year.uk.75percent')
+              ]
+            }}
+            compareB={{
+              heading: t('advantages.comparison.tables.labels.nonUk'),
+              labels: [
+                t('advantages.comparison.tables.labels.60percent'),
+                t('advantages.comparison.tables.labels.75percent')
+              ],
+              values: [
+                t('advantages.comparison.tables.5year.nonUk.60percent'),
+                t('advantages.comparison.tables.5year.nonUk.75percent')
+              ]
+            }}
+            footnote={t('advantages.comparison.tables.labels.updated')}
+          />
+        </CurveBox>
+
+        <LandingContent>
+          <Cards
+            heading={ t('advantages.fees.heading') }
+            cardA={{
+              name: t('advantages.fees.getground.name'),
+              price: t('advantages.fees.getground.price'),
+              explanation: t('advantages.fees.getground.explanation'),
+              content: t('advantages.fees.getground.content')
+            }}
+            cardB={{
+              name: t('advantages.fees.others.name'),
+              price: t('advantages.fees.others.price'),
+              explanation: t('advantages.fees.others.explanation')
+            }}
+          />
+
+
+          <center><Button classes="get-started" label={ t('home.cta')} onClick={() => navigate('/onboarding/intro') } /></center>
+
+          <Links
+            next={{ label: t('menu.links.third.label'), link: '/how-it-works' }}
+            prev={{ label: t('menu.links.first.label'), link: '/what-we-do' }}
+          />
+        </LandingContent>
       </div>
     </Layout>
   )

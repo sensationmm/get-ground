@@ -1,0 +1,54 @@
+@import '../../../styles/modules/colors';
+@import '../../../styles/modules/variables';
+
+.columns {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 50px 0;
+
+  .column {
+    width: 0;
+    flex-grow: 1;
+    text-align: center;
+    margin-right: 12%;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 30px;
+    }
+
+    p {
+      font-size: 17px !important;
+    }
+
+    ul {
+      width: 100%;
+    }
+
+    &-image {
+      display: flex;
+      margin-bottom: 20px;
+
+      img {
+        width: 100%;
+        max-height: 120px;
+      }
+    }
+  }
+
+  &.bordered {
+    .column {
+      border: 1px solid $border-offset;
+      border-radius: 10px;
+      padding: ($padding-horizontal-unit * 2 + 0px);
+      margin-right: 3%;
+    }
+  }
+}

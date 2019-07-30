@@ -25,9 +25,9 @@ const ContactUs = () => {
 
   return (
     <div className="contact-us" data-test="component-contact-us">
-      <p className="contact-us-title" data-test="contact-title">
+      <div className="contact-us-title" data-test="contact-title">
         {t('contactUs.title')}
-      </p>
+      </div>
       <div className="contact-us-details">
         <div className="contact-us-email">
           <img src={Email} data-test="email-img"/>

@@ -42,13 +42,13 @@ const TableSlider = ({ leftHandFeed, smallFeed1, smallFeed2, feed1, feed2, table
 
     if (index === 1) {
       return (
-          <Table data-test="personal-table" header={t('advantages.personalHeader')} classes={classNames('right', tableName)} sections={feed1} />
+        <Table data-test="personal-table" header={t('advantages.personalHeader')} classes={classNames('right', tableName)} sections={feed1} />
       )
     }
 
     if (index === 2) {
       return (
-          <Table data-test="company-table" header={t('advantages.companyHeader')} classes={classNames('right', 'blue', tableName)} sections={feed2} />
+        <Table data-test="company-table" header={t('advantages.companyHeader')} classes={classNames('right', 'blue', tableName)} sections={feed2} />
       )
     }
   }
@@ -56,12 +56,12 @@ const TableSlider = ({ leftHandFeed, smallFeed1, smallFeed2, feed1, feed2, table
   return (
     <div className="table-slider">
       <div className="table-slider-content">
-        <Table data-test="left-table" sections={leftHandFeed} classes={classNames(tableName)}/>
+        <Table data-test="left-table" sections={leftHandFeed} classes={classNames(tableName, 'labels')}/>
         {isMobile
           ? answersTable(TableIndex)
           : <div className="table-responses">
-            <div><Table data-test="personal-table" header={t('advantages.personalHeader')} classes={classNames('right', tableName)} sections={feed1} /></div>
-            <div><Table data-test="company-table" header={t('advantages.companyHeader')} classes={classNames('right', 'blue', tableName)} sections={feed2} /></div>
+            <div><Table data-test="personal-table" header={t('advantages.tax.companyHeader')} classes={classNames('right', 'green', tableName)} sections={feed1} /></div>
+            <div><Table data-test="company-table" header={t('advantages.tax.personalHeader')} classes={classNames('right', 'grey', tableName)} sections={feed2} /></div>
           </div>
         }
       </div>

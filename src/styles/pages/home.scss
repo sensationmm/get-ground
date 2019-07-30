@@ -1,0 +1,145 @@
+@import 'src/styles/modules/_variables.scss';
+@import 'src/styles/modules/_colors.scss';
+
+.landing {
+  .home {
+    h2 {
+      font-size: 42px !important;
+      color: $heading2 !important;
+    }
+
+    h3 {
+      text-align: center;
+      font-size: 28px !important;
+      font-weight: 600;
+    }
+
+    p {
+      font-size: 19px !important;
+
+      &.intro {
+        text-align: center;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    .landing-content {
+      padding: 60px 20px;
+
+      &:first-child {
+        padding-top: 0;
+      }
+
+      .button.get-started {
+        margin-top: 60px;
+      }
+    }
+
+    .cols {
+      display: flex;
+      justify-content: space-between;
+
+      > * {
+        width: 0;
+        flex-grow: 1;
+        padding-left: 50px;
+        margin-right: 80px;
+
+        background: top left no-repeat;
+        background-size: 35px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+      h3 {
+        font-size: 18px !important;
+        text-align: left !important;
+      }
+
+      ul {
+        width: 100%;
+        margin-bottom: 0;
+
+        li {
+          font-size: 17px !important;
+          line-height: 22px !important;
+        }
+      }
+    }
+
+    .boxes {
+      &-content {
+        align-items: flex-start;
+        align-content: flex-start;
+
+        p, li {
+          font-size: 16px !important;
+        }
+        
+        li {
+          margin-bottom: 15px !important;
+        }
+      }
+    }
+
+    .columns {
+      margin-bottom: 50px;
+
+      .column:nth-child(2n-1) {
+        top: -40px;
+      }
+
+      .column:nth-child(2n) {
+        top: 40px;
+      }
+    }
+
+    .sections {
+      padding: 0;
+    }
+
+    .section {
+      &-inner {
+        padding: 0;
+      }
+
+      &-text {
+        width: 50%;
+      }
+
+      &-image {
+        width: 35%;
+        
+        .boxes {
+          padding: 0;
+        
+          .box {
+            padding: ($padding-horizontal-unit * 2 + 0px) ($padding-horizontal-unit * 4 + 0px);
+
+            p {
+              font-size: 17px !important;
+              line-height: 20px !important;
+              text-align: center;
+            }
+          }
+        }
+
+        ul {
+          li {
+            margin-bottom: 0px !important;
+            padding-left: 10px;
+            list-style-image: url(../../assets/images/tick-bubble.svg);
+
+            &:before {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

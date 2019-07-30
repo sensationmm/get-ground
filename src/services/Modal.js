@@ -1,5 +1,5 @@
 import BaseService from './BaseService';
-import { API } from 'src/config/endpoints';
+// import { API } from 'src/config/endpoints';
 
 /**
  * ModalService

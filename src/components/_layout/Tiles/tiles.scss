@@ -1,0 +1,42 @@
+@import '../../../styles/modules/_colors';
+
+.tiles {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 50px;
+  
+  .tile {
+    width: calc(33% - 33px);
+    margin: 0 50px 20px 0;
+
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+
+    &-header {
+      position: relative;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+
+      &:before {
+        content: '';
+        width: calc(100% - 100px);
+        height: 4px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: $primary;
+      }
+    }
+
+    &-icon {
+      width: 80px;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

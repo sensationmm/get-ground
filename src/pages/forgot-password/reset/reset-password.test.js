@@ -10,6 +10,8 @@ jest.mock('gatsby', () => ({
   navigate: jest.fn()
 }));
 
+window.scrollTo = () => {};
+
 describe('ResetPassword', () => {
   let wrapper;
   let props;

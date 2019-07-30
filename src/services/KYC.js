@@ -27,35 +27,35 @@ class KYCService extends BaseService {
     // const encodedSelfie = btoa(selfie)
     // const encodedPassport = btoa(passport)
     // const encodedAddress = btoa(address)
-    console.log('selfie url', selfie);
+    // console.log('selfie url', selfie);
     const encodedSelfie = selfie.split(',')[1]
     const encodedPassport = passport.split(',')[1]
     const encodedAddress = address.split(',')[1]
 
-   const base64ToByteArray = (base64String)  => {
-      try {
-          const sliceSize = 1024;
-          const byteCharacters = atob(base64String);
-          const bytesLength = byteCharacters.length;
-          const slicesCount = Math.ceil(bytesLength / sliceSize);
-          const byteArrays = new Array(slicesCount);
+  //  const base64ToByteArray = (base64String)  => {
+  //     try {
+  //         const sliceSize = 1024;
+  //         const byteCharacters = atob(base64String);
+  //         const bytesLength = byteCharacters.length;
+  //         const slicesCount = Math.ceil(bytesLength / sliceSize);
+  //         const byteArrays = new Array(slicesCount);
 
-          for (let sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
-              const begin = sliceIndex * sliceSize;
-              const end = Math.min(begin + sliceSize, bytesLength);
+  //         for (let sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+  //             const begin = sliceIndex * sliceSize;
+  //             const end = Math.min(begin + sliceSize, bytesLength);
 
-              const bytes = new Array(end - begin);
-              for (let offset = begin, i = 0; offset < end; ++i, ++offset) {
-                  bytes[i] = byteCharacters[offset].charCodeAt(0);
-              }
-              byteArrays[sliceIndex] = new Uint8Array(bytes);
-          }
-          return byteArrays;
-      } catch (e) {
-          console.log("Couldn't convert to byte array: " + e);
-          return undefined;
-      }
-  }
+  //             const bytes = new Array(end - begin);
+  //             for (let offset = begin, i = 0; offset < end; ++i, ++offset) {
+  //                 bytes[i] = byteCharacters[offset].charCodeAt(0);
+  //             }
+  //             byteArrays[sliceIndex] = new Uint8Array(bytes);
+  //         }
+  //         return byteArrays;
+  //     } catch (e) {
+  //         console.log("Couldn't convert to byte array: " + e);
+  //         return undefined;
+  //     }
+  // }
   // let bits = Buffer.from(b64Encoded, 'base64').toString();
 
     const newID = JSON.stringify({

@@ -2,14 +2,18 @@
 @import '../../styles/modules/_variables';
 
 .table {
-  width: calc(100% - #{($padding-horizontal-unit * 4 + 0px)});
-  border-radius: 8px;
-  box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.15);
-  padding: $padding-vertical ($padding-horizontal-unit * 2 + 0px);
+  width: 100%;
 
+  &-footnote {
+    padding-left: 20%;
+    font-size: 14px;
+    font-style: italic;
+    top: -50px;
+    text-align: center;
+  }
 
   &-header {
-    font-size: 16px;
+    font-size: 18px;
     text-align: center;
     width: 100%;
     height: 50px;
@@ -24,13 +28,24 @@
     }
   }
 
-  &.blue {
-    background-image: linear-gradient(to bottom, #559bab, #8ad9d0);
-    color: $white;
-    .table-section-line {
-      border-color: $white;
+  &.labels .table-section {
+    padding: $padding-horizontal ($padding-horizontal-unit * 2 + 0px) $padding-horizontal 0;
+
+    p {
+      font-weight: 600 !important;
     }
   }
+
+  &.green .table-section {
+    background: $primary-offset;
+    color: $text;
+  }
+
+  &.grey .table-section {
+    background: $grey;
+    color: $text;
+  }
+
   .table-section:last-child {
     .table-section-line {
       display: none;
@@ -41,8 +56,10 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 110px;
-    border-bottom: 2px solid $border-offset;
+    height: 60px;
+    margin-bottom: 50px;
+    font-size: 14px;
+    padding: $padding-horizontal ($padding-horizontal-unit * 2 + 0px);
 
     > * {
       margin: 10px 0;
@@ -52,8 +69,9 @@
       width: 10%;
     }
 
-    &:last-child {
-      border: 0;
+    &-img {
+      width: 16px;
+      margin-right: 20px;
     }
   }
 
@@ -76,33 +94,48 @@
     .table-section-copy {
       font-size: 11px;
       margin: 0;
-      margin-left: 10px;
     }
   }
 }
 
 @media screen and (min-width: $breakpoint-desktop) {
-  .table {
-    &-outer {
-      flex-grow: 0.33 !important;
-    }
-
-    &-responses {
-      flex-grow: 0.66 !important;
-    }
-
-    &-section {
-      flex-direction: row;
-      justify-content: flex-start;
-
-      > * {
-        margin-right: 10px;
+  .landing {
+    .table {
+      &-outer {
+        flex-grow: 0.2 !important;
       }
-    }
 
-    &.right {
-      .table-section-copy {
-        font-size: 13px;
+      &-responses {
+        flex-grow: 0.8 !important;
+
+        > div:first-child {
+          z-index: 2;
+        }
+      }
+
+      &-section {
+        flex-direction: row;
+        justify-content: flex-start;
+
+        &-copy {
+          margin: 0 !important;
+          line-height: 22px !important;
+        }
+
+        &.full {
+          width: calc(200% - 40px);
+        }
+
+        &.empty {
+          background: none;
+        }
+      }
+
+      &.right {
+        .table-section-copy {
+          font-size: 13px;
+          margin: 0;
+        }
       }
     }
   }

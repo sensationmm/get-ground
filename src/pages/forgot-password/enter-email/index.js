@@ -96,14 +96,13 @@ class EnterEmail extends Component {
               
               <Button
                 data-test="enter-email-button"
-                classes="secondary"
                 label={ t('forgotPassword.cta') }
                 fullWidth
                 onClick={this.onSendEmailForReset}
               />
 
               <center>
-                <Button classes="secondary faded" label={ t('forgotPassword.goBack') } small onClick={() => navigate('/login')} />
+                <Button classes="faded" label={ t('forgotPassword.goBack') } small onClick={() => navigate('/login')} />
               </center>
             </Form>
         </div>
