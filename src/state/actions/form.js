@@ -3,7 +3,8 @@ import {
   CLEAR_FORM,
   UPDATE_FORM,
   SET_ERRORS,
-  SET_FORM_ERRORS
+  SET_FORM_ERRORS,
+  CLEAR_FORM_ERRORS
 } from '../../config/constants';
 
 export const initForm = (payload) => {
@@ -13,7 +14,7 @@ export const initForm = (payload) => {
   };
 };
 
-export const clearForm = (payload) => {
+export const clearForm = () => {
   return {
     type: CLEAR_FORM
   };
@@ -40,5 +41,11 @@ export const setFormErrors = (error) => {
   return {
     type: SET_FORM_ERRORS,
     error
+  }
+};
+
+export const clearFormErrors = () => {
+  return {
+    type: CLEAR_FORM_ERRORS
   }
 };

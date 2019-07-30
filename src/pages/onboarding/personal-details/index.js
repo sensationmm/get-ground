@@ -19,6 +19,7 @@ import Button from 'src/components/_buttons/Button/Button';
 import ButtonHeader from 'src/components/_buttons/ButtonHeader/ButtonHeader';
 
 import { showLoader, hideLoader } from 'src/state/actions/loader';
+import { setErrors, clearFormErrors } from 'src/state/actions/form';
 
 import accountService from 'src/services/Account';
 export const AccountService = new accountService();
@@ -120,7 +121,7 @@ class OnboardingPersonalDetailsContainer extends Component {
     formUtils.clearFormState();
   }
 
-  toggleManualAddress = () => this.setState({ isManualAddress: !this.state.isManualAddress });
+  toggleManualAddress = () => {this.setState({ isManualAddress: !this.state.isManualAddress });}
 
   initFormValidation = () => {
     const { showLoader, hideLoader, t, userID, form } = this.props;
@@ -187,12 +188,18 @@ class OnboardingPersonalDetailsContainer extends Component {
     });
   }
 
-  submitPersonalDetails =   /* istanbul ignore next */ () => {
+  submitPersonalDetails = () => {
     const { isManualAddress } = this.state;
 
+    // console.log(document.querySelector('addressArea'));
+
     if (!isManualAddress && (document.getElementById('addressArea') && document.getElementById('addressArea').value === '')) {
+      this.props.setErrors({
+        isAddressValid: 'Required'
+      })
       this.setState({ isAddressValid: false }, this.initFormValidation());
     } else {
+      this.props.clearFormErrors();
       this.setState({ isAddressValid: true }, this.initFormValidation());
     }
   }
@@ -329,7 +336,7 @@ class OnboardingPersonalDetailsContainer extends Component {
         addressFinderLabel: t('onBoarding.personalDetails.form.addressFinderLabel'),
         isHidden: isTextAreaHidden,
         editIconAltText: t('onBoarding.personalDetails.form.editIconAltText'),
-        fieldErrorText: t('onBoarding.personalDetails.form.fieldErrorText'),
+        fieldErrorText: t('onBoarding.personalDetails.form.fieldErrorText')
       },
       {
         stateKey: 'premise',
@@ -420,7 +427,9 @@ OnboardingPersonalDetailsContainer.propTypes = {
   hideLoader: PropTypes.func,
   userID: PropTypes.number,
   user: PropTypes.object,
-  form: PropTypes.object
+  form: PropTypes.object,
+  setErrors: PropTypes.func.isRequired,
+  clearFormErrors: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -429,7 +438,7 @@ const mapStateToProps = (state) => ({
   form: state.form
 });
 
-const actions = { showLoader, hideLoader };
+const actions = { showLoader, hideLoader, setErrors, clearFormErrors };
 
 export const RawComponent = OnboardingPersonalDetailsContainer;
 export default connect(mapStateToProps, actions)(withTranslation()(OnboardingPersonalDetailsContainer));

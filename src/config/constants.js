@@ -35,6 +35,7 @@ export const CLEAR_FORM = 'CLEAR_FORM';
 export const UPDATE_FORM = 'UPDATE_FORM';
 export const SET_ERRORS = 'SET_ERRORS';
 export const SET_FORM_ERRORS = 'SET_FORM_ERRORS';
+export const CLEAR_FORM_ERRORS = 'CLEAR_FORM_ERRORS';
 
 export const SET_ACTIVE_COMPANY = 'SET_ACTIVE_COMPANY';
 export const COMPANY_UPDATE = 'COMPANY_UPDATE';

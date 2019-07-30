@@ -25,7 +25,9 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
     t: tMock,
     showLoader: showLoaderMock,
     hideLoader: hideLoaderMock,
-    form: ReduxFormMock
+    form: ReduxFormMock,
+    setErrors: jest.fn(),
+    clearFormErrors: jest.fn()
   };
   jest.spyOn(formUtils, 'initFormState');
   jest.spyOn(formUtils, 'clearFormState');
@@ -73,6 +75,30 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
       expect(wrapper.find(ErrorBox).dive().text()).toEqual('custom error');
     })
   });
+
+
+  describe('submitPersonalDetails', () => {
+    test('isManualAddress, isValid', () => {
+      wrapper.instance().submitPersonalDetails()
+      expect(defaultProps.clearFormErrors).toHaveBeenCalled()
+      expect(wrapper.state().isAddressValid).toEqual(true)
+    })
+
+    test('!isManualAddress', () => {
+      const div = document.createElement('div');
+      div.id = 'addressArea'
+      div.value = ''
+      window.domNode = div;
+      document.body.appendChild(div);
+
+      wrapper.setState({isManualAddress: false})
+      wrapper.instance().submitPersonalDetails()
+      expect(defaultProps.setErrors).toHaveBeenCalledWith({
+        isAddressValid: 'Required'
+      })
+      expect(wrapper.state().isAddressValid).toEqual(false)
+    })
+  })
 
   test('form cleared on unmount', () => {
     wrapper.unmount();
@@ -236,7 +262,7 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
     test('success', async () => {
       AccountService.savePersonalDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
       await wrapperPartial.instance().saveAndExit();
-      
+
       expect(formUtils.updateValue).toHaveBeenCalledTimes(1);
       expect(formUtils.updateValue).toHaveBeenCalledWith('middle_name', '');
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
@@ -248,7 +274,7 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
     test('failure', async () => {
       AccountService.savePersonalDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 404 }));
       await wrapperPartial.instance().saveAndExit();
-      
+
       expect(formUtils.updateValue).toHaveBeenCalledTimes(1);
       expect(formUtils.updateValue).toHaveBeenCalledWith('middle_name', '');
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
@@ -278,7 +304,7 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
       expect(navigate).toHaveBeenCalledWith('/onboarding');
     });
   });
-  
+
   afterEach(() => {
     jest.clearAllMocks();
   });
