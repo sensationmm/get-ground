@@ -22,16 +22,16 @@ import './to-do.scss';
 const ToDo = props => {
   const { action, company: { id, property_address }, setActiveCompany } = props;
   const [t] = useTranslation();
-  
+
   return (
-    <div 
-      data-test="component-todo" 
+    <div
+      data-test="component-todo"
       className="to-do"
       onClick={() => setActiveCompany(id)}
     >
       {property_address.address.premise
         ? <div>
-          <div className="to-do-address">{property_address.address.premise}</div>
+          <div className="to-do-address">{`${property_address.address.premise} ${property_address.address.street}`}</div>
           <div className="to-do-postcode">{ property_address.address.postcode }</div>
         </div>
         : <div className="to-do-address">{ t('actionBox.actions.complete_company.label')}</div>

@@ -17,7 +17,7 @@ class ComplianceService extends BaseService {
    */
   saveComplianceQuiz = (quizResult) => {
     const config = {
-      url: `users/${store.getState().user.id}`,
+      url: `v2/users/${store.getState().user.id}`,
       method: 'put',
       data: JSON.stringify({ self_certification: quizResult })
     };

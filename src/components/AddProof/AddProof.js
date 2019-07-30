@@ -92,17 +92,17 @@ export class AddProof extends Component {
         <img className="confirm-image" data-test="confirm-img" src={imagesrc}/>
         <p className="happy-text">{ t(`onBoarding.idCheck.${section}.retakeImageContent`) }</p>
         <div className="confirm-buttons">
-          <Button 
-            data-test="happy-button" 
-            classes="primary confirm-happy" 
-            fullWidth 
-            label={t('onBoarding.idCheck.image.happy')} 
+          <Button
+            data-test="happy-button"
+            classes="primary confirm-happy"
+            fullWidth
+            label={t('onBoarding.idCheck.image.happy')}
             onClick={() => this.handleHappy()}
           />
-          <Button 
-            data-test="retake-button" 
-            fullWidth 
-            label={t('onBoarding.idCheck.image.retake')} 
+          <Button
+            data-test="retake-button"
+            fullWidth
+            label={t('onBoarding.idCheck.image.retake')}
             onClick={() => this.retakePicture()}
           />
         </div>
@@ -217,7 +217,7 @@ export class AddProof extends Component {
 
         {section !== 'selfie'
           ? <div>
-              <div 
+              <div
                 className="add-proof-upload-file"
                 onClick={() => this.handleActiveSection({takePicture: true})}
               >
@@ -226,7 +226,7 @@ export class AddProof extends Component {
 
               <div className="add-proof-upload-file">{this.uploadImg(t)}</div>
             </div>
-          : <div 
+          : <div
               className="add-proof-upload-file"
               onClick={() => this.handleActiveSection({takePicture: true})}
             >

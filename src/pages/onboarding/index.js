@@ -106,7 +106,7 @@ export class ProcessTracker extends Component {
             <div className="process-tracker-sections">
               {sectionsConfig.sections.map((section, idx) => {
                 return (
-                  <ProcessSection 
+                  <ProcessSection
                     key={`${idx} + ${section.title}`}
                     {...section}
                   />

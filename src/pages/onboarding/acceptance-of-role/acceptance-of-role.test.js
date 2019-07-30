@@ -131,24 +131,60 @@ describe('acceptance-of-role', () => {
     })
   })
 
-  test('call submitAnswers should call login if user exists and answers yes then redirect to dashboard', async () => {
-    const customProps = {
-      ...props,
-      form: {
-        ...ReduxFormMock,
-        values: {
-          shareholder: 'yes',
-          director: 'yes'
+  describe('existing user', () => {
+    beforeEach(() => {
+      AccountService.retrieveInvestedUser = jest.fn().mockReturnValue(Promise.resolve({ status: 200,
+        data: {
+          property_purchase: {
+            property_address: {
+              address: {
+                premise: '666',
+                street: 'test road',
+                posttown: 'test town',
+                city: 'test city',
+                postcode: 'TW8 8NJ'
+              }
+            },
+            purchase_details: {
+              price: {
+                amount_in_cents: 10000
+              }
+            },
+            shareholder_details: {
+              collection: [
+                {
+                  first_name: 'lead',
+                  last_name: 'shareholder'
+                }
+              ],
+            },
+          },
+          shareholder_detail: {
+            is_director: true,
+            is_existing_user: true,
+            allocated_shares: 11
+          },
         }
-      }
-    }
-    wrapper = shallow(<AcceptanceOfRole {...customProps}/>)
-    wrapper.setState({
-      isExistingUser: true
+      }));
+
+      test('call submitAnswers should call login if user exists and answers yes then redirect to dashboard', async () => {
+        const customProps = {
+          ...props,
+          form: {
+            ...ReduxFormMock,
+            values: {
+              shareholder: 'yes',
+              director: 'yes'
+            }
+          }
+        }
+
+        wrapper = shallow(<AcceptanceOfRole {...customProps}/>)
+        await wrapper.instance().submitAnswers()
+        expect(props.showLoader).toHaveBeenCalled()
+        expect(props.hideLoader).toHaveBeenCalled()
+        expect(navigate).toHaveBeenCalledWith('/dashboard')
+      })
     })
-    await wrapper.instance().submitAnswers()
-    expect(props.showLoader).toHaveBeenCalled()
-    expect(props.hideLoader).toHaveBeenCalled()
-    expect(navigate).toHaveBeenCalledWith('/dashboard')
   })
 })

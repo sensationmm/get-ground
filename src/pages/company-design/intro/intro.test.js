@@ -61,7 +61,7 @@ describe('<CompanyDesignIntroContainer />', () => {
   });
 
   test('handleCreateCompanyResponse calls navigate and addCompany', () => {
-    wrapper.instance().handleCreateCompanyResponse('someUrl', { status: 201, data: { id: 1 } });
+    wrapper.instance().handleCreateCompanyResponse('someUrl', { status: 200, data: { id: 1 } });
 
     expect(hideLoaderMock).toHaveBeenCalled();
     expect(addCompanyMock).toHaveBeenCalledWith({ id: 1 });

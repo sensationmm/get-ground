@@ -11,9 +11,11 @@ class PartnersService extends BaseService {
    * @param {string} email - email address for login
    * @return {Object} Add Email
    */
+
+   //TODO: this is low priority and updated last in v2
   sendEmail = (email) => {
     const config = {
-      url: '/partners/know_more_email',
+      url: 'v2/partners/know_more_email',
       method: 'post',
       data: {
         'email': email
