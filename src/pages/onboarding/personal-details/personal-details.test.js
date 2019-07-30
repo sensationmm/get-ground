@@ -85,17 +85,20 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
       expect(wrapper.state().isAddressValid).toEqual(true)
     })
 
-    // test.only('isManualAddress, isValid', () => {
-    //   const address = document.createElement('div')
-    //   address.setAttribute('id', 'addressArea')
-    //   address.setAttribute('value', 'something')
-    //   document.querySelector('body').appendChild(address);
+    test('!isManualAddress', () => {
+      const div = document.createElement('div');
+      div.id = 'addressArea'
+      div.value = ''
+      window.domNode = div;
+      document.body.appendChild(div);
 
-    //   wrapper.setState({isManualAddress: false})
-    //   wrapper.instance().submitPersonalDetails()
-    //   expect(defaultProps.setErrors).toHaveBeenCalled()
-    //   expect(wrapper.state().isAddressValid).toEqual(false)
-    // })
+      wrapper.setState({isManualAddress: false})
+      wrapper.instance().submitPersonalDetails()
+      expect(defaultProps.setErrors).toHaveBeenCalledWith({
+        isAddressValid: 'Required'
+      })
+      expect(wrapper.state().isAddressValid).toEqual(false)
+    })
   })
 
   test('form cleared on unmount', () => {
