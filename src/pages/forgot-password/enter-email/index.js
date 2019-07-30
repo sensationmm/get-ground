@@ -56,6 +56,8 @@ class EnterEmail extends Component {
               passwordReset: true,
             }
           });
+        } else if (res.status === 404) {
+          formUtils.setFormError(t('login.form.errorUser'));
         } else {
           formUtils.setFormError(t('forgotPassword.reset.form.errors.formFail'));
         }
@@ -93,7 +95,7 @@ class EnterEmail extends Component {
 
             <Form className="enter-email-actions" data-test="reset-password-form">
               { formUtils.renderForm(this.config) }
-              
+
               <Button
                 data-test="enter-email-button"
                 label={ t('forgotPassword.cta') }
