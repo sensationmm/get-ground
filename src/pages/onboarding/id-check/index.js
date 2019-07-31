@@ -36,7 +36,7 @@ export class IdCheck extends Component {
 
     KYCService.makeCheck(passport.img, address.img, selfie.img).then((res) => {
       hideLoader();
-      if(res.status === 201) {
+      if(res.status === 200) {
         navigate('onboarding');
       } else {
         formUtils.setFormError(this.props.t('onBoarding.idCheck.error'));
