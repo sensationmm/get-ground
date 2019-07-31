@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import SignaturePad from 'react-signature-pad';
 import { Link } from 'gatsby'
 
-// import signatureUtils from 'src/utils/signature';
-
 import Layout from 'src/components/Layout/Layout';
 import Button from 'src/components/_buttons/Button/Button';
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox';

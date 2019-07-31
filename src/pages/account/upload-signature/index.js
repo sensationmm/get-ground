@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 import Dropzone from 'react-dropzone';
 
-import signatureUtils from 'src/utils/signature';
-
 import Layout from 'src/components/Layout/Layout';
 import Button from 'src/components/_buttons/Button/Button';
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
@@ -36,13 +34,14 @@ class UploadSignature extends Component {
     * @param {Blob} signatureBlob - signature blob
     * @return {void}
     */
-  saveSignature = signatureBlob => {
+  saveSignature = () => {
     const { showLoader, hideLoader } = this.props;
+    const { imageSrc } = this.state;
 
     showLoader();
-    AccountService.saveSignature(signatureBlob).then(response => {
+    AccountService.saveSignature(imageSrc).then(response => {
       hideLoader();
-      if (response.status === 201) {
+      if (response.status === 200) {
         this.setState({ imageSaved: true })
       } else if (response.status === 400) {
         /** NEED AC added for the error state of this page... */
@@ -67,13 +66,6 @@ class UploadSignature extends Component {
    * @return {void}
    */
   onImageDrop = files => this.getDataUrl(files[0])
-
-  splitSignature = () => {
-    const { imageSrc } = this.state;
-    const signatureBlob = signatureUtils.splitSignatureData(imageSrc);
-
-    this.saveSignature(signatureBlob);
-  }
 
   render() {
     const { t, location } = this.props;
@@ -107,16 +99,16 @@ class UploadSignature extends Component {
                     </div>
                     <input {...getInputProps()} />
                     { imageSrc === '' &&
-                      <Button 
-                        fullWidth 
-                        classes="upload-file-button primary" 
-                        label={t('account.uploadSignature.buttons.upload')} 
+                      <Button
+                        fullWidth
+                        classes="upload-file-button primary"
+                        label={t('account.uploadSignature.buttons.upload')}
                       />
                     }
-                    { imageSrc !== '' && 
-                      <Button 
-                        fullWidth 
-                        classes="upload-file-button secondary" 
+                    { imageSrc !== '' &&
+                      <Button
+                        fullWidth
+                        classes="upload-file-button secondary"
                         label={t('account.uploadSignature.buttons.reupload')}
                       />
                     }
@@ -124,12 +116,12 @@ class UploadSignature extends Component {
                 )
               }}
             </Dropzone>
-            { imageSrc !== '' && 
-              <Button 
-                fullWidth 
-                classes="upload-file-button primary" 
+            { imageSrc !== '' &&
+              <Button
+                fullWidth
+                classes="upload-file-button primary"
                 label={t('account.uploadSignature.buttons.save')}
-                onClick={this.splitSignature}
+                onClick={this.saveSignature}
               />
             }
           </Fragment>
@@ -147,9 +139,9 @@ class UploadSignature extends Component {
 
               <img className="your-signature--saved-image" src={imageSrc} />
               <Link to={isEditMode ? '/account' : '/documents'}>
-                <Button 
+                <Button
                   classes="primary full"
-                  label={t('account.yourSignature.buttons.continue')} 
+                  label={t('account.yourSignature.buttons.continue')}
                 />
               </Link>
             </Fragment>

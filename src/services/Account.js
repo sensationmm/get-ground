@@ -111,8 +111,6 @@ class AccountService extends BaseService {
    * @return {Promise} saveSignature response
    */
   saveSignature = signatureBlob => {
-    // const formData = new FormData();
-
 
     const data = JSON.stringify({
       'file': signatureBlob.split(',')[1],
@@ -120,19 +118,11 @@ class AccountService extends BaseService {
       'description': 'signature'
     })
 
-    // for ( const key in data ) {
-    //   formData.append(key, data[key]);
-    // }
-
     const config = {
       url: 'v2/documents',
       method: 'post',
       data
     };
-
-    // blobToDataURL(signatureBlob).then((res) => {
-    //   store.dispatch(saveSignature(res))
-    // })
 
     store.dispatch(saveSignature(signatureBlob))
 
@@ -167,9 +157,9 @@ class AccountService extends BaseService {
     };
 
     return this.doRequest(config, (response) => {
-      const { data: { content } } = response;
+      const { data: { contents } } = response;
 
-      store.dispatch(saveSignature(content))
+      store.dispatch(saveSignature(contents))
     });
   };
 

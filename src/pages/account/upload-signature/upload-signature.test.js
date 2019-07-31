@@ -1,7 +1,6 @@
 import { setup, findByTestAttr } from 'src/test-utils/test-utils';
 
 import { RawComponent as UploadSignature, AccountService } from './index';
-import signatureUtils from 'src/utils/signature';
 
 /**
  * FileReader
@@ -18,8 +17,6 @@ class MockFileReader {
     this.onload = jest.fn();
   }
 }
-
-const mockBlock = new Blob([])
 
 describe('upload signature page', () => {
   let wrapper;
@@ -48,23 +45,10 @@ describe('upload signature page', () => {
   afterEach(() => {
     window.FileReader = originalFileReader;
   })
-  
+
   test('renders without error', () => {
     const component = findByTestAttr(wrapper, 'container-upload-signature');
     expect(component.length).toBe(1);
-  });
-
-  test('splitSignature retrieves blob from utils and fires saveSignature', () => {
-    const wrapper = setup(UploadSignature, defaultProps, {
-      imageSaved: false
-    });
-    const spy = jest.spyOn(signatureUtils, 'splitSignatureData').mockReturnValue(mockBlock);
-
-    wrapper.instance().saveSignature = jest.fn();
-    wrapper.instance().splitSignature();
-
-    expect(wrapper.instance().saveSignature).toHaveBeenCalledWith(mockBlock);
-    expect(spy).toHaveBeenCalled();
   });
 
   it('dropzone', () => {
@@ -83,11 +67,11 @@ describe('upload signature page', () => {
   describe('saveSignature()', () => {
 
     test('save signature success', async () => {
-      AccountService.saveSignature = jest.fn().mockReturnValue(Promise.resolve({ status: 201 }));
+      AccountService.saveSignature = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
       const wrapperNew = setup(UploadSignature, defaultProps);
-      
+
       await wrapperNew.instance().saveSignature();
-      
+
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
       expect(wrapperNew.state().imageSaved).toEqual(true);
@@ -96,9 +80,9 @@ describe('upload signature page', () => {
     test('save signature failure', async () => {
       AccountService.saveSignature = jest.fn().mockReturnValue(Promise.resolve({ status: 400 }));
       const wrapperNew = setup(UploadSignature, defaultProps);
-      
+
       await wrapperNew.instance().saveSignature();
-      
+
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
     });

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 
-import signatureUtils from 'src/utils/signature';
+// import signatureUtils from 'src/utils/signature';
 
 import Layout from 'src/components/Layout/Layout';
 import formUtils from 'src/utils/form';
@@ -49,7 +49,13 @@ class CreateSignature extends Component {
     });
   }
 
-  splitSignature = () => {
+  /**
+  * @param {Blob} signatureBlob - signature blob
+  * @param {string} signatureImgPath - img path of selected signature
+  * @return {void}
+  */
+  saveSignature = () => {
+    const { showLoader, hideLoader } = this.props;
     const { selectedSignature, signatureOneImg, signatureTwoImg, signatureThreeImg } = this.state;
     let signatureImgPath;
 
@@ -61,22 +67,10 @@ class CreateSignature extends Component {
       signatureImgPath = signatureThreeImg;
     }
 
-    const signatureBlob = signatureUtils.splitSignatureData(signatureImgPath);
-    this.saveSignature(signatureBlob, signatureImgPath);
-  }
-
-  /**
-  * @param {Blob} signatureBlob - signature blob
-  * @param {string} signatureImgPath - img path of selected signature
-  * @return {void}
-  */
-  saveSignature = (signatureBlob, signatureImgPath) => {
-    const { showLoader, hideLoader } = this.props;
-
     showLoader();
-    AccountService.saveSignature(signatureBlob).then(response => {
+    AccountService.saveSignature(signatureImgPath).then(response => {
       hideLoader();
-      if (response.status === 201) {
+      if (response.status === 200) {
         this.setState({ savedSignature: signatureImgPath });
       } else if (response.status === 400) {
         /** NEED AC added for the error state of this page... */
@@ -183,7 +177,7 @@ class CreateSignature extends Component {
                   classes="primary"
                   label={t('account.createSignature.selectLabel')}
                   fullWidth
-                  onClick={this.splitSignature}
+                  onClick={this.saveSignature}
                 />
               }
 
