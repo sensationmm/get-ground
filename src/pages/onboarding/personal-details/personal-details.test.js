@@ -250,7 +250,9 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
           values: {
             first_name: 'Sponge',
             middle_name: 'Bob',
-            last_name: 'Squarepants'
+            last_name: 'Squarepants',
+            country: '[GB] United Kindgom',
+            nationality: '[GB] British'
           },
           errors: {
             middle_name: 'No'
@@ -268,7 +270,15 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
       expect(navigate).toHaveBeenCalledWith('/onboarding');
-
+      expect(AccountService.savePersonalDetails).toHaveBeenCalledWith({
+        date_of_birth: 'Invalid date',
+        first_name: 'Sponge',
+        last_name: 'Squarepants',
+        middle_name: 'Bob',
+        userID: undefined,
+        nationality_name: 'British',
+        country: 'United Kindgom'
+      })
     });
 
     test('failure', async () => {
@@ -280,6 +290,35 @@ describe('<OnboardingPersonalDetailsContainer />', () => {
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
       expect(navigate).toHaveBeenCalledTimes(0);
+    });
+
+    test('stripout null from saveAndExit call data', async () => {
+      wrapper = setup(PersonalDetails, {
+        ...defaultProps,
+        form: {
+          values: {
+            first_name: 'Sponge',
+            middle_name: 'Bob',
+            last_name: 'Squarepants',
+            country: '[undefined] undefined',
+            nationality: '[undefined] undefined'
+          },
+          errors: {
+            middle_name: 'No'
+          }
+        }
+      });
+
+      AccountService.savePersonalDetails = jest.fn().mockReturnValue(Promise.resolve({ status: 200 }));
+      await wrapper.instance().saveAndExit();
+      expect(navigate).toHaveBeenCalledWith('/onboarding');
+      expect(AccountService.savePersonalDetails).toHaveBeenCalledWith({
+        date_of_birth: 'Invalid date',
+        first_name: 'Sponge',
+        last_name: 'Squarepants',
+        middle_name: 'Bob',
+        userID: undefined,
+      })
     });
 
     test('country variants', async () => {
