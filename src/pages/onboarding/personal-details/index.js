@@ -418,7 +418,7 @@ OnboardingPersonalDetailsContainer.propTypes = {
   t: PropTypes.func.isRequired,
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
-  userID: PropTypes.number,
+  userID: PropTypes.string,
   user: PropTypes.object,
   form: PropTypes.object
 };

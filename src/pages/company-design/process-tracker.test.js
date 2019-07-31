@@ -62,7 +62,7 @@ describe('process-tracker', () => {
         t: jest.fn().mockReturnValue(mockSections),
       },
       company: {
-        id: 1,
+        id: '1',
         additional_services_required: false
       },
       showLoader: showLoaderMock,

@@ -190,7 +190,7 @@ export class Layout extends Component {
     if(isLoggedIn) {
       menuLinks.push(
         {
-          text: t('menu.links.ninth'),
+          text: t('menu.links.ninth.label'),
           function: (e) => {
             e.preventDefault();
             this.setState({ logout: true });
@@ -229,6 +229,7 @@ export class Layout extends Component {
           menuLinks={<Menu menuLinks={menuLinks.filter(link => !link.hideDesktop)} />}
           showDashboardButton={last_page_visited === 'dashboard'}
           showOnboardingButton={last_page_visited !== 'dashboard'}
+          onLogout={() => this.setState({ logout: true })}
         >
           {headerActions}
         </Header>
@@ -278,7 +279,7 @@ Layout.propTypes = {
   headerActions: PropTypes.element,
   saveAuth: PropTypes.func,
   deleteAuth: PropTypes.func,
-  userID: PropTypes.number,
+  userID: PropTypes.string,
   secure: PropTypes.bool,
   redirect: PropTypes.string,
   activeCompany: PropTypes.number,
