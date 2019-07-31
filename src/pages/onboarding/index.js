@@ -44,9 +44,10 @@ export class ProcessTracker extends Component {
     showLoader();
 
     if(userID) {
-      AccountService.getUser(userID).then(() => {
+      setTimeout(function () {
+        AccountService.getUser(userID).then(() => {
         hideLoader();
-      });
+        })}, 1000)
     }
   }
 
