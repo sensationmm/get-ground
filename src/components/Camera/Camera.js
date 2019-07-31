@@ -21,14 +21,15 @@ export class ProofCamera extends Component {
     this.onCameraStop()
   }
 
-  onCameraError (error) {
-    // eslint-disable-next-line no-console
-    console.error('onCameraError', error);
-  }
-
   onCameraStart (stream) {}
 
-  onCameraStop () {}
+  onCameraStop () {
+    console.log('I AM CALLED')
+  }
+
+  onCameraError() {
+    console.log('error');
+  }
 
   render () {
     const { section, isMobile } = this.props
@@ -49,7 +50,7 @@ export class ProofCamera extends Component {
           isFullscreen = {false}
           sizeFactor = {1}
           onCameraStart = { (stream) => { this.onCameraStart(stream); } }
-          onCameraStop = { () => { this.onCameraStop(); } }
+          onCameraStop = {this.onCameraStop}
         />
     );
   }
