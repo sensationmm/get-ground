@@ -4,6 +4,7 @@ import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { navigate } from 'gatsby';
+import { omitBy, isNull } from 'lodash';
 
 import Layout from 'src/components/Layout/Layout'
 import formUtils from 'src/utils/form';
@@ -164,8 +165,9 @@ class OnboardingPersonalDetailsContainer extends Component {
       await formUtils.updateValue(key, '');
     });
 
-    const countryName = values.country && values.country !== '[null] null' ? values.country.split('] ').pop() : null;
-    const nationalityName = values.nationality && values.nationality !== '[null] null' ? values.nationality.split('] ').pop() : null;
+    const countryName = values.country && values.country !== '[undefined] undefined' ? values.country.split('] ').pop() : null;
+
+    const nationalityName = values.nationality && values.nationality !== '[undefined] undefined' ? values.nationality.split('] ').pop() : null;
 
     showLoader();
 
@@ -174,13 +176,19 @@ class OnboardingPersonalDetailsContainer extends Component {
 
     const formattedDate = payload.date_of_birth !== '' ? moment(payload.date_of_birth, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00') : null;
 
-    AccountService.savePersonalDetails({
-      userID,
-      ...payload,
-      date_of_birth: formattedDate,
-      nationality_name: nationalityName,
-      country: countryName
-    }).then((response) => {
+    const payloadWithoutNullValues = omitBy(
+      {
+        userID,
+        ...payload,
+        date_of_birth: formattedDate,
+        nationality_name: nationalityName,
+        country: countryName
+      },
+      isNull
+    )
+
+
+    AccountService.savePersonalDetails(payloadWithoutNullValues).then((response) => {
       hideLoader();
       if (response.status === 200) {
         navigate('/onboarding');
