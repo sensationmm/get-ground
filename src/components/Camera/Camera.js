@@ -21,35 +21,29 @@ export class ProofCamera extends Component {
     this.onCameraStop()
   }
 
-  onCameraError (error) {
-    // eslint-disable-next-line no-console
-    console.error('onCameraError', error);
-  }
-
   onCameraStart (stream) {}
 
   onCameraStop () {}
 
   render () {
-    const { section, isMobile } = this.props
+    const { section } = this.props
 
     return (
         <Camera
           data-test="camera"
           onTakePhoto = { (dataUri) => { this.onTakePhoto(dataUri); } }
-          onCameraError = { (error) => { this.onCameraError(error); } }
           idealFacingMode = {section === 'selfie' ? FACING_MODES.USER : FACING_MODES.ENVIRONMENT}
           idealResolution = {{width: 1280, height: 720}}
           imageType = {IMAGE_TYPES.JPG}
           imageCompression = {0.97}
           isMaxResolution = {false}
-          isImageMirror = {!isMobile || section === 'selfie' ? true : false}
+          isImageMirror = {section === 'selfie' ? true : false}
           isSilentMode = {true}
           isDisplayStartCameraError = {true}
           isFullscreen = {false}
           sizeFactor = {1}
           onCameraStart = { (stream) => { this.onCameraStart(stream); } }
-          onCameraStop = { () => { this.onCameraStop(); } }
+          onCameraStop = {this.onCameraStop}
         />
     );
   }
@@ -59,8 +53,7 @@ ProofCamera.propTypes = {
   section: PropTypes.string.isRequired,
   setImg: PropTypes.func.isRequired,
   setRetake: PropTypes.func.isRequired,
-  active: PropTypes.string.isRequired,
-  isMobile: PropTypes.bool
+  active: PropTypes.string.isRequired
 }
 
 const actions = {
