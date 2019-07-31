@@ -56,7 +56,7 @@ describe('process-tracker', () => {
   test('renders title', () => {
     expect(wrapper.find('h1').text()).toEqual('test-string');
   })
-  
+
   test('renders ProcessSection', () => {
     expect(wrapper.find('ProcessSection')).toHaveLength(3);
   })
@@ -68,16 +68,6 @@ describe('process-tracker', () => {
   test('hides Button until sections complete', () => {
     expect(wrapper.find('Button')).toHaveLength(0);
   })
-
-  test('refetch progress without user set', () => {
-    const newProps = {
-      ...props,
-      userID: null
-    }
-    wrapper = shallow(<ProcessTracker {...newProps} />);
-
-    expect(AccountService.getUser).toHaveBeenCalledTimes(1); // called once from beforeEach not this test
-  });
 
   describe('onboarding complete', () => {
     const newProps = {
@@ -99,7 +89,7 @@ describe('process-tracker', () => {
 
       expect(wrapper.state().checkbox).toBe(true);
     });
-  
+
     test('renders Button', () => {
       const button = wrapper.find('Button');
       expect(button).toHaveLength(1);

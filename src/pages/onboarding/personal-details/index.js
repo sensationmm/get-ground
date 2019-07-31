@@ -127,7 +127,6 @@ class OnboardingPersonalDetailsContainer extends Component {
   initFormValidation = () => {
     const { showLoader, hideLoader, t, userID, form } = this.props;
 
-    /* istanbul ignore else */
     if (formUtils.validateForm(this.config)) {
       const countryName = form.values.country ? form.values.country.split('] ').pop() : null;
       const nationalityName = form.values.nationality ? form.values.nationality.split('] ').pop() : null;
@@ -137,7 +136,7 @@ class OnboardingPersonalDetailsContainer extends Component {
       const payload = this.props.form.values;
       delete payload.nationality;
 
-      const formattedDate = moment(payload.date_of_birth, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00');
+      const formattedDate = moment(payload.date_of_birth, 'DD/MM/YYYY').format('YYYY-MM-DD');
 
       AccountService.savePersonalDetails({
         userID,
@@ -147,7 +146,6 @@ class OnboardingPersonalDetailsContainer extends Component {
         country: countryName
       }).then((response) => {
         hideLoader();
-        /* istanbul ignore else */
         if (response.status === 200) {
           navigate('/onboarding/id-check');
         } else if (response.status === 400) {
