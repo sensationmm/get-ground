@@ -2,9 +2,9 @@ const path = require('path');
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `getGround`,
+    description: `Smarter property purchasing for landlords. Make your money work harder.`,
+    author: `@ravinpatel`,
     siteUrl: `https://terranova-qa-fe.appspot.com`,
   },
   plugins: [

@@ -159,8 +159,8 @@ class Account extends Component {
       }]
     }
 
-    const passportData = documents.file_passport && documents.file_passport.content;
-    const addressProof = documents.file_proof_of_address && documents.file_proof_of_address.content;
+    const passportData = documents.file_passport && documents.file_passport.contents;
+    const addressProof = documents.file_proof_of_address && documents.file_proof_of_address.contents;
     const signature = documents.file_signature;
 
     const paymentCard = user.payment_details ? user.payment_details : {};
@@ -311,7 +311,7 @@ class Account extends Component {
           <div className="dashboard-columns">
             <div className="company-overview-section">
               <h2>{ t('profile.sections.passport') }</h2>
-              {passportData && <img src={`data:image/jpeg;base64,${passportData}`} /> }
+              {passportData && <img data-test='passport-proof' src={`data:image/jpeg;base64, ${passportData}`} /> }
 
               <div className="account-edit">
                 <Button
@@ -325,7 +325,7 @@ class Account extends Component {
 
             <div className="company-overview-section">
               <h2>{ t('profile.sections.proofAddress') }</h2>
-              {addressProof && <img src={`data:image/jpeg;base64,${addressProof}`} /> }
+              {addressProof && <img data-test='address-proof' src={`data:image/jpeg;base64, ${addressProof}`} /> }
 
               <div className="account-edit">
                 <Button

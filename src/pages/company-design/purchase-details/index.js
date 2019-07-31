@@ -44,7 +44,7 @@ class PurchaseDetails extends Component {
 
     this.config = [];
   }
-  
+
   componentDidMount() {
     const { company: { purchase_details }} = this.props;
     const payment = purchase_details.payment_schedule;
@@ -53,20 +53,20 @@ class PurchaseDetails extends Component {
     const reduxFields = {
       amount_in_cents: purchase_details.price.amount_in_cents,
       is_new_build: purchase_details.is_new_build,
-      expected_exchange_date: exchangeDate === null ? '' : moment(exchangeDate).format('DD/MM/YYYY'),
-      completion_date: completionDate === null ? '' : moment(completionDate).format('DD/MM/YYYY'),
-      depositDueDate: this.setReduxDateValues(payment, 0),
-      depositAmount: payment === null ? '' : payment[0].amount.amount_in_cents,
-      firstInstallmentDate: this.setReduxDateValues(payment, 1),
-      firstInstallmentAmount: payment === null ? '' : payment[1].amount.amount_in_cents,
-      secondInstallmentDate: this.setReduxDateValues(payment, 2),
-      secondInstallmentAmount: payment === null || !payment[2] ? '' : payment[2].amount.amount_in_cents,
-      thirdInstallmentDate: this.setReduxDateValues(payment, 3),
-      thirdInstallmentAmount: payment === null || !payment[3] ? '' : payment[3].amount.amount_in_cents,
-      fourthInstallmentDate: this.setReduxDateValues(payment, 4),
-      fourthInstallmentAmount: payment === null || !payment[4] ? '' : payment[4].amount.amount_in_cents
+      expected_exchange_date: exchangeDate ? moment(exchangeDate).format('DD/MM/YYYY') : '',
+      completion_date: completionDate ? moment(completionDate).format('DD/MM/YYYY') : '',
+      depositDueDate: payment ? this.setReduxDateValues(payment, 0) : '',
+      depositAmount: payment  ? payment[0].amount.amount_in_cents : '',
+      firstInstallmentDate: payment ? this.setReduxDateValues(payment, 1) : '',
+      firstInstallmentAmount: payment ? payment[1].amount.amount_in_cents : '',
+      secondInstallmentDate: payment ? this.setReduxDateValues(payment, 2) : '',
+      secondInstallmentAmount: !payment || !payment[2] ? '' : payment[2].amount.amount_in_cents,
+      thirdInstallmentDate: payment ? this.setReduxDateValues(payment, 3) : '',
+      thirdInstallmentAmount: !payment || !payment[3] ? '' : payment[3].amount.amount_in_cents,
+      fourthInstallmentDate: payment ? this.setReduxDateValues(payment, 4) : '',
+      fourthInstallmentAmount: !payment || !payment[4] ? '' : payment[4].amount.amount_in_cents
     }
-    
+
     formUtils.initFormState({
       amount_in_cents: '',
       is_new_build: null,
@@ -109,8 +109,7 @@ class PurchaseDetails extends Component {
    * @return {void} setReduxDateValues
    */
   setReduxDateValues = (payment, index) => {
-    if (payment === null || (payment && (!payment[index] || payment[index].due_date === null)) || 
-      (payment && payment[index].due_date === undefined)) {
+    if (payment === null || payment === undefined || (payment && (!payment[index] || payment[index].due_date === null)) || (payment && payment[index].due_date === undefined)) {
       return '';
     } else {
       return moment(payment[index].due_date).format('DD/MM/YYYY');
@@ -124,7 +123,7 @@ class PurchaseDetails extends Component {
   openDatePicker = (e) => {
     this.setState({
       isDatepickerOpen: true,
-      focusedDateField: e.target.id 
+      focusedDateField: e.target.id
     });
   }
 
@@ -200,9 +199,9 @@ class PurchaseDetails extends Component {
    * @return {void} handleSubmitPurchaseDetails
    */
   handleSubmitPurchaseDetails = async (isSaveAndExit) => {
-    const { 
-      showLoader, 
-      form: { values, errors },  
+    const {
+      showLoader,
+      form: { values, errors },
     } = this.props;
 
     const paymentSchedule = [
@@ -251,7 +250,7 @@ class PurchaseDetails extends Component {
     const payload = {
       price: {
         amount_in_cents: values.amount_in_cents,
-        currency: 'GBP' 
+        currency: 'GBP'
       },
       is_new_build: values.is_new_build,
       completion_date:  values.completion_date !== '' ? moment(values.completion_date, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss+00:00') : null,
@@ -310,7 +309,7 @@ class PurchaseDetails extends Component {
           } else {
             navigate('/company-design/solicitor-details');
           }
-          
+
         } else if (response.status === 400) {
           formUtils.setFormError(t('form.correctErrors'));
         }
@@ -352,7 +351,7 @@ class PurchaseDetails extends Component {
         value: true
       }
     ]
-        
+
     this.config = [
       {
         stateKey: 'amount_in_cents',
@@ -504,7 +503,7 @@ class PurchaseDetails extends Component {
         icon: removeIcon,
         small: true,
         label: t('companyDesign.purchaseDetails.form.removeButton'),
-        hidden: this.checkElementHidden() || extraInstallmentFieldsShowing < 1 
+        hidden: this.checkElementHidden() || extraInstallmentFieldsShowing < 1
       },
     ];
 
@@ -518,9 +517,9 @@ class PurchaseDetails extends Component {
 
           <IntroBox>{t('companyDesign.purchaseDetails.intro')}</IntroBox>
 
-          {showErrorMessage && 
+          {showErrorMessage &&
               <ErrorBox>
-              { errors.form 
+              { errors.form
                 ? errors.form
                 : t('form.correctErrors')
               }
@@ -555,10 +554,10 @@ class PurchaseDetails extends Component {
               classes="primary"
             />
 
-            <Button 
-              classes="secondary" 
-              label={t('companyDesign.purchaseDetails.form.backButton')} 
-              fullWidth 
+            <Button
+              classes="secondary"
+              label={t('companyDesign.purchaseDetails.form.backButton')}
+              fullWidth
               onClick={() => navigate('/company-design/property-address')}
             />
           </Form>

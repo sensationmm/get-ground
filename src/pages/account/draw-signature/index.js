@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import SignaturePad from 'react-signature-pad';
 import { Link } from 'gatsby'
 
-import signatureUtils from 'src/utils/signature';
-
 import Layout from 'src/components/Layout/Layout';
 import Button from 'src/components/_buttons/Button/Button';
 import IntroBox from 'src/components/_layout/IntroBox/IntroBox';
@@ -34,29 +32,22 @@ class DrawSignature extends Component {
     this.signature = null;
   }
 
-  splitSignature = () => {
-    let signatureBlob;
-    if (this.signature !== null) {
-      signatureBlob = signatureUtils.splitSignatureData(this.signature.toDataURL());
-    }
-    this.saveSignature(signatureBlob);
-  }
-
   /**
-    * @param {Blob} signatureBlob - signature blob
     * @return {void}
     */
-  saveSignature = signatureBlob => {
+  saveSignature = ()  => {
     const { showLoader, hideLoader } = this.props;
 
+    const signature = this.signature && this.signature.toDataURL();
+
     showLoader();
-    AccountService.saveSignature(signatureBlob).then(response => {
+    AccountService.saveSignature(signature).then(response => {
       hideLoader();
-      if (response.status === 201) {
+      if (response.status === 200) {
         if ( this.signature === null) return;
         this.setState({ savedSignature: this.signature.toDataURL() });
       } else if (response.status === 400) {
-        /** NEED AC added for the error state of this page... */
+        /** TODO NEED AC added for the error state of this page... */
       }
     });
   }
@@ -95,7 +86,7 @@ class DrawSignature extends Component {
                 classes="primary"
                 data-test="button-save"
                 label={t('account.drawSignature.buttons.save')}
-                onClick={this.splitSignature}
+                onClick={this.saveSignature}
               />
             </div>
           </>

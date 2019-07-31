@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { navigate } from 'gatsby';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux'
+import { get } from 'lodash';
 
 import formUtils from 'src/utils/form';
 import { inArray } from 'src/utils/functions';
@@ -42,9 +43,11 @@ class ShareholderDetails extends Component {
   constructor(props) {
     super(props);
 
+    const shareholdersCollection = get(this.props.company, ['shareholder_details', 'collection']);
+
     this.state = {
       shareholders: 1,
-      hasShareholders: this.props.company && this.props.company.shareholder_details.collection && this.props.company.shareholder_details.collection.filter(item => item.first_name !== '').length > 0,
+      hasShareholders: shareholdersCollection && shareholdersCollection.filter(item => item.first_name !== '').length > 0,
       stage: 'add',
       totalShares: 0,
       owner_is_director: true
@@ -71,7 +74,7 @@ class ShareholderDetails extends Component {
 
   componentDidMount() {
     const { company: { shareholder_details }, user} = this.props;
-    let shareholders = shareholder_details.collection === null ? [{...shareholder}] : shareholder_details.collection;
+    let shareholders = shareholder_details ? shareholder_details.collection : [{...shareholder}];
     shareholders = shareholders.filter(p => p.email !== user.email && p.first_name !== '')
 
     const populatedShareholders = shareholders.length;
@@ -158,7 +161,7 @@ class ShareholderDetails extends Component {
       shareholder5Valid &&
       shareholder6Valid &&
       shareholder7Valid;
-      
+
     if(shareholders.length !== shareholdersUnique.size) {
       formUtils.setFormError(this.props.t('companyDesign.shareholderDetails.error'));
       return false;
@@ -211,14 +214,14 @@ class ShareholderDetails extends Component {
    * @return {void}
    */
   deleteShareholder = async (index) => {
-    const existing = this.props.form.values; 
+    const existing = this.props.form.values;
     let newTotalShares = 0;
 
     for(let i=index; i<=this.state.shareholders; i++) {
       if(!existing[i+1]) {
-        await formUtils.updateValue(i, shareholder, null, true); 
+        await formUtils.updateValue(i, shareholder, null, true);
       } else {
-        await formUtils.updateValue(i, existing[i+1], null, true); 
+        await formUtils.updateValue(i, existing[i+1], null, true);
       }
     }
 
@@ -375,7 +378,7 @@ class ShareholderDetails extends Component {
       //     shareholders.splice(i, 1);
       // }
     }
-    
+
     const isValid = this.validateShareholderShares();
 
     if (isSaveAndExit) {

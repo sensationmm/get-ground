@@ -28,7 +28,7 @@ describe('draw signature page', () => {
       isSignature: false
     });
   });
-  
+
   test('renders without error', () => {
     const component = findByTestAttr(wrapper, 'container-draw-signature');
     expect(component.length).toBe(1);
@@ -48,21 +48,17 @@ describe('draw signature page', () => {
     expect(wrapper.state().isSignature).toEqual(false);
   });
 
-  test('splitSignature fires save signature', () => {
-    wrapper.instance().saveSignature = jest.fn();
-    wrapper.instance().splitSignature();
-
-    expect(wrapper.instance().saveSignature).toHaveBeenCalled();
-  });
-
   describe('saveSignature()', () => {
 
     test('save signature success', async () => {
+
       AccountService.saveSignature = jest.fn().mockReturnValue(Promise.resolve({ status: 201 }));
       const wrapperNew = setup(DrawSignature, defaultProps);
-      
-      await wrapperNew.instance().saveSignature();
-      
+
+      const wrapperInstance = wrapperNew.instance()
+
+      await wrapperInstance.saveSignature();
+
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
       expect(wrapperNew.state().savedSignature).toEqual('');
@@ -71,9 +67,9 @@ describe('draw signature page', () => {
     test('save signature failure', async () => {
       AccountService.saveSignature = jest.fn().mockReturnValue(Promise.resolve({ status: 400 }));
       const wrapperNew = setup(DrawSignature, defaultProps);
-      
+
       await wrapperNew.instance().saveSignature();
-      
+
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);
     });
