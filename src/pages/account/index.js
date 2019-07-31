@@ -159,8 +159,8 @@ class Account extends Component {
       }]
     }
 
-    const passportData = documents.file_passport && documents.file_passport.content;
-    const addressProof = documents.file_proof_of_address && documents.file_proof_of_address.content;
+    const passportData = documents.file_passport && documents.file_passport.contents;
+    const addressProof = documents.file_proof_of_address && documents.file_proof_of_address.contents;
     const signature = documents.file_signature;
 
     const paymentCard = user.payment_details ? user.payment_details : {};

@@ -45,7 +45,7 @@ export class ProcessTracker extends React.Component {
     if (company && company.id) {
       CompanyService.getCompany(company.id).then(() => {
         hideLoader();
-        
+
         if (this.props.company.progress.overall_status === 'COMPLETE') {
           navigate('/company-design/company-complete');
         }
@@ -148,9 +148,9 @@ export class ProcessTracker extends React.Component {
                 </h1>
                 <div className="process-tracker-sections">
                   {sectionsConfig.sections.map((section, idx) => (
-                    <ProcessSection 
-                      key={`${idx} + ${section.title}`} 
-                      {...section} 
+                    <ProcessSection
+                      key={`${idx} + ${section.title}`}
+                      {...section}
                     />)
                   )}
                 </div>

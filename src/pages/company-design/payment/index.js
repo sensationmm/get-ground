@@ -76,12 +76,11 @@ export class Payment extends Component {
     const { stripeToken, isStripeValid, } = this.state;
     const { values: { numberOfCompanies } } = form;
 
-    /* istanbul ignore else */
     if (formUtils.validateForm(this.config) && isStripeValid) {
       showLoader();
       return PaymentService.makePayment(stripeToken, numberOfCompanies, company.id).then((response) => {
         hideLoader();
-        if(response.status === 201) {
+        if(response.status === 200) {
           navigate('/company-design');
         } else if(response.status === 400) {
           this.setState({
@@ -106,7 +105,6 @@ export class Payment extends Component {
     let vatValue = '--';
     let totalValue = '--';
 
-    /* istanbul ignore else */
     if(!isNaN(input) && input < 21 && input > 0) {
       setupValue = this.baseSetupValue * input;
       subValue = this.baseMonthlySubValue * input
@@ -153,7 +151,7 @@ export class Payment extends Component {
 
     const headerActions = <Link to="/company-design"><ButtonHeader label={t('header.buttons.exit')} /></Link>;
 
-    return (      
+    return (
       <Layout headerActions={headerActions} secure companyID>
         <div data-test="container-payment" className="payment" role="company-design form-page">
           <h1>{ t('onBoarding.payment.title') }</h1>
