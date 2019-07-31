@@ -4,9 +4,6 @@ import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-
-// import signatureUtils from 'src/utils/signature';
-
 import Layout from 'src/components/Layout/Layout';
 import formUtils from 'src/utils/form';
 import Button from 'src/components/_buttons/Button/Button';

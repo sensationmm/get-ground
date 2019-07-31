@@ -311,7 +311,7 @@ class Account extends Component {
           <div className="dashboard-columns">
             <div className="company-overview-section">
               <h2>{ t('profile.sections.passport') }</h2>
-              {passportData && <img src={`data:image/jpeg;base64,${passportData}`} /> }
+              {passportData && <img data-test='passport-proof' src={`data:image/jpeg;base64, ${passportData}`} /> }
 
               <div className="account-edit">
                 <Button
@@ -325,7 +325,7 @@ class Account extends Component {
 
             <div className="company-overview-section">
               <h2>{ t('profile.sections.proofAddress') }</h2>
-              {addressProof && <img src={`data:image/jpeg;base64,${addressProof}`} /> }
+              {addressProof && <img data-test='address-proof' src={`data:image/jpeg;base64, ${addressProof}`} /> }
 
               <div className="account-edit">
                 <Button

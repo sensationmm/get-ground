@@ -29,10 +29,10 @@ describe('<Account />', () => {
     user: { ...UserMock, payment_details: { brand: 'visa' }, 'previous_names': 'asd' },
     documents: {
       file_passport: {
-        content: 'imageofpassport'
+        contents: 'imageofpassport'
       },
       file_proof_of_address: {
-        content: 'imageofpassport'
+        contents: 'imageofaddress'
       },
       file_signature: 'imageofsignature'
     }
@@ -225,6 +225,17 @@ describe('<Account />', () => {
     expect(wrapper.find('h2').at(11).text()).toBe('profile.sections.signature');
   });
 
+  test('passport', () => {
+    expect(wrapper.find('[data-test="passport-proof"]').length).toEqual(1)
+    expect(wrapper.find('[data-test="passport-proof"]').props().src).toEqual('data:image/jpeg;base64, imageofpassport')
+  })
+
+  test('address', () => {
+    expect(wrapper.find('[data-test="address-proof"]').length).toEqual(1)
+    expect(wrapper.find('[data-test="address-proof"]').props().src).toEqual('data:image/jpeg;base64, imageofaddress')
+  })
+
+
   test('signature', () => {
     expect(wrapper.find('[data-test="signature"]').length).toEqual(1)
     expect(wrapper.find('[data-test="signature"]').props().src).toEqual('data:image/jpeg;base64, imageofsignature')
@@ -233,10 +244,10 @@ describe('<Account />', () => {
       ...defaultProps,
       documents: {
         file_passport: {
-          content: 'imageofpassport'
+          contents: 'imageofpassport'
         },
         file_proof_of_address: {
-          content: 'imageofpassport'
+          contents: 'imageofpassport'
         },
         file_signature: 'data:image/jpeg;base64, iamsignaturewithinitialdataurl'
       }
