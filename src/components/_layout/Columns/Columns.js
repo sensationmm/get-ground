@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
+import Slider from 'src/components/Slider/Slider';
+
 import './columns.scss';
 
 /**
@@ -11,11 +13,15 @@ import './columns.scss';
 * @return {JSXElement} - Columns component
 */
 const Columns = (props) => {
-  const { sections, bordered } = props;
+  const { sections, bordered, renderSlider } = props;
+
+  const cols = sections.map((section, count) => <Column key={`section-${count}`} {...section} /> );
 
   return (
     <div data-test="component-columns" className={classNames('columns', { bordered: bordered })}>
-    {sections.map((section, count) => <Column key={`section-${count}`} {...section} /> )}
+      { !renderSlider && cols }
+
+      { renderSlider && <Slider slides={cols} /> }
     </div>
   );
 }
@@ -53,7 +59,8 @@ Columns.propTypes = {
       t: PropTypes.func
     })
   ),
-  bordered: PropTypes.bool
+  bordered: PropTypes.bool,
+  renderSlider: PropTypes.bool
 };
 
 Column.propTypes = {

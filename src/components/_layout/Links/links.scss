@@ -1,17 +1,20 @@
+@import '../../../styles/modules/variables';
+
 .links {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 80px;
+  padding-top: 40px;
   font-size: 14px;
 
   &-link {
+    width: 50%;
     display: flex;
     align-items: center;
     cursor: pointer;
 
     &-label {
-      padding: 0 30px;
+      padding: 0 10px;
       font-weight: 300;
 
       b {
@@ -21,8 +24,30 @@
       }
     }
 
+    &-more {
+      display: none;
+    }
+
     &:last-of-type {
       text-align: right;
+      justify-content: flex-end;
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .links {
+    padding-top: 80px;
+
+    &-link {
+      width: auto;
+      &-label {
+        padding: 0 30px;
+      }
+
+      &-more {
+        display: block;
+      }
     }
   }
 }

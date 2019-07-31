@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
-import { useTranslation } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { navigate } from 'gatsby';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Layout from 'src/components/Layout/Layout';
 import PageHeader from 'src/components/_layout/PageHeader/PageHeader';
@@ -27,8 +29,8 @@ import IconBankAccount from 'src/assets/images/icon-debit-card.svg';
 
 import 'src/styles/pages/landing-pages.scss';
 
-const WhatWeDo = () => {
-  const [t] = useTranslation();
+const WhatWeDo = (props) => {
+  const { t, isMobile } = props;
 
   return (
     <Fragment>
@@ -36,7 +38,7 @@ const WhatWeDo = () => {
         <div data-test="container-whatWeDo" className="whatWeDo" role="company-design landing">
           <PageHeader title={ t('whatWeDo.title') } text={ t('whatWeDo.intro') } />
 
-          <LandingContent>
+          <LandingContent first>
             <h2 className="center">{ t('whatWeDo.content.heading') }</h2>
             <div dangerouslySetInnerHTML={{ __html: t('whatWeDo.content.text.p1') }} />
             <div dangerouslySetInnerHTML={{ __html: t('whatWeDo.content.text.p2') }} />
@@ -87,6 +89,7 @@ const WhatWeDo = () => {
                 { text: t('whatWeDo.tiles.content.partnerships'), icon: IconPartnerships },
                 { text: t('whatWeDo.tiles.content.bankAccount'), icon: IconBankAccount }
               ]}
+              renderSlider={isMobile}
             />
 
             <div dangerouslySetInnerHTML={{ __html: t('whatWeDo.tiles.outro') }} />
@@ -106,4 +109,15 @@ const WhatWeDo = () => {
   )
 }
 
-export default WhatWeDo;
+WhatWeDo.propTypes = {
+  t: PropTypes.func,
+  isMobile: PropTypes.bool
+};
+
+export const RawComponent = WhatWeDo;
+
+const mapStateToProps = (state) => ({
+  isMobile: state.layout.isMobile
+});
+
+export default connect(mapStateToProps)(withTranslation()(WhatWeDo));

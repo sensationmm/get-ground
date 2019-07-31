@@ -1,127 +1,20 @@
 @import 'src/styles/modules/_colors';
 @import 'src/styles/modules/_variables.scss';
 
-.pricing {
-  &-img {
-    width: 313px;
-    float: right;
-    margin: (($padding-vertical-unit * 2) + 0px) (- ($padding-horizontal-unit * 2) + 0px);
-  }
-
-  &-title {
-    line-height: 2.5;
-  }
-
-  &-property {
-    &-title {
-      font-size: 17px;
-      line-height: 2.15;
-      color: $heading;
-    }
-
-    &-sign, &-monthly, &-annual {
-      font-size: 28px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-
-      h3:first-child {
-        margin: 0;
-        margin-right: 0;
-        font-size: 28px;
-        line-height: 28px;
-      }
-
-      h3:nth-child(2) {
-        margin: 0;
-        margin-left: 5px;
-        font-size: 18px;
-      }
-
-      &-caption {
-        margin: 0 auto;
-        width: 60%;
-        font-size: 16px;
-        line-height: 1.75;
-        margin-bottom: 30px;
-        text-align: center;
-      }
-
-      &-small {
-        font-size: 14px;
-        font-weight: 300;
-        text-align: center;
-      }
-    }
-  }
-
-  &-services {
-    margin-top: 70px;
-    margin-bottom: 50px;
-    &-title {
-      font-size: 17px;
-      color: $text;
-    }
-    p {
-      color: $heading;
-      font-size: 18px;
-      font-weight: 300;
-      line-height: 1.75;
-    }
-  }
-}
-
-@media screen and (min-width: $breakpoint-desktop) {
+.landing {
   .pricing {
-    &-property, &-services {
-      &-title {
-        font-size: 22px;
-      }
+    .boxes {
+      .box {
+        box-shadow: 0 0 10px $shadow;
+        padding: ($padding-horizontal-unit * 5 + 0px) ($padding-horizontal-unit * 3 + 0px) ($padding-horizontal-unit * 3 + 0px);
+        margin-bottom: 30px;
 
-
-      &-sign, &-monthly, &-annual {
-        h3:first-child {
-          font-size: 34px;
+        &:nth-child(1) {
+          border: 2px solid $primary;
         }
 
-        h3:nth-child(2) {
-          font-size: 26px;
-        }
-
-        &-caption {
-          width: 100%;
-          font-size: 18px;
-          font-weight: 300;
-          padding-top: 10px;
-          line-height: 1;
-        }
-      }
-    }
-
-    &-chart {
-      border: 1px solid $border-offset;
-      border-radius: 10px;
-      padding: $padding-vertical $padding-horizontal;
-
-      &-prices {
-        display: flex;
-        margin-bottom: 20px;
-
-        > div {
-          width: 0;
-          flex-grow: 1;
-          border-right: 1px solid $border-offset;
-          padding: $padding-vertical $padding-horizontal;
-
-          &:nth-child(3n) {
-            border: 0;
-          }
-
-          p {
-            margin-bottom: 0;
-            text-align: center;
-          }
+        &:last-child {
+          margin-bottom: 0;
         }
       }
     }

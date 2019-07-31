@@ -197,7 +197,21 @@ b {
 }
 
 canvas {
-  display: none;
+  display: block;
+  width: 100%;
+  height: 50px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+
+  path {
+    background: #fff;
+  }
+
+  &#top, &#bottom {
+    height: 100px;
+  }
 }
 
 @media screen and (min-width: $breakpoint-desktop) {
@@ -270,25 +284,13 @@ canvas {
     }
   }
 
-
-
-  canvas {
-    display: block;
-    width: 100%;
-    height: 150px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-
-    path {
-      background: #fff;
-    }
-  }
-
   .hasCurve {
     .app {
       padding-bottom: 200px;
     }
+  }
+
+  canvas {
+    height: 150px;
   }
 }

@@ -42,6 +42,14 @@ class Section extends Component {
     return (
       <div className="section">
         <div className="section-inner">
+
+          <div className={classNames('section-image', { jsx: typeof image !== 'string' }, { imageFull: imageFull })}>
+            {typeof image === 'string'
+              ? <img src={image} />
+              : image
+            }
+          </div>
+
           <div className="section-text">
             <h2>{heading}</h2>
             <div dangerouslySetInnerHTML={{ __html: `<p>${ text } </p>` }} />
@@ -53,13 +61,6 @@ class Section extends Component {
             }
 
             {button && button}
-          </div>
-
-          <div className={classNames('section-image', { jsx: typeof image !== 'string' }, { imageFull: imageFull })}>
-            {typeof image === 'string'
-              ? <img src={image} />
-              : image
-            }
           </div>
         </div>
 

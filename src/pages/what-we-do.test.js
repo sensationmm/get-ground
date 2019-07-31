@@ -1,11 +1,11 @@
-import WhatWeDo from './what-we-do'
+import { RawComponent as WhatWeDo } from './what-we-do'
 import { setup, findByTestAttr } from 'src/test-utils/test-utils';
 
 describe('what-we-do page', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = setup(WhatWeDo)
+    wrapper = setup(WhatWeDo, { t: jest.fn() })
   })
 
   test('renders without error', () => {

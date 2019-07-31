@@ -3,6 +3,7 @@
 
 .comparison {
   padding-top: 20px;
+  margin-bottom: 30px;
 
   h3 {
     font-size: 26px;
@@ -20,7 +21,7 @@
   }
 
   &-table {
-    display: flex;
+    display: block;
     max-width: 626px;
     margin: 0 auto 50px auto;
     box-shadow: 0 5px 10px $shadow;
@@ -29,16 +30,13 @@
     background: $disabled-offset;
 
     &-block {
-      width: 50%;
       padding: ($padding-vertical-unit * 2 + 0px) ($padding-horizontal * 2 + 0px) 10px ($padding-horizontal * 2 + 0px);
       text-align: center;
 
       h4 {
         font-size: 26px;
         font-weight: 400;
-        height: 70px;
         margin: 0 auto 20px auto;
-        width: 70%;
       }
 
       &:first-of-type {
@@ -48,7 +46,7 @@
     }
 
     &-item {
-      margin-bottom: 30px;
+      margin-bottom: 20px;
 
       &-label {
         font-size: 16px;
@@ -57,6 +55,29 @@
       &-value {
         font-size: 28px;
         font-weight: 300;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .comparison {
+    margin-bottom: 0px;
+    
+    &-table {
+      display: flex;
+
+      &-block {
+        width: 50%;
+
+        h4 {
+          width: 70%;
+          height: 70px;
+        }
+      }
+
+      &-item {
+        margin-bottom: 30px;
       }
     }
   }

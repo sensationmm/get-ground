@@ -1,4 +1,5 @@
 @import '../../styles/modules/_colors';
+@import '../../styles/modules/_variables';
 
 .landing {
   h2 {
@@ -23,7 +24,7 @@
     ul {
       display: block;
       list-style: none;
-      width: 50%;
+      width: 90%;
       padding: 10px 0 1px 0;
 
       li {
@@ -53,6 +54,20 @@
 
     &.orange {
       background-image: linear-gradient(135deg, #F2B47E 0%, #FEC858 100%);
+    }
+
+    &.first {
+      padding-top: 20px;
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .landing {
+    &-content {
+      ul {
+        width: 50%;
+      }
     }
   }
 }

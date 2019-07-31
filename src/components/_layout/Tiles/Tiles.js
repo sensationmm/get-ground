@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Slider from 'src/components/Slider/Slider';
+
 import './tiles.scss';
 
 /**
@@ -10,11 +12,24 @@ import './tiles.scss';
 * @return {JSXElement} - Sections component
 */
 const Tiles = (props) => {
-  const { tiles } = props;
+  const { tiles, renderSlider } = props;
+
+  const content = tiles.map((tile, count) => <Tile key={`section-${count}`} {...tile} /> );
+
+    
+  const contentChunks = [];
+  const contentCopy = content.slice();
+
+  for(let i=0; i<=Math.ceil(contentCopy.length / 2); i++) {
+    contentChunks.push(contentCopy.splice(0, 2));
+  }
+  contentChunks.push(contentCopy)
 
   return (
     <div data-test="component-tiles" className="tiles">
-    {tiles.map((tile, count) => <Tile key={`section-${count}`} {...tile} /> )}
+    { !renderSlider && content }
+
+    { renderSlider && <Slider slides={contentChunks} arrows={false} /> }
     </div>
   );
 }
@@ -36,7 +51,8 @@ Tiles.propTypes = {
       text: PropTypes.string,
       icon: PropTypes.object
     })
-  )
+  ),
+  renderSlider: PropTypes.bool
 };
 
 Tile.propTypes = {

@@ -26,24 +26,24 @@ class CanvasCurve extends Component {
   drawChevronTop(ctx) {
     ctx.lineTo(window.outerWidth, 0);
     ctx.lineTo(window.outerWidth, 50);
-    ctx.lineTo((window.outerWidth / 3 * 2) + 30, 2)
+    ctx.lineTo((window.outerWidth / 3 * 2) + 30, 10)
 
     ctx.bezierCurveTo(
-      (window.outerWidth / 3 * 2) + 30, 2, 
+      (window.outerWidth / 3 * 2) + 30, 10, 
       window.outerWidth / 3 * 2, 0, 
-      (window.outerWidth / 3 * 2) - 30, 2);
+      (window.outerWidth / 3 * 2) - 30, 10);
 
     ctx.lineTo(0,70)
   }
 
   drawChevronBottom(ctx) {
     ctx.lineTo(0, 150);
-    ctx.lineTo((window.outerWidth / 3 * 2) - 30, 82)
+    ctx.lineTo((window.outerWidth / 3 * 2) - 30, 90)
 
     ctx.bezierCurveTo(
-      (window.outerWidth / 3 * 2) - 30, 82, 
+      (window.outerWidth / 3 * 2) - 30, 90, 
       window.outerWidth / 3 * 2, 80, 
-      (window.outerWidth / 3 * 2) + 30, 82);
+      (window.outerWidth / 3 * 2) + 30, 90);
 
     ctx.lineTo(window.outerWidth, 127);
     ctx.lineTo(window.outerWidth, 150);

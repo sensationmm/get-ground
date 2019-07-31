@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next'
 
+import Slider from 'src/components/Slider/Slider';
+
 import './cards.scss';
 
 /**
@@ -11,7 +13,7 @@ import './cards.scss';
 * @return {JSXElement} - Cards component
 */
 const Cards = (props) => {
-  const { heading, cardA, cardB } = props;
+  const { heading, cardA, cardB, renderSlider } = props;
   const [t] = useTranslation()
 
   const card = (src) => {
@@ -38,10 +40,13 @@ const Cards = (props) => {
     <div data-test="component-cards" className="cards">
       <h2>{ heading }</h2>
 
-      <div className="cards-content">
-        { card(cardA) }
-        { card(cardB) }
-      </div>
+      {!renderSlider 
+        ? <div className="cards-content">
+          { card(cardA) }
+          { card(cardB) }
+        </div>
+        : <Slider slides={[ card(cardA), card(cardB) ]} />
+      }
     </div>
   );
 }
@@ -59,7 +64,12 @@ Cards.propTypes = {
     price: PropTypes.string,
     explanation: PropTypes.string,
     content: PropTypes.string
-  })
+  }),
+  renderSlider: PropTypes.bool
+};
+
+Cards.defaultProps = {
+  renderSlider: false
 };
 
 export default Cards;
