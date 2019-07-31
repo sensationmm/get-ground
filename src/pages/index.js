@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
-import { useTranslation } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { navigate } from 'gatsby';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import Layout from 'src/components/Layout/Layout'
 import PageHeader from 'src/components/_layout/PageHeader/PageHeader';
@@ -24,8 +26,8 @@ import ImageHome from 'src/assets/images/home.svg';
 
 import 'src/styles/pages/home.scss'
 
-const IndexPage = () => {
-  const [t] = useTranslation();
+const IndexPage = (props) => {
+  const { isMobile, t } = props;
 
   return (
     <Fragment>
@@ -55,6 +57,7 @@ const IndexPage = () => {
                     image: <Boxes content={[ { text: t('home.whatWeDo.box') } ]} />
                   }
                 ]}
+                reverse={isMobile}
               />
 
               <center>
@@ -106,6 +109,7 @@ const IndexPage = () => {
                   }
                 ]}
                 bordered
+                renderSlider={isMobile}
               />
 
               <h3>{ t('home.howItWorks.outro.heading') }</h3>
@@ -149,10 +153,11 @@ const IndexPage = () => {
                     text: t('pricing.content.other.text'),
                   }
                 ]}
+                renderSlider={isMobile}
               />
             </LandingContent>
             
-            <LandingContent>
+            <LandingContent trust>
               <Sections
                 sections={[
                   {
@@ -169,6 +174,7 @@ const IndexPage = () => {
                   }
                 ]}
                 imageFull
+                reverse={isMobile}
               />
             </LandingContent>
             
@@ -193,4 +199,15 @@ const IndexPage = () => {
   )
 }
 
-export default IndexPage;
+IndexPage.propTypes = {
+  t: PropTypes.func,
+  isMobile: PropTypes.bool
+};
+
+export const RawComponent = IndexPage;
+
+const mapStateToProps = (state) => ({
+  isMobile: state.layout.isMobile
+});
+
+export default connect(mapStateToProps)(withTranslation()(IndexPage));

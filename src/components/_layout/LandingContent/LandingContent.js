@@ -13,10 +13,10 @@ import 'src/styles/pages/landing-pages.scss';
 * @return {JSXElement} LandingContent
 */
 const LandingContent = props => {
-  const { children, center, green, orange } = props;
+  const { children, center, green, orange, first, trust } = props;
 
   return (
-    <div className={classNames('landing-content', { green: green }, { orange: orange })}>
+    <div className={classNames('landing-content', { first: first }, { green: green }, { orange: orange }, { trust: trust })}>
       <div className={classNames('landing-content-inner', { centered: center })}>
         { children }
       </div>
@@ -28,7 +28,9 @@ LandingContent.propTypes = {
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.array]).isRequired,
   center: PropTypes.bool,
   green: PropTypes.bool,
-  orange: PropTypes.bool
+  orange: PropTypes.bool,
+  first: PropTypes.bool,
+  trust: PropTypes.bool
 };
 
 export default LandingContent;

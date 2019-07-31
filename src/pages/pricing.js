@@ -16,7 +16,7 @@ const Pricing = () => {
 
   return (
     <Layout>
-      <div data-test="container-pricing" role="landing">
+      <div data-test="container-pricing" role="landing" className="pricing">
         <PageHeader title={ t('pricing.title') } text={ t('pricing.intro') } />
 
         <LandingContent>

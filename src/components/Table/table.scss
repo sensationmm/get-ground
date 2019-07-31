@@ -8,7 +8,7 @@
     padding-left: 20%;
     font-size: 14px;
     font-style: italic;
-    top: -50px;
+    top: -20px;
     text-align: center;
   }
 
@@ -44,6 +44,10 @@
   &.grey .table-section {
     background: $grey;
     color: $text;
+
+    &.green {
+      background: $primary-offset;
+    }
   }
 
   .table-section:last-child {
@@ -98,9 +102,25 @@
   }
 }
 
+.slick-slider {
+  .table-section {
+    height: auto;
+    margin-bottom: 30px;
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
 @media screen and (min-width: $breakpoint-desktop) {
   .landing {
     .table {
+
+      &-footnote {
+        top: -50px;
+      }
+
       &-outer {
         flex-grow: 0.2 !important;
       }

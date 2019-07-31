@@ -18,7 +18,7 @@ const TextImage = (props) => {
   return (
     <div data-test="component-list" className="text-image">
       <div className="text-image-cols">
-        <div className="hero-image"><img src={image} alt="" /></div>
+        {image && <div className="hero-image"><img src={image} alt="" /></div>}
 
         <div className="text-image-content">
           <h1 dangerouslySetInnerHTML={{ __html: title }} />

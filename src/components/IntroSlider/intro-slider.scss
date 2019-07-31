@@ -3,9 +3,34 @@
 
 .slick {
   
+  &-arrow {
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    cursor: pointer;
+    filter: invert(1);
+
+    &.slick-next {
+      transform: translateX(450%);
+    }
+
+    &.slick-prev {
+      transform: translateX(-550%);
+    }
+  }
+
+  &-slide {
+    > *, &--container {
+      height: 100%;
+      display: flex;
+      align-items: stretch;
+    }
+  }
+
   &-slider {
     overflow: hidden;
     touch-action: none;
+    margin-bottom: 30px;
 
     .slick-track {
       display: flex;
@@ -30,29 +55,34 @@
     }
 
     .slick-dots {
-      padding: 0;
+      padding: 20px 0 0 0;
       text-align: center;
-      margin: 0;
+      margin: 0 auto 10px auto;
 
       li {
         display: inline-block;
         padding: 0px;
-        margin: 0 3px;
+        margin: 0 3px !important;
 
         &.slick-active button {
-          background: #2e5472;
+          background: $gradient-option-1;
         }
 
         button {
-          width: 10px;
-          height: 10px;
-          border-radius: 5px;
+          width: 14px;
+          height: 14px;
+          border-radius: 7px;
           background-color: #FFF;
           text-indent: -9999px;
           border: 0;
           cursor: pointer;
           padding: 0;
           outline: none;
+          border: 1px solid $gradient-option-1;
+        }
+
+        &:before {
+          display: none;
         }
       }
     }
@@ -67,23 +97,38 @@
   text-align: center;
 }
 
-@media screen and (min-width: $breakpoint-desktop) {
-  .slick {
-    &-arrow {
-      position: absolute;
-      left: 50%;
-      bottom: 2px;
-      cursor: pointer;
-      filter: invert(1);
-
-      &.slick-next {
-        transform: translateX(450%);
+.landing-content.orange {
+  .slick-dots {
+    li {
+      &.slick-active button {
+        background: $white;
       }
 
-      &.slick-prev {
-        transform: translateX(-550%);
+      button {
+        background: none;
+        border-color: $white;
       }
     }
+  }
+}
+
+.green {
+  .slick-dots {
+    li {
+      &.slick-active button {
+        background: $primary;
+      }
+
+      button {
+        background: $white;
+        border-color: $primary;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .slick {
 
     &-slider {
       max-width: 800px;

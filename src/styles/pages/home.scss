@@ -16,36 +16,20 @@
 
     p {
       font-size: 19px !important;
-
-      &.intro {
-        text-align: center;
-        width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-      }
     }
 
     .landing-content {
-      padding: 60px 20px;
+      padding: 40px 20px;
 
       &:first-child {
         padding-top: 0;
       }
-
-      .button.get-started {
-        margin-top: 60px;
-      }
     }
 
     .cols {
-      display: flex;
-      justify-content: space-between;
-
       > * {
-        width: 0;
-        flex-grow: 1;
         padding-left: 50px;
-        margin-right: 80px;
+        margin-bottom: 50px;
 
         background: top left no-repeat;
         background-size: 35px;
@@ -86,18 +70,6 @@
       }
     }
 
-    .columns {
-      margin-bottom: 50px;
-
-      .column:nth-child(2n-1) {
-        top: -40px;
-      }
-
-      .column:nth-child(2n) {
-        top: 40px;
-      }
-    }
-
     .sections {
       padding: 0;
     }
@@ -107,23 +79,14 @@
         padding: 0;
       }
 
-      &-text {
-        width: 50%;
-      }
-
       &-image {
-        width: 35%;
-        
         .boxes {
           padding: 0;
         
           .box {
-            padding: ($padding-horizontal-unit * 2 + 0px) ($padding-horizontal-unit * 4 + 0px);
-
             p {
               font-size: 17px !important;
               line-height: 20px !important;
-              text-align: center;
             }
           }
         }
@@ -138,6 +101,73 @@
               display: none;
             }
           }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .landing {
+    .home {
+      .landing-content {
+        padding: 60px 20px;
+
+        .button.get-started {
+          margin-top: 60px;
+        }
+      }
+
+      p {
+        &.intro {
+          text-align: center;
+          width: 80%;
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
+
+      .section {
+        &-text {
+          width: 50%;
+        }
+
+        &-image {
+          width: 35%;
+        }
+      }
+
+      .boxes {
+        .box {
+          padding: ($padding-horizontal-unit * 2 + 0px) ($padding-horizontal-unit * 4 + 0px);
+
+          p {
+            text-align: center;
+          }
+        }
+      }
+
+      .cols {
+        display: flex;
+        justify-content: space-between;
+  
+        > * {
+          width: 0;
+          flex-grow: 1;
+          margin-right: 80px;
+          margin-bottom: 0;
+        }
+      }
+
+      .columns {
+        margin-bottom: 50px;
+
+        .column:nth-child(2n-1) {
+          top: -40px;
+        }
+
+        .column:nth-child(2n) {
+          top: 40px;
         }
       }
     }

@@ -26,14 +26,14 @@ const Links = (props) => {
         <ButtonIcon icon={ChevronPrev} />
         <div className="links-link-label">
           <b>{ prev.label }</b>
-          { t('findOutMore.label') }
+          <span className="links-link-more">{ t('findOutMore.label') }</span>
         </div>
       </div> 
 
       <div className="links-link" onClick={() => navigate(next.link)}>
         <div className="links-link-label">
           <b>{ next.label }</b>
-          { t('findOutMore.label') }
+          <span className="links-link-more">{ t('findOutMore.label') }</span>
         </div>
         <ButtonIcon icon={ChevronNext} />
       </div>

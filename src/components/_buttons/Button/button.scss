@@ -80,6 +80,7 @@
 
   &.get-started {
     padding: 15px 70px;
+    margin: 0 auto;
   }
 
   &.tertiary {
@@ -196,6 +197,15 @@
   }
 }
 
+.landing-content-inner {
+  > center {
+    > .button.get-started {
+      top: 30px;
+      margin-bottom: 30px;
+    }
+  }
+}
+
 @media screen and (min-width: $breakpoint-desktop) {
   .button:not(.get-started) {
     padding: 7px 50px;
@@ -238,5 +248,9 @@
     .button {
       padding: 12px 20px;
     }
+  }
+
+  .button.get-started {
+    margin: 0;
   }
 }

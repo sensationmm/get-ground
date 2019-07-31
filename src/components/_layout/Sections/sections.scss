@@ -1,23 +1,20 @@
+@import '../../../styles/modules/variables';
+
 .sections {
   padding: 30px 0;
   
   .section {
     &-inner {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
       padding: 30px 0;
-    }
-
-    &-text {
-      width: 65%;
+      flex-direction: column;
     }
 
     &-image {
-      width: 25%;
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-bottom: 30px;
 
       &.jsx {
         display: block;
@@ -25,6 +22,7 @@
 
       &:not(.imageFull) {
         img {
+          max-width: 200px;
           max-height: 150px;
         }
       }
@@ -43,22 +41,75 @@
     ul {
       width: 90%;
     }
-
-    &:nth-child(2n) {
-      .section-inner {
-        flex-direction: row-reverse;
-      }
-    }
   }
 
   &.reversed {
-    .section-inner {
-      flex-direction: row-reverse;
+    .section:nth-child(2n-1) {
+      .section-inner {
+        flex-direction: column;
+      }
     }
-
     .section:nth-child(2n) {
       .section-inner {
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+.landing-content.trust {
+  .sections {
+    &.reversed {
+      .section-inner {
+        flex-direction: column-reverse;
+
+        div:last-child {
+          margin-bottom: 30px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .sections {
+    .section {
+      &-inner {
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      &-text {
+        width: 65%;
+      }
+  
+      &-image {
+        width: 25%;
+        margin-bottom: 0;
+
+        img {
+          max-width: 100%;
+          max-height: 100%;
+        }
+      }
+
+      &:nth-child(2n) {
+        .section-inner {
+          flex-direction: row;
+        }
+      }
+    }
+
+    &.reversed {
+      .section-inner {
         flex-direction: row;
+      }
+  
+      .section:nth-child(2n) {
+        .section-inner {
+          flex-direction: row-reverse;
+        }
       }
     }
   }
