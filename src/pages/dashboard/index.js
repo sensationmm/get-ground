@@ -148,7 +148,7 @@ Dashboard.propTypes = {
   t: PropTypes.func.isRequired,
   companies: PropTypes.array,
   setActiveCompany: PropTypes.func,
-  userID: PropTypes.number,
+  userID: PropTypes.string,
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   actions: PropTypes.arrayOf(

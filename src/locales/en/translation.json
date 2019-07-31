@@ -603,6 +603,7 @@
     "buttons": {
       "register": "Register",
       "login": "Sign In",
+      "logout": "Log out",
       "saveAndExit": "Save and Exit",
       "exit": "Exit"
     }
@@ -748,7 +749,8 @@
         "summary": "Details of our fees"
       },
       "fifth": {
-        "label": "About us"
+        "label": "About us",
+        "summary": "Find out more about GetGround"
       },
       "sixth": {
         "label": "Partnerships",

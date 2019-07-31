@@ -3,7 +3,7 @@
 @import 'src/styles/modules/_colors';
 
 .menu {
-  @include gradient-horizontal($gradient-primary-1, $gradient-primary-2);
+  background: $white;
   position: fixed;
   height: 100%;
   width: 100%;
@@ -12,6 +12,7 @@
   z-index: 2;
   padding: 110px 20px 20px;
   box-sizing: border-box;
+  overflow: auto;
 
   &--list {
     list-style: none;
@@ -81,10 +82,6 @@
     transition: transform 400ms;
     transform: translateY(-100%);
   }
-}
-
-.account .menu {
-  @include gradient-horizontal($background-account-start,$background-account-end);
 }
 
 @media screen and (min-width: $breakpoint-desktop) {

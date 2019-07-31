@@ -21,7 +21,7 @@ const Menu = (props) => {
 
           return(
             <li className="menu--list-item" key={`menu-link-${i}`}>
-              <Link to={link} activeClassName="active">
+              <Link to={link} activeClassName="active" onClick={menuLink.function ? menuLink.function : () => {}}>
                 <div className="menu--list-item-label">{ menuLink.text }</div>
                 { menuLink.summary }
               </Link>

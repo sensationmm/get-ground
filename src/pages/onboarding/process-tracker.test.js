@@ -44,7 +44,7 @@ describe('process-tracker', () => {
     },
     showLoader: showLoaderMock,
     hideLoader: hideLoaderMock,
-    userID: 1,
+    userID: '1',
     isLoading: true
   };
 
