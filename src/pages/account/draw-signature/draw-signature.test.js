@@ -51,10 +51,13 @@ describe('draw signature page', () => {
   describe('saveSignature()', () => {
 
     test('save signature success', async () => {
+
       AccountService.saveSignature = jest.fn().mockReturnValue(Promise.resolve({ status: 201 }));
       const wrapperNew = setup(DrawSignature, defaultProps);
 
-      await wrapperNew.instance().saveSignature();
+      const wrapperInstance = wrapperNew.instance()
+
+      await wrapperInstance.saveSignature();
 
       expect(showLoaderMock).toHaveBeenCalledTimes(1);
       expect(hideLoaderMock).toHaveBeenCalledTimes(1);

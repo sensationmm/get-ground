@@ -35,12 +35,12 @@ class DrawSignature extends Component {
   }
 
   /**
-    * @param {Blob} signatureBlob - signature blob
     * @return {void}
     */
   saveSignature = ()  => {
     const { showLoader, hideLoader } = this.props;
-    const signature = this.signature.toDataURL();
+
+    const signature = this.signature && this.signature.toDataURL();
 
     showLoader();
     AccountService.saveSignature(signature).then(response => {
