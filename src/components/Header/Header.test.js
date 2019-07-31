@@ -38,7 +38,7 @@ describe('<Header />', () => {
 
     expect(findByTestAttr(wrapper, 'dashboard').length).toEqual(0);
     wrapper.setProps({
-      userID: 1234
+      userID: '1234'
     })
     expect(findByTestAttr(wrapper, 'dashboard').length).toEqual(1);
     findByTestAttr(wrapper, 'dashboard').props().onClick()

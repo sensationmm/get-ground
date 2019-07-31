@@ -70,7 +70,7 @@ describe('<Layout />', () => {
   });
 
   test('loggedOutOnly', () => {
-    setup(Layout, { ...props, userID:1, loggedOutOnly: true });
+    setup(Layout, { ...props, userID:'1', loggedOutOnly: true });
 
     expect(navigate).toHaveBeenCalledWith('/onboarding');
   });
@@ -90,7 +90,7 @@ describe('<Layout />', () => {
   describe('auth detection', () => {
 
     test('has userID', () => {
-      setup(Layout, { ...props, userID: 1 });
+      setup(Layout, { ...props, userID: '1' });
       expect(AuthService.reauthenticate).toHaveBeenCalledTimes(0);
       expect(navigate).toHaveBeenCalledTimes(0);
     });

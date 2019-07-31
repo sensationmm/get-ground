@@ -40,7 +40,8 @@ class Header extends Component {
       menuLinks,
       showDashboardButton,
       showOnboardingButton,
-      t
+      t,
+      onLogout
     } = this.props;
     const { menuActive } = this.state;
 
@@ -48,8 +49,7 @@ class Header extends Component {
       <header
         data-test="component-header"
         className={classNames('header',
-          this.props.classNames,
-          {'no-background': menuIsOpen}
+          this.props.classNames
         )}
       >
         <div className="header-inner-wrapper">
@@ -67,6 +67,10 @@ class Header extends Component {
 
               {userID && !children && showDashboardButton &&
                 <ButtonHeader data-test="dashboard" label={t('header.dashboard')} onClick={() => navigate('/dashboard')} />
+              }
+
+              {!isLoading && userID && !menuIsOpen && !isMobile &&
+                <Button classes="link" onClick={onLogout} label={t('header.buttons.logout')} />
               }
 
               {userID && !children && showOnboardingButton &&
@@ -114,14 +118,15 @@ Header.propTypes = {
   children: PropTypes.element,
   menuIsOpen: PropTypes.bool,
   isLoading: PropTypes.bool,
-  userID: PropTypes.number,
+  userID: PropTypes.string,
   onClick: PropTypes.func,
   childrenDisabled: PropTypes.bool,
   isMobile: PropTypes.bool,
   menuLinks: PropTypes.object,
   showDashboardButton: PropTypes.bool,
   showOnboardingButton: PropTypes.bool,
-  t: PropTypes.func
+  t: PropTypes.func,
+  onLogout: PropTypes.func
 }
 
 export const RawComponent = Header;

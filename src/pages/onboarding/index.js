@@ -153,7 +153,7 @@ ProcessTracker.propTypes = {
   i18n: PropTypes.object.isRequired,
   progress: PropTypes.object,
   isLoading: PropTypes.bool,
-  userID: PropTypes.number,
+  userID: PropTypes.string,
   last_page_visited: PropTypes.string
 };
 
