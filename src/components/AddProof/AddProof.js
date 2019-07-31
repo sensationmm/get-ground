@@ -178,6 +178,7 @@ export class AddProof extends Component {
         data-test="dropzone"
         onDrop={this.onImageDrop}
         multiple={false}
+        accept='image/jpeg, image/png, .pdf'
         className="dropzone"
       >
         {({getRootProps, getInputProps}) => {
