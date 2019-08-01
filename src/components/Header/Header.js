@@ -61,20 +61,20 @@ class Header extends Component {
             </div>
             <div className="header-buttons">
 
-              {!isLoading && !userID && !menuIsOpen &&
-                <Button onClick={() => navigate('/login')} classes="header-signIn small" label={t('header.buttons.login')} />
+              {!isLoading && !userID &&
+                <Button onClick={() => navigate('/login')} classes="header-signIn" label={t('header.buttons.login')} />
               }
 
               {userID && !children && showDashboardButton &&
                 <ButtonHeader data-test="dashboard" label={t('header.dashboard')} onClick={() => navigate('/dashboard')} />
               }
 
-              {!isLoading && userID && !menuIsOpen && !isMobile &&
-                <Button classes="link" onClick={onLogout} label={t('header.buttons.logout')} />
-              }
-
               {userID && !children && showOnboardingButton &&
                 <ButtonHeader data-test="onboarding" label={t('header.onboarding')} onClick={() => navigate('/onboarding')} />
+              }
+
+              {!isLoading && userID && !isMobile &&
+                <Button classes="link" onClick={onLogout} label={t('header.buttons.logout')} />
               }
 
               {children
