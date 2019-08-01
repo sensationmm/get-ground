@@ -20,7 +20,8 @@ const ButtonIcon = props => {
     icon,
     onClick,
     disabled,
-    liveChat
+    liveChat,
+    flatBG
   } = props;
 
   return (
@@ -30,7 +31,8 @@ const ButtonIcon = props => {
       className={classNames(
         'icon-button',
         {'disabled': disabled},
-        {'chat': liveChat}
+        {'chat': liveChat},
+        {'flatBG': flatBG}
       )}
       onClick={onClick}
     >
@@ -44,7 +46,8 @@ ButtonIcon.propTypes = {
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
   icon: PropTypes.any,
-  liveChat: PropTypes.bool
+  liveChat: PropTypes.bool,
+  flatBG: PropTypes.bool
 };
 
 ButtonIcon.defaultProps = {

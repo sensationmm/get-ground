@@ -69,10 +69,10 @@ class TermsConditions extends Component {
 
   render() {
     const { modalMarkdown } = this.state;
-    const { t } = this.props;
+    const { t, location } = this.props;
 
     return (
-      <Layout>
+      <Layout location={location.pathname}>
         <div classNames="modal-full" data-test="container-terms" role="account brochure markdown" ref={this.modalHeader}>
           <h1>{ t('footer.navigation.link8.title') }</h1>
           <div className="hero-image"><img src={Image} alt="clock" data-test="about-us-img" /></div>
@@ -96,8 +96,11 @@ class TermsConditions extends Component {
 TermsConditions.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
-  t: PropTypes.func
-};
+  t: PropTypes.func,
+  location: PropTypes.shape({
+    pathname: PropTypes.string
+  })
+}
 
 const actions = {
   showLoader,

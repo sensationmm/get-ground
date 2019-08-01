@@ -6,6 +6,7 @@
       "heading": "But, purchasing your investment property through a company can help solve this.",
       "text": "<p>There are many other benefits too. Such as, protecting your wealth, helping plan for inheritance and easily buying with others.</p><p>After all, an investment property is a business and companies are designed for business. At GetGround we’ve created a service that helps you capture these benefits - without the hassle or high fees.</p><p>We believe that holding property in a company helps lower costs, improve information and reduce barriers to buy and sell. As a result, we think both landlords and tenants will benefit.</p><p>Our mission is to create a fairer property market for all. </p>"
     },
+    "teamHeader": "Meet our leadership team",
     "moubin": {
       "name": "Moubin",
       "text": "<p>Moubin is the CEO of GetGround and was an investment professional at Apax Partners, one of the world’s leading private equity houses. There he was involved in numerous key transactions in the retail, consumer and services sectors.</p><p>Previously Moubin was at McKinsey & Company and is trained as a medical doctor at Imperial College where he graduated with distinctions.</p>"
@@ -554,8 +555,9 @@
       }
     },
     "login": "Register / Login",
-    "location": "Terranova.network Limited (t/a GetGround) is registered in England with Company No. 11273793 and VAT registered. VAT No. 313087625. Registered office: 5 Theale Lakes Business Park, Reading, RG7 4GB.",
-    "legal": "Terranova.network Limited (t/a GetGround) is authorised and regulated by the Financial Conduct Authority (firm reference number 829031) as an AR of Resolution Compliance (firm reference number 574048). Terranova.network Limited (t/a GetGround) is registered with the Information Commissioner’s Office under registration number ZA481725 for the purposes of the protection of data."
+    "location": "This website is owned and operated by Terranova.network Limited (“we”, “us” or “our”). Your use of this website is subject to our <a href='/terms-and-conditions'>Terms of Use</a> and our <a href='/privacypolicy'>Privacy Policy and Cookies Policy</a>.",
+    "legal": "GetGround is a trading name of Terranova.network Limited a company registered in England and Wales (registered number 11273793).",
+    "resolution": "Terranova.network Limited is an appointed representative of Resolution Compliance Limited which is authorised and regulated by the Financial Conduct Authority (FRN: 574048). Resolution Compliance Limited is registered at Floor 9, No.1 Croydon, Addiscombe Road, Croydon, CR0 0XT, UK."
   },
   "forgotPassword": {
     "title": "Forgot password",
@@ -1132,7 +1134,7 @@
             "text": "(inc vat)<br />One-time sign-up fee"
           },
           "subscription": {
-            "heading": "288",
+            "heading": "£288",
             "text": "(inc vat)<br />Total annual company running costs *"
           }
         },

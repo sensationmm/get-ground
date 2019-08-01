@@ -9,7 +9,7 @@
     font-size: 14px;
     font-style: italic;
     top: -20px;
-    text-align: center;
+    text-align: right;
   }
 
   &-header {
@@ -119,6 +119,7 @@
 
       &-footnote {
         top: -50px;
+        text-align: center;
       }
 
       &-outer {

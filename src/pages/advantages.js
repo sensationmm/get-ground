@@ -76,7 +76,7 @@ const Advantages = (props) => {
   ];
 
   return (
-    <Layout>
+    <Layout location={props.location.pathname}>
       <div data-test="container-advantages" className="advantages" role="landing">
         <PageHeader title={ t('advantages.title') } text={ t('advantages.intro') } />
 
@@ -243,7 +243,10 @@ const Advantages = (props) => {
 }
 
 Advantages.propTypes = {
-  isMobile: PropTypes.bool
+  isMobile: PropTypes.bool,
+  location: PropTypes.shape({
+    pathname: PropTypes.string
+  })
 }
 
 const mapStateToProps = state => ({

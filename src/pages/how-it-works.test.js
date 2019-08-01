@@ -6,7 +6,7 @@ describe('<HowItWorks />', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = setup(HowItWorks)
+    wrapper = setup(HowItWorks, { location: {} })
   })
 
   test('renders without error', () => {

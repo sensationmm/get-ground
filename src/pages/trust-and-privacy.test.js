@@ -5,7 +5,7 @@ describe('trust and privacy page', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = setup(TrustAndPrivacy)
+    wrapper = setup(TrustAndPrivacy, { location: {} })
   })
 
   test('renders without error', () => {

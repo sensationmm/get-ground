@@ -54,7 +54,7 @@ Columns.propTypes = {
     PropTypes.shape({
       heading: PropTypes.string,
       text: PropTypes.string,
-      image: PropTypes.object,
+      image: PropTypes.oneOfType([ PropTypes.object, PropTypes.string ]),
       more: PropTypes.string,
       t: PropTypes.func
     })
@@ -66,7 +66,7 @@ Columns.propTypes = {
 Column.propTypes = {
   heading: PropTypes.string,
   text: PropTypes.string,
-  image: PropTypes.string,
+  image: PropTypes.oneOfType([ PropTypes.object, PropTypes.string ]),
 };
 
 export default Columns;

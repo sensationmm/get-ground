@@ -13,7 +13,8 @@ describe('<PrivacyPolicy />', () => {
   const props = {
     t: jest.fn().mockImplementation(id => id),
     showLoader: showLoaderMock,
-    hideLoader: hideLoaderMock
+    hideLoader: hideLoaderMock,
+    location: {}
   };
 
   global.URL = {

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next';
 import { navigate } from 'gatsby';
+import PropTypes from 'prop-types';
 
 import Layout from 'src/components/Layout/Layout'
 import PageHeader from 'src/components/_layout/PageHeader/PageHeader';
@@ -11,11 +12,11 @@ import Links from 'src/components/_layout/Links/Links';
 
 import 'src/styles/pages/pricing.scss';
 
-const Pricing = () => {
+const Pricing = (props) => {
   const [t] = useTranslation();
 
   return (
-    <Layout>
+    <Layout location={props.location.pathname}>
       <div data-test="container-pricing" role="landing" className="pricing">
         <PageHeader title={ t('pricing.title') } text={ t('pricing.intro') } />
 
@@ -58,6 +59,12 @@ const Pricing = () => {
       </div>
     </Layout>
   )
+}
+
+Pricing.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string
+  })
 }
 
 export default Pricing

@@ -144,7 +144,8 @@ export class Layout extends Component {
       isLoggedIn,
       idCheckActive,
       isMobile,
-      last_page_visited
+      last_page_visited,
+      location
     } = this.props;
     const { isLoggingOut } = this.state;
 
@@ -241,7 +242,7 @@ export class Layout extends Component {
         </div>
         <div id="modal-root"></div>
 
-        <Footer hideNav={inArray('form-page', roles)} />
+        <Footer hideNav={inArray('form-page', roles)} location={location} />
 
         {isMobile &&
           <ModalWrapper
@@ -294,7 +295,8 @@ Layout.propTypes = {
   isLoggedIn: PropTypes.bool,
   idCheckActive: PropTypes.string,
   isMobile: PropTypes.bool,
-  last_page_visited: PropTypes.string
+  last_page_visited: PropTypes.string,
+  location: PropTypes.string
 }
 
 Layout.defaultProps = {

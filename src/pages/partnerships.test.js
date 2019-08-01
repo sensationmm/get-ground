@@ -22,7 +22,8 @@ describe('Partnerships' ,() => {
       hideLoader: jest.fn(),
       form: ReduxFormMock,
       location: {
-        search: ''
+        search: '',
+        pathname: ''
       }
     }
     wrapper = shallow(<Partnerships {...props} />);

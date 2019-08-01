@@ -1,4 +1,5 @@
 @import '../../styles/modules/colors';
+@import '../../styles/modules/variables';
 
 .landing {
   .about-us {
@@ -9,11 +10,12 @@
         }
 
         &-image {
-          width: 30%;
+          margin: 0 auto 20px auto;
 
           img {
             width: 100%;
             height: auto;
+            max-width: 280px;
             max-height: none;
             border: 2px solid $border-offset;
           }
@@ -21,6 +23,51 @@
 
         &-inner {
           align-items: flex-start;
+          padding-top: 0;
+        }
+
+        &-text {
+          h2 {
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    &-team {
+      .page-intro {
+        top: 30px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .landing {
+    .about-us {
+      .sections {
+        .section {
+          h2, p {
+            margin-bottom: 15px !important;
+          }
+  
+          &-inner {
+            padding-top: 30px;
+          }
+  
+          &-image {
+            width: 30%;
+
+            img {
+              max-width: 200px;
+            }
+          }
+
+          &-text {
+            h2 {
+              text-align: left;
+            }
+          }
         }
       }
     }

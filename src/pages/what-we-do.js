@@ -34,7 +34,7 @@ const WhatWeDo = (props) => {
 
   return (
     <Fragment>
-      <Layout>
+      <Layout location={props.location.pathname}>
         <div data-test="container-whatWeDo" className="whatWeDo" role="company-design landing">
           <PageHeader title={ t('whatWeDo.title') } text={ t('whatWeDo.intro') } />
 
@@ -111,8 +111,11 @@ const WhatWeDo = (props) => {
 
 WhatWeDo.propTypes = {
   t: PropTypes.func,
-  isMobile: PropTypes.bool
-};
+  isMobile: PropTypes.bool,
+  location: PropTypes.shape({
+    pathname: PropTypes.string
+  })
+}
 
 export const RawComponent = WhatWeDo;
 
