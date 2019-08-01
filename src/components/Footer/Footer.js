@@ -81,7 +81,7 @@ const Footer = (props) => {
             dangerouslySetInnerHTML={{ __html: t('footer.legal') }}
           />
 
-          {location.replace(new RegExp(/\//, 'g'), '') === 'how-it-works' &&
+          {location && location.replace(new RegExp(/\//, 'g'), '') === 'how-it-works' &&
             <div
               data-test="component-footer-legal"
               className="footer-legal"
