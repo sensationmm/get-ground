@@ -101,6 +101,7 @@
     color: $white;
     background: $background-3;
     font-weight: 300;
+    padding: 8px 30px;
   }
 
   &.white {
@@ -258,6 +259,10 @@
   .header-buttons {
     .button {
       padding: 12px 20px;
+
+      &.header-signIn {
+        padding: 12px 30px;
+      }
     }
   }
 
