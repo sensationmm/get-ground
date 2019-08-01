@@ -1,6 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next';
 import { navigate } from 'gatsby';
+import PropTypes from 'prop-types';
 
 import Layout from 'src/components/Layout/Layout';
 import PageHeader from 'src/components/_layout/PageHeader/PageHeader';
@@ -14,11 +15,11 @@ import Step1 from 'src/assets/images/for-sale.svg';
 import Step2 from 'src/assets/images/deed.svg';
 import Step3 from 'src/assets/images/documents-modal.svg';
 
-const HowItWorks = () => {
+const HowItWorks = (props) => {
   const [t] = useTranslation()
 
   return (
-    <Layout>
+    <Layout location={props.location.pathname}>
       <div data-test="container-how-it-works" className="how-it-works" role="landing">
         <PageHeader title={ t('howItWorks.title') } text={ t('howItWorks.intro') } />
 
@@ -58,6 +59,12 @@ const HowItWorks = () => {
       </div>
     </Layout>
   )
+}
+
+HowItWorks.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string
+  })
 }
 
 export default HowItWorks

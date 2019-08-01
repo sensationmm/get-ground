@@ -23,7 +23,7 @@ const Links = (props) => {
   return (
     <div data-test="component-links" className="links">
       <div className="links-link" onClick={() => navigate(prev.link)}>
-        <ButtonIcon icon={ChevronPrev} />
+        <ButtonIcon icon={ChevronPrev} flatBG />
         <div className="links-link-label">
           <b>{ prev.label }</b>
           <span className="links-link-more">{ t('findOutMore.label') }</span>
@@ -35,7 +35,7 @@ const Links = (props) => {
           <b>{ next.label }</b>
           <span className="links-link-more">{ t('findOutMore.label') }</span>
         </div>
-        <ButtonIcon icon={ChevronNext} />
+        <ButtonIcon icon={ChevronNext} flatBG />
       </div>
     </div>
   );

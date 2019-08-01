@@ -34,7 +34,7 @@ describe('<Advantages />', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = setup(Advantages, { isMobile:true });
+    wrapper = setup(Advantages, { isMobile:true, location: {} });
   })
 
   test('renders without error', () => {

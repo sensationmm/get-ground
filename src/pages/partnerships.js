@@ -86,7 +86,7 @@ class Partnerships extends Component {
   }
 
   render() {
-    const { t, form } = this.props;
+    const { t, form, location } = this.props;
     const { values, errors, showErrorMessage } = form;
 
     this.config = [
@@ -100,7 +100,7 @@ class Partnerships extends Component {
     ];
 
     return (
-      <Layout>
+      <Layout location={location.pathname}>
         <div className="partnerships" role="landing">
           <PageHeader title={ t('partnerships.title') } text={ t('partnerships.intro') } />
 
@@ -145,9 +145,11 @@ Partnerships.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
   t: PropTypes.func.isRequired,
-  location: PropTypes.object,
-  form: PropTypes.object
-};
+  form: PropTypes.object,
+  location: PropTypes.shape({
+    pathname: PropTypes.string
+  })
+}
 
 export const RawComponent = Partnerships;
 

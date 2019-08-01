@@ -75,7 +75,7 @@ Sections.propTypes = {
     PropTypes.shape({
       heading: PropTypes.string,
       text: PropTypes.string,
-      image: PropTypes.object,
+      image: PropTypes.oneOfType([ PropTypes.object, PropTypes.string ]),
       more: PropTypes.string,
       t: PropTypes.func
     })
@@ -92,7 +92,7 @@ Sections.defaultProps = {
 Section.propTypes = {
   heading: PropTypes.string,
   text: PropTypes.string,
-  image: PropTypes.string,
+  image: PropTypes.oneOfType([ PropTypes.object, PropTypes.string ]),
   more: PropTypes.string,
   t: PropTypes.func,
   imageFull: PropTypes.bool,

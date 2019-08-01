@@ -68,10 +68,10 @@ class PrivacyPolicy extends Component {
 
   render() {
     const { modalMarkdown } = this.state;
-    const { t } = this.props;
+    const { t, location } = this.props;
 
     return (
-      <Layout>
+      <Layout location={location.pathname}>
         <div className="modal-full" data-test="container-privacy" role="brochure markdown" ref={this.modalHeader}>
           <img className="hero-image" src={Image} alt="clock" data-test="about-us-img" />
           <center>
@@ -93,8 +93,11 @@ class PrivacyPolicy extends Component {
 PrivacyPolicy.propTypes = {
   showLoader: PropTypes.func,
   hideLoader: PropTypes.func,
-  t: PropTypes.func
-};
+  t: PropTypes.func,
+  location: PropTypes.shape({
+    pathname: PropTypes.string
+  })
+}
 
 const actions = {
   showLoader,

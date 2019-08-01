@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { navigate } from 'gatsby';
+import PropTypes from 'prop-types';
 
 import Layout from 'src/components/Layout/Layout';
 import PageHeader from 'src/components/_layout/PageHeader/PageHeader';
@@ -17,12 +18,12 @@ import ImageSection4 from 'src/assets/images/city.svg';
 
 import 'src/styles/pages/landing-pages.scss';
 
-const TrustAndPrivacy = () => {
+const TrustAndPrivacy = (props) => {
   const [t] = useTranslation();
 
   return (
     <Fragment>
-      <Layout>
+      <Layout location={props.location.pathname}>
         <div data-test="container-trustAndPrivacy" className="trustAndPrivacy" role="company-design landing">
           <PageHeader title={ t('trustAndPrivacy.title') } text={ t('trustAndPrivacy.intro') } />
 
@@ -75,6 +76,12 @@ const TrustAndPrivacy = () => {
       </Layout>
     </Fragment>
   )
+}
+
+TrustAndPrivacy.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string
+  })
 }
 
 export default TrustAndPrivacy;

@@ -62,7 +62,7 @@ PageHeader.propTypes = {
     PropTypes.array,
     PropTypes.string
   ]),
-  image: PropTypes.object,
+  image: PropTypes.oneOfType([ PropTypes.object, PropTypes.string ]),
   button: PropTypes.object
 };
 

@@ -6,7 +6,7 @@ describe('about us page', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = setup(AboutUs)
+    wrapper = setup(AboutUs, { location: {} })
   })
 
   test('renders without error', () => {

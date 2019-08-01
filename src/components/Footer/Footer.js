@@ -11,7 +11,7 @@ import './footer.scss';
 
 const Footer = (props) => {
   const [t, i18n] = useTranslation();
-  const { hideNav } = props;
+  const { hideNav, location } = props;
 
   const links = i18n.t('footer.navigation', { returnObjects: true });
   const linksConfig = {
@@ -70,8 +70,24 @@ const Footer = (props) => {
               ))}
             </div>
           </div>
-          <div data-test="component-footer-location" className="footer-location">{t('footer.location')}</div>
-          <div data-test="component-footer-legal" className="footer-legal">{t('footer.legal')}</div>
+          <div
+            data-test="component-footer-location"
+            className="footer-location"
+            dangerouslySetInnerHTML={{ __html: t('footer.location') }}
+          />
+          <div
+            data-test="component-footer-legal"
+            className="footer-legal"
+            dangerouslySetInnerHTML={{ __html: t('footer.legal') }}
+          />
+
+          {location.replace(new RegExp(/\//, 'g'), '') === 'how-it-works' &&
+            <div
+              data-test="component-footer-legal"
+              className="footer-legal"
+              dangerouslySetInnerHTML={{ __html: t('footer.resolution') }}
+            />
+          }
         </div>
       )}
     </div>
@@ -79,7 +95,8 @@ const Footer = (props) => {
 }
 
 Footer.propTypes = {
-  hideNav: PropTypes.bool
+  hideNav: PropTypes.bool,
+  location: PropTypes.string
 };
 
 export default Footer;

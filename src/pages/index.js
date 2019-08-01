@@ -31,7 +31,7 @@ const IndexPage = (props) => {
 
   return (
     <Fragment>
-      <Layout>
+      <Layout location={props.location.pathname}>
         <div data-test="container-landing" className="home" role="landing account">
           <PageHeader
             title={ t('home.title') }
@@ -201,8 +201,11 @@ const IndexPage = (props) => {
 
 IndexPage.propTypes = {
   t: PropTypes.func,
-  isMobile: PropTypes.bool
-};
+  isMobile: PropTypes.bool,
+  location: PropTypes.shape({
+    pathname: PropTypes.string
+  })
+}
 
 export const RawComponent = IndexPage;
 

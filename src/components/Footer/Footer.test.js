@@ -43,7 +43,9 @@ jest.mock('react-i18next', () => ({
 
 describe('', () => {
   let wrapper;
-  let props;
+  const props = {
+    location: ''
+  };
 
   beforeEach(() => {
     wrapper = shallow(<Footer {...props}/>)

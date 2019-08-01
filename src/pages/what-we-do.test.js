@@ -5,7 +5,7 @@ describe('what-we-do page', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = setup(WhatWeDo, { t: jest.fn() })
+    wrapper = setup(WhatWeDo, { t: jest.fn(), location: {} })
   })
 
   test('renders without error', () => {

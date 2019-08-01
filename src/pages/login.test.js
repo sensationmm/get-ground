@@ -28,7 +28,8 @@ describe('Login', () => {
     hideLoader: hideLoaderMock,
     form: ReduxFormMock,
     location: {
-      search: null
+      search: null,
+      pathname: ''
     }
   };
 
