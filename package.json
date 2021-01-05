@@ -35,7 +35,7 @@
     "swipejs": "^2.2.14"
   },
   "devDependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "babel-jest": "^24.7.1",
     "babel-polyfill": "^6.26.0",
     "babel-preset-gatsby": "^0.1.11",
